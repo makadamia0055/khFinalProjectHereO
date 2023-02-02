@@ -1,0 +1,49 @@
+.topBar {
+	position: fixed;
+	width: 100%;
+	background-color: white;
+}
+.topBar__containerBox1 {
+	position: relative;
+	height: 40px;
+}
+.topBar__list {
+	list-style: none; 
+	position: absolute;
+	right: 20px;
+	top: 10px;
+}
+.topBar__list li {
+	float: left;
+	margin-right: 20px;
+	padding: 5px;
+	font-size: 12px;
+}
+
+.menu-containerBox2 {
+	justify-content: space-evenly;
+	background-color: #183153;
+	position: relative;
+}
+.menu-containerBox2__bigBox {
+	display: flex;
+	margin: 0 200px;
+}
+.menu-container__box {
+	margin: 15px 50px;
+	font-size: 22px;
+	padding: 10px;
+	color: white;
+}
+.menu-container__box span {
+	padding: 25px 80px;
+}
+.menu-container__box span:hover {
+	background-color: #a3b1c5;
+}
+
+
+
+
+
+
