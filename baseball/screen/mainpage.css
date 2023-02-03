@@ -1,12 +1,10 @@
-.main-top {
-	display: flex;
+.main-imgBox {
+	width: 100%;
+	height: 100vh;
+	background-image: url(../img/main_page.jpg);
+	background-size: cover;
+	opacity: 0.9;
+	position: fixed;
+	z-index: 4;
+}
 
-}
-.main-top__text {
-	width: 50%;
-}
-.main-top__img {
-	height: 700px;
-	width: 50%;
-	background-image: url(../img/rangers-1402096_960_720.jpg);
-}
