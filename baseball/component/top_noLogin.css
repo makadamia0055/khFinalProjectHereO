@@ -1,8 +1,8 @@
 .topBar {
 	position: fixed;
-	width: 100%;
 	background-color: white;
 	z-index: 99;
+	width: 100%;
 }
 .topBar__containerBox1 {
 	position: relative;
@@ -23,14 +23,13 @@
 
 .menu-containerBox2 {
 	background-color: #183153;
-	width: 100vw;
 	height: 80px;
 }
 .menu-containerBox2__bigBox {
 	display: flex;
 }
 .menu-container__box {
-	width: 20vw;
+	width: 20%;
 	height: 80px;
 	position: relative;
 }
