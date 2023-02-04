@@ -1,7 +1,7 @@
 $(document).ready(function(){
-    $('.submenu').hide();
+    $('.sub-team').hide();
 });
 
-$('.munu-container__box:nth-child(2)').hover(function(){
-    $('.submenu').show();
+$('#home').hover(function(){
+    $('.sub-team').show();
 });
