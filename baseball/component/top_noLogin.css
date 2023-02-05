@@ -1,7 +1,8 @@
 .topBar {
 	position: fixed;
-	width: 100%;
 	background-color: white;
+	z-index: 99;
+	width: 100%;
 }
 .topBar__containerBox1 {
 	position: relative;
@@ -21,26 +22,59 @@
 }
 
 .menu-containerBox2 {
-	justify-content: space-evenly;
 	background-color: #183153;
-	position: relative;
+	height: 80px;
 }
 .menu-containerBox2__bigBox {
 	display: flex;
-	margin: 0 200px;
 }
 .menu-container__box {
-	margin: 15px 50px;
-	font-size: 22px;
-	padding: 10px;
+	width: 20%;
+	height: 80px;
+	position: relative;
+}
+.menu-container__box a {
 	color: white;
+	font-size: 22px;
+	position: absolute;
+	transition: color 1s ease-in-out;
 }
-.menu-container__box span {
-	padding: 25px 80px;
+.menu-container__box>a:not(#home){
+	top: 21px;
 }
-.menu-container__box span:hover {
-	background-color: #a3b1c5;
+.menu-container__box:nth-child(2)>a{
+	left: 15%;
 }
+.menu-container__box:first-child>a {
+	font-size: 40px;
+	top: 10px;
+	right: 45%;
+	transform: rotate(-45deg);
+}
+
+@keyframes menuTitleHover {
+	0%{
+		color: white;
+	}
+	50%{
+		color: #183153;
+		font-size: 25px;
+	}
+	100%{
+		color: white;
+	}
+}
+.menu-container__box>a:hover:not(#home) {
+	animation: menuTitleHover 0.8s linear infinite;
+}
+#home:hover {
+	transform: rotate(1turn);
+}
+
+
+
+
+
 
 
 
