@@ -4,6 +4,10 @@
 /* sceen */
 @import "../baseball/screen/mainpage.css";
 
+/* team */
+@import "../baseball/team/teampage_main.css";
+
+
 * {
 	margin: 0;
 	padding: 0;
