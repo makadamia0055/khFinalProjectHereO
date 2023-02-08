@@ -1,0 +1,39 @@
+
+.left-introduce{
+	width: 40%;
+	border: 1px solid white;
+	display: inline-block;
+
+}
+.right-introduce{
+	width: 40%;
+	border: 1px solid white;
+	display: inline-block;
+}
+
+
+/* container-lineup */
+.container-lineup{
+	/* 임시 보더 */
+	display: inline-block;
+	border: 1px solid black;
+	width: 40%;
+}
+
+
+
+/* 선수 라인업 호버 메뉴  */
+.container-hover-lineup{
+	display: inline-block;
+	width: 40%;
+	border : 1px solid black;
+
+}
+.container-latestscore{
+	border : 1px solid black;
+}
+
+.container-calendar{
+	display: inline-block;
+	border: 1px solid white;
+}

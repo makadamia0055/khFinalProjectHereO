@@ -1,0 +1,22 @@
+/* 프로필 컨테이너 */
+
+.container-playerprofile{
+	position: relative;
+	border: 1px solid black;
+	border-radius: 20px;
+}
+.leftbox-profile{
+	width: 50%; display: inline-block;
+	border : 1px solid white;
+}
+.rightbox-profile{
+	
+	position: absolute;
+	display: inline-block;
+}
+.container-playergraph{
+	position: relative;
+	width: 300px; height: 300px;
+	border: 3px double white;
+	border-radius: 20px;
+}

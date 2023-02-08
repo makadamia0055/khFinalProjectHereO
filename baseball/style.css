@@ -6,6 +6,8 @@
 
 /* team */
 @import "../baseball/team/team.css";
+@import "../baseball/team/team-sep.css";
+@import "../baseball/team/team-playerdetail.css";
 
 
 * {
