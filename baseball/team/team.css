@@ -2,7 +2,6 @@
 /* 임시 */
 section{
 	width: 70%;
-	height: 100%;
 	background-color: rgb(66, 58, 48);
 }
 .teammain-main, .teamsep-main, .teamplayerdetail-main{
@@ -17,7 +16,7 @@ section{
 .team-sidebar{
 	padding-top: 150px;
 	width: calc(20%);
-	height: 1000px;
+	height: 100vh;
 	float: left;
 	clear: both;
 	box-shadow: 3px 2px 3px 3px rgba(163, 157, 157, 0.7);
@@ -57,6 +56,50 @@ section{
 
 .teammain-main .container-pagenation{
 	padding: 0 auto;	
+}
+.teammain-main .container-teambox {
+	margin-top : 30px;
+}
+
+
+.teammain-main .container-teambox .item-teambox{
+	border: 3px double white;
+	border-radius:  20px;
+	background-color: rgb(92, 88, 83);
+	width: 40%;
+	position: relative; display: inline-block;
+}
+.teammain-main .container-teambox .item-teambox + .item-teambox{
+	margin-left : 20px;
+}
+
+.teammain-main .container-teambox .item-teambox .left-teambox, .right-teambox{
+	position: relative;
+	display: inline-block;
+}
+
+.teammain-main .container-teambox .item-teambox .label-team{
+	position: absolute;
+	display: inline-block;
+	bottom : 0px;
+	left : 10px;
+	background-color: #212529;
+	color: aliceblue;
+	font-size: 25px;
+	border-radius: 10px;
+	font-weight: 700;
+	padding: 2px;
+}
+
+
+/* 오른쪽 호버 박스 */
+.teammain-rightbox{
+	float: right;
+}
+.teammain-rightbox .hover-box{
+	position: relative;
+	display: inline-block;
+	right : 300px;
 }
 
 

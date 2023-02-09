@@ -44,3 +44,24 @@
 	border: 1px solid white;
 	width: 40%;
 }
+
+/* 팀 창단 이후 승률 그래프 */
+.container-team-winlose-graph{
+	display: inline-block;
+	width: 40%; height: 300px;
+	border: 1px solid white;
+
+}
+
+/* 전체 리그 참여 연혁 */
+.container-team-league{
+	display: inline-block;
+	width: 40%; height: 300px;
+	border: 1px solid white;
+}
+/* 현재 참여중 리그 */
+.container-team-current-league{
+	display: inline-block;
+	width: 40%; height: 300px;
+	border: 1px solid white;
+}
