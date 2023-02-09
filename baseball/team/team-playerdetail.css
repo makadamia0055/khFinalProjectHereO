@@ -20,3 +20,8 @@
 	border: 3px double white;
 	border-radius: 20px;
 }
+.container-personal_detail_stat{
+	display: inline-block;
+	width: 80%; height: 300px;
+	border: 1px solid white;
+}
