@@ -1,14 +1,22 @@
 .main__page {
   position: relative;
-  display: flex;
   padding-top: 120px;
   height: 100vh;
 }
-.main__imgBox {
+.main__imgBox-container {
   left: 25%;
   width: 1000px;
   height: 500px;
   z-index: 4;
   position: absolute;
+  overflow: hidden;
+}
+.main__imgBox-container2 {
   display: flex;
+  width: 300%;
+}
+.main__imgBox-container2 li img {
+  object-fit: cover;
+  width: 1000px;
+  height: 500px;
 }

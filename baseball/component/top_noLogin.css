@@ -1,83 +1,75 @@
 .topBar {
-	position: fixed;
-	background-color: white;
-	z-index: 99;
-	width: 100%;
+  position: fixed;
+  background-color: white;
+  z-index: 99;
+  width: 100%;
 }
 .topBar__containerBox1 {
-	position: relative;
-	height: 40px;
+  position: relative;
+  height: 40px;
 }
 .topBar__list {
-	list-style: none; 
-	position: absolute;
-	right: 20px;
-	top: 10px;
+  list-style: none;
+  position: absolute;
+  right: 20px;
+  top: 10px;
 }
 .topBar__list li {
-	float: left;
-	margin-right: 20px;
-	padding: 5px;
-	font-size: 12px;
+  float: left;
+  margin-right: 20px;
+  padding: 5px;
+  font-size: 12px;
+}
+.topBar__list li:hover {
+  text-decoration: underline;
 }
 
 .menu-containerBox2 {
-	background-color: #183153;
-	height: 80px;
+  background-color: #183153;
+  height: 80px;
 }
 .menu-containerBox2__bigBox {
-	display: flex;
+  display: flex;
 }
 .menu-container__box {
-	width: 20%;
-	height: 80px;
-	position: relative;
+  width: 20%;
+  height: 80px;
+  position: relative;
 }
 .menu-container__box a {
-	color: white;
-	font-size: 22px;
-	position: absolute;
-	transition: color 1s ease-in-out;
+  color: white;
+  font-size: 22px;
+  position: absolute;
+  transition: color 1s ease-in-out;
 }
-.menu-container__box>a:not(#home){
-	top: 21px;
+.menu-container__box > a:not(#home) {
+  top: 21px;
 }
-.menu-container__box:nth-child(2)>a{
-	left: 15%;
+.menu-container__box:nth-child(2) > a {
+  left: 15%;
 }
-.menu-container__box:first-child>a {
-	font-size: 40px;
-	top: 10px;
-	right: 45%;
-	transform: rotate(-45deg);
+.menu-container__box:first-child > a {
+  font-size: 40px;
+  top: 10px;
+  right: 45%;
+  transform: rotate(-45deg);
 }
 
 @keyframes menuTitleHover {
-	0%{
-		color: white;
-	}
-	50%{
-		color: #183153;
-		font-size: 25px;
-	}
-	100%{
-		color: white;
-	}
+  0% {
+    color: white;
+  }
+  50% {
+    color: #183153;
+    font-size: 25px;
+  }
+  100% {
+    color: white;
+  }
 }
-.menu-container__box>a:hover:not(#home) {
-	animation: menuTitleHover 0.8s linear infinite;
+.menu-container__box > a:hover:not(#home) {
+  animation: menuTitleHover 0.8s linear infinite;
 }
 #home:hover {
-	transform: rotate(1turn);
+  transform: rotate(1turn);
 }
-
-
-
-
-
-
-
-
-
-
-
