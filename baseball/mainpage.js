@@ -1,12 +1,13 @@
-window.onload = function () {
+//나중에 window.onload = 붙이기
+$(function () {
   setInterval(function () {
-    $(".main__imgBox-container2 li")
+    $(".main__imgBox-container2 li2")
       .first()
       .animate(
         {
           marginLeft: "-1000px",
         },
-        5000,
+        7000,
         function () {
           $(this)
             .detach()
@@ -14,5 +15,5 @@ window.onload = function () {
             .removeAttr("style");
         }
       );
-  }, 5000);
-};
+  }, 7000);
+});
