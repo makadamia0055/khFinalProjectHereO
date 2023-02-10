@@ -3,6 +3,7 @@
 section{
 	width: 70%;
 	background-color: rgb(66, 58, 48);
+	z-index: 0;
 }
 .teammain-main, .teamsep-main, .teamplayerdetail-main{
 	margin-top: 150px;
@@ -94,14 +95,22 @@ section{
 
 /* 오른쪽 호버 박스 */
 .teammain-rightbox{
+	margin-top : 400px;
 	float: right;
+	width : 200px;
+	border : 1px solid black;
+	background-color: aquamarine;
 }
 .teammain-rightbox .hover-box{
 	position: relative;
 	display: inline-block;
-	right : 300px;
+	
 }
-
+.teammain-rightbox .container-calendar{
+	border: 1px solid black;
+	width : 200px; height: 200px;
+	
+}
 
 /* 공용 */
 .clear-fix::after{

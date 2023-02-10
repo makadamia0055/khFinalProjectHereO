@@ -65,3 +65,19 @@
 	width: 40%; height: 300px;
 	border: 1px solid white;
 }
+/* 팀 전체 선수 열람 */
+.container-team-all_members{
+	display: inline-block;
+	width: 80%; height: 300px;
+	border: 1px solid white;
+}
+
+.container-team-all_members .table-all_member{
+	border: 1px solid white;
+	border-collapse: collapse;
+}
+.container-team-all_members .table-all_member th, td{
+	border: 1px solid white;
+	
+
+}

@@ -5,8 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>개별 팀페이지</title>
+    <link rel="stylesheet" href="../component/bootstrap4/bootstrap.min.css">
+    <script src="../component/bootstrap4/jquery.js"></script>
+    <script src="../component/bootstrap4/popper.min.js"></script>
+    <script src="../component/bootstrap4/boostrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../style.css" />
-    <script src="../jquery.min.js"></script>
     <script src="../hover.js"></script>
   </head>
   <body>
@@ -57,13 +60,13 @@
 					<a href="#" class="link-side">팀 연혁</a>
 				</li>
         <li class="item-side">
+					<a href="#" class="link-side">전체 선수 리스트</a>
+				</li>
+        <li class="item-side">
 					<a href="#" class="link-side">가입신청</a>
 				</li>
         <li class="item-side login">
 					<a href="#" class="link-side">팀 게시판</a>
-				</li>
-        <li class="item-side">
-					<a href="#" class="link-side">전체 선수 리스트</a>
 				</li>
 
 			</ul>
@@ -182,7 +185,7 @@
                 창단일 : <span class="team-since"></span>
               </li>
               <li class="item-teamhistory">
-              멤버수 : <span class="team-currentMember"></span>명
+              멤버수 : <span class="team-currentMember"></span>명 /
                 <span class="team-maxMember">
                 <span class="team-maxMember-num"></span>명
                 </span>
@@ -226,6 +229,71 @@
         <div class="container-team-winlose-graph">
           창단 이후 승률
         </div>
+      </div>
+      <!-- 이후 스프링으로 빼서 따로 페이지 만들기 -->
+      <div class="container-team-all_members">
+        <table class="table-all_member">
+          <tr>
+            <th class="th-member-profile">멤버 프로필</th>
+            <th class="th-member-status">팀 지위</th>
+            <th class="th-member-position">포지션</th>
+            <th class="th-member-attendance_rate">출석률</th>
+            <th class="th-member-attendance-ok"><span class="next_match">월 일 일정</span> 참석 여부</th>
+          </tr>
+          <tr>
+            <td class="member-profile">
+              <a href="#" class="link-member">
+                <div class="profile-img">
+                  <div class="profile-label">강호동</div>
+                </div>
+              </a>
+            </td>
+            <td class="member-status">
+              팀장
+            </td>
+            <td class="member-position">
+              포수
+            </td>
+            <td class="member-attendance_rate">
+              <span class="text-attendance_rate">95</span>%
+            </td>
+            <td class="member-next_match">참석</td>
+          </tr>
+          <tr>
+            <td class="member-profile">
+              <a href="#" class="link-member">
+                <div class="profile-img">
+                  <div class="profile-label">유재석</div>
+                </div>
+              </a>
+            </td>
+            <td class="member-status">
+              총무
+            </td>
+            <td class="member-position">
+              외야수
+            </td>
+            <td class="member-attendance_rate">
+              <span class="text-attendance_rate">100</span>%
+            </td>
+            <td class="member-next_match">불참</td>
+          </tr>
+        </table>
+        <div class="input-group col-sm-4">
+          <input type="text" class="form-control" placeholder="선수명 검색">
+          <div class="input-group-append">
+            <button class="btn btn-success" type="submit">검색</button>
+          </div>
+        </div>
+          <div class="box-pagination-all_member">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </div>
       </div>
     </section>
 

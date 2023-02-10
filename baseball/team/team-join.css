@@ -1,0 +1,18 @@
+.teamjoin-main{
+	width: 40em;
+	height : 50em;
+	margin: 150px auto;
+	position: relative;
+	background-color: rgb(179, 176, 176);
+	border-radius: 20%;
+	padding: 0 auto;
+}
+
+.container-join-input{
+	display: inline-block;
+	width: 26rem; height : 40rem;
+	border: 1px solid black;
+	margin : calc(5em), calc(7em);
+	border-radius: 20%;
+	background-color:rgb(179, 176, 176);
+}
