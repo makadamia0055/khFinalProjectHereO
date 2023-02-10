@@ -1,8 +1,9 @@
 /* component */
 @import "../baseball/component/top_noLogin.css";
 @import "../baseball/component/hover_menu.css";
-/* sceen */
+/* screen */
 @import "../baseball/screen/mainpage.css";
+@import "../baseball/screen/signup.css";
 
 * {
 	margin: 0;

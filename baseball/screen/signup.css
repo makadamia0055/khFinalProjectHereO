@@ -1,0 +1,22 @@
+.signup-title {
+    width: 80%;
+    padding: 20px;
+    position: relative;
+}
+.signup-title span {
+    color: white;
+    font-size: 27px;
+    position: absolute;
+    left: -9%;
+}
+.signup-btn__container {
+    margin-top: 200px;
+    margin-left: 30%;
+}
+.signup-btn__btn {
+    font-size: 20px;
+    padding: 15px 20px;
+    background-color: yellow;
+    margin-right: 50px;
+    border-style: none;
+}
