@@ -3,14 +3,9 @@
   position: relative;
   margin:120px 15% 0px 15%;
 }
-<<<<<<< Updated upstream
 .main__imgBox-container {
   width: 100%;
-=======
-.main__imgBox {
   left: 15%;
-  width: 70%;
->>>>>>> Stashed changes
   height: 500px;
   z-index: 4;
   overflow: hidden;
