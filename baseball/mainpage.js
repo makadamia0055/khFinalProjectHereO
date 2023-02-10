@@ -5,9 +5,10 @@ $(function () {
       .first()
       .animate(
         {
-          marginLeft: "-1000px",
+          marginLeft: "-25%",
+          opacity: "0.7"
         },
-        7000,
+        3000,
         function () {
           $(this)
             .detach()
@@ -15,5 +16,5 @@ $(function () {
             .removeAttr("style");
         }
       );
-  }, 7000);
-});
+  }, 3000);
+}); //다른 화면으로 넘어간 후 다시 해당 페이지로 오는 경우 애니메이션 효과가 겹침. 

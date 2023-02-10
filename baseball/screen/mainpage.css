@@ -1,23 +1,26 @@
 .main__page {
   position: relative;
-  padding-top: 120px;
+  margin:120px 15% 0px 15%;
   height: 100vh;
   background-color: #c9dbf3;
 }
 .main__imgBox-container {
-  left: 25%;
-  width: 1000px;
+  width: 100%;
   height: 500px;
   z-index: 4;
-  position: absolute;
   overflow: hidden;
 }
 .main__imgBox-container2 {
   display: flex;
-  width: 300%;
+  width: 400%;
+  height: 100%;
+}
+.main__imgBox-container2 li{
+  width: 25%;
+  height: 100%;
 }
 .main__imgBox-container2 li img {
+  width: 100%;
+  height: inherit;
   object-fit: cover;
-  width: 1000px;
-  height: 500px;
 }
