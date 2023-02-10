@@ -1,8 +1,7 @@
+/* 메인 이미지 + 이미지 하단 배너 */
 .main__page {
   position: relative;
   margin:120px 15% 0px 15%;
-  height: 100vh;
-  background-color: #c9dbf3;
 }
 .main__imgBox-container {
   width: 100%;
@@ -23,4 +22,93 @@
   width: 100%;
   height: inherit;
   object-fit: cover;
+}
+
+.main__contents-container {
+  position: relative;
+}
+.main__contents-reservationAndCommu {
+  background: linear-gradient(white, #fbfaf5);
+  width: 70%;
+  border-radius: 15px;
+  padding: 20px 60px;
+  position: absolute;
+  top: -40px;
+  left: 10%;
+  box-shadow: 0px 17px 21px rgb(0 0 0 / 4%);
+  display: flex;
+}
+.main__contents-reservation {
+  width: 50%;
+  border-right: 1px solid rgb(38, 38, 38);
+}
+.reservation-title {
+  color: #30475E;
+  margin-left: 10px;
+  font-weight: 600;
+}
+.main__contents-commu {
+  width: 50%;
+  padding: 10px 20px;
+  display: flex;
+}
+.reservation-mainTitle,
+.commu-mainTitle {
+  font-weight: 900;
+  margin-left: 10px;
+  font-size: 17px;
+}
+.letter-click {
+  margin-left: 10px;
+}
+.letter-click:hover,
+.commu-mainTitle span:hover {
+  text-decoration: underline;
+}
+.main__contents-commu i {
+  font-size: 25px;
+  margin-left: 8px;
+  margin-right: 5px;
+  color: #FF5B00;
+}
+.main__contents-box {
+  width: 22%;
+  background-color: #FFFFD0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px 2%;
+}
+.main__contents-box > i {
+  padding: 10px 0px;
+  font-size: 50px;
+}
+/* 팀 섹션 */
+.team-section {
+  margin-top: 75px;
+}
+.team-section h2 {
+  margin-left: 5%;
+  margin-bottom: 20px;
+}
+.newTeam-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+.newTeam__list {
+  width: 25%;
+  margin-top: 10px;
+  height: 350px;
+  border: 1px solid #ecedf2;
+  box-shadow: 0px 17px 21px rgb(0 0 0 / 4%);
+}
+.newTeam__more{
+  margin-top: 15px;
+  text-align: right;
+  margin-right: 5%;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+.newTeam__more a:hover{
+  text-decoration: underline;
 }
