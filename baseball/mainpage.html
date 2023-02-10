@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="../baseball/style.css" />
-    <script src="../jquery.min.js"></script>
-    <script src="../hover.js"></script>
+    <script src="../baseball/jquery.min.js"></script>
+    <script src="../baseball/mainpage.js"></script>
+    <script src="../baseball/component/component.js"></script>
   </head>
   <body>
     <header class="topBar">
       <div class="topBar__containerBox">
+        <!-- 최상단 로그인 메뉴바 -->
         <div class="topBar__containerBox1">
           <ul class="topBar__list">
             <li><a href="#">로그인</a></li>
@@ -19,52 +21,99 @@
             <li><a href="#">고객센터</a></li>
           </ul>
         </div>
+        <!-- 메인 메뉴바 -->
         <nav class="menu-containerBox2">
           <ul class="menu-containerBox2__bigBox">
             <li class="menu-container__box">
               <a href="#" id="home"><i class="fa-solid fa-baseball"></i></a>
             </li>
             <li class="menu-container__box">
-              <a href="#">Team</a>
+              <a href="#"><span>Team</span></a>
+              <ul class="submenu-containerBox1">
+                <li><a>서브메뉴1</a></li>
+                <li><a>서브메뉴2</a></li>
+              </ul>
             </li>
             <li class="menu-container__box">
-              <a href="#">League</a>
+              <a href="#"><span>League</span></a>
+              <ul class="submenu-containerBox1">
+                <li><a>서브메뉴3</a></li>
+                <li><a>서브메뉴4</a></li>
+              </ul>
             </li>
             <li class="menu-container__box">
-              <a href="#">Reservation</a>
+              <a href="#"><span>Reservation</span></a>
+              <ul class="submenu-containerBox1">
+                <li><a>서브메뉴5</a></li>
+                <li><a>서브메뉴6</a></li>
+              </ul>
             </li>
             <li class="menu-container__box">
-              <a href="#">Community</a>
+              <a href="#"><span>Community</span></a>
+              <ul class="submenu-containerBox1">
+                <li><a>서브메뉴7</a></li>
+                <li><a>서브메뉴8</a></li>
+              </ul>
             </li>
           </ul>
         </nav>
+        <div class="submenu__background"></div>
       </div>
     </header>
-    <main>
-      <div class="main-imgBox"></div>
-    </main>
-    <div class="submenu sub-team">
-      <div class="submenu__list">
-        <ul>
-          <li><a href="#">메뉴01</a></li>
-          <li><a href="#">메뉴02</a></li>
+    <main class="main__page">
+      <div class="main__imgBox-container">
+        <ul class="main__imgBox-container2">
+          <li><img src="/baseball/img/main_page.jpg" /></li>
+          <li>
+            <img
+              src="https://cdn.pixabay.com/photo/2016/12/05/00/28/san-francisco-1882882_960_720.jpg"
+            />
+          </li>
+          <li>
+            <img
+              src="https://images.unsplash.com/photo-1603538512033-d36db59f3133?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+            />
+          </li>
+          <li>
+            <img
+              src="https://cdn.pixabay.com/photo/2017/06/16/23/17/baseball-2410657_960_720.jpg"
+            />
+          </li>
         </ul>
       </div>
-      <div class="submenu__team-contents">
-        <img
-          class="sub-team__img1"
-          src="https://cdn.pixabay.com/photo/2016/07/04/05/10/baseball-1495939_960_720.jpg"
-        />
-        <span class="sub-team__title">야구는 팀게임!</span>
-        <span class="sub-team__title2">당신을 기다리는 팀이 지금 여기</span>
-        <a href="#"><span class="sub-team__title3">Click</span></a>
-        
-        <img
-          class="sub-team__img2"
-          src="https://cdn.pixabay.com/photo/2013/07/12/15/41/baseball-150324_960_720.png"
-        />
+      <div class="main__contents-container">
+        <div class="main__contents-reservationAndCommu">
+          <div class="main__contents-reservation">
+            <div class="reservation-title">빠르고 간편하게!</div>
+            <div class="reservation-mainTitle">
+              야구장 쉽게 예약하기<a href="#"
+                ><span style="color: #e0144c" class="letter-click"
+                  >CLICK!</span
+                ></a
+              >
+            </div>
+          </div>
+          <div class="main__contents-commu">
+            <div class="commu-mainTitle">
+              야구계
+              <a href="#"
+                ><span style="color: #fd841f">" Carrot Market "</span></a
+              >
+            </div>
+            <i class="fa-solid fa-carrot"></i>
+          </div>
+        </div>
       </div>
-    </div>
+    </main>
+    <section class="team-section">
+      <h2>New Team</h2>
+      <div class="newTeam-container">
+        <div class="newTeam__list"></div>
+        <div class="newTeam__list"></div>
+        <div class="newTeam__list"></div>
+      </div>
+      <div class="newTeam__more"><a href="#">더보기</a></div>
+    </section>
     <script
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
