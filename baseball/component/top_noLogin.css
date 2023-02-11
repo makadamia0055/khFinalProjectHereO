@@ -68,8 +68,8 @@
 평소엔 opacity : 0 지금은 눈에 보이게 하려고*/
 .submenu__background {
   width: 100%;
-  height: 24px;
-  background-color: #FFFBE9;
+  height: 28px;
+  background-color: #FFFBE9; 
 }
 .submenu-containerBox1 {
   display: flex;
