@@ -16,11 +16,28 @@
 	<section class="teamjoin-main">
 		<div class="container-join-input">
 			<fieldset class="">
-				<form action="" method="post" class="form-horizontal">
+				<form action="" method="get" class="form-horizontal">
 					<div class="form-group">
-						<label for="contact">연락처</label>
-						<input type="text" name="contact" id="contact" class="form-control  col-lg-8" placeholder="연럭처를 입력해주세요.">
+						<div class="team-selector">
+							<label for="team">가입 희망 팀:</label>
+							<select class="form-control" id="team">
+								<option>단또즈</option>
+								<option>댕댕즈</option>
+								<option>돈까스</option>
+								<option>돌핀즈</option>
+							</select>
+						</div>
 
+
+						<label for="contact">연락처</label>
+						<input type="text" name="contact" id="contact" class="form-control  col-lg-8" placeholder="연락처를 입력해주세요.">
+						<label for="local">거주지</label>
+						<input type="text" name="local" id="local" class="form-control  col-lg-12" placeholder="거주 지역을 입력해주세요">
+						<label for="position">희망 포지션</label>
+						<input type="text" name="position" id="position" class="form-control  col-lg-8" placeholder="희망 포지션을 입력해주세요.">
+						<label for="introduce">자기소개</label>
+						<textarea name="introduce" id="introduce" class="form-control" rows="5"></textarea>
+						<button type="submit">등록</button>
 					</div>
 
 

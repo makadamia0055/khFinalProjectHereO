@@ -9,10 +9,9 @@
 }
 
 .container-join-input{
+	position: relative;
 	display: inline-block;
-	width: 26rem; height : 40rem;
-	border: 1px solid black;
-	margin : calc(5em), calc(7em);
-	border-radius: 20%;
-	background-color:rgb(179, 176, 176);
+	width: 26em; height : 40em;
+	margin: calc(5em) calc(7em);
+	box-sizing: content-box;
 }
