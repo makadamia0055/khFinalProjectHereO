@@ -1,8 +1,7 @@
 /* 메인 */
 /* 임시 */
 section{
-	width: 70%;
-	background-color: rgb(66, 58, 48);
+	width: calc( 70% );
 	z-index: 0;
 }
 .teammain-main, .teamsep-main, .teamplayerdetail-main{
@@ -55,9 +54,14 @@ section{
 }
 
 
+/* 페이지 네이션 */
 .teammain-main .container-pagenation{
+	width: inherit;
 	padding: 0 auto;	
 }
+/* 개별 팀박스 */
+
+
 .teammain-main .container-teambox {
 	margin-top : 30px;
 }
@@ -66,11 +70,12 @@ section{
 .teammain-main .container-teambox .item-teambox{
 	border: 3px double white;
 	border-radius:  20px;
-	background-color: rgb(92, 88, 83);
-	width: 40%;
+	background-color: rgb(38, 97, 173);
+	min-width: 520px;
+	width: calc(40%);
 	position: relative; display: inline-block;
 }
-.teammain-main .container-teambox .item-teambox + .item-teambox{
+.teammain-main .container-teambox .item-teambox + .item-teambox:nth-child(2n){
 	margin-left : 20px;
 }
 
@@ -81,17 +86,22 @@ section{
 
 .teammain-main .container-teambox .item-teambox .label-team{
 	position: absolute;
-	display: inline-block;
-	bottom : 0px;
-	left : 10px;
+	width: 150px;
+	margin-top: -43px;
 	background-color: #212529;
 	color: aliceblue;
+	text-align: center;
 	font-size: 25px;
 	border-radius: 10px;
 	font-weight: 700;
 	padding: 2px;
 }
-
+.teammain-main .container-teambox .right-teambox{
+	margin: 0 calc( 40% - 150px);
+	font-size: 18px;
+	vertical-align: middle;
+	color: white;
+}
 
 /* 오른쪽 호버 박스 */
 .teammain-rightbox{
