@@ -1,37 +1,125 @@
-
+.teamsep-main{
+	background-color: #183153;
+	border-radius: 30px;
+}
 .left-introduce{
-	width: 40%;
-	border: 1px solid white;
+	
+	/* border: 1px solid black; */
 	display: inline-block;
+	width: 40%;
 
 }
 .right-introduce{
-	width: 40%;
-	border: 1px solid white;
+	
+	
+	/* border: 1px solid black; */
+	
 	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	margin-left: 100px;
+	
+	
+
+}
+.right-introduce .list-team_intro{
+	background-color: antiquewhite;
+	border-radius: 30px;
+	padding: 30px;
+	font-size: 1.4em;
+	font-weight: 700;
+	line-height: 38px;
+	box-shadow: 2px 2px 0 5px #1c1e20 ;
+	
+	
+}
+.right-introduce .list-team_intro .team-name {
+	letter-spacing: -4px;
+	font-size: 60px;
+	color: black;
+	text-shadow: 2px 2px 1px gray;
+
+}
+.right-introduce .list-team_intro .team-message{
+	font-style: oblique;
+	margin : 20px 0 20px 10px;
+	
+}
+.left-introduce .box-logo{
+	display: inline-block;
+	
 }
 
 
-/* container-lineup */
+.container-latestscore{
+	display: block;
+	background-color: antiquewhite;
+}
+
+
+/* 선수 라인업 */
 .container-lineup{
 	/* 임시 보더 */
+	position: relative;
+	margin-top : 30px;
 	display: inline-block;
-	border: 1px solid black;
+	border-radius: 20px;
+	background-color: rgb(38, 97, 173);
 	width: 40%;
 }
+.container-lineup .titletext-lineup{
+	font-size: 28px;
+	text-align: center;
+	color: aliceblue;
+	font-weight: 700;
+}
+.container-lineup .item-lineup{
+	display: block;
+	border-radius: 10px;
+	background-color: antiquewhite;
+	margin: 10px 0;
 
+}
+.container-lineup .item-lineup .link-lineup{
+	margin : 10px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 20px;
+	font-weight: 700;
+}
+.container-lineup .item-lineup .position-lineup{
+	float: right;
+	margin-right: 10px;
+	margin-top: 3px;
+	font-size: 20px;
+	color: crimson;
+	font-weight: 600;
+}
 
 
 /* 선수 라인업 호버 메뉴  */
 .container-hover-lineup{
-	display: inline-block;
-	width: 40%;
-	border : 1px solid black;
+	position: absolute;
+	float: left;
+	/* right: -300px; */
+	right: -800px;
+	 top: 0;
+	border-radius: 30px;
+	border : 5px solid wheat;
+	background-color: rgb(23, 60, 109);
+	color: white;
+	padding: 20px;
+	vertical-align: top;
 
 }
-.container-latestscore{
-	border : 1px solid black;
+.container-hover-lineup .player-name{
+	margin-left: 10px;
+	font-weight: 700;
 }
+.container-hover-lineup .box-player-profile{
+
+}
+
 
 .container-calendar{
 	display: inline-block;

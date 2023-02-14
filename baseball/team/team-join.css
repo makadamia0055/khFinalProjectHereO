@@ -15,3 +15,8 @@
 	margin: calc(5em) calc(7em);
 	box-sizing: content-box;
 }
+
+.container-join-input label{
+	margin-top : 10px
+	
+}
