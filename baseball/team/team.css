@@ -82,12 +82,23 @@ section{
 .teammain-main .container-teambox .item-teambox .left-teambox, .right-teambox{
 	position: relative;
 	display: inline-block;
+
+	
+}
+.teammain-main .container-teambox .item-teambox .link-team-select{
+	display: inline-block;
+	width: 150px;
+	height: 150px;
+	background-image: url(./고양이\ 로고.png);
+	background-size: 150px 150px;
+
 }
 
 .teammain-main .container-teambox .item-teambox .label-team{
 	position: absolute;
 	width: 150px;
-	margin-top: -43px;
+	float: left;
+	bottom: 0;
 	background-color: #212529;
 	color: aliceblue;
 	text-align: center;
@@ -97,8 +108,9 @@ section{
 	padding: 2px;
 }
 .teammain-main .container-teambox .right-teambox{
-	margin: 0 calc( 40% - 150px);
-	font-size: 18px;
+	margin: 30px calc( 40% - 150px);
+	position: absolute;
+	font-size: 20px;
 	vertical-align: middle;
 	color: white;
 }
