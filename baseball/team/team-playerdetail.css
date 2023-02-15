@@ -2,26 +2,97 @@
 
 .container-playerprofile{
 	position: relative;
-	border: 1px solid black;
 	border-radius: 20px;
 }
 .leftbox-profile{
 	width: 50%; display: inline-block;
-	border : 1px solid white;
 }
 .rightbox-profile{
 	
 	position: absolute;
 	display: inline-block;
 }
-.container-playergraph{
-	position: relative;
-	width: 300px; height: 300px;
-	border: 3px double white;
-	border-radius: 20px;
-}
+
 .container-personal_detail_stat{
 	display: inline-block;
 	width: 80%; height: 300px;
+	/* 임시보더 */
 	border: 1px solid white;
+}
+
+.teamplayerdetail-main{
+	border-radius: 20px;
+	background: #183153;
+}
+.teamplayerdetail-main .section-title-playerdetail{
+	color: black;
+	margin-left : 20px; 
+	font-size: 40px;
+	text-shadow: 1px 1px 1px white;
+	
+}
+.teamplayerdetail-main .container-playerprofile .leftbox-profile .player-icon{
+	display: inline-block;
+	margin-left : 30px;
+	width: 300px; height: 300px;
+	border-radius: 20px;
+}
+/* 플레이어 프로필 사진 */
+
+.teamplayerdetail-main .container-playerprofile .leftbox-profile .player-icon.no_icon{
+	background-image: url(./선수\ 이미지\ 샘플.png);
+	background-size: 300px 300px;
+	filter: grayscale(100%);
+
+}
+
+.teamplayerdetail-main .container-playerprofile .rightbox-profile{
+ margin-left : 30px;
+ width: 300px; height: 300px;
+ background-color: antiquewhite;
+ border-radius: 20px;
+ padding : 20px;	
+ font-size: 20px;
+ line-height: 30px;
+ box-sizing: border-box;
+}
+
+.teamplayerdetail-main .container-playerprofile .rightbox-profile .player-profile1{
+	margin-bottom : 10px;
+}
+.teamplayerdetail-main .container-playerprofile .rightbox-profile .player-profile1 .player-name{
+	margin-bottom: 10px;
+}
+
+
+/* 중간 블록 타일 */
+.teamplayerdetail-main .block-tile{
+	display: block;
+	margin: 30px 0;
+	text-align: center;
+	font-size: 30px;
+	font-weight: 700;
+	
+	padding: 20px;
+	background-color: antiquewhite;
+}
+
+.container-latest_score .box-latest_score{
+	display: flex;
+	width : 80%;
+	
+}
+
+.container-latest_score .box-latest_score ul{
+	background-color: rgb(38, 97, 173);
+}
+
+.container-playergraph{
+	background-color: antiquewhite;
+	width: 40%;
+
+	text-align: center; border-radius: 20px;
+}
+.container-playergraph::after{
+	content:''; display: block; clear: both;
 }

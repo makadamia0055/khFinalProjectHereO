@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="../style.css" />
     <script src="../jquery.min.js"></script>
     <script src="../hover.js"></script>
+    <!-- 그래프 링크 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- https://www.chartjs.org/docs/latest/getting-started/ -->
   </head>
   <body>
     <header class="topBar">
@@ -69,74 +73,89 @@
 			</ul>
 		</aside>
 		<section class="teamplayerdetail-main">
+      <div class="section-title-playerdetail">
+        <h1>선수 프로필</h1>
+      </div>
 			<div class="container-playerprofile">
         <div class="leftbox-profile">
-          <h2>선수 프로필</h2>
-          <div class="player-icon">
-            <img src="./선수 이미지 샘플.png" alt="선수 디폴트 이미지">
+          
+          <div class="player-icon no_icon">
+            
           </div>
-          <div class="player-profile1">
-            <h3 class="player-name">선수 이름</h3>
-            <span>지역 : </span><span class="player-local">인천</span>
-            <span class="attendance">출석률 : 95%</span><span class="attendanceRate"></span>
-          </div>
-          <div class="player-profile2">
-            <div class="item-weight">
-              <span>몸무게 : </span><span class="player-weight">89</span><span>kg</span>
+          <div class="rightbox-profile">
+            <div class="player-profile1">
+              <h3 class="player-name">선수 이름</h3>
+              <span>지역 : </span><span class="player-local">인천</span><br>
+              <span class="attendance">출석률 : <span class="attendance-rate">95</span>%</span><span class="attendanceRate"></span>
             </div>
-            <div class="item-height">
-              <span>신장 : </span><span class="player-height">175</span><span>cm</span>
+            <div class="player-profile2">
+              <div class="item-weight">
+                <span>몸무게 : </span><span class="player-weight">89</span><span>kg</span>
+              </div>
+              <div class="item-height">
+                <span>신장 : </span><span class="player-height">175</span><span>cm</span>
+              </div>
+              <div class="item-throwhitarm">
+                투타 : <span class="player-throwarm">좌</span>투<span class="player-hitarm">좌</span>타
+              </div>
+              <div class="item-isdual">
+                <span>투타겸업 여부 : </span><span class="player-isdual">겸업</span>
+              </div>
             </div>
-            <div class="item-throwhitarm">
-              <span class="player-throwarm">좌</span>투<span class="player-hitarm">좌</span>타
-            </div>
-            <div class="item-isdual">
-              <span>투타겸업 여부 : </span><span class="player-isdual">겸업</span>
-            </div>
-          </div>
-
-        </div>
-        <div class="rightbox-profile">
-          <div class="container-playergraph ">
-            플레이어 그래프 들어갈 장소
           </div>
           
-        </div>
-        <div class="container-latest_score">
-          <ul class="latest-stat-hit">
-            <li class="item-last10gamehit">
-              10경기 타율 : <span class="last10gamehit">0.302</span>
-            </li>
-            <li class="item-last10hit">
-              10타석 타율 : <span class="last10hit">0.404</span>
-            </li>
-            <li class="item-hitpoint">
-              10경기 타점 : <span class="last10hitpoint">3</span>점
-            </li>
-          </ul>
-          <ul class="latest-stat-throw">
-            <!-- 주요 구종 -->
-            <li class="item-last10gamepitch">
-              10경기 자책점 : <span class="last10gamepitch">2.302</span>
-            </li>
-            <li class="item-last10hitted">
-              10타석 피안타율 : <span class="last10hitted">0.404</span>
-            </li>
-            <li class="item-hitpoint">
-              10경기 실점 : <span class="last10losepoint">6</span>점
-            </li>
-          </ul>
-          <ul class="latest-stat-throw">
-            <li class="item-last10gamepitch">
-              10경기 실책 : <span class="last10gamepitch">2.3</span>회
-            </li>
-            <li class="item-last10hitted">
-              10경기 파인 플레이 : <span class="last10hitted">4</span>회
-            </li>
-         </ul>
-        </div>
-        <!-- 베스트 플레이 영상 -->
 
+        </div>
+        <div class="block-tile title-recently_Match_score">
+          최근 경기 성적
+        </div>
+        
+        
+          
+       
+        <div class="container-latest_score">
+          <div class="box-latest_score">
+            <ul class="latest-stat-hit">
+              <li class="item-last10gamehit">
+                10경기 타율 : <span class="last10gamehit">0.302</span>
+              </li>
+              <li class="item-last10hit">
+                10타석 타율 : <span class="last10hit">0.404</span>
+              </li>
+              <li class="item-hitpoint">
+                10경기 타점 : <span class="last10hitpoint">3</span>점
+              </li>
+            </ul>
+            <ul class="latest-stat-throw">
+              <!-- 주요 구종 -->
+              <li class="item-last10gamepitch">
+                10경기 자책점 : <span class="last10gamepitch">2.302</span>
+              </li>
+              <li class="item-last10hitted">
+                10타석 피안타율 : <span class="last10hitted">0.404</span>
+              </li>
+              <li class="item-hitpoint">
+                10경기 실점 : <span class="last10losepoint">6</span>점
+              </li>
+            </ul>
+            <!-- <ul class="latest-stat-">
+              <li class="item-last10gamepitch">
+                10경기 실책 : <span class="last10gamepitch">2.3</span>회
+              </li>
+              <li class="item-last10hitted">
+                10경기 파인 플레이 : <span class="last10hitted">4</span>회
+              </li>
+            </ul> -->
+          </div>
+        </div>
+        <div class="container-playergraph clear-fix">
+          <h2>팀내 타율 순위</h2>
+          <canvas id="PlayerStatChart"></canvas>
+         </div>
+        <!-- 베스트 플레이 영상 -->
+        <div class="block-tile title-Match_recode">
+          경기 기록 열람
+        </div>
         <!-- 선수 열람 스탯 칸 -->
         <!--  어떻게 구성해야하나 감 아직 안잡힘. -->
         <div class="container-personal_detail_stat">
@@ -173,6 +192,29 @@
 
   </body>
 </html>
+
+<script>
+  const ctx = document.getElementById('PlayerStatChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
 
 </body>
 </html>
