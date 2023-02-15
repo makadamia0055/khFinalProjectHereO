@@ -45,7 +45,7 @@
 }
 .menu-container__box a:not(#home) span {
   display: block;
-  font-size: 22px;
+  font-size: 26px;
   transition: color 1s ease-in-out;
   color: #f9f5e7;
 }
@@ -56,7 +56,7 @@
   left: 15%;
 }
 .menu-container__box:first-child > a {
-  font-size: 30px;
+  font-size: 35px;
   top: 16px;
   left: 25%;
   color: #f9f5e7;
@@ -68,7 +68,7 @@
 평소엔 opacity : 0 지금은 눈에 보이게 하려고*/
 .submenu__background {
   width: 100%;
-  height: 28px;
+  height: 30px;
   background-color: #fffbe9;
 }
 .submenu-containerBox1 {
@@ -78,7 +78,7 @@
 .submenu-containerBox1 > li {
   color: black;
   margin-left: 10px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
-  padding: 2px 0px;
+  padding: 4px 0px;
 }
