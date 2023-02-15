@@ -6,7 +6,7 @@
 	
 	/* border: 1px solid black; */
 	display: inline-block;
-	width: 40%;
+	width: 300px;
 
 }
 .right-introduce{
@@ -17,7 +17,7 @@
 	display: inline-block;
 	vertical-align: top;
 	position: relative;
-	margin-left: 100px;
+	
 	
 	
 
@@ -54,18 +54,27 @@
 .container-latestscore{
 	display: block;
 	background-color: antiquewhite;
+	margin-top : 30px;
 }
-
+.container-latestscore .score-teamstat{
+	text-align: center;
+	font-size: 30px;
+}
+.container-latestscore .score-teamstat .titletext-latestscore{
+	font-weight: 700;
+}
 
 /* 선수 라인업 */
 .container-lineup{
-	/* 임시 보더 */
+
 	position: relative;
 	margin-top : 30px;
 	display: inline-block;
 	border-radius: 20px;
 	background-color: rgb(38, 97, 173);
 	width: 40%;
+	box-shadow: 2px 2px 0 5px #1c1e20 ;
+
 }
 .container-lineup .titletext-lineup{
 	font-size: 28px;

@@ -110,7 +110,7 @@ section{
 .teammain-main .container-teambox .right-teambox{
 	margin: 30px calc( 40% - 150px);
 	position: absolute;
-	font-size: 20px;
+	font-size: 18px;
 	vertical-align: middle;
 	color: white;
 }
