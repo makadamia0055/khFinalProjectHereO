@@ -51,16 +51,16 @@
 }
 
 
-.container-latestscore{
+.block-liner{
 	display: block;
 	background-color: antiquewhite;
 	margin-top : 30px;
 }
-.container-latestscore .score-teamstat{
+.block-liner .content-blockliner{
 	text-align: center;
 	font-size: 30px;
 }
-.container-latestscore .score-teamstat .titletext-latestscore{
+.block-liner .content-blockliner .titletext-latestscore{
 	font-weight: 700;
 }
 
@@ -69,13 +69,15 @@
 
 	position: relative;
 	margin-top : 30px;
+	margin-left : 30px;
 	display: inline-block;
 	border-radius: 20px;
 	background-color: rgb(38, 97, 173);
-	width: 40%;
+	width: 20%;
 	box-shadow: 2px 2px 0 5px #1c1e20 ;
 
 }
+
 .container-lineup .titletext-lineup{
 	font-size: 28px;
 	text-align: center;
@@ -103,6 +105,12 @@
 	font-size: 20px;
 	color: crimson;
 	font-weight: 600;
+}
+.container-lineup .item-lineup .attendance{
+	margin-left: 10px;
+	margin-top : 4px;
+	
+
 }
 
 
