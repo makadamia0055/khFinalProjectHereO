@@ -1,0 +1,13 @@
+footer {
+  border-top: 1px solid black;
+}
+.footer-menu__container {
+  padding: 0.3% 15%;
+}
+.footer-menu__list {
+  float: left;
+  margin: 0 1% 0.3% 1%;
+}
+.footer__info {
+  padding: 0 15.5%;
+}
