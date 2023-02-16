@@ -86,7 +86,8 @@
 }
 /* 팀 섹션 */
 .team-section {
-  margin-top: 75px;
+  width: 100vw;
+  padding-top: 75px;
 }
 .team-section h2 {
   color: #d2001a;
@@ -94,6 +95,7 @@
   margin-bottom: 20px;
 }
 .newTeam-container {
+  width: 100vw;
   display: flex;
   justify-content: space-evenly;
 }
@@ -105,12 +107,15 @@
   box-shadow: 0px 17px 21px rgb(0 0 0 / 4%);
 }
 .newTeam__more {
+  width: inherit;
   margin-top: 15px;
-  text-align: right;
-  margin-right: 5%;
   font-size: 13px;
   margin-bottom: 5px;
+  text-align: right;
 }
 .newTeam__more a:hover {
   text-decoration: underline;
+}
+body::-webkit-scrollbar {
+  width: 0;
 }
