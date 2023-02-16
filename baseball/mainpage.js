@@ -1,7 +1,7 @@
 //나중에 window.onload = 붙이기
 $(function () {
   setInterval(function () {
-    $(".main__imgBox-container2 li2")
+    $(".main__imgBox-container2 li")
       .first()
       .animate(
         {
