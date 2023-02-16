@@ -59,6 +59,7 @@
 .block-liner .content-blockliner{
 	text-align: center;
 	font-size: 30px;
+	padding : 10px;
 }
 .block-liner .content-blockliner .titletext-latestscore{
 	font-weight: 700;
@@ -73,7 +74,7 @@
 	display: inline-block;
 	border-radius: 20px;
 	background-color: rgb(38, 97, 173);
-	width: 20%;
+	width: calc( 20% );
 	box-shadow: 2px 2px 0 5px #1c1e20 ;
 
 }
@@ -113,6 +114,21 @@
 
 }
 
+.item-vs_icon{
+	display: inline-block;
+	font-size: 70px;
+	color: antiquewhite;
+	vertical-align: middle;
+	margin: 0 auto;
+}
+
+.container-lineup.opponent{
+	background-color: rgb(211, 44, 136);
+	float: right;
+	margin-right : 20px;
+}
+
+
 
 /* 선수 라인업 호버 메뉴  */
 .container-hover-lineup{
@@ -132,9 +148,6 @@
 .container-hover-lineup .player-name{
 	margin-left: 10px;
 	font-weight: 700;
-}
-.container-hover-lineup .box-player-profile{
-
 }
 
 
@@ -170,19 +183,34 @@
 	width: 40%; height: 300px;
 	border: 1px solid white;
 }
-/* 팀 전체 선수 열람 */
-.container-team-all_members{
-	display: inline-block;
-	width: 80%; height: 300px;
-	border: 1px solid white;
+
+.container-team-winlose-graph::after{
+	clear: both; content: ''; display: block;
 }
 
-.container-team-all_members .table-all_member{
-	border: 1px solid white;
-	border-collapse: collapse;
+/* right-team-history */
+.right-team-history{
+	margin : 20px ;
+	display: inline-block;
+	background-color: antiquewhite;
+	width: 70%;
 }
-.container-team-all_members .table-all_member th, td{
-	border: 1px solid white;
+
+
+
+
+/* 창단 후 승률그래프 */
+.container-team-winlose-graph{
+	float: right;
+}
+
+.container-team-winlose-graph .item-winlosegraph{
+	border-radius: 20px;
+	padding: 20px; 
+	background-color: white;
 	
+}
+.container-team-winlose-graph .item-winlosegraph::after{
+	clear: both; content: ''; display: block;
 
 }

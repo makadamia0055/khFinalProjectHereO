@@ -4,15 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>개별 팀페이지</title>
+    <title>팀 경기 기록실</title>
     <link rel="stylesheet" href="../component/bootstrap4/bootstrap.min.css">
     <script src="../component/bootstrap4/jquery.js"></script>
     <script src="../component/bootstrap4/popper.min.js"></script>
     <script src="../component/bootstrap4/boostrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../style.css" />
     <script src="../hover.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
   </head>
   <body>
     <header class="topBar">
@@ -103,7 +101,7 @@
             <li class="current-league_text">현재 참여 리그 : <a href="#" class="current-league">가리봉동 가리비 리그</a></li>
           </ul>
         </div>
-        <iframe src="https://calendar.google.com/calendar/embed?height=300&wkst=2&bgcolor=%234285F4&ctz=Asia%2FSeoul&showTitle=0&showTabs=0&showPrint=0&showCalendars=0&showTz=0&mode=MONTH&src=Y2RiYWNmNDhiZGRmY2I2YjdhZWQ3YzM4ZjYwODljZjk5OTc2MmZkOTliYzA0OTc4N2FiYjc2MDFiZTRhMmE5MEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23F09300" style="border-width:0" width="400" height="300" frameborder="0" scrolling="no"></iframe>
+
         <div class="block-liner container-latestscore">
           <div class="content-blockliner score-teamstat">
             <div class="titletext-latestscore">다음 경기</div>
@@ -116,7 +114,7 @@
 
 
         <div class="container-nextMatch">
-          <div class="container-lineup">
+          <div class="container-lineup prev">
             <ul class="list-lineup">
               <div class="titletext-lineup">다음 경기 Line-up</div>
               <li class="item-lineup">
@@ -181,74 +179,6 @@
             <button class="btn btn-primary col-lg-12">출석 체크</button>
          </div>
 
-         <div class="item-vs_icon">VS</div>
-
-
-
-         <div class="container-lineup opponent">
-          <ul class="list-lineup">
-            <div class="titletext-lineup opponent">상대팀 Line-up</div>
-            <li class="item-lineup">
-              <span class="num-lineup btn btn-info">1</span>
-              <a href="#" class="link-lineup">강백호</a>
-              <span class="position-lineup">유격수</span>
-              <span class="attendance badge badge-warning">출석확인</span>
-            </li>
-            <li class="item-lineup">
-              <span class="num-lineup btn btn-info">1</span>
-              <a href="#" class="link-lineup">강백호</a>
-              <span class="position-lineup">유격수</span>
-              <span class="attendance badge badge-warning"></span>
-            </li>
-            <li class="item-lineup">
-              <span class="num-lineup btn btn-info">1</span>
-              <a href="#" class="link-lineup">강백호</a>
-              <span class="position-lineup">유격수</span>
-              <span class="attendance badge badge-warning">출석확인</span>
-            </li>
-            <li class="item-lineup">
-              <span class="num-lineup btn btn-info">1</span>
-              <a href="#" class="link-lineup">강백호</a>
-              <span class="position-lineup">유격수</span>
-              <span class="attendance badge badge-warning"></span>
-            </li>
-            <li class="item-lineup">
-              <span class="num-lineup btn btn-info">1</span>
-              <a href="#" class="link-lineup">강백호</a>
-              <span class="position-lineup">유격수</span>
-              <span class="attendance badge badge-warning">출석확인</span>
-            </li>
-            <li class="item-lineup">
-              <span class="num-lineup btn btn-info">1</span>
-              <a href="#" class="link-lineup">강백호</a>
-              <span class="position-lineup">유격수</span>
-              <span class="attendance badge badge-warning"></span>
-            </li>
-            <li class="item-lineup">
-              <span class="num-lineup btn btn-info">1</span>
-              <a href="#" class="link-lineup">강백호</a>
-              <span class="position-lineup">유격수</span>
-              <span class="attendance badge badge-warning">출석확인</span>
-            </li>
-            <li class="item-lineup">
-              <span class="num-lineup btn btn-info">1</span>
-              <a href="#" class="link-lineup">강백호</a>
-              <span class="position-lineup">유격수</span>
-              <span class="attendance badge badge-warning"></span>
-            </li>
-            <li class="item-lineup">
-              <span class="num-lineup btn btn-info">1</span>
-              <a href="#" class="link-lineup">강백호</a>
-              <span class="position-lineup">유격수</span>
-              <span class="attendance badge badge-warning"></span>
-            </li>
-            
-            
-           
-          </ul>
-          
-          <button class="btn btn-primary col-lg-12">상대 팀 페이지로 </button>
-       </div>
         </div>
 
 
@@ -382,13 +312,7 @@
       </div> -->
 
       
-      <div class="block-liner team-history">
-        <div class="content-blockliner">
-          팀 연혁
-        </div>
 
-
-      </div>
 
 
       <div class="right-team-history">
@@ -416,11 +340,7 @@
         </div> -->
 
         <div class="container-team-winlose-graph">
-          <span class="title-winlosegraph">창단 이후 승률</span>
-          <div class="item-winlosegraph">
-            <canvas id="team-winlosegraph"></canvas>
-          </div>
-
+          창단 이후 승률
         </div>
       </div>
       <!-- 이후 스프링으로 빼서 따로 페이지 만들기 -->
@@ -433,27 +353,5 @@
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
     ></script>
-    <script>
-      const ctx = document.getElementById('team-winlosegraph');
-    
-      new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-          datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
-        }
-      });
-    </script>
   </body>
 </html>

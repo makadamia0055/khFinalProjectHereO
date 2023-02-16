@@ -11,10 +11,8 @@
 @import "../baseball/team/team-sep.css";
 @import "../baseball/team/team-playerdetail.css";
 @import "../baseball/team/team-join.css";
-/* team>board */
-@import "../baseball/team/board/team-sep-board_main.css";
-@import "../baseball/team/board/team-sep-board_view.css";
-@import "../baseball/team/board/team-sep-board_write.css";
+
+
 * {
   margin: 0;
   padding: 0;
