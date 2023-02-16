@@ -1,8 +1,9 @@
 /* component */
 @import "../baseball/component/top_noLogin.css";
 @import "../baseball/component/hover_menu.css";
-/* sceen */
+/* screen */
 @import "../baseball/screen/mainpage.css";
+@import "../baseball/screen/signup.css";
 
 /* team */
 @import "../baseball/team/team.css";
@@ -16,6 +17,7 @@
 * {
 	margin: 0;
 	padding: 0;
+	font-family: 'Notosans', -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, 'Malgun Gothic', Arial, sans-serif;
 }
 
 a {
