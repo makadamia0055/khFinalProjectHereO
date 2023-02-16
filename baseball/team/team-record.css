@@ -1,26 +1,22 @@
-.teamsep-main{
+.teamrec-main{
+	margin-top: 180px;
 	background-color: #183153;
 	border-radius: 30px;
 }
-.left-introduce{
+/* .left-introduce{
 	
-	/* border: 1px solid black; */
+	border: 1px solid black;
 	display: inline-block;
 	width: 300px;
 
-}
+} */
 .right-introduce{
 	
-	
 	/* border: 1px solid black; */
-	
 	display: inline-block;
 	vertical-align: top;
 	position: relative;
 	
-	
-	
-
 }
 .right-introduce .list-team_intro{
 	background-color: antiquewhite;
@@ -33,9 +29,21 @@
 	
 	
 }
+.right-introduce .list-team_intro .img-team-logo{
+	width: 100px; height: 100px;
+	display: inline-block;
+	
+}
+
+
+
+
+
 .right-introduce .list-team_intro .team-name {
+	display: inline-block;
 	letter-spacing: -4px;
 	font-size: 60px;
+	line-height: 100px;
 	color: black;
 	text-shadow: 2px 2px 1px gray;
 
@@ -64,6 +72,58 @@
 .block-liner .content-blockliner .titletext-latestscore{
 	font-weight: 700;
 }
+/* 매치업 */
+.container-matchup{
+
+	position: relative;
+	margin-left : 50px;
+	display: inline-block;
+	border-radius: 20px;
+	background-color: rgb(38, 97, 173);
+	width: calc( 20% );
+	min-width: 270px;
+	box-shadow: 2px 2px 0 5px #1c1e20 ;
+
+}
+.container-matchup .titletext-matchup{
+	font-size: 25px;
+	text-align: center;
+	color: aliceblue;
+	font-weight: 700;
+}
+.container-matchup .item-matchup{
+	display: block;
+	border-radius: 10px;
+	background-color: antiquewhite;
+	margin: 10px 0;
+
+}
+.container-matchup .item-matchup .link-matchup{
+	margin : 10px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 20px;
+	font-weight: 700;
+}
+.container-matchup .item-matchup .result-matchup{
+	float: right;
+	margin-right: 10px;
+	margin-top: 3px;
+	font-size: 20px;
+	color: black;
+	font-weight: 600;
+}
+.container-matchup .item-matchup .result-matchup.win{
+	color: dodgerblue;
+	
+}
+.container-matchup .item-matchup .result-matchup.lose{
+	color: crimson;
+	
+}
+
+
+
 
 /* 선수 라인업 */
 .container-lineup{
@@ -75,7 +135,6 @@
 	border-radius: 20px;
 	background-color: rgb(38, 97, 173);
 	width: calc( 20% );
-	min-width: 270px;
 	box-shadow: 2px 2px 0 5px #1c1e20 ;
 
 }

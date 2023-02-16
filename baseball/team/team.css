@@ -1,18 +1,6 @@
 /* 메인 */
 /* 임시 */
-section {
-  width: calc(70%);
-  z-index: 0;
-}
-.teammain-main,
-.teamsep-main,
-.teamplayerdetail-main {
-  margin-top: 150px;
-  margin-left: 30px;
-  position: absolute;
-  left: 20%;
-  padding-top: 20px;
-}
+
 
 /* 사이드바 */
 .team-sidebar {
@@ -21,7 +9,8 @@ section {
   height: 100vh;
   float: left;
   clear: both;
-  box-shadow: 3px 2px 3px 3px rgba(163, 157, 157, 0.7);
+  background-color: white;
+  box-shadow: 3px 2px 3px 3px rgba(0, 0, 0, 0.7);
 }
 
 /* 지역 버튼 */

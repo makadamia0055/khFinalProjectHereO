@@ -47,8 +47,8 @@ ul, li{
 .container-board-teamjoin .num, .writer, .date, .position, .location{
 	width: 10%;
 }
-.container-board-teamjoin .item-board .contact{
-	width: 30%;
+.container-board-teamjoin .item-board .contact, .buttonCol{
+	width: 20%;
 	text-align: left;
 }
 .container-board-teamjoin .item-board.top .title{

@@ -1,0 +1,28 @@
+@import "./team.css";
+@import "./team-sep.css";
+@import "./team-playerdetail.css";
+@import "./team-join.css";
+@import "./team-record.css";
+@import "./board/team-board-common.css";
+
+/* 보드 */
+@import "./board/team-sep-board_main.css";
+@import "./board/team-sep-board_view.css";
+@import "./board/team-sep-board_write.css";
+
+
+
+section {
+  width: calc(70%);
+  z-index: 0;
+}
+.teammain-main,
+.teamsep-main,
+.teamplayerdetail-main,
+.teamrec-main {
+  margin-top: 150px;
+  margin-left: 30px;
+  position: absolute;
+  left: 20%;
+  padding-top: 20px;
+}

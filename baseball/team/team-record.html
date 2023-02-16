@@ -4,46 +4,20 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>팀 경기 기록실</title>
+    <title>팀 기록실</title>
     <link rel="stylesheet" href="../component/bootstrap4/bootstrap.min.css">
     <script src="../component/bootstrap4/jquery.js"></script>
     <script src="../component/bootstrap4/popper.min.js"></script>
     <script src="../component/bootstrap4/boostrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="./team_common.css">
     <script src="../hover.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   </head>
   <body>
-    <header class="topBar">
-      <div class="topBar__containerBox">
-        <div class="topBar__containerBox1">
-          <ul class="topBar__list">
-            <li><a href="#">로그인</a></li>
-            <li><a href="#">회원가입</a></li>
-            <li><a href="#">고객센터</a></li>
-          </ul>
-        </div>
-        <nav class="menu-containerBox2">
-          <ul class="menu-containerBox2__bigBox">
-            <li class="menu-container__box">
-              <a href="#" id="home"><i class="fa-solid fa-baseball"></i></a>
-            </li>
-            <li class="menu-container__box">
-              <a href="#">Team</a>
-            </li>
-            <li class="menu-container__box">
-              <a href="#">League</a>
-            </li>
-            <li class="menu-container__box">
-              <a href="#">Reservation</a>
-            </li>
-            <li class="menu-container__box">
-              <a href="#">Community</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-
+    <iframe src="../component/topBar.html" class="topBar" frameborder="0"></iframe>
+    
 		<aside class="team-sidebar">
 			<ul class="list-side">
 
@@ -71,18 +45,22 @@
 
 			</ul>
 		</aside>
-    <section class="teamsep-main">
-      <div class="teamsep-leftbox">
+    <section class="teamrec-main">
+      <div class="teamrec-leftbox">
         <div class="container-introduce">
-         <div class="left-introduce">
-          <div class="box-logo">
-            <img src="../team/고양이 로고.png" class="rounded-circle" alt="안양 단또즈">
-          </div>
+         <!-- <div class="left-introduce">
+         
             
-        </div>
+        </div> -->
         <div class="right-introduce">
           <ul class="list-team_intro">
-            <h1 class="team-name"></span>구단이름</h1>
+            <li>
+              <div class="box-logo">
+                <img src="../team/고양이 로고.png" class="rounded-circle img-team-logo" alt="안양 단또즈">
+                <h1 class="team-name">구단 기록실</h1>
+              </div>
+            </li>
+            
             <div class="team-message">"야구장 예약은 바로 여기, Here O!!"</div>
             <li class="item-team_intro">
               연고지 : <span class="team-local">
@@ -101,27 +79,52 @@
             <li class="current-league_text">현재 참여 리그 : <a href="#" class="current-league">가리봉동 가리비 리그</a></li>
           </ul>
         </div>
+        <div class="container-matchup">
+          <ul class="list-matchup">
+            <div class="titletext-matchup">지난 10 경기 결과</div>
+            <li class="item-matchup">
+              <span class="num-lineup btn btn-info">1</span>
+              VS <a href="#" class="link-matchup">버팔로즈</a>
+              <span class="result-matchup win">승</span>
+            </li>
+            <li class="item-matchup">
+              <span class="num-lineup btn btn-info">2</span>
+              VS <a href="#" class="link-matchup">임팔로즈</a>
+              <span class="result-matchup lose">패</span>
+            </li>
+            <li class="item-matchup">
+              <span class="num-lineup btn btn-info">3</span>
+              VS <a href="#" class="link-matchup">임파선즈</a>
+              <span class="result-matchup draw">무</span>
+            </li>
+          </ul>
+       </div>
+
+
+
+
+
+
+
 
         <div class="block-liner container-latestscore">
           <div class="content-blockliner score-teamstat">
-            <div class="titletext-latestscore">다음 경기</div>
-              일시 : <span class="date-nextMatch">2023-02-18 오후 3시</span><br>
-              구장 : <span class="location-nextmatch"><a href="#">왕십리 사근초등학교</a></span><br>
-              <a href="#" class="link-nextMatch btn btn-primary">예약 페이지로</a>
+            <div class="titletext-latestscore">지난 경기 기록 보기</div>
+              
             
           </div>
         </div>
-
+        <iframe src="https://calendar.google.com/calendar/embed?height=300&wkst=2&bgcolor=%234285F4&ctz=Asia%2FSeoul&showTitle=0&showTabs=0&showPrint=0&showCalendars=0&showTz=0&mode=MONTH&src=Y2RiYWNmNDhiZGRmY2I2YjdhZWQ3YzM4ZjYwODljZjk5OTc2MmZkOTliYzA0OTc4N2FiYjc2MDFiZTRhMmE5MEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23F09300" style="border-width:0" width="400" height="300" frameborder="0" scrolling="no"></iframe>
 
         <div class="container-nextMatch">
-          <div class="container-lineup prev">
+          <div class="container-lineup">
             <ul class="list-lineup">
-              <div class="titletext-lineup">다음 경기 Line-up</div>
+              <div class="titletext-lineup">선발 Line-up</div>
               <li class="item-lineup">
                 <span class="num-lineup btn btn-info">1</span>
                 <a href="#" class="link-lineup">강백호</a>
                 <span class="position-lineup">유격수</span>
-                <span class="attendance badge badge-warning">출석확인</span>
+                <span class="attendance badge badge-warning">교체</span>
               </li>
               <li class="item-lineup">
                 <span class="num-lineup btn btn-info">1</span>
@@ -129,48 +132,7 @@
                 <span class="position-lineup">유격수</span>
                 <span class="attendance badge badge-warning"></span>
               </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-                <span class="attendance badge badge-warning">출석확인</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-                <span class="attendance badge badge-warning"></span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-                <span class="attendance badge badge-warning">출석확인</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-                <span class="attendance badge badge-warning"></span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-                <span class="attendance badge badge-warning">출석확인</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-                <span class="attendance badge badge-warning"></span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-                <span class="attendance badge badge-warning"></span>
-              </li>
+              
               
               
              
@@ -179,82 +141,49 @@
             <button class="btn btn-primary col-lg-12">출석 체크</button>
          </div>
 
-        </div>
+         <div class="item-vs_icon">VS</div>
 
 
 
-
-
-
-
-
-
-
-
-
-
-        <div class="block-liner container-latestscore">
-          <div class="content-blockliner score-teamstat">
-            <div class="titletext-latestscore">최근 10경기 전적</div>
-              <span class="latest-win">7</span>승 
-              <span class="latest-lose">3</span>패
-              <span class="latest-draw"></span><span class="isDraw">무</span>
+         <div class="container-lineup opponent">
+          <ul class="list-lineup">
+            <div class="titletext-lineup opponent">상대팀 선발 Line-up</div>
+            <li class="item-lineup">
+              <span class="num-lineup btn btn-info">1</span>
+              <a href="#" class="link-lineup">강백호</a>
+              <span class="position-lineup">유격수</span>
+              <span class="attendance badge badge-warning"></span>
+            </li>
+            <li class="item-lineup">
+              <span class="num-lineup btn btn-info">1</span>
+              <a href="#" class="link-lineup">강백호</a>
+              <span class="position-lineup">유격수</span>
+              <span class="attendance badge badge-warning">교체</span>
+            </li>
+           
             
-            <!-- <div class="latest-team-hitrate">0.223</div>
-            <div class="latest-team-earnedpoints">3.7</div> -->
-          </div>
+            
+           
+          </ul>
+          
+          <button class="btn btn-primary col-lg-12">상대 팀 페이지로 </button>
+       </div>
         </div>
-          <div class="container-lineup prev">
-            <ul class="list-lineup">
-              <div class="titletext-lineup">지난 경기 선발 Line-up</div>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              
-             
-            </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+          
             <div class="container-hover-lineup">
               <h4 class="player-name">강백호</h4>
               <div class="box-player-profile">
@@ -283,13 +212,9 @@
                 </div>
               </div>
             </div>
-            <button class="btn btn-primary col-lg-12">전체 선수 열람</button>
          </div>
          
           
-          <div class="container-calendar">
-            달력에 경기 가능일 표시 혹은 예약된 경기일자 표시
-          </div>
          
 
 
@@ -312,7 +237,13 @@
       </div> -->
 
       
+      <div class="block-liner team-history">
+        <div class="content-blockliner">
+          팀 연혁
+        </div>
 
+
+      </div>
 
 
       <div class="right-team-history">
@@ -340,7 +271,11 @@
         </div> -->
 
         <div class="container-team-winlose-graph">
-          창단 이후 승률
+          <span class="title-winlosegraph">창단 이후 승률</span>
+          <div class="item-winlosegraph">
+            <canvas id="team-winlosegraph"></canvas>
+          </div>
+
         </div>
       </div>
       <!-- 이후 스프링으로 빼서 따로 페이지 만들기 -->
@@ -353,5 +288,27 @@
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
     ></script>
+    <script>
+      const ctx = document.getElementById('team-winlosegraph');
+    
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
   </body>
 </html>

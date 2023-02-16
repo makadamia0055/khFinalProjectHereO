@@ -7,11 +7,6 @@
 @import "../baseball/screen/signup.css";
 
 /* team */
-@import "../baseball/team/team.css";
-@import "../baseball/team/team-sep.css";
-@import "../baseball/team/team-playerdetail.css";
-@import "../baseball/team/team-join.css";
-
 
 * {
   margin: 0;
@@ -32,4 +27,8 @@ a:hover{
 
 li {
   list-style: none;
+}
+.topBar{
+  display: block;
+  
 }
