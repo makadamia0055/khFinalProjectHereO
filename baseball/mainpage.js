@@ -19,4 +19,13 @@ $(function () {
           }
         );
   }, 3010);
-}); //다른 화면으로 넘어간 후 다시 해당 페이지로 오는 경우 애니메이션 효과가 겹침.
+  $(".newTeam__list").hover(
+    function () {
+      $(this).css("box-shadow", "4px 12px 30px 6px rgb(0 0 0 / 13%)");
+      $(this).css("cursor", "pointer");
+    },
+    function () {
+      $(this).css("box-shadow", "4px 12px 30px 6px rgb(0 0 0 / 9%)");
+    }
+  );
+});
