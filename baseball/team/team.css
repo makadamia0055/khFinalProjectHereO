@@ -126,10 +126,12 @@ section {
   position: relative;
   display: inline-block;
 }
-.teammain-rightbox .container-calendar {
-  border: 1px solid black;
-  width: 200px;
-  height: 200px;
+
+/* 캘린더 */
+
+.teammain-rightbox .container-calendar .item-calendar{
+	border-radius: 10px;
+	width: 400px; height: 300px;
 }
 
 /* 공용 */
