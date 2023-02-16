@@ -1,0 +1,22 @@
+.teamjoin-main{
+	width: 40em;
+	height : 50em;
+	margin: 150px auto;
+	position: relative;
+	background-color: antiquewhite;
+	border-radius: 20%;
+	padding: 0 auto;
+}
+
+.container-join-input{
+	position: relative;
+	display: inline-block;
+	width: 26em; height : 40em;
+	margin: calc(5em) calc(7em);
+	box-sizing: content-box;
+}
+
+.container-join-input label{
+	margin-top : 10px
+	
+}
