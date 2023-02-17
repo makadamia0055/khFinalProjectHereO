@@ -10,19 +10,61 @@
     <script src="../../component/bootstrap4/popper.min.js"></script>
     <script src="../../component/bootstrap4/boostrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../../style.css" />
-		<link rel="stylesheet" href="../team_common.css>
+		<link rel="stylesheet" href="../team_common.css">
 		
 </head>
-<body>
+<body style="background: transparent;">
 	<ul class="list-side">
 
+
 		<li class="item-side">
-			<a href="#" role="button" class="link-side btn btn-outline-primary col-lg-8">팀페이지 메인</a>
+			<a href="../team.html" role="button" target="_parent" class="link-side btn btn-outline-light col-lg-8">전체 팀 보기</a>
+		</li>
+		<li class="item-side team-name this-teamMenu" hidden>
+			<a href="#demo1" class="link-side btn btn-light col-lg-8" data-toggle="collapse">xx 팀 메뉴</a>
+			<div id="demo1" class="collapse">
+				<ul class="sublist-side">
+					<li class="subitem-side">
+						<a href="../team-sep.html" target="_parent"  class="sublink-side btn btn-danger col-sm-3">팀 메인페이지</a>
+					</li>
+					<li class="subitem-side">
+						<a href="../team-record.html" target="_parent"  class="sublink-side btn btn-outline-danger col-sm-3">경기 기록실</a>
+					</li>
+					<li class="subitem-side">
+						<a href="../team-whole_player.html" target="_parent" class="sublink-side btn btn-danger col-sm-3">전체 선수 리스트</a>
+					</li>
+					<li class="subitem-side">
+						<a href="../board/team-sep-board_main.html" target="_parent" class="sublink-side btn btn-outline-danger col-sm-3">팀 게시판</a>
+					</li>
+					
+				</ul>
+			</div>
+		</li>
+		<li class="item-side team-name" hidden>
+			<a href="#demo" class="link-side btn btn-outline-light col-lg-8" data-toggle="collapse">우리 팀 메뉴</a>
+			<div id="demo" class="collapse">
+				<ul class="sublist-side">
+					<li class="subitem-side">
+						<a href="../team-sep.html" target="_parent"  class="sublink-side btn btn-danger col-sm-3">팀 메인페이지</a>
+					</li>
+					<li class="subitem-side">
+						<a href="../team-record.html" target="_parent"  class="sublink-side btn btn-outline-danger col-sm-3">경기 기록실</a>
+					</li>
+					<li class="subitem-side">
+						<a href="../team-whole_player.html" target="_top" class="sublink-side btn btn-danger col-sm-3">전체 선수 리스트</a>
+					</li>
+					<li class="subitem-side">
+						<a href="../board/team-sep-board_main.html" target="_parent" class="sublink-side btn btn-outline-danger col-sm-3">팀 게시판</a>
+					</li>
+					
+				</ul>
+			</div>
 		</li>
 		<li class="item-side">
-			<a href="#" class="link-side">가입 신청 페이지</a>
+			<a href="../team-join.html" target="_top" class="link-side btn btn-light col-lg-8">가입신청</a>
 		</li>
-		<!-- 부트스트랩 스크롤 스파이 처리 -->
+		
+
 	</ul>
 </body>
 </html>

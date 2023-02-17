@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>가입 페이지</title>
+	<link rel="stylesheet" href="../component/bootstrap4/bootstrap.min.css">
+	<script src="../component/bootstrap4/jquery.js"></script>
+	<script src="../component/bootstrap4/popper.min.js"></script>
+	<script src="../component/bootstrap4/boostrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="../style.css" />
+	<link rel="stylesheet" href="./team_common.css">
+
+</head>
+<body>
+	<iframe src="../component/topBar.html" class="topBar" frameborder="0"></iframe>
+
+
+		
+	<aside class="team-sidebar">
+		<iframe src="./sidebar/sidebar-main.html" frameborder="0"></iframe>
+	</aside>
+
+	<section class="teamjoin-main">
+		<div class="container-join-input">
+			<fieldset class="">
+				<form action="" method="get" class="form-horizontal">
+					<div class="form-group">
+						<div class="team-selector">
+							<label for="team">희망 팀 이름:</label>
+							<input type="text" name="team_name" id="team_name">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="team-local">지역</label>
+							<select name="team-local" id="team-local">
+								<option value="1">서울</option>
+								<option value="2">경기</option>
+								<option value="3">인천</option>
+								<option value="4">대전</option>
+								<option value="5">충남</option>
+								<option value="6">충북</option>
+								<option value="7">광주</option>
+								<option value="8">전남</option>
+								<option value="9">전북</option>
+								<option value="10">강원</option>
+								<option value="11">울산</option>
+								<option value="12">대구</option>
+								<option value="13">경남</option>
+								<option value="14">경북</option>
+								<option value="15">제주</option>
+							</select>
+						</div>
+					<div class="form-group">
+						<label for="contact">연고지</label>
+						<input type="text" name="contact" id="contact" class="form-control  col-lg-8" placeholder="연고지를 입력해주세요.">
+					</div>
+					<div class="form-group">
+						<label for="team-since">팀 창단일</label>
+						<input type="text" name="team-since" id="team-since" class="form-control  col-lg-8" placeholder="팀 창단일을 입력해주세요.">
+					</div>
+					<div class="form-group">
+						현재 참가 중인 리그<br>
+						<label for=""><input type="checkbox">없음</label>
+
+						<label for=""><input type="checkbox">리그 이름</label>
+					</div>	
+						
+						<label for="introduce">팀 소개</label>
+						
+						<textarea name="introduce" id="introduce" class="form-control" rows="5"></textarea>
+						<button type="submit" class="btn btn-dark col-lg-12">등록</button>
+					
+
+
+
+				</form>
+			</fieldset>
+		</div>
+
+	</section>
+
+	
+	<script
+      src="https://kit.fontawesome.com/bedfa56d7f.js"
+      crossorigin="anonymous"
+    ></script>
+</body>
+</html>
