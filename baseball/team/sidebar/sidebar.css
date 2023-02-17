@@ -1,0 +1,33 @@
+/* 사이드바 */
+.team-sidebar {
+	position: fixed;
+  padding-top: 180px;
+  width: calc(15%);
+  height: 100vh;
+  float: left;
+  clear: both;
+  background-color: white;
+  box-shadow: 3px 0 0 0 rgba(0, 0, 0, 0.7);
+}
+.team-sidebar>iframe{
+	width: 95%;
+	height: 100%;
+}
+.list-side{
+	position: relative;
+	
+}
+
+
+.list-side .item-side .link-side{
+	text-align: left;
+	padding-left : 10px;
+
+}
+.sublist-side .subitem-side{
+	margin-left : 10px;
+}
+.sublist-side .subitem-side .sublink-side{
+	padding : 10px;
+	text-align: left;
+}

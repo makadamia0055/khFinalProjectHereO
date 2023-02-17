@@ -10,6 +10,8 @@
 @import "./board/team-sep-board_view.css";
 @import "./board/team-sep-board_write.css";
 
+/* 사이드바 */
+@import "./sidebar/sidebar.css";
 
 
 section {

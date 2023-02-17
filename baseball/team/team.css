@@ -2,16 +2,7 @@
 /* 임시 */
 
 
-/* 사이드바 */
-.team-sidebar {
-  padding-top: 150px;
-  width: calc(15%);
-  height: 100vh;
-  float: left;
-  clear: both;
-  background-color: white;
-  box-shadow: 3px 2px 3px 3px rgba(0, 0, 0, 0.7);
-}
+
 
 /* 지역 버튼 */
 .teammain-main .container-region {
