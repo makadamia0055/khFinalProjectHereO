@@ -1,17 +1,12 @@
 /* component */
-@import "../baseball/component/top_noLogin.css";
-@import "../baseball/component/hover_menu.css";
-@import "../baseball/component/footer.css";
+@import "component/top_noLogin.css";
+@import "component/hover_menu.css";
+@import "component/footer.css";
 /* screen */
-@import "../baseball/screen/mainpage.css";
-@import "../baseball/screen/signup.css";
+@import "screen/mainpage.css";
+@import "screen/signup.css";
 
 /* team */
-@import "../baseball/team/team.css";
-@import "../baseball/team/team-sep.css";
-@import "../baseball/team/team-playerdetail.css";
-@import "../baseball/team/team-join.css";
-
 
 * {
   margin: 0;
@@ -32,4 +27,8 @@ a:hover{
 
 li {
   list-style: none;
+}
+.topBar{
+  display: block;
+  
 }

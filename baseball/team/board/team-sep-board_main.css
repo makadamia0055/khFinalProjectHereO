@@ -1,17 +1,9 @@
 
-*{
-	/* font-size: 10px; */
-	font-family: 'Malgun Gothic';
-
-}
-
-ul, li{
-	list-style: none;
-}
 
 .container-board{
 	width: 1000px;
 	margin: 100px auto;
+	margin-top: 180px;
 }
 /* 타이틀  */
 .title-board{

@@ -75,6 +75,7 @@
 	border-radius: 20px;
 	background-color: rgb(38, 97, 173);
 	width: calc( 20% );
+	min-width: 270px;
 	box-shadow: 2px 2px 0 5px #1c1e20 ;
 
 }
@@ -153,7 +154,6 @@
 
 .container-calendar{
 	display: inline-block;
-	border: 1px solid white;
 }
 
 /* 팀 소개 및 연혁 */

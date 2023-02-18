@@ -10,54 +10,18 @@
     <script src="../component/bootstrap4/popper.min.js"></script>
     <script src="../component/bootstrap4/boostrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../style.css" />
-    
+		<link rel="stylesheet" href="./team_common.css">
+
 	<style>
 		
 	</style>
   </head>
   <body>
-    <header class="topBar">
-      <div class="topBar__containerBox">
-        <div class="topBar__containerBox1">
-          <ul class="topBar__list">
-            <li><a href="#">로그인</a></li>
-            <li><a href="#">회원가입</a></li>
-            <li><a href="#">고객센터</a></li>
-          </ul>
-        </div>
-        <nav class="menu-containerBox2">
-          <ul class="menu-containerBox2__bigBox">
-            <li class="menu-container__box">
-              <a href="#" id="home"><i class="fa-solid fa-baseball"></i></a>
-            </li>
-            <li class="menu-container__box">
-              <a href="#">Team</a>
-            </li>
-            <li class="menu-container__box">
-              <a href="#">League</a>
-            </li>
-            <li class="menu-container__box">
-              <a href="#">Reservation</a>
-            </li>
-            <li class="menu-container__box">
-              <a href="#">Community</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+		<iframe src="../component/topBar.html" class="topBar" frameborder="0"></iframe>
+
 
     <aside class="team-sidebar">
-			<ul class="list-side">
-
-				<li class="item-side">
-					<a href="#" class="link-side">팀페이지 메인</a>
-				</li>
-				<li class="item-side">
-					<a href="#" class="link-side">가입 신청 페이지</a>
-				</li>
-				<!-- 부트스트랩 스크롤 스파이 처리 -->
-			</ul>
+			<iframe src="./sidebar/sidebar-sep.html" frameborder="0"></iframe>
 		</aside>
 	
 	<!-- 지역 팀 조회 -->
@@ -94,7 +58,7 @@
 				<ul class="list-teambox">
 					<li class="item-teambox">
 						<div class="left-teambox">
-							<a href="#" class="link-team-select rounded-circle clear-fix">
+							<a href="./team-playerdetail.html" class="link-team-select rounded-circle clear-fix">
 								<!-- <img src="./고양이 로고.png" alt="팀 이미지" class="rounded-circle team-icon" style="width: 150px; height: 150px ;"> -->
 								<div class="label-team">
 									<span class="team-local badge badge-danger">투수</span> 
