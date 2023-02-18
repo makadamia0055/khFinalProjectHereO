@@ -24,13 +24,13 @@
     
     <section class="teamrec-main">
       <div class="teamrec-leftbox">
-        <div class="container-introduce">
-          <div class="left-introduce">
-            <ul class="list-team_intro">
-              <li>
+        <div class="container-record">
+          <div class="left-record">
+            <ul class="list-team_record_intro">
+              <li class="item-team_intro">
                 <div class="box-logo">
                   <img src="../team/고양이 로고.png" class="rounded-circle img-team-logo" alt="안양 단또즈">
-                  <h1 class="team-name">구단 기록실</h1>
+                  <span class="team-name">구단 기록실</span>
                 </div>
               </li>
               
@@ -52,106 +52,210 @@
               <li class="current-league_text">현재 참여 리그 : <a href="#" class="current-league">가리봉동 가리비 리그</a></li>
             </ul>
           </div>
-            
-        </div>
-        <div class="right-introduce">
+          <div class="right-record">
           
-        <div class="container-matchup">
-          <ul class="list-matchup">
-            <div class="titletext-matchup">지난 10 경기 결과</div>
-            <li class="item-matchup">
-              <span class="num-lineup btn btn-info">1</span>
-              VS <a href="#" class="link-matchup">버팔로즈</a>
-              <span class="result-matchup win">승</span>
-            </li>
-            <li class="item-matchup">
-              <span class="num-lineup btn btn-info">2</span>
-              VS <a href="#" class="link-matchup">임팔로즈</a>
-              <span class="result-matchup lose">패</span>
-            </li>
-            <li class="item-matchup">
-              <span class="num-lineup btn btn-info">3</span>
-              VS <a href="#" class="link-matchup">임파선즈</a>
-              <span class="result-matchup draw">무</span>
-            </li>
-          </ul>
+            <div class="container-matchup">
+              <ul class="list-matchup">
+                <div class="titletext-matchup">지난 10 경기 결과</div>
+                <li class="item-matchup">
+                  <span class="num-lineup btn btn-info">1</span>
+                  VS <a href="#" class="link-matchup">버팔로즈</a>
+                  <span class="result-matchup win">승</span>
+                </li>
+                <li class="item-matchup">
+                  <span class="num-lineup btn btn-info">2</span>
+                  VS <a href="#" class="link-matchup">임팔로즈</a>
+                  <span class="result-matchup lose">패</span>
+                </li>
+                <li class="item-matchup">
+                  <span class="num-lineup btn btn-info">3</span>
+                  VS <a href="#" class="link-matchup">임파선즈</a>
+                  <span class="result-matchup draw">무</span>
+                </li>
+              </ul>
+            </div>
+          </div>  
         </div>
-        </div>
+        
 
 
         <div class="block-liner container-latestscore">
           <div class="content-blockliner score-teamstat">
             <div class="titletext-latestscore">지난 경기 기록 보기</div>
-              
-            
-          </div>
+            </div>
         </div>
-        <div class="box-datePick">
+
+        
+        <!-- <div class="box-datePick">
           <iframe src="https://calendar.google.com/calendar/embed?height=300&wkst=2&bgcolor=%234285F4&ctz=Asia%2FSeoul&showTitle=0&showTabs=0&showPrint=0&showCalendars=0&showTz=0&mode=MONTH&src=Y2RiYWNmNDhiZGRmY2I2YjdhZWQ3YzM4ZjYwODljZjk5OTc2MmZkOTliYzA0OTc4N2FiYjc2MDFiZTRhMmE5MEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23F09300" style="border-width:0" width="400" height="300" frameborder="0" scrolling="no"></iframe>
+        </div> -->
+        <div class="container-lastMatchRec clear-fix">
+          <div class="subcontainer-firstLine">
+            <div class="box-datepicker form-group">
+              <label for="last_match_date">경기 날짜 선택 </label>
+              <select class="form-control" id="last_match_date">
+                <option>23-01-23 VS 맘모스</option>
+                <option selected>23-02-03 VS 돌핀스</option>
+                <option>23-02-13 VS 댕댕스</option>
+              </select>
+            </div>
+            <div class="box-score">
+              <div class="team-box our-team">
+                <div class="img-box">
+                  <img class="team-logo rounded-circle" src="./고양이 로고.png" alt="단또즈">
+                  <button class="badge badge-pill badge-success">홈팀</button>
+                </div>
+                <span class="team-name">단또즈</span>
+              </div>
+              VS
+              <div class="team-box our-team">
+                <span class="team-name">돌핀즈</span>
+                <div class="img-box">
+                  <img class="team-logo rounded-circle" src="./돌고래.png" alt="단또즈">
+                  <button class="badge badge-pill badge-danger">원정</button>
+                </div>
+              </div>
+              <div class="score_num">
+                <span class="home_score">5</span>
+                :
+                <span class="opponent_score">2</span>
+              </div>
+            </div>
+            <div class="container-lineup">
+              <ul class="list-lineup">
+                <div class="titletext-lineup">선발 Line-up</div>
+                <li class="item-lineup">
+                  <span class="num-lineup btn btn-info">1</span>
+                  <a href="#" class="link-lineup">강백호</a>
+                  <span class="position-lineup">유격수</span>
+                  <span class="attendance badge badge-warning">용병</span>
+                  <!-- <span class="attendance badge badge-success">용병</span> -->
+
+                </li>
+                <li class="item-lineup">
+                  <span class="num-lineup btn btn-info">1</span>
+                  <a href="#" class="link-lineup">강백호</a>
+                  <span class="position-lineup">유격수</span>
+                  <span class="freelancer badge badge-warning"></span>
+                </li>
+                <li class="item-lineup">
+                  <span class="num-lineup btn btn-info">1</span>
+                  <a href="#" class="link-lineup">강백호</a>
+                  <span class="position-lineup">유격수</span>
+                  <span class="attendance badge badge-warning">용병</span>
+                  <!-- <span class="attendance badge badge-success">용병</span> -->
+
+                </li>
+                <li class="item-lineup">
+                  <span class="num-lineup btn btn-info">1</span>
+                  <a href="#" class="link-lineup">강백호</a>
+                  <span class="position-lineup">유격수</span>
+                  <span class="freelancer badge badge-warning"></span>
+                </li>
+                <li class="item-lineup">
+                  <span class="num-lineup btn btn-info">1</span>
+                  <a href="#" class="link-lineup">강백호</a>
+                  <span class="position-lineup">유격수</span>
+                  <span class="attendance badge badge-warning">용병</span>
+                  <!-- <span class="attendance badge badge-success">용병</span> -->
+
+                </li>
+                <li class="item-lineup">
+                  <span class="num-lineup btn btn-info">1</span>
+                  <a href="#" class="link-lineup">강백호</a>
+                  <span class="position-lineup">유격수</span>
+                  <span class="freelancer badge badge-warning"></span>
+                </li>
+                <li class="item-lineup">
+                  <span class="num-lineup btn btn-info">1</span>
+                  <a href="#" class="link-lineup">강백호</a>
+                  <span class="position-lineup">유격수</span>
+                  <span class="attendance badge badge-warning">용병</span>
+                  <!-- <span class="attendance badge badge-success">용병</span> -->
+
+                </li>
+                <li class="item-lineup">
+                  <span class="num-lineup btn btn-info">1</span>
+                  <a href="#" class="link-lineup">강백호</a>
+                  <span class="position-lineup">유격수</span>
+                  <span class="freelancer badge badge-warning"></span>
+                </li>
+                <li class="item-lineup">
+                  <span class="num-lineup btn btn-info">1</span>
+                  <a href="#" class="link-lineup">강백호</a>
+                  <span class="position-lineup">유격수</span>
+                  <span class="attendance badge badge-warning">용병</span>
+                  <!-- <span class="attendance badge badge-success">용병</span> -->
+
+                </li>
+                
+                
+              </ul>
+              <button class="btn btn-primary col-lg-12">전체 선수 보기</button>
+            </div>
+
+          </div>
+          <div class="subcontainer-secondLine">
+            <div class="box-detail_score">
+              <table class="table-detail_score">
+                <tr>
+                  <th class="name-team">팀</th>
+                  <th>1회</th>
+                  <th>2회</th>
+                  <th>3회</th>
+                  <th>4회</th>
+                  <th>5회</th>
+                  <th>6회</th>
+                  <th>Total</th>
+                </tr>
+                <tr class="trscore_hometeam">
+                  <td class="name-home_team">단또즈</td>
+                  <td class="inning_1">1</td>
+                  <td class="inning_2">0</td>
+                  <td class="inning_3">1</td>
+                  <td class="inning_4">0</td>
+                  <td class="inning_5">0</td>
+                  <td class="inning_6">3</td>
+                  <td class="total_home">5</td>
+                </tr>
+                <tr class="trscore_opponent">
+                  <td class="name-home_team">돌핀즈</td>
+                  <td class="inning_1">0</td>
+                  <td class="inning_2">0</td>
+                  <td class="inning_3">0</td>
+                  <td class="inning_4">2</td>
+                  <td class="inning_5">0</td>
+                  <td class="inning_6">0</td>
+                  <td class="total_home">2</td>
+                </tr>
+                
+              </table>
+            </div>
+            <div class="box-player_score">
+              <div class="player_profile">
+                <img class="rounded-circle img-player" src="./선수 이미지 샘플.png" alt="">
+                <button class="btn btn-warning btn-mvp col-lg-12">MVP</button>
+              </div>
+              <table class="table-player_score">
+                <tr>
+                  <th>타석</th>
+                  <th>타수</th>
+                  <th>타점</th>
+                  
+                </tr>
+              </table>
+            </div>
+          </div>
+          
+          
+            
+           
+
         </div>
 
-        <div class="container-nextMatch">
-          <div class="container-lineup">
-            <ul class="list-lineup">
-              <div class="titletext-lineup">선발 Line-up</div>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-                <span class="attendance badge badge-warning">교체</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-                <span class="attendance badge badge-warning"></span>
-              </li>
-              
-            </ul>
-            
-            <button class="btn btn-primary col-lg-12">전체 선수 보기</button>
-         </div>
-
-
-         <div class="container-lineup opponent">
-          <ul class="list-lineup">
-            <div class="titletext-lineup opponent">상대팀 선발 Line-up</div>
-            <li class="item-lineup">
-              <span class="num-lineup btn btn-info">1</span>
-              <a href="#" class="link-lineup">강백호</a>
-              <span class="position-lineup">유격수</span>
-              <span class="attendance badge badge-warning"></span>
-            </li>
-            <li class="item-lineup">
-              <span class="num-lineup btn btn-info">1</span>
-              <a href="#" class="link-lineup">강백호</a>
-              <span class="position-lineup">유격수</span>
-              <span class="attendance badge badge-warning">교체</span>
-            </li>
-           
-            
-            
-           
-          </ul>
-          
-          <button class="btn btn-primary col-lg-12">상대 팀 페이지로 </button>
-       </div>
+         
         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-       
-          
             <div class="container-hover-lineup">
               <h4 class="player-name">강백호</h4>
               <div class="box-player-profile">
@@ -164,11 +268,7 @@
               </div>
              
   
-              <!-- <div class="player-stat-default">
-                통산 출장 경기 : <span class="all_join_match">29</span>경기<br> 
-                통산 승 : <span class="player_all_win">12</span>승<br>
-                출석률 : <span class="particifate_rate">95</span>%
-              </div> -->
+              
               <br>
               <h5>최근 10경기 성적</h5>
               <div class="player-stat-latestWinLose">
@@ -188,21 +288,7 @@
 
         </div>
       </div>
-      <!-- 선수 프로필을 line-up박스 안으로 옮기고 오른쪽에 달력을 넣자 -->
-
-
-      <!-- 상단 메뉴들과 마진 좀 넣기 -->
-      <!-- 아직 미배치 -->
-      <!-- <div class="left-team-history">
-        <div class="container-teamhistory">
-             <h2>팀 소개 및 팀 스피릿</h2>
-              <div class="box-teamsprit">
-              <div class="text-teamsprit">
-                안녕하세요. 반갑습니다. 
-              </div>
-            </div>
-           </div>
-      </div> -->
+     
 
       
       <div class="block-liner team-history">
