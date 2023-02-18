@@ -1,28 +1,8 @@
 /* 메인 */
 /* 임시 */
-section {
-  width: calc(70%);
-  z-index: 0;
-}
-.teammain-main,
-.teamsep-main,
-.teamplayerdetail-main {
-  margin-top: 150px;
-  margin-left: 30px;
-  position: absolute;
-  left: 20%;
-  padding-top: 20px;
-}
 
-/* 사이드바 */
-.team-sidebar {
-  padding-top: 150px;
-  width: calc(15%);
-  height: 100vh;
-  float: left;
-  clear: both;
-  box-shadow: 3px 2px 3px 3px rgba(163, 157, 157, 0.7);
-}
+
+
 
 /* 지역 버튼 */
 .teammain-main .container-region {
@@ -87,7 +67,6 @@ section {
   display: inline-block;
   width: 150px;
   height: 150px;
-  background-image: url(./고양이\ 로고.png);
   background-size: 150px 150px;
 }
 
@@ -111,26 +90,38 @@ section {
   vertical-align: middle;
   color: white;
 }
+.teammain-main .container-teambox .right-teambox .show-schedule{
+  margin: 10px 0;
+}
 
 /* 오른쪽 호버 박스 */
 .teammain-rightbox {
   margin-top: 400px;
   position: fixed;
-  right: 200px;
-  width: calc(30%);
+  right: 0px;
   border-radius: 20px;
   border: 1px solid black;
-  background-color: #17a2b8;
+  background-color: #fff;
+  padding: 20px;
 }
 .teammain-rightbox .hover-box {
   position: relative;
   display: inline-block;
+  text-align: center;
 }
-.teammain-rightbox .container-calendar {
-  border: 1px solid black;
-  width: 200px;
-  height: 200px;
+
+.rb-schedule .list-schedule .item-schedule{
+  border-bottom: 3px double rgb(107, 104, 104);
+  padding: 10px 0;
 }
+.rb-schedule .list-schedule .item-schedule:first-child{
+  border-top: 3px solid rgb(107, 104, 104);
+}
+
+
+
+
+
 
 /* 공용 */
 .clear-fix::after {

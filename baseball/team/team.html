@@ -5,245 +5,218 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>전체 팀 페이지</title>
-    <link rel="stylesheet" href="../component/bootstrap4/bootstrap.min.css" />
+    <link rel="stylesheet" href="../component/bootstrap4/bootstrap.min.css">
     <script src="../component/bootstrap4/jquery.js"></script>
     <script src="../component/bootstrap4/popper.min.js"></script>
     <script src="../component/bootstrap4/boostrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../style.css" />
+		<link rel="stylesheet" href="./team_common.css">
 
-    <style></style>
+	<style>
+		
+	</style>
   </head>
   <body>
-    <header class="topBar">
-      <div class="topBar__containerBox">
-        <!-- 최상단 로그인 메뉴바 -->
-        <div class="topBar__containerBox1">
-          <ul class="topBar__list">
-            <li><a href="#">로그인</a></li>
-            <li><a href="#">회원가입</a></li>
-            <li><a href="#">고객센터</a></li>
-          </ul>
-        </div>
-        <!-- 메인 메뉴바 -->
-        <nav class="menu-containerBox2">
-          <ul class="menu-containerBox2__bigBox">
-            <li class="menu-container__box">
-              <a href="../mainpage.html" id="home"
-                >Here <i class="fa-solid fa-baseball"></i
-              ></a>
-            </li>
-            <li class="menu-container__box">
-              <a href="#"><span>Team</span></a>
-              <ul class="submenu-containerBox1">
-                <li><a>서브메뉴1</a></li>
-                <li><a>서브메뉴2</a></li>
-              </ul>
-            </li>
-            <li class="menu-container__box">
-              <a href="#"><span>League</span></a>
-              <ul class="submenu-containerBox1">
-                <li><a>서브메뉴3</a></li>
-                <li><a>서브메뉴4</a></li>
-              </ul>
-            </li>
-            <li class="menu-container__box">
-              <a href="#"><span>Reservation</span></a>
-              <ul class="submenu-containerBox1">
-                <li><a>서브메뉴5</a></li>
-                <li><a>서브메뉴6</a></li>
-              </ul>
-            </li>
-            <li class="menu-container__box">
-              <a href="#"><span>Community</span></a>
-              <ul class="submenu-containerBox1">
-                <li><a>서브메뉴7</a></li>
-                <li><a>서브메뉴8</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <div class="submenu__background"></div>
-      </div>
-    </header>
+    <iframe src="../component/topBar.html" class="topBar" frameborder="0"></iframe>
 
     <aside class="team-sidebar">
-      <ul class="list-side">
-        <li class="item-side">
-          <a href="#" class="link-side">팀페이지 메인</a>
-        </li>
-        <li class="item-side">
-          <a href="#" class="link-side">가입 신청 페이지</a>
-        </li>
-        <!-- 부트스트랩 스크롤 스파이 처리 -->
-      </ul>
-    </aside>
+			<iframe src="./sidebar/sidebar-main.html" frameborder="0"></iframe>
+		</aside>
+	
+	<!-- 지역 팀 조회 -->
+	
+	<section class="teammain-main">
+		<div class="teammain-leftbox">
+			<!-- 지역 리스트 -->
+			<div class="left1-nav-container clear-fix">
+				<div class="container-region">
+					<ul class="list-region clear-fix">
+						<li class="item-region">
+							<a href="#" class="link-region btn btn-primary" role="button">서울</a>
+						</li>
+						<li class="item-region">
+							<a href="#" class="link-region btn btn-primary" role="button">경기</a>
+						</li>
+						<li class="item-region">
+							<a href="#" class="link-region btn btn-primary" role="button">부산</a>
+						</li>
+						<li class="item-region">
+							<a href="#" class="link-region btn btn-primary" role="button">대구</a>
+						</li>
+						<li class="item-region">
+							<a href="#" class="link-region btn btn-primary" role="button">인천</a>
+						</li>
+						<li class="item-region">
+							<a href="#" class="link-region btn btn-primary" role="button">대전</a>
+						</li>
+						<li class="item-region">
+							<a href="#" class="link-region btn btn-primary" role="button">광주</a>
+						</li>
+						<li class="item-region">
+							<a href="#" class="link-region btn btn-primary" role="button">울산</a>
+						</li>
+						<li class="item-region">
+							<a href="#" class="link-region btn btn-primary" role="button">강원</a>
+						</li>
+						<li class="item-region">
+							<a href="#" class="link-region btn btn-primary" role="button">충남</a>
+						</li>
+						<li class="item-region">
+							<a href="#" class="link-region btn btn-primary" role="button">충북</a>
+						</li>
+						<li class="item-region">
+							<a href="#" class="link-region btn btn-primary" role="button">전남</a>
+						</li>
+						<li class="item-region">
+							<a href="#" class="link-region btn btn-primary" role="button">전북</a>
+						</li>
+						<li class="item-region">
+							<a href="#" class="link-region btn btn-primary" role="button">경남</a>
+						</li>
+						<li class="item-region">
+							<a href="#" class="link-region btn btn-primary" role="button">경북</a>
+						</li>
+						<li class="item-region">
+							<a href="#" class="link-region btn btn-primary" role="button">제주</a>
+						</li>
 
-    <!-- 지역 팀 조회 -->
+					</ul>
+				</div>
+				<!-- 지역 리스트 끝 -->
+				<div class="group-search-team input-group col-sm-3">
+					<input type="text" class="form-control " name="search-team" placeholder="팀 검색">
+					<div class="input-group-append">
+						<button class="btn btn-success">검색</button>
+					</div>
+				</div>
+			</div>
+				<!-- 팀 리스트 -->
+			<div class="container-teambox">
+				<ul class="list-teambox">
+					<li class="item-teambox">
+						<div class="left-teambox">
+							<a href="./team-sep.html" style="background-image: url(./고양이\ 로고.png);" class="link-team-select rounded-circle clear-fix">
+								<!-- <img src="./고양이 로고.png" alt="팀 이미지" class="rounded-circle team-icon" style="width: 150px; height: 150px ;"> -->
+								<div class="label-team">
+									<span class="team-local badge badge-success">안양</span> 
+									<span class="tean-name">단또즈</span>
+								</div>
+							</a>
+						</div>
+						<div class="right-teambox">
+							경기 가능 지역 : <span class="possible_local">경기도</span><br>
+							다음 경기 일정 : <span class="recently_match">미정</span><br>
+							연습 신청 허용 여부 : <span class="match_type">비공개</span>
+							<button class="show-schedule btn btn-warning">경기 일정 보기</button>
+						</div>
+					</li>
+					<li class="item-teambox">
+						<div class="left-teambox">
+							<a href="./team-sep.html" style="background-image: url(./돌고래.png);" class="link-team-select rounded-circle clear-fix">
+								<!-- <img src="./고양이 로고.png" alt="팀 이미지" class="rounded-circle team-icon" style="width: 150px; height: 150px ;"> -->
+								<div class="label-team">
+									<span class="team-local badge badge-success">성남</span> 
+									<span class="tean-name">돌핀즈</span>
+								</div>
+							</a>
+						</div>
+						<div class="right-teambox">
+							경기 가능 지역 : <span class="possible_local">경기도</span><br>
+							다음 경기 일정 : <span class="recently_match">미정</span><br>
+							연습 신청 허용 여부 : <span class="match_type">비공개</span>
+							<button class="show-schedule btn btn-warning">경기 일정 보기</button>
+						</div>
+					</li>
+					<li class="item-teambox">
+						<div class="left-teambox">
+							<a href="./team-sep.html" style="background-image: url(./돼지.png);" class="link-team-select rounded-circle clear-fix">
+								<!-- <img src="./고양이 로고.png" alt="팀 이미지" class="rounded-circle team-icon" style="width: 150px; height: 150px ;"> -->
+								<div class="label-team">
+									<span class="team-local badge badge-success">왕십리</span> <br>
+									<span class="tean-name">호그즈</span>
+								</div>
+							</a>
+						</div>
+						<div class="right-teambox">
+							경기 가능 지역 : <span class="possible_local">경기도</span><br>
+							다음 경기 일정 : <span class="recently_match">미정</span><br>
+							연습 신청 허용 여부 : <span class="match_type">비공개</span>
+							<button class="show-schedule btn btn-warning">경기 일정 보기</button>
+						</div>
+					</li>
+					<li class="item-teambox">
+						<div class="left-teambox">
+							<a href="./team-sep.html" style="background-image: url(./강아지.png);" class="link-team-select rounded-circle clear-fix">
+								<!-- <img src="./고양이 로고.png" alt="팀 이미지" class="rounded-circle team-icon" style="width: 150px; height: 150px ;"> -->
+								<div class="label-team">
+									<span class="team-local badge badge-success">용산</span> 
+									<span class="tean-name">댕댕즈</span>
+								</div>
+							</a>
+						</div>
+						<div class="right-teambox">
+							경기 가능 지역 : <span class="possible_local">경기도</span><br>
+							다음 경기 일정 : <span class="recently_match">미정</span><br>
+							연습 신청 허용 여부 : <span class="match_type">비공개</span>
+							<button class="show-schedule btn btn-warning">경기 일정 보기</button>
+						</div>
+					</li>
+					
+				</ul>
+			</div>
+			<!-- 팀 리스트 끝 -->
+			<div class="team-request">
+				<a href="./team-apply_team.html" role="button" class="btn btn-dark btn-team-request">팀 신청하기</a>
+			</div>
+			<!-- 페이지 번호 -->
+			<div class="container-pagenation">
+				<ul class="pagination justify-content-center">
+					<li class="page-item"><a href="#" class="page-link">이전</a></li>
+					<li class="page-item active"><a href="#" class="page-link">1</a></li>
+					<li class="page-item"><a href="#" class="page-link">2</a></li>
+					<li class="page-item"><a href="#" class="page-link">3</a></li>
+					<li class="page-item"><a href="#" class="page-link">다음</a></li>
+				</ul>
+			</div>
+		</div>
+		
+		<!-- 오른쪽 호버 박스 -->
+		
+	</section>	
+	<div class="teammain-rightbox" style="display: none;">
+		<div class="hover-box">
+			<div class="rb-title"><h3><span class="team-name">단또즈</span> 경기 일정</div></h3>
+			<div class="rb-schedule">
+				<ul class="list-schedule">
+					<li class="item-schedule">
+						<span class="home_team badge badge-pill badge-primary">팀 단또즈</span> VS 
+						<span class="opponent_team badge badge-pill badge-danger">팀 맘모스</span>
+						<div class="date-schedule">23-02-18 오전 9시</div>
+						<div class="location-schedule">왕십리 사근초등학교</div>
+						<a href="#" role="button" class="btn btn-outline-primary">경기 예약 확인 페이지로</a>
+					</li>
+				</ul>
+				
+				
+			</div>
+			
+			
+			
+		</div>
 
-    <section class="teammain-main">
-      <div class="teammain-leftbox">
-        <!-- 지역 리스트 -->
-        <div class="left1-nav-container clear-fix">
-          <div class="container-region">
-            <ul class="list-region clear-fix">
-              <li class="item-region">
-                <a href="#" class="link-region btn btn-primary" role="button"
-                  >서울</a
-                >
-              </li>
-              <li class="item-region">
-                <a href="#" class="link-region btn btn-primary" role="button"
-                  >경기</a
-                >
-              </li>
-              <li class="item-region">
-                <a href="#" class="link-region btn btn-primary" role="button"
-                  >부산</a
-                >
-              </li>
-              <li class="item-region">
-                <a href="#" class="link-region btn btn-primary" role="button"
-                  >대구</a
-                >
-              </li>
-              <li class="item-region">
-                <a href="#" class="link-region btn btn-primary" role="button"
-                  >인천</a
-                >
-              </li>
-              <li class="item-region">
-                <a href="#" class="link-region btn btn-primary" role="button"
-                  >대전</a
-                >
-              </li>
-              <li class="item-region">
-                <a href="#" class="link-region btn btn-primary" role="button"
-                  >광주</a
-                >
-              </li>
-              <li class="item-region">
-                <a href="#" class="link-region btn btn-primary" role="button"
-                  >울산</a
-                >
-              </li>
-              <li class="item-region">
-                <a href="#" class="link-region btn btn-primary" role="button"
-                  >강원</a
-                >
-              </li>
-              <li class="item-region">
-                <a href="#" class="link-region btn btn-primary" role="button"
-                  >충남</a
-                >
-              </li>
-              <li class="item-region">
-                <a href="#" class="link-region btn btn-primary" role="button"
-                  >충북</a
-                >
-              </li>
-              <li class="item-region">
-                <a href="#" class="link-region btn btn-primary" role="button"
-                  >전남</a
-                >
-              </li>
-              <li class="item-region">
-                <a href="#" class="link-region btn btn-primary" role="button"
-                  >전북</a
-                >
-              </li>
-              <li class="item-region">
-                <a href="#" class="link-region btn btn-primary" role="button"
-                  >경남</a
-                >
-              </li>
-              <li class="item-region">
-                <a href="#" class="link-region btn btn-primary" role="button"
-                  >경북</a
-                >
-              </li>
-              <li class="item-region">
-                <a href="#" class="link-region btn btn-primary" role="button"
-                  >제주</a
-                >
-              </li>
-            </ul>
-          </div>
-          <!-- 지역 리스트 끝 -->
-          <div class="group-search-team input-group col-sm-3">
-            <input
-              type="text"
-              class="form-control"
-              name="search-team"
-              placeholder="팀 검색"
-            />
-            <div class="input-group-append">
-              <button class="btn btn-success">검색</button>
-            </div>
-          </div>
-        </div>
-        <!-- 팀 리스트 -->
-        <div class="container-teambox">
-          <ul class="list-teambox">
-            <li class="item-teambox">
-              <div class="left-teambox">
-                <a href="#" class="link-team-select rounded-circle clear-fix">
-                  <!-- <img src="./고양이 로고.png" alt="팀 이미지" class="rounded-circle team-icon" style="width: 150px; height: 150px ;"> -->
-                  <div class="label-team">
-                    <span class="team-local badge badge-success">안양</span>
-                    <span class="tean-name">단또즈</span>
-                  </div>
-                </a>
-              </div>
-              <div class="right-teambox">
-                경기 가능 지역 : <span class="possible_local">경기도</span
-                ><br />
-                다음 경기 일정 : <span class="recently_match">미정</span><br />
-                연습 신청 허용 여부 : <span class="match_type">비공개</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <!-- 팀 리스트 끝 -->
-        <div class="team-request">
-          <button class="btn btn-dark btn-team-request">팀 신청하기</button>
-        </div>
-        <!-- 페이지 번호 -->
-        <div class="container-pagenation">
-          <ul class="pagination justify-content-center">
-            <li class="page-item"><a href="#" class="page-link">이전</a></li>
-            <li class="page-item active">
-              <a href="#" class="page-link">1</a>
-            </li>
-            <li class="page-item"><a href="#" class="page-link">2</a></li>
-            <li class="page-item"><a href="#" class="page-link">3</a></li>
-            <li class="page-item"><a href="#" class="page-link">다음</a></li>
-          </ul>
-        </div>
-      </div>
+		
 
-      <!-- 오른쪽 호버 박스 -->
-    </section>
-    <div class="teammain-rightbox">
-      <div class="hover-box">
-        <div class="rb-title">team : <span class="team-name">단또즈</span></div>
-        <div class="rb-date">경기 일정</div>
-        <div class="container-calendar">
-          <iframe
-            src="https://calendar.google.com/calendar/embed?height=300&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FSeoul&showPrint=0&showTabs=0&showCalendars=0&showTz=0&showTitle=0&mode=AGENDA&src=Y2RiYWNmNDhiZGRmY2I2YjdhZWQ3YzM4ZjYwODljZjk5OTc2MmZkOTliYzA0OTc4N2FiYjc2MDFiZTRhMmE5MEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23F09300"
-            style="border: solid 1px #777"
-            width="400"
-            height="300"
-            frameborder="0"
-            scrolling="no"
-          ></iframe>
-        </div>
-        <div class="box-btn-gototeam"></div>
-      </div>
-    </div>
+	</div>
+
 
     <script
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
     ></script>
+		<script>
+			$('.show-schedule').click(function(){
+				$('.teammain-rightbox').toggle();
+			})
+		</script>
   </body>
 </html>

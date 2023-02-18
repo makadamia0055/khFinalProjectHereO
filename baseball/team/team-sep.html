@@ -10,68 +10,17 @@
     <script src="../component/bootstrap4/popper.min.js"></script>
     <script src="../component/bootstrap4/boostrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="./team_common.css">
+
     <script src="../hover.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   </head>
   <body>
-    <header class="topBar">
-      <div class="topBar__containerBox">
-        <div class="topBar__containerBox1">
-          <ul class="topBar__list">
-            <li><a href="#">로그인</a></li>
-            <li><a href="#">회원가입</a></li>
-            <li><a href="#">고객센터</a></li>
-          </ul>
-        </div>
-        <nav class="menu-containerBox2">
-          <ul class="menu-containerBox2__bigBox">
-            <li class="menu-container__box">
-              <a href="#" id="home"><i class="fa-solid fa-baseball"></i></a>
-            </li>
-            <li class="menu-container__box">
-              <a href="#">Team</a>
-            </li>
-            <li class="menu-container__box">
-              <a href="#">League</a>
-            </li>
-            <li class="menu-container__box">
-              <a href="#">Reservation</a>
-            </li>
-            <li class="menu-container__box">
-              <a href="#">Community</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-
+    <iframe src="../component/topBar.html" class="topBar" frameborder="0"></iframe>
+    
 		<aside class="team-sidebar">
-			<ul class="list-side">
-
-				<li class="item-side">
-					<a href="#" class="link-side">팀페이지 메인</a>
-				</li>
-        <li class="item-side team-name">
-					<a href="#" class="link-side">팀 이름</a>
-				</li>
-        <li class="item-side">
-					<a href="#" class="link-side">팀 최근 스탯</a>
-				</li>
-        <li class="item-side">
-					<a href="#" class="link-side">팀 연혁</a>
-				</li>
-        <li class="item-side">
-					<a href="#" class="link-side">전체 선수 리스트</a>
-				</li>
-        <li class="item-side">
-					<a href="#" class="link-side">가입신청</a>
-				</li>
-        <li class="item-side login">
-					<a href="#" class="link-side">팀 게시판</a>
-				</li>
-
-			</ul>
+			<iframe src="./sidebar/sidebar-sep.html" frameborder="0"></iframe>
 		</aside>
     <section class="teamsep-main">
       <div class="teamsep-leftbox">
@@ -247,7 +196,7 @@
            
           </ul>
           
-          <button class="btn btn-primary col-lg-12">상대 팀 페이지로 </button>
+          <a href="./team-sep.html" role="button" class="btn btn-primary col-lg-12">상대 팀 페이지로 </a>
        </div>
         </div>
 
@@ -353,7 +302,7 @@
                 </div>
               </div>
             </div>
-            <button class="btn btn-primary col-lg-12">전체 선수 열람</button>
+            <a href="./team-whole_player.html" role="button" class="btn btn-primary col-lg-12">전체 선수 열람</a>
          </div>
          
           
