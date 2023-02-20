@@ -10,6 +10,11 @@
 @import "./board/team-sep-board_view.css";
 @import "./board/team-sep-board_write.css";
 
+/* 가입 보드 */
+@import "./join-control/team-join-board_view.css";
+@import "./join-control/team-join-board_main.css";
+
+
 /* 사이드바 */
 @import "./sidebar/sidebar.css";
 
@@ -18,10 +23,14 @@ section {
   width: calc(70%);
   z-index: 0;
 }
-.teammain-main,
+/* .teammain-main,
 .teamsep-main,
 .teamplayerdetail-main,
-.teamrec-main {
+.teamrec-main,
+.teamjoin-main,
+.team-join-board-main_main,
+.team-join-board_view_main */
+ section{
   margin-top: 150px;
   margin-left: 30px;
   position: absolute;

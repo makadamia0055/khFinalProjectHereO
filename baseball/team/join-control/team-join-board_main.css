@@ -125,3 +125,15 @@ ul, li{
 	color: #fff;
 }
 
+.new_join, .nocheck_join, .whole_join{
+	font-size: 14px;
+}
+.new_num{
+	color: blue;
+}
+.nocheck_num{
+	color:red;
+}
+.whole_num{
+	color:green
+}
