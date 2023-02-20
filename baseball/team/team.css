@@ -67,7 +67,6 @@
   display: inline-block;
   width: 150px;
   height: 150px;
-  background-image: url(./고양이\ 로고.png);
   background-size: 150px 150px;
 }
 
@@ -91,28 +90,38 @@
   vertical-align: middle;
   color: white;
 }
+.teammain-main .container-teambox .right-teambox .show-schedule{
+  margin: 10px 0;
+}
 
 /* 오른쪽 호버 박스 */
 .teammain-rightbox {
   margin-top: 400px;
   position: fixed;
-  right: 200px;
-  width: calc(30%);
+  right: 0px;
   border-radius: 20px;
   border: 1px solid black;
-  background-color: #17a2b8;
+  background-color: #fff;
+  padding: 20px;
 }
 .teammain-rightbox .hover-box {
   position: relative;
   display: inline-block;
+  text-align: center;
 }
 
-/* 캘린더 */
-
-.teammain-rightbox .container-calendar .item-calendar{
-	border-radius: 10px;
-	width: 400px; height: 300px;
+.rb-schedule .list-schedule .item-schedule{
+  border-bottom: 3px double rgb(107, 104, 104);
+  padding: 10px 0;
 }
+.rb-schedule .list-schedule .item-schedule:first-child{
+  border-top: 3px solid rgb(107, 104, 104);
+}
+
+
+
+
+
 
 /* 공용 */
 .clear-fix::after {

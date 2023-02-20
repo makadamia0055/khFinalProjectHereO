@@ -1,10 +1,10 @@
 /* component */
-@import "../baseball/component/top_noLogin.css";
-@import "../baseball/component/hover_menu.css";
-@import "../baseball/component/footer.css";
+@import "component/top_noLogin.css";
+@import "component/hover_menu.css";
+@import "component/footer.css";
 /* screen */
-@import "../baseball/screen/mainpage.css";
-@import "../baseball/screen/signup.css";
+@import "screen/mainpage.css";
+@import "screen/signup.css";
 
 /* team */
 

@@ -3,14 +3,8 @@
 	background-color: #183153;
 	border-radius: 30px;
 }
-/* .left-introduce{
-	
-	border: 1px solid black;
-	display: inline-block;
-	width: 300px;
 
-} */
-.right-introduce{
+.left-record{
 	
 	/* border: 1px solid black; */
 	display: inline-block;
@@ -18,44 +12,46 @@
 	position: relative;
 	
 }
-.right-introduce .list-team_intro{
+.left-record .list-team_record_intro{
 	background-color: antiquewhite;
 	border-radius: 30px;
+	margin-left : 20px;
 	padding: 30px;
 	font-size: 1.4em;
 	font-weight: 700;
 	line-height: 38px;
 	box-shadow: 2px 2px 0 5px #1c1e20 ;
-	
-	
+		
 }
-.right-introduce .list-team_intro .img-team-logo{
+.left-record .list-team_record_intro .img-team-logo{
 	width: 100px; height: 100px;
 	display: inline-block;
 	
 }
-
-
-
-
-
-.right-introduce .list-team_intro .team-name {
+.left-record .list-team_record_intro .team-name {
 	display: inline-block;
 	letter-spacing: -4px;
 	font-size: 60px;
+	vertical-align: middle;
 	line-height: 100px;
 	color: black;
 	text-shadow: 2px 2px 1px gray;
 
 }
-.right-introduce .list-team_intro .team-message{
+.left-record .list-team_intro .team-message{
 	font-style: oblique;
 	margin : 20px 0 20px 10px;
-	
 }
-.left-introduce .box-logo{
-	display: inline-block;
-	
+.left-record .list-team_record_intro li{
+	margin-left: 70px;
+}
+.left-record .list-team_record_intro li:first-child{
+	margin-left: 0;
+}
+
+.right-record{
+	float: right;
+
 }
 
 
@@ -121,100 +117,118 @@
 	color: crimson;
 	
 }
+/* 날짜 선택 datepicker */
+.container-lastMatchRec .subcontaier-firstLine{
+	display: flex;
+}
+.container-lastMatchRec .box-datepicker{
+	position: relative;
+	display: inline-block;
+	width: 20%;
+	background-color: antiquewhite;
+	margin-top: 20px;
+	margin-left : 20px;
+	border-radius: 20px;
+	padding: 20px 10px 5px 10px;
+}
+.container-lastMatchRec .box-datepicker label{
+	font-weight: 700;
+}
 
+/* 스코어 박스 */
+.container-lastMatchRec .box-score{
 
+	background-color: antiquewhite;
+	display: inline-block;
+	border-radius: 30px;
+	margin-left : 100px;
+	padding: 30px;
+	font-size: 1.4em;
+	font-weight: 700;
+	line-height: 38px;
+	box-shadow: 2px 2px 0 5px #1c1e20 ;
+}
+.container-lastMatchRec .box-score .team-logo{
+	width: 75px; height: 75px;
+
+}
+.container-lastMatchRec .box-score .img-box{
+	position: relative;
+	display: inline-block;
+}
+.container-lastMatchRec .box-score .img-box button{
+	position: absolute;
+	bottom: -10px;
+	left: 10px;
+}
+.container-lastMatchRec .box-score .team-box{
+	vertical-align: middle;
+	display: inline-block;
+
+}
+.container-lastMatchRec .box-score .team-name{
+	margin-left: 10px;
+	font-size: 30px;
+}
+.score_num{
+	text-align: center;
+}
 
 
 /* 선수 라인업 */
-.container-lineup{
-
-	position: relative;
-	margin-top : 30px;
-	margin-left : 30px;
-	display: inline-block;
-	border-radius: 20px;
-	background-color: rgb(38, 97, 173);
-	width: calc( 20% );
-	box-shadow: 2px 2px 0 5px #1c1e20 ;
-
-}
-
-.container-lineup .titletext-lineup{
-	font-size: 28px;
-	text-align: center;
-	color: aliceblue;
-	font-weight: 700;
-}
-.container-lineup .item-lineup{
-	display: block;
-	border-radius: 10px;
-	background-color: antiquewhite;
-	margin: 10px 0;
-
-}
-.container-lineup .item-lineup .link-lineup{
-	margin : 10px;
-	text-align: center;
-	vertical-align: middle;
-	font-size: 20px;
-	font-weight: 700;
-}
-.container-lineup .item-lineup .position-lineup{
+.container-lastMatchRec .container-lineup{
 	float: right;
-	margin-right: 10px;
-	margin-top: 3px;
-	font-size: 20px;
-	color: crimson;
-	font-weight: 600;
-}
-.container-lineup .item-lineup .attendance{
-	margin-left: 10px;
-	margin-top : 4px;
 	
-
 }
 
-.item-vs_icon{
+/* 두번째 라인 */
+/* 경기 스코어표 */
+.subcontainer-secondLine .box-detail_score{
 	display: inline-block;
-	font-size: 70px;
-	color: antiquewhite;
-	vertical-align: middle;
-	margin: 0 auto;
-}
-
-.container-lineup.opponent{
-	background-color: rgb(211, 44, 136);
-	float: right;
-	margin-right : 20px;
-}
-
-
-
-/* 선수 라인업 호버 메뉴  */
-.container-hover-lineup{
-	position: absolute;
-	float: left;
-	/* right: -300px; */
-	right: -800px;
-	 top: 0;
-	border-radius: 30px;
-	border : 5px solid wheat;
-	background-color: rgb(23, 60, 109);
-	color: white;
+	background-color: whitesmoke;
 	padding: 20px;
-	vertical-align: top;
-
+	border-radius: 20px;
 }
-.container-hover-lineup .player-name{
-	margin-left: 10px;
-	font-weight: 700;
+.subcontainer-secondLine .box-detail_score .table-detail_score{
+	border: 2px solid black;
+	
 }
+.subcontainer-secondLine .box-detail_score .table-detail_score th{
+	padding : 5px;
+	border: 1px solid black;
+}
+.subcontainer-secondLine .box-detail_score .table-detail_score td{
+	padding : 5px;
+	text-align: center;
+	border: 1px solid gainsboro;
+}
+.subcontainer-secondLine .box-detail_score .table-detail_score td:first-child{
 
-
-.container-calendar{
+	border: 1px solid black;
+}
+/* 플레이어 스탯 */
+.box-player_score{
+	background-color: whitesmoke;
+}
+.box-player_score .player_profile{
+	position: relative;
 	display: inline-block;
-	border: 1px solid white;
+	background-color: transparent;
+	width: 100px; height: 100px;
 }
+.box-player_score .player_profile .btn-mvp{
+	position: absolute;
+	bottom: 0; left: 0;
+	font-weight: 700;
+	opacity: 0.8;	
+}
+.box-player_score .player_profile .img-player{
+	width: 100px; height: 100px;
+}
+.box-player_score .player_profile .table-player_score{
+	display: inline-block;
+}
+/* 선수 라인업 호버 메뉴  */
 
 /* 팀 소개 및 연혁 */
 .container-teamhistory{
