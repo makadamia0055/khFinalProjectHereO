@@ -9,10 +9,8 @@
     <script src="../component/bootstrap4/jquery.js"></script>
     <script src="../component/bootstrap4/popper.min.js"></script>
     <script src="../component/bootstrap4/boostrap.bundle.min.js"></script>
+    <script src="/baseball/component/component.js"></script>
     <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="../team/team_common.css" />
-
-    <style></style>
   </head>
   <body>
     <iframe
@@ -21,17 +19,13 @@
       frameborder="0"
     ></iframe>
 
-    <aside class="team-sidebar">
-      <iframe src="./sidebar/sidebar-main.html" frameborder="0"></iframe>
+    <aside class="sidebar">
+      <iframe src="../community/commu-sidebar.html" frameborder="0"></iframe>
     </aside>
+
     <script
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
     ></script>
-    <script>
-      $(".show-schedule").click(function () {
-        $(".teammain-rightbox").toggle();
-      });
-    </script>
   </body>
 </html>
