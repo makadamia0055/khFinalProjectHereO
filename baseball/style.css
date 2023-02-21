@@ -8,6 +8,8 @@
 @import "screen/signup.css";
 
 /* team */
+/* commu-component*/
+@import "../baseball/community/commu-components.css";
 
 * {
   margin: 0;

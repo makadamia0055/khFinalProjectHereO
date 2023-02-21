@@ -1,0 +1,29 @@
+.free-main {
+  padding-top: 170px;
+  padding-left: calc(20%);
+}
+.free__title {
+  font-size: 30px;
+  padding: 8px 15px;
+  border: 1px solid none;
+  border-radius: 15px;
+  background-color: #eff5f5;
+}
+.free__hotTopic {
+  margin-top: 40px;
+  width: 90%;
+  height: 250px;
+  background-color: tomato;
+}
+.free__hotTopic-title {
+  padding-left: 15px;
+}
+.free_hotTopic-contents {
+  display: flex;
+  justify-content: space-evenly;
+}
+.Top5 {
+  width: 17%;
+  height: 200px;
+  background-color: green;
+}
