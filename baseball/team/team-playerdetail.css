@@ -87,12 +87,31 @@
 	background-color: rgb(38, 97, 173);
 }
 
-.container-playergraph{
+/* .container-playergraph{
 	background-color: antiquewhite;
 	width: 40%;
 
 	text-align: center; border-radius: 20px;
-}
-.container-playergraph::after{
+} */
+/* .container-playergraph::after{
 	content:''; display: block; clear: both;
+} */
+
+/* 테이블 */
+.teamplayerdetail-main .table{
+	background-color: white;
+	color: black;
+}
+
+/* 투타 교환 버튼 박스 */
+.title-recently_Match_score{
+	position: relative
+}
+.title-recently_Match_score .box-btn{
+	position: absolute;
+	bottom: 0;
+}
+.title-recently_Match_score .box-btn .btn{
+	float: left;
+	border-bottom: none;
 }
