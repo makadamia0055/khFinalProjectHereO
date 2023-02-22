@@ -1,14 +1,19 @@
-.teamjoin-main{
+.teamcreate-main{
 	width: 40em;
 	height : 50em;
 	position: relative;
-	background-color: antiquewhite;
+	background-color: #3a6baf;
 	border-radius: 20%;
 	padding: 0 auto;
 	vertical-align: auto;
+	color: white;
 }
-
-.container-join-input{
+.teamcreate-main .title-teamcreate{
+	position: absolute;
+	top: -50px;
+	font-weight: 700;
+}
+.container-create-input{
 	position: relative;
 	display: inline-block;
 	width: 26em; height : 40em;
@@ -16,7 +21,7 @@
 	box-sizing: content-box;
 }
 
-.container-join-input label{
+.container-create-input label{
 	margin-top : 10px
 	
 }

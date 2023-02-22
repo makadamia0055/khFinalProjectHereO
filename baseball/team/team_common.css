@@ -4,6 +4,7 @@
 @import "./team-join.css";
 @import "./team-record.css";
 @import "./board/team-board-common.css";
+@import "./team-create_team.css";
 
 /* 보드 */
 @import "./board/team-sep-board_main.css";
@@ -18,6 +19,9 @@
 /* 사이드바 */
 @import "./sidebar/sidebar.css";
 
+/* 팀 신청 보드 */
+@import "./admin-crateTeam/team-create-board_main.css";
+@import "./admin-crateTeam/team-create-board_view.css";
 
 section {
   width: calc(70%);

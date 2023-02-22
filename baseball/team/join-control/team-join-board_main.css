@@ -9,18 +9,18 @@ ul, li{
 	list-style: none;
 }
 
-.container-board-teamjoin{
+.container-board{
 	width: 1000px;
 	margin: 100px auto;
 }
 /* 타이틀  */
-.container-board-teamjoin .title-board{
+.container-board .title-board{
 	margin-bottom: 30px;
 }
-.container-board-teamjoin .title-board strong{
+.container-board .title-board strong{
 	font-size: 3rem;
 }
-.container-board-teamjoin .title-board p{
+.container-board .title-board p{
 	margin-top : 5px;
 	font-size: 1.4rem;
 }
@@ -28,49 +28,49 @@ ul, li{
 
 /* 게시글 */
 
-.container-board-teamjoin .list-board{
+.container-board .list-board{
 	width: 100%;
 	border-top: 2px solid #000;
 }
-.container-board-teamjoin .item-board{
+.container-board .item-board{
 	border-bottom: 1px solid #ddd;
 	font-size: 0;
 
 }
-.container-board-teamjoin .item-board > div{
+.container-board .item-board > div{
 	display: inline-block;
 	vertical-align: middle;
 	text-align: center;
 	font-size: 1.4rem;
 	padding: 15px 0;
 }
-.container-board-teamjoin .num, .writer, .date, .position, .location{
+.container-board .num, .writer, .date, .position, .location{
 	width: 10%;
 }
-.container-board-teamjoin .item-board .contact, .buttonCol{
+.container-board .item-board .contact, .buttonCol{
 	width: 20%;
 	text-align: left;
 }
-.container-board-teamjoin .item-board.top .title{
+.container-board .item-board.top .title{
 	text-align: center;
 }
 
-.container-board-teamjoin .item-board.top{
+.container-board .item-board.top{
 	border-bottom: 1px solid #999;
 	font-weight: 700;
 }
-.container-board-teamjoin .item-board:last-child{
+.container-board .item-board:last-child{
 	border-bottom : 1px solid #000;
 }
 
 
 /* 페이지네이션 */
-.container-board-teamjoin .board-pagenation{
+.container-board .board-pagenation{
 	margin-top: 30px;
 	text-align: center;
 	font-size: 0;
 }
-.container-board-teamjoin .board-pagenation a{
+.container-board .board-pagenation a{
 	display: inline-block;
 	width: 32px; height: 32px;
 	vertical-align: middle;
@@ -79,19 +79,19 @@ ul, li{
 	line-height: 100%;
 	box-sizing: border-box;
 }
-.container-board-teamjoin .board-pagenation a.bt{
+.container-board .board-pagenation a.bt{
 	font-size: 1.2rem;
 	padding-top : 10px;
 	letter-spacing: -1px;
 }
-.container-board-teamjoin .board-pagenation a.num{
+.container-board .board-pagenation a.num{
 	font-size: 1.4rem;
 	padding-top : 9px;
 }
-.container-board-teamjoin .board-pagenation a:first-child{
+.container-board .board-pagenation a:first-child{
 	border-left: 1px solid #ddd;
 }
-.container-board-teamjoin .board-pagenation a.num.on{
+.container-board .board-pagenation a.num.on{
 	border-color: black;
 	background-color: black;
 	color: #fff;
@@ -100,13 +100,13 @@ ul, li{
 
 
 /* 버튼박스 */
-.container-board-teamjoin .btnBox-board{
+.container-board .btnBox-board{
 	margin-top : 30px;
 	font-size: 0;
 	text-align: center;
 
 }
-.container-board-teamjoin .btnBox-board a{
+.container-board .btnBox-board a{
 	display: inline-block;
 	min-width: 80px;
 	padding: 10px;
@@ -115,12 +115,12 @@ ul, li{
 	border-radius: 2px;
 	font-size: 1.4rem;
 }
-.container-board-teamjoin .btnBox-board a:first-child{
+.container-board .btnBox-board a:first-child{
 	margin-left:0;
 }
 
 
-.container-board-teamjoin .btnBox-board a.on{
+.container-board .btnBox-board a.on{
 	background-color: #000;
 	color: #fff;
 }
