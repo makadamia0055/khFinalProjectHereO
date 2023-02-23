@@ -34,7 +34,7 @@
         <div class="right-introduce">
           <ul class="list-team_intro">
             <h1 class="team-name"></span>구단이름</h1>
-            <div class="team-message">"야구장 예약은 바로 여기, Here O!!"</div>
+            <div class="team-message">"야구장 예약은 바로 여기, Here <i class="fa-solid fa-baseball"></i>!!"</div>
             <li class="item-team_intro">
               연고지 : <span class="team-local">
                 <a href="#" class="link-local_full badge badge-success">서울</a> 왕십리
@@ -49,10 +49,26 @@
                 <span class="team-maxMember-num">30</span>명
               </span>
             </li>
-            <li class="current-league_text">현재 참여 리그 : <a href="#" class="current-league">가리봉동 가리비 리그</a></li>
           </ul>
         </div>
-        <iframe src="https://calendar.google.com/calendar/embed?height=300&wkst=2&bgcolor=%234285F4&ctz=Asia%2FSeoul&showTitle=0&showTabs=0&showPrint=0&showCalendars=0&showTz=0&mode=MONTH&src=Y2RiYWNmNDhiZGRmY2I2YjdhZWQ3YzM4ZjYwODljZjk5OTc2MmZkOTliYzA0OTc4N2FiYjc2MDFiZTRhMmE5MEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23F09300" style="border-width:0" width="400" height="300" frameborder="0" scrolling="no"></iframe>
+        <div id="accordion" class="subcontainer-league">
+
+          <div class="card">
+            <div class="card-header">
+              <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                현재 진행중 리그
+              </a>
+            </div>
+            <div id="collapseOne" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <a href="#" class=""> 왕십리 아마야구 주말리그</a>
+              </div>
+            </div>
+          </div>
+        </div>
+          
+        </div>
+        <!-- <iframe src="https://calendar.google.com/calendar/embed?height=300&wkst=2&bgcolor=%234285F4&ctz=Asia%2FSeoul&showTitle=0&showTabs=0&showPrint=0&showCalendars=0&showTz=0&mode=MONTH&src=Y2RiYWNmNDhiZGRmY2I2YjdhZWQ3YzM4ZjYwODljZjk5OTc2MmZkOTliYzA0OTc4N2FiYjc2MDFiZTRhMmE5MEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23F09300" style="border-width:0" width="400" height="300" frameborder="0" scrolling="no"></iframe> -->
         <div class="block-liner container-latestscore">
           <div class="content-blockliner score-teamstat">
             <div class="titletext-latestscore">다음 경기</div>
@@ -61,6 +77,8 @@
               <a href="#" class="link-nextMatch btn btn-primary">예약 페이지로</a>
             
           </div>
+          <div class="item-vs_icon">VS</div>
+
         </div>
 
 
@@ -130,7 +148,37 @@
             <button class="btn btn-primary col-lg-12">출석 체크</button>
          </div>
 
-         <div class="item-vs_icon">VS</div>
+         
+         <div class="container-hover-lineup next_match">
+          <h4 class="player-name">강백호</h4>
+          <div class="box-player-profile">
+            신장 : <span class="height-player">178</span>cm / 
+            몸무게 : <span class="weight-player">89</span>kg,<br>
+            투타 : <span class="pitch-hand">우</span>투/
+            <span class="hit-hand">우</span>타,<br> 
+
+          </div>
+                      
+          <br>
+          <h5>직전 경기 성적</h5>
+          <div class="player-stat-latestWinLose">
+            <div class="hitter_stat">
+              <li class="title_hitter"><h5>타자</h5></li>
+              <li>타석 : <span class="prev_hitseat">3</span>회</li>
+              <li>타점 : <span class="prev_hitpoint">3</span>점</li>
+              <li>타율 : <span class="prev_hitrate">0.302</span></li>
+              <li><span class="badge badge-success">홈런</span></li>  
+            </div>
+            <div class="pitcher_stat">
+                <li class="title_hitter"><h5>투수</h5></li>
+                <li>타석 : <span class="prev_inning">3</span>회</li>
+                <li>실점 : <span class="prev_losepoint">3</span>점</li>
+                <li>삼진 : <span class="prev_Kpoint">3</span>K</li>
+                <li>방어율 : <span class="prev_loserate">0.302</span></li>
+                <li><span class="badge badge-success">승리</span></li>  
+              </div>
+          </div>
+        </div>
 
 
 
@@ -225,7 +273,7 @@
         </div>
           <div class="container-lineup prev">
             <ul class="list-lineup">
-              <div class="titletext-lineup">지난 경기 선발 Line-up</div>
+              <div class="titletext-lineup">지난 경기 <br>선발 Line-up</div>
               <li class="item-lineup">
                 <span class="num-lineup btn btn-info">1</span>
                 <a href="#" class="link-lineup">강백호</a>
@@ -274,66 +322,72 @@
               
              
             </ul>
-            <div class="container-hover-lineup">
-              <h4 class="player-name">강백호</h4>
-              <div class="box-player-profile">
-                신장 : <span class="height-player">178</span>cm / 
-                몸무게 : <span class="weight-player">89</span>kg,<br>
-                투타 : <span class="pitch-hand">우</span>투/
-                <span class="hit-hand">우</span>타,<br> 
-                주요 포지션 : <span class="mainposition-player">1루수</span>
-  
-              </div>
-             
-  
-              <!-- <div class="player-stat-default">
-                통산 출장 경기 : <span class="all_join_match">29</span>경기<br> 
-                통산 승 : <span class="player_all_win">12</span>승<br>
-                출석률 : <span class="particifate_rate">95</span>%
-              </div> -->
-              <br>
-              <h5>최근 10경기 성적</h5>
-              <div class="player-stat-latestWinLose">
-                <div class="hitter_stat">
-                  총 타점 : <span class="all_hitpoint">3</span>점<br>
-  
-                  타점 : 3점
-                  타율
-                </div>
-              </div>
-            </div>
+            
             <a href="./team-whole_player.html" role="button" class="btn btn-primary col-lg-12">전체 선수 열람</a>
          </div>
-         
-          
-          <div class="container-calendar">
-            달력에 경기 가능일 표시 혹은 예약된 경기일자 표시
+         <div class="container-hover-lineup">
+          <h4 class="player-name">강백호</h4>
+          <div class="box-player-profile">
+            신장 : <span class="height-player">178</span>cm / 
+            몸무게 : <span class="weight-player">89</span>kg,<br>
+            투타 : <span class="pitch-hand">우</span>투/
+            <span class="hit-hand">우</span>타,<br> 
+
           </div>
+                      
+          <br>
+          <h5>직전 경기 성적</h5>
+          <div class="player-stat-latestWinLose">
+            <div class="hitter_stat">
+              <li class="title_hitter"><h5>타자</h5></li>
+              <li>타석 : <span class="prev_hitseat">3</span>회</li>
+              <li>타점 : <span class="prev_hitpoint">3</span>점</li>
+              <li>타율 : <span class="prev_hitrate">0.302</span></li>
+              <li><span class="badge badge-success">홈런</span></li>  
+            </div>
+            <div class="pitcher_stat">
+                <li class="title_hitter"><h5>투수</h5></li>
+                <li>타석 : <span class="prev_inning">3</span>회</li>
+                <li>실점 : <span class="prev_losepoint">3</span>점</li>
+                <li>삼진 : <span class="prev_Kpoint">3</span>K</li>
+                <li>방어율 : <span class="prev_loserate">0.302</span></li>
+                <li><span class="badge badge-success">승리</span></li>  
+              </div>
+          </div>
+        </div>
          
-
-
+         <div class="container-matchup">
+          <ul class="list-matchup">
+            <div class="titletext-matchup">지난 10 경기 결과</div>
+            <li class="item-matchup">
+              <span class="num-lineup btn btn-info">1</span>
+              VS <a href="#" class="link-matchup">버팔로즈</a>
+              <span class="result-matchup win">승</span>
+            </li>
+            <li class="item-matchup">
+              <span class="num-lineup btn btn-info">2</span>
+              VS <a href="#" class="link-matchup">임팔로즈</a>
+              <span class="result-matchup lose">패</span>
+            </li>
+            <li class="item-matchup">
+              <span class="num-lineup btn btn-info">3</span>
+              VS <a href="#" class="link-matchup">임파선즈</a>
+              <span class="result-matchup draw">무</span>
+            </li>
+          </ul>
+        </div>
+         
         </div>
       </div>
-      <!-- 선수 프로필을 line-up박스 안으로 옮기고 오른쪽에 달력을 넣자 -->
 
 
       <!-- 상단 메뉴들과 마진 좀 넣기 -->
-      <!-- 아직 미배치 -->
-      <!-- <div class="left-team-history">
-        <div class="container-teamhistory">
-             <h2>팀 소개 및 팀 스피릿</h2>
-              <div class="box-teamsprit">
-              <div class="text-teamsprit">
-                안녕하세요. 반갑습니다. 
-              </div>
-            </div>
-           </div>
-      </div> -->
+      
 
       
      
 
-        <!-- <div class="container-team-current-league">
+       <!-- <div class="container-team-current-league">
           <h2 class="title-team-current-league">현재 참여 중 리그</h2>
           <ul class="list-team-current-league">
             <li class="item-team-current-league">
@@ -342,13 +396,13 @@
               </a>
             </li>
           </ul>
-        </div> -->
+        </div> --> -->
 
-        <div class="container-team-winlose-graph">
+        <!-- <div class="container-team-winlose-graph">
           <span class="title-winlosegraph">창단 이후 승률</span>
           <div class="item-winlosegraph">
             <canvas id="team-winlosegraph"></canvas>
-          </div>
+          </div> -->
 
         </div>
       </div>

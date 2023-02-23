@@ -23,6 +23,7 @@
 
 }
 .right-introduce .list-team_intro{
+	margin-left: 150px;
 	background-color: antiquewhite;
 	border-radius: 30px;
 	padding: 30px;
@@ -50,7 +51,27 @@
 	
 }
 
+.teamsep-leftbox .subcontainer-league{
+	float: right;
+	
+}
+.teamsep-leftbox .subcontainer-league .card-header{
+	background-color: antiquewhite;
+}
+.teamsep-leftbox .subcontainer-league .card-link{
+	font-weight: 700;
+}
 
+.teamsep-leftbox .subcontainer-league .card-body{
+	padding: 5px;
+	padding-left : 10px;
+}
+
+
+
+
+
+/* 블록 라이너 */
 .block-liner{
 	display: block;
 	background-color: antiquewhite;
@@ -64,6 +85,12 @@
 .block-liner .content-blockliner .titletext-latestscore{
 	font-weight: 700;
 }
+
+
+
+
+
+
 
 /* 선수 라인업 */
 .container-lineup{
@@ -116,11 +143,11 @@
 }
 
 .item-vs_icon{
-	display: inline-block;
+	display: block;
 	font-size: 70px;
-	color: antiquewhite;
+	color: #183153;
 	vertical-align: middle;
-	margin: 0 auto;
+	text-align: center;
 }
 
 .container-lineup.opponent{
@@ -133,11 +160,7 @@
 
 /* 선수 라인업 호버 메뉴  */
 .container-hover-lineup{
-	position: absolute;
-	float: left;
-	/* right: -300px; */
-	right: -800px;
-	 top: 0;
+	display: inline-block;
 	border-radius: 30px;
 	border : 5px solid wheat;
 	background-color: rgb(23, 60, 109);
@@ -154,6 +177,17 @@
 
 .container-calendar{
 	display: inline-block;
+}
+
+/* 넥스트 매치 */
+.container-nextMatch{
+	position: relative;
+	display: flex;
+
+}
+.container-hover-lineup.next_match{
+	margin: 20px auto;
+	float: none;
 }
 
 /* 팀 소개 및 연혁 */
