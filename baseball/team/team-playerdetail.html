@@ -113,13 +113,13 @@
         </div> -->
         <div class="block-tile title-recently_Match_score">
           최근 10경기 성적
-        <div class="box-btn">
-          <a href="#" role="button" class="btn btn-primary">타자</a>
-          <a href="#" role="button" class="btn btn-outline-success">투수</a>
-        </div>
+          <div class="box-btn box-latest">
+            <a href="#" role="button" class="btn btn-primary hitter">타자</a>
+            <a href="#" role="button" class="btn btn-success btn-pithcer" style="display:none;">투수</a>
+          </div>
         </div>
         
-        <div class="hitter_latest10_history" hidden>
+        <div class="hitter_latest10_history">
           <div class="latest_10_match">
             <table class="table table-bordered">
               <thead class="thead thead-dark">
@@ -170,7 +170,7 @@
             </table>
           </div>
         </div>
-        <div class="pitcher_latest10_history">
+        <div class="pitcher_latest10_history" style="display:none;">
           <div class="latest_10_match">
             <table class="table table-bordered">
               <thead class="thead thead-dark">
@@ -224,6 +224,10 @@
         <!-- 베스트 플레이 영상 -->
         <div class="block-tile title-Match_recode">
          전체 경기 기록 열람
+         <div class="box-btn">
+          <a href="#" role="button" class="btn btn-primary hitter">타자</a>
+          <a href="#" role="button" class="btn btn-success btn-pithcer" style="display:none;">투수</a>
+         </div>
         </div>
         <!-- 선수 열람 스탯 칸 -->
           <!-- 선수 유형을 분류, 투수, 타자, 투타 겸업 -->
@@ -280,7 +284,7 @@
             </div>
           </div>
 
-          <div class="pitcher_history">
+          <div class="pitcher_history"  style="display:none;">
             <div class="latest_match">
               <table class="table table-bordered">
                 <thead class="thead thead-dark">
@@ -362,6 +366,26 @@
       }
     }
   });
+
+</script>
+<script>
+  $('.title-recently_Match_score .box-btn .btn').click(function(e){
+    e.preventDefault();
+    $('.pitcher_latest10_history').toggle();
+    $('.title-recently_Match_score .box-btn .btn').toggle();
+    $('.hitter_latest10_history').toggle();
+    
+  });
+  $('.title-Match_recode .box-btn .btn').click(function(e){
+    e.preventDefault();
+    $('.pitcher_history').toggle();
+    $('.title-Match_recode .box-btn .btn').toggle();
+    $('.hitter_history').toggle();
+    
+  });
+
+ 
+
 </script>
 
 </body>

@@ -32,10 +32,13 @@
 				<div class="container-region">
 					<ul class="list-region clear-fix">
 						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button">서울</a>
+							<a href="#" class="link-region btn btn-success" role="button" data-local="all">전체</a>
 						</li>
 						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button">경기</a>
+							<a href="#" class="link-region btn btn-primary" role="button" data-local="seoul">서울</a>
+						</li>
+						<li class="item-region">
+							<a href="#" class="link-region btn btn-primary" role="button" data-local="kyungki">경기</a>
 						</li>
 						<li class="item-region">
 							<a href="#" class="link-region btn btn-primary" role="button">부산</a>
@@ -84,7 +87,7 @@
 				</div>
 				<!-- 지역 리스트 끝 -->
 				<div class="group-search-team input-group col-sm-3">
-					<input type="text" class="form-control " name="search-team" placeholder="팀 검색">
+					<input type="text" class="form-control " name="search-team" id="search-team" placeholder="팀 검색">
 					<div class="input-group-append">
 						<button class="btn btn-success">검색</button>
 					</div>
@@ -92,13 +95,13 @@
 			</div>
 				<!-- 팀 리스트 -->
 			<div class="container-teambox">
-				<ul class="list-teambox">
+				<ul class="list-teambox" id="teamList">
 					<li class="item-teambox">
 						<div class="left-teambox">
 							<a href="./team-sep.html" style="background-image: url(./고양이\ 로고.png);" class="link-team-select rounded-circle clear-fix">
 								<!-- <img src="./고양이 로고.png" alt="팀 이미지" class="rounded-circle team-icon" style="width: 150px; height: 150px ;"> -->
 								<div class="label-team">
-									<span class="team-local badge badge-success">안양</span> 
+									<span class="team-local badge badge-success" data-local="seoul">안양</span> 
 									<span class="tean-name">단또즈</span>
 								</div>
 							</a>
@@ -115,7 +118,7 @@
 							<a href="./team-sep.html" style="background-image: url(./돌고래.png);" class="link-team-select rounded-circle clear-fix">
 								<!-- <img src="./고양이 로고.png" alt="팀 이미지" class="rounded-circle team-icon" style="width: 150px; height: 150px ;"> -->
 								<div class="label-team">
-									<span class="team-local badge badge-success">성남</span> 
+									<span class="team-local badge badge-success" data-local="kyungki">성남</span> 
 									<span class="tean-name">돌핀즈</span>
 								</div>
 							</a>
@@ -132,7 +135,7 @@
 							<a href="./team-sep.html" style="background-image: url(./돼지.png);" class="link-team-select rounded-circle clear-fix">
 								<!-- <img src="./고양이 로고.png" alt="팀 이미지" class="rounded-circle team-icon" style="width: 150px; height: 150px ;"> -->
 								<div class="label-team">
-									<span class="team-local badge badge-success">왕십리</span> <br>
+									<span class="team-local badge badge-success" data-local="seoul">왕십리</span> <br>
 									<span class="tean-name">호그즈</span>
 								</div>
 							</a>
@@ -149,7 +152,7 @@
 							<a href="./team-sep.html" style="background-image: url(./강아지.png);" class="link-team-select rounded-circle clear-fix">
 								<!-- <img src="./고양이 로고.png" alt="팀 이미지" class="rounded-circle team-icon" style="width: 150px; height: 150px ;"> -->
 								<div class="label-team">
-									<span class="team-local badge badge-success">용산</span> 
+									<span class="team-local badge badge-success" data-local="seoul">용산</span> 
 									<span class="tean-name">댕댕즈</span>
 								</div>
 							</a>
@@ -217,6 +220,27 @@
 			$('.show-schedule').click(function(){
 				$('.teammain-rightbox').toggle();
 			})
+			$(document).ready(function(){
+				$("#search-team").on("keyup", function() {
+					var value = $(this).val().toLowerCase();
+					$("#teamList li").filter(function() {
+						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					});
+				});
+			});
+			$('.list-region .item-region .link-region').click(function(e){
+				e.preventDefault();
+				if($(this).data('local')=='all'){
+					$('.container-teambox .list-teambox li').show();
+				}else{
+					let dtValue= $(this).data('local');
+					$('.container-teambox .list-teambox li').hide();
+					$('.container-teambox .list-teambox li').filter(function(){
+						return $(this).find('.team-local').data('local') == dtValue;
+					}).show();
+				}
+			})
 		</script>
+		
   </body>
 </html>

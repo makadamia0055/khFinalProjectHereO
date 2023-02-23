@@ -5,6 +5,7 @@
 @import "./team-record.css";
 @import "./board/team-board-common.css";
 @import "./team-create_team.css";
+@import "./team-whole_player.css";
 
 /* 보드 */
 @import "./board/team-sep-board_main.css";

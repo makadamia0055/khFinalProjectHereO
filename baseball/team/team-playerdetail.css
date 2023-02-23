@@ -1,3 +1,4 @@
+
 /* 프로필 컨테이너 */
 
 .container-playerprofile{
@@ -21,6 +22,7 @@
 }
 
 .teamplayerdetail-main{
+	min-width: 800px;;
 	border-radius: 20px;
 	background: #183153;
 }
@@ -112,6 +114,19 @@
 	bottom: 0;
 }
 .title-recently_Match_score .box-btn .btn{
+	float: left;
+	border-bottom: none;
+}
+
+
+.title-Match_recode{
+	position: relative
+}
+.title-Match_recode .box-btn{
+	position: absolute;
+	bottom: 0;
+}
+.title-Match_recode .box-btn .btn{
 	float: left;
 	border-bottom: none;
 }

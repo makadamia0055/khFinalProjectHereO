@@ -1,6 +1,7 @@
 .teamsep-main{
 	background-color: #183153;
 	border-radius: 30px;
+	min-width: 920px;
 }
 .left-introduce{
 	
@@ -183,8 +184,10 @@
 .container-nextMatch{
 	position: relative;
 	display: flex;
+	justify-content: space-between;
 
 }
+
 .container-hover-lineup.next_match{
 	margin: 20px auto;
 	float: none;
@@ -254,4 +257,9 @@
 	margin-top : 20px;
 	margin-right: 20px;
 	float: right;
+}
+
+.container-prevMatch{
+	display: flex;
+	justify-content: space-between;
 }
