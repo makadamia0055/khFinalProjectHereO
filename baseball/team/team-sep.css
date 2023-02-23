@@ -248,3 +248,10 @@
 	clear: both; content: ''; display: block;
 
 }
+/*  */
+.teamsep-leftbox .container-matchup{
+	vertical-align: top;
+	margin-top : 20px;
+	margin-right: 20px;
+	float: right;
+}
