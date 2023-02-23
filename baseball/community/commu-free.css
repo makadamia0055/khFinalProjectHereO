@@ -7,7 +7,7 @@
   padding: 8px 15px;
   border: 1px solid none;
   border-radius: 15px;
-  background-color: #eff5f5;
+  background-color: #fffbac;
 }
 .free__hotTopic {
   margin-top: 40px;
@@ -16,7 +16,7 @@
   border: 1px solid none;
   border-radius: 15px;
   padding: 5px;
-  background-color: #eff5f5;
+  background-color: #feffdf;
 }
 .free__hotTopic-title {
   display: inline-block;
@@ -38,4 +38,22 @@
 }
 .free__contents-title a:hover {
   text-decoration: underline;
+}
+.free__pageNum,
+.free__search {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.free__search {
+  margin-bottom: 25px;
+}
+.free__search-input {
+  margin: 0px 2px;
+  width: 220px;
+}
+.free__search-btn {
+  width: 55px;
+  font-size: 15px;
 }
