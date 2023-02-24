@@ -40,8 +40,8 @@
 				</ul>
 			</div>
 		</li>
-		<li class="item-side team-name" hidden>
-			<a href="#demo" class="link-side btn btn-outline-light col-lg-8" data-toggle="collapse">우리 팀 메뉴</a>
+		<li class="item-side team-name">
+			<a href="#demo" class="link-side btn btn-light col-lg-8" data-toggle="collapse">우리 팀 메뉴</a>
 			<div id="demo" class="collapse">
 				<ul class="sublist-side">
 					<li class="subitem-side">
@@ -63,8 +63,22 @@
 		<li class="item-side">
 			<a href="../team-join.html" target="_top" class="link-side btn btn-light col-lg-8">가입신청</a>
 		</li>
+		<li class="item-side">
+			<a href="../admin-crateTeam/team-create-board_main.html" target="_top" class="link-side btn btn-light col-lg-8">관리자 메뉴</a>
+		</li>
 		
 
 	</ul>
 </body>
+<script>
+	var url = location.href;
+	var parameters = (rul.slice(irl.indexOf('?')+1, url.length)).split('&');
+	for(var i = 0; i<parameters.length; i++){
+		var varName = parameters[i].split('=')[0];
+		if(varName.toUpperCase()==paramName.toUpperCase()){
+			returnValue = parameters[i].split('=')[1];
+			return decodeURIComponent(returnValue);
+		}
+	}
+</script>
 </html>

@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./team_common.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link	rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
   </head>
   <body>
@@ -76,9 +77,52 @@
               <a href="#" class="link-nextMatch btn btn-primary">예약 페이지로</a>
             
           </div>
-          <div class="item-vs_icon">VS</div>
+          <div class="container-vsTeam">
+            <div class="our_team title-team animate__animated">단또즈</div>
+            <div class="item-vs_icon">VS</div>
+            <div class="oppo_team title-team animate__animated"><a href="#">버팔로즈</a></div>
+          </div>
 
         </div>
+        <a class="block-liner container-vsScore" href="#gamerecord" data-toggle="collapse">
+          <div class="content-blockliner score-teamstat">
+            <div class="titletext-latestscore">상대 전적</div>
+              <span class="latest-win">1</span>승 
+              <span class="latest-lose">2</span>패
+              <span class="latest-draw">0</span><span class="isDraw">무</span>
+            </div>
+        </a>
+
+        <!-- 컬랩스 상대전적 -->
+        <div class="collapse" id="gamerecord">
+          <div class="container-prevMatch" >
+            <div class="container-matchup">
+              <ul class="list-matchup">
+                <div class="titletext-matchup">VS <span class="oppoTeam_name">버팔로즈</span> 지난 경기 결과</div>
+                <li class="item-matchup">
+                  <span class="num-lineup btn btn-info">1</span>
+                  <a href="#" class="link-matchup">2022-11-23</a>경기
+                  <span class="result-matchup win">승</span>
+                </li>
+                <li class="item-matchup">
+                  <span class="num-lineup btn btn-info">2</span>
+                  <a href="#" class="link-matchup">2023-01-11</a>경기
+                  <span class="result-matchup lose">패</span>
+                </li>
+                <li class="item-matchup">
+                  <span class="num-lineup btn btn-info">3</span>
+                  <a href="#" class="link-matchup">2023-02-01</a>경기
+                  <span class="result-matchup draw">무</span>
+                </li>
+              </ul>
+              
+            </div>
+            <div class="container-graph">
+              <canvas id="graph_vsOppoPitcher"></canvas>
+            </div>
+            
+          </div>
+        </div>  
 
 
         <div class="container-nextMatch">
@@ -260,139 +304,11 @@
         </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-        <div class="block-liner container-latestscore">
-          <div class="content-blockliner score-teamstat">
-            <div class="titletext-latestscore">최근 10경기 전적</div>
-              <span class="latest-win">7</span>승 
-              <span class="latest-lose">3</span>패
-              <span class="latest-draw"></span><span class="isDraw">무</span>
-            
-            <!-- <div class="latest-team-hitrate">0.223</div>
-            <div class="latest-team-earnedpoints">3.7</div> -->
-          </div>
-        </div>
-
-        <div class="container-prevMatch">
-
         
-          <div class="container-lineup prev">
-            <ul class="list-lineup">
-              <div class="titletext-lineup">지난 경기 <br>선발 Line-up</div>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              <li class="item-lineup">
-                <span class="num-lineup btn btn-info">1</span>
-                <a href="#" class="link-lineup">강백호</a>
-                <span class="position-lineup">유격수</span>
-              </li>
-              
-             
-            </ul>
-            
-            <a href="./team-whole_player.html" role="button" class="btn btn-primary col-lg-12">전체 선수 열람</a>
-         </div>
-         <div class="container-hover-lineup">
-          <h4 class="player-name">강백호</h4>
-          <div class="box-player-profile">
-            신장 : <span class="height-player">178</span>cm / 
-            몸무게 : <span class="weight-player">89</span>kg,<br>
-            투타 : <span class="pitch-hand">우</span>투/
-            <span class="hit-hand">우</span>타,<br> 
-
-          </div>
-                      
-          <br>
-          <h5>직전 경기 성적</h5>
-          <div class="player-stat-latestWinLose">
-            <div class="hitter_stat">
-              <li class="title_hitter"><h5>타자</h5></li>
-              <li>타석 : <span class="prev_hitseat">3</span>회</li>
-              <li>타점 : <span class="prev_hitpoint">3</span>점</li>
-              <li>타율 : <span class="prev_hitrate">0.302</span></li>
-              <li><span class="badge badge-success">홈런</span></li>  
-            </div>
-            <div class="pitcher_stat">
-                <li class="title_hitter"><h5>투수</h5></li>
-                <li>타석 : <span class="prev_inning">3</span>회</li>
-                <li>실점 : <span class="prev_losepoint">3</span>점</li>
-                <li>삼진 : <span class="prev_Kpoint">3</span>K</li>
-                <li>방어율 : <span class="prev_loserate">0.302</span></li>
-                <li><span class="badge badge-success">승리</span></li>  
-              </div>
-          </div>
-        </div>
          
-         <div class="container-matchup">
-          <ul class="list-matchup">
-            <div class="titletext-matchup">지난 10 경기 결과</div>
-            <li class="item-matchup">
-              <span class="num-lineup btn btn-info">1</span>
-              VS <a href="#" class="link-matchup">버팔로즈</a>
-              <span class="result-matchup win">승</span>
-            </li>
-            <li class="item-matchup">
-              <span class="num-lineup btn btn-info">2</span>
-              VS <a href="#" class="link-matchup">임팔로즈</a>
-              <span class="result-matchup lose">패</span>
-            </li>
-            <li class="item-matchup">
-              <span class="num-lineup btn btn-info">3</span>
-              VS <a href="#" class="link-matchup">임파선즈</a>
-              <span class="result-matchup draw">무</span>
-            </li>
-          </ul>
-        </div>
          
-      </div>
+         
+      
       
     </div>
   </div>
@@ -404,23 +320,7 @@
       
      
 
-       <!-- <div class="container-team-current-league">
-          <h2 class="title-team-current-league">현재 참여 중 리그</h2>
-          <ul class="list-team-current-league">
-            <li class="item-team-current-league">
-              <a href="#" class="link-team-current-league">
-                쌍용배 아마 최강야구 8강 진출
-              </a>
-            </li>
-          </ul>
-        </div> --> -->
-
-        <!-- <div class="container-team-winlose-graph">
-          <span class="title-winlosegraph">창단 이후 승률</span>
-          <div class="item-winlosegraph">
-            <canvas id="team-winlosegraph"></canvas>
-          </div> -->
-
+      
         </div>
       </div>
       <!-- 이후 스프링으로 빼서 따로 페이지 만들기 -->
@@ -433,17 +333,17 @@
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
     ></script>
-    <!-- <script>
-      const ctx = document.getElementById('team-winlosegraph');
+    <script>
+      const ctx = document.getElementById('graph_vsOppoPitcher');
     
       new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          labels: ['1번', '2번', '3번', '4번', '5번', '6번', '7번', '8번', '9번'],
           datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1
+            label: '상대 선발 - 상대 타율',
+            data: [0.320, 0.190, 0.306, 0.505, 0.23, 0.312 , 0.250, 0, 0.610],
+            borderWidth: 0.2
           }]
         },
         options: {
@@ -454,7 +354,7 @@
           }
         }
       });
-    </script> -->
+    </script>
     <script>
       $('.container-nextMatch .container-lineup .list-lineup li').hover(function(){
         $('.container-hover-lineup.next_match').show();
@@ -480,6 +380,15 @@
         
         
         
+      }, function(){
+        $('.container-hover-lineup.next_match').hide();
+
+      } )
+      $('.container-vsTeam .title-team').hover(function(){
+        $(this).addClass('animate__pulse')
+      }, function(){
+        $(this).removeClass('animate__pulse')
+
       })
     </script>
   </body>

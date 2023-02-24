@@ -273,12 +273,11 @@
 	clear: both; content: ''; display: block;
 }
 
-/* right-team-history */
-.right-team-history{
-	margin : 20px ;
-	display: inline-block;
-	background-color: antiquewhite;
-	width: 70%;
+/* bottom-team-history */
+.bottom-team-history{
+	
+	display: flex;
+	
 }
 
 
