@@ -33,13 +33,42 @@
 				<div class="container-region">
 					<ul class="list-region clear-fix">
 						<li class="item-region">
-							<a href="#" class="link-region btn btn-info" role="button">직위</a>
+							<div class="btn-group">
+								<button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+									직위<span class="caret"></span>
+								</button>
+								<div class="dropdown-menu">
+									<a href="#" class="dropdown-item">단장</a>
+									<a href="#" class="dropdown-item">총무</a>
+									<a href="#" class="dropdown-item">팀원</a>
+								</div>
+							</div>
 						</li>
 						<li class="item-region">
-							<a href="#" class="link-region btn btn-info" role="button">주전</a>
+							<div class="btn-group">
+								<button type="button" class="btn btn-info dropdown-toggle " data-toggle="dropdown">
+									포지션<span class="caret"></span>
+								</button>
+								<div class="dropdown-menu">
+									<a href="#" class="dropdown-item">투수</a>
+									<a href="#" class="dropdown-item">타자</a>
+									<a href="#" class="dropdown-item">포수</a>
+									<a href="#" class="dropdown-item">내야수</a>
+									<a href="#" class="dropdown-item">외야수</a>
+								</div>
+							</div>
 						</li>
 						<li class="item-region">
-							<a href="#" class="link-region btn btn-info" role="button">참석</a>
+							<div class="btn-group">
+								<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+									다음 경기 참석여부<span class="caret"></span>
+								</button>
+								<div class="dropdown-menu">
+									<a href="#" class="dropdown-item">참석</a>
+									<a href="#" class="dropdown-item">미정</a>
+									<a href="#" class="dropdown-item">불참</a>
+								</div>
+							</div>
 						</li>
 						
 
@@ -47,7 +76,7 @@
 				</div>
 				<!-- 지역 리스트 끝 -->
 				<div class="group-search-player input-group col-sm-3">
-					<input type="text" class="form-control " name="search-member" placeholder="팀원 검색">
+					<input type="text" class="form-control " id="search-member" name="search-member" placeholder="팀원 검색">
 					<div class="input-group-append">
 						<button class="btn btn-success">검색</button>
 					</div>
@@ -55,7 +84,7 @@
 			</div>
 				<!-- 팀 리스트 -->
 			<div class="container-playerbox">
-				<ul class="list-playerbox">
+				<ul class="list-playerbox" id="list-player">
 					<li class="item-playerbox">
 						<div class="left-playerbox">
 							<a href="./team-playerdetail.html" class="link-player-img rounded-circle clear-fix">
@@ -107,14 +136,22 @@
 			});
 			</script>
 			<script>
-				$(document).ready(function(){
-					$("#myInput").on("keyup", function() {
-						var value = $(this).val().toLowerCase();
-						$("#myTable tr").filter(function() {
-							$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-						});
+			$(document).ready(function(){
+				$("#search-member").on("keyup", function() {
+					var value = $(this).val().toLowerCase();
+					$("#list-player li").filter(function() {
+						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 					});
 				});
+
+				$(".list-region .item-region .btn-group a").click(function(e) {
+					e.preventDefault();
+					var value = $(this).text();
+					$("#list-player li").filter(function() {
+						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					});
+				});
+			});
 				</script>
   </body>
 </html>

@@ -2,6 +2,7 @@
 	margin-top: 180px;
 	background-color: #183153;
 	border-radius: 30px;
+	min-width: 1000px;
 }
 
 .left-record{
@@ -11,11 +12,12 @@
 	vertical-align: top;
 	position: relative;
 	
+	
 }
 .left-record .list-team_record_intro{
 	background-color: antiquewhite;
 	border-radius: 30px;
-	margin-left : 20px;
+	margin-left: 150px;
 	padding: 30px;
 	font-size: 1.4em;
 	font-weight: 700;
@@ -69,10 +71,9 @@
 	font-weight: 700;
 }
 /* 매치업 */
-.container-matchup{
-
+.teamrec-main .container-matchup{
+	margin-right: 10px;
 	position: relative;
-	margin-left : 50px;
 	display: inline-block;
 	border-radius: 20px;
 	background-color: rgb(38, 97, 173);
@@ -81,27 +82,27 @@
 	box-shadow: 2px 2px 0 5px #1c1e20 ;
 
 }
-.container-matchup .titletext-matchup{
+.teamrec-main .titletext-matchup{
 	font-size: 25px;
 	text-align: center;
 	color: aliceblue;
 	font-weight: 700;
 }
-.container-matchup .item-matchup{
+.teamrec-main .item-matchup{
 	display: block;
 	border-radius: 10px;
 	background-color: antiquewhite;
 	margin: 10px 0;
 
 }
-.container-matchup .item-matchup .link-matchup{
+.teamrec-main .item-matchup .link-matchup{
 	margin : 10px;
 	text-align: center;
 	vertical-align: middle;
 	font-size: 20px;
 	font-weight: 700;
 }
-.container-matchup .item-matchup .result-matchup{
+.teamrec-main .item-matchup .result-matchup{
 	float: right;
 	margin-right: 10px;
 	margin-top: 3px;
@@ -109,11 +110,11 @@
 	color: black;
 	font-weight: 600;
 }
-.container-matchup .item-matchup .result-matchup.win{
+.container-lastMatchRec .item-matchup .result-matchup.win{
 	color: dodgerblue;
 	
 }
-.container-matchup .item-matchup .result-matchup.lose{
+.container-lastMatchRec .item-matchup .result-matchup.lose{
 	color: crimson;
 	
 }
@@ -126,10 +127,13 @@
 	display: inline-block;
 	width: 20%;
 	background-color: antiquewhite;
+	vertical-align: top;
 	margin-top: 20px;
 	margin-left : 20px;
 	border-radius: 20px;
 	padding: 20px 10px 5px 10px;
+	box-shadow: 2px 2px 0 5px #1c1e20 ;
+
 }
 .container-lastMatchRec .box-datepicker label{
 	font-weight: 700;
@@ -141,7 +145,8 @@
 	background-color: antiquewhite;
 	display: inline-block;
 	border-radius: 30px;
-	margin-left : 100px;
+	margin-left : 150px;
+	margin-top : 20px;
 	padding: 30px;
 	font-size: 1.4em;
 	font-weight: 700;
@@ -178,6 +183,7 @@
 /* 선수 라인업 */
 .container-lastMatchRec .container-lineup{
 	float: right;
+	margin-right: 10px;
 	
 }
 
@@ -188,7 +194,12 @@
 	background-color: whitesmoke;
 	padding: 20px;
 	border-radius: 20px;
+	margin-left: 20px;
+	box-shadow: 2px 2px 0 5px #1c1e20 ;
+
 }
+
+
 .subcontainer-secondLine .box-detail_score .table-detail_score{
 	border: 2px solid black;
 	

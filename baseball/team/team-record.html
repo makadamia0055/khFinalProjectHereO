@@ -121,6 +121,7 @@
                 <span class="opponent_score">2</span>
               </div>
             </div>
+
             <div class="container-lineup">
               <ul class="list-lineup">
                 <div class="titletext-lineup">선발 Line-up</div>
@@ -197,7 +198,7 @@
           </div>
           <div class="subcontainer-secondLine">
             <div class="box-detail_score">
-              <table class="table-detail_score">
+              <table class="table-detail_score table">
                 <tr>
                   <th class="name-team">팀</th>
                   <th>1회</th>
@@ -231,20 +232,157 @@
                 
               </table>
             </div>
-            <div class="box-player_score">
-              <div class="player_profile">
-                <img class="rounded-circle img-player" src="./선수 이미지 샘플.png" alt="">
-                <button class="btn btn-warning btn-mvp col-lg-12">MVP</button>
-              </div>
-              <table class="table-player_score">
-                <tr>
-                  <th>타석</th>
-                  <th>타수</th>
-                  <th>타점</th>
+           
+          </div>
+
+          <div class="subcontainer-secondLine">
+            <div class="box-detail_score">
+              <div class="btn-group">
+								<button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+									홈/어웨이<span class="caret"></span>
+								</button>
+								<div class="dropdown-menu">
+									<a href="#" class="dropdown-item">홈팀</a>
+									<a href="#" class="dropdown-item">어웨이팀</a>
+									
+								</div>
+							</div>
+              <div class="btn-group">
+								<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+									타자/투수<span class="caret"></span>
+								</button>
+								<div class="dropdown-menu">
+									<a href="#" class="dropdown-item">타자</a>
+									<a href="#" class="dropdown-item">투수</a>
+									
+								</div>
+							</div>
+              
+              <table class="table table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th class="name-player">선수</th>
+                    <th>1회</th>
+                    <th>2회</th>
+                    <th>3회</th>
+                    <th>4회</th>
+                    <th>5회</th>
+                    <th>6회</th>
+                    <th>타수</th>
+                    <th>안타</th>
+                    <th>타점</th>
+                    <th>득점</th>
+                    <th>도루</th>
+                    <th>타율</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="trscore_hometeam">
+                    <td class="name-player">강백호</td>
+                    <td class="inning_1">4구, 도루</td>
+                    <td class="inning_2"></td>
+                    <td class="inning_3">좌플</td>
+                    <td class="inning_4">좌안</td>
+                    <td class="inning_5"></td>
+                    <td class="inning_6"></td>
+                    <td class="hit_time">2</td>
+                    <td class="hit">1</td>
+                    <td class="hit_point">2</td>
+                    <td class="point">1</td>
+                    <td class="run">1</td>
+                    <td class="hitrate">0.500</td>
+                  </tr>
+                  <tr class="trscore_hometeam">
+                    <td class="name-player">강백호</td>
+                    <td class="inning_1">4구, 도루</td>
+                    <td class="inning_2"></td>
+                    <td class="inning_3">좌플</td>
+                    <td class="inning_4">좌안</td>
+                    <td class="inning_5"></td>
+                    <td class="inning_6"></td>
+                    <td class="hit_time">2</td>
+                    <td class="hit">1</td>
+                    <td class="hit_point">2</td>
+                    <td class="point">1</td>
+                    <td class="run">1</td>
+                    <td class="hitrate">0.500</td>
+                  </tr>
                   
-                </tr>
+                </tbody>
+                
+              </table>
+              <table class="table table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th class="name-player">투수</th>
+                    <th>결과</th>
+                    <th>이닝</th>
+                    <th>타자</th>
+                    <th>타수</th>
+                    <th>피안타</th>
+                    <th>피홈런</th>
+                    <th>희타</th>
+                    <th>희비</th>
+                    <th>볼넷</th>
+                    <th>사구</th>
+                    <th>삼진</th>
+                    <th>폭투</th>
+                    <th>보크</th>
+                    <th>실점</th>
+                    <th>자책점</th>
+                    <th>투구수</th>
+                    <th>방어율</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="trscore_hometeam">
+                    <td class="name-player">강백호</td>
+                    <td class="inning_1">-</td>
+                    <td class="inning_2">2 ⅔</td>
+                    <td class="inning_3">13</td>
+                    <td class="inning_4">8</td>
+                    <td class="inning_5">1</td>
+                    <td class="inning_6">0</td>
+                    <td class="hit_time">0</td>
+                    <td class="hit">0</td>
+                    <td class="hit_point">2</td>
+                    <td class="point">3</td>
+                    <td class="run">4</td>
+                    <td class="hitrate">0</td>
+                    <td class="hitrate">1</td>
+                    <td class="hitrate">2</td>
+                    <td class="hitrate">2</td>
+                    <td class="hitrate">53</td>
+                    <td class="hitrate">5.26</td>
+                  </tr>
+                  <tr class="trscore_hometeam">
+                    <td class="name-player">강백호</td>
+                    <td class="inning_1">-</td>
+                    <td class="inning_2">2 ⅔</td>
+                    <td class="inning_3">13</td>
+                    <td class="inning_4">8</td>
+                    <td class="inning_5">1</td>
+                    <td class="inning_6">0</td>
+                    <td class="hit_time">0</td>
+                    <td class="hit">0</td>
+                    <td class="hit_point">2</td>
+                    <td class="point">3</td>
+                    <td class="run">4</td>
+                    <td class="hitrate">0</td>
+                    <td class="hitrate">1</td>
+                    <td class="hitrate">2</td>
+                    <td class="hitrate">2</td>
+                    <td class="hitrate">53</td>
+                    <td class="hitrate">5.26</td>
+                  </tr>
+                  
+                </tbody>
+                
               </table>
             </div>
+           
           </div>
           
           
@@ -256,31 +394,7 @@
          
         </div>
 
-            <div class="container-hover-lineup">
-              <h4 class="player-name">강백호</h4>
-              <div class="box-player-profile">
-                신장 : <span class="height-player">178</span>cm / 
-                몸무게 : <span class="weight-player">89</span>kg,<br>
-                투타 : <span class="pitch-hand">우</span>투/
-                <span class="hit-hand">우</span>타,<br> 
-                주요 포지션 : <span class="mainposition-player">1루수</span>
-  
-              </div>
-             
-  
-              
-              <br>
-              <h5>최근 10경기 성적</h5>
-              <div class="player-stat-latestWinLose">
-                <div class="hitter_stat">
-                  총 타점 : <span class="all_hitpoint">3</span>점<br>
-  
-                  타점 : 3점
-                  타율
-                </div>
-              </div>
-            </div>
-         </div>
+        
          
           
          
