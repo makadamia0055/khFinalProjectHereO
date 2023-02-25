@@ -11,6 +11,8 @@ $(function () {
   })
 
   $(".top-menu__commu-hover").hover(function(){
+    $('.submenu__background').css('z-index', 100);
+    $(".submenu-containerBox1").show();
     $(".submenu__background").show();
     $(".commu-submenu__01").show();
   },function(){

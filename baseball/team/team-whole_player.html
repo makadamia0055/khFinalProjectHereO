@@ -11,6 +11,7 @@
     <script src="../component/bootstrap4/boostrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../style.css" />
 		<link rel="stylesheet" href="./team_common.css">
+		<script src="./pagination.js"></script>
 
 	<style>
 		
@@ -106,9 +107,12 @@
 							수비 포지션 : <span class="team_position">투수</span><br>
 							주전/벤치 : <span class="recently_match">벤치</span><br>
 							다음 경기 참석 여부: <span class="match_type">미정</span>
-
+							
 						</div>
+						<button type="button" class="btn btn-danger btn-kickout" data-toggle="modal" data-target="#warning_kickout">탈퇴</button>
+						
 					</li>
+
 					<li class="item-playerbox">
 						<div class="left-playerbox">
 							<a href="./team-playerdetail.html" class="link-player-img1 rounded-circle clear-fix">
@@ -165,16 +169,16 @@
 			</div>
 			<!-- 팀 리스트 끝 -->
 			<div class="team-request">
-				<button class="btn btn-dark btn-team-request">팀원 관리</button>
+				<button class="btn btn-dark btn-team-manage">팀원 관리</button>
 			</div>
 			<!-- 페이지 번호 -->
 			<div class="container-pagenation">
 				<ul class="pagination justify-content-center">
-					<li class="page-item"><a href="#" class="page-link">이전</a></li>
+					<li class="page-item prev"><a href="#" class="page-link">이전</a></li>
 					<li class="page-item active"><a href="#" class="page-link">1</a></li>
 					<li class="page-item"><a href="#" class="page-link">2</a></li>
 					<li class="page-item"><a href="#" class="page-link">3</a></li>
-					<li class="page-item"><a href="#" class="page-link">다음</a></li>
+					<li class="page-item next"><a href="#" class="page-link">다음</a></li>
 				</ul>
 			</div>
 		</div>
@@ -182,39 +186,73 @@
 		<!-- 오른쪽 호버 박스 -->
 		
 	</section>	
+	<div class="modal" id="warning_kickout">
+		<div class="modal-dialog">
+			<div class="modal-content">
 	
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">탈퇴 확인</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+	
+				<!-- Modal body -->
+				<div class="modal-body">
+					정말로 팀에서 방출 시키겠습니까?
+				</div>
+	
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+	
+			</div>
+		</div>
+	</div>
 
 
-    <script
-      src="https://kit.fontawesome.com/bedfa56d7f.js"
-      crossorigin="anonymous"
-    ></script>
-		<script>
-			$(document).ready(function(){
-				$('[data-toggle="tooltip"]').tooltip();
-			});
-			</script>
-			<script>
-			$(document).ready(function(){
-				$("#search-member").on("keyup", function() {
-					var value = $(this).val().toLowerCase();
-					$("#list-player li").filter(function() {
-						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-					});
-				});
-
-				$(".list-region .item-region .btn-group a").click(function(e) {
-					e.preventDefault();
-					var value = $(this).text();
-					if($(this).hasClass('whole_select')){
-						$("#list-player li").show();
-					}else{
-						$("#list-player li").filter(function() {
-						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-					});
-					}
-				});
-			});
-				</script>
+   
   </body>
+	<script
+	src="https://kit.fontawesome.com/bedfa56d7f.js"
+	crossorigin="anonymous"
+></script>
+<script>
+	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+	</script>
+	<script>
+	$(document).ready(function(){
+		$("#search-member").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			$("#list-player li").filter(function() {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
+
+		$(".list-region .item-region .btn-group a").click(function(e) {
+			e.preventDefault();
+			var value = $(this).text();
+			if($(this).hasClass('whole_select')){
+				$("#list-player li").show();
+			}else{
+				$("#list-player li").filter(function() {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+			}
+		});
+	});
+		</script>
+		<script>
+			$('.btn-team-manage').click(function(){
+				if($(this).hasClass('btn-dark')){
+					$('.btn-kickout').show();
+					$(this).removeClass('btn-dark').addClass('btn-outline-dark').text('팀원 관리 닫기');
+				}else{
+					$('.btn-kickout').hide();
+					$(this).removeClass('btn-outline-dark').addClass('btn-dark').text('팀원 관리');
+				}
+			})	
+		</script>
 </html>
