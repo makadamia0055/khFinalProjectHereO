@@ -29,6 +29,7 @@
   background-color: #150050;
   height: 80px;
 }
+
 .menu-containerBox2__bigBox {
   display: flex;
 }
@@ -37,6 +38,7 @@
   height: 80px;
   position: relative;
 }
+
 .menu-container__box > a {
   display: block;
   height: 80px;
@@ -57,10 +59,11 @@
 }
 .menu-container__box:first-child > a {
   font-size: 35px;
-  top: 16px;
+  top: 0px;
   left: 25%;
   color: #f9f5e7;
   font-weight: 600;
+  line-height: 75px;
 }
 
 /* 아래 백그라운드 클래스와 서브메뉴는 
