@@ -309,7 +309,7 @@
 
 /*  */
 .teamsep-main .container-matchup{
-	margin-right: 10px;
+	margin-left: 200px;
 	position: relative;
 	display: inline-block;
 	border-radius: 20px;
@@ -364,6 +364,7 @@
 }
 .container-graph{
 	display: inline-block;
+	margin-right: 100px;
 	width: 400px;
 	height: 200px;
 	background-color: white;
