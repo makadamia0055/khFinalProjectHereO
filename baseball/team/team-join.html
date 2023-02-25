@@ -1,76 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>가입 페이지</title>
-	<link rel="stylesheet" href="../component/bootstrap4/bootstrap.min.css">
-	<script src="../component/bootstrap4/jquery.js"></script>
-	<script src="../component/bootstrap4/popper.min.js"></script>
-	<script src="../component/bootstrap4/boostrap.bundle.min.js"></script>
-	<link rel="stylesheet" href="../style.css" />
-	<link rel="stylesheet" href="./team_common.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가입 페이지</title>
+    <link rel="stylesheet" href="../component/bootstrap4/bootstrap.min.css" />
+    <script src="../component/bootstrap4/jquery.js"></script>
+    <script src="../component/bootstrap4/popper.min.js"></script>
+    <script src="../component/bootstrap4/boostrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="./team_common.css" />
+  </head>
+  <body>
+    <iframe
+      src="../component/topBar.html"
+      target="_top"
+      class="topBar"
+      frameborder="0"
+    ></iframe>
 
-</head>
-<body>
-	<iframe src="../component/topBar.html" target="_top" class="topBar" frameborder="0"></iframe>
+    <aside class="team-sidebar">
+      <iframe src="./sidebar/sidebar-main.html" frameborder="0"></iframe>
+    </aside>
 
-	<aside class="team-sidebar">
-		<iframe src="./sidebar/sidebar-main.html" frameborder="0"></iframe>
-	</aside>
+    <section class="teamjoin-main">
+      <div class="container-join-input">
+        <fieldset class="">
+          <form action="" method="get" class="form-horizontal">
+            <div class="form-group">
+              <div class="team-selector">
+                <label for="team">가입 희망 팀:</label>
+                <select class="form-control" id="team">
+                  <option>단또즈</option>
+                  <option>댕댕즈</option>
+                  <option>돈까스</option>
+                  <option>돌핀즈</option>
+                </select>
+              </div>
 
-	<section class="teamjoin-main">
-		<div class="container-join-input">
-			<fieldset class="">
-				<form action="" method="get" class="form-horizontal">
-					<div class="form-group">
-						<div class="team-selector">
-							<label for="team">가입 희망 팀:</label>
-							<select class="form-control" id="team">
-								<option>단또즈</option>
-								<option>댕댕즈</option>
-								<option>돈까스</option>
-								<option>돌핀즈</option>
-							</select>
-						</div>
+              <label for="contact">연락처</label>
+              <input
+                type="text"
+                name="contact"
+                id="contact"
+                class="form-control col-lg-8"
+                placeholder="연락처를 입력해주세요."
+              />
+              <label for="local">거주지</label>
+              <input
+                type="text"
+                name="local"
+                id="local"
+                class="form-control col-lg-12"
+                placeholder="거주 지역을 입력해주세요"
+              />
+              <label for="position">희망 포지션</label>
+              <input
+                type="text"
+                name="position"
+                id="position"
+                class="form-control col-lg-8"
+                placeholder="희망 포지션을 입력해주세요."
+              />
+              <label for="pitching_hand">던지는 손</label>
+              <select name="pitching_hand">
+                <option value="right">우투</option>
+                <option value="left">좌투</option>
+              </select>
 
+              <label for="pitching_hand">치는 손</label>
+              <select name="pitching_hand">
+                <option value="right">우타</option>
+                <option value="left">좌타</option>
+              </select>
+              <br />
+              <label for="introduce">자기소개</label>
+              <textarea
+                name="introduce"
+                id="introduce"
+                class="form-control"
+                rows="5"
+              ></textarea>
+              <button type="submit" class="btn btn-dark col-lg-12">등록</button>
+            </div>
+          </form>
+        </fieldset>
+      </div>
+    </section>
 
-						<label for="contact">연락처</label>
-						<input type="text" name="contact" id="contact" class="form-control  col-lg-8" placeholder="연락처를 입력해주세요.">
-						<label for="local">거주지</label>
-						<input type="text" name="local" id="local" class="form-control  col-lg-12" placeholder="거주 지역을 입력해주세요">
-						<label for="position">희망 포지션</label>
-						<input type="text" name="position" id="position" class="form-control  col-lg-8" placeholder="희망 포지션을 입력해주세요.">
-						<label for="pitching_hand">던지는 손</label>
-						<select name="pitching_hand"> 
-							<option value="right">우투</option>
-							<option value="left">좌투</option>
-						</select>
-
-						<label for="pitching_hand">치는 손</label>
-						<select name="pitching_hand"> 
-							<option value="right">우타</option>
-							<option value="left">좌타</option>
-						</select>
-						<br>
-						<label for="introduce">자기소개</label>
-						<textarea name="introduce" id="introduce" class="form-control" rows="5"></textarea>
-						<button type="submit" class="btn btn-dark col-lg-12">등록</button>
-					</div>
-
-
-
-				</form>
-			</fieldset>
-		</div>
-
-	</section>
-
-	
-	<script
+    <script
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
     ></script>
-</body>
+  </body>
 </html>
