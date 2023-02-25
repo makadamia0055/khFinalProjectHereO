@@ -1,7 +1,9 @@
 
 
 .container-board{
+	position: relative;
 	width: 1000px;
+
 	margin: 100px auto;
 	margin-top: 180px;
 }

@@ -11,57 +11,7 @@
     <script src="../baseball/component/component.js"></script>
   </head>
   <body>
-    <header class="topBar">
-      <div class="topBar__containerBox">
-        <!-- 최상단 로그인 메뉴바 -->
-        <div class="topBar__containerBox1">
-          <ul class="topBar__list">
-            <li><a href="#">로그인</a></li>
-            <li><a href="#">회원가입</a></li>
-            <li><a href="#">고객센터</a></li>
-          </ul>
-        </div>
-        <!-- 메인 메뉴바 -->
-        <nav class="menu-containerBox2">
-          <ul class="menu-containerBox2__bigBox">
-            <li class="menu-container__box">
-              <a href="../baseball/mainpage.html" id="home"
-                >Here <i class="fa-solid fa-baseball"></i
-              ></a>
-            </li>
-            <li class="menu-container__box">
-              <a href="../baseball/team/team.html"><span>Team</span></a>
-              <ul class="submenu-containerBox1">
-                <li><a>서브메뉴1</a></li>
-                <li><a>서브메뉴2</a></li>
-              </ul>
-            </li>
-            <li class="menu-container__box">
-              <a href="#"><span>League</span></a>
-              <ul class="submenu-containerBox1">
-                <li><a>서브메뉴3</a></li>
-                <li><a>서브메뉴4</a></li>
-              </ul>
-            </li>
-            <li class="menu-container__box">
-              <a href="#"><span>Reservation</span></a>
-              <ul class="submenu-containerBox1">
-                <li><a>서브메뉴5</a></li>
-                <li><a>서브메뉴6</a></li>
-              </ul>
-            </li>
-            <li class="menu-container__box">
-              <a href="#"><span>Community</span></a>
-              <ul class="submenu-containerBox1">
-                <li><a>서브메뉴7</a></li>
-                <li><a>서브메뉴8</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <div class="submenu__background"></div>
-      </div>
-    </header>
+    <iframe src="component/topBar.html" class="topBar" frameborder="0"></iframe>
     <main class="main__page">
       <div class="main__imgBox-container">
         <ul class="main__imgBox-container2">
@@ -98,7 +48,7 @@
           <div class="main__contents-commu">
             <div class="commu-mainTitle">
               야구계
-              <a href="#"
+              <a href="community/commu-market.html"
                 ><span style="color: #fd841f">" Carrot Market "</span></a
               >
             </div>
@@ -107,16 +57,32 @@
         </div>
       </div>
     </main>
-    <section class="team-section">
+    <section class="team-section menu-section">
       <h2>New Team</h2>
       <div class="newTeam-container">
-        <div class="newTeam__list">
-          준비중- 호버하면 translate top되는 기능 넣기
-        </div>
-        <div class="newTeam__list">준비중</div>
-        <div class="newTeam__list">준비중</div>
+        <div class="newTeam__list"><a href="#">준비중</a></div>
+        <div class="newTeam__list"><a href="#">준비중</a></div>
+        <div class="newTeam__list"><a href="#">준비중</a></div>
       </div>
       <div class="newTeam__more"><a href="#">더보기</a></div>
+    </section>
+    <section class="commu-section menu-section">
+      <div class="commu__issue">
+        <h2>실시간 <span style="color: red">HOT</span>이슈</h2>
+        <ul class="commu__issue-contents">
+          <li>ABC</li>
+          <li>DEF</li>
+          <li>GHI</li>
+        </ul>
+      </div>
+      <div class="commu__find">
+        <h2>같이 <span style="color: #ffa900">PLAY</span>할 팀?</h2>
+        <ul class="commu__find-contents">
+          <li>여기요</li>
+          <li>포수구해요</li>
+          <li>타자구해요</li>
+        </ul>
+      </div>
     </section>
     <footer>
       <ul class="footer-menu__container">
@@ -125,7 +91,6 @@
         <li class="footer-menu__list">이용약관</li>
         <li class="footer-menu__list">고객센터</li>
       </ul>
-      <br />
       <ul class="footer__info">
         <li>히어로 주식회사</li>
         <li>공승배 : 깃주소</li>

@@ -1,11 +1,11 @@
 .teamjoin-main{
 	width: 40em;
 	height : 50em;
-	margin: 0 auto;
 	position: relative;
 	background-color: antiquewhite;
 	border-radius: 20%;
 	padding: 0 auto;
+	vertical-align: auto;
 }
 
 .container-join-input{

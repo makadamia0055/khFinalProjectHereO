@@ -1,0 +1,17 @@
+.team-board-main.team_create{
+	width: auto; height: auto;
+	background-color:antiquewhite;
+	border-radius: 30px;
+	padding: 10px;
+}
+
+
+.team-board-main.team_create .container-board .box-board .table{
+	font-size: 15px;
+	
+}
+
+
+.team-board-main.team_create .container-board .box-board .table td{
+	background-color: white;
+}
