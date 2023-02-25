@@ -17,4 +17,12 @@ $(function () {
     $(".submenu-containerBox1").hide();
     $(".submenu__background").hide();
   })
+
+   $(".top-menu__reservation-hover").hover(function(){
+    $(".submenu__background").show();
+    $(".reserve-submenu__01").show();
+  },function(){
+    $(".submenu-containerBox1").hide();
+    $(".submenu__background").hide();
+  })
 });
