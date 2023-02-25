@@ -1,0 +1,30 @@
+body{ padding: 0; text-decoration: none; list-style: none;}
+    .stadium-info{
+      width: 1000px; height: 100%; display: inline-block; 
+      position: relative; margin-top: 150px; left: 20%; 
+      padding: 20px 0 20px 0; box-sizing: border-box;
+    }
+    .stadium-info .info-content{
+      width: 100%; height: 100%; 
+    }
+    .stadium-info .info-content .info-img{
+      width: 100%; height: 300px; background-color: gray;
+    }
+    .stadium-info .info-content img{
+      width: 100%; height: 300px;
+    }
+    .stadium-info .info-content .info-detail{
+      width: 100%; height: 100%; 
+    }
+    .stadium-info .info-content .info-detail .title{
+       text-align: left;
+      padding: 5px; background: rgb(250, 250, 250);
+      font-size: 20px; color: rgba(0, 0, 0, 0.8);
+      text-align: center;
+    }
+    .stadium-info .info-content .info-detail .content{
+       text-align: left;
+      padding: 5px;font-size: 14px; color: rgba(0, 0, 0, 0.7);
+      font-size: 18px; line-height: 30px;
+    }
+

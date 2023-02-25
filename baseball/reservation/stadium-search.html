@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>구장 검색</title>
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+   <link rel="stylesheet" href="/resources/demos/style.css">
+   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+   <link rel="stylesheet" href="../style.css" />
+   <link rel="stylesheet" href="../reservation/side/reservation-side.css">
+	<link rel="stylesheet" href="../reservation/reservation-main.css">
+   
+   <iframe src="../component/topBar.html" class="topBar" frameborder="0"></iframe>
+	<aside class="reservation-sidebar">
+		<iframe src="reservation-sidebar.html" frameborder="0"></iframe>
+	</aside>
+</head>
+<body>
+   <div class="reservation">
+      <h2>구장 검색</h2>
+      <strong>찾으실 구장의 지역을 선택해 주세요.</strong>
+      <div class="reservation-content">
+         <div class="search_boxes">
+            <div class="search_box">
+               <select name="region" id="region" onchange="categoryChange(this)">
+                  <option value>시/도 선택</option>
+                  <option value="region01">강원</option>
+                  <option value="region02">경기</option>
+                  <option value="region03">경남</option>
+                  <option value="region04">경북</option>
+                  <option value="region05">광주</option>
+                  <option value="region06">대구</option>
+                  <option value="region07">대전</option>
+                  <option value="region08">부산</option>
+                  <option value="region09">서울</option>
+                  <option value="region10">울산</option>
+                  <option value="region11">인천</option>
+                  <option value="region12">전남</option>
+                  <option value="region13">전북</option>
+                  <option value="region14">충남</option>
+                  <option value="region15">충북</option>
+               </select>
+            </div>
+            <div class="search_box">
+               <select name="" id="state">
+                  <option>군/구 선택</option>
+               </select>
+            </div>
+            <button type="submit" class="btn-submit">검색</button>
+         </div>
+         <div class="stadium-list">
+            <a href="stadium-detail.html" class="stadium-item">
+               <img src="화도.jpg" alt="" class="img img1">
+               <div class="contents">
+                     <strong class="title">구장이름 : </strong>
+                     <span>화도</span>
+                     <br>
+                     <strong class="content">위치 : </strong>
+                     <span>경기도 남양주</span>
+               </div>
+            </a>
+            <a href="stadium-detail.html" class="stadium-item">
+               <img src="화도.jpg" alt="" class="img img1">
+               <div class="contents">
+                     <strong class="title">구장이름 : </strong>
+                     <span>화도</span>
+                     <br>
+                     <strong class="content">위치 : </strong>
+                     <span>경기도 남양주</span>
+               </div>
+            </a>
+            <a href="stadium-detail.html" class="stadium-item">
+               <img src="화도.jpg" alt="" class="img img1">
+               <div class="contents">
+                     <strong class="title">구장이름 : </strong>
+                     <span>화도</span>
+                     <br>
+                     <strong class="content">위치 : </strong>
+                     <span>경기도 남양주</span>
+               </div>
+            </a>
+            <a href="stadium-detail.html" class="stadium-item">
+               <img src="화도.jpg" alt="" class="img img1">
+               <div class="contents">
+                     <strong class="title">구장이름 : </strong>
+                     <span>화도</span>
+                     <br>
+                     <strong class="content">위치 : </strong>
+                     <span>경기도 남양주</span>
+               </div>
+            </a>
+            <a href="stadium-detail.html" class="stadium-item">
+               <img src="화도.jpg" alt="" class="img img1">
+               <div class="contents">
+                     <strong class="title">구장이름 : </strong>
+                     <span>화도</span>
+                     <br>
+                     <strong class="content">위치 : </strong>
+                     <span>경기도 남양주</span>
+               </div>
+            </a>
+            <a href="stadium-detail.html" class="stadium-item">
+               <img src="화도.jpg" alt="" class="img img1">
+               <div class="contents">
+                     <strong class="title">구장이름 : </strong>
+                     <span>화도</span>
+                     <br>
+                     <strong class="content">위치 : </strong>
+                     <span>경기도 남양주</span>
+               </div>
+            </a>
+            <a href="stadium-detail.html" class="stadium-item">
+               <img src="화도.jpg" alt="" class="img img1">
+               <div class="contents">
+                     <strong class="title">구장이름 : </strong>
+                     <span>화도</span>
+                     <br>
+                     <strong class="content">위치 : </strong>
+                     <span>경기도 남양주</span>
+               </div>
+            </a>
+            <a href="stadium-detail.html" class="stadium-item">
+               <img src="화도.jpg" alt="" class="img img1">
+               <div class="contents">
+                     <strong class="title">구장이름 : </strong>
+                     <span>화도</span>
+                     <br>
+                     <strong class="content">위치 : </strong>
+                     <span>경기도 남양주</span>
+               </div>
+            </a>
+            <a href="stadium-detail.html" class="stadium-item">
+               <img src="화도.jpg" alt="" class="img img1">
+               <div class="contents">
+                     <strong class="title">구장이름 : </strong>
+                     <span>화도</span>
+                     <br>
+                     <strong class="content">위치 : </strong>
+                     <span>경기도 남양주</span>
+               </div>
+            </a>
+      </div>
+      <div class="pagination">
+         <a href="#" class="prev-link">&lt;</a>
+         <a href="#" class="page-link">1</a>
+         <a href="#" class="page-link">2</a>
+         <a href="#" class="page-link">3</a>
+         <a href="#" class="page-link">4</a>
+         <a href="#" class="page-link">5</a>
+         <a href="#" class="next-link">&gt;</a>
+       </div>
+   </div>
+   <script src="regionbox.js"></script>
+   <script src="https://kit.fontawesome.com/bedfa56d7f.js" crossorigin="anonymous"></script>
+</body>
+</html>

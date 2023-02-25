@@ -1,0 +1,62 @@
+.reservation{
+   width: 1000px; height: 100%; display: inline-block; 
+   position: relative; margin-top: 150px; left: 20%; 
+   padding: 20px 0 20px 0; box-sizing: border-box;
+ }
+ .reservation .reservation-content{
+   width: 100%; height: 100%; padding: 10px;
+ }
+ .reservation .search_boxes{
+   display: flex; flex-wrap: wrap; 
+   flex-direction: row; justify-content: space-between; align-items: center;
+ }
+ .reservation .search_box{
+    margin: 10px; display: inline-block;
+ }
+ #datepicker{
+   width: 250px; height: 27px;
+ }
+ .reservation select{
+   width: 300px; height: 30px; text-align: center;
+ }
+ .reservation .btn-submit{
+   width: 60px;  height: 30px; text-align: center;
+   font-weight: bold; margin: 10px;
+ }
+ .stadium-list{
+   width: 100%; max-height: 1300px; margin-top: 20px;
+   display: flex; flex-wrap: wrap;  
+   flex-direction: row; justify-content: space-between; align-items: center;
+ }
+ .stadium-item{
+   display: inline-block;
+ }
+ .stadium-item img{
+   width: 300px; height: 300px;
+ }
+ .stadium-item .contents{
+   margin: 10px; line-height: 25px;
+ }
+ strong{
+ line-height: 30px; padding: 30px;
+ }
+
+ /* 페이지네이션 */
+.pagination {
+display: flex;
+justify-content: center;
+}
+
+.page-link,
+.prev-link,
+.next-link {
+margin: 0 5px;
+padding: 5px 10px;
+border: 1px solid #ddd;
+background-color: #fff;
+cursor: pointer;
+}
+
+.active {
+background-color: #ddd;
+}
