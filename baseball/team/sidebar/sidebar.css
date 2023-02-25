@@ -1,36 +1,41 @@
 /* 사이드바 */
+<<<<<<< HEAD
+.team-sidebar,
+.sidebar {
+  position: fixed;
+  padding-top: 180px;
+  width: calc(18%);
+=======
 .team-sidebar {
 	position: fixed;
   top: 150px;
   width: calc(15%);
+>>>>>>> fd244a8bec9a10425a7230b23b171b02dbb5346f
   height: 100vh;
   float: left;
   background-color: rgb(26, 22, 22);
   /* box-shadow: 3px 0 0 0 rgba(0, 0, 0, 0.7); */
 	
 }
-.team-sidebar>iframe{
-	width: 100%;
-	height: 100%;
-	background-color: rgb(26, 22, 22);
-
+.team-sidebar > iframe,
+.sidebar > iframe {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(26, 22, 22);
 }
-.list-side{
-	position: relative;
-	background-color: transparent;
+.list-side {
+  position: relative;
+  background-color: transparent;
 }
 
-
-.list-side .item-side .link-side{
-	text-align: left;
-	padding-left : 10px;
-	
-
+.list-side .item-side .link-side {
+  text-align: left;
+  padding-left: 10px;
 }
-.sublist-side .subitem-side{
-	margin-left : 10px;
+.sublist-side .subitem-side {
+  margin-left: 10px;
 }
-.sublist-side .subitem-side .sublink-side{
-	padding : 10px;
-	text-align: left;
+.sublist-side .subitem-side .sublink-side {
+  padding: 10px;
+  text-align: left;
 }

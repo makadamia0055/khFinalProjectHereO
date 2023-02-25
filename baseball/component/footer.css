@@ -1,8 +1,13 @@
 footer {
-  border-top: 1px solid black;
+  border-top: 1px solid rgba(0, 0, 0, 0.192);
+  background-color: #fcfcfc;
+  padding-bottom: 2%;
 }
 .footer-menu__container {
   padding: 0.3% 15%;
+  margin-bottom: 0.3%;
+  font-size: 15px;
+  font-weight: 600;
 }
 .footer-menu__list {
   float: left;
@@ -10,4 +15,10 @@ footer {
 }
 .footer__info {
   padding: 0 15.5%;
+  color: #888;
+}
+.footer-menu__container::after {
+  clear: both;
+  content: "";
+  display: block;
 }
