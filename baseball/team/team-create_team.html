@@ -16,14 +16,13 @@
 <body>
 	<iframe src="../component/topBar.html" class="topBar" frameborder="0"></iframe>
 
-
-		
 	<aside class="team-sidebar">
 		<iframe src="./sidebar/sidebar-main.html" frameborder="0"></iframe>
 	</aside>
 
-	<section class="teamjoin-main">
-		<div class="container-join-input">
+	<section class="teamcreate-main">
+		<div class="container-create-input">
+			<h3 class="title-teamcreate">팀 창설 지원서</h3>
 			<fieldset class="">
 				<form action="" method="get" class="form-horizontal">
 					<div class="form-group">
@@ -65,7 +64,11 @@
 						<label for=""><input type="checkbox">없음</label>
 
 						<label for=""><input type="checkbox">리그 이름</label>
-					</div>	
+					</div>
+						<div class="form-group">
+							<label for="team_img">팀 이미지 파일</label><br>
+							<input type="file" name="team_img" id="team_img">	
+						</div>
 						
 						<label for="introduce">팀 소개</label>
 						

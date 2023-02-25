@@ -5,6 +5,9 @@
 
 
 /* 지역 버튼 */
+.teammain-main{
+min-width: 1000px;  
+}
 .teammain-main .container-region {
   display: inline-block;
 }
@@ -49,14 +52,15 @@
   border: 3px double white;
   border-radius: 20px;
   background-color: rgb(38, 97, 173);
-  min-width: 520px;
+  min-width: 480px;
   width: calc(40%);
   position: relative;
   display: inline-block;
+  margin: 0 10px;
 }
-.teammain-main .container-teambox .item-teambox + .item-teambox:nth-child(2n) {
+/* .teammain-main .container-teambox .item-teambox + .item-teambox:nth-child(2n) {
   margin-left: 20px;
-}
+} */
 
 .teammain-main .container-teambox .item-teambox .left-teambox,
 .right-teambox {

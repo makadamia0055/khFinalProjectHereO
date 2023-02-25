@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size : 10px">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../style.css">
+	<link rel="stylesheet" href="../team_common.css">
+	<link rel="stylesheet" href="../../component/bootstrap4/bootstrap.min.css">
+	<script src="../../component/bootstrap4/jquery.js"></script>
+  <script src="../../component/bootstrap4/popper.min.js"></script>
+  <script src="../../component/bootstrap4/boostrap.bundle.min.js"></script>
+	<title>개별 게시판</title>
+	<style>
+		
+	</style>
+</head>
+<body>
+	<header>
+		<iframe src="../../component/topBar.html" class="topBar" frameborder="0"></iframe>
+	</header>
+		
+	<aside class="team-sidebar">
+		<iframe src="../sidebar/sidebar-sep.html" frameborder="0"></iframe>
+	</aside>
+	
+	<section class="team-board-main team_create">
+		<div class="container-board">
+			<div class="title-board">
+				<strong>팀 개설 관리</strong>
+				<div class="new_join">새로운 요청 : <span class="new_num">2</span>건</div>
+				<div class="nocheck_join">미확인 요청 : <span class="nocheck_num">2</span>건</div>
+				<div class="whole_join">전체 요청 : <span class="whole_num">4</span>건</div>
+			</div>
+			<div class="box-board">
+				<table class="table table-bordered">
+					<thead class="thead-dark">
+						<tr>
+							<th class="team_num">팀번호</th>
+							<th class="team_name">희망 팀 이름</th>
+							<th class="teamLeader">팀장</th>
+							<th class="location_big">지역</th>
+							<th class="location_root">연고지</th>
+							<th class="create_date">신청일</th>
+							<th class="box-team_img">팀 이미지</th>
+							<th class="buttonCol">비고</th>
+						</tr>
+					</thead>
+					<tr>
+						<td class="team_num">05</td>
+						<td class="team_name"><a href="./team-create-board_view.html">한량즈</a></td>
+						<td class="teamLeader"> <a href="#"> macmorning04</a></td>
+						<td class="location_big">서울</td>
+						<td class="location_root">연고지</td>
+						<td class="create_date">신청일</td>
+						<td class="box-team_img">Y</td>
+						<td class="buttonCol">비고</td>
+					</tr>
+						
+				</table>
+			</div>
+				<div class="board-pagenation">
+					<a href="#" class="bt first"><<</a>
+					<a href="#" class="bt prev"><</a>
+					<a href="#" class="num on">1</a>
+					<a href="#" class="num">2</a>
+					<a href="#" class="num">3</a>
+					<a href="#" class="num">4</a>
+					<a href="#" class="num">5</a>
+					<a href="#" class="bt next">></a>
+					<a href="#" class="bt last">>></a>
+				</div>
+				<div class="btnBox-board">
+					<a href="#" class="on">목록 선택</a>
+					<!-- <a href="#" class="">수정</a> -->
+				</div>
+			</div>
+		</div>
+	</section>	
+</body>
+</html>
