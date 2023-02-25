@@ -59,12 +59,12 @@
 
 
 /* 페이지네이션 */
-.team-board .board-pagenation{
+.board-pagenation{
 	margin-top: 30px;
 	text-align: center;
 	font-size: 0;
 }
-.team-board .board-pagenation li{
+.board-pagenation a{
 	display: inline-block;
 	width: 32px; height: 32px;
 	vertical-align: middle;
@@ -73,21 +73,19 @@
 	line-height: 100%;
 	box-sizing: border-box;
 }
-.team-board .board-pagenation li{
-	font-size: 1.4rem;
-	padding-top : 9px;
+.board-pagenation a.bt{
+	font-size: 1.2rem;
+	padding-top : 10px;
 	letter-spacing: -1px;
 }
-.team-board .board-pagenation li.next,
-.team-board .board-pagenation li.prev
-{
+.board-pagenation a.num{
 	font-size: 1.4rem;
 	padding-top : 9px;
 }
-.team-board .board-pagenation li:first-child{
+.board-pagenation a:first-child{
 	border-left: 1px solid #ddd;
 }
-.team-board .board-pagenation li.active{
+.board-pagenation a.num.on{
 	border-color: black;
 	background-color: black;
 	color: #fff;

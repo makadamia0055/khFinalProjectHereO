@@ -65,13 +65,12 @@ ul, li{
 
 
 /* 페이지네이션 */
-/* 페이지네이션 */
-.team-board-main .board-pagenation{
+.container-board_join .board-pagenation{
 	margin-top: 30px;
 	text-align: center;
 	font-size: 0;
 }
-.team-board-main .board-pagenation li{
+.container-board_join .board-pagenation a{
 	display: inline-block;
 	width: 32px; height: 32px;
 	vertical-align: middle;
@@ -80,25 +79,24 @@ ul, li{
 	line-height: 100%;
 	box-sizing: border-box;
 }
-.team-board-main .board-pagenation li{
-	font-size: 1.4rem;
-	padding-top : 9px;
+.container-board_join .board-pagenation a.bt{
+	font-size: 1.2rem;
+	padding-top : 10px;
 	letter-spacing: -1px;
 }
-.team-board-main .board-pagenation li.next,
-.team-board-main .board-pagenation li.prev
-{
+.container-board_join .board-pagenation a.num{
 	font-size: 1.4rem;
 	padding-top : 9px;
 }
-.team-board-main .board-pagenation li:first-child{
+.container-board_join .board-pagenation a:first-child{
 	border-left: 1px solid #ddd;
 }
-.team-board-main .board-pagenation li.active{
+.container-board_join .board-pagenation a.num.on{
 	border-color: black;
 	background-color: black;
 	color: #fff;
 }
+
 
 
 /* 버튼박스 */

@@ -24,7 +24,6 @@
 @import "./admin-crateTeam/team-create-board_main.css";
 @import "./admin-crateTeam/team-create-board_view.css";
 
-
 section {
   width: calc(70%);
   z-index: 0;
