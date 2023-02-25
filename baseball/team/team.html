@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="../style.css" />
 		<link rel="stylesheet" href="./team_common.css">
 		<link	rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-	<style>
 		
-	</style>
+		<script src="./pagination.js"></script>
+
   </head>
   <body>
     <iframe src="../component/topBar.html" class="topBar" frameborder="0"></iframe>
@@ -225,11 +225,11 @@
 			<!-- 페이지 번호 -->
 			<div class="container-pagenation">
 				<ul class="pagination justify-content-center">
-					<li class="page-item"><a href="#" class="page-link">이전</a></li>
+					<li class="page-item prev"><a href="#" class="page-link">이전</a></li>
 					<li class="page-item active"><a href="#" class="page-link">1</a></li>
 					<li class="page-item"><a href="#" class="page-link">2</a></li>
 					<li class="page-item"><a href="#" class="page-link">3</a></li>
-					<li class="page-item"><a href="#" class="page-link">다음</a></li>
+					<li class="page-item next"><a href="#" class="page-link">다음</a></li>
 				</ul>
 			</div>
 		</div>
@@ -295,12 +295,6 @@
 				}
 			})
 		</script>
-		<script>
-			$('.pagination .page-item').click(function(e){
-				e.preventDefault();
-				$('.pagination li').removeClass('active');
-				$(this).addClass('active');
-			})
-		</script>
+		
   </body>
 </html>
