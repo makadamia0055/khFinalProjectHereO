@@ -5,7 +5,7 @@
   width: calc(15%);
   height: 100vh;
   float: left;
-  clear: both;
+  clear: both; 
   background-color: rgb(26, 22, 22);
   /* box-shadow: 3px 0 0 0 rgba(0, 0, 0, 0.7); */
 }

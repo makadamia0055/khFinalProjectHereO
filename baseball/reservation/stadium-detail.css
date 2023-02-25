@@ -1,28 +1,73 @@
-    body{ padding: 0; text-decoration: none; list-style: none;}
-    .stadium-info{ 
-      position: absolute; margin-top: 150px; left: 20%;  margin-left: 30px;
-      padding: 20px 0 20px 0; box-sizing: border-box; 
-      border-radius: 10px;  
-    }
-    .stadium-info .info-content img{
-      width: 100%; height: 600px;
-    }
-    .stadium-info .info-content .info-detail{
-      width: 100%; height: 100%; 
-    }
-    .stadium-info .info-content .info-detail .title{
-       text-align: left; padding: 5px;  font-size: 20px;
-       color: rgba(0, 0, 0, 0.8); text-align: center; 
-       border: 1px solid rgba(0, 0, 0, 0.1);
-       background-color: rgba(0, 0, 0, 0.1);
-      
-    }
-    .stadium-info .info-content .info-detail .content{
-      text-align: left; padding: 5px; font-size: 1rem;
-      color: rgba(0, 0, 0, 0.7); line-height: 30px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      background-color: rgba(0, 0, 0, 0.1);
-      
-    }
+  body{ padding: 0; text-decoration: none; list-style: none;}
+  /* 메인 박스 */
+  .stadium-info{ 
+  position: absolute;  left: 20%;  margin-left: 30px;
+  padding: 20px 0 20px 0; box-sizing: border-box; 
+  border-radius: 10px;  margin-top: 150px;
+  }
+  .info-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  }
+  .info-leftbox {
+  flex-basis: calc(50% - 5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+  .info-leftbox img {
+  max-width: 100%;
+  max-height: 100%;
+  }
+  .info-rightbox {
+  flex-basis: calc(45% - 5px);
+  }
+  .info-rightbox ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  }
+  .info-rightbox li {
+  margin-bottom: 10px; font-size: 18px;
+  }
+  .info-rightbox b {
+  display: block;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 5px;
+  }
+  .info-rightbox p {
+  margin: 0;
+  color: rgba(0, 0, 0, 0.7);
+  }
+  .stadium-info img{
+  width: 500px; height: 300px;
+  }
+  .stadium-info .info-content .info-detail{
+  box-sizing: border-box;  padding: 5px;
+  }
+  .stadium-info .info-content .info-detail .title{
+    text-align: left; padding: 5px;  font-size: 18px;
+    color: rgba(0, 0, 0, 0.8); text-align: center; 
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
+
+  }
+  .stadium-info .info-content .info-detail .content{
+  text-align: left; padding: 5px; font-size: 1rem;
+  color: rgba(0, 0, 0, 0.7); line-height: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
+  }
+  .stadium-info .info-content .info-detail td{
+  border: 1px solid black; padding: 5px;
+  }
+  .content-table{
+  width: 100%; height: 100%;
+  border-collapse: collapse;
+  }
+
 
 
