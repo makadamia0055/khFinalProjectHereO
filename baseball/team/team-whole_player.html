@@ -34,6 +34,13 @@
 					<ul class="list-region clear-fix">
 						<li class="item-region">
 							<div class="btn-group">
+								<a role="button" class="btn btn-info whole_select">
+									전체
+								</a>
+							</div>
+						</li>
+						<li class="item-region">
+							<div class="btn-group">
 								<button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
 									직위<span class="caret"></span>
 								</button>
@@ -87,7 +94,7 @@
 				<ul class="list-playerbox" id="list-player">
 					<li class="item-playerbox">
 						<div class="left-playerbox">
-							<a href="./team-playerdetail.html" class="link-player-img rounded-circle clear-fix">
+							<a href="./team-playerdetail.html" class="link-player-img3 rounded-circle clear-fix">
 								<div class="label-player">
 									<span class="player-local badge badge-danger">투수</span> 
 									<span class="player-name">김철수</span>
@@ -96,7 +103,59 @@
 						</div>
 						<div class="right-playerbox">
 							직위 : <span class="team_class">단장</span><br>
+							수비 포지션 : <span class="team_position">투수</span><br>
 							주전/벤치 : <span class="recently_match">벤치</span><br>
+							다음 경기 참석 여부: <span class="match_type">미정</span>
+
+						</div>
+					</li>
+					<li class="item-playerbox">
+						<div class="left-playerbox">
+							<a href="./team-playerdetail.html" class="link-player-img1 rounded-circle clear-fix">
+								<div class="label-player">
+									<span class="player-local badge badge-danger">타자</span> 
+									<span class="player-name">김중수</span>
+								</div>
+							</a>
+						</div>
+						<div class="right-playerbox">
+							직위 : <span class="team_class">부단장</span><br>
+							수비 포지션 : <span class="team_position">외야수</span><br>
+							주전/벤치 : <span class="recently_match">주전</span><br>
+							다음 경기 참석 여부: <span class="match_type">미정</span>
+
+						</div>
+					</li>
+					<li class="item-playerbox">
+						<div class="left-playerbox">
+							<a href="./team-playerdetail.html" class="link-player-img2 rounded-circle clear-fix">
+								<div class="label-player">
+									<span class="player-local badge badge-danger">타자</span> 
+									<span class="player-name">김용수</span>
+								</div>
+							</a>
+						</div>
+						<div class="right-playerbox">
+							직위 : <span class="team_class">팀원</span><br>
+							수비 포지션 : <span class="team_position">내야수(1루)</span><br>
+							주전/벤치 : <span class="recently_match">주전</span><br>
+							다음 경기 참석 여부: <span class="match_type">미정</span>
+
+						</div>
+					</li>
+					<li class="item-playerbox">
+						<div class="left-playerbox">
+							<a href="./team-playerdetail.html" class="link-player-img1 rounded-circle clear-fix">
+								<div class="label-player">
+									<span class="player-local badge badge-danger">타자</span> 
+									<span class="player-name">김갑수</span>
+								</div>
+							</a>
+						</div>
+						<div class="right-playerbox">
+							직위 : <span class="team_class">팀원</span><br>
+							수비 포지션 : <span class="team_position">포수</span><br>
+							주전/벤치 : <span class="recently_match">주전</span><br>
 							다음 경기 참석 여부: <span class="match_type">미정</span>
 
 						</div>
@@ -147,9 +206,13 @@
 				$(".list-region .item-region .btn-group a").click(function(e) {
 					e.preventDefault();
 					var value = $(this).text();
-					$("#list-player li").filter(function() {
+					if($(this).hasClass('whole_select')){
+						$("#list-player li").show();
+					}else{
+						$("#list-player li").filter(function() {
 						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 					});
+					}
 				});
 			});
 				</script>

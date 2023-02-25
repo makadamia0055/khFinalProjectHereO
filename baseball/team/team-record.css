@@ -65,7 +65,10 @@
 .block-liner .content-blockliner{
 	text-align: center;
 	font-size: 30px;
+	font-weight: 700;
 	padding : 10px;
+	text-shadow: 2px 2px 1px gray;
+
 }
 .block-liner .content-blockliner .titletext-latestscore{
 	font-weight: 700;
@@ -110,11 +113,11 @@
 	color: black;
 	font-weight: 600;
 }
-.container-lastMatchRec .item-matchup .result-matchup.win{
+.item-matchup .result-matchup.win{
 	color: dodgerblue;
 	
 }
-.container-lastMatchRec .item-matchup .result-matchup.lose{
+.item-matchup .result-matchup.lose{
 	color: crimson;
 	
 }
@@ -181,11 +184,28 @@
 
 
 /* 선수 라인업 */
-.container-lastMatchRec .container-lineup{
-	float: right;
-	margin-right: 10px;
+.container-lastMatchRec{
+	position: relative;
+}
+.big_container-lineup{
+	position: absolute;
+	top: 0;
+	right : +330px;
+	display: inline-block;
+	
 	
 }
+.big_container-lineup .container-lineup{
+	position: absolute;
+	
+}
+.big_container-lineup .container-lineup.opponent-team{
+	position: absolute;
+	display: none;
+	margin-right: 20px;
+	background-color: rgb(211, 44, 136);
+}
+
 
 /* 두번째 라인 */
 /* 경기 스코어표 */
@@ -278,6 +298,28 @@
 	
 	display: flex;
 	
+}
+.bottom-team-history .container-team-participate-league{
+	margin: 20px 0 20px 250px;
+	padding: 20px;	
+	width: calc(60%);
+	justify-content: center; align-items: center;
+	background-color: antiquewhite;
+	border-radius: 20px;
+		box-shadow: 2px 2px 0 5px #1c1e20 ;
+	text-align: center;
+}
+.bottom-team-history .container-team-participate-league h2{
+	font-weight: 700;
+}
+.bottom-team-history .container-team-participate-league hr{
+	content:''; display: inline-block; clear: both;
+	border-bottom: 3px double black;
+	width: 50%;
+}
+.bottom-team-history .container-team-participate-league li{
+	font-size: 20px;
+	font-weight: 500;
 }
 
 

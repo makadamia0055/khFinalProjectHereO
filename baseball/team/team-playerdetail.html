@@ -61,8 +61,13 @@
             </div>
           </div>
           
+          <div class="box-player_graph">
+            <canvas id="PlayerStatChart"></canvas>
+
+          </div>
           
         </div>
+        
         <!-- <div class="block-tile title-recently_Match_score">
           최근 경기 성적
         
@@ -349,14 +354,30 @@
   const ctx = document.getElementById('PlayerStatChart');
 
   new Chart(ctx, {
-    type: 'bar',
+    type: 'radar',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: ['장타력', '주루', '컨택트', '수비', '송구력', '피칭'],
       datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1
-      }]
+    label: '선수 스탯',
+    data: [60, 59, 60, 31, 56, 0],
+    fill: true,
+    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+    borderColor: 'rgb(255, 99, 132)',
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(255, 99, 132)'
+  }, {
+    label: '팀 평균',
+    data: [50, 48, 40, 45, 96, 27],
+    fill: true,
+    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+    borderColor: 'rgb(54, 162, 235)',
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(54, 162, 235)'
+  }]
     },
     options: {
       scales: {

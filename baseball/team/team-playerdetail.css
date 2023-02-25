@@ -6,12 +6,13 @@
 	border-radius: 20px;
 }
 .leftbox-profile{
-	width: 50%; display: inline-block;
+	display: flex;
+	height: 300px;
+	justify-content: space-evenly;
 }
 .rightbox-profile{
-	
-	position: absolute;
 	display: inline-block;
+	flex-basis: 300px;
 }
 
 .container-personal_detail_stat{
@@ -65,7 +66,15 @@
 .teamplayerdetail-main .container-playerprofile .rightbox-profile .player-profile1 .player-name{
 	margin-bottom: 10px;
 }
+/* 그래프 */
+.box-player_graph{
+	background-color: white;
+	border-radius: 20px;
+	margin-left: 20px;
+}
+.box-player_graph #PlayerStatChart{
 
+}
 
 /* 중간 블록 타일 */
 .teamplayerdetail-main .block-tile{
@@ -89,15 +98,6 @@
 	background-color: rgb(38, 97, 173);
 }
 
-/* .container-playergraph{
-	background-color: antiquewhite;
-	width: 40%;
-
-	text-align: center; border-radius: 20px;
-} */
-/* .container-playergraph::after{
-	content:''; display: block; clear: both;
-} */
 
 /* 테이블 */
 .teamplayerdetail-main .table{

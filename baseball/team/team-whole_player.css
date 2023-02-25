@@ -90,9 +90,23 @@ min-width: 1000px;
   margin: 10px 0;
 }
 
-.link-player-img{
+.link-player-img1{
 	display: inline-block;
 	width: 150px; height: 150px;
 	background-image: url(./선수\ 이미지\ 샘플.png);
 	background-size: 150px 150px;
 }
+.link-player-img2{
+	display: inline-block;
+	width: 150px; height: 150px;
+	background-image: url(./프로필2.png);
+	background-size: 150px 150px;
+}
+
+.link-player-img3{
+	display: inline-block;
+	width: 150px; height: 150px;
+	background-image: url(./프로필.png);
+	background-size: 150px 150px;
+}
+

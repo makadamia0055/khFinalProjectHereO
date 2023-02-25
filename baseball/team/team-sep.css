@@ -68,6 +68,31 @@
 	padding-left : 10px;
 }
 
+/* vs로고 */
+
+.container-vsTeam .title-team .team-logo{
+	width: 75px; height: 75px;
+
+}
+.container-vsTeam .title-team .img-box{
+	position: relative;
+	display: inline-block;
+}
+.container-vsTeam .title-team .img-box button{
+	position: absolute;
+	font-size: 15px;
+	bottom: -10px;
+	left: 10px;
+}
+.container-vsTeam .title-team .team-box{
+	vertical-align: middle;
+	display: inline-block;
+
+}
+.container-vsTeam .title-team .team-name{
+	margin-left: 10px;
+	font-size: 30px;
+}
 
 
 
