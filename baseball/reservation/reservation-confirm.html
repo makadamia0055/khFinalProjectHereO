@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>예약확인</title>
+   <link rel="stylesheet" href="reservation.html">
+   <link rel="stylesheet" href="../style.css" />
+   <link rel="stylesheet" href="../reservation/side/reservation-side.css">
+	<link rel="stylesheet" href="../reservation/reservation-info.css">
+   <link rel="stylesheet" href="../reservation/reservation.css">
+   <iframe src="../component/topBar.html" class="topBar" frameborder="0"></iframe>
+	<aside class="reservation-sidebar">
+		<iframe src="sidebar-main.html" frameborder="0"></iframe>
+	</aside>
+   <style>
+      .booking{
+         border: 0;
+      }
+   </style>
+</head>
+<body>
+   <form action="" method="get" class="booking">
+      <h2 style="margin: 0; padding: 0;">예약 확인</h2>
+      <div class="booking-content">
+            <ul class="list-content">
+               <li class="item-content">
+                  <span>예약 구장</span>
+                  <br>
+                  <input type="text" placeholder="구장이름(출력) 수정X" disabled>
+                  <a href="../reservation/stadium-detail.html">구장 정보</a>
+               </li>
+               <li class="item-content">
+                  <span>예약 날짜</span>
+                  <br>
+                  <input type="text"placeholder="예약 날짜" disabled>
+               </li>
+               <li class="item-content">
+                  <span>예약 시간</span>
+                  <br>
+                  <input type="text"placeholder="예약 시간" disabled>
+               </li>
+               <li class="item-content">
+                  <span>심판</span>
+                  <br>
+                  <input type="text"placeholder="심판 이름 출력" disabled>
+               </li>
+               <li class="item-content">
+                  <span>선택한 상대팀</span>
+                  <br>
+                  <input type="text" placeholder="똔또즈" disabled>
+               </li>		
+            </ul>
+      </div>
+   </form>
+</body>
+</html>

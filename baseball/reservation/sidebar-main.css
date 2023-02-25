@@ -1,0 +1,28 @@
+/* 사이드바 */
+.reservation-sidebar {
+  position: fixed;
+  padding-top: 180px;
+  width: calc(15%);
+  height: 100vh;
+  float: left;
+  clear: both;
+  background-color: rgb(26, 22, 22);
+  /* box-shadow: 3px 0 0 0 rgba(0, 0, 0, 0.7); */
+}
+.reservation-sidebar iframe{
+	width: 100%;
+	height: 100%;
+	background-color: rgb(26, 22, 22);
+
+}
+.list-side{
+	position: relative;
+	background-color: transparent;
+   padding: 0;
+}
+
+
+.list-side .item-side .link-side{
+	text-align: left;
+	padding-left : 10px;
+}
