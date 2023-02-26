@@ -37,14 +37,14 @@
   width: 20%;
   height: 80px;
   position: relative;
-}
+ }
 
 .menu-container__box > a {
   display: block;
   height: 80px;
   position: absolute;
   top: 0px;
-}
+ }
 .menu-container__box a:not(#home) span {
   display: block;
   font-size: 26px;
