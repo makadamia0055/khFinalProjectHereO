@@ -1,0 +1,8 @@
+/* 예약 메인 페이지 */
+@import "./reservation-main.css";
+/* 예약 사이드바 */
+@import "../reservation/sidebar-main.css";
+/* 예약 상세 페이지 */
+@import "./stadium-detail.css";
+@import "./stadium-reservation.css";
+@import "./reservation-info.css";

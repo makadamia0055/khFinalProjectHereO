@@ -1,0 +1,175 @@
+/* 예약하기 페이지 */
+*{margin: 0; list-style-type: none; padding: 0;}
+strong{
+   color: red; font-size: 20px;
+}
+header{
+   text-align: center; margin: 10px;
+}
+.booking{
+   display: inline-block;box-sizing: border-box;
+   position: absolute; margin-top: 150px; 
+   left: 20%; padding-top: 20px; 
+}
+.content{
+   width: 100%; height: 100%; 
+}
+
+.reserve_info{
+    padding: 10px; display:flex; justify-content: space-between;
+    border-radius: 10px; 
+}
+.reserve_info [type="text"]{
+   border: 0; width: 200px; height: 40px; margin: 0;
+   border-radius: 10px; 
+}
+.list-content{
+   padding: 50px 50px 0 0; display: inline-block;
+   width: 300px;
+}
+.item-content{
+   margin-top: 10px;
+}
+.league__text{
+   font-size: 13px; color: red; font-weight: bold;
+}
+[name=team-select],[name=league-select]{
+   width: 200px; height: 30px; border: 1px solid rgba(0, 0, 0, 0.8);
+   font-size: 16px; cursor: pointer; border-radius: 10px; 
+}
+.booking .pay-select{
+    margin-top: 10px; display: flex; flex-direction: column; padding: 20px;
+    border-radius: 10px; 
+}
+.booking .pay-select h3{
+   margin-bottom: 10px; 
+}
+.booking .pay-select .select-type{
+   width: 200px; border: 1px solid rgba(0, 0, 0, 0.8);
+   border-radius: 5px; font-size: 16px; color: rgba(0, 0, 0, 0.56);
+   cursor: pointer;
+}
+.booking .pay-regulation{
+   padding: 20px; display: flex; flex-direction: column;
+   border-radius: 10px; 
+}
+.booking .pay-regulation .rule-list{
+   font-size: 17px; 
+}
+.booking .pay-regulation .rule-list .rule-item{
+   margin-top: 5px; list-style-type: decimal; 
+}
+.booking .btn-reservation{
+   width: 100%; height: 50px; font-size: 20px; border-radius: 10px;
+   background-color: #fff; color: blue; font-weight: bold;
+   cursor: pointer;
+}
+.booking .agree{
+   padding: 23px 0; display: flex; flex-direction: column;
+   border-radius: 10px; 
+}
+.agree label{
+   cursor: pointer;
+}
+.booking .agree .all_check{
+   font-weight: bold;
+}
+.booking .agree p{
+   position: relative; padding-top: 11px; padding-bottom: 10px; line-height: 1;
+   padding-left: 37px; 
+}
+.booking .agree input{
+   position: absolute; top: 50%; left: 0; margin-top: -12px;
+   width: 24px; height: 24px; border: none; cursor: pointer;
+}
+.booking .agree span{
+      font-style: normal;      
+}
+.list-reservation-side{
+   position: fixed; padding-top: 180px;width: calc(15%);
+   height: 100vh; float: left; clear: both; background-color: inherit;
+   list-style: none; line-height: 25px;
+}
+h3{
+color: red;
+}
+
+
+
+/* 팝업 */
+.popup{
+   
+   
+ }
+ .popup agree{
+   background-color: #fefefe;
+   margin: 15% auto; /* 모달 위치 */
+   padding: 20px;
+   border: 1px solid #888;
+   width: 80%;
+   max-width: 600px;
+ }
+ .btn-close{
+   color: #aaa;
+   float: right;
+   font-size: 28px;
+   font-weight: bold;
+ }
+ .btn-close:hover,
+ .btn-close:focus {
+   color: black;
+   text-decoration: none;
+   cursor: pointer;
+ }
+.popup .popup-title{
+   display: block; top: 0; right: auto; left: 0; bottom: auto; height: 64px;
+   padding: 0 0 0 30px; font-size: 18px;line-height: 60px; text-align: left;
+        
+}
+.btn-close{
+    top: 230px; right: 0; float: right;
+   border: 0; cursor: pointer; width: 35px; height: 35px;
+   text-align: center; font-weight: bold; background-color: #fff;
+   font-size: 20px; 
+}
+.popup .popup-content{
+   position: fixed; top: 400px; bottom: 0; left: 500px; padding: 10px;
+   z-index: 1;   width: 800px;   height: 400px;   overflow: auto;  
+   
+}
+.popup .popup-content>strong{
+   display: block; padding:0 0 0 30px; color: rgba(0, 0, 0, 0.8);
+}
+.popup .popup-content .list-text{
+   font-size: 16px; line-height: 26px; 
+}
+.popup .popup-content .item-text{
+   margin-bottom: 7px; 
+}
+.popup>tbody{
+   box-sizing: border-box;
+}
+.popup-content .content-table{
+   width: 100%; margin: 10px 0 20px 0;
+   border: 1px solid #ccc; line-height: 24px;
+}
+.content-table .table-top{
+   border: 1px solid #ccc; text-align: center;
+   padding: 5px; background: rgba(0, 0, 0, 0.08);
+   font-size: 14px; color: rgba(0, 0, 0, 0.56);
+   font-weight: bold; 
+}
+.content-table .table-mid{
+   border: 1px solid #ccc; text-align: left;
+   padding: 5px; background: rgb(250, 250, 250);
+   font-size: 14px; color: rgba(0, 0, 0, 0.56);
+}
+.content-table .table-mid b{
+   text-decoration: underline; font-style: normal;
+}
+.item-text2{
+   list-style: none; padding: 0; margin-bottom: 7px;
+}
+.text2{
+   padding: 0; color: rgba(0, 0, 0, 0.56);
+}
