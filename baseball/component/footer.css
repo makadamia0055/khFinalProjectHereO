@@ -22,3 +22,10 @@ footer {
   content: "";
   display: block;
 }
+.footer__info>li:first-child {
+  font-weight: 600;
+}
+.footer__info-git {
+  font-size: 12px;
+  padding-top: 3px;
+}

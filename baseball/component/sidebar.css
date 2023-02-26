@@ -2,7 +2,7 @@
 
 .sidebar {
   position: fixed;
-  z-index: 50;
+  z-index: 99;
   top: 120px;
   padding-top: 30px;
   width: calc(18%);
@@ -34,10 +34,17 @@
   padding: 10px;
   text-align: left;
 }
-.commu-submenu__color > a {
+.commu-submenu__color > a,
+.commu-talk_background > a{
  background-color: #FFE3A9;
+ color : black;
+ border: 1px solid #FFF9D7;
 }
 
 .commu-submenu__color> a:hover {
+  background-color: #FBFACD;
+}
+
+.commu-submenu__selected {
   background-color: #FBFACD;
 }
