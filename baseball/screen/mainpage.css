@@ -90,7 +90,8 @@ body::-webkit-scrollbar {
 }
 .menu-section {
   width: 100vw;
-  padding-top: 105px;
+  padding-top: 55px;
+  padding-bottom: 55px;
 }
 .menu-section h2 {
   margin-left: 5%;
@@ -127,9 +128,35 @@ body::-webkit-scrollbar {
 }
 /* 팀 섹션 - Community 적용*/
 .commu-section {
-  background-color: #ffc3c3;
+  background-color: #FFF8CD;
   display: flex;
 }
 .commu__issue {
-  width: 50%;
+  width: 33%;
+}
+.commu__find {
+  width: 67%;
+}
+.commu__issue > h2 {
+  margin: 0;
+  padding: 0 0 25px 33%;
+}
+.commu__issue-contents li {
+  padding: 0 0 5px 30%;
+  font-size: 17px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+.commu__issue-contents li a:hover {
+  text-decoration: underline;
+  color: #F45905;
+}
+.commu__find-contents li {
+  float: left;
+  width: 23%
+}
+.commu__find-img {
+  width: 68%;
+  border-radius: 50%;
+  border: 2px solid #13005A;
 }

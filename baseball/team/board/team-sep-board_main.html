@@ -6,6 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../../style.css">
 	<link rel="stylesheet" href="../team_common.css">
+	<script src="../../component/bootstrap4/jquery.js"></script>
+	<script src="../../pagination.js"></script>
+
 	<title>개별 게시판</title>
 	<style>
 		
@@ -20,7 +23,7 @@
 		<iframe src="../sidebar/sidebar-sep.html" frameborder="0"></iframe>
 	</aside>
 
-<section>
+<section class="team-board-main ">
 	<div class="container-board">
 			<div class="title-board">
 				<strong><i class="fa-solid fa-baseball"></i>팀 게시판</strong>
@@ -65,15 +68,14 @@
 						</li>
 					</ul>
 				<div class="board-pagenation">
-					<a href="#" class="bt first"><<</a>
-					<a href="#" class="bt prev"><</a>
-					<a href="#" class="num on">1</a>
-					<a href="#" class="num">2</a>
-					<a href="#" class="num">3</a>
-					<a href="#" class="num">4</a>
-					<a href="#" class="num">5</a>
-					<a href="#" class="bt next">></a>
-					<a href="#" class="bt last">>></a>
+					<ul class="pagination">
+						<li class="page-item prev"><a href="#" class="page-link">이전</a></li>
+						<li class="page-item active"><a href="#" class="page-link">1</a></li>
+						<li class="page-item"><a href="#" class="page-link">2</a></li>
+						<li class="page-item"><a href="#" class="page-link">3</a></li>
+						<li class="page-item next"><a href="#" class="page-link">다음</a></li>
+					</ul>
+					
 				</div>
 				<div class="btnBox-board">
 					<a href="./team-sep-board_write.html" class="on">글 등록</a>
@@ -87,4 +89,5 @@
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
     ></script>
+		
 </html>
