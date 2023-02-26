@@ -30,3 +30,42 @@
     font-size: 20px;
     padding: 20px 0px;
 }
+.signup-container {
+    padding-left: 25%;
+}
+.signUp-form {
+    height: 35px;
+}
+.signup-container input {
+    width: 63%;
+}
+.signup-id {
+    display: inline-block;
+}
+.valid-letter {
+    width: 63%;
+    display: block;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+.idCheck-btn {
+    margin-left: 8px;
+    width: 65px;
+    height: 35px;
+    font-size: 13px;
+    border-radius: 10px;
+    border-style: none ;
+}
+.signup-btn {
+    margin-left: 45%;
+    border-radius: 10px;
+    border-style: none ;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    width: 80px;
+    height: 35px;
+    background-color: #00337C;
+    color: white;
+    font-weight: 600;
+}
+
