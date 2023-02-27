@@ -6,7 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>기록등록</title>
 	<link rel="stylesheet" href="insertScore.css">
-	<script src="insertScore.js"></script>
+	<script src="../component/bootstrap4/jquery.js"></script>
+	<!-- <script src="insertScore.js"></script> -->
 </head>
 <body>
 	<div class="main-container">
@@ -25,10 +26,10 @@
 						<tbody>
 							<form action="">
 								<tr>
-									<td><input type="radio" name="tim-name" value="home"> home</td>
+									<td><input type="radio" name="team-name" value="home"> home</td>
 								</tr>
 								<tr>
-									<td><input type="radio" name="tim-name" value="away"> away</td>
+									<td><input type="radio" name="team-name" value="away"> away</td>
 								</tr>
 
 							</form>
@@ -122,8 +123,8 @@
 		</div>
 		<div class="box-middle">
 			<div class="middle-top">
-				<div class="left-team" ><span>Baseball</span></div>
-				<div class="right-team" aria-selected="true"><span>몬스터즈</span></div>
+				<div class="home-team" aria-selected="false"><span>Baseball</span></div>
+				<div class="away-team" aria-selected="true"><span>몬스터즈</span></div>
 			</div>
 			<hr>
 			<div class="recode-guide">
@@ -316,7 +317,7 @@
 				<div>득점</div>
 				<div>도루</div>
 			</div>
-			<div class="middle-recode-board">
+			<div class="middle-recode-board-home" hidden>
 				<div class="recode player1">
 					<select name="lineup-num">
 						<option value="1" selected>1번</option>
@@ -776,68 +777,593 @@
 					<input type="text" style="width:20px" placeholder="0">
 					<button class="btn-delete">X</button>
 				</div>
+				<table class="tbl-addPlayer">
+					<thead>
+						<tr>
+							<th>타순</th>
+							<th>선수명</th>
+							<th>포지션</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<select name="substitute-num">
+									<option value="0" selected>선택</option>
+									<option value="1">1번</option>
+									<option value="2">2번</option>
+									<option value="3">3번</option>
+									<option value="4">4번</option>
+									<option value="5">5번</option>
+									<option value="6">6번</option>
+									<option value="7">7번</option>
+									<option value="8">8번</option>
+									<option value="9">9번</option>
+								</select>
+							</td>
+							<td>
+								<select name="substitute-name">
+									<option value="0"selected>선수선택</option>
+									<option value="1">박해민(11)</option>
+									<option value="2">문성주(10)</option>
+									<option value="3">김현수(22)</option>
+									<option value="4">채은성(33)</option>
+									<option value="5">오지환(44)</option>
+									<option value="6">문보경(7)</option>
+									<option value="7">유강남(36)</option>
+									<option value="8">이재원(74)</option>
+									<option value="9">이영빈(56)</option>
+								</select>
+							</td>
+							<td>
+								<select name="substitute-position">
+									<option value="0" selected>선택</option>
+									<option value="1">투수</option>
+									<option value="2">포수</option>
+									<option value="3">1루수</option>
+									<option value="4">2루수</option>
+									<option value="5">3루수</option>
+									<option value="6">유격수</option>
+									<option value="7">좌익수</option>
+									<option value="8">중견수</option>
+									<option value="9">우익수</option>
+									<option value="10">대타</option>
+								</select>
+							</td>
+							<td><button class="btn-addPlayer">출전</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="middle-recode-board-away">
+				<div class="recodeplayer1">
+					<select name="lineup-num">
+						<option value="1">1번</option>
+						<option value="2" selected>2번</option>
+						<option value="3">3번</option>
+						<option value="4">4번</option>
+						<option value="5">5번</option>
+						<option value="6">6번</option>
+						<option value="7">7번</option>
+						<option value="8">8번</option>
+						<option value="9">9번</option>
+					</select>
+					<select name="lineup-name">
+						<option value="1">박해민(11)</option>
+						<option value="2" selected>문성주(10)</option>
+						<option value="3">김현수(22)</option>
+						<option value="4">채은성(33)</option>
+						<option value="5">오지환(44)</option>
+						<option value="6">문보경(7)</option>
+						<option value="7">유강남(36)</option>
+						<option value="8">이재원(74)</option>
+						<option value="9">이영빈(56)</option>
+					</select>
+					<select name="lineup-position">
+						<option value="1" >투수</option>
+						<option value="2" selected>포수</option>
+						<option value="3">1루수</option>
+						<option value="4">2루수</option>
+						<option value="5">3루수</option>
+						<option value="6">유격수</option>
+						<option value="7">좌익수</option>
+						<option value="8">중견수</option>
+						<option value="9">우익수</option>
+					</select>
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+	
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px;" placeholder="0">
+					<button class="btn-delete">X</button>
+				</div>
+				<div class="recodePlayer2">
+					<select name="lineup-num">
+						<option value="1">1번</option>
+						<option value="2"selected>2번</option>
+						<option value="3">3번</option>
+						<option value="4">4번</option>
+						<option value="5">5번</option>
+						<option value="6">6번</option>
+						<option value="7">7번</option>
+						<option value="8">8번</option>
+						<option value="9">9번</option>
+					</select>
+					<select name="lineup-name">
+						<option value="1">박해민(11)</option>
+						<option value="2"selected>문성주(10)</option>
+						<option value="3">김현수(22)</option>
+						<option value="4">채은성(33)</option>
+						<option value="5">오지환(44)</option>
+						<option value="6">문보경(7)</option>
+						<option value="7">유강남(36)</option>
+						<option value="8">이재원(74)</option>
+						<option value="9">이영빈(56)</option>
+					</select>
+					<select name="lineup-position">
+						<option value="1" >투수</option>
+						<option value="2"selected>포수</option>
+						<option value="3">1루수</option>
+						<option value="4">2루수</option>
+						<option value="5">3루수</option>
+						<option value="6">유격수</option>
+						<option value="7">좌익수</option>
+						<option value="8">중견수</option>
+						<option value="9">우익수</option>
+					</select>
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+	
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<button class="btn-delete">X</button>
+				</div>
+				<div class="recodePlayer3">
+					<select name="lineup-num">
+						<option value="1" >1번</option>
+						<option value="2">2번</option>
+						<option value="3"selected>3번</option>
+						<option value="4">4번</option>
+						<option value="5">5번</option>
+						<option value="6">6번</option>
+						<option value="7">7번</option>
+						<option value="8">8번</option>
+						<option value="9">9번</option>
+					</select>
+					<select name="lineup-name">
+						<option value="1">박해민(11)</option>
+						<option value="2">문성주(10)</option>
+						<option value="3"selected>김현수(22)</option>
+						<option value="4">채은성(33)</option>
+						<option value="5">오지환(44)</option>
+						<option value="6">문보경(7)</option>
+						<option value="7">유강남(36)</option>
+						<option value="8">이재원(74)</option>
+						<option value="9">이영빈(56)</option>
+					</select>
+					<select name="lineup-position">
+						<option value="1" >투수</option>
+						<option value="2">포수</option>
+						<option value="3"selected>1루수</option>
+						<option value="4">2루수</option>
+						<option value="5">3루수</option>
+						<option value="6">유격수</option>
+						<option value="7">좌익수</option>
+						<option value="8">중견수</option>
+						<option value="9">우익수</option>
+					</select>
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+	
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<button class="btn-delete">X</button>
+				</div>
+				<div class="recodePlayer4">
+					<select name="lineup-num">
+						<option value="1">1번</option>
+						<option value="2">2번</option>
+						<option value="3">3번</option>
+						<option value="4" selected>4번</option>
+						<option value="5">5번</option>
+						<option value="6">6번</option>
+						<option value="7">7번</option>
+						<option value="8">8번</option>
+						<option value="9">9번</option>
+					</select>
+					<select name="lineup-name">
+						<option value="1">박해민(11)</option>
+						<option value="2">문성주(10)</option>
+						<option value="3">김현수(22)</option>
+						<option value="4"selected>채은성(33)</option>
+						<option value="5">오지환(44)</option>
+						<option value="6">문보경(7)</option>
+						<option value="7">유강남(36)</option>
+						<option value="8">이재원(74)</option>
+						<option value="9">이영빈(56)</option>
+					</select>
+					<select name="lineup-position">
+						<option value="1">투수</option>
+						<option value="2">포수</option>
+						<option value="3">1루수</option>
+						<option value="4" selected>2루수</option>
+						<option value="5">3루수</option>
+						<option value="6">유격수</option>
+						<option value="7">좌익수</option>
+						<option value="8">중견수</option>
+						<option value="9">우익수</option>
+					</select>
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+	
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<button class="btn-delete">X</button>
+				</div>
+				<div class="recodePlayer5">
+					<select name="lineup-num">
+						<option value="1">1번</option>
+						<option value="2">2번</option>
+						<option value="3">3번</option>
+						<option value="4">4번</option>
+						<option value="5" selected>5번</option>
+						<option value="6">6번</option>
+						<option value="7">7번</option>
+						<option value="8">8번</option>
+						<option value="9">9번</option>
+					</select>
+					<select name="lineup-name">
+						<option value="1">박해민(11)</option>
+						<option value="2">문성주(10)</option>
+						<option value="3">김현수(22)</option>
+						<option value="4">채은성(33)</option>
+						<option value="5"selected>오지환(44)</option>
+						<option value="6">문보경(7)</option>
+						<option value="7">유강남(36)</option>
+						<option value="8">이재원(74)</option>
+						<option value="9">이영빈(56)</option>
+					</select>
+					<select name="lineup-position">
+						<option value="1">투수</option>
+						<option value="2">포수</option>
+						<option value="3">1루수</option>
+						<option value="4">2루수</option>
+						<option value="5" selected>3루수</option>
+						<option value="6">유격수</option>
+						<option value="7">좌익수</option>
+						<option value="8">중견수</option>
+						<option value="9">우익수</option>
+					</select>
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+	
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<button class="btn-delete">X</button>
+				</div>
+				<div class="recodePlayer6">
+					<select name="lineup-num">
+						<option value="1">1번</option>
+						<option value="2">2번</option>
+						<option value="3">3번</option>
+						<option value="4">4번</option>
+						<option value="5">5번</option>
+						<option value="6" selected>6번</option>
+						<option value="7">7번</option>
+						<option value="8">8번</option>
+						<option value="9">9번</option>
+					</select>
+					<select name="lineup-name">
+						<option value="1">박해민(11)</option>
+						<option value="2">문성주(10)</option>
+						<option value="3">김현수(22)</option>
+						<option value="4">채은성(33)</option>
+						<option value="5">오지환(44)</option>
+						<option value="6"selected>문보경(7)</option>
+						<option value="7">유강남(36)</option>
+						<option value="8">이재원(74)</option>
+						<option value="9">이영빈(56)</option>
+					</select>
+					<select name="lineup-position">
+						<option value="1">투수</option>
+						<option value="2">포수</option>
+						<option value="3">1루수</option>
+						<option value="4">2루수</option>
+						<option value="5">3루수</option>
+						<option value="6" selected>유격수</option>
+						<option value="7">좌익수</option>
+						<option value="8">중견수</option>
+						<option value="9">우익수</option>
+					</select>
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+	
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<button class="btn-delete">X</button>
+				</div>
+				<div class="recodePlayer7">
+					<select name="lineup-num">
+						<option value="1">1번</option>
+						<option value="2">2번</option>
+						<option value="3">3번</option>
+						<option value="4">4번</option>
+						<option value="5">5번</option>
+						<option value="6">6번</option>
+						<option value="7" selected>7번</option>
+						<option value="8">8번</option>
+						<option value="9">9번</option>
+					</select>
+					<select name="lineup-name">
+						<option value="1">박해민(11)</option>
+						<option value="2">문성주(10)</option>
+						<option value="3">김현수(22)</option>
+						<option value="4">채은성(33)</option>
+						<option value="5">오지환(44)</option>
+						<option value="6">문보경(7)</option>
+						<option value="7"selected>유강남(36)</option>
+						<option value="8">이재원(74)</option>
+						<option value="9">이영빈(56)</option>
+					</select>
+					<select name="lineup-position">
+						<option value="1">투수</option>
+						<option value="2">포수</option>
+						<option value="3">1루수</option>
+						<option value="4">2루수</option>
+						<option value="5">3루수</option>
+						<option value="6">유격수</option>
+						<option value="7" selected>좌익수</option>
+						<option value="8">중견수</option>
+						<option value="9">우익수</option>
+					</select>
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+	
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<button class="btn-delete">X</button>
+				</div>
+				<div class="recodePlayer8">
+					<select name="lineup-num">
+						<option value="1">1번</option>
+						<option value="2">2번</option>
+						<option value="3">3번</option>
+						<option value="4">4번</option>
+						<option value="5">5번</option>
+						<option value="6">6번</option>
+						<option value="7">7번</option>
+						<option value="8" selected>8번</option>
+						<option value="9">9번</option>
+					</select>
+					<select name="lineup-name">
+						<option value="1">박해민(11)</option>
+						<option value="2">문성주(10)</option>
+						<option value="3">김현수(22)</option>
+						<option value="4">채은성(33)</option>
+						<option value="5">오지환(44)</option>
+						<option value="6">문보경(7)</option>
+						<option value="7">유강남(36)</option>
+						<option value="8"selected>이재원(74)</option>
+						<option value="9">이영빈(56)</option>
+					</select>
+					<select name="lineup-position">
+						<option value="1">투수</option>
+						<option value="2">포수</option>
+						<option value="3">1루수</option>
+						<option value="4">2루수</option>
+						<option value="5">3루수</option>
+						<option value="6">유격수</option>
+						<option value="7">좌익수</option>
+						<option value="8" selected>중견수</option>
+						<option value="9">우익수</option>
+					</select>
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+	
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<button class="btn-delete">X</button>
+				</div>
+				<div class="recodePlayer9">
+					<select name="lineup-num">
+						<option value="1">1번</option>
+						<option value="2">2번</option>
+						<option value="3">3번</option>
+						<option value="4">4번</option>
+						<option value="5">5번</option>
+						<option value="6">6번</option>
+						<option value="7">7번</option>
+						<option value="8">8번</option>
+						<option value="9" selected>9번</option>
+					</select>
+					<select name="lineup-name">
+						<option value="1">박해민(11)</option>
+						<option value="2">문성주(10)</option>
+						<option value="3">김현수(22)</option>
+						<option value="4">채은성(33)</option>
+						<option value="5">오지환(44)</option>
+						<option value="6">문보경(7)</option>
+						<option value="7">유강남(36)</option>
+						<option value="8">이재원(74)</option>
+						<option value="9"selected>이영빈(56)</option>
+					</select>
+					<select name="lineup-position">
+						<option value="1">투수</option>
+						<option value="2">포수</option>
+						<option value="3">1루수</option>
+						<option value="4">2루수</option>
+						<option value="5">3루수</option>
+						<option value="6">유격수</option>
+						<option value="7">좌익수</option>
+						<option value="8">중견수</option>
+						<option value="9" selected>우익수</option>
+					</select>
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+					<input type="text" style="width:47px">
+	
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<input type="text" style="width:20px" placeholder="0">
+					<button class="btn-delete">X</button>
+				</div>
+				<table class="tbl-addPlayer">
+					<thead>
+						<tr>
+							<th>타순</th>
+							<th>선수명</th>
+							<th>포지션</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<select name="substitute-num">
+									<option value="0" selected>선택</option>
+									<option value="1">1번</option>
+									<option value="2">2번</option>
+									<option value="3">3번</option>
+									<option value="4">4번</option>
+									<option value="5">5번</option>
+									<option value="6">6번</option>
+									<option value="7">7번</option>
+									<option value="8">8번</option>
+									<option value="9">9번</option>
+								</select>
+							</td>
+							<td>
+								<select name="substitute-name">
+									<option value="0"selected>선수선택</option>
+									<option value="1">박해민(11)</option>
+									<option value="2">문성주(10)</option>
+									<option value="3">김현수(22)</option>
+									<option value="4">채은성(33)</option>
+									<option value="5">오지환(44)</option>
+									<option value="6">문보경(7)</option>
+									<option value="7">유강남(36)</option>
+									<option value="8">이재원(74)</option>
+									<option value="9">이영빈(56)</option>
+								</select>
+							</td>
+							<td>
+								<select name="substitute-position">
+									<option value="0" selected>선택</option>
+									<option value="1">투수</option>
+									<option value="2">포수</option>
+									<option value="3">1루수</option>
+									<option value="4">2루수</option>
+									<option value="5">3루수</option>
+									<option value="6">유격수</option>
+									<option value="7">좌익수</option>
+									<option value="8">중견수</option>
+									<option value="9">우익수</option>
+									<option value="10">대타</option>
+								</select>
+							</td>
+							<td><button class="btn-addPlayer">출전</button></td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 			<div class="middle-footer">
-				<table class="tbl-addPlayer">
-					<form action="">
-						<thead>
-							<tr>
-								<th>타순</th>
-								<th>선수명</th>
-								<th>포지션</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<select name="substitute-num">
-										<option value="1">1번</option>
-										<option value="2">2번</option>
-										<option value="3">3번</option>
-										<option value="4">4번</option>
-										<option value="5">5번</option>
-										<option value="6">6번</option>
-										<option value="7">7번</option>
-										<option value="8">8번</option>
-										<option value="9" selected>9번</option>
-									</select>
-								</td>
-								<td>
-									<select name="substitute-name">
-										<option value="1">박해민(11)</option>
-										<option value="2">문성주(10)</option>
-										<option value="3">김현수(22)</option>
-										<option value="4">채은성(33)</option>
-										<option value="5">오지환(44)</option>
-										<option value="6">문보경(7)</option>
-										<option value="7">유강남(36)</option>
-										<option value="8">이재원(74)</option>
-										<option value="9"selected>이영빈(56)</option>
-									</select>
-								</td>
-								<td>
-									<select name="substitute-position">
-										<option value="1">투수</option>
-										<option value="2">포수</option>
-										<option value="3">1루수</option>
-										<option value="4">2루수</option>
-										<option value="5">3루수</option>
-										<option value="6">유격수</option>
-										<option value="7">좌익수</option>
-										<option value="8">중견수</option>
-										<option value="9" selected>우익수</option>
-									</select>
-								</td>
-								<td><button>출전</button></td>
-							</tr>
-						</tbody>
-					</form>
-					<button class="btn-save">저장
-					</button>
-				</table>
+				
 			</div>
 		</div>
 		<div class="box-bottom"></div>
 	</div>
+
+	<script>
+		
+
+		
+	</script>
 </body>
 </html>
