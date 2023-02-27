@@ -4,7 +4,7 @@ a{	text-decoration: none;}
 
 .main-container{
 background-color: #183153; width: 1000px; margin:0 auto;
-height: 1500px;
+padding-bottom: 20px;
 }
 
 /* 기록등록 메인 타이틀 */
@@ -72,11 +72,12 @@ padding: 10px;
 /* 미들 박스 */
 .box-middle{
 	border-radius: 10px; border: 1px solid #000;
-	margin: 50px 50px; width: 900px; height: 900px; background-color: #fff;
+	margin: 50px 50px; width: 900px; background-color: #fff;
 }
 .box-middle .middle-top{
 	height: 50px; text-align: center; line-height: 50px;
-	background-color: #c5c5c5; color: #505050;
+	 color: #505050;  background-color: #c5c5c5; border-radius: 10px 10px 0 0;
+	 
 }
 .box-middle .middle-top span{
 	cursor: pointer; 
@@ -84,21 +85,26 @@ padding: 10px;
 .box-middle .middle-top div+div{
 	border-left: 1px solid gray;
 }
-.box-middle .middle-top .left-team[aria-selected=true]{
+.box-middle .middle-top .home-team[aria-selected=true]{
 	background-color: white; border-radius: 8px 0 0 0; padding-right: 1.5px;
-	font-weight: 800; color: #121212; 
+	font-weight: 800; color: #121212;
+}
+.box-middle .middle-top .away-team[aria-selected=true]{
+	background-color: white; border-radius: 0 8px 0 0; padding-left: 1.5px;
+	font-weight: 800; color: #121212;
 }
 
-.box-middle .middle-top .right-team[aria-selected=true]{
+.box-middle .middle-top[aria-selected=true]{
 	background-color: white; border-radius: 0 8px 0 0;
-	font-weight: 800; color: #121212; 
+	font-weight: 800; color: #121212;
 }
 
 
-.middle-top .left-team{
+
+.middle-top .home-team{
 	width: 49.9%; float:left;
 }
-.middle-top .right-team{
+.middle-top .away-team{
 	width: 49.8%; float:right;
 }
 .recode-guide{
@@ -182,8 +188,14 @@ padding: 10px;
 .middle-recodeTitle div:nth-child(16){	margin-left: 6px;	}
 .middle-recodeTitle div:nth-child(17){	margin-left: 5px;	}
 
-.middle-recode-board{
+.box-middle .middle-recode-board{
 	background-color: #f4f4f4; margin-left: 3px;
+}
+.box-middle .middle-recode-board [aria-selected=false]{
+	display: none;
+}
+.box-middle .tbl-addPlayer{
+	padding: 20px 5px 50px 10px
 }
 
 .middle-footer .btn-save{
