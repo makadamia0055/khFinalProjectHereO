@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>menu</title>
 
     <link rel="stylesheet" href="../style.css" />
     <script src="bootstrap4/jquery.js"></script>
@@ -17,7 +17,13 @@
         <!-- 최상단 로그인 메뉴바 -->
         <div class="topBar__containerBox1">
           <ul class="topBar__list">
-            <li><a href="#">로그인</a></li>
+            <li>
+              <a
+                href="#"
+                onclick="window.open('../screen/login.html','login','width=450, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no')"
+                >로그인</a
+              >
+            </li>
             <li><a href="../screen/signup.html" target="_top">회원가입</a></li>
             <li><a href="#">고객센터</a></li>
           </ul>
@@ -40,8 +46,15 @@
                 </li>
               </ul>
             </li>
-            <li class="menu-container__box">
+            <li class="menu-container__box top-menu__league-hover">
               <a href="#"><span>League</span></a>
+              <ul class="submenu-containerBox1 league-submenu__01">
+                <li>
+                  <a href="../recodeGame/insertScore.html" target="_top"
+                    >리그 기록</a
+                  >
+                </li>
+              </ul>
             </li>
             <li class="menu-container__box top-menu__reservation-hover">
               <a href="../reservation/reservation-main.html" target="_parent"

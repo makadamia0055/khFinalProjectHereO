@@ -1,0 +1,37 @@
+.findId-comment {   
+    padding-left: 19%;
+    font-weight: 600;
+}
+.findPw-comment {   
+    padding-left: 17%;
+    font-weight: 600;
+}
+
+.findId-input {
+    margin-left: 5%;
+    width: 90%;
+    height: 45px;
+    font-size: 14px;
+    border: 1px solid #e6e6e6;
+    padding-left: 12px;
+    margin-bottom: 7px;
+    color: #222;
+    outline: none;
+}
+
+.id-remember span {
+    padding: 0 3px;
+}
+.findId-btn {
+    margin-top: 10px;
+    margin-left: 5%;
+    width: 90%;
+    height: 45px;
+    background-color: #FFC54D;
+    color: #150050;
+    border-style: none;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+
