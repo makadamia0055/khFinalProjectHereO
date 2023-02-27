@@ -5,12 +5,11 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>예약하기</title>
+	<script src="../component/bootstrap4/jquery.js"></script>
    <link rel="stylesheet" href="../style.css" />
    <link rel="stylesheet" href="../reservation/reservation.css">
    <iframe src="../component/topBar.html" class="topBar" frameborder="0"></iframe>
-	<aside class="reservation-sidebar">
-		<iframe src="sidebar-main.html" frameborder="0"></iframe>
-	</aside>
+
 </head>
 <body>
 	<div class="booking">	
@@ -57,13 +56,26 @@
 							<input type="text"placeholder="심판 이름 출력" disabled>
 						</li>	
 						<li class="item-content">
+							<span>리그 선택</span>
+							<br>
+							<select name="league-select" id="league" onchange="categoryChange(this)">
+								<option value="league">친선</option>
+								<option value="league">리그</option>
+								<option value="league" selected>연습</option>							
+							</select>
+							<br>
+							<span class="league__text" hidden>연습경기는 경기기록에 반영되지 않습니다.</span>
+							<br>
+							<br>
 							<span>상대팀 선택</span>
 							<br>
 							<select name="team-select" id="team" onchange="categoryChange(this)">
 								<option value="team">강아지</option>
-								<option value="team" selected>고양이</option>
+								<option value="team" >고양이</option>
 								<option value="team">다람쥐</option>
+								<option value="team" selected>부킹가능</option>
 							</select>
+							<br>							
 						</li>
 					</ul>
 			</section>
@@ -71,25 +83,7 @@
 					<h3 style="color: black;">결제 수단 선택</h3>
 					<select id="payment-select" class="select-type" >
 						<option data-minprice="0" value="KAKAO" >
-						카카오페이
-						</option>
-						<option data-minprice="0" value="TOSS" >
-								토스페이
-						</option>
-						<option data-minprice="0" selected="selected" value="CARD" >
-								신용/체크카드
-						</option>
-						<option data-minprice="0" value="NAVER" >
-								네이버페이
-						</option>
-						<option data-minprice="0" value="PAYCO" >
-								PAYCO
-						</option>
-						<option data-minprice="0" value="CARD_BIZ" >
-								법인카드
-						</option>
-						<option data-minprice="0" value="CELLPHONE" >
-								휴대폰결제
+							무통장입금
 						</option>
 					</select>
 			</section>
@@ -109,34 +103,40 @@
 			<section class="agree">
 				<p class="all_check">
 					<label>
-						<input type="checkbox" name="checkAll" class="check">
+						<input type="checkbox" name="checkAll" class="check" onclick="checkAll()">
 						<span>전체 동의</span>
 					</label>
 				</p>
-				<p>
-					<input type="checkbox" name="checkOne" class="check">
-					<span onclick="agree1();">
-						<i> 취소/환불규정 동의</i>
-						<b> (필수)</b>
+				<p >
+					<label>
+						<input type="checkbox" name="checkOne" class="check">
+						<span class="refund-agree">
+							<i> 취소/환불규정 동의</i>
+							<b> (필수)</b>
 						</span>
+					</label>
 				</p>
-				<p>
-					<input type="checkbox" name="checkOne" class="check">
-					<span onclick="agree2();">
-						<i>개인정보 수집 및 이용 동의</i>
-						<b> (필수)</b>
-					</span>
+				<p class="personal-info">
+					<label>
+						<input type="checkbox" name="checkOne" class="check">
+						<span>
+							<i>개인정보 수집 및 이용 동의</i>
+							<b> (필수)</b>
+						</span>
+					</label>
 				</p>
-				<p>
-					<input type="checkbox" name="checkOne" class="check">
-					<span onclick="agree3();">
-						<i>개인정보 제 3자 제공 동의</i>
-						<b> (필수)</b>
-					</span>
+				<p class="personal-info2">
+					<label>
+						<input type="checkbox" name="checkOne" class="check">
+						<span>
+							<i>개인정보 제 3자 제공 동의</i>
+							<b> (필수)</b>
+						</span>
+					</label>
 				</p>
 			</section>
-			<section class="popup">
-				<div class="popup agree1">
+			<section class="">
+				<div class="popup agree1" id="agree1" style="display: none;">
 					<div class="popup-title">
 						<strong>취소/환불규정(필수)</strong>
 						<button class="btn-close">X</button>
@@ -161,7 +161,7 @@
 					</div>
 				</div>
 				<!-- 동의 체크 박스 1(취소/환불규정 동의) -->
-				<div class="popup agree2">
+				<div class="popup agree2" id="agree2" style="display: none;">
 					<div class="popup-title">
 						<strong>개인정보 수집 및 이용 동의 (필수)</strong>
 						<button class="btn-close">X</button>
@@ -217,7 +217,7 @@
 					</div>
 				</div>
 				<!-- 동의 체크 박스 2(개인정보 수집 및 이용동의) -->
-				<div class="popup agree3">
+				<div class="popup agree3" id="agree3" style="display: none;">
 					<div class="popup-title">
 						<strong>개인정보 제 3자 제공 동의 (필수)</strong>
 						<button class="btn-close">X</button>
@@ -281,5 +281,28 @@
 			</div>
 		</div>			
 	</div>
+	<script>
+		// 전체 동의 체크 
+		$(document).ready(function() {
+		$('input[name="checkAll"]').click(function() {
+			$('input[name="checkOne"]').prop('checked', $(this).prop('checked'));
+		});
+		});
+		//모달 작업 예정
+		// $(document).ready(function() {
+		// $(".refund-agree").on("click", function() {
+		// 	$("#agree1").fadeIn();
+		// });
+		// });
+		// // X버튼 클릭 시 팝업 닫기
+		// $(".btn-close").click(function() {
+  		// $(".popup").css("display", "none");
+		// });
+		// $(window).click(function(event) {
+		// if (event.target == $(".modal")[0]) {
+		// 	$(".popup").css("display", "none");
+		// }
+		// });
+	</script>
 </body>
 </html>

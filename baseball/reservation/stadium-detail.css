@@ -1,28 +1,86 @@
-    body{ padding: 0; text-decoration: none; list-style: none;}
-    .stadium-info{ 
-      position: absolute; margin-top: 150px; left: 20%;  margin-left: 30px;
-      padding: 20px 0 20px 0; box-sizing: border-box; 
-      border-radius: 10px;  
-    }
-    .stadium-info .info-content img{
-      width: 100%; height: 600px;
-    }
-    .stadium-info .info-content .info-detail{
-      width: 100%; height: 100%; 
-    }
-    .stadium-info .info-content .info-detail .title{
-       text-align: left; padding: 5px;  font-size: 20px;
-       color: rgba(0, 0, 0, 0.8); text-align: center; 
-       border: 1px solid rgba(0, 0, 0, 0.1);
-       background-color: rgba(0, 0, 0, 0.1);
-      
-    }
-    .stadium-info .info-content .info-detail .content{
-      text-align: left; padding: 5px; font-size: 1rem;
-      color: rgba(0, 0, 0, 0.7); line-height: 30px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      background-color: rgba(0, 0, 0, 0.1);
-      
-    }
+  body{ padding: 0; text-decoration: none; list-style: none;}
+  /* 메인 박스 */
+  .stadium-info{ 
+  position: absolute;  left: 20%;  margin-left: 30px;
+  padding: 20px 0 20px 0; box-sizing: border-box; 
+  border-radius: 10px;  margin-top: 150px;
+  }
+  .info-top {
+  overflow: hidden;
+  padding: 10px;
+  }
+  .stadium-info .info-content .info-detail{
+  box-sizing: border-box;  padding: 5px;
+  }
+  .stadium-info .info-content .info-detail .title{
+    text-align: left; padding: 5px;  font-size: 18px;
+    color: rgba(0, 0, 0, 0.8); text-align: center; 
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
+
+  }
+  .stadium-info .info-content .info-detail .content{
+  text-align: left; padding: 5px; font-size: 1rem;
+  color: rgba(0, 0, 0, 0.7); line-height: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
+  }
+  .stadium-info .info-content .info-detail td{
+  border: 1px solid black; padding: 5px;
+  }
+  .content-table{
+  width: 100%; height: 100%;
+  border-collapse: collapse;
+  }
+  /* 예약 가능한지 확인 할 수 있는 테이블 */
+  .schedule {
+  border-width: 1px 0;
+  margin: 10px 0;
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid black;
+  }
+  colgroup{box-sizing: border-box;}
+  .schedule thead{
+  display: table-header-group;
+  vertical-align: middle;
+  background-color: rgba(0, 0, 0, 0.3);
+  }
+  .schedule tbody{
+  display: table-row-group;  vertical-align: middle;
+  }
+  .schedule th,
+  .schedule td {
+  border: 1px solid rgba(0, 0, 0, 0.6); text-align: center; 
+  }
+  tr{
+  display: table-row;  vertical-align: inherit;  border-color: inherit;
+  }
+  .info-img{
+  position: relative;
+  }
+  .img{
+  display: inline-block;  max-width: 100%;  height: auto;
+  overflow: hidden;
+  }
+  .prev-button, .next-button {
+  position: absolute;  top: 50%;  transform: translateY(-50%);
+  font-size: 20px;  padding: 8px;  border: none;
+  outline: none;  background: transparent;  color: white;
+  cursor: pointer;  border-radius: 15px;  background-color: rgba(0, 0, 0, 0.1);
+  font-weight: bold; 
+  }
+  .prev-button {
+  left: 0;
+  }
+  .next-button {
+  right: 0;
+  }
+  /* 이전 페이지로 돌아가는 버튼 */
+  .btn-prev{
+  font-size: 20px; border-radius: 15px; border: 0; background-color: rgba(0, 0, 0, 0.3); cursor: pointer;
+  margin-bottom: 30px; width: 200px;
+  }
+
 
 
