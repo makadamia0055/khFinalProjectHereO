@@ -6,6 +6,8 @@
 /* screen */
 @import "screen/mainpage.css";
 @import "screen/signup.css";
+@import "screen/login.css";
+@import "screen/find-idPw.css";
 
 /* team */
 /* commu*/
