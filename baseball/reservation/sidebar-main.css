@@ -7,8 +7,11 @@
   width: calc(18%);
   height: 100vh;
   float: left;
+
+
   clear: both;
   background-color: #FFC54D;
+
   /* box-shadow: 3px 0 0 0 rgba(0, 0, 0, 0.7); */
 }
 .reservation-sidebar iframe{

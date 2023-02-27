@@ -1,251 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>실시간 예약하기</title>
-    <link
-      rel="stylesheet"
-      href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
-    />
-    <link rel="stylesheet" href="/resources/demos/style.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="../reservation/side/reservation-side.css" />
-    <link rel="stylesheet" href="../reservation/reservation.css" />
-    <iframe
-      src="../component/topBar.html"
-      class="topBar"
-      frameborder="0"
-    ></iframe>
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Hero O</title>
+   <script src="../component/bootstrap4/jquery.js"></script>
+   <link rel="stylesheet" href="../style.css" />
+   <link rel="stylesheet" href="../reservation/reservation.css">
+    <iframe src="../component/topBar.html" class="topBar" frameborder="0"></iframe>
     <aside class="reservation-sidebar">
       <iframe src="sidebar-main.html" frameborder="0"></iframe>
     </aside>
-  </head>
-  <body>
-    <div class="reservation">
-      <h2>실시간 예약하기</h2>
-      <strong>예약하실 구장의 지역과 일정을 선택해 주세요.</strong>
-      <div class="reservation-content">
-        <h3>구장 조회</h3>
-        <div class="search_boxes">
-          <div class="search_box">
-            <select name="region" id="region" onchange="categoryChange(this)">
-              <option value>시/도 선택</option>
-              <option value="region01">서울</option>
-              <option value="region02">경기</option>
-            </select>
-          </div>
-          <div class="search_box">
-            <select name="" id="state">
-              <option>군/구 선택</option>
-            </select>
-          </div>
-          <div class="search_box">
-            <p><input type="text" id="datepicker" /></p>
-          </div>
-          <button type="submit" class="btn-submit">검색</button>
-        </div>
-        <ul class="list-stadium">
-          <li class="item-stadium">
-            <a href="stadium-reservation.html" class="link-stadium">
-              <img src="화도.jpg" alt="" class="img img1" />
-              <div class="contents">
-                <strong class="title">구장이름 : </strong>
-                <span>화도</span>
-                <br />
-                <strong class="content">위치 : </strong>
-                <span>경기도 남양주</span>
+</head>
+<body>
+  <div class="reservations">
+      <div class="topbox">
+        <h2 >실시간 예약하기</h2>
+        <span>❗예약하실 구장의 지역과 일정을 선택해 주세요.</span>
+              <div class="search_boxes">
+                  <div class="search_box">
+                    <select name="region" id="region" onchange="categoryChange(this)">
+                        <option value>구장/연습장 선택</option>
+                        <option value="region01">구장</option>
+                        <option value="region02">연습장</option>
+                    </select>
+                  </div>
+                  <div class="search_box">
+                    <select name="region" id="region" onchange="categoryChange(this)">
+                        <option value>시/도 선택</option>
+                        <option value="region01">서울</option>
+                        <option value="region02">경기</option>
+                    </select>
+                  </div>
+                  <div class="search_box">
+                    <select name="" id="state">
+                        <option>군/구 선택</option>
+                    </select>
+                  </div>
+                  <div class="search_box">
+                    <p> <input type="text" id="datepicker"></p>                     
+                  </div>
+                  <button type="submit" class="btn-submit">검색</button>
               </div>
-            </a>
-          </li>
-          <li class="item-stadium">
-            <a href="stadium-reservation.html" class="link-stadium">
-              <img src="화도.jpg" alt="" class="img img1" />
-              <div class="contents">
-                <strong class="title">구장이름 : </strong>
-                <span>화도</span>
-                <br />
-                <strong class="content">위치 : </strong>
-                <span>경기도 남양주</span>
-              </div>
-            </a>
-          </li>
-          <li class="item-stadium">
-            <a href="stadium-reservation.html" class="link-stadium">
-              <img src="화도.jpg" alt="" class="img img1" />
-              <div class="contents">
-                <strong class="title">구장이름 : </strong>
-                <span>화도</span>
-                <br />
-                <strong class="content">위치 : </strong>
-                <span>경기도 남양주</span>
-              </div>
-            </a>
-          </li>
-          <li class="item-stadium">
-            <a href="stadium-reservation.html" class="link-stadium">
-              <img src="화도.jpg" alt="" class="img img1" />
-              <div class="contents">
-                <strong class="title">구장이름 : </strong>
-                <span>화도</span>
-                <br />
-                <strong class="content">위치 : </strong>
-                <span>경기도 남양주</span>
-              </div>
-            </a>
-          </li>
-          <li class="item-stadium">
-            <a href="stadium-reservation.html" class="link-stadium">
-              <img src="화도.jpg" alt="" class="img img1" />
-              <div class="contents">
-                <strong class="title">구장이름 : </strong>
-                <span>화도</span>
-                <br />
-                <strong class="content">위치 : </strong>
-                <span>경기도 남양주</span>
-              </div>
-            </a>
-          </li>
-          <li class="item-stadium">
-            <a href="stadium-reservation.html" class="link-stadium">
-              <img src="화도.jpg" alt="" class="img img1" />
-              <div class="contents">
-                <strong class="title">구장이름 : </strong>
-                <span>화도</span>
-                <br />
-                <strong class="content">위치 : </strong>
-                <span>경기도 남양주</span>
-              </div>
-            </a>
-          </li>
-          <li class="item-stadium">
-            <a href="stadium-reservation.html" class="link-stadium">
-              <img src="화도.jpg" alt="" class="img img1" />
-              <div class="contents">
-                <strong class="title">구장이름 : </strong>
-                <span>화도</span>
-                <br />
-                <strong class="content">위치 : </strong>
-                <span>경기도 남양주</span>
-              </div>
-            </a>
-          </li>
-          <li class="item-stadium">
-            <a href="stadium-reservation.html" class="link-stadium">
-              <img src="화도.jpg" alt="" class="img img1" />
-              <div class="contents">
-                <strong class="title">구장이름 : </strong>
-                <span>화도</span>
-                <br />
-                <strong class="content">위치 : </strong>
-                <span>경기도 남양주</span>
-              </div>
-            </a>
-          </li>
-          <li class="item-stadium">
-            <a href="stadium-reservation.html" class="link-stadium">
-              <img src="화도.jpg" alt="" class="img img1" />
-              <div class="contents">
-                <strong class="title">구장이름 : </strong>
-                <span>화도</span>
-                <br />
-                <strong class="content">위치 : </strong>
-                <span>경기도 남양주</span>
-              </div>
-            </a>
-          </li>
-          <li class="item-stadium">
-            <a href="stadium-reservation.html" class="link-stadium">
-              <img src="화도.jpg" alt="" class="img img1" />
-              <div class="contents">
-                <strong class="title">구장이름 : </strong>
-                <span>화도</span>
-                <br />
-                <strong class="content">위치 : </strong>
-                <span>경기도 남양주</span>
-              </div>
-            </a>
-          </li>
-          <li class="item-stadium">
-            <a href="stadium-reservation.html" class="link-stadium">
-              <img src="화도.jpg" alt="" class="img img1" />
-              <div class="contents">
-                <strong class="title">구장이름 : </strong>
-                <span>화도</span>
-                <br />
-                <strong class="content">위치 : </strong>
-                <span>경기도 남양주</span>
-              </div>
-            </a>
-          </li>
-          <li class="item-stadium">
-            <a href="stadium-reservation.html" class="link-stadium">
-              <img src="화도.jpg" alt="" class="img img1" />
-              <div class="contents">
-                <strong class="title">구장이름 : </strong>
-                <span>화도</span>
-                <br />
-                <strong class="content">위치 : </strong>
-                <span>경기도 남양주</span>
-              </div>
-            </a>
-          </li>
-          <li class="item-stadium">
-            <a href="stadium-reservation.html" class="link-stadium">
-              <img src="화도.jpg" alt="" class="img img1" />
-              <div class="contents">
-                <strong class="title">구장이름 : </strong>
-                <span>화도</span>
-                <br />
-                <strong class="content">위치 : </strong>
-                <span>경기도 남양주</span>
-              </div>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="pagination">
-        <a href="#" class="prev-link">&lt;</a>
-        <a href="#" class="page-link">1</a>
-        <a href="#" class="page-link">2</a>
-        <a href="#" class="page-link">3</a>
-        <a href="#" class="next-link">&gt;</a>
-      </div>
+      </div> 
+      <div class="list">
+        <table cellpadding="0" cellspacing="0" class="content_table">
+            <colgroup>
+                <col span="1" width="100">
+                <col span="1" width="300">
+                <col span="1" width="1000">
+            </colgroup>
+            <thead>
+                <tr id="table-title">
+                    <th id="table-name">지역</th>
+                    <th id="table-name">구장</th>
+                    <th id="table-name">내용</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="stadium-list">
+                    <td rowspan="3" id="table-region">
+                        <p><strong>경기</strong></p>
+                    </td>
+                    <td rowspan="3" id="table-stadium">
+                        <a href="../reservation/stadium-detail.html">
+                            <img src="강상.jpg" alt="" class="img">
+                            <br>
+                            <strong style="color: black; font-size: 15px;">구장명 : </strong><span>강상제3구장</span>
+                            <br>
+                            <strong style="color: black; font-size: 15px;">구장 위치 : </strong><span>경기도 양평</span>
+                        </a>
+                    </td>
+                    <td rowspan="3" id="table-content">
+                        <div class="info-content">
+                            <div class="game-group">
+                                <div class="game-title">1게임</div>
+                                <div class="game-title">2게임</div>
+                                <div class="game-title">3게임</div>
+                                <div class="game-title">4게임</div>
+                                <div class="game-title">5게임</div>
+                                <div class="game-title">6게임</div>
+                                <div class="game-title">7게임</div>
+                                <div class="game-title">8게임</div>
+                                <div class="game-title">9게임</div>
+                                <div class="game-title">10게임</div>                                
+                                <br>
+                                <div class="game-info">
+                                    <div class="status"><span class="league">리그</span></div>
+                                    <div class="status"><span class="confirm">확정</span></div>
+                                    <div class="status"><span class="reserve">예약</span></div>
+                                    <div class="status"><span class="league">리그</span></div>
+                                    <div class="status"><span class="reserve">예약</span></div>
+                                    <div class="status"><span class="none"></span></div>
+                                    <div class="status"><span class="none"></span></div>
+                                    <div class="status"><span class="none"></span></div>
+                                    <div class="status"><span class="none"></span></div>
+                                    <div class="status"><span class="none"></span></div>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>   
+                <!-- 구장 리스트 1개 단위 -->
+                
+            </tbody>
+        </table>
+        <div class="pagination">
+          <a href="#" class="prev-link">&lt;</a>
+          <a href="#" class="page-link">1</a>
+          <a href="#" class="page-link">2</a>
+          <a href="#" class="page-link">3</a>
+          <a href="#" class="next-link">&gt;</a>
+       </div>
     </div>
-    <script src="regionbox.js"></script>
-    <script
-      src="https://kit.fontawesome.com/bedfa56d7f.js"
-      crossorigin="anonymous"
-    ></script>
-    <script>
-      $(function () {
-        $("#datepicker").datepicker({
-          changeMonth: true,
-          changeYear: true,
-          nextText: "다음",
-          prevText: "이전",
-          dayNamesMin: ["월", "화", "수", "목", "금", "토", "일"],
-          monthNamesShort: [
-            "1월",
-            "2월",
-            "3월",
-            "4월",
-            "5월",
-            "6월",
-            "7월",
-            "8월",
-            "9월",
-            "10월",
-            "11월",
-            "12월",
-          ],
-          dateFormat: "yy년mm월dd일",
-          minDate: "dtNow", // 오늘 날짜 이전 데이터 클릭 방지
-        });
-      });
-    </script>
-  </body>
+    
+  </div>
+  
+
+<script src="regionbox.js"></script>
+<script src="https://kit.fontawesome.com/bedfa56d7f.js" crossorigin="anonymous"></script>
+<script>
+$( function() {
+    $( "#datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      nextText: "다음",
+      prevText: "이전",
+      dayNamesMin : ['월','화','수','목','금','토','일'],
+      monthNamesShort:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+      dateFormat : "yy년mm월dd일",
+      minDate: "dtNow" // 오늘 날짜 이전 데이터 클릭 방지
+    });
+} );
+</script>
+<script>
+  $(".reserve").click(function() {
+  window.location.href = "stadium-detail.html";
+});  
+</script>  
+    
+    
+   
+</body>
 </html>
