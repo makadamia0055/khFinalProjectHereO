@@ -1,18 +1,20 @@
 /* 사이드바 */
 .reservation-sidebar {
   position: fixed;
-  padding-top: 180px;
-  width: calc(15%);
+  z-index: 99;
+  top: 120px;
+  padding-top: 30px;
+  width: calc(18%);
   height: 100vh;
   float: left;
   clear: both;
-  background-color: rgb(26, 22, 22);
+  background-color: #FFC54D;
   /* box-shadow: 3px 0 0 0 rgba(0, 0, 0, 0.7); */
 }
 .reservation-sidebar iframe{
 	width: 100%;
 	height: 100%;
-	background-color: rgb(26, 22, 22);
+  background-color: #FFC54D;
 
 }
 .list-side{
@@ -25,4 +27,13 @@
 .list-side .item-side .link-side{
 	text-align: left;
 	padding-left : 10px;
+}
+/* 사이드메뉴 색깔 클래스 */
+.reserve-submenu__color {
+  background-color: #FFE3A9;
+  color : black;
+  border: 1px solid #FFF9D7;
+}
+.reserve-submenu__color:hover {
+  background-color: #FBFACD;
 }
