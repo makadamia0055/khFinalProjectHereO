@@ -1,0 +1,62 @@
+/* 사이드바 */
+.league-sidebar {
+    position: fixed;
+    z-index: 99;
+    top: 120px;
+    width: 500px;
+    height: 100vh;
+    float: left;
+    background-color: #FFC54D;
+    
+}
+.league-sidebar > iframe,
+.sidebar > iframe {
+  width: 100%;
+  height: 100%;
+  background-color: #FFC54D;
+}
+
+.list-side {
+    position: relative; background-color: transparent;
+    display: block;
+ }
+.list-side .item-side{
+    text-align: center;
+}
+.list-side .item-side .link-side {
+    text-align: center;
+    padding-left: 10px;
+    color: black;
+}
+.list-side .item-side .link-side.btn-light{
+    background-color: antiquewhite;
+}
+
+/* 서브메뉴 */
+.list-submenu{
+    width: 300px; 
+    overflow: hidden;
+}
+.list-submenu > .item-submenu{
+    width: 100%;
+    text-align: center;
+    line-height: 40px;
+}
+.item-submenu{
+    height: 0;
+    overflow: hidden;
+}
+.item-submenu > .item-submenu {
+    line-height: 50px;
+    background-color: #94a9ff;
+}
+
+.list-submenu > .item-submenu:hover {
+    background-color: #94a9ff;
+    transition-duration: 0.5s;
+}
+  
+.list-submenu > .item-submenu:hover .submenu {
+    height: 250px;
+    transition-duration: 1s;
+}

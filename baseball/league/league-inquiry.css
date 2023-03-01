@@ -1,0 +1,59 @@
+.container-main{
+    min-width: 1000px;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    
+    height: 1000px; margin-left: 20%;
+}
+.container-main .box-main{
+    position: relative;
+    top: 200px; left: 30px;
+    width: 950px; height: 400px;
+}
+
+/* 지역 선택 */
+.box-main .main-top-region{
+    width: 950px; height: 40px;
+}
+.list-region{
+    height: 40px; line-height: 40px; 
+    border-top: 2px solid #747474; border-bottom: 1px solid #747474;
+}
+.item-region{
+    float: left; width: 5.7%; text-align: center;
+    border-right: 1px solid #747474;
+}
+.item-region:first-child{
+    width: 6.9%;  border-left: 1px solid #747474;
+}
+
+
+/* 리그 리스트 */
+.container-league{
+    width: 950px; 
+    padding-bottom: 30px;
+}
+.container-league .list-league{
+    padding-top: 30px; 
+}
+.item-league{
+    width: 400px; height: 150px; border: 1px solid #000;
+    border-radius: 10px; display: inline-block; margin: 10px 35px 10px;
+}
+
+.item-league-logo{
+    width: 150px; height: 150px; border-radius: 10px;
+}
+.item-league .left-box{
+    float: left;
+}
+.item-league .right-box{
+    float: left; padding: 20px;
+}
+.teammain-main .container-pagenation {
+    width: inherit;
+    padding: 0 auto;
+  }
+
