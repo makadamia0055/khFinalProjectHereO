@@ -10,4 +10,4 @@ KH정보교육원 자바A - 4조 Final Project입니다.
 
 | JavaScript                               | Java                                                                                                   | Mysql                                                                                                                    |
 | ---------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
-| <img src="./readme/JavaScript-Logo.png" width="200" /> | <img scr="./readme/Java-Logo.png" />? | <img scr="https://cdn.iconscout.com/icon/free/png-512/mysql-3521596-2945040.png?f=avif&w=256" width="100" height="150"/> |
+|   <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">   |   <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> | <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">  |
