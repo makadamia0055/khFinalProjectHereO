@@ -8,6 +8,6 @@ KH정보교육원 자바A - 4조 Final Project입니다.
 
 ## HERE O 제작 기술 스택
 
-| JavaScript | Java | Mysql | 
-|------------|------|-------|
-|<img src="https://cdn.iconscout.com/icon/free/png-512/javascript-2038874-1720087.png?f=avif&w=256" width="100px" height="150px"/>|<img scr="https://cdn.iconscout.com/icon/free/png-512/java-23-225999.png?f=avif&w=256" width="100px" height="150px"/>|<img scr="https://cdn.iconscout.com/icon/free/png-512/mysql-3521596-2945040.png?f=avif&w=256" width="100px" height="150px"/>|
+| JavaScript                                                                                                                    | Java                                                                                                              | Mysql                                                                                                                    |
+| ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| <img src="https://cdn.iconscout.com/icon/free/png-512/javascript-2038874-1720087.png?f=avif&w=256" width="100" height="150"/> | <img scr="https://cdn.iconscout.com/icon/free/png-512/java-23-225999.png?f=avif&w=256" width="100" height="150"/> | <img scr="https://cdn.iconscout.com/icon/free/png-512/mysql-3521596-2945040.png?f=avif&w=256" width="100" height="150"/> |
