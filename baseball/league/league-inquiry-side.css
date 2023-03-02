@@ -1,0 +1,39 @@
+/* 사이드바 */
+.league-sidebar {
+    position: fixed;
+    z-index: 99;
+    top: 120px;
+    width: calc(18%);
+    height: 100vh;
+    float: left;
+    /* background-color: rgb(26, 22, 22); */
+    background-color: #FFC54D;
+    /* box-shadow: 3px 0 0 0 rgba(0, 0, 0, 0.7); */
+      
+}
+.league-sidebar > iframe,
+.sidebar > iframe {
+  width: 100%;
+  height: 100%;
+  /* background-color: rgb(26, 22, 22); */
+  background-color: #FFC54D;
+}
+
+.list-side {
+    position: relative; background-color: transparent;
+    display: block;
+ }
+.list-side .item-side{
+    text-align: center;
+}
+.list-side .item-side .link-side {
+    text-align: center;
+    padding-left: 10px;
+    color: black;
+}
+.list-side .item-side .link-side.btn-light{
+    background-color: antiquewhite;
+}
+  
+  
+  
