@@ -10,4 +10,4 @@ KH정보교육원 자바A - 4조 Final Project입니다.
 
 | JavaScript | Java | Mysql | 
 |------------|------|-------|
-|<img src="https://cdn.iconscout.com/icon/free/png-512/javascript-2038874-1720087.png?f=avif&w=256" width="100px" height="150px"/>|<img scr="https://cdn.iconscout.com/icon/free/png-512/java-60-1174953.png?f=avif&w=256" width="100px" height="150px">|<img scr="https://cdn.iconscout.com/icon/free/png-512/mysql-3521596-2945040.png?f=avif&w=256" width="150px" height="150px">|
+|<img src="https://cdn.iconscout.com/icon/free/png-512/javascript-2038874-1720087.png?f=avif&w=256" width="100px" height="150px"/>|<img scr="https://cdn.iconscout.com/icon/free/png-512/java-60-1174953.png?f=avif&w=256" width="100px" height="150px"/>|<img scr="https://cdn.iconscout.com/icon/free/png-512/mysql-3521596-2945040.png?f=avif&w=256" width="100px" height="150px"/>|
