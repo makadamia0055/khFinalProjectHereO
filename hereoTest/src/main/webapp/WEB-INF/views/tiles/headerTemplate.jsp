@@ -9,12 +9,12 @@
           <ul class="topBar__list">
             <li>
               <a
-                href="#"
-                onclick="window.open('../screen/login.html','login','width=450, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no')"
+                href="#" 
+                onclick="window.open('<%=request.getContextPath()%>/login','login','width=450, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no')"
                 >로그인</a
               >
             </li>
-            <li><a href="../screen/signup.html" target="_top">회원가입</a></li>
+            <li><a href="<c:url value='/signup'></c:url>" target="_top">회원가입</a></li>
             <li><a href="#">고객센터</a></li>
           </ul>
         </div>
@@ -22,7 +22,7 @@
         <nav class="menu-containerBox2">
           <ul class="menu-containerBox2__bigBox">
             <li class="menu-container__box">
-              <a href="../mainpage.html" target="_top" id="home"
+              <a href="<c:url value='/home'></c:url>" target="_top" id="home"
                 >HERE <i class="fa-solid fa-baseball"></i
               ></a>
             </li>

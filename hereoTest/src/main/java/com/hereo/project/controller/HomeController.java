@@ -22,10 +22,18 @@ public class HomeController {
 		mv.setViewName("/home");
 		return mv;
 	}
-	@RequestMapping(value = "/team/main", method = RequestMethod.GET)
-	public ModelAndView tempTeam(ModelAndView mv) {
-		mv.setViewName("/team/team-main");
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView login(ModelAndView mv) {
+		mv.setViewName("/login_etc/login");
 		return mv;
 	}
+	
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public ModelAndView signup(ModelAndView mv) {
+		mv.setViewName("/login_etc/signup");
+		return mv;
+	}
+	
 }
 	
