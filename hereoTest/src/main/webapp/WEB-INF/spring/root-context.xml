@@ -16,7 +16,7 @@
 	      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
 	    <property name="url"
-	              value="jdbc:mysql://localhost:3306/heroDB?useSSL=false&amp;serverTimezone=Asia/Seoul">
+	              value="jdbc:mysql://localhost:3306/herodb?useSSL=false&amp;serverTimezone=Asia/Seoul">
 	    </property>
 	    <property name="username" value="root"></property>
 	    <property name="password" value="root"></property>
@@ -24,13 +24,8 @@
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     	<property name="dataSource" ref="dataSource" />
-	    <property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
+	    <property name="mapperLocations" value="classpath:mappers/*Mapper.xml"></property>
 	</bean>
 	
-	<!-- <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-	    <property name="mapperInterface" value="com.hereo.test.dao.userMapper"></property>
-	    <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-	</bean> -->
-	
-	<mybatis-spring:scan base-package="com.hereo.test.dao"/> 	
+	<mybatis-spring:scan base-package="com.hereo.project.dao"/> 	
 </beans>
