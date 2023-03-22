@@ -23,6 +23,7 @@
     margin-bottom: 7px;
     color: #222;
     outline: none;
+    box-sizing: border-box;
 }
 .id-remember {
     margin-left: 5%;
