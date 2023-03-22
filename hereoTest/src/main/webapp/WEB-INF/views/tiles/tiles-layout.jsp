@@ -5,6 +5,10 @@
 <html>
 <head>
 	<title>Home</title>
+	<link rel="stylesheet" href="/hereoTest/resources/css/bootstrap.min.css">
+	<script type="text/javascript" src="/hereoTest/resources/js/common/jquery.js"></script>
+	<script type="text/javascript" src="/hereoTest/resources/js/common/popper.min.js"></script>
+	<script type="text/javascript" src="/hereoTest/resources/js/common/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 	<tiles:insertAttribute name="header" />

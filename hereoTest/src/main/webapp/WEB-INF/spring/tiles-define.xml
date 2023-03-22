@@ -14,4 +14,7 @@
   <definition name="*/*" extends="layout-tiles">
     <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
   </definition>
+  <definition name="/*/*" extends="layout-tiles">
+    <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+  </definition>
 </tiles-definitions>
