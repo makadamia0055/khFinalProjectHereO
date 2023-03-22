@@ -7,10 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원가입</title>
-    <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="../component/bootstrap4/bootstrap.min.css" />
-    <script src="../component/bootstrap4/boostrap.bundle.min.js"></script>
-    <script src="../component/bootstrap4/popper.min.js"></script>
+    <link href="<c:url value='/resources/css/common/style.css'></c:url>" rel="stylesheet" />
+    <link href="<c:url value='/resources/css/login_etc/signup.css'></c:url>" rel="stylesheet" />
+    <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css'></c:url>" />
+    <script src="<c:url value='/resources/js/bootstrap.bundle.min.js'></c:url>"></script>
+    <script src="<c:url value='/resources/js/common/popper.min.js'></c:url>"></script>
   </head>
   <body>
     <header class="topBar">
@@ -18,7 +19,13 @@
         <!-- 최상단 로그인 메뉴바 -->
         <div class="topBar__containerBox1">
           <ul class="topBar__list">
-            <li><a href="#" style="color: black">로그인</a></li>
+            <li>
+              <a
+                href="#" 
+                onclick="window.open('<%=request.getContextPath()%>/login','login','width=450, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no')"
+                >로그인</a
+              >
+            </li>
             <li><a href="#" style="color: black">고객센터</a></li>
           </ul>
         </div>
@@ -26,7 +33,7 @@
         <nav class="signUp-topMenu">
           <ul class="menu-containerBox2__bigBox">
             <li class="signUp-topMenu__goMainPage">
-              <a href="../mainpage.html" target="_top" id="home"
+              <a href="<c:url value='/'></c:url>" target="_top" id="home"
                 >Here <i class="fa-solid fa-baseball"></i
               ></a>
             </li>

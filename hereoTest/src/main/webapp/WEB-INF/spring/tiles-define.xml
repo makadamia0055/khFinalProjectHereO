@@ -18,5 +18,6 @@
   <!-- no layout -->
   <definition name="No-layout-tiles" template="">
     <put-attribute name="login" value="/WEB-INF/views/login_etc/login.jsp" />
+    <put-attribute name="signup" value="/WEB-INF/views/login_etc/signup.jsp" />
   </definition>
 </tiles-definitions>
