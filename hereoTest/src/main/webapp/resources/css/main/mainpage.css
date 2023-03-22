@@ -1,0 +1,163 @@
+@charset "UTF-8";
+/* 메인 이미지 + 이미지 하단 배너 */
+.main__page {
+  position: relative;
+  margin: 120px 15% 0px 15%;
+}
+.main__imgBox-container {
+  width: 100%;
+  left: 15%;
+  height: 650px;
+  z-index: 4;
+  overflow: hidden;
+}
+.main__imgBox-container2 {
+  display: flex;
+  width: 400%;
+  height: 100%;
+}
+.main__imgBox-container2 li {
+  width: 25%;
+  height: 100%;
+}
+.main__imgBox-container2 li img {
+  width: 100%;
+  height: inherit;
+  object-fit: cover;
+}
+
+.main__contents-container {
+  position: relative;
+}
+.main__contents-reservationAndCommu {
+  background: linear-gradient(white, #fbfaf5);
+  width: 70%;
+  border-radius: 15px;
+  padding: 20px 60px;
+  position: absolute;
+  top: -40px;
+  left: 10%;
+  box-shadow: 0px 6px 15px 3px rgb(0 0 0 / 9%);
+  display: flex;
+}
+.main__contents-reservation {
+  width: 50%;
+  border-right: 1px solid rgb(38, 38, 38);
+}
+.reservation-title {
+  color: #30475e;
+  margin-left: 10px;
+  font-weight: 600;
+}
+.main__contents-commu {
+  width: 50%;
+  padding: 10px 20px;
+  display: flex;
+}
+.reservation-mainTitle,
+.commu-mainTitle {
+  font-weight: 900;
+  margin-left: 10px;
+  font-size: 17px;
+}
+.letter-click {
+  margin-left: 10px;
+}
+.letter-click:hover,
+.commu-mainTitle span:hover {
+  text-decoration: underline;
+}
+.main__contents-commu i {
+  font-size: 25px;
+  margin-left: 8px;
+  margin-right: 5px;
+  color: #ff5b00;
+}
+.main__contents-box {
+  width: 22%;
+  background-color: #ffffd0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px 2%;
+}
+.main__contents-box > i {
+  padding: 10px 0px;
+  font-size: 50px;
+}
+/* 팀 섹션 - 공통 적용*/
+body::-webkit-scrollbar {
+  width: 0;
+}
+.menu-section {
+  width: 100vw;
+  padding-top: 55px;
+  padding-bottom: 55px;
+}
+.menu-section h2 {
+  margin-left: 5%;
+  margin-bottom: 35px;
+}
+
+/* 팀 섹션 - Team 적용*/
+.team-section h2 {
+  color: #d2001a;
+}
+.newTeam-container {
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+}
+.newTeam__list {
+  width: 25%;
+  margin-top: 10px;
+  height: 350px;
+  border: 1px solid #ecedf2;
+  box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%);
+}
+.newTeam__more {
+  width: inherit;
+  margin: 45px 0 45px 0px;
+  font-size: 13px;
+  text-align: right;
+}
+.newTeam__more a {
+  padding-right: 2%;
+}
+.newTeam__more a:hover {
+  text-decoration: underline;
+}
+/* 팀 섹션 - Community 적용*/
+.commu-section {
+  background-color: #FFF8CD;
+  display: flex;
+}
+.commu__issue {
+  width: 33%;
+}
+.commu__find {
+  width: 67%;
+}
+.commu__issue > h2 {
+  margin: 0;
+  padding: 0 0 25px 33%;
+}
+.commu__issue-contents li {
+  padding: 0 0 5px 30%;
+  font-size: 17px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+.commu__issue-contents li a:hover {
+  text-decoration: underline;
+  color: #F45905;
+}
+.commu__find-contents li {
+  float: left;
+  width: 23%
+}
+.commu__find-img {
+  width: 68%;
+  border-radius: 50%;
+  border: 2px solid #13005A;
+}
