@@ -1,0 +1,135 @@
+/* 메인 */
+/* 임시 */
+
+
+
+
+/* 지역 버튼 */
+.teammain-main{
+min-width: 1000px;  
+}
+.teammain-main .container-region {
+  display: inline-block;
+}
+.teammain-main .item-region {
+  float: left;
+}
+.teammain-main .item-region + .item-region {
+  margin-left: 8px;
+}
+
+/* 검색 그룹 */
+
+.teammain-main .group-search-team {
+  float: right;
+  clear: both;
+}
+
+/* 개별 팀 */
+
+.teammain-main .container-team {
+  margin-top: 10px;
+}
+
+.teammain-main .container-team .item-team {
+  width: 300px;
+  height: 200px;
+  border: 1px solid black;
+}
+
+/* 페이지 네이션 */
+.teammain-main .container-pagenation {
+  width: inherit;
+  padding: 0 auto;
+}
+/* 개별 팀박스 */
+
+.teammain-main .container-teambox {
+  margin-top: 30px;
+}
+
+.teammain-main .container-teambox .item-teambox {
+  border: 3px double white;
+  border-radius: 20px;
+  background-color: rgb(38, 97, 173);
+  min-width: 480px;
+  width: calc(40%);
+  position: relative;
+  display: inline-block;
+  margin: 0 10px;
+}
+/* .teammain-main .container-teambox .item-teambox + .item-teambox:nth-child(2n) {
+  margin-left: 20px;
+} */
+
+.teammain-main .container-teambox .item-teambox .left-teambox,
+.right-teambox {
+  position: relative;
+  display: inline-block;
+}
+.teammain-main .container-teambox .item-teambox .link-team-select {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  background-size: 150px 150px;
+}
+
+.teammain-main .container-teambox .item-teambox .label-team {
+  position: absolute;
+  width: 150px;
+  float: left;
+  bottom: 0;
+  background-color: #212529;
+  color: aliceblue;
+  text-align: center;
+  font-size: 25px;
+  border-radius: 10px;
+  font-weight: 700;
+  padding: 2px;
+}
+.teammain-main .container-teambox .right-teambox {
+  margin: 30px calc(40% - 150px);
+  position: absolute;
+  font-size: 18px;
+  vertical-align: middle;
+  color: white;
+}
+.teammain-main .container-teambox .right-teambox .show-schedule{
+  margin: 10px 0;
+}
+
+/* 오른쪽 호버 박스 */
+.teammain-rightbox {
+  margin-top: 400px;
+  position: fixed;
+  right: 0px;
+  border-radius: 20px;
+  border: 1px solid black;
+  background-color: #fff;
+  padding: 20px;
+}
+.teammain-rightbox .hover-box {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.rb-schedule .list-schedule .item-schedule{
+  border-bottom: 3px double rgb(107, 104, 104);
+  padding: 10px 0;
+}
+.rb-schedule .list-schedule .item-schedule:first-child{
+  border-top: 3px solid rgb(107, 104, 104);
+}
+
+
+
+
+
+
+/* 공용 */
+.clear-fix::after {
+  content: "";
+  clear: both;
+  display: block;
+}
