@@ -9,8 +9,8 @@
           <ul class="topBar__list">
             <li>
               <a
-                href="#"
-                onclick="window.open('../screen/login.html','login','width=450, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no')"
+                href="#" 
+                onclick="window.open('<%=request.getContextPath()%>/login','login','width=450, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no')"
                 >로그인</a
               >
             </li>

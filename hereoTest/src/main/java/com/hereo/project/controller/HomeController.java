@@ -23,5 +23,11 @@ public class HomeController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView login(ModelAndView mv) {
+		mv.setViewName("/login_etc/login");
+		return mv;
+	}
+	
 }
 	
