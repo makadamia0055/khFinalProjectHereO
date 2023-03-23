@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="/hereoTest/resources/css/team/team_common.css" />
 <link rel="stylesheet" href="/hereoTest/resources/css/team/team.css" />
-<tiles:insertAttribute name="left" />
+
 <section class="teammain-main">
 		<div class="teammain-leftbox">
 			<!-- 지역 리스트 -->
@@ -75,24 +75,24 @@
 				<!-- 팀 리스트 -->
 			<div class="container-teambox">
 				<ul class="list-teambox" id="teamList">
-					<li class="item-teambox">
-						<div class="left-teambox">
-							<a href="./team-sep.html" style="background-image: url(/hereoTest/resources/img/team/고양이 로고.png);" class="link-team-select rounded-circle clear-fix">
-								<!-- <img src="./고양이 로고.png" alt="팀 이미지" class="rounded-circle team-icon" style="width: 150px; height: 150px ;"> -->
-								<div class="label-team">
-									<span class="team-local badge badge-success" data-local="seoul">안양</span> 
-									<span class="team-name">단또즈</span>
-								</div>
-							</a>
-						</div>
-						<div class="right-teambox">
-							경기 가능 지역 : <span class="possible_local">경기도</span><br>
-							다음 경기 일정 : <span class="recently_match">미정</span><br>
-							연습 신청 허용 여부 : <span class="match_type">비공개</span>
-							<button class="show-schedule btn btn-warning">경기 일정 보기</button>
-						</div>
-					</li>
-					
+					<c:forEach items="${teamList}" var="team">
+						<li class="item-teambox">
+							<div class="left-teambox">
+								<a href="<c:url value='/team/sep?teamNum=${team.tm_num}'></c:url>" style="background-image: url(/hereoTest/resources/img/team/고양이 로고.png);" class="link-team-select rounded-circle clear-fix">
+									<div class="label-team">
+										<span class="team-local badge badge-success" data-local="seoul">안양</span> 
+										<span class="team-name">${team.tm_name}</span>
+									</div>
+								</a>
+							</div>
+							<div class="right-teambox">
+								경기 가능 지역 : <span class="possible_local">경기도</span><br>
+								다음 경기 일정 : <span class="recently_match">미정</span><br>
+								연습 신청 허용 여부 : <span class="match_type">${team.tm_openformatch}</span>
+								<button class="show-schedule btn btn-warning">경기 일정 보기</button>
+							</div>
+						</li>
+					</c:forEach>
 					
 				</ul>
 			</div>

@@ -35,17 +35,16 @@
     <ul class="list-side">
       <li class="item-side">
         <a
-          href="../team.html"
+          href="<c:url value='/team/main'></c:url>"
           role="button"
-          target="_parent"
-          class="link-side btn btn-outline-light col-lg-8"
+          class="link-side btn btn-outline-light col-lg-12"
           >전체 팀 보기</a
         >
       </li>
       <li class="item-side team-name this-teamMenu" hidden>
         <a
           href="#demo1"
-          class="link-side btn btn-light col-lg-8"
+          class="link-side btn btn-light col-lg-12"
           data-toggle="collapse"
           >xx 팀 메뉴</a
         >
@@ -53,9 +52,8 @@
           <ul class="sublist-side">
             <li class="subitem-side">
               <a
-                href="../team-sep.html"
-                target="_parent"
-                class="sublink-side btn btn-danger col-sm-3"
+                href="<c:url value='/team/sep?teamNum=${team.tm_num }'></c:url>"
+                class="sublink-side btn btn-danger col-sm-8"
                 >팀 메인페이지</a
               >
             </li>
@@ -63,7 +61,7 @@
               <a
                 href="../team-record.html"
                 target="_parent"
-                class="sublink-side btn btn-outline-danger col-sm-3"
+                class="sublink-side btn btn-outline-danger col-sm-8"
                 >경기 기록실</a
               >
             </li>
@@ -71,7 +69,7 @@
               <a
                 href="../team-whole_player.html"
                 target="_parent"
-                class="sublink-side btn btn-danger col-sm-3"
+                class="sublink-side btn btn-danger col-sm-8"
                 >전체 선수 리스트</a
               >
             </li>
@@ -79,7 +77,7 @@
               <a
                 href="../board/team-sep-board_main.html"
                 target="_parent"
-                class="sublink-side btn btn-outline-danger col-sm-3"
+                class="sublink-side btn btn-outline-danger col-sm-8"
                 >팀 게시판</a
               >
             </li>
@@ -89,7 +87,7 @@
       <li class="item-side team-name">
         <a
           href="#demo"
-          class="link-side btn btn-light col-lg-8"
+          class="link-side btn btn-light col-lg-12"
           data-toggle="collapse"
           >우리 팀 메뉴</a
         >
@@ -99,7 +97,7 @@
               <a
                 href="../team-sep.html"
                 target="_parent"
-                class="sublink-side btn btn-danger col-sm-3"
+                class="sublink-side btn btn-danger col-sm-8"
                 >팀 메인페이지</a
               >
             </li>
@@ -107,7 +105,7 @@
               <a
                 href="../team-record.html"
                 target="_parent"
-                class="sublink-side btn btn-outline-danger col-sm-3"
+                class="sublink-side btn btn-outline-danger col-sm-8"
                 >경기 기록실</a
               >
             </li>
@@ -115,7 +113,7 @@
               <a
                 href="../team-whole_player.html"
                 target="_top"
-                class="sublink-side btn btn-danger col-sm-3"
+                class="sublink-side btn btn-danger col-sm-8"
                 >전체 선수 리스트</a
               >
             </li>
@@ -123,7 +121,7 @@
               <a
                 href="../board/team-sep-board_main.html"
                 target="_parent"
-                class="sublink-side btn btn-outline-danger col-sm-3"
+                class="sublink-side btn btn-outline-danger col-sm-8"
                 >팀 게시판</a
               >
             </li>
@@ -131,7 +129,7 @@
               <a
                 href="../join-control/team-join-board_main.html"
                 target="_parent"
-                class="sublink-side btn btn-danger col-sm-3"
+                class="sublink-side btn btn-danger col-sm-8"
                 >팀 가입 관리 게시판</a
               >
             </li>
@@ -142,7 +140,7 @@
         <a
           href="../team-join.html"
           target="_top"
-          class="link-side btn btn-outline-light col-lg-8"
+          class="link-side btn btn-outline-light col-lg-12"
           >가입신청</a
         >
       </li>
@@ -150,7 +148,7 @@
         <a
           href="../admin-crateTeam/team-create-board_main.html"
           target="_top"
-          class="link-side btn btn-light col-lg-8"
+          class="link-side btn btn-light col-lg-12"
           >관리자 메뉴</a
         >
       </li>

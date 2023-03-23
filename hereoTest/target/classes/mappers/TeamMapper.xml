@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hereo.project.dao.TeamDAO">
+	<select id="selectAllTeams" resultType="com.hereo.project.vo.TeamVO">
+		select * from team
+	</select>
+	<select id="selectTeamByTm_num" resultType="com.hereo.project.vo.TeamVO">
+		select * from team
+			where tm_num = #{tm_num}
+	</select>
+
+
+
+
+</mapper>
