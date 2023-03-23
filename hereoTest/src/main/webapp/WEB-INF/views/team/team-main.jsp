@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="/hereoTest/resources/css/team/team_common.css" />
 <link rel="stylesheet" href="/hereoTest/resources/css/team/team.css" />
+<tiles:insertAttribute name="left" />
 <section class="teammain-main">
 		<div class="teammain-leftbox">
 			<!-- 지역 리스트 -->
@@ -138,6 +139,37 @@
 		
 
 	</div>
-
+<script
+      src="https://kit.fontawesome.com/bedfa56d7f.js"
+      crossorigin="anonymous"
+    ></script>
+		<script>
+			$('.show-schedule').click(function(){
+				let teamName = $(this).parents('.item-teambox').find('.team-name').text();
+				$('.teammain-rightbox').find('.team-name').text(teamName);
+				$('.teammain-rightbox').find('.home_team').text(teamName);
+				$('.teammain-rightbox').toggle();
+			})
+			$(document).ready(function(){
+				$("#search-team").on("keyup", function() {
+					var value = $(this).val().toLowerCase();
+					$("#teamList li").filter(function() {
+						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					});
+				});
+			});
+			$('.list-region .item-region .link-region').click(function(e){
+				e.preventDefault();
+				if($(this).data('local')=='all'){
+					$('.container-teambox .list-teambox li').show();
+				}else{
+					let dtValue= $(this).data('local');
+					$('.container-teambox .list-teambox li').hide();
+					$('.container-teambox .list-teambox li').filter(function(){
+						return $(this).find('.team-local').data('local') == dtValue;
+					}).show();
+				}
+			})
+		</script>
 
     
