@@ -6,7 +6,6 @@
   src="https://code.jquery.com/jquery-3.6.4.js"
   integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
   crossorigin="anonymous"></script>
-<script type="text/javascript" src="<c:url value='/resources/js/common/click_menu.js'></c:url>"></script>
 <script type="text/javascript" src="<c:url value='/resources/js/main/main_page.js'></c:url>"></script>
   <main class="main__page">
       <div class="main__imgBox-container">

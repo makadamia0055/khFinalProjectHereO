@@ -1,3 +1,4 @@
+@import "../common/style.css";
 @import "./team.css";
 @import "./team-sep.css";
 @import "./team-playerdetail.css";
@@ -25,6 +26,11 @@
 @import "./admin-crateTeam/team-create-board_view.css"; */
 
 
+
+*{
+	list-style:none;
+}
+
 section {
   width: calc(70%);
   z-index: 0;
@@ -43,3 +49,4 @@ section {
   left: 20%;
   padding-top: 10px;
 }
+
