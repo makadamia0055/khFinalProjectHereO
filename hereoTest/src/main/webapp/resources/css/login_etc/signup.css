@@ -63,9 +63,20 @@
 }
 .signUp-form {
     height: 35px;
+    margin-top:5px;
 }
-.signup-container input {
+.signup-container input:not(.gender-type) {
+	padding-left : 10px;
     width: 63%;
+}
+.signup-gender {
+	display : flex;
+	position : relative;
+}
+.signup-gender .gender-type {
+	width : 25px;
+	height : 25px;
+	margin-left : 5px;
 }
 .signup-id {
     display: inline-block;
