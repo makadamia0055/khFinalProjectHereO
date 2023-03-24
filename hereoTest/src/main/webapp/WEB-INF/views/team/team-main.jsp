@@ -88,7 +88,12 @@
 							<div class="right-teambox">
 								경기 가능 지역 : <span class="possible_local">경기도</span><br>
 								다음 경기 일정 : <span class="recently_match">미정</span><br>
-								연습 신청 허용 여부 : <span class="match_type">${team.tm_openformatch}</span>
+								연습 신청 허용 여부 : <span class="match_type">
+									<c:choose>
+										<c:when test="${team.tm_openformatch}">신청 가능</c:when>
+										<c:otherwise>신청 불가</c:otherwise>
+									</c:choose>
+								</span>
 								<button class="show-schedule btn btn-warning">경기 일정 보기</button>
 							</div>
 						</li>
@@ -98,15 +103,18 @@
 			</div>
 			<!-- 팀 리스트 끝 -->
 			<div class="team-request">
-				<a href="./team-create_team.html" role="button" class="btn btn-dark btn-team-request">팀 신청하기</a>
+				<a href="<c:url value='/team/create'></c:url>" role="button" class="btn btn-dark btn-team-request">팀 신청하기</a>
 			</div>
 			<!-- 페이지 번호 -->
 			<div class="container-pagenation">
 				<ul class="pagination justify-content-center">
 					<li class="page-item prev"><a href="#" class="page-link">이전</a></li>
-					<li class="page-item active"><a href="#" class="page-link">1</a></li>
-					<li class="page-item"><a href="#" class="page-link">2</a></li>
-					<li class="page-item"><a href="#" class="page-link">3</a></li>
+					<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="index">
+						<li class="page-item
+							<c:if test='${index == pm.cri.page -1 }'> active </c:if> ">
+							<a href="<c:url value='/team/main?page=${index}'></c:url>" class="page-link">${index +1}</a>
+						</li>
+					</c:forEach>
 					<li class="page-item next"><a href="#" class="page-link">다음</a></li>
 				</ul>
 			</div>

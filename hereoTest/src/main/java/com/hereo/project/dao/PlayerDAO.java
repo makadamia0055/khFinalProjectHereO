@@ -9,5 +9,7 @@ public interface PlayerDAO {
 
 	PlayerVO selectPlayerByTP(@Param("tp")TeamPlayerVO tmp);
 
+	PlayerVO selectPlayerByNum(@Param("pl_num")Integer player);
+
 
 }

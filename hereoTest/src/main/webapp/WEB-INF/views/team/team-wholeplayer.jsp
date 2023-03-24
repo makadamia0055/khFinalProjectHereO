@@ -75,10 +75,10 @@
 					<c:forEach items="${playerList }" var="player">
 						<li class="item-playerbox">
 							<div class="left-playerbox">
-								<a href="./team-playerdetail.html" class="link-player-img3 rounded-circle clear-fix">
+								<a href="<c:url value='/team/pdetail?player=${player.pl_num }'></c:url>" class="link-player-img3 rounded-circle clear-fix">
 									<div class="label-player">
 										<span class="player-local badge badge-danger">투수</span> 
-										<span class="player-name">${player.pl_me_id }</span>
+										<span class="player-name">${player.me_nickname }</span>
 									</div>
 								</a>
 							</div>

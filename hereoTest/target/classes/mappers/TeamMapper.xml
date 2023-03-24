@@ -5,10 +5,19 @@
 <mapper namespace="com.hereo.project.dao.TeamDAO">
 	<select id="selectAllTeams" resultType="com.hereo.project.vo.TeamVO">
 		select * from team
+			order by tm_num desc
+			limit #{cri.pageStart}, #{cri.perPageNum}
+			
 	</select>
 	<select id="selectTeamByTm_num" resultType="com.hereo.project.vo.TeamVO">
 		select * from team
 			where tm_num = #{tm_num}
+	</select>
+	<select id = "countAllTeams" resultType="int">
+		select
+			count(tm_num)
+		from
+			team
 	</select>
 
 
