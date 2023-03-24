@@ -16,5 +16,7 @@ public class PlayerVO {
 	private String pl_introduct;
 	private String pl_player_img;
 	private ArrayList<TeamPlayerVO> teamList;
-	
+	private ArrayList<Position_HopeVO> positionList;
+//	닉네임 임시로 넣긴 했는데 계속 여기 넣어야하나 고민중
+	private String me_nickname;
 }

@@ -10,4 +10,6 @@ public interface TeamPlayerDAO {
 
 	ArrayList<TeamPlayerVO> selectPlayerListByTeam(@Param("tm_num")Integer teamNum);
 
+	ArrayList<TeamPlayerVO> selectTPlayerListByPl_Num(@Param("pl_num")Integer player);
+
 }

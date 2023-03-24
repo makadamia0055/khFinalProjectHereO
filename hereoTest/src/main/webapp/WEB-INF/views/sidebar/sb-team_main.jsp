@@ -67,8 +67,7 @@
             </li>
             <li class="subitem-side">
               <a
-                href="../team-whole_player.html"
-                target="_parent"
+                href="<c:url value='/team/wholeplayer?teamNum=${team.tm_num }'></c:url>"
                 class="sublink-side btn btn-danger col-sm-8"
                 >전체 선수 리스트</a
               >
@@ -76,7 +75,6 @@
             <li class="subitem-side">
               <a
                 href="../board/team-sep-board_main.html"
-                target="_parent"
                 class="sublink-side btn btn-outline-danger col-sm-8"
                 >팀 게시판</a
               >
@@ -95,8 +93,7 @@
           <ul class="sublist-side">
             <li class="subitem-side">
               <a
-                href="../team-sep.html"
-                target="_parent"
+                href="<c:url value='/team/main'></c:url>"
                 class="sublink-side btn btn-danger col-sm-8"
                 >팀 메인페이지</a
               >
@@ -111,8 +108,7 @@
             </li>
             <li class="subitem-side">
               <a
-                href="../team-whole_player.html"
-                target="_top"
+                href="<c:url value='/team/wholeplayer?teamNum=${team.tm_num }'></c:url>"
                 class="sublink-side btn btn-danger col-sm-8"
                 >전체 선수 리스트</a
               >
