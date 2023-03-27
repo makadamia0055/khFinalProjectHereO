@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="/hereoTest/resources/css/team/team_common.css" />
 <link rel="stylesheet" href="/hereoTest/resources/css/team/team.css" />
-<link	rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
 <section class="teammain-main">
 		<div class="teammain-leftbox">
@@ -79,17 +78,7 @@
 					<c:forEach items="${teamList}" var="team">
 						<li class="item-teambox">
 							<div class="left-teambox">
-								<a href="<c:url value='/team/sep?teamNum=${team.tm_num}'></c:url>" style="background-image: url(
-									<c:choose>
-										<c:when test="${empty team.tm_team_img}">
-											<c:url value='/files/defaultlogo.png'></c:url>
-										</c:when>
-										<c:otherwise>
-											<c:url value='/files${team.tm_team_img}'></c:url>
-										</c:otherwise>
-									</c:choose>
-									
-								);" class="link-team-select rounded-circle clear-fix">
+								<a href="<c:url value='/team/sep?teamNum=${team.tm_num}'></c:url>" style="background-image: url(/hereoTest/resources/img/team/고양이 로고.png);" class="link-team-select rounded-circle clear-fix">
 									<div class="label-team">
 										<span class="team-local badge badge-success" data-local="seoul">안양</span> 
 										<span class="team-name">${team.tm_name}</span>
@@ -97,7 +86,7 @@
 								</a>
 							</div>
 							<div class="right-teambox">
-								연고지 : <span class="possible_local">경기도</span><br>
+								경기 가능 지역 : <span class="possible_local">경기도</span><br>
 								다음 경기 일정 : <span class="recently_match">미정</span><br>
 								연습 신청 허용 여부 : <span class="match_type">
 									<c:choose>
@@ -162,8 +151,6 @@
 		
 
 	</div>
-	<c:remove var="team" scope="session"></c:remove>
-	
 <script
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
@@ -183,32 +170,43 @@
 		$('.teammain-rightbox').find('.home_team').text(teamName);
 		$('.teammain-rightbox').toggle();
 	})
-	
+	/* 레거시 검색& 버튼 코드 */
+	/* $(document).ready(function(){
+		$("#search-team").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			$("#teamList li").filter(function() {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
+	});
+	$('.list-region .item-region .link-region').click(function(e){
+		e.preventDefault();
+		if($(this).data('local')=='all'){
+			$('.container-teambox .list-teambox li').show();
+		}else{
+			let dtValue= $(this).data('local');
+			$('.container-teambox .list-teambox li').hide();
+			$('.container-teambox .list-teambox li').filter(function(){
+				return $(this).find('.team-local').data('local') == dtValue;
+			}).show();
+		}
+	}) */
 	
 </script>
 <script>
 /* 버튼 검색(일단은 strType으로 구현) */
-/* $('.list-region .item-region .link-region').click(function(e){
+$('.list-region .item-region .link-region').click(function(e){
 	e.preventDefault();
-	$(this).toggleClass('active');
 	let localType = $(this).data('local');
-	console.log(localType);
-	if(localType=='all'){
-		$('.list-region .item-region .link-region').removeClass('active');
-		return;
-	}
-	applyActive($(this));
-	
+	cri.strType = localType;
+	ajax("get", cri, "<c:url value='/team/main'></c:url>", function(data){
+		
+		cri = data.cri
+		console.log(cri);
+		
+		
+		})
 	})
-function applyActive(e){
-	let tmp = $('.list-region .item-region .link-region').filter('.active')
-	if(tmp.length>=4){
-		alert('지역은 최대 3개까지 선택할 수 있습니다.')
-		$(e).removeClass('active');
-		return;
-	}
-	let teamList = 
-} */	
 
 
 

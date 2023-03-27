@@ -11,7 +11,15 @@
         <div class="container-introduce">
          <div class="left-introduce">
           <div class="box-logo">
-            <img src="../team/고양이 로고.png" class="rounded-circle" alt="안양 단또즈">
+            <img src="
+	            <c:choose>
+					<c:when test="${empty team.tm_team_img}">
+						<c:url value='/files/defaultlogo.png'></c:url>
+					</c:when>
+					<c:otherwise>
+						<c:url value='/files${team.tm_team_img}'></c:url>
+					</c:otherwise>
+				</c:choose> " class="rounded-circle" alt="${team.tm_name }">
           </div>
             
         </div>

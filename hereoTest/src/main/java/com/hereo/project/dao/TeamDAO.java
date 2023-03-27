@@ -9,10 +9,12 @@ import com.hereo.project.vo.TeamVO;
 
 public interface TeamDAO {
 
-	ArrayList<TeamVO> selectAllTeams(@Param("cri")Criteria cri);
+	ArrayList<TeamVO> selectAllTeamsByCri(@Param("cri")Criteria cri);
 
 	TeamVO selectTeamByTm_num(@Param("tm_num")Integer teamNum);
 
 	int countAllTeams();
+
+	boolean insertTeam(@Param("tm")TeamVO team);
 
 }
