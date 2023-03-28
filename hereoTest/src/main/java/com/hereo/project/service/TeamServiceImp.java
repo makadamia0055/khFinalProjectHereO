@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.hereo.project.dao.TeamDAO;
 import com.hereo.project.pagination.Criteria;
 import com.hereo.project.utils.UploadFileUtils;
+import com.hereo.project.vo.TeamApprovalListVO;
 import com.hereo.project.vo.TeamVO;
 
 @Service
@@ -19,6 +20,10 @@ public class TeamServiceImp implements TeamService{
 
 	String uploadPath = "D:\\uploadfiles";
 
+	@Override
+	public ArrayList<TeamVO> selectTeamsByCriAndState(Criteria cri, String state) {
+		return teamDao.selectTeamsByCriAndState(cri, state);
+	}
 	
 	@Override
 	public ArrayList<TeamVO> selectAllTeamsByCri(Criteria cri) {
@@ -59,8 +64,25 @@ public class TeamServiceImp implements TeamService{
 		team.setTm_me_id("asd123");
 		team.setTm_team_img(tmpImgPath);
 		boolean res = teamDao.insertTeam(team);
-		
+		if(res) {
+			teamDao.insertTeamAppList(team);
+		}
 		return res;
+	}
+
+	@Override
+	public TeamApprovalListVO selectTeamAppListByTeam(TeamVO tmpTeam) {
+		if(tmpTeam==null)
+			return null;
+		return teamDao.selectTeamAppListByTeam(tmpTeam);
+	}
+
+	@Override
+	public boolean updateTeamAppListState(Integer teamNum, int i) {
+		if(teamNum==null||teamNum<0)
+			return false;
+		return teamDao.updateTeamAppListState(teamNum, i) !=0;
+	
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hereo.project.pagination.Criteria;
+import com.hereo.project.vo.TeamApprovalListVO;
 import com.hereo.project.vo.TeamVO;
 
 public interface TeamService {
@@ -16,6 +17,14 @@ public interface TeamService {
 	int countTeams();
 
 	boolean insertTeam(TeamVO team, MultipartFile imgFile);
+
+	ArrayList<TeamVO> selectTeamsByCriAndState(Criteria cri, String state);
+
+	TeamApprovalListVO selectTeamAppListByTeam(TeamVO tmpTeam);
+
+	boolean updateTeamAppListState(Integer teamNum, int i);
+
+	
 
 
 

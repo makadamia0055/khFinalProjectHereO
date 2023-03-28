@@ -35,7 +35,7 @@ public class TeamController {
 		cri.setPerPageNum(5);
 		PageMaker pm = new PageMaker(totalCount, 5, cri);
 		
-		ArrayList<TeamVO> teamList = teamService.selectAllTeamsByCri(pm.getCri());
+		ArrayList<TeamVO> teamList = teamService.selectTeamsByCriAndState(pm.getCri(), "활동중");
 		mv.addObject("teamList", teamList);
 		mv.addObject("pm", pm);
 		mv.setViewName("/team/team-main");

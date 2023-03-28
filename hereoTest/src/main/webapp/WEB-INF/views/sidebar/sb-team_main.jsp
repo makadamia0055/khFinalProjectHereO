@@ -155,8 +155,7 @@
       </li>
       <li class="item-side">
         <a
-          href="../admin-crateTeam/team-create-board_main.html"
-          target="_top"
+          href="<c:url value='/admin'></c:url>"
           class="link-side btn btn-light col-lg-12"
           >관리자 메뉴</a
         >
