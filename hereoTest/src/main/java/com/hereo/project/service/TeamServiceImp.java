@@ -1,22 +1,33 @@
 package com.hereo.project.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hereo.project.dao.TeamDAO;
 import com.hereo.project.pagination.Criteria;
+import com.hereo.project.utils.UploadFileUtils;
+import com.hereo.project.vo.TeamApprovalListVO;
 import com.hereo.project.vo.TeamVO;
 
 @Service
 public class TeamServiceImp implements TeamService{
 	@Autowired
 	TeamDAO teamDao;
+
+	String uploadPath = "D:\\uploadfiles";
+
+	@Override
+	public ArrayList<TeamVO> selectTeamsByCriAndState(Criteria cri, String state) {
+		return teamDao.selectTeamsByCriAndState(cri, state);
+	}
 	
 	@Override
-	public ArrayList<TeamVO> selectAllTeams(Criteria cri) {
-		return teamDao.selectAllTeams(cri);
+	public ArrayList<TeamVO> selectAllTeamsByCri(Criteria cri) {
+		return teamDao.selectAllTeamsByCri(cri);
 	}
 
 	
@@ -31,6 +42,64 @@ public class TeamServiceImp implements TeamService{
 	@Override
 	public int countTeams() {
 		return teamDao.countAllTeams();
+	}
+
+
+	@Override
+	public boolean insertTeam(TeamVO team, MultipartFile imgFile) {
+		if(team==null||team.getTm_name()==null||team.getTm_name().trim().equals("")||
+				team.getTm_slogan()==null)
+			return false;
+//			team.tm_me_id는 지금 시점에서 구현이 애매해서 뺌
+		String tmpImgPath = "";
+		if(imgFile!=null) {
+			try {
+				 tmpImgPath = UploadFileUtils.uploadFile(uploadPath, imgFile.getOriginalFilename(), imgFile.getBytes());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+//		임시 팀장 아이디
+		team.setTm_me_id("asd123");
+		team.setTm_team_img(tmpImgPath);
+		boolean res = teamDao.insertTeam(team);
+		if(res) {
+			teamDao.insertTeamAppList(team);
+		}
+		return res;
+	}
+
+	@Override
+	public TeamApprovalListVO selectTeamAppListByTeam(TeamVO tmpTeam) {
+		if(tmpTeam==null)
+			return null;
+		return teamDao.selectTeamAppListByTeam(tmpTeam);
+	}
+
+	@Override
+	public boolean updateTeamAppListState(Integer teamNum, int i) {
+		if(teamNum==null||teamNum<0)
+			return false;
+		
+		return teamDao.updateTeamAppListState(teamNum, i) !=0;
+	
+	}
+
+	@Override
+	public void deleteTeamAppListState(Integer teamNum, Integer teamState) {
+		if(teamNum==null||teamNum<0)
+			return ;
+		if(teamState==null||teamState<0)
+			return ;
+		if(teamState==3) {
+			teamDao.deleteTeamAppList(teamNum);
+			teamDao.updateTeamState(teamNum, "활동중");
+		}else if(teamState==2) {
+			teamDao.deleteTeamAppList(teamNum);
+			teamDao.updateTeamState(teamNum, "승인불가");
+		}
+		
 	}
 	
 }
