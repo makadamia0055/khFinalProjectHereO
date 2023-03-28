@@ -39,7 +39,7 @@
 				<table class="table table-bordered">
 					<thead class="thead-dark">
 						<tr>
-							<th class="board_num">번호</th>
+<!-- 							<th class="board_num">번호</th> -->
 							<th class="team_num">팀번호</th>
 							<th class="box-team_img">팀 이미지</th>
 							<th class="team_name">희망 팀 이름</th>
@@ -53,7 +53,7 @@
 					<tbody>
 						<c:forEach items="${TAList}" var="tal">
 							<tr>
-								<th class="board_num">임시tal.ta_bo_num</th>
+								<!-- <th class="board_num">임시tal.ta_bo_num</th> -->
 								<td class="team_num">${tal.team.tm_num}</td>
 								<td class="box-team_img"><img class="item-team_img" src="<c:url value='/files${tal.team.tm_team_img }'></c:url>"></td>
 								<td class="team_name"><a href="<c:url value='/admin/team_createBoard?teamNum= ${tal.ta_tm_num }'></c:url>"> ${tal.team.tm_name }</a></td>

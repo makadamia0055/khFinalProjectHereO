@@ -81,8 +81,25 @@ public class TeamServiceImp implements TeamService{
 	public boolean updateTeamAppListState(Integer teamNum, int i) {
 		if(teamNum==null||teamNum<0)
 			return false;
+		
 		return teamDao.updateTeamAppListState(teamNum, i) !=0;
 	
+	}
+
+	@Override
+	public void deleteTeamAppListState(Integer teamNum, Integer teamState) {
+		if(teamNum==null||teamNum<0)
+			return ;
+		if(teamState==null||teamState<0)
+			return ;
+		if(teamState==3) {
+			teamDao.deleteTeamAppList(teamNum);
+			teamDao.updateTeamState(teamNum, "활동중");
+		}else if(teamState==2) {
+			teamDao.deleteTeamAppList(teamNum);
+			teamDao.updateTeamState(teamNum, "승인불가");
+		}
+		
 	}
 	
 }

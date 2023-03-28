@@ -55,6 +55,14 @@
 			set ta_state = #{ta_state}
 			where ta_tm_num = #{tm_num}
 	</update>
+	<delete id="deleteTeamAppList">
+		delete from `team-approvallist`	where ta_tm_num = #{tm_num}
+	</delete>
+	<update id="updateTeamState">
+		update team
+			set tm_teamstate = #{state}
+			where tm_num = #{tm_num}
+	</update>
 
 
 </mapper>

@@ -57,6 +57,17 @@ public class AdminController {
 		mv.setViewName("/admin/admin_teamcreateboard");
 		return mv;
 	}
+	@RequestMapping(value = "/admin/team_createBoard", method = RequestMethod.POST)
+	public ModelAndView adminTeamCreateBoardPost(ModelAndView mv, Integer teamNum, Integer teamState) {
+		boolean res = teamService.updateTeamAppListState(teamNum, teamState);
+		if(res) {
+			teamService.deleteTeamAppListState(teamNum, teamState);
+			
+		}
+		
+		mv.setViewName("redirect:/admin/team_create");
+		return mv;
+	}
 	
 	
 }

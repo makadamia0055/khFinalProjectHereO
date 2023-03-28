@@ -24,6 +24,8 @@ public interface TeamService {
 
 	boolean updateTeamAppListState(Integer teamNum, int i);
 
+	void deleteTeamAppListState(Integer teamNum, Integer teamState);
+
 	
 
 

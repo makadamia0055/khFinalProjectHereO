@@ -26,5 +26,9 @@ public interface TeamDAO {
 
 	int updateTeamAppListState(@Param("tm_num")Integer teamNum, @Param("ta_state")int i);
 
+	void deleteTeamAppList(@Param("tm_num")Integer teamNum);
+
+	void updateTeamState(@Param("tm_num")Integer teamNum, @Param("state")String string);
+
 
 }
