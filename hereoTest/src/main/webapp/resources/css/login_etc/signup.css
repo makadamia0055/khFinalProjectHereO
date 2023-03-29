@@ -54,21 +54,52 @@
     line-height: 75px;
 }
 /* 본문 */
+label {
+	font-weight : 600;
+	margin-top: 8px;
+}
 .signUp-dsscription {
+	margin-left : 25%;
     font-size: 20px;
     padding: 20px 0px;
+    font-weight : 600;
 }
 .signup-container {
     padding-left: 25%;
 }
+.signup-withBtn_container {
+	display : flex;
+}
+.signup-withBtn01 {
+	width:63%;
+}
+.signup-withBtn02 {
+	width:37%;
+	padding-top : 37px;
+	padding-left : 15px;
+}
+.signup-withBtn01 input{
+	width:100%;
+}
 .signUp-form {
     height: 35px;
 }
-.signup-container input {
+.signup-container>input:not(.gender-type) {
+  padding-left : 10px;
     width: 63%;
+}
+.signup-gender {
+  display : flex;
+  position : relative;
+}
+.signup-gender .gender-type {
+  width : 25px;
+  height : 25px;
+  margin-left : 5px;
 }
 .signup-id {
     display: inline-block;
+    padding-left : 10px;
 }
 .valid-letter {
     width: 63%;
@@ -78,7 +109,7 @@
 }
 .idCheck-btn {
     margin-left: 8px;
-    width: 65px;
+    width: 78px;
     height: 35px;
     font-size: 13px;
     border-radius: 10px;
@@ -96,4 +127,11 @@
     color: white;
     font-weight: 600;
 }
+/* 에러 */
+label.error {
+	font-size:9px;
+	margin : 0 0 0 0;
+	color: red;
+}
+
 
