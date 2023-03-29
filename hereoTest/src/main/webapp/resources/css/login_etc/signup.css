@@ -27,73 +27,110 @@
   text-decoration: underline;
 }
 .signup {
-    margin-top: 120px;
+  margin-top: 120px;
 }
 /* 회원가입 상단 메뉴 */
 .signUp-topMenu {
-    background-color: #150050;
-    height: 80px;
+  background-color: #150050;
+  height: 80px;
 }
 .signUp-topMenu__goMainPage {
-    width: 100%;
-    height: 80px;
-    position: relative;
+  width: 100%;
+  height: 80px;
+  position: relative;
 }
 .signUp-topMenu__goMainPage > a {
-    display: block;
-    height: 80px;
-    position: absolute;
-    top: 0px;
+  display: block;
+  height: 80px;
+  position: absolute;
+  top: 0px;
 }
 .signUp-topMenu__goMainPage:first-child > a {
-    font-size: 35px;
-    top: 0px;
-    left: 45%;
-    color: #f9f5e7;
-    font-weight: 600;
-    line-height: 75px;
+  font-size: 35px;
+  top: 0px;
+  left: 45%;
+  color: #f9f5e7;
+  font-weight: 600;
+  line-height: 75px;
 }
 /* 본문 */
+label {
+  font-weight: 600;
+  margin-top: 8px;
+}
 .signUp-dsscription {
-    font-size: 20px;
-    padding: 20px 0px;
+  margin-left: 25%;
+  font-size: 20px;
+  padding: 20px 0px;
+  font-weight: 600;
 }
 .signup-container {
-    padding-left: 25%;
+  padding-left: 25%;
+}
+.signup-withBtn_container {
+  display: flex;
+}
+.signup-withBtn01 {
+  width: 63%;
+}
+.signup-withBtn02 {
+  width: 37%;
+  padding-top: 37px;
+  padding-left: 15px;
+}
+.signup-withBtn01 input {
+  width: 100%;
 }
 .signUp-form {
-    height: 35px;
+  height: 35px;
+  margin-top: 5px;
 }
-.signup-container input {
-    width: 63%;
+.signup-container > input:not(.gender-type) {
+  padding-left: 10px;
+  width: 63%;
+}
+.signup-gender {
+  display: flex;
+  position: relative;
+}
+.signup-gender .gender-type {
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
 }
 .signup-id {
-    display: inline-block;
+  display: inline-block;
+  padding-left: 10px;
 }
 .valid-letter {
-    width: 63%;
-    display: block;
-    font-size: 12px;
-    margin-bottom: 10px;
+  width: 63%;
+  display: block;
+  font-size: 12px;
+  margin-bottom: 10px;
 }
 .idCheck-btn {
-    margin-left: 8px;
-    width: 65px;
-    height: 35px;
-    font-size: 13px;
-    border-radius: 10px;
-    border-style: none ;
+  margin-left: 8px;
+  width: 78px;
+  height: 35px;
+  font-size: 13px;
+  border-radius: 10px;
+  border-style: none;
 }
 .signup-btn {
-    margin-left: 45%;
-    border-radius: 10px;
-    border-style: none ;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    width: 80px;
-    height: 35px;
-    background-color: #00337C;
-    color: white;
-    font-weight: 600;
+  margin-left: 45%;
+  border-radius: 10px;
+  border-style: none;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  width: 80px;
+  height: 35px;
+  background-color: #00337c;
+  color: white;
+  font-weight: 600;
 }
-
+/* 에러 */
+label.error {
+  font-size: 9px;
+  margin: 0 0 0 0;
+  color: red;
+}
