@@ -16,7 +16,7 @@ public interface TeamDAO {
 
 	TeamVO selectTeamByTm_num(@Param("tm_num")Integer teamNum);
 
-	int countAllTeams();
+	int countAllTeams(@Param("state")String state, @Param("cri")Criteria cri);
 
 	boolean insertTeam(@Param("tm")TeamVO team);
 
@@ -29,6 +29,8 @@ public interface TeamDAO {
 	void deleteTeamAppList(@Param("tm_num")Integer teamNum);
 
 	void updateTeamState(@Param("tm_num")Integer teamNum, @Param("state")String string);
+
+	ArrayList<TeamVO> selectTeamByName(String tm_name);
 
 
 }

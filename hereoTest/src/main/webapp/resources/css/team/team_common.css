@@ -4,14 +4,14 @@
 @import "./team-playerdetail.css";
 @import "./team-join.css";
 @import "./team-record.css";
-/* @import "./board/team-board-common.css"; */
+@import "./team-board-common.css"; 
 @import "./team-create_team.css";
 @import "./team-whole_player.css";
 
 /* 보드 */
-/* @import "./board/team-sep-board_main.css";
-@import "./board/team-sep-board_view.css";
-@import "./board/team-sep-board_write.css"; */
+@import "./team-sep-board_main.css";
+@import "./team-sep-board_view.css";
+@import "./team-sep-board_write.css";
 
 /* 가입 보드 */
 /* @import "./join-control/team-join-board_view.css";

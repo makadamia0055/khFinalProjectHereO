@@ -10,9 +10,10 @@
   			<if test="state !=null">
   			and tm_teamstate like #{state}
   			</if>
-  			<if test="cri.strType!=null and !cri.strType.equals('')">
-  				and tm_re_num= (select re_num from region where re_sido like concat(${cir.strType}, '%'))  				
+  			<if test="cri.type != 0">
+  				and tm_re_num= #{cri.type}  				
   			</if>
+  			
   			order by tm_num desc
 			limit #{cri.pageStart}, #{cri.perPageNum}
 			
@@ -21,8 +22,8 @@
 		select * from team
 		where
   			(tm_name like concat('%',#{cri.search} ,'%'))
-  			<if test="cri.strType!=null and !cri.strType.equals('')">
-  				and tm_re_num= (select re_num from region where re_sido like concat(${cir.strType}, '%'))  				
+  			<if test="cri.type != 0">
+  				and tm_re_num= #{cri.type}  				
   			</if>
   			order by tm_num desc
 			limit #{cri.pageStart}, #{cri.perPageNum}
@@ -37,6 +38,10 @@
 			count(tm_num)
 		from
 			team
+		where tm_teamstate like #{state}
+			<if test="cri.type != 0">
+  				and tm_re_num= #{cri.type}  				
+  			</if>
 	</select>
 	<insert id="insertTeam">
 		insert into team(tm_name, tm_startday, tm_slogan, tm_re_num, tm_openformatch, tm_teamgender, tm_teamstate, tm_me_id, tm_team_img)
@@ -63,6 +68,10 @@
 			set tm_teamstate = #{state}
 			where tm_num = #{tm_num}
 	</update>
+	<select id="selectTeamByName" resultType="com.hereo.project.vo.TeamVO">
+		select * from team
+			where tm_name =#{tm_name}
+	</select>
 
 
 </mapper>

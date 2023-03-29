@@ -56,7 +56,7 @@
 								<!-- <th class="board_num">임시tal.ta_bo_num</th> -->
 								<td class="team_num">${tal.team.tm_num}</td>
 								<td class="box-team_img"><img class="item-team_img" src="<c:url value='/files${tal.team.tm_team_img }'></c:url>"></td>
-								<td class="team_name"><a href="<c:url value='/admin/team_createBoard?teamNum= ${tal.ta_tm_num }'></c:url>"> ${tal.team.tm_name }</a></td>
+								<td class="team_name"><a href="<c:url value='/team/adteam_createBoard?teamNum= ${tal.ta_tm_num }'></c:url>"> ${tal.team.tm_name }</a></td>
 								<td class="teamLeader"> <a href="#"> ${tal.team.tm_me_id }</a></td>
 								<td class="location_big">${tal.team.tm_re_num }</td>
 								<td class="create_date"><fmt:formatDate type="both" pattern = "yyyy-MM-dd HH:mm" value="${tal.ta_register_date}"></fmt:formatDate></td>

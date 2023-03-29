@@ -7,7 +7,6 @@
   <!-- main layout -->
   <definition name="layout-tiles" template="/WEB-INF/views/tiles/tiles-layout.jsp">
     <put-attribute name="header" value="/WEB-INF/views/tiles/headerTemplate.jsp" />
-    <put-attribute name="left" value="/WEB-INF/views/tiles/sidebarTemplate.jsp" />
     <put-attribute name="footer" value="/WEB-INF/views/tiles/footerTemplate.jsp" />
   </definition>
   
@@ -19,13 +18,24 @@
   <definition name="/home" extends="noSideBarlayout-tiles">
     <put-attribute name="body" value="/WEB-INF/views/home.jsp" />
   </definition>
-  <definition name="/*/*" extends="layout-tiles">
+  
+ <!--  <definition name="/*/*" extends="layout-tiles">
     <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
-  </definition>
+  </definition> -->
+  <!-- 앞에 /team/에 해당하는 템플릿을 만들고 거기에 맞추어 사이드바를 넣는 식으로.
+  	그러면 템플릿 3개만 만들면 사이드바 추가 가능 -->
+  	
+  <definition name="/team/*" extends="layout-tiles">
+    <put-attribute name="body" value="/WEB-INF/views/team/{1}.jsp" />
+    <put-attribute name="left" value="/WEB-INF/views/sidebar/sb-team_main.jsp" />
+  </definition>	
+  
   
   <!-- no layout -->
-  <definition name="No-layout-tiles" template="">
+  <definition name="/nolayout/*/*" template="">
     <put-attribute name="login" value="/WEB-INF/views/login_etc/login.jsp" />
     <put-attribute name="signup" value="/WEB-INF/views/login_etc/signup.jsp" />
   </definition>
+  
+  
 </tiles-definitions>

@@ -40,8 +40,8 @@ public class TeamServiceImp implements TeamService{
 
 
 	@Override
-	public int countTeams() {
-		return teamDao.countAllTeams();
+	public int countTeams(String state, Criteria cri) {
+		return teamDao.countAllTeams(state, cri);
 	}
 
 
@@ -52,7 +52,7 @@ public class TeamServiceImp implements TeamService{
 			return false;
 //			team.tm_me_id는 지금 시점에서 구현이 애매해서 뺌
 		String tmpImgPath = "";
-		if(imgFile!=null) {
+		if(imgFile!=null&&imgFile.getOriginalFilename().length()!=0) {
 			try {
 				 tmpImgPath = UploadFileUtils.uploadFile(uploadPath, imgFile.getOriginalFilename(), imgFile.getBytes());
 			} catch (Exception e) {
@@ -99,6 +99,17 @@ public class TeamServiceImp implements TeamService{
 			teamDao.deleteTeamAppList(teamNum);
 			teamDao.updateTeamState(teamNum, "승인불가");
 		}
+		
+	}
+
+	@Override
+	public boolean selectTeamByName(String tm_name) {
+		if(tm_name==null||tm_name.trim().equals(""))
+			return false;
+		ArrayList<TeamVO> tmpList = teamDao.selectTeamByName(tm_name);
+		if(tmpList==null||tmpList.size()==0)
+			return true;
+		return false;
 		
 	}
 	
