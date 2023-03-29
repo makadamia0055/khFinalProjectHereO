@@ -12,6 +12,15 @@ import com.hereo.project.vo.MembersVO;
 public class MembersServiceImp implements MembersService{
 	@Autowired
 	MembersDAO membersDao;
+
+	@Override
+	public boolean insertUser(MembersVO user) {
+		if(user==null)
+			return false;
+		if(membersDao.insertUser(user) !=0 )
+			return true;
+		return false;
+	}
 	
 	
 

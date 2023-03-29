@@ -6,5 +6,7 @@ import com.hereo.project.vo.MembersVO;
 
 public interface MembersService {
 
+	boolean insertUser(MembersVO user);
+
 
 }

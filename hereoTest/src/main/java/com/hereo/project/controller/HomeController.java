@@ -1,9 +1,9 @@
 package com.hereo.project.controller;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,9 +29,16 @@ public class HomeController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/signup", method = RequestMethod.GET)
-	public ModelAndView signup(ModelAndView mv) {
+	@GetMapping(value = "/signup")
+	public ModelAndView signupGet(ModelAndView mv) {
 		mv.setViewName("login_etc/signup");
+		return mv;
+	}
+	
+	@PostMapping(value = "/signup")
+	public ModelAndView signupPost(ModelAndView mv, MembersVO user) {
+		membersService.insertUser(user);
+		mv.setViewName("redirect:/");
 		return mv;
 	}
 	
