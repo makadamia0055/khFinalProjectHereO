@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hereo.project.dao.TeamDAO">
+	<select id="selectTeamsByCriAndState" resultType="com.hereo.project.vo.TeamVO">
+		select * from team
+		where
+  			(tm_name like concat('%',#{cri.search} ,'%'))
+  			<if test="state !=null">
+  			and tm_teamstate like #{state}
+  			</if>
+  			<if test="cri.strType!=null and !cri.strType.equals('')">
+  				and tm_re_num= (select re_num from region where re_sido like concat(${cir.strType}, '%'))  				
+  			</if>
+  			order by tm_num desc
+			limit #{cri.pageStart}, #{cri.perPageNum}
+			
+	</select>
+	<select id="selectAllTeamsByCri" resultType="com.hereo.project.vo.TeamVO">
+		select * from team
+		where
+  			(tm_name like concat('%',#{cri.search} ,'%'))
+  			<if test="cri.strType!=null and !cri.strType.equals('')">
+  				and tm_re_num= (select re_num from region where re_sido like concat(${cir.strType}, '%'))  				
+  			</if>
+  			order by tm_num desc
+			limit #{cri.pageStart}, #{cri.perPageNum}
+			
+	</select>
+	<select id="selectTeamByTm_num" resultType="com.hereo.project.vo.TeamVO">
+		select * from team
+			where tm_num = #{tm_num}
+	</select>
+	<select id = "countAllTeams" resultType="int">
+		select
+			count(tm_num)
+		from
+			team
+	</select>
+	<insert id="insertTeam">
+		insert into team(tm_name, tm_startday, tm_slogan, tm_re_num, tm_openformatch, tm_teamgender, tm_teamstate, tm_me_id, tm_team_img)
+		values(#{tm.tm_name}, ifnull(#{tm.tm_startday}, now()), #{tm.tm_slogan}, #{tm.tm_re_num}, #{tm.tm_openformatch}, #{tm.tm_teamgender}, '심사중',  #{tm.tm_me_id}, #{tm.tm_team_img})
+	</insert>
+	<select id="selectTeamAppListByTeam" resultType="com.hereo.project.vo.TeamApprovalListVO">
+		select * from `team-approvallist`
+			where ta_tm_num = #{tm.tm_num}
+	</select>
+	<insert id="insertTeamAppList">
+		insert into `team-approvallist`(ta_tm_num, ta_register_date, ta_state, ta_bo_num)
+			value((select tm_num from team where tm_name like "${tm.tm_name}"), now(), 0, null)
+	</insert>
+	<update id="updateTeamAppListState">
+		update `team-approvallist`
+			set ta_state = #{ta_state}
+			where ta_tm_num = #{tm_num}
+	</update>
+	<delete id="deleteTeamAppList">
+		delete from `team-approvallist`	where ta_tm_num = #{tm_num}
+	</delete>
+	<update id="updateTeamState">
+		update team
+			set tm_teamstate = #{state}
+			where tm_num = #{tm_num}
+	</update>
+
+
+</mapper>

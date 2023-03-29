@@ -43,10 +43,11 @@ section {
 .team-join-board-main_main,
 .team-join-board_view_main */
  section{
-  margin-top: 150px;
-  margin-left: 30px;
+ margin-top: 150px;
+  margin-left: 50px;
+  left: 18%;
   position: absolute;
-  left: 20%;
+  
   padding-top: 10px;
 }
 

@@ -1,12 +1,10 @@
 .teamcreate-main{
-	width: 40em;
-	height : 50em;
 	position: relative;
-	background-color: #3a6baf;
+	
 	border-radius: 20%;
 	padding: 0 auto;
 	vertical-align: auto;
-	color: white;
+	color: black;
 }
 .teamcreate-main .title-teamcreate{
 	position: absolute;

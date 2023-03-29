@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hereo.project.dao.PlayerDAO">
+	<select id="selectPlayerByTP" resultType="com.hereo.project.vo.PlayerVO">
+		select * from player
+			join (select me_id, me_nickname from members) as me on me_id=pl_me_id
+			where pl_num = #{tp.tp_pl_num}
+	</select>
+	<select id="selectPlayerByNum" resultType="com.hereo.project.vo.PlayerVO">
+		select * from player
+			join (select me_id, me_nickname from members) as me on me_id=pl_me_id
+			where pl_num = #{pl_num}
+	</select>
+
+
+
+
+</mapper>

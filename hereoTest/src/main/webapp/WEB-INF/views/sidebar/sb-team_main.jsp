@@ -30,56 +30,66 @@
   background-color: antiquewhite;
 }
 
-	
 </style>
+<c:choose>
+	<c:when test="${not empty team}">
+		<c:set value="${team}" scope="session" var="tm" />
+	</c:when>
+</c:choose>
     <ul class="list-side">
       <li class="item-side">
         <a
-          href="../team.html"
+          href="<c:url value='/team/main'></c:url>"
           role="button"
-          target="_parent"
-          class="link-side btn btn-outline-light col-lg-8"
-          >전체 팀 보기</a
+          class="link-side btn btn-outline-light col-lg-12"
+          >
+        <c:choose>
+			<c:when test="${not empty team}">
+				다른 팀 보기
+			</c:when>
+			<c:otherwise>
+				전체 팀 보기
+			</c:otherwise>
+		</c:choose>
+          
+        </a
         >
       </li>
-      <li class="item-side team-name this-teamMenu" hidden>
+      <li class="item-side team-name this-teamMenu">
         <a
           href="#demo1"
-          class="link-side btn btn-light col-lg-8"
+          class="link-side btn btn-light col-lg-12"
           data-toggle="collapse"
-          >xx 팀 메뉴</a
+          >${tm.tm_name } 팀 메뉴</a
         >
         <div id="demo1" class="collapse">
           <ul class="sublist-side">
             <li class="subitem-side">
               <a
-                href="../team-sep.html"
-                target="_parent"
-                class="sublink-side btn btn-danger col-sm-3"
+                href="<c:url value='/team/sep?teamNum=${tm.tm_num }'></c:url>"
+                class="sublink-side btn btn-danger col-sm-8"
                 >팀 메인페이지</a
               >
             </li>
             <li class="subitem-side">
               <a
-                href="../team-record.html"
-                target="_parent"
-                class="sublink-side btn btn-outline-danger col-sm-3"
+                href="<c:url value='/team/record?teamNum=${tm.tm_num }'></c:url>"
+                
+                class="sublink-side btn btn-outline-danger col-sm-8"
                 >경기 기록실</a
               >
             </li>
             <li class="subitem-side">
               <a
-                href="../team-whole_player.html"
-                target="_parent"
-                class="sublink-side btn btn-danger col-sm-3"
+                href="<c:url value='/team/wholeplayer?teamNum=${tm.tm_num }'></c:url>"
+                class="sublink-side btn btn-danger col-sm-8"
                 >전체 선수 리스트</a
               >
             </li>
             <li class="subitem-side">
               <a
                 href="../board/team-sep-board_main.html"
-                target="_parent"
-                class="sublink-side btn btn-outline-danger col-sm-3"
+                class="sublink-side btn btn-outline-danger col-sm-8"
                 >팀 게시판</a
               >
             </li>
@@ -89,7 +99,7 @@
       <li class="item-side team-name">
         <a
           href="#demo"
-          class="link-side btn btn-light col-lg-8"
+          class="link-side btn btn-light col-lg-12"
           data-toggle="collapse"
           >우리 팀 메뉴</a
         >
@@ -97,25 +107,22 @@
           <ul class="sublist-side">
             <li class="subitem-side">
               <a
-                href="../team-sep.html"
-                target="_parent"
-                class="sublink-side btn btn-danger col-sm-3"
+                href="<c:url value='/team/sep?teanNum=${team.tm_num }'></c:url>"
+                class="sublink-side btn btn-danger col-sm-8"
                 >팀 메인페이지</a
               >
             </li>
             <li class="subitem-side">
               <a
-                href="../team-record.html"
-                target="_parent"
-                class="sublink-side btn btn-outline-danger col-sm-3"
+                href="<c:url value='/team/record?teamNum=${team.tm_num }'></c:url>"
+                class="sublink-side btn btn-outline-danger col-sm-8"
                 >경기 기록실</a
               >
             </li>
             <li class="subitem-side">
               <a
-                href="../team-whole_player.html"
-                target="_top"
-                class="sublink-side btn btn-danger col-sm-3"
+                href="<c:url value='/team/wholeplayer?teamNum=${team.tm_num }'></c:url>"
+                class="sublink-side btn btn-danger col-sm-8"
                 >전체 선수 리스트</a
               >
             </li>
@@ -123,7 +130,7 @@
               <a
                 href="../board/team-sep-board_main.html"
                 target="_parent"
-                class="sublink-side btn btn-outline-danger col-sm-3"
+                class="sublink-side btn btn-outline-danger col-sm-8"
                 >팀 게시판</a
               >
             </li>
@@ -131,7 +138,7 @@
               <a
                 href="../join-control/team-join-board_main.html"
                 target="_parent"
-                class="sublink-side btn btn-danger col-sm-3"
+                class="sublink-side btn btn-danger col-sm-8"
                 >팀 가입 관리 게시판</a
               >
             </li>
@@ -140,17 +147,16 @@
       </li>
       <li class="item-side">
         <a
-          href="../team-join.html"
-          target="_top"
-          class="link-side btn btn-outline-light col-lg-8"
+          href="<c:url value='/team/join'></c:url>"
+          
+          class="link-side btn btn-outline-light col-lg-12"
           >가입신청</a
         >
       </li>
       <li class="item-side">
         <a
-          href="../admin-crateTeam/team-create-board_main.html"
-          target="_top"
-          class="link-side btn btn-light col-lg-8"
+          href="<c:url value='/admin'></c:url>"
+          class="link-side btn btn-light col-lg-12"
           >관리자 메뉴</a
         >
       </li>
