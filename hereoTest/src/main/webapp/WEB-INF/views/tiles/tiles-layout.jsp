@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="/hereoTest/resources/js/common/popper.min.js"></script>
 	<script type="text/javascript" src="/hereoTest/resources/js/common/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="/hereoTest/resources/css/common/style.css" />
+
 	
 </head>
 <body>

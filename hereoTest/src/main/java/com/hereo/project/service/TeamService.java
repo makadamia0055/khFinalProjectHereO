@@ -14,7 +14,7 @@ public interface TeamService {
 
 	TeamVO selectTeamByTm_Num(Integer teamNum);
 
-	int countTeams();
+	int countTeams(String state, Criteria cri);
 
 	boolean insertTeam(TeamVO team, MultipartFile imgFile);
 
@@ -25,6 +25,8 @@ public interface TeamService {
 	boolean updateTeamAppListState(Integer teamNum, int i);
 
 	void deleteTeamAppListState(Integer teamNum, Integer teamState);
+
+	boolean selectTeamByName(String tm_name);
 
 	
 
