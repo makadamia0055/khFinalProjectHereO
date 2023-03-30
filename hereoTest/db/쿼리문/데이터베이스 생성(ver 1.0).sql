@@ -2,7 +2,6 @@ drop database if exists herodb;
 create database herodb;
 use herodb;
 DROP TABLE IF EXISTS `members`;
-
 CREATE TABLE `members` (
 	`me_id`	varchar(13) primary key	NOT NULL,
 	`me_pw`	varchar(20)	NOT NULL,
@@ -15,8 +14,6 @@ CREATE TABLE `members` (
 	`me_ma_num`	int	NOT NULL
 );
 
-DROP TABLE IF EXISTS `board-type`;
-
 CREATE TABLE `board-type` (
 	`bt_num`	int primary key auto_increment	NOT NULL,
 	`bt_types`	varchar(20)	NOT NULL,
@@ -25,8 +22,6 @@ CREATE TABLE `board-type` (
 	`bt_tm_num`	int	NULL,
 	`bt_lg_num`	int	NULL
 );
-
-DROP TABLE IF EXISTS `board`;
 
 CREATE TABLE `board` (
 	`bo_num`	int primary key auto_increment	NOT NULL,
@@ -42,8 +37,6 @@ CREATE TABLE `board` (
 	`bo_bc_num`	int	NULL
 );
 
-DROP TABLE IF EXISTS `board-reply`;
-
 CREATE TABLE `board-reply` (
 	`br_num`	int  primary key auto_increment	NOT NULL,
 	`br_bo_num`	int	NOT NULL,
@@ -54,8 +47,6 @@ CREATE TABLE `board-reply` (
 	`br_ori_num`	int null	NOT NULL
 );
 
-DROP TABLE IF EXISTS `board-file`;
-
 CREATE TABLE `board-file` (
 	`bf_num`	int  primary key auto_increment	NOT NULL,
 	`bf_filename`	varchar(255)	NOT NULL,
@@ -63,15 +54,11 @@ CREATE TABLE `board-file` (
 	`bf_bo_num`	int	NOT NULL
 );
 
-DROP TABLE IF EXISTS `member-joinauth`;
-
 CREATE TABLE `member-joinauth` (
 	`mj_me_id`	varchar(13) primary key	NOT NULL,
 	`mj_authnum`	int	NOT NULL,
 	`mj_expire_date`	datetime	NOT NULL
 );
-
-DROP TABLE IF EXISTS `team`;
 
 CREATE TABLE `team` (
 	`tm_num`	int  primary key auto_increment	NOT NULL,
@@ -86,8 +73,6 @@ CREATE TABLE `team` (
 	`tm_team_img`	varchar(255)	NULL
 );
 
-DROP TABLE IF EXISTS `player`;
-
 CREATE TABLE `player` (
 	`pl_num`	int  primary key auto_increment	NOT NULL,
 	`pl_me_id`	varchar(13)	NOT NULL,
@@ -97,8 +82,6 @@ CREATE TABLE `player` (
 	`pl_introduce`	longtext	NULL,
 	`pl_player_img`	varchar(255)	NULL
 );
-
-DROP TABLE IF EXISTS `stadium`;
 
 CREATE TABLE `stadium` (
 	`sd_num`	int  primary key auto_increment	NOT NULL,
@@ -112,8 +95,6 @@ CREATE TABLE `stadium` (
 	`sd_intro`	varchar(1000)	NULL
 );
 
-DROP TABLE IF EXISTS `stadium-schedule`;
-
 CREATE TABLE `stadium-schedule` (
 	`ss_num`	int  primary key auto_increment	NOT NULL,
 	`ss_game_date`	datetime	NOT NULL,
@@ -121,16 +102,12 @@ CREATE TABLE `stadium-schedule` (
 	`ss_rv_id`	int	NOT NULL
 );
 
-DROP TABLE IF EXISTS `member-authority`;
-
 CREATE TABLE `member-authority` (
 	`ma_num`	int  primary key auto_increment	NOT NULL,
 	`ma_stadium_auth`	boolean default 0	NOT NULL,
 	`ma_league_auth`	boolean default 0	NOT NULL,
 	`ma_record_auth`	boolean default 0	NOT NULL
 );
-
-DROP TABLE IF EXISTS `league`;
 
 CREATE TABLE `league` (
 	`lg_num`	int  primary key auto_increment	NOT NULL,
@@ -140,10 +117,9 @@ CREATE TABLE `league` (
 	`lg_start_day`	date	NULL,
 	`lg_state`	varchar(10)	NULL,
 	`lg_approval`	int	NULL,
-	`lg_logo`	varchar(255)	NULL
+	`lg_logo`	varchar(255)	NULL,
+	`lg_re_num`	int	NOT NULL
 );
-
-DROP TABLE IF EXISTS `match-record`;
 
 CREATE TABLE `match-record` (
 	`mr_num`	int  primary key auto_increment	NOT NULL,
@@ -152,8 +128,6 @@ CREATE TABLE `match-record` (
 	`mr_point_away`	int	NOT NULL,
 	`mr_startteam`	boolean	NOT NULL
 );
-
-DROP TABLE IF EXISTS `reservation`;
 
 CREATE TABLE `reservation` (
 	`rv_num`	int  primary key auto_increment	NOT NULL,
@@ -167,15 +141,10 @@ CREATE TABLE `reservation` (
 	`rv_game_type`	varchar(10)	NOT NULL
 );
 
-DROP TABLE IF EXISTS `region`;
-
 CREATE TABLE `region` (
 	`re_num`	int  primary key auto_increment	NOT NULL,
-	`re_sido`	varchar(7)	NOT NULL,
-	`re_gu`	varchar(5)	NOT NULL
+	`re_sido`	varchar(7)	NOT NULL
 );
-
-DROP TABLE IF EXISTS `league-participationteam`;
 
 CREATE TABLE `league-participationteam` (
 	`lp_num`	int  primary key auto_increment	NOT NULL,
@@ -183,8 +152,6 @@ CREATE TABLE `league-participationteam` (
 	`lp_le_num`	int	NOT NULL,
 	`lp_approval`	int	NOT NULL
 );
-
-DROP TABLE IF EXISTS `match-inning`;
 
 CREATE TABLE `match-inning` (
 	`mi_num`	int  primary key auto_increment	NOT NULL,
@@ -194,8 +161,6 @@ CREATE TABLE `match-inning` (
 	`mi_mr_num`	int	NOT NULL
 );
 
-DROP TABLE IF EXISTS `match-partcipate`;
-
 CREATE TABLE `match-partcipate` (
 	`mp_num`	int  primary key auto_increment	NOT NULL,
 	`mp_tp_num`	int	NOT NULL,
@@ -204,8 +169,6 @@ CREATE TABLE `match-partcipate` (
 	`mp_po_num`	int	NOT NULL,
 	`mp_inning`	int	NOT NULL
 );
-
-DROP TABLE IF EXISTS `league-schedule`;
 
 CREATE TABLE `league-schedule` (
 	`ls_num`	int  primary key auto_increment	NOT NULL,
@@ -218,15 +181,11 @@ CREATE TABLE `league-schedule` (
 	`ls_la_num`	int	NOT NULL
 );
 
-DROP TABLE IF EXISTS `league-matchList`;
-
 CREATE TABLE `league-matchList` (
 	`lm_num`	int  primary key auto_increment	NOT NULL,
 	`lm_mr_num`	int	NOT NULL,
 	`lm_ls_num`	int	NOT NULL
 );
-
-DROP TABLE IF EXISTS `match-batterboxEvent`;
 
 CREATE TABLE `match-batterboxEvent` (
 	`mb_num`	int  primary key auto_increment	NOT NULL,
@@ -236,8 +195,6 @@ CREATE TABLE `match-batterboxEvent` (
 	`mb_mp_hitter_num`	int	NOT NULL,
 	`mb_mp_pitcher_num`	int	NOT NULL
 );
-
-DROP TABLE IF EXISTS `match-schedule`;
 
 CREATE TABLE `match-schedule` (
 	`ms_num`	int  primary key auto_increment	NOT NULL,
@@ -249,8 +206,6 @@ CREATE TABLE `match-schedule` (
 	`ms_me_id`	varchar(13)	NOT NULL
 );
 
-DROP TABLE IF EXISTS `match-lineup`;
-
 CREATE TABLE `match-lineup` (
 	`ml_num`	int  primary key auto_increment	NOT NULL,
 	`ml_ms_num`	int	NOT NULL,
@@ -260,14 +215,10 @@ CREATE TABLE `match-lineup` (
 	`ml_po_num`	int	NOT NULL
 );
 
-DROP TABLE IF EXISTS `position`;
-
 CREATE TABLE `position` (
 	`po_num`	int primary key auto_increment	NOT NULL,
 	`po_name`	varchar(5)	NOT NULL
 );
-
-DROP TABLE IF EXISTS `position-hope`;
 
 CREATE TABLE `position-hope` (
 	`ph_num`	int  primary key auto_increment	NOT NULL,
@@ -275,15 +226,11 @@ CREATE TABLE `position-hope` (
 	`ph_po_num`	int	NOT NULL
 );
 
-DROP TABLE IF EXISTS `team-possibleregion`;
-
 CREATE TABLE `team-possibleregion` (
 	`tr_num`	int  primary key auto_increment	NOT NULL,
-	`tr_re_num`	int	NOT NULL,
-	`tr_tm_num`	int	NOT NULL
+	`tr_tm_num`	int	NOT NULL,
+	`tr_re_num`	int	NOT NULL
 );
-
-DROP TABLE IF EXISTS `team-wtjoin`;
 
 CREATE TABLE `team-wtjoin` (
 	`tj_num`	int  primary key auto_increment	NOT NULL,
@@ -294,8 +241,6 @@ CREATE TABLE `team-wtjoin` (
 	`tj_bo_num`	int	NOT NULL
 );
 
-DROP TABLE IF EXISTS `team-waiting_breakup`;
-
 CREATE TABLE `team-waiting_breakup` (
 	`tw_num`	int  primary key auto_increment	NOT NULL,
 	`tw_tm_num`	int	NOT NULL,
@@ -304,25 +249,19 @@ CREATE TABLE `team-waiting_breakup` (
 	`tw_iscancled`	boolean	NULL
 );
 
-DROP TABLE IF EXISTS `league_enrollment`;
-
 CREATE TABLE `league_enrollment` (
 	`le_num`	int  primary key auto_increment	NOT NULL,
 	`le_sd_num`	int	NOT NULL,
 	`le_la_num`	int	NOT NULL
 );
 
-DROP TABLE IF EXISTS `region_detail`;
-
 CREATE TABLE `region_detail` (
 	`rd_num`	int  primary key auto_increment	NOT NULL,
-	`rd_re_num`	int	NOT NULL,
 	`rd_zipcode`	varchar(5)	NOT NULL,
 	`rd_address`	varchar(255)	NOT NULL,
-	`rd_detail-address`	varchar(255)	NOT NULL
+	`rd_detail-address`	varchar(255)	NOT NULL,
+	`rd_re_num`	int	NOT NULL
 );
-
-DROP TABLE IF EXISTS `stadium-timetable`;
 
 CREATE TABLE `stadium-timetable` (
 	`st_num`	int  primary key auto_increment	NOT NULL,
@@ -333,16 +272,12 @@ CREATE TABLE `stadium-timetable` (
 	`st_daytype`	int	NOT NULL
 );
 
-DROP TABLE IF EXISTS `team-approvallist`;
-
 CREATE TABLE `team-approvallist` (
 	`ta_tm_num`	int	NOT NULL,
 	`ta_register_date`	datetime	NOT NULL,
 	`ta_state`	int	NOT NULL,
 	`ta_bo_num`	int	NOT NULL
 );
-
-DROP TABLE IF EXISTS `refund`;
 
 CREATE TABLE `refund` (
 	`rf_num`	int  primary key auto_increment	NOT NULL,
@@ -354,8 +289,6 @@ CREATE TABLE `refund` (
 	`rf_total_price`	int	NOT NULL
 );
 
-DROP TABLE IF EXISTS `member-updateauth`;
-
 CREATE TABLE `member-updateauth` (
 	`mu_num`	int  primary key auto_increment	NOT NULL,
 	`mu_me_id`	varchar(13)	NOT NULL,
@@ -366,8 +299,6 @@ CREATE TABLE `member-updateauth` (
 	`mu_bo_num`	int	NOT NULL
 );
 
-DROP TABLE IF EXISTS `team-player`;
-
 CREATE TABLE `team-player` (
 	`tp_num`	int  primary key auto_increment	NOT NULL,
 	`tp_auth`	int	NOT NULL,
@@ -376,15 +307,11 @@ CREATE TABLE `team-player` (
 	`tp_tm_num`	int	NOT NULL
 );
 
-DROP TABLE IF EXISTS `board-category`;
-
 CREATE TABLE `board-category` (
 	`bc_num`	int primary key auto_increment	NOT NULL,
 	`bc_name`	varchar(10)	NOT NULL,
 	`bc_bt_num`	int	NOT NULL
 );
-
-DROP TABLE IF EXISTS `match-attendance`;
 
 CREATE TABLE `match-attendance` (
 	`mt_num`	int  primary key auto_increment	NOT NULL,
@@ -393,15 +320,11 @@ CREATE TABLE `match-attendance` (
 	`mt_isattendance`	int default(0)	NOT NULL
 );
 
-DROP TABLE IF EXISTS `batterboxevent-type`;
-
 CREATE TABLE `batterboxevent-type` (
 	`be_num`	int  primary key auto_increment	NOT NULL,
 	`be_type`	varchar(10)	NOT NULL,
 	`be_sub_type`	varchar(10)	NOT NULL
 );
-
-DROP TABLE IF EXISTS `playerrecord-hitter`;
 
 CREATE TABLE `playerrecord-hitter` (
 	`ph_num`	int primary key auto_increment	NOT NULL,
@@ -421,8 +344,6 @@ CREATE TABLE `playerrecord-hitter` (
 	`ph_doubleplays`	int default 0	NOT NULL,
 	`ph_hitbypitches`	int default 0	NOT NULL
 );
-
-DROP TABLE IF EXISTS `playerrecord-pitcher`;
 
 CREATE TABLE `playerrecord-pitcher` (
 	`pp_num`	int  primary key auto_increment	NOT NULL,
@@ -446,8 +367,6 @@ CREATE TABLE `playerrecord-pitcher` (
 	`pp_pitches`	int default 0	NOT NULL
 );
 
-DROP TABLE IF EXISTS `payment_history`;
-
 CREATE TABLE `payment_history` (
 	`ph_num`	int  primary key auto_increment	NOT NULL,
 	`ph_rv_num`	int	NOT NULL,
@@ -455,8 +374,6 @@ CREATE TABLE `payment_history` (
 	`ph_date`	datetime	NOT NULL,
 	`ph_price`	int	NOT NULL
 );
-
-DROP TABLE IF EXISTS `playerrecord_year-hitter`;
 
 CREATE TABLE `playerrecord_year-hitter` (
 	`yh_num`	int primary key auto_increment	NOT NULL,
@@ -477,8 +394,6 @@ CREATE TABLE `playerrecord_year-hitter` (
 	`yh_doubleplays`	int default 0	NOT NULL,
 	`yh_hitbypitches`	int default 0	NOT NULL
 );
-
-DROP TABLE IF EXISTS `playerrecord_year-pitcher`;
 
 CREATE TABLE `playerrecord_year-pitcher` (
 	`yp_num`	int primary key auto_increment	NOT NULL,
@@ -503,15 +418,11 @@ CREATE TABLE `playerrecord_year-pitcher` (
 	`yp_pitches`	int default(0)	NOT NULL
 );
 
-DROP TABLE IF EXISTS `stadium-image`;
-
 CREATE TABLE `stadium-image` (
 	`si_num`	int  primary key auto_increment	NOT NULL,
 	`sd_num`	int	NOT NULL,
 	`si_filename`	varchar(255)	NOT NULL
 );
-
-DROP TABLE IF EXISTS `league_attribute`;
 
 CREATE TABLE `league_attribute` (
 	`la_num`	int  primary key auto_increment	NOT NULL,
@@ -521,6 +432,12 @@ CREATE TABLE `league_attribute` (
 	`la_whole_period`	int	NULL,
 	`la_team_state`	varchar(5) default '모집중'	NOT NULL,
 	`la_lg_num`	int	NOT NULL
+);
+
+CREATE TABLE `region_sub` (
+	`re_num`	int primary key auto_increment	NOT NULL,
+	`rs_gu`	varchar(7)	NOT NULL,
+	`rs_re_num`	int	NOT NULL
 );
 
 ALTER TABLE `members` ADD CONSTRAINT `FK_member-authority_TO_members_1` FOREIGN KEY (
@@ -654,6 +571,13 @@ ALTER TABLE `league` ADD CONSTRAINT `FK_members_TO_league_1` FOREIGN KEY (
 )
 REFERENCES `members` (
 	`me_id`
+);
+
+ALTER TABLE `league` ADD CONSTRAINT `FK_region_sub_TO_league_1` FOREIGN KEY (
+	`lg_re_num`
+)
+REFERENCES `region_sub` (
+	`re_num`
 );
 
 ALTER TABLE `match-record` ADD CONSTRAINT `FK_match-schedule_TO_match-record_1` FOREIGN KEY (
@@ -831,18 +755,18 @@ REFERENCES `position` (
 	`po_num`
 );
 
-ALTER TABLE `team-possibleregion` ADD CONSTRAINT `FK_region_TO_team-possibleregion_1` FOREIGN KEY (
-	`tr_re_num`
-)
-REFERENCES `region` (
-	`re_num`
-);
-
 ALTER TABLE `team-possibleregion` ADD CONSTRAINT `FK_team_TO_team-possibleregion_1` FOREIGN KEY (
 	`tr_tm_num`
 )
 REFERENCES `team` (
 	`tm_num`
+);
+
+ALTER TABLE `team-possibleregion` ADD CONSTRAINT `FK_region_sub_TO_team-possibleregion_1` FOREIGN KEY (
+	`tr_re_num`
+)
+REFERENCES `region_sub` (
+	`re_num`
 );
 
 ALTER TABLE `team-wtjoin` ADD CONSTRAINT `FK_team_TO_team-wtjoin_1` FOREIGN KEY (
@@ -887,10 +811,10 @@ REFERENCES `league_attribute` (
 	`la_num`
 );
 
-ALTER TABLE `region_detail` ADD CONSTRAINT `FK_region_TO_region_detail_1` FOREIGN KEY (
+ALTER TABLE `region_detail` ADD CONSTRAINT `FK_region_sub_TO_region_detail_1` FOREIGN KEY (
 	`rd_re_num`
 )
-REFERENCES `region` (
+REFERENCES `region_sub` (
 	`re_num`
 );
 
@@ -1039,5 +963,12 @@ ALTER TABLE `league_attribute` ADD CONSTRAINT `FK_league_TO_league_attribute_1` 
 )
 REFERENCES `league` (
 	`lg_num`
+);
+
+ALTER TABLE `region_sub` ADD CONSTRAINT `FK_region_TO_region_sub_1` FOREIGN KEY (
+	`rs_re_num`
+)
+REFERENCES `region` (
+	`re_num`
 );
 

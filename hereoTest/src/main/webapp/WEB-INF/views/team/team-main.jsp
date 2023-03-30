@@ -12,57 +12,14 @@
 				<div class="container-region">
 					<ul class="list-region clear-fix">
 						<li class="item-region">
-							<a href="#" class="link-region btn btn-success" role="button" data-local="all">전체</a>
+							<a href="<c:url value='/team/main?type=0'></c:url>" class="link-region btn btn-success" role="button" data-local="all">전체</a>
 						</li>
-						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button" data-local="서울">서울</a>
-						</li>
-						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button" data-local="경기도">경기</a>
-						</li>
-						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button">부산</a>
-						</li>
-						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button">대구</a>
-						</li>
-						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button">인천</a>
-						</li>
-						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button">대전</a>
-						</li>
-						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button">광주</a>
-						</li>
-						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button">울산</a>
-						</li>
-						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button">강원</a>
-						</li>
-						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button">충남</a>
-						</li>
-						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button">충북</a>
-						</li>
-						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button">전남</a>
-						</li>
-						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button">전북</a>
-						</li>
-						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button">경남</a>
-						</li>
-						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button">경북</a>
-						</li>
-						<li class="item-region">
-							<a href="#" class="link-region btn btn-primary" role="button">제주</a>
-						</li>
-
+						<c:forEach items="${region}" var="re">
+							<li class="item-region">
+								<a href="<c:url value='/team/main?type=${re.re_num}'></c:url>" class="link-region btn btn-primary" role="button" data-local="${re.re_num}">${re.re_sido}</a>
+							</li>
+						</c:forEach>
+						
 					</ul>
 				</div>
 				<!-- 지역 리스트 끝 -->
@@ -91,7 +48,7 @@
 									
 								);" class="link-team-select rounded-circle clear-fix">
 									<div class="label-team">
-										<span class="team-local badge badge-success" data-local="seoul">안양</span> 
+										<span class="team-local badge badge-success">${region[team.tm_re_num -1].re_sido }</span> 
 										<span class="team-name">${team.tm_name}</span>
 									</div>
 								</a>

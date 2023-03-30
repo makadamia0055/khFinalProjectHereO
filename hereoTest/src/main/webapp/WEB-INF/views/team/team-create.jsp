@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="/hereoTest/resources/css/team/team_common.css" />
 <link rel="stylesheet" href="/hereoTest/resources/css/team/team.css" />
+<script src="/hereoTest/resources/js/common/jquery.validate.min.js"></script>
+
 
 	<section class="teamcreate-main">
 		<div class="container-create-input">
@@ -12,8 +14,10 @@
 					<div class="form-group">
 						<div class="team-selector">
 							<label for="team_name">희망 팀 이름</label><br>
-							<input type="text" class="col-lg-6" name="tm_name" id="team_name" placeholder="최소 3자~최대 8자">
-							<button class="btn btn-dark btn-duplicateCheck">팀명 중복 체크</button>
+							<input type="text" class="col-lg-6" name="tm_name" id="team_name" placeholder="최소 3자~최대 8자" required>
+							<button class="btn btn-dark btn-duplicateCheck" type="button">팀명 중복 체크</button>
+							<br>
+							<label for="team_name" id="team_name-error" class="error"></label>
 						</div>
 					</div>
 					<div class="form-group">
@@ -29,11 +33,12 @@
 								<option value="8">전남</option>
 								<option value="9">전북</option>
 								<option value="10">강원</option>
-								<option value="11">울산</option>
-								<option value="12">대구</option>
-								<option value="13">경남</option>
-								<option value="14">경북</option>
-								<option value="15">제주</option>
+								<option value="11">부산</option>
+								<option value="12">울산</option>
+								<option value="13">대구</option>
+								<option value="14">경남</option>
+								<option value="15">경북</option>
+								<option value="16">제주</option>
 							</select>
 					</div>
 					<div class="form-group">
@@ -59,7 +64,7 @@
 					
 						<div class="form-group">
 							<label for="teamLogo">팀 로고 이미지 파일</label><br>
-							<input type="file" name="imgFile" id="teamLogo">	
+							<input type="file" name="imgFile" id="teamLogo" accept="">	
 						</div>
 						
 						<div class="form-group">
@@ -83,3 +88,87 @@
       crossorigin="anonymous"
 			
     ></script>
+    <script>
+    	let teamNameDupCheck = false;
+    	$('.btn-duplicateCheck').click(function(e){
+    		e.preventDefault();
+    		if(!$('form').valid()){
+    			alert('사용 불가능한 팀명입니다.');
+    			return;
+    		}
+    		let tmpName = $('[name=tm_name]').val();
+    		let tmpObj = {
+    				tm_name : tmpName
+    		}
+    		ajax("POST", tmpObj, '<c:url value="/team/create_dupCheck"></c:url>', function(data){
+    			teamNameDupCheck = data.res;
+    			if(data.res){
+    				alert('사용가능한 팀명입니다.');
+    				$('.btn-duplicateCheck').removeClass('btn-dark').text('중복 체크 완료')
+    			}else{
+    				alert('이미 존재하는 팀명입니다.');
+    			}
+    		})
+    		
+    	})
+    	$('[name=tm_name]').change(function(){
+    		teamNameDupCheck=false;
+			$('.btn-duplicateCheck').addClass('btn-dark').text('팀명 중복 체크')
+
+    	})
+    	
+    	
+    $(function(){
+			
+    	$("form").validate({
+	        rules: {
+	            tm_name: {
+	                required : true,
+	               /*  minlength : 3, 
+					maxlength : 8, */
+					regex : /^[ㄱ-ㅎ가-힣a-zA-Z0-9]{3,8}$/ 
+					
+            }
+    	},
+       
+        messages : {
+        	tm_name: {
+                required : "필수로 입력하세요",
+                regex : "3~8 글자, 한글, 영문 숫자만 가능합니다."
+            }
+            
+       	},//
+					submitHandler : function (form){
+						if(!teamNameDupCheck){
+			    			alert('팀명 중복 체크를 해주세요.');
+			    			return false;
+			    		}
+						if(!confirm('정말 해당 정보로 팀을 신청합니까?')){
+							return false;
+						}
+						return true;
+					} 
+    	});
+		})
+$.validator.addMethod(
+    "regex",
+    function(value, element, regexp) {
+        var re = new RegExp(regexp);
+        return this.optional(element) || re.test(value);
+    },
+    "Please check your input."
+);	
+ 	function ajax(method, obj, url, successFunc, errorFunc){
+		$.ajax({
+			async:false,
+			type: method,
+			data: JSON.stringify(obj),
+			url: url, 
+			dataType: "json",
+			contentType:"application/json; charset=UTF-8",
+			success: successFunc,
+			error: errorFunc
+			
+		});
+	}
+    </script>
