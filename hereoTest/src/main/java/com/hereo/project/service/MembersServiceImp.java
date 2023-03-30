@@ -19,6 +19,7 @@ public class MembersServiceImp implements MembersService{
 			return false;
 		if(membersDao.insertUser(user) !=0 )
 			return true;
+		
 		return false;
 	}
 	

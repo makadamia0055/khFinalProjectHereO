@@ -37,8 +37,12 @@ public class HomeController {
 	
 	@PostMapping(value = "/signup")
 	public ModelAndView signupPost(ModelAndView mv, MembersVO user) {
-		membersService.insertUser(user);
+		boolean isSignup = membersService.insertUser(user);
+		if(isSignup) {
 		mv.setViewName("redirect:/");
+		} else {
+			mv.setViewName("redirect:/signup");
+		}
 		return mv;
 	}
 	

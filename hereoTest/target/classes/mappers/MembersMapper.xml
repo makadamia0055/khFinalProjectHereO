@@ -7,9 +7,9 @@
 		select * from members
 	</select>
 	<insert id="insertUser" >
-		insert into member(me_id, me_pw, me_name, me_gender, me_nickname, me_tel,
+		insert into members(me_id, me_pw, me_name, me_gender, me_nickname, me_tel,
 		me_mail)
-  		values(#{user.me_id},#{user.me_pw},#{user.me_name},#{user.me_gender},#{user.me_nickname},#{me_tel},
+  		values(#{user.me_id},#{user.me_pw},#{user.me_name},#{user.me_gender},#{user.me_nickname},#{user.me_tel},
   		#{user.me_mail})
 	</insert>
 

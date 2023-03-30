@@ -24,7 +24,7 @@
         <nav class="menu-containerBox2">
           <ul class="menu-containerBox2__bigBox">
             <li class="menu-container__box">
-              <a href="<c:url value='/home'></c:url>" target="_top" id="home"
+              <a href="<c:url value='/'></c:url>" target="_top" id="home"
                 >HERE <i class="fa-solid fa-baseball"></i
               ></a>
             </li>

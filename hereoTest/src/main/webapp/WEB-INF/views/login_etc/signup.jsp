@@ -67,7 +67,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   type="text"
                   class="signup-id signUp-form"
                   id="id"
-                  name="id"
+                  name="me_id"
                   required
                 />
               </div>
@@ -82,7 +82,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               type="password"
               class="signUp-form"
               id="pw"
-              name="pw"
+              name="me_pw"
               required
             />
           </div>
@@ -92,7 +92,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               type="password"
               class="signUp-form"
               id="pw2"
-              name="pw2"
+              name="me_pw2"
               required
             />
           </div>
@@ -102,17 +102,17 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               type="text"
               class="signUp-form"
               id="name"
-              name="name"
+              name="me_name"
               required
             />
           </div>
           <div class="signup-container">
-            <label for="nik_name">닉네임 :</label><br />
+            <label for="nick_name">닉네임 :</label><br />
             <input
               type="text"
               class="signUp-form"
-              id="nik_name"
-              name="nik_name"
+              id="nick_name"
+              name="me_nickname"
               placeholder="커뮤니티 게시판에서 사용할 닉네임을 작성해주세요"
               required
             />
@@ -123,7 +123,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               type="email"
               class="signUp-form"
               id="email"
-              name="email"
+              name="me_mail"
               required
             />
           </div>
@@ -134,14 +134,14 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               <input
                 type="radio"
                 class="signUp-form gender-type"
-                name="gender"
-                value="남"
+                name="me_gender"
+                value="1"
               /><span class="genderType-letter">여</span>
               <input
                 type="radio"
                 class="signUp-form gender-type"
-                name="gender"
-                value="여"
+                name="me_gender"
+                value="2"
               />
             </div>
           </div>
@@ -151,7 +151,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               type="text"
               class="signUp-form"
               id="phone"
-              name="phone"
+              name="me_tel"
               required
             />
           </div>
