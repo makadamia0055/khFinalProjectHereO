@@ -22,6 +22,14 @@ public class MembersServiceImp implements MembersService{
 		
 		return false;
 	}
+
+	@Override
+	public MembersVO login(MembersVO user) {
+		if(user==null || user.getMe_id()==null || user.getMe_pw()==null)
+			return null;
+		
+		return null;
+	}
 	
 	
 

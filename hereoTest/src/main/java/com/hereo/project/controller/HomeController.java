@@ -23,12 +23,16 @@ public class HomeController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@GetMapping(value = "/login")
 	public ModelAndView login(ModelAndView mv) {
 		mv.setViewName("login_etc/login");
 		return mv;
 	}
-	
+	@PostMapping(value = "/login")
+	public ModelAndView loginPost(ModelAndView mv, MembersVO user) {
+		MembersVO loginUser = membersService.login(user);
+		return mv;
+	}
 	@GetMapping(value = "/signup")
 	public ModelAndView signupGet(ModelAndView mv) {
 		mv.setViewName("login_etc/signup");

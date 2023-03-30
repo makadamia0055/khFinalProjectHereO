@@ -20,6 +20,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       rel="stylesheet"
       href="<c:url value='/resources/css/common/bootstrap.min.css'></c:url>"
     />
+    <link href="<c:url value='/resources/css/common/font.css'></c:url>" rel="stylesheet">
     <script src="<c:url value='/resources/js/common/bootstrap.bundle.min.js'></c:url>"></script>
     <script src="<c:url value='/resources/js/common/popper.min.js'></c:url>"></script>
     <script src="<c:url value='/resources/js/common/jquery.validate.min.js'></c:url>"></script>
@@ -47,7 +48,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <ul class="menu-containerBox2__bigBox">
             <li class="signUp-topMenu__goMainPage">
               <a href="<c:url value='/'></c:url>" target="_top" id="home"
-                >Here <i class="fa-solid fa-baseball"></i
+                >HERE <i class="fa-solid fa-baseball"></i
               ></a>
             </li>
           </ul>
@@ -167,70 +168,70 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <script>
       $(".signup_form").validate({
         rules: {
-          id: {
+          me_id: {
             required: true,
             regex: /^[a-zA-Z]{1}[a-zA-Z0-9]{7,12}$/,
           },
-          pw: {
+          me_pw: {
             required: true,
             regex: /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$]).{8,20}$/,
           },
-          pw2: {
+          me_pw2: {
             equalTo: pw,
           },
-          name: {
+          me_name: {
             required: true,
             regex: /^[가-힣]{2,35}$/,
           },
-          nik_name: {
+          me_nickname: {
             required: true,
             regex: /^[a-zA-Z0-9가-힣]{2,13}$/,
           },
-          email: {
+          me_mail: {
             required: true,
             email: true,
           },
-          phone: {
+          me_tel: {
             required: true,
             regex: /^010[0-9]{7,8}$/,
           },
-          gender: {
+          me_gender: {
             required: true,
           },
         },
         messages: {
-          id: {
+          me_id: {
             required: "필수 항목입니다.",
             regex:
               "아이디는 첫글자가 영문자로 시작해야하며, 영문과 숫자를 조합하여 8~13자까지 가능합니다.",
           },
-          pw: {
+          me_pw: {
             required: "필수 항목입니다.",
             regex:
               "비밀번호는 영문, 숫자, 특수문자(!,@,#,$)를 조합하여 8~20자까지 가능합니다.",
           },
-          pw2: {
+          me_pw2: {
             required: "필수 항목입니다.",  
             equalTo: "설정한 비밀번호와 일치하지 않습니다.",
           },
-          name: {
+          me_name: {
             required: "필수 항목입니다.",
             regex: "이름은 한글로만 작성해야 합니다.",
           },
-          nik_name: {
+          me_nickname: {
             required: "필수 항목입니다.",
             regex:
               "닉네임은 한글, 영문, 숫자를 조합하여 2~13자까지 가능합니다.",
           },
-          email: {
+          me_mail: {
             required: "필수 항목입니다.",
             email: "이메일 형식으로 작성해야 합니다.",
           },
-          phone: {
+          me_tel: {
             required: "필수 항목입니다.",
             regex: "핸드폰 번호를 입력해주세요.",
           },
-          gender: {
+          me_gender: {
             required: "필수 항목입니다.",
           },
         },
