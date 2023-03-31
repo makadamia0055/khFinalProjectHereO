@@ -20,6 +20,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       rel="stylesheet"
       href="<c:url value='/resources/css/common/bootstrap.min.css'></c:url>"
     />
+    <link href="<c:url value='/resources/css/common/font.css'></c:url>" rel="stylesheet">
     <script src="<c:url value='/resources/js/common/bootstrap.bundle.min.js'></c:url>"></script>
     <script src="<c:url value='/resources/js/common/popper.min.js'></c:url>"></script>
     <script src="<c:url value='/resources/js/common/jquery.validate.min.js'></c:url>"></script>
@@ -47,7 +48,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <ul class="menu-containerBox2__bigBox">
             <li class="signUp-topMenu__goMainPage">
               <a href="<c:url value='/'></c:url>" target="_top" id="home"
-                >Here <i class="fa-solid fa-baseball"></i
+                >HERE <i class="fa-solid fa-baseball"></i
               ></a>
             </li>
           </ul>
@@ -57,7 +58,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <main class="signup">
       <div class="container">
         <p class="signUp-dsscription">😎 히어로의 회원가입 페이지입니다.</p>
-        <form action="/action_page.php" class="signup_form">
+        <form action="<c:url value='/signup'></c:url>" class="signup_form" method="post">
           <div class="signup-container">
             <div class="signup-withBtn_container">
               <div class="signup-withBtn01">
@@ -67,7 +68,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   type="text"
                   class="signup-id signUp-form"
                   id="id"
-                  name="id"
+                  name="me_id"
                   required
                 />
               </div>
@@ -82,7 +83,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               type="password"
               class="signUp-form"
               id="pw"
-              name="pw"
+              name="me_pw"
               required
             />
           </div>
@@ -92,7 +93,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               type="password"
               class="signUp-form"
               id="pw2"
-              name="pw2"
+              name="me_pw2"
               required
             />
           </div>
@@ -102,23 +103,20 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               type="text"
               class="signUp-form"
               id="name"
-              name="name"
+              name="me_name"
               required
             />
           </div>
           <div class="signup-container">
-            <label for="nik_name">닉네임 :</label><br />
+            <label for="nick_name">닉네임 :</label><br />
             <input
               type="text"
               class="signUp-form"
-              id="nik_name"
-              name="nik_name"
+              id="nick_name"
+              name="me_nickname"
               placeholder="커뮤니티 게시판에서 사용할 닉네임을 작성해주세요"
               required
             />
-            <<<<<<< HEAD
-            <span class="valid-letter"></span>
-            ======= >>>>>>> d889d333ce5c1a85eccd33047d887b734d798207
           </div>
           <div class="signup-container">
             <label for="email">이메일 :</label><br />
@@ -126,54 +124,35 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               type="email"
               class="signUp-form"
               id="email"
-              name="email"
+              name="me_mail"
               required
             />
           </div>
           <div class="signup-container">
             <label for="gender">성별 :</label><br />
             <div class="signup-gender">
-              남
+              <span class="genderType-letter">남</span>
               <input
                 type="radio"
                 class="signUp-form gender-type"
-                name="gender"
-                value="남"
-              />여
+                name="me_gender"
+                value="1"
+              /><span class="genderType-letter">여</span>
               <input
                 type="radio"
                 class="signUp-form gender-type"
-                name="gender"
-                value="여"
+                name="me_gender"
+                value="2"
               />
             </div>
           </div>
           <div class="signup-container">
-            <label for="gender">성별 :</label><br />
-            <div class="signup-gender">
-              남
-              <input
-                type="radio"
-                class="signUp-form gender-type"
-                name="gender"
-                value="남"
-              />여
-              <input
-                type="radio"
-                class="signUp-form gender-type"
-                name="gender"
-                value="여"
-              />
-            </div>
-            <span class="valid-letter"></span>
-          </div>
-          <div class="signup-container">
-            <label for="phone">전화번호 :</label><br />
+            <label for="phone">핸드폰 번호 :</label><br />
             <input
               type="text"
               class="signUp-form"
               id="phone"
-              name="phone"
+              name="me_tel"
               required
             />
           </div>
@@ -186,147 +165,73 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
     ></script>
-    <<<<<<< HEAD
     <script>
       $(".signup_form").validate({
         rules: {
-          id: {
+          me_id: {
             required: true,
             regex: /^[a-zA-Z]{1}[a-zA-Z0-9]{7,12}$/,
           },
-          pw: {
+          me_pw: {
             required: true,
-            regex: /^[a-zA-Z0-9!@#$]{8,20}$/,
+            regex: /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$]).{8,20}$/,
           },
-          pw2: {
+          me_pw2: {
             equalTo: pw,
           },
-          name: {
+          me_name: {
             required: true,
             regex: /^[가-힣]{2,35}$/,
           },
-          nik_name: {
+          me_nickname: {
             required: true,
             regex: /^[a-zA-Z0-9가-힣]{2,13}$/,
           },
-          email: {
+          me_mail: {
             required: true,
             email: true,
           },
-          phone: {
+          me_tel: {
             required: true,
             regex: /^010[0-9]{7,8}$/,
           },
-          gender: {
+          me_gender: {
             required: true,
           },
         },
         messages: {
-          id: {
+          me_id: {
             required: "필수 항목입니다.",
             regex:
               "아이디는 첫글자가 영문자로 시작해야하며, 영문과 숫자를 조합하여 8~13자까지 가능합니다.",
           },
-          pw: {
+          me_pw: {
             required: "필수 항목입니다.",
             regex:
               "비밀번호는 영문, 숫자, 특수문자(!,@,#,$)를 조합하여 8~20자까지 가능합니다.",
           },
-          pw2: {
-            equalTo: "위의 비밀번호와 일치하지 않습니다.",
-          },
-          name: {
-            required: "필수 항목입니다.",
-            regex: "이름은 한글로만 작성가능합니다.",
-          },
-          nik_name: {
-            required: "필수 항목입니다.",
-            regex:
-              "닉네임은 한글, 영문, 숫자를 조합하여 2~13자까지 가능합니다.",
-          },
-          email: {
-            required: "필수 항목입니다.",
-            email: "이메일 형식으로 작성해야 합니다.",
-          },
-          phone: {
-            required: "필수 항목입니다.",
-            regex: "핸드폰 번호를 입력해주세요.",
-          },
-          gender: {
-            required: "필수 항목입니다.",
-          },
-        },
-      });
-    </script>
-
-    =======
-
-    <script>
-      $(".signup_form").validate({
-        rules: {
-          id: {
-            required: true,
-            regex: /^[a-zA-Z]{1}[a-zA-Z0-9]{7,12}$/,
-          },
-          pw: {
-            required: true,
-            regex: /^[a-zA-Z0-9!@#$]{8,20}$/,
-          },
-          pw2: {
-            equalTo: pw,
-          },
-          name: {
-            required: true,
-            regex: /^[가-힣]{2,35}$/,
-          },
-          nik_name: {
-            required: true,
-            regex: /^[a-zA-Z0-9가-힣]{2,13}$/,
-          },
-          email: {
-            required: true,
-            email: true,
-          },
-          phone: {
-            required: true,
-            regex: /^010[0-9]{7,8}$/,
-          },
-          gender: {
-            required: true,
-          },
-        },
-        messages: {
-          id: {
-            required: "필수 항목입니다.",
-            regex:
-              "아이디는 첫글자가 영문자로 시작해야하며, 영문과 숫자를 조합하여 8~13자까지 가능합니다.",
-          },
-          pw: {
-            required: "필수 항목입니다.",
-            regex:
-              "비밀번호는 영문, 숫자, 특수문자(!,@,#,$)를 조합하여 8~20자까지 가능합니다.",
-          },
-          pw2: {
+          me_pw2: {
+            required: "필수 항목입니다.",  
             equalTo: "설정한 비밀번호와 일치하지 않습니다.",
           },
-          name: {
+          me_name: {
             required: "필수 항목입니다.",
-            regex: "이름은 한글로만 작성가능합니다.",
+            regex: "이름은 한글로만 작성해야 합니다.",
           },
-          nik_name: {
+          me_nickname: {
             required: "필수 항목입니다.",
             regex:
               "닉네임은 한글, 영문, 숫자를 조합하여 2~13자까지 가능합니다.",
           },
-          email: {
+          me_mail: {
             required: "필수 항목입니다.",
             email: "이메일 형식으로 작성해야 합니다.",
           },
-          phone: {
+          me_tel: {
             required: "필수 항목입니다.",
             regex: "핸드폰 번호를 입력해주세요.",
           },
-          gender: {
+          me_gender: {
             required: "필수 항목입니다.",
           },
         },
@@ -337,9 +242,8 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           var re = new RegExp(regexp);
           return this.optional(element) || re.test(value);
         },
-        "필수항목들을 입력해주세요."
+        "필수 항목입니다."
       );
     </script>
-    >>>>>>> d889d333ce5c1a85eccd33047d887b734d798207
   </body>
 </html>

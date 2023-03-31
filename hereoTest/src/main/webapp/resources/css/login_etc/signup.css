@@ -53,6 +53,17 @@
   font-weight: 600;
   line-height: 75px;
 }
+
+.signUp-topMenu__goMainPage > a:hover {
+	  text-decoration: none;
+}
+#home {
+  font-family: SBAggroB;
+  font-size: 28px;
+  text-shadow: 1px 2px 1px black; 
+  font-weight: 600;
+  line-height: 85px;
+}
 /* 본문 */
 label {
   font-weight: 600;
@@ -92,11 +103,15 @@ label {
 .signup-gender {
   display: flex;
   position: relative;
+  font-size: 15px; 
 }
 .signup-gender .gender-type {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   margin-left: 5px;
+}
+.genderType-letter {
+	margin-left: 5px;
 }
 .signup-id {
   display: inline-block;
@@ -130,7 +145,8 @@ label {
 }
 /* 에러 */
 label.error {
-  font-size: 9px;
-  margin: 0 0 0 0;
+  display:block;
+  font-size: 11px;
+  margin: 3px 0 0 0;
   color: red;
 }
