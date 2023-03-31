@@ -27,10 +27,7 @@ public class HomeController {
 	
 	@GetMapping(value = "/login")
 	public String login(HttpServletRequest request) {
-		String url = request.getHeader("Referer");
-		if(url !=null && !url.contains("login")) {
-			request.getSession().setAttribute("prevURL", url);
-		}
+		
 		return "login_etc/login";
 	}
 	@PostMapping(value = "/login")

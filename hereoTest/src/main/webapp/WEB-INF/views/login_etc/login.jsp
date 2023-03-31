@@ -54,7 +54,7 @@
   // 로그인 사용자가 있으면 오프너 리로드 및 팝업창 닫기 함수 호출
   var loginUserInput = document.getElementById("loginUser");
   if (loginUserInput != null) {
-    closePopupAndReloadOpener();
+	  reloadAndClose();
   }
 </script>
 

@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="<c:url value='/resources/css/common/topBar.css'></c:url>" rel="stylesheet" />
 <link href="<c:url value='/resources/css/common/font.css'></c:url>" rel="stylesheet">
+    <script src="<c:url value='/resources/js/common/jquery.js'></c:url>"></script>
 <script type="text/javascript" src="<c:url value='/resources/js/common/click_menu.js'></c:url>"></script>
 
    <header class="topBar">
@@ -12,9 +13,7 @@
           	<c:if test="${loginUser==null}">
 	            <li>
 	              <a
-	                href="#" 
-	                onclick="window.open('<%=request.getContextPath()%>/login','login','width=450, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no')"
-	                >로그인</a
+	                href="#" class="login_popup">로그인</a
 	              >
 	            </li>
             <li><a href="<c:url value='/signup'></c:url>" target="_top">회원가입</a></li>
@@ -100,3 +99,14 @@
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
     ></script>
+	<script>
+	$('.login_popup').click(function(e){
+
+			e.preventDefault();
+			var url="<c:url value='/login'></c:url>";
+			var name="loginP";
+			var option="width=450, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no";
+			window.open(url,name,option);
+
+	})
+	</script>
