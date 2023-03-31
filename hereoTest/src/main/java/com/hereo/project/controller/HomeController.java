@@ -1,7 +1,10 @@
 package com.hereo.project.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,20 +21,27 @@ public class HomeController {
 	MembersService membersService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home(ModelAndView mv) {
-		mv.setViewName("/home");
-		return mv;
+	public String home() {
+		return "/home";
 	}
 	
 	@GetMapping(value = "/login")
-	public ModelAndView login(ModelAndView mv) {
-		mv.setViewName("login_etc/login");
-		return mv;
+	public String login(HttpServletRequest request) {
+		String url = request.getHeader("Referer");
+		if(url !=null && !url.contains("login")) {
+			request.getSession().setAttribute("prevURL", url);
+		}
+		return "login_etc/login";
 	}
 	@PostMapping(value = "/login")
-	public ModelAndView loginPost(ModelAndView mv, MembersVO user) {
+	public String loginPost(Model model, MembersVO user) {
 		MembersVO loginUser = membersService.login(user);
-		return mv;
+		model.addAttribute("loginUser",loginUser);
+		if(loginUser==null) {
+			return "redirect:/login";
+		} else {
+			return "redirect:/login";
+		}
 	}
 	@GetMapping(value = "/signup")
 	public ModelAndView signupGet(ModelAndView mv) {

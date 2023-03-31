@@ -19,13 +19,13 @@
   <body>
     <span class="login-title">HERE <i class="fa-solid fa-baseball"></i></span>
     <p class="login-comment">🔒 히어로 로그인 서비스입니다.</p>
-    <form action="<c:url value='/login'></c:url>" method="post">
+    <form name="login" action="<c:url value='/login'></c:url>" method="post">
       <input class="login-input" type="text" placeholder="아이디" name="me_id"/><br />
       <input class="login-input" type="password" placeholder="비밀번호" name="me_pw"/><br />
       <div class="id-remember">
         <i class="fa-regular fa-circle-check"></i><span>아이디 저장</span>
       </div>
-      <input class="login-btn" type="submit" value="로그인" />
+      <input class="login-btn" type="submit" value="로그인"/>
     </form>
     <ul class="search-idPw">
       <li><a href="./find-id.html" target="_self">아이디 찾기</a></li>
@@ -38,6 +38,26 @@
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
     ></script>
+<!-- ... 생략 ... -->
+<c:if test="${loginUser != null }">
+  <input type="hidden" id="loginUser" value="${loginUser}" />
+</c:if>
+<script type="text/javascript">
+  // 오프너 리로드 및 팝업창 닫기 함수
+  function reloadAndClose() {
+    if (window.opener != null && !window.opener.closed) {
+      window.opener.location.reload();
+    }
+    window.close();
+  }
+
+  // 로그인 사용자가 있으면 오프너 리로드 및 팝업창 닫기 함수 호출
+  var loginUserInput = document.getElementById("loginUser");
+  if (loginUserInput != null) {
+    closePopupAndReloadOpener();
+  }
+</script>
+
   </body>
 </html>
   

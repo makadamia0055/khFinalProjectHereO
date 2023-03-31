@@ -15,5 +15,5 @@ public class MembersVO {
 	private String me_mail;
 	private int me_siteauth;
 	private int me_ma_num;
-	
+
 }

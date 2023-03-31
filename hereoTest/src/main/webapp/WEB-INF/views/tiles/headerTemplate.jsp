@@ -9,14 +9,19 @@
         <!-- 최상단 로그인 메뉴바 -->
         <div class="topBar__containerBox1">
           <ul class="topBar__list">
-            <li>
-              <a
-                href="#" 
-                onclick="window.open('<%=request.getContextPath()%>/login','login','width=450, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no')"
-                >로그인</a
-              >
-            </li>
+          	<c:if test="${loginUser==null}">
+	            <li>
+	              <a
+	                href="#" 
+	                onclick="window.open('<%=request.getContextPath()%>/login','login','width=450, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no')"
+	                >로그인</a
+	              >
+	            </li>
             <li><a href="<c:url value='/signup'></c:url>" target="_top">회원가입</a></li>
+            </c:if>
+            <c:if test="${loginUser!=null}">
+            	<li><a href="<c:url value='/logout'></c:url>" target="_top">로그아웃</a></li>
+            </c:if>
             <li><a href="#">고객센터</a></li>
           </ul>
         </div>
