@@ -69,9 +69,8 @@
               </ul>
             </li>
             <li class="menu-container__box top-menu__commu-hover">
-              <a href="../community/commu-free.html" target="_parent"
-                ><span>커뮤니티</span></a
-              >
+              <a href="<c:url value='/community/free'></c:url>">
+              <span>커뮤니티</span></a>
               <ul class="submenu-containerBox1 commu-submenu__01">
                 <li>
                   <a href="../community/commu-free.html" target="_top"

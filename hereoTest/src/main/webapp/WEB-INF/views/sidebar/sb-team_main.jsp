@@ -5,28 +5,11 @@
 
 <style>
 	
-.list-side {
-  position: relative;
-  background-color: transparent;
-}
-
 .list-side .item-side .link-side {
-  text-align: left;
-  padding-left: 10px;
-  background-color: #150050;
-  
+  background-color: #150050; 
 }
 .list-side .item-side .link-side.btn-light{
   background-color: antiquewhite;
-}
-
-
-.sublist-side .subitem-side {
-  margin-left: 10px;
-}
-.sublist-side .subitem-side .sublink-side {
-  padding: 10px;
-  text-align: left;
 }
 .sublist-side .subitem-side .sublink-side.btn-outline-danger {
   background-color: antiquewhite;
