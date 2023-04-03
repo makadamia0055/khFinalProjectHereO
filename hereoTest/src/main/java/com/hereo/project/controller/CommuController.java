@@ -25,5 +25,20 @@ public class CommuController {
 	public String home() {
 		return "/community/free-board";
 	}	
+	
+	@GetMapping(value = "/community/eventAcid")
+	public String eventAcid() {
+		return "/community/eventAcid-board";
+	}	
+	
+	@GetMapping(value = "/community/findHero")
+	public String findHero() {
+		return "/community/findHero-board";
+	}
+	
+	@GetMapping(value = "/community/market")
+	public String market() {
+		return "/community/market-board";
+	}
 }
 	

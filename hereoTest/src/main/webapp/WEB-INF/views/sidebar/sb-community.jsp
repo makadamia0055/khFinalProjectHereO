@@ -37,7 +37,7 @@
           </li>
           <li class="subitem-side commu-talk_background">
             <a
-              href="./commu-accid.html"
+              href="<c:url value='/community/eventAcid'></c:url>"
               target="_parent"
               class="sublink-side btn btn-outline-danger col-lg-12"
               >사건 사고 게시판</a
@@ -48,7 +48,7 @@
     </li>
     <li class="item-side commu-submenu__color">
       <a
-        href="./commu-hero.html"
+        href="<c:url value='/community/findHero'></c:url>"
         target="_top"
         class="link-side btn btn-light col-lg-12"
         >용병 구해요</a
@@ -56,7 +56,7 @@
     </li>
     <li class="item-side commu-submenu__color">
       <a
-        href="./commu-market.html"
+        href="<c:url value='/community/market'></c:url>"
         target="_top"
         class="link-side btn btn-light col-lg-12"
         >중고거래</a
