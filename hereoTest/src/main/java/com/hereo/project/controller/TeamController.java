@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +20,7 @@ import com.hereo.project.pagination.Criteria;
 import com.hereo.project.pagination.PageMaker;
 import com.hereo.project.service.PlayerService;
 import com.hereo.project.service.TeamService;
+import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.RegionVO;
 import com.hereo.project.vo.TeamApprovalListVO;
@@ -27,6 +30,7 @@ import com.hereo.project.vo.TeamVO;
 public class TeamController {
 	@Autowired
 	TeamService teamService;
+	
 	@Autowired
 	PlayerService playerService;
 	@Autowired
@@ -56,7 +60,9 @@ public class TeamController {
 	@RequestMapping(value = "/team/sep", method = RequestMethod.GET)
 	public ModelAndView teamMainPage(ModelAndView mv, Integer teamNum) {
 		TeamVO tmpTeam = teamService.selectTeamByTm_Num(teamNum);
-		
+		int memberCnt = teamService.countTeamMember(teamNum);
+		System.out.println(memberCnt);
+		mv.addObject("memberCnt", memberCnt);
 		mv.addObject("team", tmpTeam);
 		mv.setViewName("/team/team-sep");
 		return mv;
@@ -81,18 +87,37 @@ public class TeamController {
 	}
 //	팀 신청 페이지(일단 이걸로 구현)
 	@RequestMapping(value = "/team/create", method = RequestMethod.GET)
-	public ModelAndView teamCreate(ModelAndView mv) {
-		
+	public ModelAndView teamCreate(ModelAndView mv, HttpSession session) {
+		MembersVO user = (MembersVO)session.getAttribute("user");
+		if(user==null) {
+		}
+
 		mv.setViewName("/team/team-create");
 		return mv;
 	}
 //	팀 신청 페이지 - POST 신청 받기
 	@RequestMapping(value = "/team/create", method = RequestMethod.POST)
-	public ModelAndView teamCreatePost(ModelAndView mv, TeamVO team, MultipartFile imgFile) {
-		boolean res = teamService.insertTeam(team, imgFile);
-		
-		
+	public ModelAndView teamCreatePost(ModelAndView mv, TeamVO team, MultipartFile imgFile, HttpSession session, Integer tm_backnum) {
+		MembersVO user = (MembersVO)session.getAttribute("user");
 		mv.setViewName("/team/team-create");
+		if(user==null) {
+//			임시 테스트용 코드
+			user=new MembersVO();
+			user.setMe_id("asd123");
+		}
+		PlayerVO player = playerService.selectPlayerByMeId(user.getMe_id());
+		int teamNum = teamService.insertTeam(team, imgFile);
+		
+		if(teamNum!=0) {
+//			team.setTm_num(teamNum);// 이게 자동으로 넣어지는 듯
+//		팀장 등록
+			int auth = 4;
+			boolean res2 = playerService.insertPlayerToTeam(team, player, auth);
+			if(res2) {
+				boolean res3 = playerService.updateBackNum(team, player, tm_backnum);
+				mv.setViewName("redirect:/team/main");
+				}
+		}
 		return mv;
 	}
 	@ResponseBody

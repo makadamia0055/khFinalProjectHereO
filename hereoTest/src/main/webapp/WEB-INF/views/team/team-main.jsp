@@ -56,7 +56,7 @@
 							<div class="right-teambox">
 								연고지 : <span class="possible_local">경기도</span><br>
 								다음 경기 일정 : <span class="recently_match">미정</span><br>
-								연습 신청 허용 여부 : <span class="match_type">
+								연습 신청 허용 : <span class="match_type">
 									<c:choose>
 										<c:when test="${team.tm_openformatch}">신청 가능</c:when>
 										<c:otherwise>신청 불가</c:otherwise>
