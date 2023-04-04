@@ -29,6 +29,7 @@
 }
 
 .market__contents {
+  position : relative;
   margin-top: 40px;
   width: 90%;
   padding: 5px 20px;
@@ -36,3 +37,4 @@
 .market__contents-title a:hover {
   text-decoration: underline;
 }
+

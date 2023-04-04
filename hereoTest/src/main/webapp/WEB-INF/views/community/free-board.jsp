@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link href="<c:url value='/resources/css/community/free-board.css'></c:url>" rel="stylesheet">
+<link href="<c:url value='/resources/css/community/free-board.css'></c:url>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/community/community-common.css'></c:url>" rel="stylesheet" />
 <link href="<c:url value='/resources/css/sidebar/sidebar-template.css'></c:url>" rel="stylesheet" />
 <main class="free-main">
       <span class="free__title">자유게시판</span><br />
@@ -107,6 +108,7 @@
               </tr>
             </tbody>
           </table>
+          <div class="writeBoard-btnBox"><a href="<c:url value='/community/writing'></c:url>"><button class="writeBoard-btn">글쓰기</button></a></div>
           <div class="commu-common__pageNum">
             <ul class="pagination pagination-sm">
               <li class="page-item prev">
@@ -134,8 +136,8 @@
           </div>
           <div class="commu-common__search">
             <select>
-              <option style="font-size: 14px">제목</option>
-              <option style="font-size: 14px">작성자</option>
+              <option style="font-size: 14px" class="freeBoard-opt">제목</option>
+              <option style="font-size: 14px" class="freeBoard-opt">작성자</option>
             </select>
             <input type="text" class="commu-common__search-input" />
             <input

@@ -40,5 +40,10 @@ public class CommuController {
 	public String market() {
 		return "/community/market-board";
 	}
+	
+	@GetMapping(value = "/community/writing")
+	public String writing() {
+		return "/community/commu-writingboard";
+	}
 }
 	

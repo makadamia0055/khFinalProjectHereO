@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="<c:url value='/resources/css/community/findHero-board.css'></c:url>" rel="stylesheet">
+<link href="<c:url value='/resources/css/community/community-common.css'></c:url>" rel="stylesheet" />
 <link href="<c:url value='/resources/css/sidebar/sidebar-template.css'></c:url>" rel="stylesheet" />
 
 <main class="hero-main">
@@ -139,6 +140,7 @@
               </tr>
             </tbody>
           </table>
+          <div class="writeBoard-btnBox"><a href="<c:url value='/community/writing'></c:url>"><button class="writeBoard-btn">글쓰기</button></a></div>
           <div class="commu-common__pageNum">
             <ul class="pagination pagination-sm">
               <li class="page-item">
