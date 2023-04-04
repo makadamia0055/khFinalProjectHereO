@@ -119,7 +119,7 @@ public class TeamServiceImp implements TeamService{
 	public int countTeamMember(Integer teamNum) {
 		if(teamNum==null)
 			return 0;
-		return teamPlayerDao.countTeamMember(teamNum);
+		return teamPlayerDao.countTeamMember(teamNum, 3, new Criteria());
 	}
 	
 }

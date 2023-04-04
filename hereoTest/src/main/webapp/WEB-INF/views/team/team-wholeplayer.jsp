@@ -75,18 +75,30 @@
 					<c:forEach items="${playerList }" var="player">
 						<li class="item-playerbox">
 							<div class="left-playerbox">
-								<a href="<c:url value='/team/pdetail?player=${player.pl_num }'></c:url>" class="link-player-img3 rounded-circle clear-fix">
+								<a href="<c:url value='/team/pdetail?player=${player.pl_num }'></c:url>" class="link-player-img3 rounded-circle clear-fix"
+								style="background-image: url(
+									<c:choose>
+										<c:when test="${empty player.pl_player_img}">
+											<c:url value='/files/defaultlogo.png'></c:url>
+										</c:when>
+										<c:otherwise>
+											<c:url value='/files${player.pl_player_img}'></c:url>
+										</c:otherwise>
+									</c:choose>
+									
+								);">
 									<div class="label-player">
-										<span class="player-local badge badge-danger">투수</span> 
+										<span class="player-backNum badge badge-danger">투수</span> 
 										<span class="player-name">${player.me_nickname }</span>
 									</div>
 								</a>
 							</div>
 							<div class="right-playerbox">
-								직위 : <span class="team_class">단장</span><br>
-								희망 포지션 : <span class="team_position">투수</span><br>
-								주전/벤치 : <span class="recently_match">벤치</span><br>
-								다음 경기 참석 여부: <span class="match_type">미정</span>
+								직위 : <span class="team_class">${param.teamNum }</span><br>
+								희망 포지션 : <c:forEach items="${player.positionList }" var="pl"><span class="team_position badge badge-pill badge-success">${pl.ph_po_ko_name }</span>
+								</c:forEach>
+								<br>
+								다음 경기 출전: <span class="match_type badge">벤치</span>
 								
 							</div>
 							<button type="button" class="btn btn-danger btn-kickout" data-toggle="modal" data-target="#warning_kickout">탈퇴</button>
@@ -104,11 +116,18 @@
 			<!-- 페이지 번호 -->
 			<div class="container-pagenation">
 				<ul class="pagination justify-content-center">
-					<li class="page-item prev"><a href="#" class="page-link">이전</a></li>
-					<li class="page-item active"><a href="#" class="page-link">1</a></li>
-					<li class="page-item"><a href="#" class="page-link">2</a></li>
-					<li class="page-item"><a href="#" class="page-link">3</a></li>
-					<li class="page-item next"><a href="#" class="page-link">다음</a></li>
+					<c:if test="${pm.prev }">
+						<li class="page-item prev"><a href="<c:url value='/team/wholeplayer?teamNum=${param.teamNum }&page=${pm.startPage - 1}&search=${pm.cri.search}&type=${pm.cri.type }'></c:url>" class="page-link">이전</a></li>
+					</c:if>
+					<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="index">
+						<li class="page-item
+							<c:if test='${index == pm.cri.page  }'> active </c:if> ">
+							<a href="<c:url value='/team/wholeplayer?teamNum=${param.teamNum }&page=${index}'></c:url>" class="page-link">${index}</a>
+						</li>
+					</c:forEach>
+					<c:if test="${pm.next}">
+						<li class="page-item next"><a href="<c:url value='/team/wholeplayer?teamNum=${param.teamNum }&page=${pm.startPage + 1}&search=${pm.cri.search}&type=${pm.cri.type }'></c:url>" class="page-link">다음</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -148,6 +167,13 @@
 	crossorigin="anonymous"
 ></script>
 <script>
+let cri = {
+		page:1,
+		perPageNum: 10, 
+		search: '',
+		type: 0,
+		strType:''
+	}
 	$(document).ready(function(){
 		$('[data-toggle="tooltip"]').tooltip();
 	});

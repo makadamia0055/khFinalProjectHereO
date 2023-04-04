@@ -43,10 +43,10 @@ public class TeamController {
 		if(cri==null) {
 			cri = new Criteria();
 		}
-		cri.setPerPageNum(5);
-		PageMaker pm = new PageMaker(totalCount, 5, cri);
-		RegionVO[] regionArr = regionDao.selectAllRegion();
+		cri.setPerPageNum(10);
+		PageMaker pm = new PageMaker(totalCount, 10, cri);
 		ArrayList<TeamVO> teamList = teamService.selectTeamsByCriAndState(pm.getCri(), "활동중");
+		RegionVO[] regionArr = regionDao.selectAllRegion();
 		mv.addObject("region", regionArr);
 		mv.addObject("teamList", teamList);
 		mv.addObject("pm", pm);
@@ -61,7 +61,15 @@ public class TeamController {
 	public ModelAndView teamMainPage(ModelAndView mv, Integer teamNum) {
 		TeamVO tmpTeam = teamService.selectTeamByTm_Num(teamNum);
 		int memberCnt = teamService.countTeamMember(teamNum);
-		System.out.println(memberCnt);
+		int auth = 4;
+		ArrayList<PlayerVO> playerList = playerService.selectPlayerByTm_Num(teamNum, auth);
+		if(playerList!= null && playerList.size()>=1) {
+			PlayerVO leader = playerList.get(0);
+			mv.addObject("teamLeader", leader);
+			
+		}
+		RegionVO[] regionArr = regionDao.selectAllRegion();
+		mv.addObject("region", regionArr);
 		mv.addObject("memberCnt", memberCnt);
 		mv.addObject("team", tmpTeam);
 		mv.setViewName("/team/team-sep");
@@ -69,10 +77,17 @@ public class TeamController {
 	}
 //	팀 전체 선수 페이지
 	@RequestMapping(value = "/team/wholeplayer", method = RequestMethod.GET)
-	public ModelAndView teamWholePlayer(ModelAndView mv, Integer teamNum) {
+	public ModelAndView teamWholePlayer(ModelAndView mv, Integer teamNum, Criteria cri) {
 		ArrayList<PlayerVO> playerList = playerService.selectPlayerByTm_Num(teamNum);
-		
-		
+		int auth = 3;
+		int totalCount = playerService.countTeamPlayers(teamNum, auth, cri);
+		if(cri==null) {
+			cri = new Criteria();
+		}
+		cri.setPerPageNum(10);
+		PageMaker pm = new PageMaker(totalCount, 10, cri);
+		mv.addObject("pm", pm);
+
 		mv.addObject("playerList", playerList);
 		mv.setViewName("/team/team-wholeplayer");
 		return mv;
@@ -153,9 +168,13 @@ public class TeamController {
 	}
 	@RequestMapping(value = "/team/adteam_create", method = RequestMethod.GET)
 	public ModelAndView adminTeamCreate(ModelAndView mv, Criteria cri) {
-		if(cri == null) {
+		if(cri==null) {
 			cri = new Criteria();
 		}
+		int totalCount = teamService.countTeams("심사중", cri);
+		cri.setPerPageNum(10);
+		PageMaker pm = new PageMaker(totalCount, 10, cri);
+		
 		ArrayList<TeamVO> teamList = teamService.selectTeamsByCriAndState(cri, "심사중");
 		ArrayList<TeamApprovalListVO> TAppList = new ArrayList<TeamApprovalListVO>();
 		for(TeamVO tmpTeam: teamList) {
@@ -165,10 +184,30 @@ public class TeamController {
 			TAppList.add(tmpApp);
 			}
 		}
+		mv.addObject("pm", pm);
 		mv.addObject("TAList", TAppList);
 		mv.setViewName("/team/team_admin_teamcreate");
 		return mv;
 	}
+//	현재 팀 관리 페이지
+	@RequestMapping(value = "/team/adteam_manage", method = RequestMethod.GET)
+	public ModelAndView adminTeamManage(ModelAndView mv, Criteria cri) {
+		if(cri==null) {
+			cri = new Criteria();
+		}
+		int totalCount = teamService.countTeams("활동중", cri);
+		cri.setPerPageNum(10);
+		PageMaker pm = new PageMaker(totalCount, 10, cri);
+		
+		ArrayList<TeamVO> teamList = teamService.selectTeamsByCriAndState(cri, "활동중");
+		
+		mv.addObject("pm", pm);
+		mv.addObject("teamList", teamList);
+		mv.setViewName("/team/team_admin_currentteammanage");
+		return mv;
+	}
+//	관리자 보드 신청 관리 보드 GET
+
 	@RequestMapping(value = "/team/adteam_createBoard", method = RequestMethod.GET)
 	public ModelAndView adminTeamCreateBoard(ModelAndView mv, Integer teamNum) {
 		TeamVO tmpTeam = teamService.selectTeamByTm_Num(teamNum);
@@ -184,6 +223,7 @@ public class TeamController {
 		mv.setViewName("/team/team_admin_teamcreateboard");
 		return mv;
 	}
+//	관리자 보드 신청 관리 보드 POST
 	@RequestMapping(value = "/team/adteam_createBoard", method = RequestMethod.POST)
 	public ModelAndView adminTeamCreateBoardPost(ModelAndView mv, Integer teamNum, Integer teamState) {
 		boolean res = teamService.updateTeamAppListState(teamNum, teamState);
@@ -193,6 +233,15 @@ public class TeamController {
 		}
 		
 		mv.setViewName("redirect:/team/adteam_create");
+		return mv;
+	}
+//	관리자 현행 팀 관리
+	@RequestMapping(value = "/team/adteam_currentBoard", method = RequestMethod.GET)
+	public ModelAndView adminTeamCurrentBoard(ModelAndView mv, Integer teamNum) {
+		TeamVO tmpTeam = teamService.selectTeamByTm_Num(teamNum);
+		
+		mv.addObject("team", tmpTeam);
+		mv.setViewName("/team/team_admin_currentteamboard");
 		return mv;
 	}
 	@RequestMapping(value="/team/board_list", method = RequestMethod.GET)

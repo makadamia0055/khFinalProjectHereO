@@ -7,7 +7,7 @@
 <section>
 	<div class="btn-group-vertical">
 	  <a href="<c:url value='/team/adteam_create'></c:url>" type="button" class="btn btn-primary btn-lg">팀 개설 관리</a>
-	  <a href="<c:url value='/team/adteam_create'></c:url>" type="button" class="btn btn-primary btn-lg">기존 팀 관리</a>
+	  <a href="<c:url value='/team/adteam_manage'></c:url>" type="button" class="btn btn-primary btn-lg">기존 팀 관리</a>
 	  <a type="button" class="btn btn-primary btn-lg">Sony</a>
 	</div>
 </section>

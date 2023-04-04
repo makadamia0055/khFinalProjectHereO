@@ -2,6 +2,7 @@ package com.hereo.project.service;
 
 import java.util.ArrayList;
 
+import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.Position_HopeVO;
@@ -22,5 +23,9 @@ public interface PlayerService {
 	PlayerVO selectPlayerByMeId(String me_id);
 
 	boolean updateBackNum(TeamVO team, PlayerVO player, Integer tm_backnum);
+
+	ArrayList<PlayerVO> selectPlayerByTm_Num(Integer teamNum, int auth);
+
+	int countTeamPlayers(int teamNum, int auth, Criteria cri);
 
 }

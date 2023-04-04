@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <link rel="stylesheet" href="/hereoTest/resources/css/team/team_common.css" />
 <link rel="stylesheet" href="/hereoTest/resources/css/team/team.css" />
 <link	rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -33,6 +35,8 @@
 				<!-- 팀 리스트 -->
 			<div class="container-teambox">
 				<ul class="list-teambox" id="teamList">
+				<!-- c:forEach 시작 -->
+					<c:if test="${empty teamList}"><div class="">검색 기록이 없습니다.</div></c:if>
 					<c:forEach items="${teamList}" var="team">
 						<li class="item-teambox">
 							<div class="left-teambox">
@@ -54,7 +58,7 @@
 								</a>
 							</div>
 							<div class="right-teambox">
-								연고지 : <span class="possible_local">경기도</span><br>
+								ㅌㅌㅌ : <span class="possible_local">ㅇㅇㅇ</span><br>
 								다음 경기 일정 : <span class="recently_match">미정</span><br>
 								연습 신청 허용 : <span class="match_type">
 									<c:choose>
@@ -62,7 +66,11 @@
 										<c:otherwise>신청 불가</c:otherwise>
 									</c:choose>
 								</span>
-								<button class="show-schedule btn btn-warning">경기 일정 보기</button>
+								<div class="btn-group">
+									<button type="button"  class="show-schedule btn btn-warning">경기 일정</button>
+									<c:if test="${true }">
+										<button type="button" class="btn-wtjoin btn btn-warning">팀 가입 신청</button>
+									</c:if>
 							</div>
 						</li>
 					</c:forEach>
@@ -95,6 +103,9 @@
 		<!-- 오른쪽 호버 박스 -->
 		
 	</section>	
+	<dialog>
+		모달창 임시 
+	</dialog>
 	<div class="teammain-rightbox animate__animated animate__backInRight animate__faster" style="display: none;">
 		<div class="hover-box">
 			<div class="rb-title"><h3><span class="team-name">단또즈</span> 경기 일정</div></h3>
@@ -140,32 +151,14 @@
 		$('.teammain-rightbox').find('.home_team').text(teamName);
 		$('.teammain-rightbox').toggle();
 	})
-	
+	const dialog = document.querySelector("dialog");
+
+	$('.btn-wtjoin').click(function(){
+		dialog.showModal();
+	})
 	
 </script>
 <script>
-/* 버튼 검색(일단은 strType으로 구현) */
-/* $('.list-region .item-region .link-region').click(function(e){
-	e.preventDefault();
-	$(this).toggleClass('active');
-	let localType = $(this).data('local');
-	console.log(localType);
-	if(localType=='all'){
-		$('.list-region .item-region .link-region').removeClass('active');
-		return;
-	}
-	applyActive($(this));
-	
-	})
-function applyActive(e){
-	let tmp = $('.list-region .item-region .link-region').filter('.active')
-	if(tmp.length>=4){
-		alert('지역은 최대 3개까지 선택할 수 있습니다.')
-		$(e).removeClass('active');
-		return;
-	}
-	let teamList = 
-} */	
 
 
 
