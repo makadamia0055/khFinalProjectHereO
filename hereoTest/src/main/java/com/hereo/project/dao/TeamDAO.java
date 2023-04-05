@@ -18,7 +18,7 @@ public interface TeamDAO {
 
 	int countAllTeams(@Param("state")String state, @Param("cri")Criteria cri);
 
-	boolean insertTeam(@Param("tm")TeamVO team);
+	int insertTeam(@Param("tm")TeamVO team);
 
 	TeamApprovalListVO selectTeamAppListByTeam(@Param("tm")TeamVO tmpTeam);
 

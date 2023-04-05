@@ -1,6 +1,5 @@
 package com.hereo.project.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hereo.project.dao.TeamDAO;
+import com.hereo.project.dao.TeamPlayerDAO;
 import com.hereo.project.pagination.Criteria;
 import com.hereo.project.utils.UploadFileUtils;
 import com.hereo.project.vo.TeamApprovalListVO;
@@ -17,6 +17,8 @@ import com.hereo.project.vo.TeamVO;
 public class TeamServiceImp implements TeamService{
 	@Autowired
 	TeamDAO teamDao;
+	@Autowired
+	TeamPlayerDAO teamPlayerDao;
 
 	String uploadPath = "D:\\uploadfiles";
 
@@ -46,10 +48,10 @@ public class TeamServiceImp implements TeamService{
 
 
 	@Override
-	public boolean insertTeam(TeamVO team, MultipartFile imgFile) {
+	public int insertTeam(TeamVO team, MultipartFile imgFile) {
 		if(team==null||team.getTm_name()==null||team.getTm_name().trim().equals("")||
 				team.getTm_slogan()==null)
-			return false;
+			return 0;
 //			team.tm_me_id는 지금 시점에서 구현이 애매해서 뺌
 		String tmpImgPath = "";
 		if(imgFile!=null&&imgFile.getOriginalFilename().length()!=0) {
@@ -63,11 +65,11 @@ public class TeamServiceImp implements TeamService{
 //		임시 팀장 아이디
 		team.setTm_me_id("asd123");
 		team.setTm_team_img(tmpImgPath);
-		boolean res = teamDao.insertTeam(team);
-		if(res) {
+		int teamNum = teamDao.insertTeam(team);
+		if(teamNum!=0) {
 			teamDao.insertTeamAppList(team);
 		}
-		return res;
+		return team.getTm_num();
 	}
 
 	@Override
@@ -111,6 +113,13 @@ public class TeamServiceImp implements TeamService{
 			return true;
 		return false;
 		
+	}
+
+	@Override
+	public int countTeamMember(Integer teamNum) {
+		if(teamNum==null)
+			return 0;
+		return teamPlayerDao.countTeamMember(teamNum, 3, new Criteria());
 	}
 	
 }

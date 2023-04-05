@@ -13,6 +13,11 @@
 			join (select me_id, me_nickname from members) as me on me_id=pl_me_id
 			where pl_num = #{pl_num}
 	</select>
+	<select id="selectPlayerByMeId" resultType="com.hereo.project.vo.PlayerVO">
+		select * from player
+			where pl_me_id like #{me_id}
+	
+	</select>
 
 
 

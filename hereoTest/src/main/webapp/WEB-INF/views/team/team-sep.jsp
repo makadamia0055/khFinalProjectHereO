@@ -1,17 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <link rel="stylesheet" href="/hereoTest/resources/css/team/team_common.css" />
 <link rel="stylesheet" href="/hereoTest/resources/css/team/team.css" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link	rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<style>
+
+#main_logo{
+	witdh: 300px; height: 300px;
+}
+
+
+</style>
 
 <section class="teamsep-main">
       <div class="teamsep-leftbox">
         <div class="container-introduce">
          <div class="left-introduce">
           <div class="box-logo">
-            <img src="
+            <img id="main_logo" src="
 	            <c:choose>
 					<c:when test="${empty team.tm_team_img}">
 						<c:url value='/files/defaultlogo.png'></c:url>
@@ -35,19 +45,26 @@
             	</c:choose>
             </div>
             <li class="item-team_intro">
-              연고지 : <span class="team-local">
-                <a href="#" class="link-local_full badge badge-success">서울</a> 왕십리
+            	구단주 : <span class="team-leader">
+            	<c:if test="${empty teamLeader }">없음</c:if>
+            	${teamLeader.me_nickname }</span> 
+            	
+            </li>
+            <li class="item-team_intro">
+              지역 : <span class="team-local">
+                <a href="#" class="link-local_full badge badge-success">${region[team.tm_re_num -1].re_sido }</a> 
               </span>
             </li>
             <li class="item-team_intro">
               창단일 : <span class="team-since">${team.tm_startday_str }</span>
             </li>
             <li class="item-team_intro">
-              멤버수 : <span class="team-currentMember">19</span>명 /
-              <span class="team-maxMember">
+              멤버수 : <span class="team-currentMember">${memberCnt }</span>명 
+              <!-- <span class="team-maxMember">
                 <span class="team-maxMember-num">30</span>명
-              </span>
+              </span> -->
             </li>
+            
           </ul>
         </div>
         <div id="accordion" class="subcontainer-league">
@@ -66,20 +83,58 @@
           </div>
         </div>
           
-        </div>
-        <!-- <iframe src="https://calendar.google.com/calendar/embed?height=300&wkst=2&bgcolor=%234285F4&ctz=Asia%2FSeoul&showTitle=0&showTabs=0&showPrint=0&showCalendars=0&showTz=0&mode=MONTH&src=Y2RiYWNmNDhiZGRmY2I2YjdhZWQ3YzM4ZjYwODljZjk5OTc2MmZkOTliYzA0OTc4N2FiYjc2MDFiZTRhMmE5MEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23F09300" style="border-width:0" width="400" height="300" frameborder="0" scrolling="no"></iframe> -->
+       </div>
+       
+        <div class="block-liner container-calendar">
+          <div class="content-blockliner title-calendar">
+          팀 일정
+          </div>
+         </div>
+         <div class="d-flex">
+       	  <div class="p-2 table">
+       	  This Month
+       	  </div>
+       	  <div class="p-2 table">
+       	  This Week
+       	  </div>
+          
+       
+         </div>
+         
+       
         <div class="block-liner container-latestscore">
           <div class="content-blockliner score-teamstat">
-            <div class="titletext-latestscore">다음 경기</div>
-              일시 : <span class="date-nextMatch">2023-02-18 오후 3시</span><br>
-              구장 : <span class="location-nextmatch"><a href="#">왕십리 사근초등학교</a></span><br>
-              <a href="#" class="link-nextMatch btn btn-primary">예약 페이지로</a>
+           <c:choose>
+              	<c:when test="${false}">
+       			 <div class="titletext-latestscore">다음 경기</div>
+            		 일시 : <span class="date-nextMatch">2023-02-18 오후 3시</span><br>
+        	  	 	  구장 : <span class="location-nextmatch"><a href="#">왕십리 사근초등학교</a></span><br>
+          		  	 <a href="#" class="link-nextMatch btn btn-primary">예약 페이지로</a>
             
+              	</c:when>
+              	<c:otherwise>
+          		<div class="titletext-latestscore">다음 경기</div>
+             	 <span>미정</span><br>
+            	  <a href="#" class="link-nextMatch btn btn-dark">예약 페이지로</a>
+              	</c:otherwise>
+              	
+              </c:choose>
           </div>
-          <div class="container-vsTeam">
+         </div>
+           
+           <c:choose>
+              	<c:when test="${false}">
+              		<div class="container-vsTeam">
             <div class="our_team title-team animate__animated">
               <div class="img-box">
-                <img class="team-logo rounded-circle" src="./고양이 로고.png" alt="단또즈">
+                <img class="team-logo rounded-circle" src="<c:choose>
+					<c:when test="${empty team.tm_team_img}">
+						<c:url value='/files/defaultlogo.png'></c:url>
+					</c:when>
+					<c:otherwise>
+						<c:url value='/files${team.tm_team_img}'></c:url>
+					</c:otherwise>
+				</c:choose>" alt="${team.tm_name }">
                 <button class="badge badge-pill badge-success">홈팀</button>
               </div>
               단또즈</div>
@@ -87,7 +142,14 @@
             <div class="oppo_team title-team animate__animated">
               <a href="#">
               <div class="img-box">
-                <img class="team-logo rounded-circle" src="./흑우즈.png" alt="단또즈">
+                <img class="team-logo rounded-circle" src="<c:choose>
+					<c:when test="${empty team.tm_team_img}">
+						<c:url value='/files/defaultlogo.png'></c:url>
+					</c:when>
+					<c:otherwise>
+						<c:url value='/files${team.tm_team_img}'></c:url>
+					</c:otherwise>
+				</c:choose>" alt="${team.tm_name }">
                 <button class="badge badge-pill badge-danger">원정</button>
               </div>
               흑우즈</a></div>
@@ -311,7 +373,15 @@
           
           <a href="./team-sep.html" role="button" class="btn btn-primary col-lg-12">상대 팀 페이지로 </a>
        </div>
-        </div>
+        </div>	
+              	</c:when>
+              	<c:otherwise>
+              		미정
+             	</c:otherwise>
+              	
+           </c:choose>
+              
+          
 
 
         
