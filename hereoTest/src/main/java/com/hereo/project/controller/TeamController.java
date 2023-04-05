@@ -24,7 +24,9 @@ import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.RegionVO;
 import com.hereo.project.vo.TeamApprovalListVO;
+import com.hereo.project.vo.TeamPlayerVO;
 import com.hereo.project.vo.TeamVO;
+import com.hereo.project.vo.TeamWTJoinVO;
 
 @Controller
 public class TeamController {
@@ -53,9 +55,42 @@ public class TeamController {
 		mv.setViewName("/team/team-main");
 		return mv;
 	}
-	
+//	팀 메인 페이지 ajax 팀 정보 받기
+	@ResponseBody
+	@RequestMapping(value="/team/main/teamInfo", method=RequestMethod.POST)
+	public Map<String, Object>teamGetInfo(@RequestBody TeamVO tmp) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		ArrayList<PlayerVO> playerList = playerService.selectPlayerByTm_Num(tmp.getTm_num(), 4);
+		map.put("teamLeader", null);
+		if(playerList!= null && playerList.size()>=1) {
+			PlayerVO leader = playerList.get(0);
+			map.put("teamLeader", leader);
+			
+		}
+		int memberCnt = teamService.countTeamMember(tmp.getTm_num());
+		map.put("memberCnt", memberCnt);
 
-	
+		return map;
+		
+		
+	}
+//	팀 메인페이지 팀 가입 백넘버 중복체크
+	@ResponseBody
+	@RequestMapping(value="/team/main/backNumDupCheck", method=RequestMethod.POST)
+	public Map<String, Object>teamCheckBackNum(@RequestBody TeamPlayerVO tp) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		boolean res= playerService.checkBackNum(tp.getTp_tm_num(), tp.getTp_backnum());
+		map.put("res", res);
+		return map;
+	}
+//	팀 메인 페이지 팀 가입 요청
+	@RequestMapping(value="/team/main/wtjoin", method=RequestMethod.POST)
+	public ModelAndView teamMainWTJoin(ModelAndView mv, TeamPlayerVO tmp) {
+		System.out.println("팀 가입 요청 발생");
+		System.out.println(tmp);
+		mv.setViewName("redirect:/team/main");
+		return mv;
+	}	
 //	팀 개별 페이지
 	@RequestMapping(value = "/team/sep", method = RequestMethod.GET)
 	public ModelAndView teamMainPage(ModelAndView mv, Integer teamNum) {

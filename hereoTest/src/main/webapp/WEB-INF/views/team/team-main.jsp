@@ -6,7 +6,16 @@
 <link rel="stylesheet" href="/hereoTest/resources/css/team/team_common.css" />
 <link rel="stylesheet" href="/hereoTest/resources/css/team/team.css" />
 <link	rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<script src="/hereoTest/resources/js/common/jquery.validate.min.js"></script>
 
+<style>
+	dialog{
+		padding: 50px;
+		margin: auto;
+		border-radius: 30px;
+		
+	}
+</style>
 <section class="teammain-main">
 		<div class="teammain-leftbox">
 			<!-- 지역 리스트 -->
@@ -58,7 +67,7 @@
 								</a>
 							</div>
 							<div class="right-teambox">
-								ㅌㅌㅌ : <span class="possible_local">ㅇㅇㅇ</span><br>
+								상대전적? : <span class="possible_local">ㅇㅇㅇ</span><br>
 								다음 경기 일정 : <span class="recently_match">미정</span><br>
 								연습 신청 허용 : <span class="match_type">
 									<c:choose>
@@ -69,7 +78,7 @@
 								<div class="btn-group">
 									<button type="button"  class="show-schedule btn btn-warning">경기 일정</button>
 									<c:if test="${true }">
-										<button type="button" class="btn-wtjoin btn btn-warning">팀 가입 신청</button>
+										<button type="button" class="btn-wtjoin btn btn-warning" data-team="${team.tm_num }">팀 가입 신청</button>
 									</c:if>
 							</div>
 						</li>
@@ -101,11 +110,47 @@
 		</div>
 		
 		<!-- 오른쪽 호버 박스 -->
-		
+		<dialog>
+			<form method="dialog" id="outerForm">
+				<h3 class="display-4 text-center"><span class="team-name">드렁큰 타이거즈</span><br>
+				<small>팀 가입 신청</small><br></h3>
+				
+				<div class="form-group">
+					연고지 : <span class="team-local badge badge-pill badge-success"></span><br>
+					팀장 : <span class="team-leader"></span><br>
+					팀 인원 : <span class="team-count"></span><br>
+					<input type="text" name="teamNum" hidden>
+					
+				</div>
+				<hr>
+				<div class="form-group text-center collapse show" id="wtjoiner">
+					<span class="mb-3">상기의 팀에 가입하시겠습니까?</span><br>
+					<button type="button" class="btn btn-primary mt-3" data-toggle="collapse" data-target="#duplicateCheck, #wtjoiner">네</button>
+					<button type="button" class="btn btn-close btn-danger mt-3">아니오</button>
+				</div>
+				</form>
+				<div class="form-group collapse " id="duplicateCheck">
+					<form id="innerForm" action="<c:url value='/team/main/wtjoin'></c:url>" method="post">
+						<label for="tp_backnum" id="tp_backnum-error" class="error">희망 등번호를 입력해주십시오.</label><br>
+						희망 등번호 : <input  form="innerForm" type="text" class="col-sm-3" placeholder="0~99" name="tp_backnum" id="tp_backnum"> 					
+						<!-- 임시로 만든 아이디 -->
+						<input type="text" form="innerForm" value="2" name="tp_pl_num" hidden readonly>
+						
+						<button type="button" class="btn btn-sm btn-dark btn-duplicateCheck"> 중복체크</button>
+						
+						<div class="form-group d-flex justify-content-center mt-3">
+							<input type="submit" form="innerForm" class="btn btn-info btn-submit  mt-3" value="팀 가입 신청">
+							<button type="button" class="btn btn-close btn-danger mt-3">취소</button>
+							
+						</div>
+					</form>
+				</div>
+				
+				
+			
+		</dialog>
 	</section>	
-	<dialog>
-		모달창 임시 
-	</dialog>
+	
 	<div class="teammain-rightbox animate__animated animate__backInRight animate__faster" style="display: none;">
 		<div class="hover-box">
 			<div class="rb-title"><h3><span class="team-name">단또즈</span> 경기 일정</div></h3>
@@ -123,12 +168,7 @@
 				
 			</div>
 			
-			
-			
 		</div>
-
-		
-
 	</div>
 	<c:remove var="team" scope="session"></c:remove>
 	
@@ -137,6 +177,7 @@
       crossorigin="anonymous"
     ></script>
 <script>
+	let backNumDupCheck = false;
 	let cri = {
 		page:1,
 		perPageNum: 10, 
@@ -155,12 +196,112 @@
 
 	$('.btn-wtjoin').click(function(){
 		dialog.showModal();
+		let teamNum = $(this).data('team');
+		let teamName = $(this).parents('.item-teambox').find('.team-name').text();
+		let teamLocal = $(this).parents('.item-teambox').find('.team-local').text();
+		$('dialog [name=teamNum]').val(teamNum);
+		$('dialog').find('.team-name').text(teamName);
+		$('dialog').find('.team-local').text(teamLocal);
+		<!--팀장 및 팀 인원 -->
+		let teamObj = {
+				tm_num : teamNum
+		};
+		ajax("post", teamObj, '<c:url value="/team/main/teamInfo"></c:url>', function(data){
+			$('dialog .team-count').text(data.memberCnt + '명');
+			if(data.teamLeader==null){
+				$('dialog .team-leader').text('없음');	
+			}else{
+				$('dialog .team-leader').text(data.teamLeader.me_nickname);	
+
+			}
+		})
+	})
+	$('.btn-close').click(function(){
+		dialog.close();
+		$('#duplicateCheck').removeClass('show');
+		$('#tp_backnum').val('');
+		$('#tp_backnum-error').text('희망 등번호를 입력해주십시오.');
+		backNumDupCheck = false;
+		$('.btn-duplicateCheck').addClass('btn-dark').text('등번호 중복 체크')
+		$('#duplicateCheck').addClass('show');
+		$('#wtjoiner').collapse("show");
+		$('#duplicateCheck').collapse("hide");
 	})
 	
-</script>
-<script>
+	$('.btn-duplicateCheck').click(function(e){
+		e.preventDefault();
+		let hopeBackNum = $('#tp_backnum').val();
+		let teamNum = $('dialog [name=teamNum]').val();
+		
+		if(!$('#tp_backnum').valid()){
+			alert('사용 불가능한 등번호입니다.');
+			return;
+		}
+		let tmpObj = {
+				tp_backnum : hopeBackNum, 
+				tp_tm_num : teamNum
+				
+		}
+		ajax("POST", tmpObj, '<c:url value="/team/main/backNumDupCheck"></c:url>', function(data){
+			backNumDupCheck = data.res;
+			console.log(data.res);
+			if(data.res){
+				alert('사용가능한 등번호입니다.');
+				$('.btn-duplicateCheck').removeClass('btn-dark').text('중복 체크 완료')
+			}else{
+				alert('이미 존재하는 등번호입니다.');
+			}
+		})
+		
+	})
+	$('#tp_backnum').change(function(){
+		backNumDupCheck = false;
+		$('.btn-duplicateCheck').addClass('btn-dark').text('등번호 중복 체크')
 
+	})
+$(function(){
+	
+	$('dialog form').validate({
+        rules: {
+        	tp_backnum:{
+        		required : true,
+        		regex:/^[0-9]{1,2}$/
+        	}
+	},
+   
+    messages : {
+    		tp_backnum:{
+        		required : "필수로 입력하세요.",
+        		regex : "두자리 이내의 숫자만 가능합니다."
+        	}
+        
+        
+   	},
+				 submitHandler : function (form){
+					if(!backNumDupCheck){
+		    			alert('등번호 중복 체크를 해주세요.');
+		    			return false;
+		    		}
+					if(!confirm('정말 해당 팀에 가입 신청합니까?')){
+						return false;
+					}
+					
+					return true;
+				} 
+	});
+	})
+	
+$.validator.addMethod(
+"regex",
+function(value, element, regexp) {
+    var re = new RegExp(regexp);
+    return this.optional(element) || re.test(value);
+},
+"Please check your input."
+);	
 
+	
+	
 
 
 

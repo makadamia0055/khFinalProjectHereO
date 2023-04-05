@@ -28,4 +28,6 @@ public interface PlayerService {
 
 	int countTeamPlayers(int teamNum, int auth, Criteria cri);
 
+	boolean checkBackNum(int tm_num, Integer backNum);
+
 }

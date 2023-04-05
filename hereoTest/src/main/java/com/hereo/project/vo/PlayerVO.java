@@ -21,6 +21,8 @@ public class PlayerVO {
 	private String me_nickname;
 	
 	public TeamPlayerVO getMainTeam() {
+		if(teamList==null)
+			return null;
 		for(TeamPlayerVO tmp : teamList) {
 			if(tmp.getTp_auth()>=3) 
 				return tmp;

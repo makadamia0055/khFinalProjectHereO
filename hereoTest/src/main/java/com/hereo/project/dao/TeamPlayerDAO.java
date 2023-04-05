@@ -25,4 +25,6 @@ public interface TeamPlayerDAO {
 
 	ArrayList<TeamPlayerVO> selectPlayerListByTeamAndAuth(@Param("teamNum")Integer teamNum, @Param("auth")int auth);
 
+	int checkBackNum(@Param("tm_num")int tm_num, @Param("backNum")Integer backNum);
+
 }

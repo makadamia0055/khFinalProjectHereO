@@ -38,6 +38,10 @@
 		select * from `team-player`
 			where tp_tm_num = #{teamNum} and tp_auth >= #{auth}
 	</select>
+	<select id="checkBackNum" resultType="int">
+		select count(*) from `team-player`
+			where tp_tm_num = #{tm_num} and tp_backnum = #{backNum} 
+	</select>
 
 
 </mapper>

@@ -119,5 +119,11 @@ public class PlayerServiceImp implements PlayerService{
 	public int countTeamPlayers(int teamNum, int auth, Criteria cri) {
 		return teamPlayerDao.countTeamMember(teamNum, auth, cri);
 	}
+	@Override
+	public boolean checkBackNum(int tm_num, Integer backNum) {
+		if(backNum==null)
+			return false;
+		return teamPlayerDao.checkBackNum(tm_num, backNum)==0;
+	}
 	
 }
