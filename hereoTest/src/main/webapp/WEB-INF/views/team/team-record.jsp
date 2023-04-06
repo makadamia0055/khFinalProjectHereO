@@ -31,7 +31,7 @@
             	  	<c:choose> 
 	            		<c:when test="${team.tm_slogan !=null && team.tm_slogan.trim().length()!=0}">${team.tm_slogan}</c:when>
 	            		<c:otherwise>
-	            		"야구장 예약은 바로 여기, Here <i class="fa-solid fa-baseball"></i>!!"
+	            		야구장 예약은 바로 여기, Here <i class="fa-solid fa-baseball"></i>!!
 	            		</c:otherwise>
             		</c:choose>
               "</div>

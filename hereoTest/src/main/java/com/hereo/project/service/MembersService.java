@@ -10,5 +10,7 @@ public interface MembersService {
 
 	MembersVO login(MembersVO user);
 
+	MembersVO selectMembersByMeId(String pl_me_id);
+
 
 }

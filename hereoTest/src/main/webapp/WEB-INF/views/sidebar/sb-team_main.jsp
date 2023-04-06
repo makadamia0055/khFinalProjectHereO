@@ -149,8 +149,7 @@
 	            </li>
 	            <li class="subitem-side">
 	              <a
-	                href="../join-control/team-join-board_main.html"
-	                target="_parent"
+	                href="<c:url value='/team/wtjPage'></c:url>"
 	                class="sublink-side btn btn-danger col-sm-8"
 	                >팀 가입 관리 게시판</a
 	              >
@@ -159,16 +158,6 @@
 	        </div>
 	      </li>
 		</c:if>
-      
-      
-      <li class="item-side">
-        <a
-          href="<c:url value='/team/join'></c:url>"
-          
-          class="link-side btn btn-outline-light col-lg-12"
-          >가입신청</a
-        >
-      </li>
       <li class="item-side">
         <a
           href="<c:url value='/team/admin'></c:url>"

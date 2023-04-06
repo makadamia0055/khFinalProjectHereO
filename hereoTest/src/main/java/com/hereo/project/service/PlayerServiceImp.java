@@ -125,5 +125,16 @@ public class PlayerServiceImp implements PlayerService{
 			return false;
 		return teamPlayerDao.checkBackNum(tm_num, backNum)==0;
 	}
+	@Override
+	public boolean insertNewTeamPlayer(TeamPlayerVO tmp) {
+		if(tmp==null)
+			return false;
+		
+		return teamPlayerDao.insertNewTeamPlayer(tmp)!=0;
+	}
 	
+	@Override
+	public boolean hasTeam(int pl_num) {
+		return teamPlayerDao.hasTeam(pl_num)==0;
+	}
 }
