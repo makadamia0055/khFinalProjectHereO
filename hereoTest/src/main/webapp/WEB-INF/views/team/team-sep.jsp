@@ -90,13 +90,48 @@
           팀 일정
           </div>
          </div>
-         <div class="d-flex">
-       	  <div class="p-2 table">
-       	  This Month
-       	  </div>
-       	  <div class="p-2 table">
-       	  This Week
-       	  </div>
+         <div class="d-flex justify-content-around">
+       	  <table class="p-2 table text-light">
+       	  	<thead>
+	       	  	<tr>
+		       	  	<th class="text-center">This Week</th>
+	       	  	</tr>
+       	  	</thead>
+       	  	<tbody>
+       	  	<c:if test="${empty weekList }">
+       	  		<tr>
+       	  			<td class="text-center">이번주 스케줄이 없습니다.</td>
+       	  			
+       	  		</tr>
+       	  	</c:if>
+       	  	<c:forEach items="weekList" var="week">
+       	  		<tr>
+       	  			<td></td>
+       	  		</tr>
+       	  	</c:forEach>
+       	  	</tbody>
+       	  	
+       	  </table>
+       	  <table class="p-2 table text-light">
+       	  	<thead>
+	       	  	<tr>
+		       	  	<th class="text-center">This Month</th>
+	       	  	</tr>
+       	  	</thead>
+       	  	<tbody>
+       	  	<c:if test="${empty monthList }">
+       	  		<tr>
+       	  			<td class="text-center">이번 달 스케줄이 없습니다.</td>
+       	  		</tr>
+       	  	</c:if>
+       	  	<c:forEach items="weekList" var="week">
+       	  		<tr>
+       	  			<td></td>
+       	  		</tr>
+       	  	</c:forEach>
+       	  	</tbody>
+       	  	
+       	  </table>
           
        
          </div>
