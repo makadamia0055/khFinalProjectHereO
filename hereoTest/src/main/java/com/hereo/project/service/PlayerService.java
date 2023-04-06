@@ -6,6 +6,7 @@ import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.Position_HopeVO;
+import com.hereo.project.vo.TeamPlayerVO;
 import com.hereo.project.vo.TeamVO;
 
 public interface PlayerService {
@@ -29,5 +30,10 @@ public interface PlayerService {
 	int countTeamPlayers(int teamNum, int auth, Criteria cri);
 
 	boolean checkBackNum(int tm_num, Integer backNum);
+
+	boolean insertNewTeamPlayer(TeamPlayerVO tmp);
+
+	public boolean hasTeam(int pl_num); 
+
 
 }

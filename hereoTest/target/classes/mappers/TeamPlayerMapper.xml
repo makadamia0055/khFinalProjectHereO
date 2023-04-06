@@ -42,6 +42,14 @@
 		select count(*) from `team-player`
 			where tp_tm_num = #{tm_num} and tp_backnum = #{backNum} 
 	</select>
-
+	<insert id="insertNewTeamPlayer" useGeneratedKeys="true" keyProperty="tp.tp_num">
+		insert into `team-player`
+		select ifnull(max(tp_num), 0) +1, #{tp.tp_auth}, #{tp.tp_pl_num}, #{tp.tp_backnum}, #{tp.tp_tm_num}
+		from `team-player`
+	</insert>
+	<select id="hasTeam" resultType="int">
+		select count(*) from `team-player`
+			where tp_pl_num = #{pl_num} and tp_auth >= 3
+	</select>
 
 </mapper>

@@ -27,4 +27,8 @@ public interface TeamPlayerDAO {
 
 	int checkBackNum(@Param("tm_num")int tm_num, @Param("backNum")Integer backNum);
 
+	int insertNewTeamPlayer(@Param("tp")TeamPlayerVO tmp);
+
+	int hasTeam(int pl_num);
+
 }

@@ -67,7 +67,7 @@
 								</a>
 							</div>
 							<div class="right-teambox">
-								상대전적? : <span class="possible_local">ㅇㅇㅇ</span><br>
+								멤버수 : <span class="memCnt">${team.tm_teamCnt }</span><br>
 								다음 경기 일정 : <span class="recently_match">미정</span><br>
 								연습 신청 허용 : <span class="match_type">
 									<c:choose>
@@ -119,7 +119,6 @@
 					연고지 : <span class="team-local badge badge-pill badge-success"></span><br>
 					팀장 : <span class="team-leader"></span><br>
 					팀 인원 : <span class="team-count"></span><br>
-					<input type="text" name="teamNum" hidden>
 					
 				</div>
 				<hr>
@@ -135,6 +134,7 @@
 						희망 등번호 : <input  form="innerForm" type="text" class="col-sm-3" placeholder="0~99" name="tp_backnum" id="tp_backnum"> 					
 						<!-- 임시로 만든 아이디 -->
 						<input type="text" form="innerForm" value="2" name="tp_pl_num" hidden readonly>
+						<input type="text" name="tp_tm_num" hidden readonly>
 						
 						<button type="button" class="btn btn-sm btn-dark btn-duplicateCheck"> 중복체크</button>
 						
@@ -199,7 +199,7 @@
 		let teamNum = $(this).data('team');
 		let teamName = $(this).parents('.item-teambox').find('.team-name').text();
 		let teamLocal = $(this).parents('.item-teambox').find('.team-local').text();
-		$('dialog [name=teamNum]').val(teamNum);
+		$('dialog [name=tp_tm_num]').val(teamNum);
 		$('dialog').find('.team-name').text(teamName);
 		$('dialog').find('.team-local').text(teamLocal);
 		<!--팀장 및 팀 인원 -->
@@ -231,7 +231,7 @@
 	$('.btn-duplicateCheck').click(function(e){
 		e.preventDefault();
 		let hopeBackNum = $('#tp_backnum').val();
-		let teamNum = $('dialog [name=teamNum]').val();
+		let teamNum = $('dialog [name=tp_tm_num]').val();
 		
 		if(!$('#tp_backnum').valid()){
 			alert('사용 불가능한 등번호입니다.');

@@ -17,4 +17,5 @@ public class TeamWTJoinVO {
 	private Date tj_register_date;
 	private String tj_state;
 	private int tj_bo_num;
+	private PlayerVO tj_player;
 }

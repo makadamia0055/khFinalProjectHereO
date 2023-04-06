@@ -11,7 +11,9 @@ import com.hereo.project.dao.TeamPlayerDAO;
 import com.hereo.project.pagination.Criteria;
 import com.hereo.project.utils.UploadFileUtils;
 import com.hereo.project.vo.TeamApprovalListVO;
+import com.hereo.project.vo.TeamPlayerVO;
 import com.hereo.project.vo.TeamVO;
+import com.hereo.project.vo.TeamWTJoinVO;
 
 @Service
 public class TeamServiceImp implements TeamService{
@@ -64,6 +66,9 @@ public class TeamServiceImp implements TeamService{
 		
 //		임시 팀장 아이디
 		team.setTm_me_id("asd123");
+		
+
+		
 		team.setTm_team_img(tmpImgPath);
 		int teamNum = teamDao.insertTeam(team);
 		if(teamNum!=0) {
@@ -120,6 +125,47 @@ public class TeamServiceImp implements TeamService{
 		if(teamNum==null)
 			return 0;
 		return teamPlayerDao.countTeamMember(teamNum, 3, new Criteria());
+	}
+
+	@Override
+	public boolean insertTeamWTJ(TeamPlayerVO tmp) {
+		if(tmp==null)
+			return false;
+		return teamDao.insertTeamWTJList(tmp)!=0;
+	}
+
+	@Override
+	public ArrayList<TeamWTJoinVO> selectWTJByTeam(int teamNum, String tj_state) {
+		return teamDao.selectWTJByTeam(teamNum, tj_state);
+	}
+
+	@Override
+	public TeamWTJoinVO selectWTJByTjNum(int tjNum) {
+		return teamDao.selectWTJByTjNum(tjNum);
+	}
+
+	@Override
+	public int countWholeWTJ(int teamNum, String tj_state) {
+		return teamDao.countWholeWTJ(teamNum, tj_state);
+	}
+
+	@Override
+	public boolean updateTeamWTJList(int tj_num, String tj_state) {
+		boolean res = teamDao.updateTeamWTJList(tj_num, tj_state)!=0;
+		if(res) {
+			TeamWTJoinVO tmp = teamDao.selectWTJByTjNum(tj_num);
+			TeamPlayerVO tmpPlayer = teamPlayerDao.selectTeamPlayerByTeamAndPlayer(tmp.getTj_tm_num(),tmp.getTj_pl_num());
+			if(tj_state.equals("승인")) {
+				tmpPlayer.setTp_auth(3);
+			}else if(tj_state.equals("거절")) {
+				tmpPlayer.setTp_auth(0);
+			}
+			teamPlayerDao.updateTeamPlayer(tmpPlayer);
+
+		}
+		
+		
+		return res;
 	}
 	
 }
