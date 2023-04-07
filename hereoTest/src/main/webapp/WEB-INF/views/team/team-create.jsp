@@ -68,9 +68,14 @@
 						</div>
 						
 						<div class="form-group">
-						<label for="tm_slogan">팀 슬로건</label><br>
-						<input type="text" class="col-lg-12" name="tm_slogan" id = "tm_slogan" placeholder="최대 25자 이내로 입력해주십시오.">
-					</div>
+							<label for="tm_slogan">팀 슬로건</label><br>
+							<input type="text" class="col-lg-12" name="tm_slogan" id = "tm_slogan" placeholder="최대 25자 이내로 입력해주십시오.">
+						</div>
+						<div class="form-group">
+						
+							<label for="tm_backnum">팀장 백넘버</label><br>
+							<input type="text" class="" name="tm_backnum" id = "tm_backnum" placeholder="0~99의 숫자 입력">
+						</div>
 						<button type="submit" class="btn btn-dark col-lg-12">팀 신청</button>
 					
 
@@ -92,13 +97,13 @@
     	let teamNameDupCheck = false;
     	$('.btn-duplicateCheck').click(function(e){
     		e.preventDefault();
-    		if(!$('form').valid()){
+    		let tmpName = $('[name=tm_name]')
+    		if(!$(tmpName).valid()){
     			alert('사용 불가능한 팀명입니다.');
     			return;
     		}
-    		let tmpName = $('[name=tm_name]').val();
     		let tmpObj = {
-    				tm_name : tmpName
+    				tm_name : tmpName.val()
     		}
     		ajax("POST", tmpObj, '<c:url value="/team/create_dupCheck"></c:url>', function(data){
     			teamNameDupCheck = data.res;
@@ -128,6 +133,9 @@
 					maxlength : 8, */
 					regex : /^[ㄱ-ㅎ가-힣a-zA-Z0-9]{3,8}$/ 
 					
+            }, tm_backnum:{
+            	required : true,
+            	regex:/^[0-9]{1,2}$/
             }
     	},
        
@@ -135,7 +143,11 @@
         	tm_name: {
                 required : "필수로 입력하세요",
                 regex : "3~8 글자, 한글, 영문 숫자만 가능합니다."
+            }, tm_backnum:{
+            	required : "필수로 입력하세요.",
+            	regex : "두자리 숫자만 가능합니다."
             }
+            
             
        	},//
 					submitHandler : function (form){

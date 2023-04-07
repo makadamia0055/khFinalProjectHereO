@@ -10,5 +10,7 @@ public interface MembersDAO {
 
 	int insertUser(@Param("user")MembersVO user);
 
+	MembersVO selectMembersByMeId(String pl_me_id);
+
 
 }
