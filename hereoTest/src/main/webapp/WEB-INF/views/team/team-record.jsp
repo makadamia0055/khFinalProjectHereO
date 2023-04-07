@@ -484,28 +484,7 @@
      
 
       
-      <div class="block-liner team-history">
-        <div class="content-blockliner">
-          팀 연혁
-        </div>
-
-
-      </div>
-
-
-      <div class="bottom-team-history">
-        <div class="container-team-participate-league">
-          <h2 class="title-team-league">전체 리그 참여 연혁</h2>
-          <hr>
-          <ul class="list-team-league">
-            <li class="item-team-league">
-              <a href="#" class="link-team-league">kh배 동계 아마추어 리그 <div class="badge badge-success">4강</div></a>
-            </li>
-            <li class="item-team-league">
-              <a href="#" class="link-team-league">배민배 하계 아마추어리그 <div class="badge badge-danger">우승</div></a>
-            </li>
-          </ul>
-        </div>
+      
 
         <!-- <div class="container-team-current-league">
           <h2 class="title-team-current-league">현재 참여 중 리그</h2>

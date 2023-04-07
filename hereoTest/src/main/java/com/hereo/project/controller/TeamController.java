@@ -22,7 +22,9 @@ import com.hereo.project.pagination.Criteria;
 import com.hereo.project.pagination.PageMaker;
 import com.hereo.project.service.MembersService;
 import com.hereo.project.service.PlayerService;
+import com.hereo.project.service.ScheduleService;
 import com.hereo.project.service.TeamService;
+import com.hereo.project.vo.MatchScheduleVO;
 import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.RegionVO;
@@ -37,6 +39,8 @@ public class TeamController {
 	TeamService teamService;
 	@Autowired
 	MembersService membersService;
+	@Autowired
+	ScheduleService scheduleService;
 	
 	@Autowired
 	PlayerService playerService;
@@ -131,8 +135,15 @@ public class TeamController {
 			mv.addObject("teamLeader", leader);
 			
 		}
+//		팀 스케쥴 보내기
+		ArrayList<MatchScheduleVO> scheduleList = scheduleService.selectTeamScheduleByTeamAfterToday(teamNum);
+		mv.addObject("scList", scheduleList);
+		MatchScheduleVO nextMatch= scheduleService.selectNextTeamSchedule(teamNum);
+		mv.addObject("nextMatch", nextMatch);
+		
 //		지역 코드 보내주기
 		RegionVO[] regionArr = regionDao.selectAllRegion();
+		
 		mv.addObject("region", regionArr);
 		mv.addObject("memberCnt", memberCnt);
 		mv.addObject("team", tmpTeam);
@@ -381,4 +392,26 @@ public class TeamController {
 		return mv;
 	}
 	
+
+// 공용 ajax 맵핑 코드
+	@ResponseBody
+	@RequestMapping(value="/team/ajax/teamNum", method=RequestMethod.POST)
+	public Map<String, Object>getTeamByNumAjax(@RequestBody TeamVO team) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		TeamVO tmp = teamService.selectTeamByTm_Num(team.getTm_num());
+		map.put("team", tmp);
+		return map;
+	}
+	@ResponseBody
+	@RequestMapping(value="/team/ajax/nextMatch", method=RequestMethod.POST)
+	public Map<String, Object>getNextMatchByNumAjax(@RequestBody TeamVO team) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(team.getTm_num()>0) {
+			MatchScheduleVO nextMatch= scheduleService.selectNextTeamSchedule(team.getTm_num());
+			map.put("nextMatch", nextMatch);
+			
+		}
+		return map;
+	}
 }
