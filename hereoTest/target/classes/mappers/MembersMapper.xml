@@ -13,10 +13,15 @@
   		#{user.me_mail})
 	</insert>
 
-
 	<select id="selectMembersByMeId" resultType="com.hereo.project.vo.MembersVO">
 		select * from members
 			where me_id like #{pl_me_id}
 	</select>
+	
+	<select id="selectUserId" resultType="com.hereo.project.vo.MembersVO">
+		select * from members
+			where me_id like #{me_id}
+	</select>
+	
 
 </mapper>
