@@ -27,19 +27,21 @@
 						</li>
 						<c:forEach items="${region}" var="re">
 							<li class="item-region">
-								<a href="<c:url value='/team/main?type=${re.re_num}'></c:url>" class="link-region btn btn-primary" role="button" data-local="${re.re_num}">${re.re_sido}</a>
+								<a href="<c:url value='/team/main?type=${re.re_num}&search=${pm.cri.search }'></c:url>" class="link-region btn btn-primary" role="button" data-local="${re.re_num}">${re.re_sido}</a>
 							</li>
 						</c:forEach>
 						
 					</ul>
 				</div>
 				<!-- 지역 리스트 끝 -->
-				<div class="group-search-team input-group col-sm-3">
-					<input type="text" class="form-control " name="search-team" id="search-team" placeholder="팀 검색">
-					<div class="input-group-append">
-						<button class="btn btn-success">검색</button>
+				<form method="get" action="<c:url value='/team/main?type=${re.re_num}&search=${pm.cri.search }'></c:url>">
+					<div class="group-search-team input-group col-sm-3">
+						<input type="text" class="form-control " name="search" id="search-team" placeholder="팀 검색" value="${pm.cri.search }">
+						<div class="input-group-append">
+							<button class="btn btn-success">검색</button>
+						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 				<!-- 팀 리스트 -->
 			<div class="container-teambox">
@@ -76,6 +78,7 @@
 									</c:choose>
 								</span>
 								<div class="btn-group">
+									<span class="tmnum" hidden>${team.tm_num }</span>
 									<button type="button"  class="show-schedule btn btn-warning">경기 일정</button>
 									<c:if test="${true }">
 										<button type="button" class="btn-wtjoin btn btn-warning" data-team="${team.tm_num }">팀 가입 신청</button>
@@ -99,7 +102,7 @@
 					<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="index">
 						<li class="page-item
 							<c:if test='${index == pm.cri.page  }'> active </c:if> ">
-							<a href="<c:url value='/team/main?page=${index}'></c:url>" class="page-link">${index}</a>
+							<a href="<c:url value='/team/main?page=${index}&search=${pm.cri.search}&type=${pm.cri.type }'></c:url>" class="page-link">${index}</a>
 						</li>
 					</c:forEach>
 					<c:if test="${pm.next}">
@@ -153,15 +156,20 @@
 	
 	<div class="teammain-rightbox animate__animated animate__backInRight animate__faster" style="display: none;">
 		<div class="hover-box">
-			<div class="rb-title"><h3><span class="team-name">단또즈</span> 경기 일정</div></h3>
+			<div class="rb-title"><h3><span class="team-name"></span> 경기 일정</div></h3>
 			<div class="rb-schedule">
 				<ul class="list-schedule">
-					<li class="item-schedule">
-						<span class="home_team badge badge-pill badge-primary">팀 단또즈</span> VS 
-						<span class="opponent_team badge badge-pill badge-danger">팀 맘모스</span>
-						<div class="date-schedule">23-02-18 오전 9시</div>
-						<div class="location-schedule">왕십리 사근초등학교</div>
+					<li class="item-schedule scheduleExist">
+						<span class="home_team badge badge-pill badge-primary"></span> VS 
+						<span class="opponent_team badge badge-pill badge-danger"></span>
+						<div class="date-schedule"></div>
+						<div class="location-schedule"></div>
 						<a href="#" role="button" class="btn btn-outline-primary">경기 예약 확인 페이지로</a>
+					</li>
+					<li class="item-schedule no-schedule">
+						<span>
+							경기 일정이 없습니다.
+						</span>
 					</li>
 				</ul>
 				
@@ -190,8 +198,40 @@
 		let teamName = $(this).parents('.item-teambox').find('.team-name').text();
 		$('.teammain-rightbox').find('.team-name').text(teamName);
 		$('.teammain-rightbox').find('.home_team').text(teamName);
-		$('.teammain-rightbox').toggle();
+		let tm_num = $(this).siblings('.tmnum').text();
+		let teamObj={
+				tm_num : tm_num
+		}
+		
+		ajax("POST", teamObj, "<c:url value='/team/ajax/nextMatch'></c:url>", function(data){
+			if(data.nextMatch != null){
+				
+				$('.scheduleExist').show();
+				$('.no-schedule').hide();
+			
+				let time = new Date(data.nextMatch.ms_datetime);
+				
+				$('.item-schedule .date-schedule').text(time.getFullYear()+'년 '+time.getMonth()+'월 '+ time.getDate()+'일 '+ time.getHours() +'시 '+ time.getMinutes()+'분' );
+				$('.item-schedule .location-schedule').text(data.nextMatch.ms_stadium.sd_name);
+				/* 예약 확인 페이지 링크 작업 필요 */
+				teamObj = {
+						tm_num: data.nextMatch.ms_tm_home_num == tm_num? data.nextMatch.ms_tm_away_num : data.nextMatch.ms_tm_home_num
+				}
+				ajax("POST", teamObj, "<c:url value='/team/ajax/teamNum'></c:url>", function(data){
+					$('.item-schedule .opponent_team').text(data.team.tm_name)
+				} )
+		}else{
+				$('.scheduleExist').hide();
+				$('.no-schedule').show();
+		}
 	})
+		$('.teammain-rightbox').hide();
+		$('.teammain-rightbox').show();
+	})
+	
+	
+	
+	
 	const dialog = document.querySelector("dialog");
 
 	$('.btn-wtjoin').click(function(){
