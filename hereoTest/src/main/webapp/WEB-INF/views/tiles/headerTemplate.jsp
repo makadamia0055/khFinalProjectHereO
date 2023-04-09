@@ -48,18 +48,31 @@
               </ul>
             </li>
             <li class="menu-container__box top-menu__reservation-hover">
-              <a href="../reservation/reservation-main.html" target="_parent"
-                ><span>예약</span></a
+              <a href="<c:url value='/reservation/main'></c:url>"><span>예약</span></a
               >
               <ul class="submenu-containerBox1 reserve-submenu__01">
                 <li>
-                  <a href="../reservation/reservation-main.html" target="_top"
-                    >실시간 예약</a
+                  <a href="<c:url value='/reservation/main'></c:url>">실시간 예약</a
                   >
                 </li>
                 <li>
-                  <a href="../reservation/stadium-search.html" target="_top"
-                    >구장 찾기</a
+                  <a href="<c:url value='/reservation/stadium-insert'></c:url>"
+                    >구장 등록</a
+                  >
+                </li>
+                <li>
+                  <a href="<c:url value='/reservation/stadium-list'></c:url>"
+                    >구장 등록 확인 리스트</a
+                  >
+                </li>
+                <li>
+                  <a href="<c:url value='/reservation/stadium-detail'></c:url>"
+                    >구장 등록 정보</a
+                  >
+                </li>
+                <li>
+                  <a href="<c:url value='/reservation/stadium-list'></c:url>"
+                    >구장 등록 확인 리스트</a
                   >
                 </li>
               </ul>

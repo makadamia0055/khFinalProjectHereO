@@ -1,0 +1,46 @@
+@charset "UTF-8";
+.stadium-add{
+	position: absolute;  left: 20%;  margin-left: 30px;
+	padding: 20px 0 20px 0; box-sizing: border-box; 
+	border-radius: 10px;  margin-top: 150px;
+}
+
+form {
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 15px;
+	border: 1px solid #333;
+	border-radius: 10px;
+	background-color: #f8f8f8;
+}
+h2 {
+	text-align: center;
+}
+label {
+	display: block;
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+input[type="text"],
+textarea {
+	width: 100%;
+	padding: 5px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+	font-size: 14px;
+	margin-bottom: 10px;
+	resize: none;
+}
+#stadium-image{
+	margin-bottom: 10px;
+}
+#stadium-phone{
+	width: calc(31%); 
+}
+#stadium-participator{
+	width: calc(31%);
+}
+button[type="submit"]{
+	width: 100%; border-radius: 10px;
+}
