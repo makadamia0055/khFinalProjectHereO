@@ -94,7 +94,8 @@ min-width: 1000px;
   vertical-align: middle;
   color: white;
 }
-.teammain-main .container-teambox .right-teambox .show-schedule{
+.teammain-main .container-teambox .right-teambox .show-schedule, 
+.teammain-main .container-teambox .right-teambox .btn-wtjoin{
   margin: 10px 0;
 }
 

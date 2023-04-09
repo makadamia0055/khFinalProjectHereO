@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.Param;
 
 import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.TeamApprovalListVO;
+import com.hereo.project.vo.TeamPlayerVO;
 import com.hereo.project.vo.TeamVO;
+import com.hereo.project.vo.TeamWTJoinVO;
 
 public interface TeamDAO {
 
@@ -18,7 +20,7 @@ public interface TeamDAO {
 
 	int countAllTeams(@Param("state")String state, @Param("cri")Criteria cri);
 
-	boolean insertTeam(@Param("tm")TeamVO team);
+	int insertTeam(@Param("tm")TeamVO team);
 
 	TeamApprovalListVO selectTeamAppListByTeam(@Param("tm")TeamVO tmpTeam);
 
@@ -31,6 +33,16 @@ public interface TeamDAO {
 	void updateTeamState(@Param("tm_num")Integer teamNum, @Param("state")String string);
 
 	ArrayList<TeamVO> selectTeamByName(String tm_name);
+
+	int insertTeamWTJList(@Param("tp")TeamPlayerVO tmp);
+
+	ArrayList<TeamWTJoinVO> selectWTJByTeam(@Param("teamNum")int teamNum, @Param("tj_state")String tj_state);
+
+	TeamWTJoinVO selectWTJByTjNum(@Param("tjNum")int tjNum);
+
+	int countWholeWTJ(@Param("teamNum")int teamNum, @Param("tj_state")String tj_state);
+
+	int updateTeamWTJList(@Param("tj_num")int tj_num, @Param("tj_state")String tj_state);
 
 
 }

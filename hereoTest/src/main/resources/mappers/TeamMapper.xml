@@ -43,9 +43,10 @@
   				and tm_re_num= #{cri.type}  				
   			</if>
 	</select>
-	<insert id="insertTeam">
-		insert into team(tm_name, tm_startday, tm_slogan, tm_re_num, tm_openformatch, tm_teamgender, tm_teamstate, tm_me_id, tm_team_img)
-		values(#{tm.tm_name}, ifnull(#{tm.tm_startday}, now()), #{tm.tm_slogan}, #{tm.tm_re_num}, #{tm.tm_openformatch}, #{tm.tm_teamgender}, '심사중',  #{tm.tm_me_id}, #{tm.tm_team_img})
+	<insert id="insertTeam" useGeneratedKeys="true" keyProperty="tm.tm_num" >
+		insert into team(tm_num, tm_name, tm_startday, tm_slogan, tm_re_num, tm_openformatch, tm_teamgender, tm_teamstate, tm_me_id, tm_team_img)
+		select ifnull(max(tm_num), 0) +1, #{tm.tm_name}, ifnull(#{tm.tm_startday}, now()), #{tm.tm_slogan}, #{tm.tm_re_num}, #{tm.tm_openformatch}, #{tm.tm_teamgender}, '심사중',  #{tm.tm_me_id}, #{tm.tm_team_img}
+		from team
 	</insert>
 	<select id="selectTeamAppListByTeam" resultType="com.hereo.project.vo.TeamApprovalListVO">
 		select * from `team-approvallist`
@@ -72,6 +73,28 @@
 		select * from team
 			where tm_name =#{tm_name}
 	</select>
-
+	<insert id="insertTeamWTJList">
+		insert into `team-wtjoin`(tj_tm_num, tj_pl_num, tj_register_date, tj_state)
+		value(#{tp.tp_tm_num}, #{tp.tp_pl_num}, now(), '신청대기')
+	</insert>
+	<select id="selectWTJByTeam" resultType="com.hereo.project.vo.TeamWTJoinVO">
+		select * from `team-wtjoin`
+			where tj_tm_num = #{teamNum} and tj_state = #{tj_state}
+	</select>
+	<select id="selectWTJByTjNum" resultType="com.hereo.project.vo.TeamWTJoinVO">
+		select * from `team-wtjoin`
+			where tj_num = #{tjNum}
+	</select>
+	<select id="countWholeWTJ" resultType="int">
+		select count(*) from `team-wtjoin`
+			where tj_tm_num = #{teamNum} and tj_state = #{tj_state}
+	</select>
+	<update id="updateTeamWTJList">
+		update `team-wtjoin`
+			set
+				tj_state = #{tj_state}
+			where
+				tj_num = #{tj_num}
+	</update>
 
 </mapper>

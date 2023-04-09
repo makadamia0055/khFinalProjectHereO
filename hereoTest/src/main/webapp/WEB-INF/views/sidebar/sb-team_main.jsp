@@ -41,103 +41,106 @@
         </a
         >
       </li>
-      <li class="item-side team-name this-teamMenu">
-        <a
-          href="#demo1"
-          class="link-side btn btn-light col-lg-12"
-          data-toggle="collapse"
-          >${tm.tm_name } 팀 메뉴</a
-        >
-        <div id="demo1" class="collapse">
-          <ul class="sublist-side">
-            <li class="subitem-side">
-              <a
-                href="<c:url value='/team/sep?teamNum=${tm.tm_num }'></c:url>"
-                class="sublink-side btn btn-danger col-sm-8"
-                >팀 메인페이지</a
-              >
-            </li>
-            <li class="subitem-side">
-              <a
-                href="<c:url value='/team/record?teamNum=${tm.tm_num }'></c:url>"
-                
-                class="sublink-side btn btn-outline-danger col-sm-8"
-                >경기 기록실</a
-              >
-            </li>
-            <li class="subitem-side">
-              <a
-                href="<c:url value='/team/wholeplayer?teamNum=${tm.tm_num }'></c:url>"
-                class="sublink-side btn btn-danger col-sm-8"
-                >전체 선수 리스트</a
-              >
-            </li>
-            <li class="subitem-side">
-              <a
-                href="<c:url value='/team/board_list'></c:url>"
-                class="sublink-side btn btn-outline-danger col-sm-8"
-                >팀 게시판</a
-              >
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="item-side team-name">
-        <a
-          href="#demo"
-          class="link-side btn btn-light col-lg-12"
-          data-toggle="collapse"
-          >우리 팀 메뉴</a
-        >
-        <div id="demo" class="collapse">
-          <ul class="sublist-side">
-            <li class="subitem-side">
-              <a
-                href="<c:url value='/team/sep?teanNum=${team.tm_num }'></c:url>"
-                class="sublink-side btn btn-danger col-sm-8"
-                >팀 메인페이지</a
-              >
-            </li>
-            <li class="subitem-side">
-              <a
-                href="<c:url value='/team/record?teamNum=${team.tm_num }'></c:url>"
-                class="sublink-side btn btn-outline-danger col-sm-8"
-                >경기 기록실</a
-              >
-            </li>
-            <li class="subitem-side">
-              <a
-                href="<c:url value='/team/wholeplayer?teamNum=${team.tm_num }'></c:url>"
-                class="sublink-side btn btn-danger col-sm-8"
-                >전체 선수 리스트</a
-              >
-            </li>
-            <li class="subitem-side">
-              <a
-                href="<c:url value='/team/board_list'></c:url>"
-                class="sublink-side btn btn-outline-danger col-sm-8"
-                >팀 게시판</a
-              >
-            </li>
-            <li class="subitem-side">
-              <a
-                href="../join-control/team-join-board_main.html"
-                target="_parent"
-                class="sublink-side btn btn-danger col-sm-8"
-                >팀 가입 관리 게시판</a
-              >
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="item-side">
-        <a
-          href="<c:url value='/team/join'></c:url>"
-          
-          class="link-side btn btn-outline-light col-lg-12"
-          >가입신청</a
-        >
-      </li>
+      <c:choose>
+			<c:when test="${not empty team}">
+				<li class="item-side team-name this-teamMenu">
+			        <a
+			          href="#demo1"
+			          class="link-side btn btn-light col-lg-12"
+			          data-toggle="collapse"
+			          >${tm.tm_name } 팀 메뉴</a
+			        >
+		       	 <div id="demo1" class="collapse">
+		          <ul class="sublist-side">
+		            <li class="subitem-side">
+		              <a
+		                href="<c:url value='/team/sep?teamNum=${tm.tm_num }'></c:url>"
+		                class="sublink-side btn btn-danger col-sm-8"
+		                >팀 메인페이지</a
+		              >
+		            </li>
+		            <li class="subitem-side">
+		              <a
+		                href="<c:url value='/team/record?teamNum=${tm.tm_num }'></c:url>"
+		                
+		                class="sublink-side btn btn-outline-danger col-sm-8"
+		                >경기 기록실</a
+		              >
+		            </li>
+		            <li class="subitem-side">
+		              <a
+		                href="<c:url value='/team/wholeplayer?teamNum=${tm.tm_num }'></c:url>"
+		                class="sublink-side btn btn-danger col-sm-8"
+		                >전체 선수 리스트</a
+		              >
+		            </li>
+		            <li class="subitem-side">
+		              <a
+		                href="<c:url value='/team/board_list'></c:url>"
+		                class="sublink-side btn btn-outline-danger col-sm-8"
+		                >팀 게시판</a
+		              >
+		            </li>
+		          </ul>
+		        </div>
+		      </li>
+
+			</c:when>
+			<c:otherwise>
+
+
+			</c:otherwise>
+		</c:choose>
+		<!-- 나중에 유저 팀으로 바꿔야함. -->
+		<c:if test="${not empty team}">
+			<li class="item-side team-name">
+	        <a
+	          href="#demo"
+	          class="link-side btn btn-light col-lg-12"
+	          data-toggle="collapse"
+	          >우리 팀 메뉴</a
+	        >
+	        <div id="demo" class="collapse">
+	          <ul class="sublist-side">
+	            <li class="subitem-side">
+	              <a
+	                href="<c:url value='/team/sep?teanNum=${team.tm_num }'></c:url>"
+	                class="sublink-side btn btn-danger col-sm-8"
+	                >팀 메인페이지</a
+	              >
+	            </li>
+	            <li class="subitem-side">
+	              <a
+	                href="<c:url value='/team/record?teamNum=${team.tm_num }'></c:url>"
+	                class="sublink-side btn btn-outline-danger col-sm-8"
+	                >경기 기록실</a
+	              >
+	            </li>
+	            <li class="subitem-side">
+	              <a
+	                href="<c:url value='/team/wholeplayer?teamNum=${team.tm_num }'></c:url>"
+	                class="sublink-side btn btn-danger col-sm-8"
+	                >전체 선수 리스트</a
+	              >
+	            </li>
+	            <li class="subitem-side">
+	              <a
+	                href="<c:url value='/team/board_list'></c:url>"
+	                class="sublink-side btn btn-outline-danger col-sm-8"
+	                >팀 게시판</a
+	              >
+	            </li>
+	            <li class="subitem-side">
+	              <a
+	                href="<c:url value='/team/wtjPage'></c:url>"
+	                class="sublink-side btn btn-danger col-sm-8"
+	                >팀 가입 관리 게시판</a
+	              >
+	            </li>
+	          </ul>
+	        </div>
+	      </li>
+		</c:if>
       <li class="item-side">
         <a
           href="<c:url value='/team/admin'></c:url>"

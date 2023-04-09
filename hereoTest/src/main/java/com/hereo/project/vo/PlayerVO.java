@@ -19,4 +19,14 @@ public class PlayerVO {
 	private ArrayList<Position_HopeVO> positionList;
 //	닉네임 임시로 넣긴 했는데 계속 여기 넣어야하나 고민중
 	private String me_nickname;
+	
+	public TeamPlayerVO getMainTeam() {
+		if(teamList==null)
+			return null;
+		for(TeamPlayerVO tmp : teamList) {
+			if(tmp.getTp_auth()>=3) 
+				return tmp;
+		}
+		return null;
+	}
 }

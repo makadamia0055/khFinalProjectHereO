@@ -18,13 +18,21 @@
 		<div>연습경기 허용 여부 : ${TAL.team.tm_openformatch }</div>
 		<div>팀 성별 구성 : ${TAL.team.tm_teamgender }</div>
 		<div>팀 상태 : ${TAL.team.tm_teamstate}</div>
-		<div>팀 로고 : <img src="<c:url value='/files${TAL.team.tm_team_img }'></c:url>"></div>
+		<div>팀 로고 :
+		<c:choose>
+			<c:when test="${empty TAL.team.tm_team_img }">X<br></c:when>
+			<c:otherwise><img class="item-team_img" src="<c:url value='/files${TAL.team.tm_team_img }'><br></c:url>">							
+			</c:otherwise>
+		</c:choose>
 		<input class="teamstate" name="teamState" type="text" hidden>
 		<input class="teamstate" name="teamNum" type="text" value="${TAL.ta_tm_num }" hidden>
+		<br>
+		<br>
+		<hr>
 	<button class="btn btn-success btn-submit btn-lg col-3" data-approve="3">승인</button>
 	<button class="btn btn-danger btn-submit btn-lg col-3" data-approve="2" >거절</button>	
 	</form>
-	<a class="btn btn-primary" href="<c:url value='/admin/team_create'></c:url>" role="button">목록으로</a>
+	<a class="btn btn-primary" href="<c:url value='/team/adteam_create'></c:url>" >목록으로</a>
 
 </section>
 <script>

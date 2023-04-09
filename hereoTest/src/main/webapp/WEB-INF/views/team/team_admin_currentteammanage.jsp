@@ -15,25 +15,12 @@
 </style>
 
 <section class="team-board-main team_create">
-	<c:set var="no_check" value= "0" />
-	<c:set var="delayed_check" value= "0" />
-	<c:forEach items="${TAList}" var="list">
-		<c:choose>
-			<c:when test="${list.ta_state eq 0 }">
-				<c:set var="no_check" value="${no_check + 1}" />		
-			</c:when>
-			<c:when test="${list.ta_state eq 1 }">
-				<c:set var="delayed_check" value="${delayed_check + 1}" />
-			</c:when>
-		</c:choose>
-	</c:forEach>
+	
 
 		<div class="container-board">
 			<div class="title-board">
-				<strong>팀 개설 관리</strong>
-				<div class="new_join">미확인 요청 : <span class="nocheck_num">${no_check }</span>건</div>
-				<div class="nocheck_join">보류된 요청 : <span class="delayed_num">${delayed_check }</span>건</div>
-				<div class="whole_join">전체 요청 : <span class="whole_num">${fn:length(TAList)}</span>건</div>
+				<strong>현행 팀 목록</strong>
+				
 			</div>
 			<div class="box-board">
 				<table class="table table-bordered">
@@ -42,31 +29,28 @@
  							<th class="board_num"></th>
 							<th class="team_num">팀번호</th>
 							<th class="box-team_img">팀 이미지</th>
-							<th class="team_name">희망 팀 이름</th>
+							<th class="team_name">팀 이름</th>
 							<th class="teamLeader">팀장</th>
 							<th class="location_big">지역</th>
-							<th class="create_date">신청일</th>
-							<th class="state">신청 상태</th>
+							<th class="state">상태</th>
 							<th class="buttonCol">비고</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${TAList}" var="tal">
+						<c:forEach items="${teamList}" var="tal">
 							<tr>
 								<td class="board_num"></td>
-								<td class="team_num">${tal.team.tm_num}</td>
+								<td class="team_num">${tal.tm_num}</td>
 								<td class="box-team_img">
 								<c:choose>
-									<c:when test="${empty tal.team.tm_team_img }">X</c:when>
-									<c:otherwise><img class="item-team_img" src="<c:url value='/files${tal.team.tm_team_img }'></c:url>">							
-									</c:otherwise>
+									<c:when test="${empty tal.tm_team_img }">X</c:when>
+									<c:otherwise><img class="item-team_img" src="<c:url value='/files${tal.tm_team_img }'></c:url>">								</c:otherwise>
 								</c:choose>
 								</td>
-								<td class="team_name"><a href="<c:url value='/team/adteam_createBoard?teamNum= ${tal.ta_tm_num }'></c:url>"> ${tal.team.tm_name }</a></td>	
-								<td class="teamLeader"> <a href="#"> ${tal.team.tm_me_id }</a></td>
-								<td class="location_big">${tal.team.tm_re_num }</td>
-								<td class="create_date"><fmt:formatDate type="both" pattern = "yyyy-MM-dd HH:mm" value="${tal.ta_register_date}"></fmt:formatDate></td>
-								<th class="state">${tal.ta_state }</th>
+								<td class="team_name"><a href="<c:url value='/team/adteam_currentBoard?teamNum=${tal.tm_num } '></c:url>"> ${tal.tm_name }</a>
+								<td class="teamLeader"> <a href="#"> ${tal.tm_me_id }</a></td>
+								<td class="location_big">${tal.tm_re_num }</td>
+								<th class="state">${tal.tm_teamstate }</th>
 								<td class="buttonCol"></td>
 							</tr>
 						</c:forEach>
