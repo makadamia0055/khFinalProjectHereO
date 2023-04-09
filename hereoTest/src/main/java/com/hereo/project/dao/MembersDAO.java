@@ -12,5 +12,6 @@ public interface MembersDAO {
 
 	MembersVO selectMembersByMeId(String pl_me_id);
 
+	MembersVO selectUserId(String me_id);
 
 }

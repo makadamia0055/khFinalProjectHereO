@@ -1,0 +1,40 @@
+.market-main {
+  padding-top: 170px;
+  padding-left: calc(20%);
+}
+.market__title {
+  font-size: 30px;
+  padding: 8px 15px;
+  border: 1px solid none;
+  border-radius: 15px;
+  background-color: #c6d57e;
+}
+.market__notice {
+  margin-top: 20px;
+}
+.market__region,
+.market__buyAndSell {
+  display: flex;
+  margin-top: 25px;
+}
+.market__region-select,
+.market__sell,
+.market__buy {
+  margin-left: 7px;
+  font-weight: 600;
+  text-align: center;
+  width: 60px;
+  line-height: 30px;
+  border-radius: 10px;
+}
+
+.market__contents {
+  position : relative;
+  margin-top: 40px;
+  width: 90%;
+  padding: 5px 20px;
+}
+.market__contents-title a:hover {
+  text-decoration: underline;
+}
+

@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="<c:url value='/resources/css/common/topBar.css'></c:url>" rel="stylesheet" />
 <link href="<c:url value='/resources/css/common/font.css'></c:url>" rel="stylesheet">
+    <script src="<c:url value='/resources/js/common/jquery.js'></c:url>"></script>
 <script type="text/javascript" src="<c:url value='/resources/js/common/click_menu.js'></c:url>"></script>
 
    <header class="topBar">
@@ -9,14 +10,17 @@
         <!-- 최상단 로그인 메뉴바 -->
         <div class="topBar__containerBox1">
           <ul class="topBar__list">
-            <li>
-              <a
-                href="#" 
-                onclick="window.open('<%=request.getContextPath()%>/login','login','width=450, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no')"
-                >로그인</a
-              >
-            </li>
+          	<c:if test="${loginUser==null}">
+	            <li>
+	              <a
+	                href="#" class="login_popup">로그인</a
+	              >
+	            </li>
             <li><a href="<c:url value='/signup'></c:url>" target="_top">회원가입</a></li>
+            </c:if>
+            <c:if test="${loginUser!=null}">
+            	<li><a href="<c:url value='/logout'></c:url>" target="_top">로그아웃</a></li>
+            </c:if>
             <li><a href="#">고객센터</a></li>
           </ul>
         </div>
@@ -78,9 +82,8 @@
               </ul>
             </li>
             <li class="menu-container__box top-menu__commu-hover">
-              <a href="../community/commu-free.html" target="_parent"
-                ><span>커뮤니티</span></a
-              >
+              <a href="<c:url value='/community/free'></c:url>">
+              <span>커뮤니티</span></a>
               <ul class="submenu-containerBox1 commu-submenu__01">
                 <li>
                   <a href="../community/commu-free.html" target="_top"
@@ -108,3 +111,14 @@
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
     ></script>
+	<script>
+	$('.login_popup').click(function(e){
+
+			e.preventDefault();
+			var url="<c:url value='/login'></c:url>";
+			var name="loginP";
+			var option="width=450, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no";
+			window.open(url,name,option);
+
+	})
+	</script>
