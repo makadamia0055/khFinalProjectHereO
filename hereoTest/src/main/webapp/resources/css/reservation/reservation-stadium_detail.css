@@ -1,0 +1,25 @@
+@charset "UTF-8";
+.stadium_info{
+			position: absolute;  left: 20%;  margin-left: 30px;
+			padding: 20px 0 20px 0; box-sizing: border-box; 
+			border-radius: 10px;  margin-top: 150px;
+		}
+		h4 {
+			font-size: 24px;
+			
+			text-align: center;
+		}
+		table {
+			border-collapse: collapse;
+			margin: 10px 0;
+		}
+		table, th, td {
+			border: 1px solid black;
+		}
+		th {
+			background-color: #ddd;
+			padding: 10px;
+		}
+		td {
+			padding: 10px;
+		}
