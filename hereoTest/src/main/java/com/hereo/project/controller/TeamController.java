@@ -49,7 +49,7 @@ public class TeamController {
 	
 //	팀 메인 페이지 
 	@RequestMapping(value = "/team/main", method = RequestMethod.GET)
-	public ModelAndView teamMainPage(ModelAndView mv, Criteria cri) {
+	public ModelAndView teamMainPage(ModelAndView mv, Criteria cri, HttpSession session) {
 //		페이지 네이션 코드
 		int totalCount = teamService.countTeams("활동중", cri);
 		if(cri==null) {
@@ -64,6 +64,10 @@ public class TeamController {
 		}
 //		지역 코드 보내기
 		RegionVO[] regionArr = regionDao.selectAllRegion();
+		
+//		현재 조회 팀 정보 삭제
+		session.removeAttribute("currentTeam");
+		
 		mv.addObject("region", regionArr);
 		mv.addObject("teamList", teamList);
 		mv.addObject("pm", pm);
@@ -142,7 +146,7 @@ public class TeamController {
 
 //	팀 개별 페이지
 	@RequestMapping(value = "/team/sep", method = RequestMethod.GET)
-	public ModelAndView teamMainPage(ModelAndView mv, Integer teamNum) {
+	public ModelAndView teamMainPage(ModelAndView mv, Integer teamNum, HttpSession session) {
 		TeamVO tmpTeam = teamService.selectTeamByTm_Num(teamNum);
 		int memberCnt = teamService.countTeamMember(teamNum);
 //		팀장 선택 코드
@@ -161,6 +165,9 @@ public class TeamController {
 		
 //		지역 코드 보내주기
 		RegionVO[] regionArr = regionDao.selectAllRegion();
+		
+//		current팀 객체 보내주기
+		session.setAttribute("currentTeam", tmpTeam);
 		
 		mv.addObject("region", regionArr);
 		mv.addObject("memberCnt", memberCnt);
@@ -209,13 +216,12 @@ public class TeamController {
 	public ModelAndView teamCreatePost(ModelAndView mv, TeamVO team, MultipartFile imgFile, HttpSession session, Integer tm_backnum) {
 		MembersVO user = (MembersVO)session.getAttribute("user");
 		mv.setViewName("/team/team-create");
-		if(user==null) {
-//			임시 테스트용 코드
-			user=new MembersVO();
-			user.setMe_id("asd123");
+		if(isUserNull(user, mv)) {
+			return mv;
 		}
+		team.setTm_me_id(user.getMe_id());
 		PlayerVO player = playerService.selectPlayerByMeId(user.getMe_id());
-		if(!playerService.hasNoTeam(player.getPl_num())) {
+		if(playerService.hasNoTeam(player.getPl_num())) {
 //			이미 가입된 팀이 있는 경우
 			System.out.println("이미 가입된 회원");
 			mv.addObject("msg", "이미 가입된 팀이 있는 회원입니다.");
@@ -246,6 +252,17 @@ public class TeamController {
 		
 		
 	}
+//	팀 정보 수정 페이지
+	@RequestMapping(value = "/team/modify", method = RequestMethod.GET)
+	public ModelAndView teamModify(ModelAndView mv, HttpSession session) {
+		TeamVO team = (TeamVO)session.getAttribute("userTeam");
+		mv.addObject("team", team);
+		mv.setViewName("/team/team-create_modify");
+		return mv;
+	}
+	
+	
+	
 //	팀 가입 페이지 -get
 	@RequestMapping(value = "/team/join", method = RequestMethod.GET)
 	public ModelAndView teamJoin(ModelAndView mv) {

@@ -65,11 +65,6 @@ public class TeamServiceImp implements TeamService{
 			}
 		}
 		
-//		임시 팀장 아이디
-		team.setTm_me_id("asd123");
-		
-
-		
 		team.setTm_team_img(tmpImgPath);
 		int teamNum = teamDao.insertTeam(team);
 		if(teamNum!=0) {
@@ -167,6 +162,21 @@ public class TeamServiceImp implements TeamService{
 		
 		
 		return res;
+	}
+	@Override
+	public ArrayList<TeamVO> selectTeamByPlNumAndAuth(int pl_num, int auth) {
+		
+		return teamPlayerDao.selectTeamByPlNumAndAuth(pl_num, auth);
+	}
+	@Override
+	public TeamVO selectJoinedTeamByPlNum(int pl_num) {
+		
+		ArrayList<TeamVO> list = teamPlayerDao.selectTeamByPlNumAndAuth(pl_num, 3);
+		
+		if(list ==null||list.size()==0) {
+			return null;
+		}
+		return list.get(0);
 	}
 
 	

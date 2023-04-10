@@ -18,8 +18,8 @@
 </style>
 <sidebar>
 	<c:choose>
-		<c:when test="${not empty team}">
-			<c:set value="${team}" scope="session" var="tm" />
+		<c:when test="${not empty currentTeam}">
+			<c:set value="${currentTeam}" scope="page" var="tm" />
 		</c:when>
 	</c:choose>
     <ul class="list-side">
@@ -30,7 +30,7 @@
           class="link-side btn btn-outline-light col-lg-12"
           >
         <c:choose>
-			<c:when test="${not empty team}">
+			<c:when test="${not empty tm}">
 				다른 팀 보기
 			</c:when>
 			<c:otherwise>
@@ -42,7 +42,7 @@
         >
       </li>
       <c:choose>
-			<c:when test="${not empty team}">
+			<c:when test="${not empty tm && tm.tm_num != userTeam.tm_num}">
 				<li class="item-side team-name this-teamMenu">
 			        <a
 			          href="#demo1"
@@ -92,33 +92,33 @@
 			</c:otherwise>
 		</c:choose>
 		<!-- 나중에 유저 팀으로 바꿔야함. -->
-		<c:if test="${not empty team}">
+		<c:if test="${not empty userTeam}">
 			<li class="item-side team-name">
 	        <a
 	          href="#demo"
 	          class="link-side btn btn-light col-lg-12"
 	          data-toggle="collapse"
-	          >우리 팀 메뉴</a
+	          ><span class="badge badge-success">${userTeam.tm_name}</span> 우리 팀 메뉴</a
 	        >
 	        <div id="demo" class="collapse">
 	          <ul class="sublist-side">
 	            <li class="subitem-side">
 	              <a
-	                href="<c:url value='/team/sep?teanNum=${team.tm_num }'></c:url>"
+	                href="<c:url value='/team/sep?teamNum=${userTeam.tm_num }'></c:url>"
 	                class="sublink-side btn btn-danger col-sm-8"
 	                >팀 메인페이지</a
 	              >
 	            </li>
 	            <li class="subitem-side">
 	              <a
-	                href="<c:url value='/team/record?teamNum=${team.tm_num }'></c:url>"
+	                href="<c:url value='/team/record?teamNum=${userTeam.tm_num }'></c:url>"
 	                class="sublink-side btn btn-outline-danger col-sm-8"
 	                >경기 기록실</a
 	              >
 	            </li>
 	            <li class="subitem-side">
 	              <a
-	                href="<c:url value='/team/wholeplayer?teamNum=${team.tm_num }'></c:url>"
+	                href="<c:url value='/team/wholeplayer?teamNum=${userTeam.tm_num }'></c:url>"
 	                class="sublink-side btn btn-danger col-sm-8"
 	                >전체 선수 리스트</a
 	              >
@@ -141,12 +141,14 @@
 	        </div>
 	      </li>
 		</c:if>
-      <li class="item-side">
-        <a
-          href="<c:url value='/team/admin'></c:url>"
-          class="link-side btn btn-light col-lg-12"
-          >관리자 메뉴</a
-        >
-      </li>
+		<c:if test="${not empty loginUser && loginUser.me_siteauth==9 }">
+      		<li class="item-side">
+		        <a
+		          href="<c:url value='/team/admin'></c:url>"
+		          class="link-side btn btn-light col-lg-12"
+		          >관리자 메뉴</a
+		        >
+      		</li>
+      </c:if>
     </ul>
  </sidebar>

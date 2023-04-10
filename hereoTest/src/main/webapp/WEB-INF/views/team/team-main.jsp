@@ -80,7 +80,7 @@
 								<div class="btn-group">
 									<span class="tmnum" hidden>${team.tm_num }</span>
 									<button type="button"  class="show-schedule btn btn-warning">경기 일정</button>
-									<c:if test="${true }">
+									<c:if test="${not empty loginUser && empty userTeam }">
 										<button type="button" class="btn-wtjoin btn btn-warning" data-team="${team.tm_num }">팀 가입 신청</button>
 									</c:if>
 							</div>
@@ -178,7 +178,7 @@
 			
 		</div>
 	</div>
-	<c:remove var="team" scope="session"></c:remove>
+	
 	
 <script
       src="https://kit.fontawesome.com/bedfa56d7f.js"

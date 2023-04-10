@@ -43,6 +43,10 @@ public interface TeamService {
 
 	ArrayList<TeamWTJoinVO> selectWTJByTeam(int teamNum, String tj_state);
 
+	public ArrayList<TeamVO> selectTeamByPlNumAndAuth(int pl_num, int auth);
+	
+	public TeamVO selectJoinedTeamByPlNum(int pl_num);
+
 
 
 	

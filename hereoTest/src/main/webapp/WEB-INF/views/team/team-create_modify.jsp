@@ -13,16 +13,17 @@
 				<form action="<c:url value='/team/create'></c:url>" method="POST" class="form-horizontal" enctype="multipart/form-data">
 					<div class="form-group">
 						<div class="team-selector">
-							<label for="team_name">희망 팀 이름</label><br>
-							<input type="text" class="col-lg-6" name="tm_name" id="team_name" placeholder="최소 3자~최대 8자" required>
+							<label for="team_name">팀 명</label><br>
+							<span name="tm_name">${team.tm_name }</span>
+							<!-- <input type="text" class="col-lg-6" name="tm_name" id="team_name" placeholder="최소 3자~최대 8자" required>
 							<button class="btn btn-dark btn-duplicateCheck" type="button">팀명 중복 체크</button>
 							<br>
-							<label for="team_name" id="team_name-error" class="error"></label>
+							<label for="team_name" id="team_name-error" class="error"></label> -->
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="team-local">지역</label>
-							<select name="tm_re_num" id="team-local">
+							<select name="tm_re_num" id="team-local" value="${team.tm_re_num }">
 								<option value="1">서울</option>
 								<option value="2">경기</option>
 								<option value="3">인천</option>
@@ -43,7 +44,7 @@
 					</div>
 					<div class="form-group">
 						<label for="team-gender">팀 성별 구성</label>
-							<select name="tm_teamgender" id="team-gender">
+							<select name="tm_teamgender" id="team-gender" value="${team.tm_teamgender}">
 								<option value="1">남녀 혼성</option>
 								<option value="2">남성만</option>
 								<option value="3">여성만</option>
@@ -51,7 +52,7 @@
 					</div>
 					<div class="form-group">
 						<label for="team-match">연습경기 신청 허용 여부</label>
-							<select name="tm_openformatch" id="team-match">
+							<select name="tm_openformatch" id="team-match" value="${team.tm_openformatch }">
 								<option value="true">허용</option>
 								<option value="false">불가</option>
 							</select>
@@ -59,26 +60,28 @@
 					
 					<div class="form-group">
 						<label for="team-since">팀 창단일</label>
-						<input type="date" name="tm_startday" id="team-since" class="form-control  col-lg-8" placeholder="팀 창단일을 입력해주세요.">
+						<input type="date" name="tm_startday" id="team-since" class="form-control  col-lg-8" placeholder="팀 창단일을 입력해주세요." value="${team.tm_startday }">
 					</div>
 					
 						<div class="form-group">
 							<label for="teamLogo">팀 로고 이미지 파일</label><br>
-							<input type="file" name="imgFile" id="teamLogo" accept="">	
+							<c:if test="${not empty team.tm_team_img }"><img src="<c:url value='/files${team.tm_team_img}'></c:url>"></c:if>
+							<input type="file" name="imgFile" id="teamLogo" accept="">
+								
 						</div>
 						
 						<div class="form-group">
 							<label for="tm_slogan">팀 슬로건</label><br>
-							<input type="text" class="col-lg-12" name="tm_slogan" id = "tm_slogan" placeholder="최대 25자 이내로 입력해주십시오.">
+							<input type="text" class="col-lg-12" name="tm_slogan" id = "tm_slogan" placeholder="최대 25자 이내로 입력해주십시오." value="${team.tm_slogan }">
 						</div>
 						<div class="form-group">
 						
-							<label for="tm_backnum">팀장 백넘버</label><br>
-							<input type="text" class="" name="tm_backnum" id = "tm_backnum" placeholder="0~99의 숫자 입력">
+							<!-- <label for="tm_backnum">팀장 백넘버</label><br>
+							<input type="text" class="" name="tm_backnum" id = "tm_backnum" placeholder="0~99의 숫자 입력"> -->
 						</div>
 						<div class="form-group">
 							<label for="tm_team_introduce">팀 소개</label><br>
-							<textarea placeholder="팀 소개를 입력해주십시오."></textarea>
+							<textarea placeholder="팀 소개를 입력해주십시오.">${team.tm_team_introduce }</textarea>
 							
 						</div>
 						
