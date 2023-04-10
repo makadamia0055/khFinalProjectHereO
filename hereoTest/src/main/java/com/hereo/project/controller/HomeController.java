@@ -22,15 +22,14 @@ public class HomeController {
 	@Autowired
 	MembersService membersService;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@GetMapping(value = "/")
 	public String home() {
 		return "/home";
 	}
 	//회원가입 기능
 	@GetMapping(value = "/signup")
-	public ModelAndView signupGet(ModelAndView mv) {
-		mv.setViewName("login_etc/signup");
-		return mv;
+	public String signupGet() {
+		return "/login_etc/signup";
 	}
 	
 	@PostMapping(value = "/signup")
@@ -62,6 +61,7 @@ public class HomeController {
 	//로그아웃 기능
 	@GetMapping(value = "/logout")
 	public String logout(HttpServletResponse response, HttpSession session) {
+		//추후 자동로그인 기능을 위해 user남겨둠
 		MembersVO user = (MembersVO)session.getAttribute("loginUser");
 		session.removeAttribute("loginUser");
 		return "redirect:/";
