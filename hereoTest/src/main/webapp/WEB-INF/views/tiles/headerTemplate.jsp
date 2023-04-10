@@ -42,7 +42,7 @@
               </ul>
             </li>
             <li class="menu-container__box top-menu__league-hover">
-              <a href="#"><span>리그</span></a>
+              <a href="<c:url value='/league/main'></c:url>"><span>리그</span></a>
               <ul class="submenu-containerBox1 league-submenu__01">
                 <li>
                   <a href="../recodeGame/insertScore.html" target="_top"
