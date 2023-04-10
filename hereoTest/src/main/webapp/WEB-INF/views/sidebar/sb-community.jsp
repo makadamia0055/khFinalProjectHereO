@@ -62,5 +62,15 @@
         >중고거래</a
       >
     </li>
+   <c:if test="${loginUser!=null}"> 
+     <li class="item-side commu-submenu__color">
+      <a
+        href="<c:url value='/community/admin'></c:url>"
+        target="_top"
+        class="link-side btn btn-light col-lg-12"
+        >관리자메뉴</a
+      >
+    </li>
+    </c:if>
   </sidebar>     
     
