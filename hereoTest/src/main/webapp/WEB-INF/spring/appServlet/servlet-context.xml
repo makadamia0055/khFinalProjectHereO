@@ -48,11 +48,17 @@
 	<!-- 인터셉터 설정 -->
 		<beans:bean id="loginInterceptor" class="com.hereo.project.interceptor.LoginInterceptor">
 		</beans:bean>
+		<beans:bean id="guestInterceptor" class="com.hereo.project.interceptor.GuestInterceptor">
+		</beans:bean>
 		
 	<interceptors>
 		<interceptor>
 			<mapping path="/login"/>
 			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/signup"/>
+			<beans:ref bean="guestInterceptor"/>
 		</interceptor>
 	</interceptors>	
 </beans:beans>
