@@ -134,7 +134,7 @@ public class PlayerServiceImp implements PlayerService{
 	}
 	
 	@Override
-	public boolean hasTeam(int pl_num) {
+	public boolean hasNoTeam(int pl_num) {
 		return teamPlayerDao.hasTeam(pl_num)==0;
 	}
 }

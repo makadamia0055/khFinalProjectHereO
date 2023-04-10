@@ -102,13 +102,30 @@ public class TeamController {
 	}
 //	팀 메인 페이지 팀 가입 요청
 	@RequestMapping(value="/team/main/wtjoin", method=RequestMethod.POST)
-	public ModelAndView teamMainWTJoin(ModelAndView mv, TeamPlayerVO tmp) {
+	public ModelAndView teamMainWTJoin(ModelAndView mv, TeamPlayerVO tmp, HttpSession session) {
 //		가입 선수 객체 만들기 (입력 들어온 객체 그대로 쓰되 매퍼에서 num리턴받기)
+//		유저 객체 받기
+		MembersVO user = (MembersVO)session.getAttribute("loginUser");
+		if(isUserNull(user, mv)) {
+			return mv;
+		}
+		
+		PlayerVO player = playerService.selectPlayerByMeId(user.getMe_id());
+		if(player == null) {
+			mv.addObject("msg", "선수 정보가 없습니다. \n선수 정보를 입력 해주십시오.");
+			mv.addObject("url", "/team/main");
+			mv.setViewName("/common/message");
+			return mv;
+		}
+//		가져온 player 객체의 num을 tmp에 넣어줌 
+		tmp.setTp_pl_num(player.getPl_num());
+		
 //		이미 가입 되어 있는지 체크
-		if(!playerService.hasTeam(tmp.getTp_pl_num())) {
+		if(!playerService.hasNoTeam(tmp.getTp_pl_num())) {
 			System.out.println("이미 팀이 있는 회원입니다.");
 			mv.addObject("msg", "이미 팀이 있는 회원입니다");
-			mv.setViewName("redirect:/team/main");
+			mv.addObject("url", "/team/main");
+			mv.setViewName("/common/message");
 			return mv;
 		}
 		
@@ -122,6 +139,7 @@ public class TeamController {
 		mv.setViewName("redirect:/team/main");
 		return mv;
 	}	
+
 //	팀 개별 페이지
 	@RequestMapping(value = "/team/sep", method = RequestMethod.GET)
 	public ModelAndView teamMainPage(ModelAndView mv, Integer teamNum) {
@@ -197,7 +215,7 @@ public class TeamController {
 			user.setMe_id("asd123");
 		}
 		PlayerVO player = playerService.selectPlayerByMeId(user.getMe_id());
-		if(!playerService.hasTeam(player.getPl_num())) {
+		if(!playerService.hasNoTeam(player.getPl_num())) {
 //			이미 가입된 팀이 있는 경우
 			System.out.println("이미 가입된 회원");
 			mv.addObject("msg", "이미 가입된 팀이 있는 회원입니다.");
@@ -414,4 +432,15 @@ public class TeamController {
 		}
 		return map;
 	}
+	private boolean isUserNull(MembersVO user, ModelAndView mv) {
+		if(user==null) {
+			mv.addObject("msg", "로그인을 해주십시오.");
+			mv.addObject("url", "/team/main");
+			mv.setViewName("/common/message");
+			
+			return true;
+		}	
+		return false;
+	}
+	
 }
