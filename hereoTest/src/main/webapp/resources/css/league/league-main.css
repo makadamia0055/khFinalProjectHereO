@@ -1,12 +1,12 @@
 @charset "UTF-8";
-
+ul{ margin: 0; padding:0;}
 
 .container-main{
 	min-width: 1000px;
 	width: 1000px;
 	margin: 0 auto;
 	position: relative;
-	height: 1000px; margin-left: 350px;
+	height: 1000px; margin-left: 500px;
 }
 .container-main .box-main-top{
 	position: relative;
@@ -47,7 +47,7 @@
 }
 .main-top-game .league .attend-team ul{
 	width: 200px; margin-left: 30px; zoom: 1;
-	margin-top: 10px; height: 200px;
+	margin-top: 10px; height: 216px;
 }
 .main-top-game .league .attend-team ul li{
 	float: left; width: 36px; height: 36px;
@@ -77,9 +77,15 @@
 .section .section-tab .tab-left{
 	float: left; width: 50%; border-right: 0.5px solid antiquewhite;
 }
+.main-top-game .section .article{
+	overflow: auto; height: 304px;
+}
 
 .main-top-game .section .article ul{
 	width: 445px; margin-left: 15px; color: #444;
+}
+.main-top-game .section .article.result{
+	display: none;
 }
 .main-top-game .section .article .list-game li{
 	height: 50px; width: 450px;
