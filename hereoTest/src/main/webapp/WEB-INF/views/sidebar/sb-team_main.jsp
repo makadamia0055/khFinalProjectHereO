@@ -137,6 +137,13 @@
 	                >팀 가입 관리 게시판</a
 	              >
 	            </li>
+	            <li class="subitem-side">
+	              <a
+	                href="<c:url value='/team/modify'></c:url>"
+	                class="sublink-side btn btn-danger col-sm-8"
+	                >팀 정보 수정 게시판(임시)</a
+	              >
+	            </li>
 	          </ul>
 	        </div>
 	      </li>

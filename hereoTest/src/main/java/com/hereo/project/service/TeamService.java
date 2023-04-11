@@ -47,6 +47,8 @@ public interface TeamService {
 	
 	public TeamVO selectJoinedTeamByPlNum(int pl_num);
 
+	boolean updateTeam(TeamVO team, Boolean currentLogoDelete, MultipartFile imgFile);
+
 
 
 	

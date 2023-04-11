@@ -23,7 +23,10 @@ import com.hereo.project.pagination.PageMaker;
 import com.hereo.project.service.MembersService;
 import com.hereo.project.service.PlayerService;
 import com.hereo.project.service.ScheduleService;
+import com.hereo.project.service.TeamBoardService;
 import com.hereo.project.service.TeamService;
+import com.hereo.project.vo.BoardCategoryVO;
+import com.hereo.project.vo.BoardVO;
 import com.hereo.project.vo.MatchScheduleVO;
 import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerVO;
@@ -41,6 +44,8 @@ public class TeamController {
 	MembersService membersService;
 	@Autowired
 	ScheduleService scheduleService;
+	@Autowired
+	TeamBoardService teamBoardService;
 	
 	@Autowired
 	PlayerService playerService;
@@ -223,9 +228,9 @@ public class TeamController {
 		PlayerVO player = playerService.selectPlayerByMeId(user.getMe_id());
 		if(playerService.hasNoTeam(player.getPl_num())) {
 //			이미 가입된 팀이 있는 경우
-			System.out.println("이미 가입된 회원");
-			mv.addObject("msg", "이미 가입된 팀이 있는 회원입니다.");
-			mv.setViewName("redirect:/team/main/");
+			mv.addObject("msg", "가입된 팀이 있는 회원은 팀을 창설 할 수 없습니다.");
+			mv.addObject("url", "/team/main");
+			mv.setViewName("/common/message");
 			return mv;
 		}
 		
@@ -256,8 +261,30 @@ public class TeamController {
 	@RequestMapping(value = "/team/modify", method = RequestMethod.GET)
 	public ModelAndView teamModify(ModelAndView mv, HttpSession session) {
 		TeamVO team = (TeamVO)session.getAttribute("userTeam");
+		team = teamService.selectTeamByTm_Num(team.getTm_num());
 		mv.addObject("team", team);
+
 		mv.setViewName("/team/team-create_modify");
+		return mv;
+	}
+//	팀 정보 수정 페이지POST
+
+	@RequestMapping(value = "/team/modify", method = RequestMethod.POST)
+	public ModelAndView teamModifyPOST(ModelAndView mv, TeamVO team, Boolean currentLogoDelete, MultipartFile imgFile) {
+		if(currentLogoDelete==null) {
+			currentLogoDelete= false;
+		}
+		boolean res = teamService.updateTeam(team, currentLogoDelete, imgFile);
+		if(!res) {
+			mv.addObject("msg", "팀 정보가 변경되지 않았습니다.");
+			mv.addObject("url", "/team/modify");
+			
+		}else {
+			mv.addObject("msg", "팀 정보가 변경 되었습니다.");
+			mv.addObject("url", "/team/main");
+		}
+
+		mv.setViewName("/common/message");
 		return mv;
 	}
 	
@@ -322,7 +349,6 @@ public class TeamController {
 	public ModelAndView teamWTJBoardPost(ModelAndView mv, TeamWTJoinVO wtj, HttpServletRequest req) {
 //		session.getAttribute("myTeam");
 //		session.getAttribute("teamAuth");
-		System.out.println(wtj);
 		
 		boolean res = teamService.updateTeamWTJList(wtj.getTj_num(), wtj.getTj_state());
 		if(res) {
@@ -421,9 +447,22 @@ public class TeamController {
 	}
 //	팀 게시판
 	@RequestMapping(value="/team/board_list", method = RequestMethod.GET)
-	public ModelAndView TeamBoardMain(ModelAndView mv) {
+	public ModelAndView TeamBoardMain(ModelAndView mv, TeamVO team, Criteria cri) {
+		if(cri ==null) {
+			cri = new Criteria();
+		}
+//		임시 팀번호 지정
+		team = teamService.selectTeamByTm_Num(1);
 		
-		mv.setViewName("/team/team-board_list");
+		int totalCnt = teamBoardService.countTeamBoardTotalCnt(team, cri);
+		ArrayList<BoardVO> boardList = teamBoardService.selectTeamBoardByTeam(team, cri);
+		ArrayList<BoardCategoryVO> categoryList = teamBoardService.selectTeamBoardCategory(team);
+		
+		PageMaker pm = new PageMaker(totalCnt, 10, cri);
+		mv.addObject("pm", pm);
+		mv.addObject("categoryList", categoryList);
+		mv.addObject("boardList", boardList);
+		mv.setViewName("/team/board/team-board_list");
 		return mv;
 	}
 	

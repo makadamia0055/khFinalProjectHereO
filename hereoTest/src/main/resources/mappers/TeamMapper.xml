@@ -96,5 +96,19 @@
 			where
 				tj_num = #{tj_num}
 	</update>
+	<update id="updateTeam">
+		update team
+			set 
+				tm_startday = #{tm.tm_startday},
+				tm_slogan = #{tm.tm_slogan},
+				tm_re_num = #{tm.tm_re_num},
+				tm_openformatch = #{tm.tm_openformatch},
+				tm_teamgender = #{tm.tm_teamgender},
+				tm_team_introduce = #{tm.tm_team_introduce}, 
+				tm_team_img = #{tm.tm_team_img}
+			where 
+				tm_num = #{tm.tm_num}
+				
+	</update>
 
 </mapper>

@@ -44,5 +44,7 @@ public interface TeamDAO {
 
 	int updateTeamWTJList(@Param("tj_num")int tj_num, @Param("tj_state")String tj_state);
 
+	int updateTeam(@Param("tm")TeamVO team);
+
 
 }
