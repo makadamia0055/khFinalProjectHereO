@@ -2,3 +2,36 @@
   padding-top: 170px;
   padding-left: calc(20%);
 }
+.writing-title {
+   border: none;
+   font-size: 20px;
+   width:860px;
+   border-bottom: 1px solid rgba(0,0,0,.05);
+}
+.writing-box {
+	margin-bottom: 10px;
+}
+.writing-title:focus {
+   outline:none;
+}
+.subject-box {
+   width:860px;
+}
+.subject {
+	width:170px;
+	margin-bottom:10px;
+}
+.subject:focus {
+   outline:none;
+}
+.btn-writingSubmit {
+	margin-top : 15px;
+	border: none;
+	width: 80px;
+	height: 35px;
+	background-color: #00337c;
+	color: white;
+	font-weight: 600;
+	border-radius: 5px;
+	margin-left:390px;
+}
