@@ -4,6 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hereo.project.dao.BoardDAO">
 	<select id="selectBoardType" resultType="com.hereo.project.vo.BoardTypeVO">
-		select * from board-type where ${auth.me_siteauth} >= bt_w_auth
+	<![CDATA[		
+	
+	select * from `board-type` where bt_w_auth<=${auth}
+	]]>
+		
 	</select>
 </mapper>

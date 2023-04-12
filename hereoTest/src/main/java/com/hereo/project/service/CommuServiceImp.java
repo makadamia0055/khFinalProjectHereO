@@ -16,6 +16,7 @@ public class CommuServiceImp implements CommuService {
 	
 	@Override
 	public ArrayList<BoardTypeVO> getBoardType(int me_siteauth) {
+		System.out.println(boardDao.selectBoardType(me_siteauth));
 		return boardDao.selectBoardType(me_siteauth);
 	}
 

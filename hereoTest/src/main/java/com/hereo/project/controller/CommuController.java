@@ -18,8 +18,12 @@ public class CommuController {
 	@Autowired
 	CommuService boardService;
 	
+	@GetMapping(value = "/community")
+	public String Home01() {
+		return "/community/free-board";
+	}	
 	@GetMapping(value = "/community/free")
-	public String home() {
+	public String home02() {
 		return "/community/free-board";
 	}	
 	
@@ -42,6 +46,7 @@ public class CommuController {
 	public String writing(HttpServletRequest request) {
 		MembersVO user=(MembersVO)request.getSession().getAttribute("loginUser");
 		ArrayList<BoardTypeVO> btList = boardService.getBoardType(user.getMe_siteauth());
+		
 		return "/community/commu-writingboard";
 	}
 }
