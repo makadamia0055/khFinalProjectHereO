@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+* {	margin: 0;	padding: 0;}
+a {	color: inherit;
+	text-decoration: none;
+	cursor: pointer;}
+li {	list-style: none;}
+
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.container-box {
+	position: relative; margin-left: 350px;
+	top: 200px;
+}
+.form-group{
+	display: inline-block;
+}
+.filter-box .btn{
+	position: relative; bottom: 3px;
+}
+.btn-complete{
+	position: relative; bottom: 3px; left: 750px;
+}
+
+.hidden{
+	display: none;
+}
+.middle-box.register .table{
+	width: 100%;  border-collapse: collapse;
+  text-align: center;
+}
+.middle-box.register .table thead th{
+	font-size: 12px; padding: 12px;
+	border-top: 1px solid black;
+}
+
+
+.middle-box.register .bottom-box{
+	width: 1200px;
+}
+.middle-box.register .table tbody td{
+	font-size: 15px; border-right: 1px solid darkgray;
+}
+.middle-box.register .table tbody td .btn{
+	padding: 3px; width: 70px; font-size: 14px;
+}
+
+select {
+  /* 생략 */
+  font-family: "Noto Sansf KR", sans-serif;
+	text-align: center;
+  color: #444;
+  background-color: #fff;
+	width: 30px; height: 25px;
+
+  border: 1px solid #aaa;
+	border-radius: 5px;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+}
+
+.middle-box.schedule .form-group{
+	display: inline-block;
+}
+.middle-box.schedule .filter-box .btn{
+	position: relative; bottom: 3px;
+}
+
+.middle-box.schedule .table{
+	width: 100%;  border-collapse: collapse;
+  text-align: center;
+}
+.middle-box.schedule .table thead th{
+	font-size: 12px; padding: 12px;
+	border-top: 1px solid black;
+}
+
+
+.middle-box.schedule .bottom-box{
+	width: 1200px;
+}
+.middle-box.schedule .table tbody td{
+	font-size: 12px; border-right: 1px solid darkgray;
+}
+.middle-box.schedule .table tbody td .btn{
+	padding: 1px; width: 70px; font-size: 12px;
+}
+.middle-box.schedule .table .team-wrap{
+	display: inline-block; width: 150px;
+}
+.middle-box.schedule .talbe tbody td .versus{
+	width: 12px; display: inline-block;
+}
