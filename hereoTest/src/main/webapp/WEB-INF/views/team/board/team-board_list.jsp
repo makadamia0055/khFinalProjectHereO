@@ -11,25 +11,32 @@
 	<div class="container-board">
 			<div class="title-board">
 				<strong><i class="fa-solid fa-baseball"></i>팀 게시판</strong>
-				<p>개별 팀 게시판입니다.</p>
+				<p>${team.tm_name } 팀 게시판입니다.</p>
 			</div>
 			<div class="box-board">
 					<ul class="list-board">
 						<li class="item-board top">
 							<div class="num">번호</div>
-							<!-- <div class="category">말머리</div> -->
+							<div class="category">말머리</div>
 							<div class="title">제목</div>
 							<div class="writer">작성자</div>
 							<div class="date">작성일</div>
+							<div class="updown">추천수</div>
 							<div class="view">조회수</div>
+							
 						</li>
 						<c:forEach items="${boardList}" var="bo" varStatus="idx">
 							<li class="item-board item">
 								<div class="num">${bo.bo_num}</div>
-								
+								<div class="category">
+									<c:forEach items="${categoryList}" var="ct">
+										<c:if test="${not empty ct && bo.bo_bc_num == ct.bc_num}">${ct.bc_name}</c:if>
+									</c:forEach>
+								</div>
 								<div class="title"><a href="./team-sep-board_view.html" class="">${bo.bo_title }</a></div>
 								<div class="writer">${bo.bo_me_id }</div>
-								<div class="date">${bo.bo_register_date }</div>
+								<div class="date">${bo.bo_register_date_str }</div>
+								<div class="updown">${bo.bo_up } / -${ bo.bo_down }</div>
 								<div class="view">${bo.bo_view }</div>
 							</li>
 						</c:forEach>
@@ -53,7 +60,7 @@
 					
 				</div>
 				<div class="btnBox-board">
-					<a href="./team-sep-board_write.html" class="on">글 등록</a>
+					<a href="<c:url value='/team/board_write'></c:url>" class="btn-on">글 등록</a>
 					<!-- <a href="#" class="">수정</a> -->
 				</div>
 			</div>
@@ -65,4 +72,3 @@
       crossorigin="anonymous"
     ></script>
 		
-</html>

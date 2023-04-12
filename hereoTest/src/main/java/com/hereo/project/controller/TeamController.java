@@ -447,24 +447,54 @@ public class TeamController {
 	}
 //	팀 게시판
 	@RequestMapping(value="/team/board_list", method = RequestMethod.GET)
-	public ModelAndView TeamBoardMain(ModelAndView mv, TeamVO team, Criteria cri) {
+	public ModelAndView TeamBoardMain(ModelAndView mv,Integer teamNum, TeamVO team, Criteria cri) {
 		if(cri ==null) {
 			cri = new Criteria();
 		}
 //		임시 팀번호 지정
-		team = teamService.selectTeamByTm_Num(1);
-		
+		team = teamService.selectTeamByTm_Num(teamNum);
+		if(team==null) {
+			mv.addObject("msg", "유효하지 않은 팀번호입니다.");
+			mv.addObject("url", "/team/main");
+			mv.setViewName("/common/message");
+			return mv;
+		}
 		int totalCnt = teamBoardService.countTeamBoardTotalCnt(team, cri);
 		ArrayList<BoardVO> boardList = teamBoardService.selectTeamBoardByTeam(team, cri);
 		ArrayList<BoardCategoryVO> categoryList = teamBoardService.selectTeamBoardCategory(team);
 		
 		PageMaker pm = new PageMaker(totalCnt, 10, cri);
+		mv.addObject("team", team);
 		mv.addObject("pm", pm);
 		mv.addObject("categoryList", categoryList);
 		mv.addObject("boardList", boardList);
 		mv.setViewName("/team/board/team-board_list");
 		return mv;
 	}
+	@RequestMapping(value="/team/board_write", method = RequestMethod.GET)
+	public ModelAndView TeamBoardWrite(ModelAndView mv, TeamVO team) {
+		
+//		임시 팀번호 지정
+		team = teamService.selectTeamByTm_Num(1);
+		
+		ArrayList<BoardCategoryVO> categoryList = teamBoardService.selectTeamBoardCategory(team);
+		mv.addObject("team", team);
+		mv.addObject("categoryList", categoryList);
+		mv.setViewName("/team/board/team-board_create");
+		return mv;
+	}
+	@RequestMapping(value="/team/board_write", method = RequestMethod.POST)
+	public ModelAndView TeamBoardWritePOST(ModelAndView mv, BoardVO board) {
+		
+		System.out.println(board);
+		
+		mv.addObject("msg", "게시글이 등록되었습니다.");
+		mv.addObject("url", "/team/board_list");
+		mv.setViewName("/common/message");
+		return mv;
+	}
+	
+	
 	
 
 // 공용 ajax 맵핑 코드

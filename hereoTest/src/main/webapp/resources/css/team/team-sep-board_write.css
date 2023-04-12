@@ -26,7 +26,7 @@
 .box-board_write .list-board_write .info dd {
 	display: inline-block;
 	vertical-align: middle;
-	font-size: 1.4rem;
+	font-size: 15px;
 }
 
 .box-board_write .list-board_write .title dt,
