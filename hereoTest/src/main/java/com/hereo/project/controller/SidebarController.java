@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SidebarController {
 	
+	
 	@RequestMapping(value = "/sidebar/sbteam", method = RequestMethod.GET)
 	public ModelAndView home(ModelAndView mv) {
 		mv.setViewName("/sidebar/sb-team_main");

@@ -33,7 +33,7 @@ public interface PlayerService {
 
 	boolean insertNewTeamPlayer(TeamPlayerVO tmp);
 
-	public boolean hasTeam(int pl_num); 
+	public boolean hasNoTeam(int pl_num); 
 
 
 }

@@ -2,6 +2,8 @@ package com.hereo.project.vo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +14,7 @@ public class BoardVO {
 	private String bo_title;
 	private String bo_content;
 	private int bo_view;
+	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date bo_register_date;
 	private int bo_reply_count;
 	private int bo_up;
