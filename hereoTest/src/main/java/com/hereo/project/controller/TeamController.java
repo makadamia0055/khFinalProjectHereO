@@ -23,7 +23,10 @@ import com.hereo.project.pagination.PageMaker;
 import com.hereo.project.service.MembersService;
 import com.hereo.project.service.PlayerService;
 import com.hereo.project.service.ScheduleService;
+import com.hereo.project.service.TeamBoardService;
 import com.hereo.project.service.TeamService;
+import com.hereo.project.vo.BoardCategoryVO;
+import com.hereo.project.vo.BoardVO;
 import com.hereo.project.vo.MatchScheduleVO;
 import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerVO;
@@ -41,6 +44,8 @@ public class TeamController {
 	MembersService membersService;
 	@Autowired
 	ScheduleService scheduleService;
+	@Autowired
+	TeamBoardService teamBoardService;
 	
 	@Autowired
 	PlayerService playerService;
@@ -49,7 +54,7 @@ public class TeamController {
 	
 //	팀 메인 페이지 
 	@RequestMapping(value = "/team/main", method = RequestMethod.GET)
-	public ModelAndView teamMainPage(ModelAndView mv, Criteria cri) {
+	public ModelAndView teamMainPage(ModelAndView mv, Criteria cri, HttpSession session) {
 //		페이지 네이션 코드
 		int totalCount = teamService.countTeams("활동중", cri);
 		if(cri==null) {
@@ -64,6 +69,10 @@ public class TeamController {
 		}
 //		지역 코드 보내기
 		RegionVO[] regionArr = regionDao.selectAllRegion();
+		
+//		현재 조회 팀 정보 삭제
+		session.removeAttribute("currentTeam");
+		
 		mv.addObject("region", regionArr);
 		mv.addObject("teamList", teamList);
 		mv.addObject("pm", pm);
@@ -102,13 +111,30 @@ public class TeamController {
 	}
 //	팀 메인 페이지 팀 가입 요청
 	@RequestMapping(value="/team/main/wtjoin", method=RequestMethod.POST)
-	public ModelAndView teamMainWTJoin(ModelAndView mv, TeamPlayerVO tmp) {
+	public ModelAndView teamMainWTJoin(ModelAndView mv, TeamPlayerVO tmp, HttpSession session) {
 //		가입 선수 객체 만들기 (입력 들어온 객체 그대로 쓰되 매퍼에서 num리턴받기)
+//		유저 객체 받기
+		MembersVO user = (MembersVO)session.getAttribute("loginUser");
+		if(isUserNull(user, mv)) {
+			return mv;
+		}
+		
+		PlayerVO player = playerService.selectPlayerByMeId(user.getMe_id());
+		if(player == null) {
+			mv.addObject("msg", "선수 정보가 없습니다. \n선수 정보를 입력 해주십시오.");
+			mv.addObject("url", "/team/main");
+			mv.setViewName("/common/message");
+			return mv;
+		}
+//		가져온 player 객체의 num을 tmp에 넣어줌 
+		tmp.setTp_pl_num(player.getPl_num());
+		
 //		이미 가입 되어 있는지 체크
-		if(!playerService.hasTeam(tmp.getTp_pl_num())) {
+		if(!playerService.hasNoTeam(tmp.getTp_pl_num())) {
 			System.out.println("이미 팀이 있는 회원입니다.");
 			mv.addObject("msg", "이미 팀이 있는 회원입니다");
-			mv.setViewName("redirect:/team/main");
+			mv.addObject("url", "/team/main");
+			mv.setViewName("/common/message");
 			return mv;
 		}
 		
@@ -122,9 +148,10 @@ public class TeamController {
 		mv.setViewName("redirect:/team/main");
 		return mv;
 	}	
+
 //	팀 개별 페이지
 	@RequestMapping(value = "/team/sep", method = RequestMethod.GET)
-	public ModelAndView teamMainPage(ModelAndView mv, Integer teamNum) {
+	public ModelAndView teamMainPage(ModelAndView mv, Integer teamNum, HttpSession session) {
 		TeamVO tmpTeam = teamService.selectTeamByTm_Num(teamNum);
 		int memberCnt = teamService.countTeamMember(teamNum);
 //		팀장 선택 코드
@@ -143,6 +170,9 @@ public class TeamController {
 		
 //		지역 코드 보내주기
 		RegionVO[] regionArr = regionDao.selectAllRegion();
+		
+//		current팀 객체 보내주기
+		session.setAttribute("currentTeam", tmpTeam);
 		
 		mv.addObject("region", regionArr);
 		mv.addObject("memberCnt", memberCnt);
@@ -191,17 +221,16 @@ public class TeamController {
 	public ModelAndView teamCreatePost(ModelAndView mv, TeamVO team, MultipartFile imgFile, HttpSession session, Integer tm_backnum) {
 		MembersVO user = (MembersVO)session.getAttribute("user");
 		mv.setViewName("/team/team-create");
-		if(user==null) {
-//			임시 테스트용 코드
-			user=new MembersVO();
-			user.setMe_id("asd123");
+		if(isUserNull(user, mv)) {
+			return mv;
 		}
+		team.setTm_me_id(user.getMe_id());
 		PlayerVO player = playerService.selectPlayerByMeId(user.getMe_id());
-		if(!playerService.hasTeam(player.getPl_num())) {
+		if(playerService.hasNoTeam(player.getPl_num())) {
 //			이미 가입된 팀이 있는 경우
-			System.out.println("이미 가입된 회원");
-			mv.addObject("msg", "이미 가입된 팀이 있는 회원입니다.");
-			mv.setViewName("redirect:/team/main/");
+			mv.addObject("msg", "가입된 팀이 있는 회원은 팀을 창설 할 수 없습니다.");
+			mv.addObject("url", "/team/main");
+			mv.setViewName("/common/message");
 			return mv;
 		}
 		
@@ -228,6 +257,39 @@ public class TeamController {
 		
 		
 	}
+//	팀 정보 수정 페이지
+	@RequestMapping(value = "/team/modify", method = RequestMethod.GET)
+	public ModelAndView teamModify(ModelAndView mv, HttpSession session) {
+		TeamVO team = (TeamVO)session.getAttribute("userTeam");
+		team = teamService.selectTeamByTm_Num(team.getTm_num());
+		mv.addObject("team", team);
+
+		mv.setViewName("/team/team-create_modify");
+		return mv;
+	}
+//	팀 정보 수정 페이지POST
+
+	@RequestMapping(value = "/team/modify", method = RequestMethod.POST)
+	public ModelAndView teamModifyPOST(ModelAndView mv, TeamVO team, Boolean currentLogoDelete, MultipartFile imgFile) {
+		if(currentLogoDelete==null) {
+			currentLogoDelete= false;
+		}
+		boolean res = teamService.updateTeam(team, currentLogoDelete, imgFile);
+		if(!res) {
+			mv.addObject("msg", "팀 정보가 변경되지 않았습니다.");
+			mv.addObject("url", "/team/modify");
+			
+		}else {
+			mv.addObject("msg", "팀 정보가 변경 되었습니다.");
+			mv.addObject("url", "/team/main");
+		}
+
+		mv.setViewName("/common/message");
+		return mv;
+	}
+	
+	
+	
 //	팀 가입 페이지 -get
 	@RequestMapping(value = "/team/join", method = RequestMethod.GET)
 	public ModelAndView teamJoin(ModelAndView mv) {
@@ -287,7 +349,6 @@ public class TeamController {
 	public ModelAndView teamWTJBoardPost(ModelAndView mv, TeamWTJoinVO wtj, HttpServletRequest req) {
 //		session.getAttribute("myTeam");
 //		session.getAttribute("teamAuth");
-		System.out.println(wtj);
 		
 		boolean res = teamService.updateTeamWTJList(wtj.getTj_num(), wtj.getTj_state());
 		if(res) {
@@ -386,9 +447,22 @@ public class TeamController {
 	}
 //	팀 게시판
 	@RequestMapping(value="/team/board_list", method = RequestMethod.GET)
-	public ModelAndView TeamBoardMain(ModelAndView mv) {
+	public ModelAndView TeamBoardMain(ModelAndView mv, TeamVO team, Criteria cri) {
+		if(cri ==null) {
+			cri = new Criteria();
+		}
+//		임시 팀번호 지정
+		team = teamService.selectTeamByTm_Num(1);
 		
-		mv.setViewName("/team/team-board_list");
+		int totalCnt = teamBoardService.countTeamBoardTotalCnt(team, cri);
+		ArrayList<BoardVO> boardList = teamBoardService.selectTeamBoardByTeam(team, cri);
+		ArrayList<BoardCategoryVO> categoryList = teamBoardService.selectTeamBoardCategory(team);
+		
+		PageMaker pm = new PageMaker(totalCnt, 10, cri);
+		mv.addObject("pm", pm);
+		mv.addObject("categoryList", categoryList);
+		mv.addObject("boardList", boardList);
+		mv.setViewName("/team/board/team-board_list");
 		return mv;
 	}
 	
@@ -414,4 +488,15 @@ public class TeamController {
 		}
 		return map;
 	}
+	private boolean isUserNull(MembersVO user, ModelAndView mv) {
+		if(user==null) {
+			mv.addObject("msg", "로그인을 해주십시오.");
+			mv.addObject("url", "/team/main");
+			mv.setViewName("/common/message");
+			
+			return true;
+		}	
+		return false;
+	}
+	
 }

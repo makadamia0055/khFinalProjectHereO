@@ -32,6 +32,7 @@
     }
     
     </script>
+
 <section class="teamsep-main">
       <div class="teamsep-leftbox">
         <div class="container-introduce">
@@ -83,8 +84,10 @@
             
           </ul>
         </div>
+        <c:choose>
+        <c:when test="${userTeam.tm_num == team.tm_num }">
         <div id="accordion" class="subcontainer-league">
-
+		
           <div class="card">
             <div class="card-header">
               <a class="card-link" data-toggle="collapse" href="#collapseOne">
@@ -98,7 +101,8 @@
             </div>
           </div>
         </div>
-          
+        </c:when>
+          </c:choose>
        </div>
        
         <div class="block-liner container-calendar">
@@ -192,6 +196,7 @@
           <h2 class="title-team-league">${team.tm_slogan }</h2>
           <hr>
           <p>팀 소개글</p>
+          <p>${team.tm_team_introduce }</p>
         </div>
     </section>
 

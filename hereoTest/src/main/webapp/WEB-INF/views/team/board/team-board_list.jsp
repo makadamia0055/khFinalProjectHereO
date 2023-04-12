@@ -17,27 +17,38 @@
 					<ul class="list-board">
 						<li class="item-board top">
 							<div class="num">번호</div>
+							<!-- <div class="category">말머리</div> -->
 							<div class="title">제목</div>
 							<div class="writer">작성자</div>
 							<div class="date">작성일</div>
 							<div class="view">조회수</div>
 						</li>
-						<li class="item-board item">
-							<div class="num">4</div>
-							<div class="title"><a href="./team-sep-board_view.html" class="">안녕하세요</a></div>
-							<div class="writer">김갑수</div>
-							<div class="date">2023.02.10</div>
-							<div class="view">1</div>
-						</li>
+						<c:forEach items="${boardList}" var="bo" varStatus="idx">
+							<li class="item-board item">
+								<div class="num">${bo.bo_num}</div>
+								
+								<div class="title"><a href="./team-sep-board_view.html" class="">${bo.bo_title }</a></div>
+								<div class="writer">${bo.bo_me_id }</div>
+								<div class="date">${bo.bo_register_date }</div>
+								<div class="view">${bo.bo_view }</div>
+							</li>
+						</c:forEach>
 						
 					</ul>
 				<div class="board-pagenation">
-					<ul class="pagination">
-						<li class="page-item prev"><a href="#" class="page-link">이전</a></li>
-						<li class="page-item active"><a href="#" class="page-link">1</a></li>
-						<li class="page-item"><a href="#" class="page-link">2</a></li>
-						<li class="page-item"><a href="#" class="page-link">3</a></li>
-						<li class="page-item next"><a href="#" class="page-link">다음</a></li>
+					<ul class="pagination justify-content-center">
+						<c:if test="${pm.prev}">
+							<li class="page-item prev"><a href="<c:url value='/team/main?page=${pm.startPage - 1}&search=${pm.cri.search}&type=${pm.cri.type }'></c:url>" class="page-link">이전</a></li>
+						</c:if>
+						<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="index">
+							<li class="page-item
+								<c:if test='${index == pm.cri.page  }'> active </c:if> ">
+								<a href="<c:url value='/team/main?page=${index}&search=${pm.cri.search}&type=${pm.cri.type }'></c:url>" class="page-link">${index}</a>
+							</li>
+						</c:forEach>
+						<c:if test="${pm.next}">
+							<li class="page-item next"><a href="<c:url value='/team/main?page=${pm.startPage + 1}&search=${pm.cri.search}&type=${pm.cri.type }'></c:url>" class="page-link">다음</a></li>
+						</c:if>
 					</ul>
 					
 				</div>
