@@ -1,7 +1,12 @@
 package com.hereo.project.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,26 +22,14 @@ public class HomeController {
 	@Autowired
 	MembersService membersService;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home(ModelAndView mv) {
-		mv.setViewName("/home");
-		return mv;
+	@GetMapping(value = "/")
+	public String home() {
+		return "/home";
 	}
-	
-	@GetMapping(value = "/login")
-	public ModelAndView login(ModelAndView mv) {
-		mv.setViewName("login_etc/login");
-		return mv;
-	}
-	@PostMapping(value = "/login")
-	public ModelAndView loginPost(ModelAndView mv, MembersVO user) {
-		MembersVO loginUser = membersService.login(user);
-		return mv;
-	}
+	//회원가입 기능
 	@GetMapping(value = "/signup")
-	public ModelAndView signupGet(ModelAndView mv) {
-		mv.setViewName("login_etc/signup");
-		return mv;
+	public String signupGet() {
+		return "/login_etc/signup";
 	}
 	
 	@PostMapping(value = "/signup")
@@ -49,7 +42,30 @@ public class HomeController {
 		}
 		return mv;
 	}
-	
+	//로그인 기능
+	@GetMapping(value = "/login")
+	public String login(HttpServletRequest request) {
+		
+		return "login_etc/login";
+	}
+	@PostMapping(value = "/login")
+	public String loginPost(Model model, MembersVO user) {
+		MembersVO loginUser = membersService.login(user);
+		model.addAttribute("loginUser",loginUser);
+		if(loginUser==null) {
+			return "redirect:/login";
+		} else {
+			return "redirect:/login";
+		}		
+	}
+	//로그아웃 기능
+	@GetMapping(value = "/logout")
+	public String logout(HttpServletResponse response, HttpSession session) {
+		//추후 자동로그인 기능을 위해 user남겨둠
+		MembersVO user = (MembersVO)session.getAttribute("loginUser");
+		session.removeAttribute("loginUser");
+		return "redirect:/";
+	}
 	
 }
 	

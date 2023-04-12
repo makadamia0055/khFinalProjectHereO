@@ -100,3 +100,6 @@
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
     ></script>
+    <script>
+    </script>
+

@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+.top-box .navbar{
+	width: 128px;
+}
+
+.container-box {
+	position: relative; margin-left: 500px;
+	top: 200px;
+}
+.middle-box .form-group{
+	display: inline-block;
+}
+.middle-box .filter-box .btn{
+	position: relative; bottom: 3px;
+}
+
+
+.table{
+	width: 100%;  border-collapse: collapse;
+  text-align: center;
+}
+.table thead th{
+	font-size: 12px; padding: 12px;
+	border-top: 1px solid black;
+}
+
+
+.bottom-box{
+	width: 1200px;
+}
+.table tbody td{
+	font-size: 15px; border-right: 1px solid darkgray;
+}
+.table tbody td .btn{
+	padding: 3px; width: 70px; font-size: 14px;
+}
