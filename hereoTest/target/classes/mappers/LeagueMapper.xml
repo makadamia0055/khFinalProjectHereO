@@ -3,26 +3,5 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hereo.project.dao.LeagueDAO">
-	<select id="selectLeagueAttribute" resultType="com.hereo.project.vo.LeagueAttributeVO">
-		select * from league-attribute
-			
-		
-		where (la_name like concat('%',#{cri.search},'%')
-  			or la_match_type like concat('%',#{cri.search},'%')
-  		)
-  		<if test="cri.type != 0">
-  			and la_num = #{cri.type}
-  		</if>
-  		order by la_num desc
-  		limit #{cri.pageStart}, #{cri.perPageNum}
-	</select>
-	<select id="selectTotalCountBoard" resultType="int">
-		select count(*) from league-attribute
-  		where (la_name like concat('%',#{cri.search},'%')
-  			or la_match_type like concat('%',#{cri.search},'%')
-  		)
-  		<if test="cri.type != 0">
-  			and la_num = #{cri.type}
-  		</if>
-	</select>
+	
 </mapper>

@@ -1,24 +1,23 @@
 package com.hereo.project.controller;
 
-<<<<<<< HEAD
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-=======
+
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
->>>>>>> main
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-<<<<<<< HEAD
+
 import com.hereo.project.service.MembersService;
-=======
+
 import com.hereo.project.pagination.Criteria;
 import com.hereo.project.pagination.PageMaker;
 import com.hereo.project.service.LeagueService;
@@ -27,22 +26,18 @@ import com.hereo.project.vo.LeagueParticipationteamVO;
 
 
 
->>>>>>> main
-
-
 
 @Controller
 public class LeagueController {
-<<<<<<< HEAD
+
 	@Autowired
-	MembersService membersService;
+	LeagueService leagueService;
 	
-	@RequestMapping(value = "/league/league-search", method = RequestMethod.GET)
+	@RequestMapping(value = "/league/leagueSearch", method = RequestMethod.GET)
 	public ModelAndView leagueSearch(ModelAndView mv) {
 		mv.setViewName("/league/league-search");
-=======
-	
-	LeagueService leagueService;
+		return mv;
+	}
 	
 	@RequestMapping(value = "/league/main", method = RequestMethod.GET)
 	public ModelAndView leagueMain(ModelAndView mv) {
@@ -89,11 +84,8 @@ public class LeagueController {
 	@RequestMapping(value = "/league/schedulemanagerment", method = RequestMethod.GET)
 	public ModelAndView leagueScheduleManagerment(ModelAndView mv) {
 		mv.setViewName("/league/league-schedule-managerment");
->>>>>>> main
 		return mv;
 	}
-	
-	
 	
 	
 }
