@@ -10,4 +10,8 @@
 	]]>
 		
 	</select>
+	<select id="selectAllBoardType" resultType="com.hereo.project.vo.BoardTypeVO">
+	
+	select * from `board-type`
+	</select>
 </mapper>

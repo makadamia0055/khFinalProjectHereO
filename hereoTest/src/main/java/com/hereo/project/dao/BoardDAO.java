@@ -10,4 +10,6 @@ public interface BoardDAO {
 
 	ArrayList<BoardTypeVO> selectBoardType(@Param("auth")int me_siteauth);
 
+	ArrayList<BoardTypeVO> selectAllBoardType();
+
 }

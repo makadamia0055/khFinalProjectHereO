@@ -8,4 +8,6 @@ public interface CommuService {
 
 	ArrayList<BoardTypeVO> getBoardType(int me_siteauth);
 
+	ArrayList<BoardTypeVO> getBoardType();
+
 }
