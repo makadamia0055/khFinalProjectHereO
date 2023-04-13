@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.BoardCategoryVO;
+import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
 import com.hereo.project.vo.TeamVO;
 
@@ -13,6 +14,14 @@ public interface TeamBoardService {
 
 	int countTeamBoardTotalCnt(TeamVO team, Criteria cri);
 
-	ArrayList<BoardCategoryVO> selectTeamBoardCategory(TeamVO team);
+	ArrayList<BoardCategoryVO> selectTeamBoardCategory(Integer tm_num);
+
+	boolean insertBoardFromTeamBoard(BoardVO board, Integer teamNum);
+	
+	public BoardTypeVO selectTeamBoardType(Integer teamNum);
+
+	BoardVO selectTeamBoardByBoNum(Integer boNum);
+
+	boolean updateTeamBoard(BoardVO board);
 
 }

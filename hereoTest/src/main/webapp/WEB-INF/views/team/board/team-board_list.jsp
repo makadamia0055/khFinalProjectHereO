@@ -10,7 +10,7 @@
 <section class="team-board-main ">
 	<div class="container-board">
 			<div class="title-board">
-				<strong><i class="fa-solid fa-baseball"></i>팀 게시판</strong>
+				<strong><i class="fa-solid fa-baseball"></i> &nbsp;팀 게시판</strong>
 				<p>${team.tm_name } 팀 게시판입니다.</p>
 			</div>
 			<div class="box-board">
@@ -25,6 +25,13 @@
 							<div class="view">조회수</div>
 							
 						</li>
+						<c:if test="${empty boardList}">
+							<li>
+								<div class="text-center">등록된 게시글이 없습니다.</div>
+							</li>
+						</c:if>
+						<c:set var="now" value="<%=new java.util.Date()%>" />
+						<c:set var="sysDate"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd" /></c:set>
 						<c:forEach items="${boardList}" var="bo" varStatus="idx">
 							<li class="item-board item">
 								<div class="num">${bo.bo_num}</div>
@@ -33,9 +40,24 @@
 										<c:if test="${not empty ct && bo.bo_bc_num == ct.bc_num}">${ct.bc_name}</c:if>
 									</c:forEach>
 								</div>
-								<div class="title"><a href="./team-sep-board_view.html" class="">${bo.bo_title }</a></div>
+								<div class="title"><a href="<c:url value='/team/board_detail?teamNum=${team.tm_num }&boNum=${bo.bo_num }'></c:url>" class="">${bo.bo_title }</a></div>
 								<div class="writer">${bo.bo_me_id }</div>
-								<div class="date">${bo.bo_register_date_str }</div>
+								<fmt:parseDate value = "${bo.bo_register_date_str}" pattern = "yyyy-MM-dd" var = "boDate"/>
+								<fmt:formatDate value="${boDate}" var="boDateStr"/>
+								<div class="date">
+								
+									<c:choose>
+										<c:when test="${boDateStr == sysDate} ">
+											<fmt:formatDate value = "${bo.bo_register_date}" pattern = "HH:mm:ss"/>
+										</c:when>	
+										<c:otherwise>
+											${boDateStr}
+										</c:otherwise>
+									
+									</c:choose>
+								
+								
+								</div>
 								<div class="updown">${bo.bo_up } / -${ bo.bo_down }</div>
 								<div class="view">${bo.bo_view }</div>
 							</li>
@@ -60,7 +82,7 @@
 					
 				</div>
 				<div class="btnBox-board">
-					<a href="<c:url value='/team/board_write'></c:url>" class="btn-on">글 등록</a>
+					<a href="<c:url value='/team/board_write?teamNum=${team.tm_num }'></c:url>" class="btn-on">글 등록</a>
 					<!-- <a href="#" class="">수정</a> -->
 				</div>
 			</div>

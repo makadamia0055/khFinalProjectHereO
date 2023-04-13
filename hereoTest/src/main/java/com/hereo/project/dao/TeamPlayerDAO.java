@@ -33,4 +33,6 @@ public interface TeamPlayerDAO {
 
 	ArrayList<TeamVO> selectTeamByPlNumAndAuth(@Param("pl_num")int pl_num, @Param("auth")int auth);
 
+	TeamPlayerVO selectTeamPlayerByPlNumAndTmNum(@Param("pl_num")int pl_num, @Param("tm_num")Integer tm_num);
+
 }

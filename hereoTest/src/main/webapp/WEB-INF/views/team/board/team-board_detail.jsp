@@ -20,86 +20,87 @@
 				<p>${team.tm_name } 팀 게시판입니다.</p>
 			</div>
 			<div class="box-board_write">
-				<form id="boardForm" action="<c:url value='/team/board_write'></c:url>" method="post">
+				
 					<ul class="list-board_write">
+						<li class="category">
+							<c:forEach items="${categoryList}" var="ct">
+								<c:if test="${not empty ct && bo.bo_bc_num == ct.bc_num}">${ct.bc_name}</c:if>
+							</c:forEach>
+						</li>
 						<li class="title">
 							<dl>
 								<dt>제목</dt>
 								<dd>
-									<input type="text" name="bo_title" placeholder="제목 입력" required>
+									<div class="title">${board.bo_title }</div>
 									<input type="text" name="teamNum" hidden value="${team.tm_num }">
 								</dd>
 								
 							</dl>
 						</li>
 						<li class="info">
-							<dl>
-								<dt>말머리</dt>
-								<dd>
-									<select name="bo_bc_num" class="custom-select">
-									    <option selected value="0">말머리를 선택해주세요.</option>
-									    <c:forEach items="${categoryList}" var="ct">
-									    	<option value="${ct.bc_num}">${ct.bc_name }</option>
-									    </c:forEach>
-								  	</select>
-								
-								
-								</dd>
-							</dl>
+							
 							<dl>
 								<dt>글쓴이</dt>
 								<dd>
-									<input type="text" class="form-control-plaintext" name="me_nickname" placeholder="글쓴이 입력" readonly value="<c:if test='${not empty loginUser}'>${loginUser.me_nickname}</c:if>">
+									<div name="me_nickname" >
+										
+									</div>
 									<input type="text" hidden name="bo_me_id" value="<c:if test='${not empty loginUser}'>${loginUser.me_id}</c:if>" readonly>
+								</dd>
+								<dt>작성일</dt>
+								<dd>${board.bo_register_date_str }
+								</dd>
+								<dt>조회수</dt>
+								<dd>${board.bo_view }
 								</dd>
 							</dl>
 						</li>
 						<li class="cont">
-							<textarea id="summernote" name="bo_content"></textarea>
+							<div>${board.bo_content }</div>
 						
 						</li>
 					</ul>
-					<button class="btn-hidden" hidden></button>
+					<div class="btnBox-board">
+						<a role="button" class="btn-submit btn-on">추천</a>
+						<a href="./team-sep-board_main.html" class="btn-cancle">비추천</a>
+					</div>
 					<div class="btnBox-board">
 						<a role="button" class="btn-submit btn-on">등록</a>
 						<a href="./team-sep-board_main.html" class="btn-cancle">취소</a>
 					</div>
-				</form>	
+				
 				
 			</div>
 		</div>
 	</section>
 </body>
 <script>
-	   $('#summernote').summernote({
-		lang: 'ko-KR',
-        placeholder: '게시글 내용을 입력해주세요.',
-        tabsize: 2,
-        height: 300
-      });
-	   
-
-      src="https://kit.fontawesome.com/bedfa56d7f.js"
+	 src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
     </script>
     <script>
-    $('#boardForm').on('submit', function(e) {
-  	  
-  	  if($('#summernote').summernote('isEmpty')) {
-  	    alert('내용을 입력해주세요.');
-  	
-  	    e.preventDefault();
-  	    return false;
-  	  }
-  	  else if($('[name=bo_bc_num]').val()==0){
-  		alert('카테고리를 선택해주세요.');
-  		e.preventDefault();
-  		return false;
-  	 }
-    })
-    $('.btn-submit').click(function(){
-    	$('.btn-hidden').click();
-    })
+    let wObj = {
+    		me_id: "${board.bo_me_id}",
+    		teamNum: '${team.tm_num}'
+    };
+   ajaxParam("post", wObj, "<c:url value='/team/ajax/playerNameAndRank'></c:url>", function(data){
+	   $('[name=me_nickname]').html('<span class="badge badge-pill badge-danger">'+data.userTP.tp_auth+'</span>'+ data.userMember.me_nickname)
+   })
     
-
+    
+    
+    
+    function ajaxParam(method, obj, url, successFunc, errorFunc){
+    	$.ajax({
+    		async:false,
+    		type: method,
+    		data: obj,
+    		url: url, 
+    		dataType: "json",
+    		
+    		success: successFunc,
+    		error: errorFunc
+    		
+    	});
+    }
     </script>
