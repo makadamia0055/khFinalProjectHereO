@@ -5,12 +5,26 @@
 <link href="<c:url value='/resources/css/sidebar/sidebar-template.css'></c:url>" rel="stylesheet" />
 <link href="<c:url value='/resources/css/community/writingboard.css'></c:url>" rel="stylesheet" />
 <main class="writingBoard">
-	<form action="<c:url value=''></c:url>" method="post" enctype="multipart/form-data" id="writing">		
+	<form action="<c:url value='/community/${board }'></c:url>" method="post" enctype="multipart/form-data" id="writing">		
 		<div class="writing-box">
 		<div class="subject-box">
-			<select name="subject" class="subject" form="writing">
-				<option value=""></option>
-			</select>
+			<c:if test="${boardCategory01!=null && boardCategory01.size()!=0}">
+				<select name="region" class="region subject" form="writing">
+					<option value="0">지역</option>
+					<c:forEach items="${boardCategory01}" var="bc">
+						<option value=${bc.bc_num}>${bc.bc_name}</option>
+					</c:forEach>
+				</select>
+			</c:if>
+			<c:if test="${boardCategory01!=null && boardCategory01.size()!=0}">
+				<select name="state" class="state subject" form="writing">
+					<option value="0">현황</option>
+					<c:forEach items="${boardCategory02}" var="bc">
+						<option value=${bc.bc_num}>${bc.bc_name}</option>
+					</c:forEach>
+				</select>
+			</c:if>
+
 		</div>	
 		<input class="writing-title" type="text" id="title" name="bo_title" placeholder="제목을 입력하세요."/>			
 		</div>

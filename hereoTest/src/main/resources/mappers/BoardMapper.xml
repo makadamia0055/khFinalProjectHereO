@@ -6,12 +6,23 @@
 	<select id="selectBoardType" resultType="com.hereo.project.vo.BoardTypeVO">
 	<![CDATA[		
 	
-	select * from `board-type` where bt_w_auth<=${auth}
+	select * from `board-type` where bt_w_auth<=#{auth}
 	]]>
 		
 	</select>
 	<select id="selectAllBoardType" resultType="com.hereo.project.vo.BoardTypeVO">
 	
 	select * from `board-type`
+	</select>
+	<select id="selectBoardCategoryRegion" resultType="com.hereo.project.vo.BoardCategoryVO">
+	select * from `board-category` where bc_bt_num=#{bt_num} and bc_auth_sort="지역";
+	</select>
+	
+	<select id="selectBoardCategoryName" resultType="com.hereo.project.vo.BoardCategoryVO">
+	select * from `board-category` where bc_bt_num=#{bt_num} and bc_auth_sort !="지역";
+	</select>
+	
+	<select id="selectFreeBoard" resultType="com.hereo.project.vo.BoardVO">
+	select * from `board` where bo_bt_num=#{bt_num}
 	</select>
 </mapper>
