@@ -9,6 +9,7 @@ import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardFileVO;
 import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
+import com.hereo.project.vo.BoardVoteVO;
 import com.hereo.project.vo.TeamVO;
 
 public interface TeamBoardService {
@@ -28,5 +29,7 @@ public interface TeamBoardService {
 	boolean updateTeamBoard(BoardVO board);
 
 	ArrayList<BoardFileVO> selectTeamBoardFiles(Integer boNum);
+
+	boolean insertOrUpdateVote(BoardVoteVO vote);
 
 }

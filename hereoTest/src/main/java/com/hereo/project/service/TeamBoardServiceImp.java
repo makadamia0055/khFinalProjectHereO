@@ -14,6 +14,7 @@ import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardFileVO;
 import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
+import com.hereo.project.vo.BoardVoteVO;
 import com.hereo.project.vo.TeamVO;
 
 @Service
@@ -127,6 +128,20 @@ public class TeamBoardServiceImp implements TeamBoardService {
 		if(boNum==null)
 			return null;
 		return teamBoardDao.selectTeamBoardFiles(boNum);
+	}
+
+	@Override
+	public boolean insertOrUpdateVote(BoardVoteVO vote) {
+		if(vote==null)
+			return false;
+		BoardVoteVO prevVote = teamBoardDao.selectBoardVoteByBoNumAndMeId(vote.getBv_bo_num(), vote.getBv_me_id());
+		if(prevVote ==null) {
+			return teamBoardDao.insertVote(vote)!=0;
+
+		}else {
+			return teamBoardDao.updateVote(vote)!=0;
+		}
+		
 	}
 
 	

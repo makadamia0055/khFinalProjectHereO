@@ -62,15 +62,25 @@
 						</li>
 						<li class="img-box">
 							<c:forEach items="${fileList}" var="file">
-								<script>
-								 console.log(${file})
-								</script>
+								<c:choose>
+									<c:when test="${file.fileType== 'image' }">
+										<div>
+											<img alt="${file.bf_ori_filename }" src="<c:url value='/files${file.bf_filename }'></c:url>"><br>
+											<a href="<c:url value='/files${file.bf_filename }'></c:url>" download="${file.bf_ori_filename }">${file.bf_ori_filename } 다운로드</a>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div>
+											<a href="<c:url value='/files${file.bf_filename }'></c:url>" download="${file.bf_ori_filename }">${file.bf_ori_filename } 다운로드</a>
+										</div>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 						</li>
 					</ul>
 					<div class="btnBox-board">
-						<a role="button" class="btn-submit btn-on">추천</a>
-						<a href="./team-sep-board_main.html" class="btn-cancle">비추천</a>
+						<a href="#" class="btn-vote btn-on" data-updown="1">추천</a>
+						<a href="#" class="btn-vote" data-updown="0">비추천</a>
 					</div>
 					<div class="btnBox-board">
 						<a role="button" class="btn-submit btn-on">등록</a>
@@ -95,6 +105,27 @@
 	   $('[name=me_nickname]').html('<span class="badge badge-pill badge-danger">'+data.userTP.tp_auth+'</span>'+ data.userMember.me_nickname)
    })
     
+    let isLogin = <c:if test="${loginUser!=null}">1</c:if>+0;
+    /* 추천 비추천 버튼 기능 구현 */
+    $('.btn-vote').click(function(e){
+    	e.preventDefault();
+    	if(!isLogin){
+    		alert("로그인한 유저만 추천할 수 있습니다.");
+    		return;
+    	}
+    	let updown = $(this).data('updown');
+    	<c:if test='${not empty loginUser}'>
+	    	let voteObj ={
+	    			bv_me_id: '${loginUser.me_id}',
+	    			bv_bo_num: ${board.bo_num},
+	    			bv_state: updown
+	    	}
+    	</c:if>
+    	ajax("Post", voteObj, "<c:url value='/team/ajax/boardVote'></c:url>", function(data){
+    		console.log(data);
+    	})
+    	    	
+    })
     
     
     
@@ -110,5 +141,18 @@
     		error: errorFunc
     		
     	});
+    }
+    function ajax(method, obj, url, successFunc, errorFunc){
+		$.ajax({
+			async:false,
+			type: method,
+			data: JSON.stringify(obj),
+			url: url, 
+			dataType: "json",
+			contentType:"application/json; charset=UTF-8",
+			success: successFunc,
+			error: errorFunc
+			
+		});
     }
     </script>

@@ -9,6 +9,7 @@ import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardFileVO;
 import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
+import com.hereo.project.vo.BoardVoteVO;
 import com.hereo.project.vo.TeamVO;
 
 public interface TeamBoardDAO {
@@ -34,6 +35,8 @@ public interface TeamBoardDAO {
 	void insertBoardFile(@Param("bf")BoardFileVO tmpBoardFile);
 
 	ArrayList<BoardFileVO> selectTeamBoardFiles(Integer boNum);
+
+	BoardVoteVO selectBoardVoteByBoNumAndMeId(@Param("bv_bo_num")int bv_bo_num, @Param("bv_me_id")String bv_me_id);
 
 	
 

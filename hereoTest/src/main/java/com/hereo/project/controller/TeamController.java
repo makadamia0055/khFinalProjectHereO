@@ -29,6 +29,7 @@ import com.hereo.project.service.TeamService;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardFileVO;
 import com.hereo.project.vo.BoardVO;
+import com.hereo.project.vo.BoardVoteVO;
 import com.hereo.project.vo.MatchScheduleVO;
 import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerVO;
@@ -544,6 +545,14 @@ public class TeamController {
 			map.put("nextMatch", nextMatch);
 			
 		}
+		return map;
+	}
+	@ResponseBody
+	@RequestMapping(value="/team/ajax/boardVote", method=RequestMethod.POST)
+	public Map<String, Object>setBoardVote(@RequestBody BoardVoteVO vote) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		boolean res = teamBoardService.insertOrUpdateVote(vote);
+//		Board의 추천수는 트리거 혹은 프로시저로 db상에서 변경해보기.(범용성)
 		return map;
 	}
 	@ResponseBody
