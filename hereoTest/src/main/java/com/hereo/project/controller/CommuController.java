@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.hereo.project.service.CommuService;
 import com.hereo.project.utils.MessageUtils;
+import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardTypeVO;
+import com.hereo.project.vo.BoardVO;
 import com.hereo.project.vo.MembersVO;
 
 
@@ -27,8 +29,10 @@ public class CommuController {
 		ArrayList<BoardTypeVO> bt_list = boardService.getBoardType();
 		BoardTypeVO bt=bt_list.get(0);
 		int bt_num = bt.getBt_num();
+		ArrayList<BoardVO> free_list= boardService.getFreeBoard(bt_num);
 		
 		model.addAttribute("bt_num",bt_num);
+		model.addAttribute("free_board", free_list);
 		
 		return "/community/free-board";
 	}	
@@ -38,8 +42,10 @@ public class CommuController {
 		ArrayList<BoardTypeVO> bt_list = boardService.getBoardType();
 		BoardTypeVO bt=bt_list.get(0);
 		int bt_num = bt.getBt_num();
-		System.out.println(bt_num);
+		ArrayList<BoardVO> free_list= boardService.getFreeBoard(bt_num);
+		
 		model.addAttribute("bt_num",bt_num);
+		model.addAttribute("free_board", free_list);
 		
 		return "/community/free-board";
 	}	
@@ -89,6 +95,11 @@ public class CommuController {
 		if (user.getMe_siteauth()<1) {
 			MessageUtils.alertAndGoPrepage(response, "이메일 인증이 필요한 서비스입니다.", referer);
 		}
+		//보드카테고리01은 지역만 가져옴, 보드카테고리02는 지역빼고 가져옴.
+		ArrayList<BoardCategoryVO> boardCategory01 = boardService.getBoardCategory01(bt_num);
+		ArrayList<BoardCategoryVO> boardCategory02 = boardService.getBoardCategory02(bt_num);
+		model.addAttribute("boardCategory01", boardCategory01);
+		model.addAttribute("boardCategory02", boardCategory02);
 		return "/community/commu-writingboard";
 		
 	}

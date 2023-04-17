@@ -13,5 +13,5 @@ public class BoardTypeVO {
 	private int bt_w_auth;
 	private int bt_tm_num;
 	private int bt_lg_num;
-	private int bt_hasbc;
+	private boolean bt_hasbc;
 }
