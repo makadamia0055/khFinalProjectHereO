@@ -34,7 +34,7 @@
 	                <td class="free__contents-title"><a href="#">${fr.bo_title }</a></td>
 	                <td>${fr.bo_me_id }</td>
 	                <td>${fr.bo_view }</td>
-	                <td>${fr.bo_register_date }</td>
+	                <td>${fr.bo_register_date_str2 }</td>
               	</tr>
               </c:forEach>
             </tbody>

@@ -5,7 +5,7 @@
 <link href="<c:url value='/resources/css/sidebar/sidebar-template.css'></c:url>" rel="stylesheet" />
 <link href="<c:url value='/resources/css/community/writingboard.css'></c:url>" rel="stylesheet" />
 <main class="writingBoard">
-	<form action="<c:url value=''></c:url>" method="post" enctype="multipart/form-data" id="writing">		
+	<form action="<c:url value='/community/${board }'></c:url>" method="post" enctype="multipart/form-data" id="writing">		
 		<div class="writing-box">
 		<div class="subject-box">
 			<c:if test="${boardCategory01!=null && boardCategory01.size()!=0}">

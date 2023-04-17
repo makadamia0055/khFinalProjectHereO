@@ -56,7 +56,9 @@ public class CommuController {
 		BoardTypeVO bt=bt_list.get(1);
 		int bt_num = bt.getBt_num();
 		
+		ArrayList<BoardVO> acid_list= boardService.getFreeBoard(bt_num);
 		model.addAttribute("bt_num",bt_num);
+		model.addAttribute("acid_board", acid_list);
 		return "/community/eventAcid-board";
 	}	
 	
