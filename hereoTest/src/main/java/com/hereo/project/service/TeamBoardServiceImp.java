@@ -122,5 +122,12 @@ public class TeamBoardServiceImp implements TeamBoardService {
 		return teamBoardDao.updateTeamBoard(board) != 0;
 	}
 
+	@Override
+	public ArrayList<BoardFileVO> selectTeamBoardFiles(Integer boNum) {
+		if(boNum==null)
+			return null;
+		return teamBoardDao.selectTeamBoardFiles(boNum);
+	}
+
 	
 }

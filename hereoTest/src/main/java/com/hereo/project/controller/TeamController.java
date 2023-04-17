@@ -27,6 +27,7 @@ import com.hereo.project.service.ScheduleService;
 import com.hereo.project.service.TeamBoardService;
 import com.hereo.project.service.TeamService;
 import com.hereo.project.vo.BoardCategoryVO;
+import com.hereo.project.vo.BoardFileVO;
 import com.hereo.project.vo.BoardVO;
 import com.hereo.project.vo.MatchScheduleVO;
 import com.hereo.project.vo.MembersVO;
@@ -507,13 +508,17 @@ public class TeamController {
 		viewCnt++;
 		board.setBo_view(viewCnt);
 		teamBoardService.updateTeamBoard(board);
-		
+//		카테고리 리스트
 		ArrayList<BoardCategoryVO> categoryList = teamBoardService.selectTeamBoardCategory(team.getTm_num());
 		
+//		파일 리스트 
+		ArrayList<BoardFileVO> fileList = teamBoardService.selectTeamBoardFiles(boNum);
+		BoardFileVO tmp;
 		mv.addObject("board", board);
 		
 		mv.addObject("team", team);
 		mv.addObject("categoryList", categoryList);
+		mv.addObject("fileList", fileList);
 		mv.setViewName("/team/board/team-board_detail");
 		return mv;
 	}

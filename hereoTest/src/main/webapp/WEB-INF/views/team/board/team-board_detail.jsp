@@ -24,6 +24,7 @@
 					<ul class="list-board_write">
 						<li class="category">
 							<c:forEach items="${categoryList}" var="ct">
+								
 								<c:if test="${not empty ct && bo.bo_bc_num == ct.bc_num}">${ct.bc_name}</c:if>
 							</c:forEach>
 						</li>
@@ -58,6 +59,13 @@
 						<li class="cont">
 							<div>${board.bo_content }</div>
 						
+						</li>
+						<li class="img-box">
+							<c:forEach items="${fileList}" var="file">
+								<script>
+								 console.log(${file})
+								</script>
+							</c:forEach>
 						</li>
 					</ul>
 					<div class="btnBox-board">

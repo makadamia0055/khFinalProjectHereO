@@ -33,6 +33,8 @@ public interface TeamBoardDAO {
 
 	void insertBoardFile(@Param("bf")BoardFileVO tmpBoardFile);
 
+	ArrayList<BoardFileVO> selectTeamBoardFiles(Integer boNum);
+
 	
 
 }

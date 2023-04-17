@@ -61,9 +61,13 @@
 			where bo_num = #{bo.bo_num} 
 	</update>
 	<insert id="insertBoardFile">
-		insert into`board-file`(bf_filename, bf_ori_filename, bf_bo_num)
+		insert into `board-file`(bf_filename, bf_ori_filename, bf_bo_num)
 		value(#{bf.bf_filename}, #{bf.bf_ori_filename}, #{bf.bf_bo_num})
 		
 	</insert>
+	<select id="selectTeamBoardFiles" resultType="com.hereo.project.vo.BoardFileVO">
+		select * from `board-file`
+			where  bf_bo_num = #{boNum}
+	</select>
 
 </mapper>
