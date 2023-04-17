@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -447,24 +448,72 @@ public class TeamController {
 	}
 //	팀 게시판
 	@RequestMapping(value="/team/board_list", method = RequestMethod.GET)
-	public ModelAndView TeamBoardMain(ModelAndView mv, TeamVO team, Criteria cri) {
+	public ModelAndView TeamBoardMain(ModelAndView mv,Integer teamNum, TeamVO team, Criteria cri) {
 		if(cri ==null) {
 			cri = new Criteria();
 		}
 //		임시 팀번호 지정
-		team = teamService.selectTeamByTm_Num(1);
-		
+		team = teamService.selectTeamByTm_Num(teamNum);
+		if(team==null) {
+			mv.addObject("msg", "유효하지 않은 팀번호입니다.");
+			mv.addObject("url", "/team/main");
+			mv.setViewName("/common/message");
+			return mv;
+		}
 		int totalCnt = teamBoardService.countTeamBoardTotalCnt(team, cri);
 		ArrayList<BoardVO> boardList = teamBoardService.selectTeamBoardByTeam(team, cri);
-		ArrayList<BoardCategoryVO> categoryList = teamBoardService.selectTeamBoardCategory(team);
+		ArrayList<BoardCategoryVO> categoryList = teamBoardService.selectTeamBoardCategory(team.getTm_num());
 		
 		PageMaker pm = new PageMaker(totalCnt, 10, cri);
+		mv.addObject("team", team);
 		mv.addObject("pm", pm);
 		mv.addObject("categoryList", categoryList);
 		mv.addObject("boardList", boardList);
 		mv.setViewName("/team/board/team-board_list");
 		return mv;
 	}
+	@RequestMapping(value="/team/board_write", method = RequestMethod.GET)
+	public ModelAndView TeamBoardWrite(ModelAndView mv, Integer teamNum) {
+		
+//		임시 팀번호 지정
+		TeamVO team = teamService.selectTeamByTm_Num(teamNum);
+		
+		ArrayList<BoardCategoryVO> categoryList = teamBoardService.selectTeamBoardCategory(team.getTm_num());
+		mv.addObject("team", team);
+		mv.addObject("categoryList", categoryList);
+		mv.setViewName("/team/board/team-board_create");
+		return mv;
+	}
+	@RequestMapping(value="/team/board_write", method = RequestMethod.POST)
+	public ModelAndView TeamBoardWritePOST(ModelAndView mv, Integer teamNum, BoardVO board) {
+		
+		
+		boolean res = teamBoardService.insertBoardFromTeamBoard(board, teamNum);
+		
+		mv.addObject("msg", "게시글이 등록되었습니다.");
+		mv.addObject("url", "/team/board_list?teamNum="+teamNum);
+		
+		mv.setViewName("/common/message");
+		return mv;
+	}
+	@RequestMapping(value="/team/board_detail", method = RequestMethod.GET)
+	public ModelAndView TeamBoardDetail(ModelAndView mv, Integer teamNum, Integer boNum) {
+	 
+		TeamVO team = teamService.selectTeamByTm_Num(teamNum);
+		BoardVO board = teamBoardService.selectTeamBoardByBoNum(boNum);
+//		조회수 올리기
+		board.setBo_view(+1);
+		teamBoardService.updateTeamBoard(board);
+		
+		ArrayList<BoardCategoryVO> categoryList = teamBoardService.selectTeamBoardCategory(team.getTm_num());
+		
+		mv.addObject("board", board);
+		mv.addObject("team", team);
+		mv.addObject("categoryList", categoryList);
+		mv.setViewName("/team/board/team-board_detail");
+		return mv;
+	}
+	
 	
 
 // 공용 ajax 맵핑 코드
@@ -488,6 +537,21 @@ public class TeamController {
 		}
 		return map;
 	}
+	@ResponseBody
+	@RequestMapping(value="/team/ajax/playerNameAndRank", method=RequestMethod.POST)
+	public Map<String, Object>getPlayerNameAndRank(@RequestParam("me_id")String me_id, @RequestParam("teamNum")Integer teamNum) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		MembersVO user = membersService.selectMembersByMeId(me_id);
+		PlayerVO player = playerService.selectPlayerByMeId(me_id);
+		TeamPlayerVO tp= playerService.selectTeamPlayerByPlNumAndTmNum(player.getPl_num(), teamNum);
+		
+		map.put("userMember", user);
+		map.put("userPlayer", player);
+		map.put("userTP", tp);		
+		return map;
+	}
+	
 	private boolean isUserNull(MembersVO user, ModelAndView mv) {
 		if(user==null) {
 			mv.addObject("msg", "로그인을 해주십시오.");

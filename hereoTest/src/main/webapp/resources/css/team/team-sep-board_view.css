@@ -6,7 +6,7 @@
 	padding: 20px 15px;
 	border-bottom: 1px dashed #ddd;
 	font-weight: 700;
-	font-size: 2rem;
+	font-size: 14px;
 }
 
 .box-board_view .list-board_view .info{
@@ -26,7 +26,6 @@
 .box-board_view .list-board_view .info dl dt, 
 .box-board_view .list-board_view .info dl dd{
 	display: inline-block;
-	font-size: 1.4rem;
 }
 
 .box-board_view .list-board_view .info dl dd{
@@ -50,5 +49,4 @@
 	padding : 15px;
 	border-bottom: 1px solid #000;
 	line-height: 160%;
-	font-size: 1.4rem;
 }
