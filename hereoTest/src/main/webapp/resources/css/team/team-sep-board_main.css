@@ -2,9 +2,9 @@
 
 .container-board{
 	position: relative;
-	width: 1000px;
+	width: 1200px;
 
-	margin: 0px auto;
+	margin-left: 30px;
 	
 }
 /* 타이틀  */
@@ -12,11 +12,11 @@
 	margin-bottom: 30px;
 }
 .title-board strong{
-	font-size: 3rem;
+	font-size: 30px;
 }
 .title-board p{
+	font-size: 15px;
 	margin-top : 5px;
-	font-size: 1.4rem;
 }
 
 
@@ -35,15 +35,16 @@
 	display: inline-block;
 	vertical-align: middle;
 	text-align: center;
-	font-size: 1.4rem;
-	padding: 15px 0;
+	font-size : 15px;
+	padding: 8px 0;
 }
-.item-board .num, .writer, .date, .count{
+.item-board .num, .category, .writer, .date, .count, .updown, .view{
 	width: 10%;
 }
 .item-board .title{
-	width: 60%;
+	width: 40%;
 	text-align: left;
+	
 }
 .item-board.top .title{
 	text-align: center;
@@ -51,6 +52,8 @@
 
 .item-board.top{
 	border-bottom: 1px solid #999;
+	
+	
 	font-weight: 700;
 }
 .item-board:last-child{
@@ -74,14 +77,12 @@
 	box-sizing: border-box;
 }
 .team-board .board-pagenation li{
-	font-size: 1.4rem;
 	padding-top : 9px;
 	letter-spacing: -1px;
 }
 .team-board .board-pagenation li.next,
 .team-board .board-pagenation li.prev
 {
-	font-size: 1.4rem;
 	padding-top : 9px;
 }
 .team-board .board-pagenation li:first-child{
@@ -109,15 +110,16 @@
 	margin-left : 10px;
 	border: 1px solid #000;
 	border-radius: 2px;
-	font-size: 1.4rem;
+	font-size : 15px;
 }
 .btnBox-board a:first-child{
 	margin-left:0;
 }
 
 
-.btnBox-board a.on{
+.btnBox-board .btn-on{
 	background-color: #000;
+	font-size : 15px;
 	color: #fff;
 }
 

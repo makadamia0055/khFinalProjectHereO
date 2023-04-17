@@ -31,10 +31,10 @@
           >
         <c:choose>
 			<c:when test="${not empty tm}">
-				다른 팀 보기
+				<i class="fa-solid fa-baseball"></i> 다른 팀 보기
 			</c:when>
 			<c:otherwise>
-				전체 팀 보기
+				<i class="fa-solid fa-baseball"></i> 전체 팀 보기
 			</c:otherwise>
 		</c:choose>
           
@@ -76,7 +76,7 @@
 		            </li>
 		            <li class="subitem-side">
 		              <a
-		                href="<c:url value='/team/board_list'></c:url>"
+		                href="<c:url value='/team/board_list?teamNum=${tm.tm_num }'></c:url>"
 		                class="sublink-side btn btn-outline-danger col-sm-8"
 		                >팀 게시판</a
 		              >
@@ -125,7 +125,7 @@
 	            </li>
 	            <li class="subitem-side">
 	              <a
-	                href="<c:url value='/team/board_list'></c:url>"
+	                href="<c:url value='/team/board_list?teamNum=${userTeam.tm_num }'></c:url>"
 	                class="sublink-side btn btn-outline-danger col-sm-8"
 	                >팀 게시판</a
 	              >

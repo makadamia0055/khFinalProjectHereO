@@ -1,5 +1,6 @@
 package com.hereo.project.vo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,4 +24,8 @@ public class BoardVO {
 	private String bo_me_id;
 	private int bo_bc_num;
 
+	public String getBo_register_date_str() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		return format.format(bo_register_date);
+	}
 }

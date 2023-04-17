@@ -26,8 +26,39 @@
 	
 	<select id="selectTeamBoardCategory" resultType="com.hereo.project.vo.BoardCategoryVO">
 		select * from `board-category`
-			where bc_bt_num = (select bt_num from `board-type` where bt_types like '팀게시판' and bt_tm_num = #{tm.tm_num})
+			where bc_bt_num = (select bt_num from `board-type` where bt_types like '팀게시판' and bt_tm_num = #{tm_num})
 				
 	</select>
+	<select id="selectTeamBoardType" resultType="com.hereo.project.vo.BoardTypeVO">
+		select * from `board-type`
+			where bt_tm_num = #{teamNum} and bt_types like '팀게시판'
+	</select>
+	<insert id="teamBoardInit">
+		insert into `board-type`(bt_types, bt_r_auth, bt_w_auth, bt_tm_num, bt_hasbc)
+			value('팀게시판', 1, 1, #{teamNum}, 1);
+	</insert>
+	<insert id="insertBoardFromTeamBoard">
+		insert into `board`(bo_title, bo_content, bo_register_date, bo_bt_num, bo_me_id, bo_bc_num)
+		value(#{bo.bo_title}, #{bo.bo_content}, now(), #{bo.bo_bt_num}, #{bo.bo_me_id}, #{bo.bo_bc_num})
+	
+	</insert>
+	<select id="callProcedureTeamBoardCategoryInit" statementType="CALLABLE">
+		CALL `teamBoard-categoryInit`(#{bt_num})
+	</select>
+	<select id="selectTeamBoardByBoNum" resultType="com.hereo.project.vo.BoardVO">
+		select * from board
+			where bo_num = #{boNum}
+	</select>
+	<update id="updateTeamBoard">
+		update board
+			set	bo_title = #{bo.bo_title},
+				bo_content = #{bo.bo_content},
+				bo_view = #{bo.bo_view},
+				bo_up = #{bo.bo_up},
+				bo_down = #{bo.bo_down},
+				bo_me_id = #{bo.bo_me_id},
+				bo_bc_num = #{bo.bo_bc_num}	
+			where bo_num = #{bo.bo_num} 
+	</update>
 
 </mapper>
