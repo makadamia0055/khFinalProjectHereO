@@ -37,7 +37,7 @@
 		insert into `board-type`(bt_types, bt_r_auth, bt_w_auth, bt_tm_num, bt_hasbc)
 			value('팀게시판', 1, 1, #{teamNum}, 1);
 	</insert>
-	<insert id="insertBoardFromTeamBoard">
+	<insert id="insertBoardFromTeamBoard" useGeneratedKeys="true" keyProperty="bo.bo_num">
 		insert into `board`(bo_title, bo_content, bo_register_date, bo_bt_num, bo_me_id, bo_bc_num)
 		value(#{bo.bo_title}, #{bo.bo_content}, now(), #{bo.bo_bt_num}, #{bo.bo_me_id}, #{bo.bo_bc_num})
 	
@@ -60,5 +60,14 @@
 				bo_bc_num = #{bo.bo_bc_num}	
 			where bo_num = #{bo.bo_num} 
 	</update>
+	<insert id="insertBoardFile">
+		insert into `board-file`(bf_filename, bf_ori_filename, bf_bo_num)
+		value(#{bf.bf_filename}, #{bf.bf_ori_filename}, #{bf.bf_bo_num})
+		
+	</insert>
+	<select id="selectTeamBoardFiles" resultType="com.hereo.project.vo.BoardFileVO">
+		select * from `board-file`
+			where  bf_bo_num = #{boNum}
+	</select>
 
 </mapper>

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.BoardCategoryVO;
+import com.hereo.project.vo.BoardFileVO;
 import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
 import com.hereo.project.vo.TeamVO;
@@ -29,6 +30,10 @@ public interface TeamBoardDAO {
 	BoardVO selectTeamBoardByBoNum(Integer boNum);
 
 	int updateTeamBoard(@Param("bo")BoardVO board);
+
+	void insertBoardFile(@Param("bf")BoardFileVO tmpBoardFile);
+
+	ArrayList<BoardFileVO> selectTeamBoardFiles(Integer boNum);
 
 	
 

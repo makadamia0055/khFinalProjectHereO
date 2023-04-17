@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hereo.project.dao.TeamBoardDAO;
 import com.hereo.project.dao.TeamDAO;
 import com.hereo.project.pagination.Criteria;
+import com.hereo.project.utils.UploadFileUtils;
 import com.hereo.project.vo.BoardCategoryVO;
+import com.hereo.project.vo.BoardFileVO;
 import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
 import com.hereo.project.vo.TeamVO;
@@ -20,6 +23,8 @@ public class TeamBoardServiceImp implements TeamBoardService {
 	@Autowired
 	TeamDAO teamDao;
 	
+	String uploadPath = "D:\\uploadfiles";
+
 	@Override
 	public ArrayList<BoardVO> selectTeamBoardByTeam(TeamVO team, Criteria cri) {
 		if(team==null)
@@ -52,7 +57,7 @@ public class TeamBoardServiceImp implements TeamBoardService {
 	}
 
 	@Override
-	public boolean insertBoardFromTeamBoard(BoardVO board, Integer teamNum) {
+	public boolean insertBoardFromTeamBoard(BoardVO board, Integer teamNum, MultipartFile[] files) {
 		if(board==null||board.getBo_title()==null||board.getBo_content()==null||board.getBo_me_id()==null)
 			return false;
 		if(teamDao.selectTeamByTm_num(teamNum)==null)
@@ -63,7 +68,27 @@ public class TeamBoardServiceImp implements TeamBoardService {
 		BoardTypeVO bt = selectTeamBoardType(teamNum);
 		board.setBo_bt_num(bt.getBt_num());
 		
-		return teamBoardDao.insertBoardFromTeamBoard(board) !=0;
+		boolean res = teamBoardDao.insertBoardFromTeamBoard(board) !=0;
+		
+//		게시글 파일 넣기 
+		if(files!=null&&files.length!=0) {
+			for(MultipartFile file : files) {
+				if(file==null||file.getOriginalFilename().length()==0)
+					continue;
+				try {
+					String uploadedFileName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
+					BoardFileVO tmpBoardFile = new BoardFileVO();
+					tmpBoardFile.setBf_ori_filename(file.getOriginalFilename());
+					tmpBoardFile.setBf_filename(uploadedFileName);
+					tmpBoardFile.setBf_bo_num(board.getBo_num());
+					
+					teamBoardDao.insertBoardFile(tmpBoardFile);
+					} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return res;
 		
 	}
 	@Override
@@ -97,6 +122,12 @@ public class TeamBoardServiceImp implements TeamBoardService {
 		return teamBoardDao.updateTeamBoard(board) != 0;
 	}
 
-	
+	@Override
+	public ArrayList<BoardFileVO> selectTeamBoardFiles(Integer boNum) {
+		if(boNum==null)
+			return null;
+		return teamBoardDao.selectTeamBoardFiles(boNum);
+	}
 
+	
 }
