@@ -43,11 +43,12 @@
 								<div class="title"><a href="<c:url value='/team/board_detail?teamNum=${team.tm_num }&boNum=${bo.bo_num }'></c:url>" class="">${bo.bo_title }</a></div>
 								<div class="writer">${bo.bo_me_id }</div>
 								<fmt:parseDate value = "${bo.bo_register_date_str}" pattern = "yyyy-MM-dd" var = "boDate"/>
-								<fmt:formatDate value="${boDate}" var="boDateStr"/>
+								<fmt:formatDate value="${boDate}" pattern = "yyyy-MM-dd" var="boDateStr"/>
+								
 								<div class="date">
 								
 									<c:choose>
-										<c:when test="${boDateStr == sysDate} ">
+										<c:when test="${boDateStr == sysDate}">
 											<fmt:formatDate value = "${bo.bo_register_date}" pattern = "HH:mm:ss"/>
 										</c:when>	
 										<c:otherwise>

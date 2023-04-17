@@ -20,7 +20,7 @@
 				<p>${team.tm_name } 팀 게시판입니다.</p>
 			</div>
 			<div class="box-board_write">
-				<form id="boardForm" action="<c:url value='/team/board_write'></c:url>" method="post">
+				<form id="boardForm" action="<c:url value='/team/board_write'></c:url>" method="post" enctype="multipart/form-data">
 					<ul class="list-board_write">
 						<li class="title">
 							<dl>
@@ -56,6 +56,15 @@
 						</li>
 						<li class="cont">
 							<textarea id="summernote" name="bo_content"></textarea>
+						
+						</li>
+						<li class="file-box">
+							<div class="form-froup">
+								<input type="file" name="files" class="form-control-file border">
+								<input type="file" name="files" class="form-control-file border">
+								<input type="file" name="files" class="form-control-file border">
+								
+							</div>
 						
 						</li>
 					</ul>
