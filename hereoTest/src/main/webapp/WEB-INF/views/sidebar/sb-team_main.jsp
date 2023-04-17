@@ -50,7 +50,7 @@
 			          data-toggle="collapse"
 			          >${tm.tm_name } 팀 메뉴</a
 			        >
-		       	 <div id="demo1" class="collapse">
+		       	 <div id="demo1" class="collapse show">
 		          <ul class="sublist-side">
 		            <li class="subitem-side">
 		              <a

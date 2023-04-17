@@ -2,6 +2,8 @@ package com.hereo.project.service;
 
 import java.util.ArrayList;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardTypeVO;
@@ -16,7 +18,7 @@ public interface TeamBoardService {
 
 	ArrayList<BoardCategoryVO> selectTeamBoardCategory(Integer tm_num);
 
-	boolean insertBoardFromTeamBoard(BoardVO board, Integer teamNum);
+	boolean insertBoardFromTeamBoard(BoardVO board, Integer teamNum, MultipartFile[] files);
 	
 	public BoardTypeVO selectTeamBoardType(Integer teamNum);
 

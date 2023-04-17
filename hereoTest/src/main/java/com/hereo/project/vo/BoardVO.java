@@ -28,4 +28,17 @@ public class BoardVO {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		return format.format(bo_register_date);
 	}
+	public String getBo_register_date_str2() {
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String nowDate = format.format(date);
+		
+		String regDate =  format.format(bo_register_date);
+		if(nowDate.equals(regDate)) {
+			format = new SimpleDateFormat("HH:mm:ss");
+		}else {
+			format = new SimpleDateFormat("yyyy-MM-dd");
+		}
+		return format.format(bo_register_date);
+	}
 }

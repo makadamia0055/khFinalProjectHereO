@@ -485,10 +485,11 @@ public class TeamController {
 		return mv;
 	}
 	@RequestMapping(value="/team/board_write", method = RequestMethod.POST)
-	public ModelAndView TeamBoardWritePOST(ModelAndView mv, Integer teamNum, BoardVO board) {
+	public ModelAndView TeamBoardWritePOST(ModelAndView mv, Integer teamNum, BoardVO board,
+			MultipartFile[] files) {
 		
 		
-		boolean res = teamBoardService.insertBoardFromTeamBoard(board, teamNum);
+		boolean res = teamBoardService.insertBoardFromTeamBoard(board, teamNum, files);
 		
 		mv.addObject("msg", "게시글이 등록되었습니다.");
 		mv.addObject("url", "/team/board_list?teamNum="+teamNum);
@@ -502,12 +503,15 @@ public class TeamController {
 		TeamVO team = teamService.selectTeamByTm_Num(teamNum);
 		BoardVO board = teamBoardService.selectTeamBoardByBoNum(boNum);
 //		조회수 올리기
-		board.setBo_view(+1);
+		int viewCnt = board.getBo_view();
+		viewCnt++;
+		board.setBo_view(viewCnt);
 		teamBoardService.updateTeamBoard(board);
 		
 		ArrayList<BoardCategoryVO> categoryList = teamBoardService.selectTeamBoardCategory(team.getTm_num());
 		
 		mv.addObject("board", board);
+		
 		mv.addObject("team", team);
 		mv.addObject("categoryList", categoryList);
 		mv.setViewName("/team/board/team-board_detail");
