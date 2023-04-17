@@ -164,7 +164,7 @@
               </tr>
             </tbody>
           </table>
-          <div class="writeBoard-btnBox"><a href="<c:url value='/community/writing'></c:url>"><button class="writeBoard-btn">글쓰기</button></a></div>
+          <div class="writeBoard-btnBox"><a href="<c:url value='/community/writing/${bt_num}'></c:url>"><button type="button" class="writeBoard-btn">글쓰기</button></a></div>
           <div class="commu-common__pageNum">
             <ul class="pagination pagination-sm">
               <li class="page-item">
