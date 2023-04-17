@@ -15,3 +15,4 @@ public class BoardTypeVO {
 	private boolean bt_hasbc;
 	
 }
+

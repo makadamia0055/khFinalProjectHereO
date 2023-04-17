@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hereo.project.dao.BoardDAO">
+	<select id="selectBoardType" resultType="com.hereo.project.vo.BoardTypeVO">
+	<![CDATA[		
+	
+	select * from `board-type` where bt_w_auth<=${auth}
+	]]>
+		
+	</select>
+	<select id="selectAllBoardType" resultType="com.hereo.project.vo.BoardTypeVO">
+	
+	select * from `board-type`
+	</select>
+</mapper>
