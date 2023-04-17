@@ -7,12 +7,13 @@ import org.apache.ibatis.annotations.Param;
 import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.LeagueAttributeVO;
 import com.hereo.project.vo.LeagueParticipationteamVO;
+import com.hereo.project.vo.PlayerrecordHitterVO;
 
 public interface LeagueDao {
 
-	ArrayList<LeagueAttributeVO> selectLeagueAttribute(@Param("cri")Criteria cri);
+	ArrayList<LeagueAttributeVO> selectLeagueAttribute();
 
-	int selectTotalCountBoard(@Param("cri")Criteria cri);
+	
 
 
 }

@@ -20,32 +20,30 @@
 	</div>
 	<div class="middle-box mt-2">
 		<div class="filter-box">
-			<form action="">
+			
 				<div class="form-group">
 					<label for="year"></label>
 					<select class="form-control" id="year">
-						<option>2021</option>
-						<option>2022</option>
-						<option>2023</option>
-						<option>2024</option>
+						<c:forEach items="${laList }" var="laList">
+							<option value="${laList.la_start_date_str}"></option>
+						</c:forEach>
+						
 					</select>
 				</div>
 				<div class="form-group">
 					<label for="league-name"></label>
 					<select class="form-control" id="league-name">
-						<option>kh중앙리그</option>
-						<option>kh숏리그</option>
-						<option>kh평일리그</option>
-						<option>kh주말리그</option>
+						<c:forEach items="${laList }" var="laList">
+							<option value="${laList.la_name}"></option>
+						</c:forEach>
 					</select>
 				</div>
 				<div class="form-group">
 					<label for="league-type"></label>
 					<select class="form-control" id="league-type">
-						<option>중앙3부리그</option>
-						<option>숏4부리그</option>
-						<option>평일3부리그</option>
-						<option>주말4부리그</option>
+						<c:forEach items="${laList }" var="laList">
+							<option value="${laList.la_match_la}"></option>
+						</c:forEach>
 					</select>
 				</div>
 				<div class="form-group">	
@@ -61,7 +59,7 @@
 					</select>
 				</div>
 				<button type="button" class="btn btn-outline-secondary">검색</button>
-			</form>
+
 		</div>
 	</div>
 		<div class="bottom-box hit">
@@ -125,6 +123,7 @@
 					</tr>
 				</thead>
 				<tbody>
+				<c:forEach items="${playerrecord-hitter }" var="record-hitter">
 					<tr>
 						<td>1</td>
 						<td>이정후(22)</td>
@@ -147,95 +146,11 @@
 						<td>0</td>
 						<td>0</td>
 					</tr>
+				
+				</c:forEach>
 				</tbody>
 			</table>
 		</div>
-			<div class="bottom-box pit hidden">
-		<table class="table">
-			<thead>
-				<tr>
-					<th style="width: 4%;">순위</th>
-					<th style="width: 7%;">선수명</th>
-					<th style="width: 12%;">팀명</th>
-					<th style="width: 8%;">
-						<a >평균자책점</a>
-					</th>
-					<th style="width: 4%;">
-						<a >경기</a>
-					</th>
-					<th style="width: 4%;">
-						<a >승리</a>
-					</th>
-					<th style="width: 4%;">
-						<a >패배</a>
-					</th>
-					<th style="width: 5%;">
-						<a >세이브</a>
-					</th>
-					<th style="width: 4%;">
-						<a >홀드</a>
-					</th>
-					<th style="width: 4%;">
-						<a >승률</a>
-					</th>
-					<th style="width: 5%;">
-						<a >타자수</a>
-					</th>
-					<th style="width: 5%;">
-						<a >이닝</a>
-					</th>
-					<th style="width: 4%;">
-						<a >안타</a>
-					</th>
-					<th style="width: 4%;">
-						<a >홈런</a>
-					</th>
-					<th style="width: 4%;">
-						<a >볼넷</a>
-					</th>
-					<th style="width: 4%;">
-						<a >사구</a>
-					</th>
-					<th style="width: 4%;">
-						<a >삼진</a>
-					</th>
-					<th style="width: 4%;">
-						<a >실점</a>
-					</th>
-					<th style="width: 5%;">
-						<a >자책점</a>
-					</th>
-					<th style="width: 5%;">
-						<a >투구수</a>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>1</td>
-					<td>이병헌</td>
-					<td>두산공작기계야구단</td>
-					<td>3.38</td>
-					<td>8</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>3</td>
-					<td>-</td>
-					<td>22</td>
-					<td>5 1/3</td>
-					<td>1</td>
-					<td>1</td>
-					<td>4</td>
-					<td>1</td>
-					<td>4</td>
-					<td>2</td>
-					<td>2</td>
-					<td>0</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
 	</div>
 	
 	

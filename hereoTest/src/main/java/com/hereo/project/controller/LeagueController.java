@@ -23,8 +23,7 @@ import com.hereo.project.pagination.PageMaker;
 import com.hereo.project.service.LeagueService;
 import com.hereo.project.vo.LeagueAttributeVO;
 import com.hereo.project.vo.LeagueParticipationteamVO;
-
-
+import com.hereo.project.vo.PlayerrecordHitterVO;
 
 
 @Controller
@@ -46,6 +45,9 @@ public class LeagueController {
 	}
 	@RequestMapping(value = "/league/recodeHit", method = RequestMethod.GET)
 	public ModelAndView leagueRecodeHit(ModelAndView mv) {
+		ArrayList<LeagueAttributeVO> laList = leagueService.getLeagueAttribute();
+		
+		mv.addObject("laList", laList);
 		mv.setViewName("/league/league-recode-hit");
 		return mv;
 	}
@@ -66,14 +68,7 @@ public class LeagueController {
 	}
 	@RequestMapping(value = "/league/enroll", method = RequestMethod.GET)
 	public ModelAndView leagueEnroll(ModelAndView mv, Criteria cri) {
-		cri.setPerPageNum(10);
-		ArrayList<LeagueAttributeVO> list = leagueService.getLeagueAttribute(cri);
-		int totalCount = leagueService.getTotalCountLeagueParticipationteam(cri);
-		int displayPageNum = 1;
-		PageMaker pm = new PageMaker(totalCount, displayPageNum, cri);
-		mv.addObject("list",list);
-		mv.addObject("pm",pm);
-		mv.setViewName("/league/league-enroll");
+		
 		return mv;
 	}
 	@RequestMapping(value = "/league/partimanagerment", method = RequestMethod.GET)
