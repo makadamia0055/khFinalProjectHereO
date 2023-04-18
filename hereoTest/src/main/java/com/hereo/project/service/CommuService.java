@@ -18,5 +18,7 @@ public interface CommuService {
 
 	ArrayList<BoardVO> getFreeBoard(int bt_num);
 
+	BoardTypeVO getBoardTypebyBtNum(int bt_num);
+
 
 }

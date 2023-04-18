@@ -49,6 +49,12 @@ public class CommuServiceImp implements CommuService {
 		ArrayList<BoardVO> selectFreeBoard=boardDao.selectFreeBoard(bt_num);
 		return selectFreeBoard;
 	}
+
+	@Override
+	public BoardTypeVO getBoardTypebyBtNum(int bt_num) {
+		BoardTypeVO bt = boardDao.getBoardTypeBtNum(bt_num);
+		return bt;
+	}
 }
 
 

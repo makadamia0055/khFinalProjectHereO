@@ -20,6 +20,8 @@ public interface BoardDAO {
 
 	ArrayList<BoardVO> selectFreeBoard(@Param("bt_num") int bt_num);
 
+	BoardTypeVO getBoardTypeBtNum(@Param("bt_num") int bt_num);
+
 
 
 }

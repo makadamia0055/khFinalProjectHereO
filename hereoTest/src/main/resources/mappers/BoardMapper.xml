@@ -25,4 +25,8 @@
 	<select id="selectFreeBoard" resultType="com.hereo.project.vo.BoardVO">
 	select * from `board` where bo_bt_num=#{bt_num}
 	</select>
+	
+	<select id="getBoardTypeBtNum" resultType="com.hereo.project.vo.BoardTypeVO">
+	select * from `board-type` where bt_num = #{bt_num}
+	</select>
 </mapper>
