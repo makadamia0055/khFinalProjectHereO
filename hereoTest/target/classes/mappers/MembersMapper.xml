@@ -22,6 +22,6 @@
 		select * from members
 			where me_id like #{me_id}
 	</select>
-	
+
 
 </mapper>

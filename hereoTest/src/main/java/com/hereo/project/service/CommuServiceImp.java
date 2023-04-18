@@ -6,15 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hereo.project.dao.BoardDAO;
+import com.hereo.project.dao.MembersDAO;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
+import com.hereo.project.vo.MembersVO;
 
 @Service
 public class CommuServiceImp implements CommuService {
 	
 	@Autowired
 	BoardDAO boardDao;
+	
 	
 	@Override
 	public ArrayList<BoardTypeVO> getBoardType(int me_siteauth) {
@@ -54,6 +57,17 @@ public class CommuServiceImp implements CommuService {
 	public BoardTypeVO getBoardTypebyBtNum(int bt_num) {
 		BoardTypeVO bt = boardDao.getBoardTypeBtNum(bt_num);
 		return bt;
+	}
+
+	@Override
+	public boolean enrollBoard(BoardVO board, MembersVO user) {
+		if(user==null)
+			return false;
+		board.setBo_me_id(user.getMe_id());
+		boardDao.enrollBoard(board);
+		
+		return true;
+		
 	}
 }
 

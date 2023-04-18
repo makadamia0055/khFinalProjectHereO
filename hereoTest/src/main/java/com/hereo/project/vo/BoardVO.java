@@ -23,6 +23,8 @@ public class BoardVO {
 	private int bo_bt_num;
 	private String bo_me_id;
 	private int bo_bc_num;
+	private String bo_region;
+	private String bo_state;
 
 	public String getBo_register_date_str() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

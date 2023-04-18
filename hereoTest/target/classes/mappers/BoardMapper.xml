@@ -29,4 +29,9 @@
 	<select id="getBoardTypeBtNum" resultType="com.hereo.project.vo.BoardTypeVO">
 	select * from `board-type` where bt_num = #{bt_num}
 	</select>
+	
+	<insert id="enrollBoard">
+	insert into board(bo_title, bo_content, bo_me_id,bo_region,bo_state)
+		values(#{bo.bo_title},#{bo.bo_content},#{bo.bo_me_id},#{bo.bo_region},#{bo.bo_state})
+	</insert>
 </mapper>

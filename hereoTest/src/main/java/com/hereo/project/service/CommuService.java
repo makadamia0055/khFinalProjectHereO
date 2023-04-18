@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
+import com.hereo.project.vo.MembersVO;
 
 public interface CommuService {
 
@@ -19,6 +20,8 @@ public interface CommuService {
 	ArrayList<BoardVO> getFreeBoard(int bt_num);
 
 	BoardTypeVO getBoardTypebyBtNum(int bt_num);
+
+	boolean enrollBoard(BoardVO board, MembersVO user);
 
 
 }

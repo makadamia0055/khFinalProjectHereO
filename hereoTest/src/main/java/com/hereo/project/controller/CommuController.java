@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hereo.project.service.CommuService;
+import com.hereo.project.service.MembersService;
 import com.hereo.project.utils.MessageUtils;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardTypeVO;
@@ -25,18 +27,9 @@ public class CommuController {
 	@Autowired
 	CommuService boardService;
 	
-//	@GetMapping(value = "/community")
-//	public String Home01(Model model) {
-//		ArrayList<BoardTypeVO> bt_list = boardService.getBoardType();
-//		BoardTypeVO bt=bt_list.get(0);
-//		int bt_num = bt.getBt_num();
-//		ArrayList<BoardVO> free_list= boardService.getFreeBoard(bt_num);
-//		
-//		model.addAttribute("bt_num",bt_num);
-//		model.addAttribute("free_board", free_list);
-//		
-//		return "/community/free-board";
-//	}	
+	@Autowired
+	MembersService membersService;
+	
 	@GetMapping(value = {"/community/free", "/community"})
 	public String home02(Model model) {
 		
@@ -44,6 +37,7 @@ public class CommuController {
 		BoardTypeVO bt=bt_list.get(0);
 		int bt_num = bt.getBt_num();
 		ArrayList<BoardVO> free_list= boardService.getFreeBoard(bt_num);
+		
 		
 		model.addAttribute("bt_num",bt_num);
 		model.addAttribute("free_board", free_list);
@@ -111,8 +105,12 @@ public class CommuController {
 		
 	}
 	@PostMapping(value="/community/{bt_namebyEnglish}")
-	public String enrollCommuBoard(@PathVariable("bt_namebyEnglish") String englishName) {
+	public String enrollCommuBoard(@PathVariable("bt_namebyEnglish") String englishName,
+			HttpSession session, BoardVO board, Model model) {
 		
+		MembersVO user=(MembersVO)session.getAttribute("loginUser");
+		boardService.enrollBoard(board,user);
+
 		return "redirect:/community/" + englishName;
 	}
 

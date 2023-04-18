@@ -9,18 +9,18 @@
 		<div class="writing-box">
 		<div class="subject-box">
 			<c:if test="${boardCategory01!=null && boardCategory01.size()!=0}">
-				<select name="region" class="region subject" form="writing">
+				<select name="bo_region" class="region subject" form="writing">
 					<option value="0">지역</option>
 					<c:forEach items="${boardCategory01}" var="bc">
-						<option value=${bc.bc_num}>${bc.bc_name}</option>
+						<option value=${bc.bc_name}>${bc.bc_name}</option>
 					</c:forEach>
 				</select>
 			</c:if>
 			<c:if test="${boardCategory01!=null && boardCategory01.size()!=0}">
-				<select name="state" class="state subject" form="writing">
+				<select name="bo_state" class="state subject" form="writing">
 					<option value="0">현황</option>
 					<c:forEach items="${boardCategory02}" var="bc">
-						<option value=${bc.bc_num}>${bc.bc_name}</option>
+						<option value=${bc.bc_name}>${bc.bc_name}</option>
 					</c:forEach>
 				</select>
 			</c:if>

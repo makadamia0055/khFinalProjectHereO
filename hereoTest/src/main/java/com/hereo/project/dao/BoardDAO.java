@@ -22,6 +22,8 @@ public interface BoardDAO {
 
 	BoardTypeVO getBoardTypeBtNum(@Param("bt_num") int bt_num);
 
+	void enrollBoard(@Param("bo") BoardVO board);
+
 
 
 }
