@@ -73,5 +73,19 @@
 		select * from `board-vote`
 			where bv_bo_num = #{bv_bo_num} and bv_me_id =#{bv_me_id}
 	</select>
-
+	<insert id="insertVote" useGeneratedKeys="true" keyProperty="bv.bv_num">
+		insert into `board-vote`(bv_bo_num, bv_me_id, bv_state)
+		value(#{bv.bv_bo_num}, #{bv.bv_me_id}, #{bv.bv_state})
+					
+	</insert>
+	<update id="updateVote">
+		update `board-vote`
+			set bv_state = #{bv.bv_state}
+					
+	</update>
+	<delete id="deleteTeamBoardByNumAndId">
+		delete from `board`
+			where bo_num =#{bo_num} and bo_me_id =#{bo_me_id}
+	</delete>
+	
 </mapper>

@@ -9,6 +9,6 @@ public class BoardVoteVO {
 	private int bv_num;
 	private int bv_bo_num;
 	private String bv_me_id;
-	private boolean bv_state;
+	private int bv_state;
 
 }

@@ -131,17 +131,44 @@ public class TeamBoardServiceImp implements TeamBoardService {
 	}
 
 	@Override
-	public boolean insertOrUpdateVote(BoardVoteVO vote) {
+	public int insertOrUpdateVote(BoardVoteVO vote) {
 		if(vote==null)
-			return false;
-		BoardVoteVO prevVote = teamBoardDao.selectBoardVoteByBoNumAndMeId(vote.getBv_bo_num(), vote.getBv_me_id());
+			return -1;
+		BoardVoteVO prevVote = selectBoardVoteByBoNumAndMeId(vote.getBv_bo_num(), vote.getBv_me_id());
 		if(prevVote ==null) {
-			return teamBoardDao.insertVote(vote)!=0;
+			teamBoardDao.insertVote(vote);
+			return 1;
 
 		}else {
-			return teamBoardDao.updateVote(vote)!=0;
+			vote.setBv_num(prevVote.getBv_num());
+			if(vote.getBv_state()==prevVote.getBv_state()) {
+//				같은 버튼을 누른 경우
+				vote.setBv_state(0);
+				teamBoardDao.updateVote(vote);
+				return 0;
+			}else {
+//				다른 버튼을 누른 경우
+			}
+			
+			teamBoardDao.updateVote(vote);
+			return 1;
 		}
 		
+	}
+	
+	@Override
+	public BoardVoteVO selectBoardVoteByBoNumAndMeId(int bo_num, String bo_me_id) {
+		if(bo_me_id ==null) 
+			return null;
+		
+		return teamBoardDao.selectBoardVoteByBoNumAndMeId(bo_num, bo_me_id);
+	}
+
+	@Override
+	public boolean deleteTeamBoard(int bo_num, String bo_me_id) {
+		if(bo_me_id ==null)
+			return false;
+		return teamBoardDao.deleteTeamBoardByNumAndId(bo_num, bo_me_id)!=0;
 	}
 
 	

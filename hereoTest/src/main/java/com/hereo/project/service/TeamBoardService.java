@@ -30,6 +30,10 @@ public interface TeamBoardService {
 
 	ArrayList<BoardFileVO> selectTeamBoardFiles(Integer boNum);
 
-	boolean insertOrUpdateVote(BoardVoteVO vote);
+	int insertOrUpdateVote(BoardVoteVO vote);
+	
+	BoardVoteVO selectBoardVoteByBoNumAndMeId(int bo_num, String bo_me_id);
+
+	boolean deleteTeamBoard(int bo_num, String bo_me_id);
 
 }

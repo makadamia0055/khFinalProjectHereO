@@ -332,11 +332,12 @@ public class TeamController {
 		mv.setViewName("/team/team_wtj");
 		return mv;
 	}
+	//팀 가입 게시판 
 	@RequestMapping(value = "/team/wtjBoard/{tj_num}", method = RequestMethod.GET)
 	public ModelAndView teamWTJBoard(ModelAndView mv, @PathVariable("tj_num") int tjNum, HttpSession session) {
 //		session.getAttribute("myTeam");
 //		session.getAttribute("teamAuth");
-		int teamNum = 64;
+		
 		TeamWTJoinVO wtj = teamService.selectWTJByTjNum(tjNum);
 		if(wtj!=null) {
 			PlayerVO tmpPlayer = playerService.selectPlayerByPl_Num(wtj.getTj_pl_num());
@@ -500,7 +501,7 @@ public class TeamController {
 		return mv;
 	}
 	@RequestMapping(value="/team/board_detail", method = RequestMethod.GET)
-	public ModelAndView TeamBoardDetail(ModelAndView mv, Integer teamNum, Integer boNum) {
+	public ModelAndView TeamBoardDetail(ModelAndView mv, Integer teamNum, Integer boNum, HttpSession session) {
 	 
 		TeamVO team = teamService.selectTeamByTm_Num(teamNum);
 		BoardVO board = teamBoardService.selectTeamBoardByBoNum(boNum);
@@ -523,7 +524,36 @@ public class TeamController {
 		mv.setViewName("/team/board/team-board_detail");
 		return mv;
 	}
-	
+	@RequestMapping(value="/team/board_delete", method = RequestMethod.POST)
+	public ModelAndView TeamBoardDeletePOST(ModelAndView mv, Integer teamNum, BoardVO board) {
+		
+		boolean res = teamBoardService.deleteTeamBoard(board.getBo_num(), board.getBo_me_id());
+		
+		mv.addObject("msg", "게시글이 삭제되었습니다.");
+		mv.addObject("url", "/team/board_list?teamNum="+teamNum);
+		
+		mv.setViewName("/common/message");
+		return mv;
+	}
+	@RequestMapping(value="/team/board_deleteAuth", method = RequestMethod.POST)
+	public ModelAndView TeamBoardDeleteAuthPOST(ModelAndView mv, Integer teamNum, Integer auth, BoardVO board) {
+		
+		boolean res = teamService.checkIsLeader(teamNum, board.getBo_me_id());
+		if(!res) {
+			mv.addObject("msg", "잘못된 접근입니다..");
+			mv.addObject("url", "/team/board_list?teamNum="+teamNum);
+			mv.setViewName("/common/message");
+			return mv;
+		}
+		
+		res = teamBoardService.deleteTeamBoard(board.getBo_num());
+		
+		mv.addObject("msg", "관리자 권한으로 게시글이 삭제되었습니다.");
+		mv.addObject("url", "/team/board_list?teamNum="+teamNum);
+		
+		mv.setViewName("/common/message");
+		return mv;
+	}
 	
 
 // 공용 ajax 맵핑 코드
@@ -551,8 +581,20 @@ public class TeamController {
 	@RequestMapping(value="/team/ajax/boardVote", method=RequestMethod.POST)
 	public Map<String, Object>setBoardVote(@RequestBody BoardVoteVO vote) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		boolean res = teamBoardService.insertOrUpdateVote(vote);
+		int res = teamBoardService.insertOrUpdateVote(vote);
 //		Board의 추천수는 트리거 혹은 프로시저로 db상에서 변경해보기.(범용성)
+		BoardVO board = teamBoardService.selectTeamBoardByBoNum(vote.getBv_bo_num());
+		map.put("boardAfter", board);
+		map.put("vote", vote);
+		map.put("voteRes", res);
+		return map;
+	}
+	@ResponseBody
+	@RequestMapping(value="/team/ajax/getUserVote", method=RequestMethod.POST)
+	public Map<String, Object>getUserBoardVote(@RequestBody BoardVoteVO vote) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		BoardVoteVO userVote = teamBoardService.selectBoardVoteByBoNumAndMeId(vote.getBv_bo_num(), vote.getBv_me_id());
+		map.put("vote", userVote);
 		return map;
 	}
 	@ResponseBody

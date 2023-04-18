@@ -38,6 +38,12 @@ public interface TeamBoardDAO {
 
 	BoardVoteVO selectBoardVoteByBoNumAndMeId(@Param("bv_bo_num")int bv_bo_num, @Param("bv_me_id")String bv_me_id);
 
+	int insertVote(@Param("bv")BoardVoteVO vote);
+
+	int updateVote(@Param("bv")BoardVoteVO vote);
+
+	int deleteTeamBoardByNumAndId(@Param("bo_num")int bo_num, @Param("bo_me_id")String bo_me_id);
+
 	
 
 }

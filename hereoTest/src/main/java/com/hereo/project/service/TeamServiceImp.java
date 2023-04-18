@@ -199,6 +199,13 @@ public class TeamServiceImp implements TeamService{
 		return teamDao.updateTeam(team)!= 0;
 	}
 
+	@Override
+	public boolean checkIsLeader(Integer teamNum, String bo_me_id) {
+		if(teamNum == null || bo_me_id == null)
+			return false;
+		
+	}
+
 	
 	
 }
