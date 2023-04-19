@@ -25,6 +25,7 @@ public class BoardVO {
 	private int bo_bc_num;
 	private String bo_region;
 	private String bo_state;
+	private String me_nickname;
 
 	public String getBo_register_date_str() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

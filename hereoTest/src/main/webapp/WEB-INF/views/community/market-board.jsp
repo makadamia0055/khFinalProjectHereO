@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="<c:url value='/resources/css/community/market-board.css'></c:url>" rel="stylesheet">
 <link href="<c:url value='/resources/css/community/community-common.css'></c:url>" rel="stylesheet" />
@@ -52,116 +53,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>10</td>
-                <td>서울</td>
-                <td>판매중</td>
-                <td class="market__contents-title">
-                  <a href="#">배트 팝니다</a>
-                </td>
-                <td>BASEBALL</td>
-                <td>17</td>
-                <td>02-22-17:55</td>
-              </tr>
-              <tr>
-                <td>9</td>
-                <td>서울</td>
-                <td>삽니다</td>
-                <td class="market__contents-title">
-                  <a href="#">글러브 삽니다</a>
-                </td>
-                <td>BASEBALL</td>
-                <td>17</td>
-                <td>02-22-17:55</td>
-              </tr>
-              <tr>
-                <td>8</td>
-                <td>서울</td>
-                <td>판매중</td>
-                <td class="market__contents-title">
-                  <a href="#">글러브 싸게 팔아요</a>
-                </td>
-                <td>BASEBALL</td>
-                <td>17</td>
-                <td>02-22-17:55</td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td>경기</td>
-                <td>판매 완료</td>
-                <td class="market__contents-title">
-                  <a href="#">판매완</a>
-                </td>
-                <td>BASEBALL</td>
-                <td>17</td>
-                <td>02-22-17:55</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>서울</td>
-                <td>판매중</td>
-                <td class="market__contents-title">
-                  <a href="#">안쓰는 용품 다 팝니다</a>
-                </td>
-                <td>kia</td>
-                <td>11</td>
-                <td>02-22-14:55</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>서울</td>
-                <td>판매 완료</td>
-                <td class="market__contents-title">
-                  <a href="#">쪽지xx판매 했음</a>
-                </td>
-                <td>uoooi</td>
-                <td>25</td>
-                <td>02-22-12:15</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>경기</td>
-                <td>판매중</td>
-                <td class="market__contents-title">
-                  <a href="#">유니폼 팔아요</a>
-                </td>
-                <td>hi</td>
-                <td>16</td>
-                <td>02-21-22:55</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>경기</td>
-                <td>판매 완료</td>
-                <td class="market__contents-title">
-                  <a href="#">배트 팔아요</a>
-                </td>
-                <td>soccer</td>
-                <td>30</td>
-                <td>02-21-20:17</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>서울</td>
-                <td>판매 완료</td>
-                <td class="market__contents-title">
-                  <a href="#">모자 팔아요</a>
-                </td>
-                <td>BASEBALL</td>
-                <td>3</td>
-                <td>02-22-17:55</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>서울</td>
-                <td>판매중</td>
-                <td class="market__contents-title">
-                  <a href="#">첫번째로 팝니다</a>
-                </td>
-                <td>BASEBALL</td>
-                <td>4</td>
-                <td>02-22-17:55</td>
-              </tr>
+                        <c:forEach items="${market_board}" var="mk" varStatus="no">
+	             <tr>
+	                <td><c:out value="${fn:length(market_board) - no.index}" /></td>
+	                <td>${mk.bo_region}</td>
+	                <td>${mk.bo_state}</td>
+	                <td class="market__contents-title"><a href="<c:url value='/community/content/${mk.bo_num}'></c:url>">${mk.bo_title }</a></td>
+	                <td>${mk.me_nickname }</td>
+	                <td>${mk.bo_view }</td>
+	                <td>${mk.bo_register_date_str2 }</td>
+              	</tr>
+              </c:forEach>
             </tbody>
           </table>
           <div class="writeBoard-btnBox"><a href="<c:url value='/community/writing/${bt_num}'></c:url>"><button type="button" class="writeBoard-btn">글쓰기</button></a></div>

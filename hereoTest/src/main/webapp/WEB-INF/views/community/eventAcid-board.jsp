@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="<c:url value='/resources/css/community/eventAcid-board.css'></c:url>" rel="stylesheet">
 <link href="<c:url value='/resources/css/community/community-common.css'></c:url>" rel="stylesheet" />
@@ -20,8 +21,8 @@
             <tbody>
               <c:forEach items="${acid_board}" var="ac" varStatus="no">
 	             <tr>
-	                <td><c:out value="${no.index}" /></td>
-	                <td class="acid__contents-title"><a href="#">${ac.bo_title }</a></td>
+	                <td><c:out value="${fn:length(acid_board) - no.index}" /></td>
+	                <td class="acid__contents-title"><a href="<c:url value='/community/content/${ac.bo_num}'></c:url>">${ac.bo_title }</a></td>
 	                <td>${ac.bo_view }</td>
 	                <td>${ac.bo_register_date_str2 }</td>
               	</tr>

@@ -48,9 +48,9 @@ public class CommuServiceImp implements CommuService {
 	}
 
 	@Override
-	public ArrayList<BoardVO> getFreeBoard(int bt_num) {
-		ArrayList<BoardVO> selectFreeBoard=boardDao.selectFreeBoard(bt_num);
-		return selectFreeBoard;
+	public ArrayList<BoardVO> getBoard(int bt_num) {
+		ArrayList<BoardVO> selectBoard=boardDao.selectBoard(bt_num);
+		return selectBoard;
 	}
 
 	@Override
@@ -60,14 +60,21 @@ public class CommuServiceImp implements CommuService {
 	}
 
 	@Override
-	public boolean enrollBoard(BoardVO board, MembersVO user) {
+	public boolean enrollBoard(BoardVO board, MembersVO user, int boardType) {
 		if(user==null)
 			return false;
 		board.setBo_me_id(user.getMe_id());
+		board.setBo_bt_num(boardType);
 		boardDao.enrollBoard(board);
 		
 		return true;
 		
+	}
+
+	@Override
+	public BoardVO getBoardDetail(int bo_num) {
+		BoardVO boardDetail = boardDao.selectBoardDetail(bo_num);
+		return boardDetail;
 	}
 }
 

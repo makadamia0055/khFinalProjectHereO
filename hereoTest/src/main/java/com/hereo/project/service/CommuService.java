@@ -17,11 +17,13 @@ public interface CommuService {
 
 	ArrayList<BoardCategoryVO> getBoardCategory02(int bt_num);
 
-	ArrayList<BoardVO> getFreeBoard(int bt_num);
+	ArrayList<BoardVO> getBoard(int bt_num);
 
 	BoardTypeVO getBoardTypebyBtNum(int bt_num);
 
-	boolean enrollBoard(BoardVO board, MembersVO user);
+	boolean enrollBoard(BoardVO board, MembersVO user, int boardType);
+
+	BoardVO getBoardDetail(int bo_num);
 
 
 }
