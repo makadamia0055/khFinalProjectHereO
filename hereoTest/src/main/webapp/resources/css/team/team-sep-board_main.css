@@ -116,10 +116,16 @@
 	margin-left:0;
 }
 
-
 .btnBox-board .btn-on{
 	background-color: #000;
 	font-size : 15px;
 	color: #fff;
 }
-
+.btnBox-board .btn-vote{
+	min-width: 100px; 
+	vertical-align : 15px;
+	
+}
+.btnBox-board hr{
+	background-color: #333
+}

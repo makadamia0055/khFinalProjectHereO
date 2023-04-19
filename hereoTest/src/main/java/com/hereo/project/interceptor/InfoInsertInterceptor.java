@@ -38,7 +38,6 @@ public class InfoInsertInterceptor implements HandlerInterceptor{
 				if(player!=null) {
 					team = teamService.selectJoinedTeamByPlNum(player.getPl_num());
 				}
-				System.out.println(team);
 				session.setAttribute("userTeam", team);
 			}
 			
