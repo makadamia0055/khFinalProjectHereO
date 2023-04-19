@@ -26,6 +26,8 @@ public interface BoardDAO {
 
 	BoardVO selectBoardDetail(@Param("bo_num") int bo_num);
 
+	void updateBoardViews(int bo_num);
+
 
 
 }

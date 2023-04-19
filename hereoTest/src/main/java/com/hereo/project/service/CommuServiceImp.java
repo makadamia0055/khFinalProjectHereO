@@ -73,6 +73,7 @@ public class CommuServiceImp implements CommuService {
 
 	@Override
 	public BoardVO getBoardDetail(int bo_num) {
+		boardDao.updateBoardViews(bo_num);
 		BoardVO boardDetail = boardDao.selectBoardDetail(bo_num);
 		return boardDetail;
 	}

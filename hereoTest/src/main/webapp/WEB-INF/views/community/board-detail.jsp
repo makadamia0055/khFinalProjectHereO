@@ -7,11 +7,13 @@
 
 <h3>${detail.bo_title }</h3>
 <div class="board-infoContainer">
-	<div class="writer">${detail.me_nickname }</div>
-	<c:if test="${detail.bo_region!=null || detail.bo_state!=null}"><div class="board-tagContainer">
-		<div class="regionTag commonTag"># ${detail.bo_region }</div>
-		<div class="stateTag commonTag"># ${detail.bo_state }</div>
-	</div></c:if>
+	<c:if test="${detail.bo_region!=null || detail.bo_state!=null}">
+		<div class="board-tagContainer">
+			<div class="regionTag commonTag"># ${detail.bo_region }</div>
+			<div class="stateTag commonTag"># ${detail.bo_state }</div>
+		</div>
+	</c:if>
+	<c:if test="${detail.bo_bt_num!=2}"><div class="writer">작성자 : ${detail.me_nickname }</div></c:if>
 	<div class="board-dataContainer">
 		<div class="regiDate">작성일 : ${detail.bo_register_date_str}</div>
 		<div class="views">조회수 : ${detail.bo_view }</div>

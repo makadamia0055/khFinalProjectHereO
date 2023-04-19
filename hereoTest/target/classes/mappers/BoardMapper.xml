@@ -39,6 +39,13 @@
 	</insert>
 	
 	<select id="selectBoardDetail" resultType="com.hereo.project.vo.BoardVO">
-	select * from `board` where bo_num=#{bo_num}
+	select board.*, members.me_nickname from `board` inner join members
+	on board.bo_me_id = members.me_id
+	 where bo_num=#{bo_num}
 	</select>
+
+	<update id="updateBoardViews">
+		update `board` set bo_view = bo_view+1
+		where bo_num=#{bo_num}
+	</update>
 </mapper>

@@ -131,6 +131,7 @@ public class CommuController {
 	}
 	@GetMapping(value="/community/content/{bo_num}")
 	public String readingBoardDetail(@PathVariable("bo_num") int bo_num, Model model) {
+		
 		BoardVO boardDetail =boardService.getBoardDetail(bo_num);
 		int bt_num=boardDetail.getBo_bt_num();
 		BoardTypeVO bt = boardService.getBoardTypebyBtNum(bt_num);
