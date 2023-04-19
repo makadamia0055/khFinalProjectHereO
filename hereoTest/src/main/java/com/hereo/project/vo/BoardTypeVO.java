@@ -15,4 +15,22 @@ public class BoardTypeVO {
 	private int bt_tm_num;
 	private int bt_lg_num;
 	private boolean bt_hasbc;
+	
+	
+	public String getBt_namebyEnglish() {
+		
+		switch(bt_num) {
+		case 1 :
+			return "free";
+		case 2 :
+			return "eventAcid";
+		case 3 :
+			return "findHero";
+		case 4 :
+			return "market";
+					
+		}
+		return "free";
+	}
+	
 }

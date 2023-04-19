@@ -18,7 +18,15 @@ public interface BoardDAO {
 
 	ArrayList<BoardCategoryVO> selectBoardCategoryName(@Param("bt_num")int bt_num);
 
-	ArrayList<BoardVO> selectFreeBoard(@Param("bt_num") int bt_num);
+	ArrayList<BoardVO> selectBoard(@Param("bt_num") int bt_num);
+
+	BoardTypeVO getBoardTypeBtNum(@Param("bt_num") int bt_num);
+
+	void enrollBoard(@Param("bo") BoardVO board);
+
+	BoardVO selectBoardDetail(@Param("bo_num") int bo_num);
+
+	void updateBoardViews(int bo_num);
 
 
 

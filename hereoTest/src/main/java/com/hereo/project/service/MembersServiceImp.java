@@ -39,7 +39,8 @@ public class MembersServiceImp implements MembersService{
 	public MembersVO selectMembersByMeId(String pl_me_id) {
 		return membersDao.selectMembersByMeId(pl_me_id);
 	}
-	
+
+
 	
 
 }

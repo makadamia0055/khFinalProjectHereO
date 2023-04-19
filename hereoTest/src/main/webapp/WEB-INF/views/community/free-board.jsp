@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="<c:url value='/resources/css/community/free-board.css'></c:url>" rel="stylesheet" />
 <link href="<c:url value='/resources/css/community/community-common.css'></c:url>" rel="stylesheet" />
@@ -30,9 +31,9 @@
             <tbody>
              <c:forEach items="${free_board}" var="fr" varStatus="no">
 	             <tr>
-	                <td><c:out value="${no.index}" /></td>
-	                <td class="free__contents-title"><a href="#">${fr.bo_title }</a></td>
-	                <td>${fr.bo_me_id }</td>
+	                <td><c:out value="${fn:length(free_board) - no.index}" /></td>
+	                <td class="free__contents-title"><a href="<c:url value='/community/content/${fr.bo_num}'></c:url>">${fr.bo_title }</a></td>
+	                <td>${fr.me_nickname }</td>
 	                <td>${fr.bo_view }</td>
 	                <td>${fr.bo_register_date_str2 }</td>
               	</tr>
