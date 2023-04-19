@@ -83,6 +83,7 @@
 	   $('#summernote').summernote({
 		lang: 'ko-KR',
         placeholder: '게시글 내용을 입력해주세요.',
+        dialogsInBody: true,
         tabsize: 2,
         height: 300
       });

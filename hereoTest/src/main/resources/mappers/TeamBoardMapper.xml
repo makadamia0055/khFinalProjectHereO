@@ -87,5 +87,30 @@
 		delete from `board`
 			where bo_num =#{bo_num} and bo_me_id =#{bo_me_id}
 	</delete>
-	
+	<delete id="deleteTeamBoardByAuth">
+		delete from `board`
+			where bo_num =#{bo_num}
+	</delete>
+	<insert id="insertReply">
+		insert into `board-reply`(br_num, br_ori_num, br_bo_num, br_me_id, br_contents, br_register_date)
+		select ifnull(max(br_num), 0)+1,
+		<if test="br.br_ori_num == 0">
+			ifnull(max(br_num), 0)+1,
+		</if>
+		<if test="br.br_ori_num != 0">
+			#{br.br_ori_num},
+		</if>
+			#{br.br_bo_num}, #{br.br_me_id}, #{br.br_contents}, now()
+			from `board-reply`
+	</insert>
+	<select id="countReply" resultType="int">
+		select count(*) from `board-reply`
+			where br_bo_num = #{bo_num}
+	</select>
+	<select id="selectReplyByBoNumAndCri" resultType="com.hereo.project.vo.BoardReplyVO">
+		select * from `board-reply`
+			where br_bo_num = #{bo_num}
+			order by br_num asc
+			limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
 </mapper>

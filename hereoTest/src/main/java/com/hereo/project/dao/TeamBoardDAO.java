@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardFileVO;
+import com.hereo.project.vo.BoardReplyVO;
 import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
 import com.hereo.project.vo.BoardVoteVO;
@@ -43,6 +44,14 @@ public interface TeamBoardDAO {
 	int updateVote(@Param("bv")BoardVoteVO vote);
 
 	int deleteTeamBoardByNumAndId(@Param("bo_num")int bo_num, @Param("bo_me_id")String bo_me_id);
+
+	int deleteTeamBoardByAuth(int bo_num);
+
+	int insertReply(@Param("br")BoardReplyVO reply);
+
+	int countReply(int bo_num);
+
+	ArrayList<BoardReplyVO> selectReplyByBoNumAndCri(@Param("cri")Criteria cri, @Param("bo_num")int bo_num);
 
 	
 

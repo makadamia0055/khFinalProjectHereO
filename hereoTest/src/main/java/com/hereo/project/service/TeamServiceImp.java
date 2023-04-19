@@ -203,6 +203,12 @@ public class TeamServiceImp implements TeamService{
 	public boolean checkIsLeader(Integer teamNum, String bo_me_id) {
 		if(teamNum == null || bo_me_id == null)
 			return false;
+		TeamVO team = selectTeamByTm_Num(teamNum);
+		if(team.getTm_me_id().equals(bo_me_id)) {
+			return true;
+		}else {
+			return false;
+		}
 		
 	}
 

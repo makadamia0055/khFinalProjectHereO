@@ -28,6 +28,7 @@ import com.hereo.project.service.TeamBoardService;
 import com.hereo.project.service.TeamService;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardFileVO;
+import com.hereo.project.vo.BoardReplyVO;
 import com.hereo.project.vo.BoardVO;
 import com.hereo.project.vo.BoardVoteVO;
 import com.hereo.project.vo.MatchScheduleVO;
@@ -524,6 +525,23 @@ public class TeamController {
 		mv.setViewName("/team/board/team-board_detail");
 		return mv;
 	}
+//	게시판 댓글 작업
+	@RequestMapping(value="/team/board_reply_insert", method = RequestMethod.POST)
+	public ModelAndView TeamBoardReplyPOST(ModelAndView mv, BoardReplyVO reply, HttpServletRequest req) {
+		
+		String url = req.getHeader("referer");
+		boolean res = teamBoardService.insertReply(reply);
+		if(res) {
+			mv.addObject("msg", "답글이 등록되었습니다.");
+			
+		}else {
+			mv.addObject("msg", "답글이 등록에 실패하였습니다.");
+		}
+		mv.addObject("url", url);
+		mv.setViewName("/common/message");
+		return mv;
+	}
+	
 	@RequestMapping(value="/team/board_delete", method = RequestMethod.POST)
 	public ModelAndView TeamBoardDeletePOST(ModelAndView mv, Integer teamNum, BoardVO board) {
 		
@@ -539,19 +557,22 @@ public class TeamController {
 	public ModelAndView TeamBoardDeleteAuthPOST(ModelAndView mv, Integer teamNum, Integer auth, BoardVO board) {
 		
 		boolean res = teamService.checkIsLeader(teamNum, board.getBo_me_id());
+		mv.addObject("msg", "잘못된 접근입니다..");
+		mv.addObject("url", "/team/board_list?teamNum="+teamNum);
+		mv.setViewName("/common/message");
 		if(!res) {
-			mv.addObject("msg", "잘못된 접근입니다..");
-			mv.addObject("url", "/team/board_list?teamNum="+teamNum);
-			mv.setViewName("/common/message");
 			return mv;
 		}
 		
-		res = teamBoardService.deleteTeamBoard(board.getBo_num());
+		res = teamBoardService.deleteTeamBoardByAuth(board.getBo_num());
+		if(!res) {
+			return mv;
+			
+		}else {
+			mv.addObject("msg", "관리자 권한으로 게시글이 삭제되었습니다.");
+			mv.addObject("url", "/team/board_list?teamNum="+teamNum);
+		}
 		
-		mv.addObject("msg", "관리자 권한으로 게시글이 삭제되었습니다.");
-		mv.addObject("url", "/team/board_list?teamNum="+teamNum);
-		
-		mv.setViewName("/common/message");
 		return mv;
 	}
 	
@@ -595,6 +616,20 @@ public class TeamController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		BoardVoteVO userVote = teamBoardService.selectBoardVoteByBoNumAndMeId(vote.getBv_bo_num(), vote.getBv_me_id());
 		map.put("vote", userVote);
+		return map;
+	}
+	@ResponseBody
+	@RequestMapping(value="/team/ajax/getReply", method=RequestMethod.POST)
+	public Map<String, Object>getBoardReply(@RequestBody Criteria cri, Integer boNum) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int replyCnt = teamBoardService.countReply(boNum);
+		
+		ArrayList<BoardReplyVO> list = teamBoardService.selectReplyByBoNumAndCri(cri, boNum);
+		PageMaker pm = new PageMaker(replyCnt, 10, cri);
+		
+		map.put("replyList", list);
+		map.put("pm", pm);
 		return map;
 	}
 	@ResponseBody
