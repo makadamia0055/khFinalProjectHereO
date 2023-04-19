@@ -18,50 +18,52 @@
 
 		</ul>
 	</div>
-	<div class="middle-box mt-2">
-		<div class="filter-box">
-			
-				<div class="form-group">
-					<label for="year"></label>
-					<select class="form-control" id="year">
-						<c:forEach items="${laList }" var="laList">
-							<option value="${laList.la_start_date_str}"></option>
-						</c:forEach>
-						
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="league-name"></label>
-					<select class="form-control" id="league-name">
-						<c:forEach items="${laList }" var="laList">
-							<option value="${laList.la_name}"></option>
-						</c:forEach>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="league-type"></label>
-					<select class="form-control" id="league-type">
-						<c:forEach items="${laList }" var="laList">
-							<option value="${laList.la_match_la}"></option>
-						</c:forEach>
-					</select>
-				</div>
-				<div class="form-group">	
-					<label for="league-team"></label>
-					<select class="form-control" id="league-team">
-						<option selected>없음</option>
-						<option>kia타이거즈</option>
-						<option>kt위즈</option>
-						<option>두산 베어스</option>
-						<option>ssg랜더스</option>
-						<option>롯데 자이언트</option>
-						<option>lg트윈스</option>
-					</select>
-				</div>
-				<button type="button" class="btn btn-outline-secondary">검색</button>
-
+			<div class="middle-box mt-2">
+			<div class="filter-box">
+				<form action="">
+					<div class="form-group">
+						<label for="year"></label>
+						<select class="form-control" id="year">
+							<option>2021</option>
+							<option>2022</option>
+							<option>2023</option>
+							<option>2024</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="league-name"></label>
+						<select class="form-control" id="league-name">
+							<option>kh중앙리그</option>
+							<option>kh숏리그</option>
+							<option>kh평일리그</option>
+							<option>kh주말리그</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="league-type"></label>
+						<select class="form-control" id="league-type">
+							<option>중앙3부리그</option>
+							<option>숏4부리그</option>
+							<option>평일3부리그</option>
+							<option>주말4부리그</option>
+						</select>
+					</div>
+					<div class="form-group">	
+						<label for="league-team"></label>
+						<select class="form-control" id="league-team">
+							<option selected>없음</option>
+							<option>kia타이거즈</option>
+							<option>kt위즈</option>
+							<option>두산 베어스</option>
+							<option>ssg랜더스</option>
+							<option>롯데 자이언트</option>
+							<option>lg트윈스</option>
+						</select>
+					</div>
+					<button type="button" class="btn btn-outline-secondary">검색</button>
+				</form>
+			</div>
 		</div>
-	</div>
 		<div class="bottom-box hit">
 			<table class="table">
 				<thead>
@@ -123,7 +125,6 @@
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach items="${playerrecord-hitter }" var="record-hitter">
 					<tr>
 						<td>1</td>
 						<td>이정후(22)</td>
@@ -146,8 +147,7 @@
 						<td>0</td>
 						<td>0</td>
 					</tr>
-				
-				</c:forEach>
+
 				</tbody>
 			</table>
 		</div>
