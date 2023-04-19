@@ -11,9 +11,7 @@ import com.hereo.project.vo.PlayerrecordHitterVO;
 
 public interface LeagueDao {
 
-	ArrayList<LeagueAttributeVO> selectLeagueAttribute();
 
-	
 
 
 }

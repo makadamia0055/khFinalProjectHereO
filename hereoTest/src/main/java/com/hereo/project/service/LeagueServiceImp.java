@@ -14,10 +14,6 @@ public class LeagueServiceImp implements LeagueService {
 	LeagueDao leagueDao;
 
 
-	@Override
-	public ArrayList<LeagueAttributeVO> getLeagueAttribute() {
-		return leagueDao.selectLeagueAttribute();
-	}
 	
 	
 

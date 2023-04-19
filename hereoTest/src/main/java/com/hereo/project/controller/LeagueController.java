@@ -45,9 +45,7 @@ public class LeagueController {
 	}
 	@RequestMapping(value = "/league/recodeHit", method = RequestMethod.GET)
 	public ModelAndView leagueRecodeHit(ModelAndView mv) {
-		ArrayList<LeagueAttributeVO> laList = leagueService.getLeagueAttribute();
 		
-		mv.addObject("laList", laList);
 		mv.setViewName("/league/league-recode-hit");
 		return mv;
 	}
