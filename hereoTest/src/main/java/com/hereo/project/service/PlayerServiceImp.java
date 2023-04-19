@@ -134,7 +134,14 @@ public class PlayerServiceImp implements PlayerService{
 	}
 	
 	@Override
-	public boolean hasTeam(int pl_num) {
+	public boolean hasNoTeam(int pl_num) {
 		return teamPlayerDao.hasTeam(pl_num)==0;
+	}
+//	팀 선수 객체를 선수 번호와 팀번호로 가져오는 메소드
+	@Override
+	public TeamPlayerVO selectTeamPlayerByPlNumAndTmNum(int pl_num, Integer tm_num) {
+		if(pl_num == 0||tm_num==null||tm_num==0)
+			return null;
+		return teamPlayerDao.selectTeamPlayerByPlNumAndTmNum(pl_num, tm_num);
 	}
 }

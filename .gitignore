@@ -10,3 +10,7 @@ hereoTest/target/m2e-wtp/web-resources/META-INF/maven/com.hereo/test/pom.propert
 hereoTest/src/main/webapp/META-INF/maven/com.hereo/test/pom.properties
 
 hereoTest/.settings/org.eclipse.m2e.wtp.prefs
+
+hereoTest/.classpath
+
+hereoTest/.settings/org.eclipse.wst.common.component

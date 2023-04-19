@@ -28,87 +28,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>10</td>
-                <td class="free__contents-title"><a href="#">반갑습니다</a></td>
-                <td>BASEBALL</td>
-                <td>17</td>
-                <td>02-22-17:55</td>
-              </tr>
-              <tr>
-                <td>9</td>
-                <td class="free__contents-title"><a href="#">반갑습니다</a></td>
-                <td>BASEBALL</td>
-                <td>17</td>
-                <td>02-22-17:55</td>
-              </tr>
-              <tr>
-                <td>8</td>
-                <td class="free__contents-title"><a href="#">반갑습니다</a></td>
-                <td>BASEBALL</td>
-                <td>17</td>
-                <td>02-22-17:55</td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td class="free__contents-title"><a href="#">반갑습니다</a></td>
-                <td>BASEBALL</td>
-                <td>17</td>
-                <td>02-22-17:55</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td class="free__contents-title">
-                  <a href="#">이번 주말에 비온다던데</a>
-                </td>
-                <td>kia</td>
-                <td>11</td>
-                <td>02-22-14:55</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td class="free__contents-title">
-                  <a href="#">님들 들어와보셈</a>
-                </td>
-                <td>uoooi</td>
-                <td>25</td>
-                <td>02-22-12:15</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td class="free__contents-title">
-                  <a href="#">이런 사이트도 생기고 ㅋㅋ</a>
-                </td>
-                <td>hi</td>
-                <td>16</td>
-                <td>02-21-22:55</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td class="free__contents-title">
-                  <a href="#">여기서 예약하신분?</a>
-                </td>
-                <td>soccer</td>
-                <td>30</td>
-                <td>02-21-20:17</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td class="free__contents-title"><a href="#">반갑습니다</a></td>
-                <td>BASEBALL</td>
-                <td>3</td>
-                <td>02-22-17:55</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td class="free__contents-title"><a href="#">반갑습니다</a></td>
-                <td>BASEBALL</td>
-                <td>4</td>
-                <td>02-22-17:55</td>
-              </tr>
+             <c:forEach items="${free_board}" var="fr" varStatus="no">
+	             <tr>
+	                <td><c:out value="${no.index}" /></td>
+	                <td class="free__contents-title"><a href="#">${fr.bo_title }</a></td>
+	                <td>${fr.bo_me_id }</td>
+	                <td>${fr.bo_view }</td>
+	                <td>${fr.bo_register_date_str2 }</td>
+              	</tr>
+              </c:forEach>
             </tbody>
           </table>
-          <div class="writeBoard-btnBox"><a href="<c:url value='/community/writing'></c:url>"><button class="writeBoard-btn">글쓰기</button></a></div>
+          <div class="writeBoard-btnBox"><a href="<c:url value='/community/writing/${bt_num}'></c:url>">
+          	<button type="button" class="writeBoard-btn">글쓰기</button>
+          	</a>
+          </div>
           <div class="commu-common__pageNum">
             <ul class="pagination pagination-sm">
               <li class="page-item prev">

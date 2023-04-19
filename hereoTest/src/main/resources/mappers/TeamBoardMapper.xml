@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hereo.project.dao.TeamBoardDAO">
+	<select id="selectTeamBoardByTeam" resultType="com.hereo.project.vo.BoardVO">
+		select * from board
+			where bo_bt_num = (select bt_num from `board-type` where bt_types like '팀게시판' and bt_tm_num = #{tm.tm_num})
+				and bo_title like concat('%', #{cri.search},'%')
+				<if test="cri.type != 0">
+					and bo_bc_num = #{cri.type}
+				</if>
+				order by bo_num desc
+				limit #{cri.pageStart}, #{cri.perPageNum}
+			
+	
+	</select>
+	<select id="countTeamBoardTotalCnt" resultType="int">
+		select count(*) from board
+			where bo_bt_num = (select bt_num from `board-type` where bt_types like '팀게시판' and bt_tm_num = #{tm.tm_num})
+				and bo_title like concat('%', #{cri.search},'%')
+				<if test="cri.type != 0">
+					and bo_bc_num = #{cri.type}
+				</if>
+	</select>
+	
+	<select id="selectTeamBoardCategory" resultType="com.hereo.project.vo.BoardCategoryVO">
+		select * from `board-category`
+			where bc_bt_num = (select bt_num from `board-type` where bt_types like '팀게시판' and bt_tm_num = #{tm_num})
+				
+	</select>
+	<select id="selectTeamBoardType" resultType="com.hereo.project.vo.BoardTypeVO">
+		select * from `board-type`
+			where bt_tm_num = #{teamNum} and bt_types like '팀게시판'
+	</select>
+	<insert id="teamBoardInit">
+		insert into `board-type`(bt_types, bt_r_auth, bt_w_auth, bt_tm_num, bt_hasbc)
+			value('팀게시판', 1, 1, #{teamNum}, 1);
+	</insert>
+	<insert id="insertBoardFromTeamBoard" useGeneratedKeys="true" keyProperty="bo.bo_num">
+		insert into `board`(bo_title, bo_content, bo_register_date, bo_bt_num, bo_me_id, bo_bc_num)
+		value(#{bo.bo_title}, #{bo.bo_content}, now(), #{bo.bo_bt_num}, #{bo.bo_me_id}, #{bo.bo_bc_num})
+	
+	</insert>
+	<select id="callProcedureTeamBoardCategoryInit" statementType="CALLABLE">
+		CALL `teamBoard-categoryInit`(#{bt_num})
+	</select>
+	<select id="selectTeamBoardByBoNum" resultType="com.hereo.project.vo.BoardVO">
+		select * from board
+			where bo_num = #{boNum}
+	</select>
+	<update id="updateTeamBoard">
+		update board
+			set	bo_title = #{bo.bo_title},
+				bo_content = #{bo.bo_content},
+				bo_view = #{bo.bo_view},
+				bo_up = #{bo.bo_up},
+				bo_down = #{bo.bo_down},
+				bo_me_id = #{bo.bo_me_id},
+				bo_bc_num = #{bo.bo_bc_num}	
+			where bo_num = #{bo.bo_num} 
+	</update>
+	<insert id="insertBoardFile">
+		insert into `board-file`(bf_filename, bf_ori_filename, bf_bo_num)
+		value(#{bf.bf_filename}, #{bf.bf_ori_filename}, #{bf.bf_bo_num})
+		
+	</insert>
+	<select id="selectTeamBoardFiles" resultType="com.hereo.project.vo.BoardFileVO">
+		select * from `board-file`
+			where  bf_bo_num = #{boNum}
+	</select>
+
+</mapper>

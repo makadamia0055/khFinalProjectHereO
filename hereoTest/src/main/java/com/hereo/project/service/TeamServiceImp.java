@@ -52,8 +52,8 @@ public class TeamServiceImp implements TeamService{
 
 	@Override
 	public int insertTeam(TeamVO team, MultipartFile imgFile) {
-		if(team==null||team.getTm_name()==null||team.getTm_name().trim().equals("")||
-				team.getTm_slogan()==null)
+		if(team==null||team.getTm_name()==null||team.getTm_name().trim().equals("")
+				)
 			return 0;
 //			team.tm_me_id는 지금 시점에서 구현이 애매해서 뺌
 		String tmpImgPath = "";
@@ -64,11 +64,6 @@ public class TeamServiceImp implements TeamService{
 				e.printStackTrace();
 			}
 		}
-		
-//		임시 팀장 아이디
-		team.setTm_me_id("asd123");
-		
-
 		
 		team.setTm_team_img(tmpImgPath);
 		int teamNum = teamDao.insertTeam(team);
@@ -167,6 +162,41 @@ public class TeamServiceImp implements TeamService{
 		
 		
 		return res;
+	}
+	@Override
+	public ArrayList<TeamVO> selectTeamByPlNumAndAuth(int pl_num, int auth) {
+		
+		return teamPlayerDao.selectTeamByPlNumAndAuth(pl_num, auth);
+	}
+	@Override
+	public TeamVO selectJoinedTeamByPlNum(int pl_num) {
+		
+		ArrayList<TeamVO> list = teamPlayerDao.selectTeamByPlNumAndAuth(pl_num, 3);
+		
+		if(list ==null||list.size()==0) {
+			return null;
+		}
+		return list.get(0);
+	}
+
+	@Override
+	public boolean updateTeam(TeamVO team, Boolean currentLogoDelete, MultipartFile imgFile) {
+		if(team==null)
+			return false;
+		if(currentLogoDelete&&!team.getTm_team_img().contains("디폴트이미지")) {
+			UploadFileUtils.removeFile(uploadPath, team.getTm_team_img());
+		}
+		
+		String tmpImgPath = "";
+		if(imgFile!=null&&imgFile.getOriginalFilename().length()!=0) {
+			try {
+				 tmpImgPath = UploadFileUtils.uploadFile(uploadPath, imgFile.getOriginalFilename(), imgFile.getBytes());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		team.setTm_team_img(tmpImgPath);
+		return teamDao.updateTeam(team)!= 0;
 	}
 
 	

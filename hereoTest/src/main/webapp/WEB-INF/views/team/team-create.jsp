@@ -76,6 +76,15 @@
 							<label for="tm_backnum">팀장 백넘버</label><br>
 							<input type="text" class="" name="tm_backnum" id = "tm_backnum" placeholder="0~99의 숫자 입력">
 						</div>
+						<div class="form-group">
+							<label for="tm_team_introduce">팀 소개</label><br>
+							<textarea placeholder="팀 소개를 입력해주십시오."></textarea>
+							
+						</div>
+						
+						
+						
+						
 						<button type="submit" class="btn btn-dark col-lg-12">팀 신청</button>
 					
 

@@ -21,6 +21,7 @@ public class TeamVO {
 	private String tm_teamstate;
 	private String tm_team_img;
 	private int tm_teamCnt;
+	private String tm_team_introduce;
 	
 	public void setTm_startday(String dateStr) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
