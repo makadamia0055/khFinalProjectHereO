@@ -66,7 +66,7 @@ public class LeagueController {
 	}
 	@RequestMapping(value = "/league/enroll", method = RequestMethod.GET)
 	public ModelAndView leagueEnroll(ModelAndView mv, Criteria cri) {
-		
+		mv.setViewName("/league/league-enroll");
 		return mv;
 	}
 	@RequestMapping(value = "/league/partimanagerment", method = RequestMethod.GET)
