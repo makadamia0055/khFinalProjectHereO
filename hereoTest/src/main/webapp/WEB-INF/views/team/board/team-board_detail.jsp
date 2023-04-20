@@ -95,22 +95,22 @@
 							</form>
 						</c:if>
 					</div>
-					<form name="replyForm" action="<c:url value='/team/board_reply_insert'></c:url>" method="post">
+					<form name="replyForm" class="replyForm" action="<c:url value='/team/board_reply_insert'></c:url>" method="post">
 						<div class="input-group mt-3">
 							<input type="text" name="br_me_id" hidden readonly value="${loginUser.me_id}">
-							<input type="text" name="br_bo_num" hidden readonly value="${board.bo_num }"> 
-							<textarea name="br_contents" class="form-control" placeholder="댓글을 입력해주세요."></textarea>
+							<input type="text" name="br_bo_num" hidden value="${board.bo_num }"> 
+							<textarea name="br_contents" class="form-control" maxlength="300" placeholder="댓글을 입력해주세요."></textarea>
 							<div class="input-group-append">
     							<button class="input-group-text btn btn-secendary">댓글 입력</button>
   							</div>
 						</div>
 					</form>
-					<form name="rereplyForm" style="display:none;" class="ml-3" action="<c:url value='/team/board_reply_insert'></c:url>" method="post">
+					<form name="rereplyForm" style="display:none;" class="ml-3 replyForm" action="<c:url value='/team/board_reply_insert'></c:url>" method="post">
 						<div class="input-group mt-3">
 							<input type="text" name="br_me_id" hidden readonly value="${loginUser.me_id}">
 							<input type="text" name="br_bo_num" hidden readonly value="${board.bo_num }">
 							<input type="text" name="br_ori_num" hidden readonly value="0"> 
-							<textarea name="br_contents" class="form-control" placeholder="댓글을 입력해주세요."></textarea>
+							<textarea name="br_contents" class="form-control" maxlength="300" placeholder="댓글을 입력해주세요."></textarea>
 							<div class="input-group-append">
     							<button class="input-group-text btn btn-secendary">댓글 입력</button>
   							</div>
@@ -122,7 +122,7 @@
 								<div class="list-group-item d-flex justify-content-between list-group-item-secondary align-items-center">
 									<span class="box-nick">
 										<span class="badge badge-primary badge-pill">4</span> 
-										<span class="nickname">맘모스쌈바돼지</span>
+										<span class="nickname">견본</span>
 									</span>
 									<span class="box-date">2023-03-23</span>
 								</div>
@@ -147,7 +147,17 @@
       crossorigin="anonymous"
     </script>
     <script>
+    $(document).ready(function(){
+    	  $('[data-toggle="tooltip"]').tooltip();
+    	});
     /* 필요 객체들 */
+    let viewAuth = false;
+    <c:if test="${not empty loginUser.me_id}">
+    	viewAuth = getAuth('${loginUser.me_id}', ${team.tm_num});
+    </c:if>
+    
+    
+    
     let wObj = {
     		me_id: "${board.bo_me_id}",
     		teamNum: '${team.tm_num}'
@@ -231,15 +241,40 @@
 		   let replyDate = rp.br_register_date_str2;
 		   if(rp.br_update_date_str2 !=null)
 			   replyDate =rp.br_update_date_str2; 
-		   replyStr += '<li class="list-group mt-2"><div class="list-group-item d-flex justify-content-between list-group-item-secondary align-items-center reply-title">'
+		   replyStr += '<li class="list-group mt-2';
+		   /* 대댓 마진 레프트 넣어주는 곳 */
+		   if(rp.br_ori_num!=rp.br_num)
+			   replyStr += ' ml-3 ';
+		   
+		   replyStr+= '"><div class="list-group-item d-flex justify-content-between list-group-item-secondary align-items-center reply-title">'
 			+'<span class="box-nick">'
 			+'<span class="badge badge-primary badge-pill">'+auth +'</span>' 
 			+'<span class="nickname">'+nickAndRank.userMember.me_nickname+'</span>'
 		+'</span>'
 		+'<span class="box-date">'+replyDate+'</span>'
-	+'</div><div class="list-group-item list-group-item-action d-flex reply-contents" data-num="'+rp.br_num +'">'
-		+ rp.br_contents
-	+'</div></li>'
+	+'</div><div class="list-group-item list-group-item-action reply-contents" data-num="'+rp.br_num +'">'
+	   /* 대댓 @닉네임 넣어주는 곳 */
+		if(rp.br_ori_num!=rp.br_num){
+		   let oriMeId= getOriMeId(rp.br_ori_num);
+		   rereObj ={
+				   me_id: oriMeId,
+		    		teamNum: ${team.tm_num}	   
+		   }
+		   reNickAndRank = getPlayerNameAndRank(rereObj)
+		replyStr += '<span class="badge badge-pill badge-success">@' +reNickAndRank.userMember.me_nickname + '</span> '
+	   }
+	/* 댓글 내용 */
+	 replyStr += '<span class="reply-text">'+rp.br_contents +'</span>';
+	 
+	/* 댓글 버튼 넣어주는 곳 */
+		if(rp.br_me_id == '${loginUser.me_id}'||viewAuth){
+			
+		replyStr += '<br><div class="d-flex flex-row-reverse" >'
+		+'<button class="btn btn-outline-secondary btn-sm btn-more btn-reply-delete" data-toggle="tooltip" title="댓글 삭제"><i class="fa-solid fa-trash" style="color: #5a5a63;"></i></button>'
+		+'<button class="btn btn-outline-secondary btn-sm btn-more btn-reply-edit ml-2" data-toggle="tooltip" title="댓글 수정"><i class="fa-solid fa-gear" style="color: #5a5a63;"></i></button>'
+		+'</div>'
+		}
+		replyStr += '</div></li>'
 	   }
 	   
 	   createAndAppendPagination(data);
@@ -274,16 +309,118 @@
    /* 초기 리플 받아오기 */
    requestReply();
    
+   /* 리플창 비회원 거르기 */
+   $('.replyForm').click(function(e){
+	   if(isLogin!=1){
+		   alert('회원만이 댓글을 달 수 있습니다.');
+		   $('.btn-on').focus();
+		   
+		   return;
+	   }
+   })
+   /* 리플 내용 없을때 보내지 않기 */
+   $('.replyForm').submit(function(){
+	   let text = $(this).find('[name=br_contents]').text();
+	   if(text.trim().length==0){
+		  alert('댓글 내용을 입력해주세요.');
+		  $(this).find('[name=br_contents]').focus();
+		  return false;
+	   }
+	   return true;
+   })
+   /* 댓글창 리사이즈 */
+  $(document).on('keydown','[name=br_contents]', replyResize);
+ 
+   function replyResize(){
+	   	
+	  	$(this).css('height', '1px');
+	    $(this).css('height', (12 + $(this).prop('scrollHeight')) + 'px');
+   }
+   
+   /* 리플 클릭시 대댓창 나타나게 */
    $(document).on('click', '.reply-contents', function(e){
+	   if(isLogin!=1){
+		   alert('로그인 한 회원만 댓글을 달 수 있습니다.');
+		   return;
+	   }
 	   let rplyForm = $('[name=rereplyForm]');
 	   $(rplyForm).show();
 	   $(this).parent().append(rplyForm);
 	   let dataNum = $(this).data('num');
-	  
-	   $('[name=br_ori_num]').val(dataNum)
+	   $(rplyForm).attr("action", "<c:url value='/team/board_reply_update'></c:url>")
+
+	   $('[name=br_ori_num]').attr('value', dataNum);
 	   
 	   
    })
+   /* 댓글 수정 작업 */
+   $(document).on('click', '.btn-reply-edit', function(e){
+	  e.stopPropagation();
+  	  let dataNum = $(this).parents('.reply-contents').data('num');
+  	  let id= getOriMeId(dataNum);
+  	  let manageAuth = getAuth(id, ${team.tm_num});
+	
+      if(id!='${loginUser.me_id}'&&manageAuth){
+    	  alert('관리자는 댓글 삭제만 가능합니다.');
+    	  return;
+      }else if(id!='${loginUser.me_id}'&&!manageAuth){
+    	  alert('자기 자신의 글만 수정 가능합니다.');
+    	  return;
+      }
+      let rplyForm = $('[name=rereplyForm]');
+	   $(rplyForm).show();
+	   $('.reply-contents').show();
+	   let contents= $(this).parents('.reply-contents');
+	   $(contents).hide();
+	   $(contents).prev().after(rplyForm);
+	   let repText = $(contents).find('.reply-text').text();
+	   $(rplyForm).find('[name=br_contents]').text(repText)
+	   /* 수정은 ori_num 값을 건드릴 필요는 없음 근데 ori_num에 원 댓글 번호가 자동으로 들어가니
+	   그걸 ori_num 대용으로 사용함*/
+	   $(rplyForm).attr("action", "<c:url value='/team/board_reply_update'></c:url>")
+	  	
+ 
+   })
+    /* 댓글 삭제 작업 */
+    $(document).on('click', '.btn-reply-delete', function(e){
+  	  e.stopPropagation();
+  	  let dataNum = $(this).parents('.reply-contents').data('num');
+  	  let id= getOriMeId(dataNum);
+  	  let type = "삭제";
+  	  let deleteAuth = getAuth(id, ${team.tm_num});
+  	  if(id!='${loginUser.me_id}'&& !deleteAuth){
+  		  alert('자신이 쓴 글만 '+type+'할 수 있습니다.');
+  		  return;
+  	  }
+  	  if(type=="삭제"){
+  	  	if(confirm('정말 '+type+'하시겠습니까?')){
+  	  		let reObj={
+  	  				br_num : dataNum
+  	  		}
+  	  		if(deleteReply(reObj)){
+  	  			alert('댓글이 삭제되었습니다.');
+	  	  		requestReply();
+  	  		}else{
+  	  			alert('댓글 삭제에 실패했습니다');
+  	  			requestReply();
+  	  		}
+  	  	}else{
+  	  		return;
+  	  	}
+  	  	
+  		  
+  	  }
+
+    })
+   /* 댓글 삭제 기능 */
+   function deleteReply(obj){
+	   let res = false;
+	   ajaxParam("POST", obj, '<c:url value="/team/ajax/deleteReply"></c:url>', function(data){
+		   res = data.res;
+	   })
+	   return res;
+   }
+   
    
     /* 추천 비추천 버튼 기능 구현 */
     $('.btn-vote').click(function(e){
@@ -332,7 +469,7 @@
     		return false;
     	}
     	/* 글쓴이 자신 혹은 관리자만 지울 수 있게 */
-    	userAuth =  getUserTeamAuth('${loginUser.me_id}', ${team.tm_num});
+    	userAuth =  getUserTeamAuth('${loginUser.me_id}');
     	if('${loginUser.me_id}'!='${board.bo_me_id}'){
     		console.log(userAuth);
     		if(userAuth!=4){
@@ -347,8 +484,10 @@
     	}
     	return true;
     })
+   
+    
     /* 유저의 권한만 받아오는 함수 */
-    function getUserTeamAuth(id, num){
+    function getUserTeamAuth(id){
     		let uObj = {
     				me_id: "${loginUser.me_id}",
     	    		teamNum: '${team.tm_num}'
@@ -359,7 +498,34 @@
     	   })
     	   return res; 
     }
-    
+   /* 댓글의 작성자 id 리턴받는 */
+    function getOriMeId(num1){
+    	let obj1 ={
+    			br_ori_num : num1
+    	}
+    	let res;
+    	ajaxParam("POST", obj1, '<c:url value="/team/ajax/getOriMeId"></c:url>', function(data){
+    		res= data.me_id;
+    	} )
+    	return res;
+    }
+    /* 권한을 리턴하는 함수 */
+    function getAuth(me_id, teamNum){
+    	let authObj ={
+    			me_id : me_id, 
+    			tm_num : teamNum
+    	}
+    	let res=false;
+    	ajaxParam("POST", authObj, '<c:url value="/team/ajax/getAuth"></c:url>', function(data){
+    		if(data.siteAuth){
+    			res=true;
+    		}else if(data.tp_auth==4){
+    			res=true;
+    		}
+    		
+    	})
+    	return res;
+    }
     
     function ajaxParam(method, obj, url, successFunc, errorFunc){
     	$.ajax({

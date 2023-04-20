@@ -110,7 +110,21 @@
 	<select id="selectReplyByBoNumAndCri" resultType="com.hereo.project.vo.BoardReplyVO">
 		select * from `board-reply`
 			where br_bo_num = #{bo_num}
-			order by br_num asc
+			order by br_ori_num, br_num asc
 			limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
+	<select id="selectMeIdByBrOriNum" resultType="String">
+		select br_me_id from `board-reply`
+			where br_num = #{br_ori_num}
+	</select>
+	<delete id="deleteReply">
+		delete from `board-reply`
+			where br_num =#{br_num}
+	</delete>
+	<update id="updateReply">
+		update `board-reply`
+			set br_contents = #{br.br_contents},
+				br_update_date = now()
+			where br_num =#{br.br_num}
+	</update>
 </mapper>
