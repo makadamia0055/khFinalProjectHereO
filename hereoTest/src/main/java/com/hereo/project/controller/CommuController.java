@@ -130,16 +130,30 @@ public class CommuController {
 		return "redirect:/community/" + englishName;
 	}
 	@GetMapping(value="/community/content/{bo_num}")
-	public String readingBoardDetail(@PathVariable("bo_num") int bo_num, Model model) {
-		
+	public String readingBoardDetail(@PathVariable("bo_num") int bo_num, Model model,
+			HttpSession session) {
+		MembersVO user=(MembersVO)session.getAttribute("loginUser");
 		BoardVO boardDetail =boardService.getBoardDetail(bo_num);
 		int bt_num=boardDetail.getBo_bt_num();
 		BoardTypeVO bt = boardService.getBoardTypebyBtNum(bt_num);
+		model.addAttribute("user", user);
 		model.addAttribute("bt", bt);
 		model.addAttribute("detail", boardDetail);
 		return "/community/board-detail";
 	}
-	
+	@GetMapping(value="/community/correct/{bo_num}")
+	public String correctBoard(@PathVariable("bo_num")int bo_num, Model model
+			) {
+		BoardVO board=boardService.getBoardDetail(bo_num);
+		ArrayList<BoardCategoryVO> selectBoardCategory01 = boardService.getBoardCategory01(board.getBo_bt_num());
+		ArrayList<BoardCategoryVO> selectBoardCategory02 = boardService.getBoardCategory02(board.getBo_bt_num());
+		model.addAttribute("board", board);
+		model.addAttribute("boardCategory01", selectBoardCategory01);
+		model.addAttribute("boardCategory02", selectBoardCategory02);
+		
+		return "/community/commu-writingboard2";
+		
+	}
 
 }
 	

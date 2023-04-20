@@ -28,7 +28,13 @@
 		<button class="like_btn commu-btn">추천 <i class="fa-regular fa-thumbs-up"></i></button>
 		<button class="dislike_btn commu-btn">비추천 <i class="fa-regular fa-thumbs-down"></i></button>
 	</div>
-
+	<c:if test="${user.me_id == detail.bo_me_id }">
+		<div class="btn-container02">
+			<button class="correct_btn"><a href="<c:url value='/community/correct/${detail.bo_num}'></c:url>">글 수정</a></button>
+			<div class="section">|</div>
+			<button class="delete-btn">글 삭제</button>
+		</div>
+	</c:if>	
 </div>
 <div>댓글</div>
 </main>

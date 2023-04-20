@@ -52,9 +52,26 @@ h3 {
 	margin-right : 7px;
 	border-style:none;
 }
-.like_btn {
-
+.delete-btn,.correct_btn {
+	position: relative;
+	border-style:none;
+	background-color:white;
+	color : #868E96;
+	font-size:13px;
 }
-.dislike_btn {
-
+.section {
+	color : #868E96;
+	font-size:13px;
+	display: inline;
+	position: relative;
+	right:-895px;	
+}
+.delete-btn:hover,.correct_btn:hover {
+	  text-decoration: underline;
+}
+.delete-btn {
+	right:-900px;
+}
+.correct_btn {
+	right:-890px;
 }

@@ -34,7 +34,6 @@ public class CommuServiceImp implements CommuService {
 	@Override
 	public ArrayList<BoardCategoryVO> getBoardCategory01(int bt_num) {
 		ArrayList<BoardCategoryVO> selectBoardCategory = boardDao.selectBoardCategoryRegion(bt_num);
-		System.out.println("서비스1"+selectBoardCategory);
 		return selectBoardCategory;
 
 
@@ -43,7 +42,6 @@ public class CommuServiceImp implements CommuService {
 	@Override
 	public ArrayList<BoardCategoryVO> getBoardCategory02(int bt_num) {
 		ArrayList<BoardCategoryVO> selectBoardCategory = boardDao.selectBoardCategoryName(bt_num);
-		System.out.println("서비스1"+selectBoardCategory);
 		return selectBoardCategory;
 	}
 
