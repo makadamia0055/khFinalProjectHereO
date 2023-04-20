@@ -202,5 +202,24 @@ public class TeamBoardServiceImp implements TeamBoardService {
 		return teamBoardDao.selectReplyByBoNumAndCri(cri, bo_num);
 	}
 
+	@Override
+	public String selectMeIdByBrOriNum(Integer br_ori_num) {
+		return teamBoardDao.selectMeIdByBrOriNum(br_ori_num);
+	}
+
+	@Override
+	public boolean deleteReply(Integer br_num) {
+		if(br_num == null)
+			return false;
+		return teamBoardDao.deleteReply(br_num)!=0;
+	}
+	@Override
+	public boolean updateReply(BoardReplyVO reply) {
+		if(reply==null||reply.getBr_me_id()==null||reply.getBr_me_id().trim().length()==0||
+				reply.getBr_contents()==null||reply.getBr_contents().trim().length()==0)
+			return false;
+		
+		return teamBoardDao.updateReply(reply)!=0;
+	}
 	
 }

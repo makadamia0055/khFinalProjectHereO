@@ -53,6 +53,12 @@ public interface TeamBoardDAO {
 
 	ArrayList<BoardReplyVO> selectReplyByBoNumAndCri(@Param("cri")Criteria cri, @Param("bo_num")int bo_num);
 
+	String selectMeIdByBrOriNum(Integer br_ori_num);
+
+	int deleteReply(Integer br_num);
+
+	int updateReply(@Param("br")BoardReplyVO reply);
+
 	
 
 }
