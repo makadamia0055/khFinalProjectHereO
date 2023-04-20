@@ -45,4 +45,10 @@ public interface TeamBoardService {
 
 	ArrayList<BoardReplyVO> selectReplyByBoNumAndCri(Criteria cri, Integer bo_num);
 
+	String selectMeIdByBrOriNum(Integer br_ori_num);
+
+	boolean deleteReply(Integer br_num);
+
+	boolean updateReply(BoardReplyVO reply);
+
 }

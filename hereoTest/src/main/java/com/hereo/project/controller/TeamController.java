@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hereo.project.dao.RegionDAO;
 import com.hereo.project.pagination.Criteria;
 import com.hereo.project.pagination.PageMaker;
+import com.hereo.project.service.AuthService;
 import com.hereo.project.service.MembersService;
 import com.hereo.project.service.PlayerService;
 import com.hereo.project.service.ScheduleService;
@@ -50,6 +51,8 @@ public class TeamController {
 	ScheduleService scheduleService;
 	@Autowired
 	TeamBoardService teamBoardService;
+	@Autowired
+	AuthService authService;
 	
 	@Autowired
 	PlayerService playerService;
@@ -541,7 +544,25 @@ public class TeamController {
 		mv.setViewName("/common/message");
 		return mv;
 	}
-	
+//	게시판 댓글 수정
+	@RequestMapping(value="/team/board_reply_update", method = RequestMethod.POST)
+	public ModelAndView TeamBoardReplyUpdatePOST(ModelAndView mv, BoardReplyVO reply, HttpServletRequest req) {
+		String url = req.getHeader("referer");
+		
+		int br_num = reply.getBr_ori_num();
+		reply.setBr_num(br_num);
+		
+		boolean res = teamBoardService.updateReply(reply);
+		if(res) {
+			mv.addObject("msg", "답글이 수정되었습니다.");
+			
+		}else {
+			mv.addObject("msg", "답글 수정에 실패하였습니다.");
+		}
+		mv.addObject("url", url);
+		mv.setViewName("/common/message");
+		return mv;
+	}
 	@RequestMapping(value="/team/board_delete", method = RequestMethod.POST)
 	public ModelAndView TeamBoardDeletePOST(ModelAndView mv, Integer teamNum, BoardVO board) {
 		
@@ -633,6 +654,15 @@ public class TeamController {
 		return map;
 	}
 	@ResponseBody
+	@RequestMapping(value="/team/ajax/deleteReply", method=RequestMethod.POST)
+	public Map<String, Object>deleteBoardReply(@RequestParam("br_num") Integer br_num) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		boolean res = teamBoardService.deleteReply(br_num);
+		map.put("res", res);
+		
+		return map;
+	}
+	@ResponseBody
 	@RequestMapping(value="/team/ajax/playerNameAndRank", method=RequestMethod.POST)
 	public Map<String, Object>getPlayerNameAndRank(@RequestParam("me_id")String me_id, @RequestParam("teamNum")Integer teamNum) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -646,7 +676,32 @@ public class TeamController {
 		map.put("userTP", tp);		
 		return map;
 	}
-	
+	@ResponseBody
+	@RequestMapping(value="/team/ajax/getAuth", method=RequestMethod.POST)
+	public Map<String, Object>getAuth(@RequestParam("me_id")String me_id, @RequestParam("tm_num")Integer teamNum) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("siteAuth", false);
+		if(authService.isSiteManager(me_id)) {
+			map.put("siteAuth", true);
+		}
+		PlayerVO player = playerService.selectPlayerByMeId(me_id);
+		TeamPlayerVO tp= playerService.selectTeamPlayerByPlNumAndTmNum(player.getPl_num(), teamNum);
+		map.put("tp_auth", 0);
+		if(tp!=null) {
+			int tp_auth = tp.getTp_auth();
+			map.put("tp_auth", tp_auth);
+		}
+		return map;
+	}
+	@ResponseBody
+	@RequestMapping(value="/team/ajax/getOriMeId", method=RequestMethod.POST)
+	public Map<String, Object>getOriReplyMeId(@RequestParam("br_ori_num") Integer br_ori_num) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		String me_id = teamBoardService.selectMeIdByBrOriNum(br_ori_num);
+		map.put("me_id", me_id);
+		return map;
+	}
 	private boolean isUserNull(MembersVO user, ModelAndView mv) {
 		if(user==null) {
 			mv.addObject("msg", "로그인을 해주십시오.");
