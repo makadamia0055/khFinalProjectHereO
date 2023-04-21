@@ -127,4 +127,26 @@
 				br_update_date = now()
 			where br_num =#{br.br_num}
 	</update>
+	<insert id="insertBoardFileSummerNote" useGeneratedKeys="true" keyProperty="bf.bf_num">
+		insert into `board-file`(bf_filename, bf_ori_filename, bf_issummernote)
+		value(#{bf.bf_filename}, #{bf.bf_ori_filename}, 1)
+		
+	</insert>
+	<update id="updateSummerNoteImg">
+		update `board-file`
+			set bf_bo_num = #{bo_num}
+			where bf_num = #{bf_num}
+			
+	
+	</update>
+	<delete id="deleteSummerNoteImg">
+		delete from `board-file`
+			where bf_num = #{bf_num}
+			and bf_bo_num is null
+	
+	</delete>
+	<select id="selectTeamBoardFilesByBfNum" resultType="com.hereo.project.vo.BoardFileVO">
+		select * from `board-file`
+			where bf_num = #{bf_num}
+	</select>
 </mapper>

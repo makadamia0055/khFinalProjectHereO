@@ -51,4 +51,8 @@ public interface TeamBoardService {
 
 	boolean updateReply(BoardReplyVO reply);
 
+	BoardFileVO uploadSummerNoteImg(MultipartFile file);
+
+	void updateSummerNoteImg(int bo_num, String resArr, String tmpArr);
+
 }

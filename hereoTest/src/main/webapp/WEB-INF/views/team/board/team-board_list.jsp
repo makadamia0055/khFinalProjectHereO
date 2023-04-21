@@ -87,7 +87,7 @@
 					
 				</div>
 				<div class="btnBox-board">
-					<a href="<c:url value='/team/board_write?teamNum=${team.tm_num }'></c:url>" class="btn-on">글 등록</a>
+					<a href="<c:url value='/team/board_write?teamNum=${team.tm_num }'></c:url>" class="btn-on btn-write">글 등록</a>
 					<!-- <a href="#" class="">수정</a> -->
 				</div>
 			</div>
@@ -97,5 +97,15 @@
 <script
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
+      
     ></script>
+    <script>
+    $('.btn-write').click(function(e){
+    	<c:if test="${empty loginUser}">
+    	alert("로그인 된 유저만 글을 작성할 수 있습니다.");
+    	e.preventDefault();
+    	</c:if>
+    })
+    
+    </script>
 		
