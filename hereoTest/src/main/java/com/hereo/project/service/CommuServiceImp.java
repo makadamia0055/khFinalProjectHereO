@@ -80,13 +80,16 @@ public class CommuServiceImp implements CommuService {
 	public boolean updateBoard(BoardVO board) {		
 		
 		boardDao.updateBoard(board);
-		System.out.println(board);
 		return true;
 	}
 
 	@Override
-	public void deleteBoard(BoardVO board) {
-		//삭제 구현중임.
+	public boolean deleteBoard(BoardVO board, MembersVO user) {
+		if(user==null)
+			return false;
+		
+		boardDao.deleteBoard(board, user);
+		return true; 
 		
 	}
 }

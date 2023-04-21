@@ -32,7 +32,9 @@
 		</div>
 		<textarea id="content" name="bo_content">${board.bo_content }</textarea>
 		<button class="btn-rewritingSubmit">수정</button>
-		<button type="button" class="btn-delete"><a href="<c:url value='/'></c:url>">삭제</a></button>
+		<a href="<c:url value='/community/delete/${board.bo_num}'></c:url>">
+			<button type="button" class="btn-delete">삭제</button>
+		</a>
 	</form>
       
 </main>

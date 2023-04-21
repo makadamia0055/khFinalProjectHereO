@@ -27,7 +27,7 @@ public interface CommuService {
 
 	boolean updateBoard(BoardVO board);
 
-	void deleteBoard(BoardVO board);
+	boolean deleteBoard(BoardVO board, MembersVO user);
 
 
 }

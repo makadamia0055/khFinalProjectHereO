@@ -186,15 +186,18 @@ public class CommuController {
 	public String deleteBoard(@PathVariable("bo_num")int bo_num, HttpSession session, HttpServletResponse response) {
 		MembersVO user=(MembersVO)session.getAttribute("loginUser");
 		BoardVO board = boardService.getBoardDetail(bo_num);
+		BoardTypeVO bt_type = boardService.getBoardTypebyBtNum(board.getBo_bt_num());
+		String englishName = bt_type.getBt_namebyEnglish();
 		
-		if(user==null || !user.getMe_id().equals(board.getBo_me_id())) {
-			MessageUtils.alertAndGoPage(response, "권한이 없습니다", "/hereoTest", "/community");
+		if(user==null) {
+			MessageUtils.alertAndGoPage(response, "로그인이 필요합니다.", "/hereoTest", "/community");
+		}
+		if(user.getMe_id().equals(board.getBo_me_id()) || user.getMe_siteauth()>=9) {
+
+		boardService.deleteBoard(board, user);
 		}
 		
-
-		boardService.deleteBoard(board);
-		
-		return null;
+		return "redirect:/community/" + englishName;
 		
 	}
 

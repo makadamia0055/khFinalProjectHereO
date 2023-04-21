@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
+import com.hereo.project.vo.MembersVO;
 
 public interface BoardDAO {
 
@@ -29,6 +30,8 @@ public interface BoardDAO {
 	void updateBoardViews(int bo_num);
 
 	void updateBoard(@Param("bo") BoardVO board);
+
+	Object deleteBoard(@Param("bo") BoardVO board, MembersVO user);
 
 
 
