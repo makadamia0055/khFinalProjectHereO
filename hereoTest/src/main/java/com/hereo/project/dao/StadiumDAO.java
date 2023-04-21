@@ -25,5 +25,7 @@ public interface StadiumDAO {
 
 	void insertStadiumImage(@Param("file")StadiumImageVO file);
 
+	RegionDetailVO selectRegionDetail(int rd_num);
+
 
 }

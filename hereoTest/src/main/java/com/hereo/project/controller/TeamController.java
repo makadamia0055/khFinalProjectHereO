@@ -493,11 +493,10 @@ public class TeamController {
 	}
 	@RequestMapping(value="/team/board_write", method = RequestMethod.POST)
 	public ModelAndView TeamBoardWritePOST(ModelAndView mv, Integer teamNum, BoardVO board,
-			MultipartFile[] files) {
-		
+			MultipartFile[] files, String resArr, String tmpArr) {
 		
 		boolean res = teamBoardService.insertBoardFromTeamBoard(board, teamNum, files);
-		
+		teamBoardService.updateSummerNoteImg(board.getBo_num(), resArr, tmpArr);
 		mv.addObject("msg", "게시글이 등록되었습니다.");
 		mv.addObject("url", "/team/board_list?teamNum="+teamNum);
 		
@@ -711,6 +710,17 @@ public class TeamController {
 			return true;
 		}	
 		return false;
+	}
+	@ResponseBody
+	@RequestMapping(value="/ajax/image", method=RequestMethod.POST)
+	public Map<String, Object>handleFileUpload(@RequestParam("file") MultipartFile file) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		BoardFileVO tmpFile = teamBoardService.uploadSummerNoteImg(file);
+		String uploadFile = tmpFile.getBf_filename();
+		int fileNum = tmpFile.getBf_num();
+		map.put("fileNum", fileNum);
+		map.put("uploadFile", uploadFile);
+		return map;
 	}
 	
 }
