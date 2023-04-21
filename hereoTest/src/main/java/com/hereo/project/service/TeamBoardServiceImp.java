@@ -1,6 +1,7 @@
 package com.hereo.project.service;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +13,10 @@ import com.hereo.project.pagination.Criteria;
 import com.hereo.project.utils.UploadFileUtils;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardFileVO;
+import com.hereo.project.vo.BoardReplyVO;
 import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
+import com.hereo.project.vo.BoardVoteVO;
 import com.hereo.project.vo.TeamVO;
 
 @Service
@@ -129,5 +132,159 @@ public class TeamBoardServiceImp implements TeamBoardService {
 		return teamBoardDao.selectTeamBoardFiles(boNum);
 	}
 
+	@Override
+	public int insertOrUpdateVote(BoardVoteVO vote) {
+		if(vote==null)
+			return -1;
+		BoardVoteVO prevVote = selectBoardVoteByBoNumAndMeId(vote.getBv_bo_num(), vote.getBv_me_id());
+		if(prevVote ==null) {
+			teamBoardDao.insertVote(vote);
+			return 1;
+
+		}else {
+			vote.setBv_num(prevVote.getBv_num());
+			if(vote.getBv_state()==prevVote.getBv_state()) {
+//				같은 버튼을 누른 경우
+				vote.setBv_state(0);
+				teamBoardDao.updateVote(vote);
+				return 0;
+			}else {
+//				다른 버튼을 누른 경우
+			}
+			
+			teamBoardDao.updateVote(vote);
+			return 1;
+		}
+		
+	}
 	
+	@Override
+	public BoardVoteVO selectBoardVoteByBoNumAndMeId(int bo_num, String bo_me_id) {
+		if(bo_me_id ==null) 
+			return null;
+		
+		return teamBoardDao.selectBoardVoteByBoNumAndMeId(bo_num, bo_me_id);
+	}
+
+	@Override
+	public boolean deleteTeamBoard(int bo_num, String bo_me_id) {
+		if(bo_me_id ==null)
+			return false;
+		ArrayList<BoardFileVO> files = selectTeamBoardFiles(bo_num);
+		if(teamBoardDao.deleteTeamBoardByNumAndId(bo_num, bo_me_id)==0)
+			return false;
+		for(BoardFileVO file : files) {
+			UploadFileUtils.removeFile(uploadPath, file.getBf_filename());
+			
+		}
+		
+		
+		return true;
+	}
+
+	@Override
+	public boolean deleteTeamBoardByAuth(int bo_num) {
+		
+		return teamBoardDao.deleteTeamBoardByAuth(bo_num)!=0;
+	}
+
+	@Override
+	public boolean insertReply(BoardReplyVO reply) {
+		if(reply==null||reply.getBr_me_id()==null||reply.getBr_me_id().trim().length()==0||
+				reply.getBr_contents()==null||reply.getBr_contents().trim().length()==0)
+			return false;
+		
+		return teamBoardDao.insertReply(reply)!=0;
+	}
+
+	@Override
+	public int countReply(int bo_num) {
+		return teamBoardDao.countReply(bo_num);
+	}
+
+	@Override
+	public ArrayList<BoardReplyVO> selectReplyByBoNumAndCri(Criteria cri, Integer bo_num) {
+		if(cri==null) {
+			cri=new Criteria();
+		}
+		if(bo_num==null||bo_num<1)
+			return null;
+		return teamBoardDao.selectReplyByBoNumAndCri(cri, bo_num);
+	}
+
+	@Override
+	public String selectMeIdByBrOriNum(Integer br_ori_num) {
+		return teamBoardDao.selectMeIdByBrOriNum(br_ori_num);
+	}
+
+	@Override
+	public boolean deleteReply(Integer br_num) {
+		if(br_num == null)
+			return false;
+		return teamBoardDao.deleteReply(br_num)!=0;
+	}
+	@Override
+	public boolean updateReply(BoardReplyVO reply) {
+		if(reply==null||reply.getBr_me_id()==null||reply.getBr_me_id().trim().length()==0||
+				reply.getBr_contents()==null||reply.getBr_contents().trim().length()==0)
+			return false;
+		
+		return teamBoardDao.updateReply(reply)!=0;
+	}
+
+	@Override
+	public BoardFileVO uploadSummerNoteImg(MultipartFile file) {
+		if(file==null||file.getOriginalFilename().length()==0)
+			return null;
+		
+		BoardFileVO tmpBoardFile = new BoardFileVO();
+		try {
+			String uploadedFileName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
+			tmpBoardFile.setBf_ori_filename(file.getOriginalFilename());
+			tmpBoardFile.setBf_filename(uploadedFileName);
+			tmpBoardFile.setBf_issummernote(true);
+			
+			teamBoardDao.insertBoardFileSummerNote(tmpBoardFile);
+			} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return tmpBoardFile;
+	}
+
+	@Override
+	public void updateSummerNoteImg(int bo_num, String resArr, String tmpArr) {
+		ArrayList<Integer> resList = strToList(resArr);
+		ArrayList<Integer> tmpList = strToList(tmpArr);
+		
+		for(int i = 0; i<tmpList.size();i++) {
+			if(!resList.contains(tmpList.get(i)))
+				continue;
+			tmpList.remove(i);
+		}
+		for(Integer res : resList) {
+			teamBoardDao.updateSummerNoteImg(bo_num, res);
+		}
+		for(int i = 0 ; i<tmpList.size(); i++) {
+			BoardFileVO bf = teamBoardDao.selectTeamBoardFilesByBfNum(tmpList.get(i));
+			UploadFileUtils.removeFile(uploadPath, bf.getBf_filename());
+		
+		}
+		if(tmpList.size()!=0)
+			return;
+		for(Integer tmp : tmpList) {
+				teamBoardDao.deleteSummerNoteImg(bo_num, tmp);
+		}
+		
+				
+	}
+	
+	private ArrayList<Integer> strToList(String str){
+		StringTokenizer st = new StringTokenizer(str, ",");
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		while(st.hasMoreTokens()) {
+			list.add(Integer.parseInt(st.nextToken()));
+		}
+		return list;
+	}
 }

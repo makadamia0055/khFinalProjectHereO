@@ -25,7 +25,7 @@
 							<div class="view">조회수</div>
 							
 						</li>
-						<c:if test="${empty boardList}">
+						<c:if test="${empty boardList || fn:length(boardList) == 0}">
 							<li>
 								<div class="text-center">등록된 게시글이 없습니다.</div>
 							</li>
@@ -40,7 +40,11 @@
 										<c:if test="${not empty ct && bo.bo_bc_num == ct.bc_num}">${ct.bc_name}</c:if>
 									</c:forEach>
 								</div>
-								<div class="title"><a href="<c:url value='/team/board_detail?teamNum=${team.tm_num }&boNum=${bo.bo_num }'></c:url>" class="">${bo.bo_title }</a></div>
+								<div class="title"><a href="<c:url value='/team/board_detail?teamNum=${team.tm_num }&boNum=${bo.bo_num }'></c:url>" class="">${bo.bo_title }
+								<c:if test="${bo.bo_reply_count !=0}">
+									[${bo.bo_reply_count}]
+								</c:if>
+									</a></div>
 								<div class="writer">${bo.bo_me_id }</div>
 								<fmt:parseDate value = "${bo.bo_register_date_str}" pattern = "yyyy-MM-dd" var = "boDate"/>
 								<fmt:formatDate value="${boDate}" pattern = "yyyy-MM-dd" var="boDateStr"/>
@@ -83,7 +87,7 @@
 					
 				</div>
 				<div class="btnBox-board">
-					<a href="<c:url value='/team/board_write?teamNum=${team.tm_num }'></c:url>" class="btn-on">글 등록</a>
+					<a href="<c:url value='/team/board_write?teamNum=${team.tm_num }'></c:url>" class="btn-on btn-write">글 등록</a>
 					<!-- <a href="#" class="">수정</a> -->
 				</div>
 			</div>
@@ -93,5 +97,15 @@
 <script
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
+      
     ></script>
+    <script>
+    $('.btn-write').click(function(e){
+    	<c:if test="${empty loginUser}">
+    	alert("로그인 된 유저만 글을 작성할 수 있습니다.");
+    	e.preventDefault();
+    	</c:if>
+    })
+    
+    </script>
 		

@@ -26,7 +26,7 @@
 							<dl>
 								<dt>제목</dt>
 								<dd>
-									<input type="text" name="bo_title" placeholder="제목 입력" required>
+									<input type="text" name="bo_title" placeholder="제목 입력" required value="${board.bo_title }">
 									<input type="text" name="teamNum" hidden value="${team.tm_num }">
 								</dd>
 								
@@ -39,7 +39,9 @@
 									<select name="bo_bc_num" class="custom-select">
 									    <option selected value="0">말머리를 선택해주세요.</option>
 									    <c:forEach items="${categoryList}" var="ct">
-									    	<option value="${ct.bc_num}">${ct.bc_name }</option>
+									    	<option value="${ct.bc_num}" 
+									    		<c:if test="${ct.bc_num == board.bo_bc_num }"> selected</c:if>
+									    	>${ct.bc_name }</option>
 									    </c:forEach>
 								  	</select>
 								
@@ -84,7 +86,8 @@
 <script src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"></script>
 <script>
-	   $('#summernote').summernote({
+$(document).ready(function(){
+	$('#summernote').summernote({
 		lang: 'ko-KR',
         placeholder: '게시글 내용을 입력해주세요.',
         dialogsInBody: true,
@@ -98,6 +101,9 @@
         	}
         }
       });
+	   $('#summernote').summernote('code', '${board.bo_content}')
+})
+	   
 	  let tmpImgArr = []; 
 	  function sendFile(file, el){
 		  var form_data = new FormData();
