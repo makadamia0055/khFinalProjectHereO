@@ -10,7 +10,8 @@ import com.hereo.project.vo.PlayerrecordHitterVO;
 import com.hereo.project.vo.TeamPlayerVO;
 import com.hereo.project.vo.TeamVO;
 
-public interface LeagueDAO {
+public interface RecordDAO {
 
+	ArrayList<PlayerrecordHitterVO> selectAllHitRecord();
 
 }

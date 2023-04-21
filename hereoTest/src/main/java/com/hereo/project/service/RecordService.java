@@ -10,6 +10,8 @@ import com.hereo.project.vo.TeamVO;
 import com.hereo.project.pagination.Criteria;
 
 
-public interface LeagueService {
+public interface RecordService {
+
+	ArrayList<PlayerrecordHitterVO> getSelectAllHitRecord();
 
 }
