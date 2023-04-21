@@ -503,6 +503,21 @@ public class TeamController {
 		mv.setViewName("/common/message");
 		return mv;
 	}
+	@RequestMapping(value="/team/board_update", method = RequestMethod.GET)
+	public ModelAndView TeamBoardUpdate(ModelAndView mv, Integer boNum, Integer teamNum) {
+		
+//		팀 가져오기
+		TeamVO team = teamService.selectTeamByTm_Num(teamNum);
+//		카테고리 가져오기
+		ArrayList<BoardCategoryVO> categoryList = teamBoardService.selectTeamBoardCategory(team.getTm_num());
+//		보드 가져오기
+		BoardVO tmpBoard = teamBoardService.selectTeamBoardByBoNum(boNum);
+		mv.addObject("board", tmpBoard);
+		mv.addObject("team", team);
+		mv.addObject("categoryList", categoryList);
+		mv.setViewName("/team/board/team-board_update");
+		return mv;
+	}
 	@RequestMapping(value="/team/board_detail", method = RequestMethod.GET)
 	public ModelAndView TeamBoardDetail(ModelAndView mv, Integer teamNum, Integer boNum, HttpSession session) {
 	 
