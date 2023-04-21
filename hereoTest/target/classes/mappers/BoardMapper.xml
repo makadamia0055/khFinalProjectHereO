@@ -48,4 +48,13 @@
 		update `board` set bo_view = bo_view+1
 		where bo_num=#{bo_num}
 	</update>
+	
+	<update id="updateBoard">
+		update `board` set 
+			bo_title = #{bo.bo_title},
+			bo_content= #{bo.bo_content},
+			bo_region = #{bo.bo_region},
+			bo_state = #{bo.bo_state}
+		where bo_num = #{bo.bo_num}
+	</update>
 </mapper>

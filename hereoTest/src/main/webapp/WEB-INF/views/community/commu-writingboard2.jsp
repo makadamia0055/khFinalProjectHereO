@@ -7,6 +7,8 @@
 <main class="writingBoard">
 <form action="<c:url value='/community/correct/${bt.bt_namebyEnglish}'></c:url>" method="post" enctype="multipart/form-data" id="writing">		
 		<div class="writing-box">
+		<input type="hidden" name="bo_num" value="${board.bo_num}" />
+		<input type="hidden" name="bo_me_id" value="${board.bo_me_id}" />
 		<div class="subject-box">
 			<c:if test="${board.bo_region !=null && board.bo_state !=null}">
 				<select name="bo_region" class="region subject" form="writing">

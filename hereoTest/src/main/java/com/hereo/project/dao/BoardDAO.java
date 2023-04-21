@@ -28,6 +28,8 @@ public interface BoardDAO {
 
 	void updateBoardViews(int bo_num);
 
+	void updateBoard(@Param("bo") BoardVO board);
+
 
 
 }

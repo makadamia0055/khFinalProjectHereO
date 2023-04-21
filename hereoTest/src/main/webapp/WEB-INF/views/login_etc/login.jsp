@@ -10,6 +10,7 @@
     <link href="<c:url value='/resources/css/common/style.css'></c:url>" rel="stylesheet">
     <link href="<c:url value='/resources/css/login_etc/login.css'></c:url>" rel="stylesheet">
     <link href="<c:url value='/resources/css/common/font.css'></c:url>" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script
   		src="https://code.jquery.com/jquery-3.6.4.js"
   		integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
@@ -23,7 +24,8 @@
       <input class="login-input" type="text" placeholder="아이디" name="me_id"/><br />
       <input class="login-input" type="password" placeholder="비밀번호" name="me_pw"/><br />
       <div class="id-remember">
-        <i class="fa-regular fa-circle-check"></i><span>아이디 저장</span>
+        <input type="checkbox" name="autoLogin" value="true">
+        <label for="auto" class="auto">자동로그인</label>
       </div>
       <input class="login-btn" type="submit" value="로그인"/>
     </form>

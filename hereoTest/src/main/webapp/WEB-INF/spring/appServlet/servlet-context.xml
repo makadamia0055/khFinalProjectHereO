@@ -50,6 +50,8 @@
 		</beans:bean>
 		<beans:bean id="guestInterceptor" class="com.hereo.project.interceptor.GuestInterceptor">
 		</beans:bean>
+		<beans:bean id="AutoLoginInterceptor" class="com.hereo.project.interceptor.AutoLoginInterceptor">
+		</beans:bean>
 		<beans:bean id="InfoInsertInterceptor" class="com.hereo.project.interceptor.InfoInsertInterceptor">
 		</beans:bean>
 		<beans:bean id="InfoDeleteInterceptor" class="com.hereo.project.interceptor.InfoDeleteInterceptor">
@@ -63,6 +65,10 @@
 		<interceptor>
 			<mapping path="/signup"/>
 			<beans:ref bean="guestInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:ref bean="AutoLoginInterceptor"/>
 		</interceptor>
 		<interceptor>
 			<mapping path="/**"/>

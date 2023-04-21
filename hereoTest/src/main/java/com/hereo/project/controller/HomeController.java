@@ -52,9 +52,12 @@ public class HomeController {
 	public String loginPost(Model model, MembersVO user) {
 		MembersVO loginUser = membersService.login(user);
 		model.addAttribute("loginUser",loginUser);
+		System.out.println(loginUser);
 		if(loginUser==null) {
 			return "redirect:/login";
 		} else {
+			loginUser.setAutoLogin(user.isAutoLogin());
+			System.out.println("체크용"+loginUser);
 			return "redirect:/login";
 		}		
 	}
@@ -62,8 +65,10 @@ public class HomeController {
 	@GetMapping(value = "/logout")
 	public String logout(HttpServletResponse response, HttpSession session) {
 		//추후 자동로그인 기능을 위해 user남겨둠
-		MembersVO user = (MembersVO)session.getAttribute("loginUser");
+		MembersVO loginUser = (MembersVO)session.getAttribute("loginUser");
 		session.removeAttribute("loginUser");
+		loginUser.setMe_session_limit(null);
+		membersService.updateAutoLoginSession(loginUser);
 		return "redirect:/";
 	}
 	

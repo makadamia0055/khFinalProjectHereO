@@ -139,19 +139,62 @@ public class CommuController {
 		model.addAttribute("user", user);
 		model.addAttribute("bt", bt);
 		model.addAttribute("detail", boardDetail);
+		
 		return "/community/board-detail";
 	}
 	@GetMapping(value="/community/correct/{bo_num}")
-	public String correctBoard(@PathVariable("bo_num")int bo_num, Model model
+	public String correctBoard(@PathVariable("bo_num")int bo_num, Model model,
+			HttpSession session, HttpServletResponse response
 			) {
 		BoardVO board=boardService.getBoardDetail(bo_num);
+		MembersVO user = (MembersVO)session.getAttribute("loginUser");
+		if (user==null || !user.getMe_id().equals(board.getBo_me_id())) {
+			MessageUtils.alertAndGoPage(response, "권한이 없습니다", "/hereoTest", "/community");
+		}
 		ArrayList<BoardCategoryVO> selectBoardCategory01 = boardService.getBoardCategory01(board.getBo_bt_num());
 		ArrayList<BoardCategoryVO> selectBoardCategory02 = boardService.getBoardCategory02(board.getBo_bt_num());
+		
+		int bt_num = board.getBo_bt_num();
+		BoardTypeVO bt = boardService.getBoardTypebyBtNum(bt_num);
+		model.addAttribute("bt", bt);
+		
 		model.addAttribute("board", board);
+
 		model.addAttribute("boardCategory01", selectBoardCategory01);
 		model.addAttribute("boardCategory02", selectBoardCategory02);
 		
 		return "/community/commu-writingboard2";
+		
+	}
+	@PostMapping(value="/community/correct/{bt_namebyEnglish}")
+	public String correctCommuBoard(@PathVariable("bt_namebyEnglish") String englishName,
+			HttpSession session, BoardVO board, Model model, HttpServletResponse response) {
+		
+		MembersVO user=(MembersVO)session.getAttribute("loginUser");
+		
+
+		if(user==null) {
+			MessageUtils.alertAndGoPage(response, "로그인이 필요합니다.", "/hereoTest", "/community");
+		}
+		if(!user.getMe_id().equals(board.getBo_me_id())) {
+			MessageUtils.alertAndGoPage(response, "권한이 없습니다.", "/hereoTest", "/community");
+		}
+		boardService.updateBoard(board);
+		return "redirect:/community/" + englishName;
+	}
+	@GetMapping(value="/community/delete/{bo_num}")
+	public String deleteBoard(@PathVariable("bo_num")int bo_num, HttpSession session, HttpServletResponse response) {
+		MembersVO user=(MembersVO)session.getAttribute("loginUser");
+		BoardVO board = boardService.getBoardDetail(bo_num);
+		
+		if(user==null || !user.getMe_id().equals(board.getBo_me_id())) {
+			MessageUtils.alertAndGoPage(response, "권한이 없습니다", "/hereoTest", "/community");
+		}
+		
+
+		boardService.deleteBoard(board);
+		
+		return null;
 		
 	}
 
