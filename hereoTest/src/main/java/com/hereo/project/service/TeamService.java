@@ -49,6 +49,8 @@ public interface TeamService {
 
 	boolean updateTeam(TeamVO team, Boolean currentLogoDelete, MultipartFile imgFile);
 
+	boolean checkIsLeader(Integer teamNum, String bo_me_id);
+
 
 
 	

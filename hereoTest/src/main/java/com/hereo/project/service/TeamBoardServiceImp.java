@@ -12,8 +12,10 @@ import com.hereo.project.pagination.Criteria;
 import com.hereo.project.utils.UploadFileUtils;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardFileVO;
+import com.hereo.project.vo.BoardReplyVO;
 import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
+import com.hereo.project.vo.BoardVoteVO;
 import com.hereo.project.vo.TeamVO;
 
 @Service
@@ -129,5 +131,95 @@ public class TeamBoardServiceImp implements TeamBoardService {
 		return teamBoardDao.selectTeamBoardFiles(boNum);
 	}
 
+	@Override
+	public int insertOrUpdateVote(BoardVoteVO vote) {
+		if(vote==null)
+			return -1;
+		BoardVoteVO prevVote = selectBoardVoteByBoNumAndMeId(vote.getBv_bo_num(), vote.getBv_me_id());
+		if(prevVote ==null) {
+			teamBoardDao.insertVote(vote);
+			return 1;
+
+		}else {
+			vote.setBv_num(prevVote.getBv_num());
+			if(vote.getBv_state()==prevVote.getBv_state()) {
+//				같은 버튼을 누른 경우
+				vote.setBv_state(0);
+				teamBoardDao.updateVote(vote);
+				return 0;
+			}else {
+//				다른 버튼을 누른 경우
+			}
+			
+			teamBoardDao.updateVote(vote);
+			return 1;
+		}
+		
+	}
+	
+	@Override
+	public BoardVoteVO selectBoardVoteByBoNumAndMeId(int bo_num, String bo_me_id) {
+		if(bo_me_id ==null) 
+			return null;
+		
+		return teamBoardDao.selectBoardVoteByBoNumAndMeId(bo_num, bo_me_id);
+	}
+
+	@Override
+	public boolean deleteTeamBoard(int bo_num, String bo_me_id) {
+		if(bo_me_id ==null)
+			return false;
+		return teamBoardDao.deleteTeamBoardByNumAndId(bo_num, bo_me_id)!=0;
+	}
+
+	@Override
+	public boolean deleteTeamBoardByAuth(int bo_num) {
+		
+		return teamBoardDao.deleteTeamBoardByAuth(bo_num)!=0;
+	}
+
+	@Override
+	public boolean insertReply(BoardReplyVO reply) {
+		if(reply==null||reply.getBr_me_id()==null||reply.getBr_me_id().trim().length()==0||
+				reply.getBr_contents()==null||reply.getBr_contents().trim().length()==0)
+			return false;
+		
+		return teamBoardDao.insertReply(reply)!=0;
+	}
+
+	@Override
+	public int countReply(int bo_num) {
+		return teamBoardDao.countReply(bo_num);
+	}
+
+	@Override
+	public ArrayList<BoardReplyVO> selectReplyByBoNumAndCri(Criteria cri, Integer bo_num) {
+		if(cri==null) {
+			cri=new Criteria();
+		}
+		if(bo_num==null||bo_num<1)
+			return null;
+		return teamBoardDao.selectReplyByBoNumAndCri(cri, bo_num);
+	}
+
+	@Override
+	public String selectMeIdByBrOriNum(Integer br_ori_num) {
+		return teamBoardDao.selectMeIdByBrOriNum(br_ori_num);
+	}
+
+	@Override
+	public boolean deleteReply(Integer br_num) {
+		if(br_num == null)
+			return false;
+		return teamBoardDao.deleteReply(br_num)!=0;
+	}
+	@Override
+	public boolean updateReply(BoardReplyVO reply) {
+		if(reply==null||reply.getBr_me_id()==null||reply.getBr_me_id().trim().length()==0||
+				reply.getBr_contents()==null||reply.getBr_contents().trim().length()==0)
+			return false;
+		
+		return teamBoardDao.updateReply(reply)!=0;
+	}
 	
 }

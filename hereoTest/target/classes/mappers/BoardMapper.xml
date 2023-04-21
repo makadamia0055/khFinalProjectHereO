@@ -22,7 +22,30 @@
 	select * from `board-category` where bc_bt_num=#{bt_num} and bc_auth_sort !="지역";
 	</select>
 	
-	<select id="selectFreeBoard" resultType="com.hereo.project.vo.BoardVO">
-	select * from `board` where bo_bt_num=#{bt_num}
+	<select id="selectBoard" resultType="com.hereo.project.vo.BoardVO">
+	select board.* ,members.me_nickname from `board` 
+		inner join members 
+		on board.bo_me_id = members.me_id
+		where bo_bt_num=#{bt_num} order by bo_num DESC;
 	</select>
+	
+	<select id="getBoardTypeBtNum" resultType="com.hereo.project.vo.BoardTypeVO">
+	select * from `board-type` where bt_num = #{bt_num}
+	</select>
+	
+	<insert id="enrollBoard">
+	insert into board(bo_title, bo_content, bo_me_id,bo_region,bo_state,bo_bt_num)
+		values(#{bo.bo_title},#{bo.bo_content},#{bo.bo_me_id},#{bo.bo_region},#{bo.bo_state},#{bo.bo_bt_num})
+	</insert>
+	
+	<select id="selectBoardDetail" resultType="com.hereo.project.vo.BoardVO">
+	select board.*, members.me_nickname from `board` inner join members
+	on board.bo_me_id = members.me_id
+	 where bo_num=#{bo_num}
+	</select>
+
+	<update id="updateBoardViews">
+		update `board` set bo_view = bo_view+1
+		where bo_num=#{bo_num}
+	</update>
 </mapper>
