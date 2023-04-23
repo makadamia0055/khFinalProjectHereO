@@ -14,4 +14,8 @@ public interface MembersDAO {
 
 	MembersVO selectUserId(String me_id);
 
+	void updateSession(@Param("user") MembersVO loginUser);
+
+	MembersVO selectLoginSession(@Param("me_session_id") String me_session_id);
+
 }

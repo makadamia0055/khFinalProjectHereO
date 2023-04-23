@@ -22,6 +22,14 @@
 		select * from members
 			where me_id like #{me_id}
 	</select>
-
-
+	<update id="updateSession">
+		update members set 
+			me_session_id=#{user.me_session_id},
+			me_session_limit=#{user.me_session_limit}
+		where me_id = #{user.me_id}
+	</update>
+	<select id="selectLoginSession" resultType="com.hereo.project.vo.MembersVO">
+		select * from members
+			where me_session_id = #{me_session_id} and me_session_limit > now()
+	</select>
 </mapper>

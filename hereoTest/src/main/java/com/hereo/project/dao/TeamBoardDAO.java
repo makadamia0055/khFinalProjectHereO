@@ -59,6 +59,14 @@ public interface TeamBoardDAO {
 
 	int updateReply(@Param("br")BoardReplyVO reply);
 
+	void insertBoardFileSummerNote(@Param("bf")BoardFileVO tmpBoardFile);
+
+	void updateSummerNoteImg(@Param("bo_num")int bo_num, @Param("bf_num")Integer resList);
+
+	void deleteSummerNoteImg(@Param("bo_num")int bo_num, @Param("bf_num")Integer tmpList);
+
+	BoardFileVO selectTeamBoardFilesByBfNum(Integer bf_num);
+
 	
 
 }
