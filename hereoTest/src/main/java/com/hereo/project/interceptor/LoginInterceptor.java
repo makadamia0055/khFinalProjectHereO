@@ -1,5 +1,8 @@
 package com.hereo.project.interceptor;
 
+import java.util.Date;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,6 +29,21 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if(loginUser != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
+			
+			if(loginUser.isAutoLogin()) {
+				Cookie cookie = new Cookie("loginCookie", session.getId());
+				
+				int time = 60*60*24*7;
+				cookie.setPath("/");
+				cookie.setMaxAge(time);
+				response.addCookie(cookie);
+				
+				loginUser.setMe_session_id(session.getId());
+				
+				Date date = new Date(System.currentTimeMillis() + time*1000);
+				loginUser.setMe_session_limit(date);
+				membersService.updateAutoLoginSession(loginUser);
+			}
 		}
 		
 	}

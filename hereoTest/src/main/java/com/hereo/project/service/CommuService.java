@@ -25,5 +25,9 @@ public interface CommuService {
 
 	BoardVO getBoardDetail(int bo_num);
 
+	boolean updateBoard(BoardVO board);
+
+	boolean deleteBoard(BoardVO board, MembersVO user);
+
 
 }
