@@ -12,6 +12,10 @@ public interface MembersService {
 
 	MembersVO selectMembersByMeId(String pl_me_id);
 
+	void updateAutoLoginSession(MembersVO loginUser);
+
+	MembersVO getLoginSession(String me_session_id);
+
 
 
 

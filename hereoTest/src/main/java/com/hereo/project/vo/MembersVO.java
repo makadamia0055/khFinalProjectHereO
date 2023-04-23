@@ -1,5 +1,7 @@
 package com.hereo.project.vo;
 
+import java.util.Date;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,5 +17,7 @@ public class MembersVO {
 	private String me_mail;
 	private int me_siteauth;
 	private int me_ma_num;
-
+	private String me_session_id;
+	private Date me_session_limit;
+	boolean autoLogin;
 }

@@ -1,6 +1,7 @@
 package com.hereo.project.service;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -169,7 +170,16 @@ public class TeamBoardServiceImp implements TeamBoardService {
 	public boolean deleteTeamBoard(int bo_num, String bo_me_id) {
 		if(bo_me_id ==null)
 			return false;
-		return teamBoardDao.deleteTeamBoardByNumAndId(bo_num, bo_me_id)!=0;
+		ArrayList<BoardFileVO> files = selectTeamBoardFiles(bo_num);
+		if(teamBoardDao.deleteTeamBoardByNumAndId(bo_num, bo_me_id)==0)
+			return false;
+		for(BoardFileVO file : files) {
+			UploadFileUtils.removeFile(uploadPath, file.getBf_filename());
+			
+		}
+		
+		
+		return true;
 	}
 
 	@Override
@@ -221,5 +231,60 @@ public class TeamBoardServiceImp implements TeamBoardService {
 		
 		return teamBoardDao.updateReply(reply)!=0;
 	}
+
+	@Override
+	public BoardFileVO uploadSummerNoteImg(MultipartFile file) {
+		if(file==null||file.getOriginalFilename().length()==0)
+			return null;
+		
+		BoardFileVO tmpBoardFile = new BoardFileVO();
+		try {
+			String uploadedFileName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
+			tmpBoardFile.setBf_ori_filename(file.getOriginalFilename());
+			tmpBoardFile.setBf_filename(uploadedFileName);
+			tmpBoardFile.setBf_issummernote(true);
+			
+			teamBoardDao.insertBoardFileSummerNote(tmpBoardFile);
+			} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return tmpBoardFile;
+	}
+
+	@Override
+	public void updateSummerNoteImg(int bo_num, String resArr, String tmpArr) {
+		ArrayList<Integer> resList = strToList(resArr);
+		ArrayList<Integer> tmpList = strToList(tmpArr);
+		
+		for(int i = 0; i<tmpList.size();i++) {
+			if(!resList.contains(tmpList.get(i)))
+				continue;
+			tmpList.remove(i);
+		}
+		for(Integer res : resList) {
+			teamBoardDao.updateSummerNoteImg(bo_num, res);
+		}
+		for(int i = 0 ; i<tmpList.size(); i++) {
+			BoardFileVO bf = teamBoardDao.selectTeamBoardFilesByBfNum(tmpList.get(i));
+			UploadFileUtils.removeFile(uploadPath, bf.getBf_filename());
+		
+		}
+		if(tmpList.size()!=0)
+			return;
+		for(Integer tmp : tmpList) {
+				teamBoardDao.deleteSummerNoteImg(bo_num, tmp);
+		}
+		
+				
+	}
 	
+	private ArrayList<Integer> strToList(String str){
+		StringTokenizer st = new StringTokenizer(str, ",");
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		while(st.hasMoreTokens()) {
+			list.add(Integer.parseInt(st.nextToken()));
+		}
+		return list;
+	}
 }

@@ -40,6 +40,21 @@ public class MembersServiceImp implements MembersService{
 		return membersDao.selectMembersByMeId(pl_me_id);
 	}
 
+	@Override
+	public void updateAutoLoginSession(MembersVO loginUser) {
+		if(loginUser==null)
+			return;
+		membersDao.updateSession(loginUser);
+		
+	}
+
+	@Override
+	public MembersVO getLoginSession(String me_session_id) {
+		
+		return membersDao.selectLoginSession(me_session_id);
+		
+	}
+
 
 	
 

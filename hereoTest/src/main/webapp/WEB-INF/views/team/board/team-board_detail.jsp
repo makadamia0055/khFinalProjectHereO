@@ -86,7 +86,7 @@
 					<div class="btnBox-board">
 						<a href="<c:url value='/team/board_list?teamNum=${team.tm_num }'></c:url>" class="btn-submit btn-on">목록</a>
 						<c:if test="${board.bo_me_id == loginUser.me_id||team.tm_me_id==loginUser.me_id }">
-							<a href="./team-sep-board_main.html" class="btn-edit">수정</a>
+							<a href="<c:url value='/team/board_update?teamNum=${team.tm_num }&boNum=${board.bo_num }'></c:url>" class="btn-edit">수정</a>
 							<form id="deleteForm" action="<c:url value='/team/board_delete'></c:url>" method="POST">
 								<input type="text" name="teamNum" value="${team.tm_num }" hidden readonly>
 								<input type="text" name="bo_num" value="${board.bo_num }" hidden readonly>
@@ -108,7 +108,7 @@
 					<form name="rereplyForm" style="display:none;" class="ml-3 replyForm" action="<c:url value='/team/board_reply_insert'></c:url>" method="post">
 						<div class="input-group mt-3">
 							<input type="text" name="br_me_id" hidden readonly value="${loginUser.me_id}">
-							<input type="text" name="br_bo_num" hidden readonly value="${board.bo_num }">
+							<input type="text" name="br_bo_num" hidden readonly value="${board.bo_num}">
 							<input type="text" name="br_ori_num" hidden readonly value="0"> 
 							<textarea name="br_contents" class="form-control" maxlength="300" placeholder="댓글을 입력해주세요."></textarea>
 							<div class="input-group-append">

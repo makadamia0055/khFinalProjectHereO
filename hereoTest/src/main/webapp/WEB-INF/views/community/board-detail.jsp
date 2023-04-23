@@ -24,11 +24,26 @@
 	${detail.bo_content}
 	</div>
 	<div class="btn-container">
-		<button class="pre-list_btn commu-btn"><a href="<c:url value='/community/${bt.bt_namebyEnglish}'></c:url>">목록 <i class="fa-solid fa-bars"></i></a></button>
+		<a href="<c:url value='/community/${bt.bt_namebyEnglish}'></c:url>">
+			<button class="pre-list_btn commu-btn">목록 <i class="fa-solid fa-bars"></i>
+			</button>
+		</a>	
 		<button class="like_btn commu-btn">추천 <i class="fa-regular fa-thumbs-up"></i></button>
 		<button class="dislike_btn commu-btn">비추천 <i class="fa-regular fa-thumbs-down"></i></button>
 	</div>
-
+	<div class="btn-container02">
+		<c:if test="${user.me_id == detail.bo_me_id}">
+			<a href="<c:url value='/community/correct/${detail.bo_num}'></c:url>">
+				<button class="correct_btn">글 수정</button>
+			</a>	
+			<div class="section">|</div>
+		</c:if>
+		<c:if test="${user.me_id == detail.bo_me_id || user.me_siteauth>=9 }">		
+			<a href="<c:url value='/community/delete/${detail.bo_num}'></c:url>">
+				<button class="delete-btn">글 삭제</button>
+			</a>
+		</c:if>
+	</div>	
 </div>
 <div>댓글</div>
 </main>

@@ -16,6 +16,7 @@ public class BoardFileVO {
 	private String bf_ori_filename;
 	private int bf_bo_num;
 	private String fileType;
+	private boolean bf_issummernote;
 	
 	public void setBf_filename(String bf_filename) {
 		this.bf_filename = bf_filename;
