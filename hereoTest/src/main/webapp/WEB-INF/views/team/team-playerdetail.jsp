@@ -17,26 +17,26 @@
             
           </div>
           <div class="rightbox-profile">
-            <div class="player-profile1">
-              <h3 class="player-name">${Player.me_nickname }</h3>
-              <span>소속팀 : </span><span class="player-team"></span><br>
-              <br>통산 출장 경기 : <span class="all_join_match">29</span>경기<br> 
-
-            </div>
-            <div class="player-profile2">
-              <div class="item-weight">
-                <span>몸무게 : </span><span class="player-weight">89</span><span>kg</span>
-              </div>
-              <div class="item-height">
-                <span>신장 : </span><span class="player-height">175</span><span>cm</span>
-              </div>
-              <div class="item-throwhitarm">
-                투타 : <span class="player-throwarm">${Player.pl_pitching_hand }</span><span class="player-hitarm">${Player.pl_hitting_hand }</span>
-              </div>
-              <div class="item-isdual">
-                <span>선출 여부 : </span><span class="player-ispro">${Player.pl_ispro }</span>
-              </div>
-            </div>
+            <ul class="list-group player-profile1">
+              <h3 class="player-name">${player.me_nickname }</h3>
+              <li class="list-group-item list-group-item-action">소속팀 : 
+              	<c:choose>
+              		<c:when test="${not empty team}">${team.tm_name}</c:when>
+              		<c:otherwise>소속팀 없음</c:otherwise>
+              	</c:choose>
+              </span><span class="player-team"></li>
+              <li class="list-group-item list-group-item-action">통산 출장 경기 : <span class="all_join_match">29</span>경기</li> 
+              <li class="list-group-item list-group-item-action item-throwhitarm">
+                투타 : <span class="player-throwarm">${player.pl_pitching_hand }</span><span class="player-hitarm">${player.pl_hitting_hand }</span>
+              </li>
+              <li class="list-group-item list-group-item-action">
+               주요 포지션:<c:forEach items="${player.positionList }" var="pl"><span class="team_position badge badge-pill badge-success">${pl.ph_po_ko_name }</span>
+								</c:forEach>
+              </li>
+              <li class="list-group-item list-group-item-action">선출 여부 : </span><span class="player-ispro">${player.pl_ispro }</li>
+              
+              </ul>
+            
           </div>
           
           <div class="box-player_graph">

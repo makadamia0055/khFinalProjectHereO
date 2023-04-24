@@ -156,4 +156,9 @@
 			where bo_num = #{bo.bo_num}
 	
 	</update>
+	<delete id="deleteBoardFilesByBfNum">
+		delete from `board-file`
+			where bf_num = #{bf_num}
+			
+	</delete>
 </mapper>

@@ -193,9 +193,13 @@
 		type: 0,
 		strType:''
 	}
-
+	let teamName='';
 	$('.show-schedule').click(function(){
-		let teamName = $(this).parents('.item-teambox').find('.team-name').text();
+		if(teamName == $(this).parents('.item-teambox').find('.team-name').text()){
+			$('.teammain-rightbox').toggle();
+			return;
+		};
+		teamName = $(this).parents('.item-teambox').find('.team-name').text()
 		$('.teammain-rightbox').find('.team-name').text(teamName);
 		$('.teammain-rightbox').find('.home_team').text(teamName);
 		let tm_num = $(this).siblings('.tmnum').text();

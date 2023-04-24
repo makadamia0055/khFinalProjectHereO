@@ -209,7 +209,13 @@ public class TeamController {
 	@RequestMapping(value = "/team/pdetail", method = RequestMethod.GET)
 	public ModelAndView teamPlayerDetail(ModelAndView mv, Integer player) {
 		PlayerVO tmpPlayer = playerService.selectPlayerByPl_Num(player);
-		mv.addObject("Player", tmpPlayer);
+//		소속 팀 찾기
+		ArrayList<TeamVO> teamList= teamService.selectTeamByPlNumAndAuth(tmpPlayer.getPl_num(), 3);
+		if(teamList!=null && teamList.size()!=0) {
+			TeamVO team = teamList.get(0);
+			mv.addObject("team", team);
+		}
+		mv.addObject("player", tmpPlayer);
 		mv.setViewName("/team/team-playerdetail");
 		return mv;
 	}
@@ -536,7 +542,7 @@ public class TeamController {
 	
 	@RequestMapping(value="/team/board_update", method = RequestMethod.POST)
 	public ModelAndView TeamBoardUpdatePOST(ModelAndView mv, Integer teamNum, BoardVO board,
-			MultipartFile[] files, String resArr, String tmpArr, HttpServletRequest req, ArrayList<Integer> removeFileNums) {
+			MultipartFile[] files, String resArr, String tmpArr, HttpServletRequest req, Integer[] removeFileNums) {
 		MembersVO user = (MembersVO)req.getSession().getAttribute("loginUser");
 		String url = req.getHeader("referer");
 
@@ -549,7 +555,7 @@ public class TeamController {
 		teamBoardService.updateSummerNoteImg(board.getBo_num(), resArr, tmpArr);
 		if(removeFileNums!=null) {
 			for(Integer reFile : removeFileNums) {
-				deleteBoardFilesByBFNum(reFile);
+				teamBoardService.deleteBoardFilesByBFNum(reFile);
 			}
 		}
 		
@@ -563,10 +569,7 @@ public class TeamController {
 		return mv;
 	}
 	
-	private void deleteBoardFilesByBFNum(Integer reFile) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	@RequestMapping(value="/team/board_detail", method = RequestMethod.GET)
 	public ModelAndView TeamBoardDetail(ModelAndView mv, Integer teamNum, Integer boNum, HttpSession session) {
 	 
