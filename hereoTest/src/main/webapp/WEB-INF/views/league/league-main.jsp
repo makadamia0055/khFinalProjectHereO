@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <link href="<c:url value='/resources/css/common/bootstrap.min.css'></c:url>" rel="stylesheet">
 <link href="<c:url value='/resources/css/common/style.css'></c:url>" rel="stylesheet">
 <link href="<c:url value='/resources/css/league/league-main.css'></c:url>" rel="stylesheet">
-<link href="<c:url value='/resources/js/common/click_menu.js'></c:url>" rel="stylesheet">
+<script  type="text/javascript" src="<c:url value='/resources/js/common/bootstrap.bundle.min.js'></c:url>"></script>
+<script  type="text/javascript" src="<c:url value='/resources/js/common/jquery.js'></c:url>"></script>
+<script  type="text/javascript" src="<c:url value='/resources/js/common/popper.min.js'></c:url>"></script>
+<script type="text/javascript" src="<c:url value='/resources/js/league/league-main.js'></c:url>"></script>
 
 <div class="container-main">
 		<div class="box-main-top">
@@ -25,7 +29,7 @@
 						<ul>
 							<li>
 								<a href="">
-									<span><img src="<c:url value='/resources/css/common/images/kt로고.jpg'></c:url>"></span>
+									<span><img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>"></span>
 								</a>
 							</li>
 						</ul>
@@ -41,7 +45,7 @@
 							<span>경기결과</span>
 						</div>
 					</div>
-					<div class="article schedule" hidden>
+					<div class="article schedule" >
 						<div class="list-scroll">
 							<ul class="list-game">
 								<li>
@@ -50,7 +54,7 @@
 										<dd>
 											<a href="">
 												<span class="emblem">
-													<img src="<c:url value='/resources/css/common/images/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
 												</span>
 												<span class="team">KT 위즈</span>
 											</a>
@@ -59,9 +63,177 @@
 										<dd>
 											<a href="">
 												<span class="emblem">
-													<img src="<c:url value='/resources/css/common/images/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
 												</span>
-												<span class="team">kia</span>
+												<span class="team">kia 타이거즈</span>
+											</a>
+										</dd>
+									</dl>
+								</li>
+							</ul>
+							<ul class="list-game">
+								<li>
+									<dl>
+										<dt>04월02일 (일) 09:00</dt>
+										<dd>
+											<a href="">
+												<span class="emblem">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
+												</span>
+												<span class="team">KT 위즈</span>
+											</a>
+										</dd>
+										<dd class="versus">vs</dd>
+										<dd>
+											<a href="">
+												<span class="emblem">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
+												</span>
+												<span class="team">kia 타이거즈</span>
+											</a>
+										</dd>
+									</dl>
+								</li>
+							</ul>
+							<ul class="list-game">
+								<li>
+									<dl>
+										<dt>04월02일 (일) 09:00</dt>
+										<dd>
+											<a href="">
+												<span class="emblem">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
+												</span>
+												<span class="team">KT 위즈</span>
+											</a>
+										</dd>
+										<dd class="versus">vs</dd>
+										<dd>
+											<a href="">
+												<span class="emblem">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
+												</span>
+												<span class="team">kia 타이거즈</span>
+											</a>
+										</dd>
+									</dl>
+								</li>
+							</ul>
+							<ul class="list-game">
+								<li>
+									<dl>
+										<dt>04월02일 (일) 09:00</dt>
+										<dd>
+											<a href="">
+												<span class="emblem">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
+												</span>
+												<span class="team">KT 위즈</span>
+											</a>
+										</dd>
+										<dd class="versus">vs</dd>
+										<dd>
+											<a href="">
+												<span class="emblem">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
+												</span>
+												<span class="team">kia 타이거즈</span>
+											</a>
+										</dd>
+									</dl>
+								</li>
+							</ul>
+							<ul class="list-game">
+								<li>
+									<dl>
+										<dt>04월02일 (일) 09:00</dt>
+										<dd>
+											<a href="">
+												<span class="emblem">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
+												</span>
+												<span class="team">KT 위즈</span>
+											</a>
+										</dd>
+										<dd class="versus">vs</dd>
+										<dd>
+											<a href="">
+												<span class="emblem">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
+												</span>
+												<span class="team">kia 타이거즈</span>
+											</a>
+										</dd>
+									</dl>
+								</li>
+							</ul>
+							<ul class="list-game">
+								<li>
+									<dl>
+										<dt>04월02일 (일) 09:00</dt>
+										<dd>
+											<a href="">
+												<span class="emblem">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
+												</span>
+												<span class="team">KT 위즈</span>
+											</a>
+										</dd>
+										<dd class="versus">vs</dd>
+										<dd>
+											<a href="">
+												<span class="emblem">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
+												</span>
+												<span class="team">kia 타이거즈</span>
+											</a>
+										</dd>
+									</dl>
+								</li>
+							</ul>
+							<ul class="list-game">
+								<li>
+									<dl>
+										<dt>04월02일 (일) 09:00</dt>
+										<dd>
+											<a href="">
+												<span class="emblem">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
+												</span>
+												<span class="team">KT 위즈</span>
+											</a>
+										</dd>
+										<dd class="versus">vs</dd>
+										<dd>
+											<a href="">
+												<span class="emblem">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
+												</span>
+												<span class="team">kia 타이거즈</span>
+											</a>
+										</dd>
+									</dl>
+								</li>
+							</ul>
+							<ul class="list-game">
+								<li>
+									<dl>
+										<dt>04월02일 (일) 09:00</dt>
+										<dd>
+											<a href="">
+												<span class="emblem">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
+												</span>
+												<span class="team">KT 위즈</span>
+											</a>
+										</dd>
+										<dd class="versus">vs</dd>
+										<dd>
+											<a href="">
+												<span class="emblem">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
+												</span>
+												<span class="team">kia 타이거즈</span>
 											</a>
 										</dd>
 									</dl>
@@ -78,7 +250,7 @@
 										<dd>
 											<a href="">
 												<span class="emblem">
-													<img src="<c:url value='/resources/css/common/images/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
 												</span>
 												<span class="team">KT 위즈</span>
 												<span class="score">2</span>
@@ -88,7 +260,7 @@
 										<dd>
 											<a href="">
 												<span class="emblem">
-													<img src="<c:url value='/resources/css/common/images/kia.svg'></c:url>" style="width: 30px;height: 30px;">
+													<img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>" style="width: 30px;height: 30px;">
 												</span>
 												<span class="team">kia 타이거즈</span>
 												<span class="score">2</span>
@@ -147,3 +319,18 @@
 			
 		</div>
 	</div>
+	
+<script>
+$('.tab-left').click(function(){
+	$('.tab-right').removeClass('selected');
+	$('.tab-left').addClass('selected');
+	$('.article.result').hide();
+	$('.article.schedule').show();
+});
+$('.tab-right').click(function(){
+	$('.tab-left').removeClass('selected');
+	$('.tab-right').addClass('selected');
+	$('.article.schedule').hide();
+	$('.article.result').show();
+});
+</script>
