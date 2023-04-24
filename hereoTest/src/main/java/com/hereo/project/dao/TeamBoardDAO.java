@@ -67,6 +67,10 @@ public interface TeamBoardDAO {
 
 	BoardFileVO selectTeamBoardFilesByBfNum(Integer bf_num);
 
+	int updateBoardFromTeamBoard(@Param("bo")BoardVO board);
+
+	void deleteBoardFilesByBfNum(Integer bf_num);
+
 	
 
 }

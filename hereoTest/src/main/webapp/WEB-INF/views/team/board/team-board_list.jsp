@@ -45,7 +45,7 @@
 									[${bo.bo_reply_count}]
 								</c:if>
 									</a></div>
-								<div class="writer">${bo.bo_me_id }</div>
+								<div class="writer"><span class="bo_me_id" data-num="${bo.bo_num}" hidden>${bo.bo_me_id }</span><span name="me_nickname" data-num="${bo.bo_num}"></span></div>
 								<fmt:parseDate value = "${bo.bo_register_date_str}" pattern = "yyyy-MM-dd" var = "boDate"/>
 								<fmt:formatDate value="${boDate}" pattern = "yyyy-MM-dd" var="boDateStr"/>
 								
@@ -100,6 +100,10 @@
       
     ></script>
     <script>
+    let wObj = {
+    		me_id: '',
+    		teamNum: '${team.tm_num}'
+    };
     $('.btn-write').click(function(e){
     	<c:if test="${empty loginUser}">
     	alert("로그인 된 유저만 글을 작성할 수 있습니다.");
@@ -107,5 +111,54 @@
     	</c:if>
     })
     
+    
+    function convertUserIdToNickname(){
+    	let idObj =  $('.bo_me_id');
+    	for(let tmp of idObj){
+    		wObj.me_id = $(tmp).text();
+    		let num = $(tmp).data('num');
+    		setBoardNickAndRank(getPlayerNameAndRank(wObj),num);
+    	}
+    }
+    
+    convertUserIdToNickname();
+    /* 글 쓴 유저의 랭크와 닉네임을 받아오는 함수*/
+    function getPlayerNameAndRank(obj){
+    	let res;
+    	ajaxParam("post", obj, "<c:url value='/team/ajax/playerNameAndRank'></c:url>", function(data){
+    		res= data;
+    	})
+    	return res;
+    }
+    
+    /* 글을 쓴 유저의 랭크와 닉네임을 넣어주는 함수 */
+   function setBoardNickAndRank(data, num){
+	   if(data.userTP==null){
+		   $('[name=me_nickname]').filter(function(){
+			   if($(this).data('num')==num)
+			   	return this;   
+		   }).html('<span class="badge badge-pill badge-secondary">'+'손님'+'</span>'+ data.userMember.me_nickname);
+		   return;
+	   }
+	   
+	   $('[name=me_nickname]').filter(function(){
+			   if($(this).data('num')==num){
+				   return this;   
+			   }
+		   }).html('<span class="badge badge-pill badge-danger">'+data.userTP.tp_auth+'</span>'+ data.userMember.me_nickname);
+   }
+   function ajaxParam(method, obj, url, successFunc, errorFunc){
+   	$.ajax({
+   		async:false,
+   		type: method,
+   		data: obj,
+   		url: url, 
+   		dataType: "json",
+   		
+   		success: successFunc,
+   		error: errorFunc
+   		
+   	});
+   }
     </script>
 		

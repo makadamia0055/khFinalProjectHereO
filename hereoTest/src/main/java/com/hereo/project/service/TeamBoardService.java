@@ -55,4 +55,8 @@ public interface TeamBoardService {
 
 	void updateSummerNoteImg(int bo_num, String resArr, String tmpArr);
 
+	boolean UpdateBoardFromTeamBoard(BoardVO board, Integer teamNum, MultipartFile[] files);
+
+	void deleteBoardFilesByBFNum(Integer s);
+
 }

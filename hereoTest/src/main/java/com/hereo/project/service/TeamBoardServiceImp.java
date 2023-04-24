@@ -74,6 +74,12 @@ public class TeamBoardServiceImp implements TeamBoardService {
 		boolean res = teamBoardDao.insertBoardFromTeamBoard(board) !=0;
 		
 //		게시글 파일 넣기 
+		insertBoardFile(board.getBo_num(), files);
+		
+		return res;
+		
+	}
+	private void insertBoardFile(int bonum, MultipartFile[] files) {
 		if(files!=null&&files.length!=0) {
 			for(MultipartFile file : files) {
 				if(file==null||file.getOriginalFilename().length()==0)
@@ -83,7 +89,7 @@ public class TeamBoardServiceImp implements TeamBoardService {
 					BoardFileVO tmpBoardFile = new BoardFileVO();
 					tmpBoardFile.setBf_ori_filename(file.getOriginalFilename());
 					tmpBoardFile.setBf_filename(uploadedFileName);
-					tmpBoardFile.setBf_bo_num(board.getBo_num());
+					tmpBoardFile.setBf_bo_num(bonum);
 					
 					teamBoardDao.insertBoardFile(tmpBoardFile);
 					} catch (Exception e) {
@@ -91,9 +97,9 @@ public class TeamBoardServiceImp implements TeamBoardService {
 				}
 			}
 		}
-		return res;
 		
 	}
+
 	@Override
 	public BoardTypeVO selectTeamBoardType(Integer teamNum) {
 		BoardTypeVO bt = teamBoardDao.selectTeamBoardType(teamNum);
@@ -270,7 +276,7 @@ public class TeamBoardServiceImp implements TeamBoardService {
 			UploadFileUtils.removeFile(uploadPath, bf.getBf_filename());
 		
 		}
-		if(tmpList.size()!=0)
+		if(tmpList.size()==0)
 			return;
 		for(Integer tmp : tmpList) {
 				teamBoardDao.deleteSummerNoteImg(bo_num, tmp);
@@ -286,5 +292,30 @@ public class TeamBoardServiceImp implements TeamBoardService {
 			list.add(Integer.parseInt(st.nextToken()));
 		}
 		return list;
+	}
+
+	@Override
+	public boolean UpdateBoardFromTeamBoard(BoardVO board, Integer teamNum, MultipartFile[] files) {
+		if(board==null||board.getBo_title()==null||board.getBo_content()==null||board.getBo_me_id()==null)
+			return false;
+		if(teamDao.selectTeamByTm_num(teamNum)==null)
+			return false;
+		
+		BoardTypeVO bt = selectTeamBoardType(teamNum);
+		board.setBo_bt_num(bt.getBt_num());
+		
+		boolean res = teamBoardDao.updateBoardFromTeamBoard(board) !=0;
+		
+//		게시글 파일 넣기 
+		insertBoardFile(board.getBo_num(), files);
+		return res;
+	}
+
+	@Override
+	public void deleteBoardFilesByBFNum(Integer s) {
+		BoardFileVO file = teamBoardDao.selectTeamBoardFilesByBfNum(s);
+		UploadFileUtils.removeFile(uploadPath, file.getBf_filename());
+
+		teamBoardDao.deleteBoardFilesByBfNum(s);
 	}
 }
