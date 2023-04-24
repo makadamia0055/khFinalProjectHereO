@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import com.hereo.project.service.LeagueService;
+import com.hereo.project.service.MembersService;
 import com.hereo.project.service.RecordService;
 import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerrecordHitterVO;
@@ -26,6 +27,8 @@ public class LeagueController {
 	LeagueService leagueService;
 	@Autowired
 	RecordService recordService;
+	@Autowired
+	MembersService memberService;
 	
 	@RequestMapping(value = "/league/leagueSearch", method = RequestMethod.GET)
 	public ModelAndView leagueSearch(ModelAndView mv) {
@@ -35,12 +38,14 @@ public class LeagueController {
 	
 	@RequestMapping(value = "/league/main", method = RequestMethod.GET)
 	public ModelAndView leagueMain(ModelAndView mv) {
+		
 		mv.setViewName("/league/league-main");
 		return mv;
 	}
 	@RequestMapping(value = "/league/recordHit", method = RequestMethod.GET)
 	public ModelAndView leagueRecordHit(ModelAndView mv) {
 		ArrayList<PlayerrecordHitterVO> hList = recordService.getSelectAllHitRecord();
+
 		mv.addObject("hList", hList);
 		mv.setViewName("/league/league-record-hit");
 		return mv;
@@ -57,6 +62,7 @@ public class LeagueController {
 	}
 	@RequestMapping(value = "/league/schedule", method = RequestMethod.GET)
 	public ModelAndView leagueSchedule(ModelAndView mv) {
+		
 		mv.setViewName("/league/league-schedule");
 		return mv;
 	}
