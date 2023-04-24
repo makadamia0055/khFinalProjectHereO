@@ -10,7 +10,7 @@ public class PlayerrecordHitterVO {
 	private int ph_tp_num;
 	private int ph_mr_num;
 	private int ph_single_hits;
-	private int ph_towbase_hits;
+	private int ph_twobase_hits;
 	private int ph_threebase_hits;
 	private int ph_homeruns;
 	private int ph_errors;

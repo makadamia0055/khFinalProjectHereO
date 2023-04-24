@@ -9,10 +9,10 @@
 				<div class="top-box">
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
-					<a class="nav-link" href="<c:url value='/league/recodeHit'></c:url>">타자</a>
+					<a class="nav-link" href="<c:url value='/league/recordHit'></c:url>">타자</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" href="<c:url value='/league/recodePit'></c:url>">투수</a>
+					<a class="nav-link active" href="<c:url value='/league/recordPit'></c:url>">투수</a>
 				</li>
 
 			</ul>
