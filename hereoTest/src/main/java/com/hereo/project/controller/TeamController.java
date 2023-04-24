@@ -504,19 +504,68 @@ public class TeamController {
 		return mv;
 	}
 	@RequestMapping(value="/team/board_update", method = RequestMethod.GET)
-	public ModelAndView TeamBoardUpdate(ModelAndView mv, Integer boNum, Integer teamNum) {
+	public ModelAndView TeamBoardUpdate(ModelAndView mv, Integer boNum, Integer teamNum, HttpServletRequest req) {
+//		일단 여기서 자격 검증 1회
+		MembersVO user = (MembersVO)req.getSession().getAttribute("loginUser");
+		BoardVO tmpBoard = teamBoardService.selectTeamBoardByBoNum(boNum);
+		String url = req.getHeader("referer");
+
+		if(!user.getMe_id().equals(tmpBoard.getBo_me_id())) {
+			mv.addObject("msg", "잘못된 접근입니다.(사유: 자격 없는 수정)");
+			mv.addObject("url", url);
+			mv.setViewName("/common/message");
+		}
+		
 		
 //		팀 가져오기
 		TeamVO team = teamService.selectTeamByTm_Num(teamNum);
 //		카테고리 가져오기
 		ArrayList<BoardCategoryVO> categoryList = teamBoardService.selectTeamBoardCategory(team.getTm_num());
 //		보드 가져오기
-		BoardVO tmpBoard = teamBoardService.selectTeamBoardByBoNum(boNum);
+		
+		ArrayList<BoardFileVO> fileList = teamBoardService.selectTeamBoardFiles(boNum);
+
+		
 		mv.addObject("board", tmpBoard);
 		mv.addObject("team", team);
 		mv.addObject("categoryList", categoryList);
+		mv.addObject("fileList", fileList);
 		mv.setViewName("/team/board/team-board_update");
 		return mv;
+	}
+	
+	@RequestMapping(value="/team/board_update", method = RequestMethod.POST)
+	public ModelAndView TeamBoardUpdatePOST(ModelAndView mv, Integer teamNum, BoardVO board,
+			MultipartFile[] files, String resArr, String tmpArr, HttpServletRequest req, ArrayList<Integer> removeFileNums) {
+		MembersVO user = (MembersVO)req.getSession().getAttribute("loginUser");
+		String url = req.getHeader("referer");
+
+		if(!user.getMe_id().equals(board.getBo_me_id())) {
+			mv.addObject("msg", "잘못된 접근입니다.(사유: 자격 없는 수정)");
+			mv.addObject("url", url);
+			mv.setViewName("/common/message");
+		}
+		boolean res = teamBoardService.UpdateBoardFromTeamBoard(board, teamNum, files);
+		teamBoardService.updateSummerNoteImg(board.getBo_num(), resArr, tmpArr);
+		if(removeFileNums!=null) {
+			for(Integer reFile : removeFileNums) {
+				deleteBoardFilesByBFNum(reFile);
+			}
+		}
+		
+		if(res) {
+			mv.addObject("msg", "게시글이 수정되었습니다.");
+		}else {
+			mv.addObject("msg", "게시글 수정에 실패하였습니다.");
+		}
+		mv.addObject("url", "/team/board_list?teamNum="+teamNum);
+		mv.setViewName("/common/message");
+		return mv;
+	}
+	
+	private void deleteBoardFilesByBFNum(Integer reFile) {
+		// TODO Auto-generated method stub
+		
 	}
 	@RequestMapping(value="/team/board_detail", method = RequestMethod.GET)
 	public ModelAndView TeamBoardDetail(ModelAndView mv, Integer teamNum, Integer boNum, HttpSession session) {

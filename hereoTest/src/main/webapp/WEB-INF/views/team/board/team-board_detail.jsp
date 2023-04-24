@@ -67,10 +67,14 @@
 						<li class="img-box">
 							<c:forEach items="${fileList}" var="file">
 								<c:choose>
-									<c:when test="${file.fileType== 'image' }">
+									<c:when test="${file.fileType== 'image'&& file.bf_issummernote == false}">
 										<div>
 											<img alt="${file.bf_ori_filename }" src="<c:url value='/files${file.bf_filename }'></c:url>"><br>
 											<a href="<c:url value='/files${file.bf_filename }'></c:url>" download="${file.bf_ori_filename }">${file.bf_ori_filename } 다운로드</a>
+										</div>
+									</c:when>
+									<c:when test="${file.fileType== 'image' && file.bf_issummernote == true}">
+										<div>
 										</div>
 									</c:when>
 									<c:otherwise>
@@ -176,6 +180,7 @@
     	return res;
     }
     
+    /* 글을 쓴 유저의 랭크와 닉네임을 넣어주는 함수 */
    function setBoardNickAndRank(data){
 	   if(data.userTP==null){
 		   $('[name=me_nickname]').html('<span class="badge badge-pill badge-secondary">'+'손님'+'</span>'+ data.userMember.me_nickname);
@@ -224,6 +229,7 @@
 		   appendReply(replyStr);
 	   })
    }
+   /* 리플 문자열을 만드는 메소드 */
    function createReply(data){
 	   if(data.replyList == null)
 		   return;
@@ -280,6 +286,7 @@
 	   createAndAppendPagination(data);
 	   return replyStr;
    }
+   /* 댓글 페이지네이션 넣어주는 메소드 */
    function createAndAppendPagination(data){
 	   let pmStr = "";
 	   		if(data.pm.prev)
@@ -302,6 +309,7 @@
 			$('.container-pagination .pagination').append(pmStr);
 			
    }
+   /* 생성된 댓글 문자열을 넣어주는 함수 */
    function appendReply(str){
 	   $('.box-reply').text("");
 	   $('.box-reply').append(str);
@@ -319,9 +327,9 @@
 	   }
    })
    /* 리플 내용 없을때 보내지 않기 */
-   $('.replyForm').submit(function(){
-	   let text = $(this).find('[name=br_contents]').text();
-	   if(text.trim().length==0){
+   $('.replyForm').submit(function(el){
+	   let textStr = $(el.currentTarget).find('[name=br_contents]').val();
+	   if(textStr.trim().length==0){
 		  alert('댓글 내용을 입력해주세요.');
 		  $(this).find('[name=br_contents]').focus();
 		  return false;

@@ -20,12 +20,13 @@
 				<p>${team.tm_name } 팀 게시판입니다.</p>
 			</div>
 			<div class="box-board_write">
-				<form id="boardForm" action="<c:url value='/team/board_write'></c:url>" method="post" enctype="multipart/form-data">
+				<form id="boardForm" action="<c:url value='/team/board_update'></c:url>" method="post" enctype="multipart/form-data">
 					<ul class="list-board_write">
 						<li class="title">
 							<dl>
 								<dt>제목</dt>
 								<dd>
+									<input type="text" name="bo_num" value="${board.bo_num }" hidden>
 									<input type="text" name="bo_title" placeholder="제목 입력" required value="${board.bo_title }">
 									<input type="text" name="teamNum" hidden value="${team.tm_num }">
 								</dd>
@@ -63,14 +64,38 @@
 						<input type="text" name="resArr" hidden readonly>
 						<input type="text" name="tmpArr" hidden readonly>
 						<li class="file-box">
-							<div class="form-froup">
-								<input type="file" name="files" class="form-control-file border">
-								<input type="file" name="files" class="form-control-file border">
-								<input type="file" name="files" class="form-control-file border">
-								
-							</div>
-						
+							<c:set value="3" var="fileLen"/>
+							<c:forEach items="${fileList}" var="file" varStatus="ind">
+								<c:choose>
+									<c:when test="${file.fileType== 'image'&& file.bf_issummernote == false}">
+										<c:set var="fileLen" value="${fileLen -1}"/>
+										<div class="img-container">
+											<img alt="${file.bf_ori_filename }" src="<c:url value='/files${file.bf_filename }'></c:url>"><br>
+											<a href="<c:url value='/files${file.bf_filename }'></c:url>" download="${file.bf_ori_filename }">${file.bf_ori_filename }
+											<button type="button" class="btn btn-outline-dark btn-sm ml-auto btn-times" data-type="img" data-filenum="${file.bf_num }">첨부 취소</button>
+											</a>
+										</div>
+									</c:when>
+									<c:when test="${file.fileType== 'image' && file.bf_issummernote == true}">
+										<div>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<c:set var="fileLen" value="${fileLen -1}"/>
+										<a class="form-control d-flex" href="<c:url value='/files${file.bf_filename }'></c:url>" download="${file.bf_ori_filename }">${file.bf_ori_filename }
+										<button type="button" class="btn btn-outline-dark btn-sm ml-auto btn-times" data-type="etc" data-filenum="${file.bf_num}">첨부 취소</button>
+										</a>
+										
+									</c:otherwise>
+									
+								</c:choose>
+							</c:forEach>
+							<c:forEach begin="1" end="${fileLen}">
+								<input type="file" class="form-control" name="files">
+							</c:forEach>
+							
 						</li>
+						
 					</ul>
 					<button class="btn-hidden" hidden></button>
 					<div class="btnBox-board">
@@ -126,11 +151,20 @@ $(document).ready(function(){
 		  })
 	  }
 	   
-	   
+	  /* 첨부파일 삭제 버튼 구현 */
+	  $('.btn-times').click(function(e){
+		  e.preventDefault();
+		  let dataNum = $(this).data('filenum');
+		  $(this).parent().hide();
+		  if($(this).data('type')=='img'){
+			  $(this).parents('.img-container').hide()
+		  }
+		  let removeFileStr = '<input type="text" hidden name="removeFileNums" value="'+dataNum+'">' 
+		  $('.file-box').append(removeFileStr).append('<input type="file" class="form-control" name="files">');
+	  })
 
       
-    </script>
-    <script>
+    
     $('#boardForm').on('submit', function(e) {
   	  <c:if test="${empty loginUser}">
   	  alert("로그인 한 유저만 글을 작성할 수 있습니다.");

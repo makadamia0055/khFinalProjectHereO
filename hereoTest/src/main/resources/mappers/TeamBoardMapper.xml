@@ -13,7 +13,6 @@
 				order by bo_num desc
 				limit #{cri.pageStart}, #{cri.perPageNum}
 			
-	
 	</select>
 	<select id="countTeamBoardTotalCnt" resultType="int">
 		select count(*) from board
@@ -149,4 +148,12 @@
 		select * from `board-file`
 			where bf_num = #{bf_num}
 	</select>
+	<update id="updateBoardFromTeamBoard">
+		update `board`
+			set bo_title = #{bo.bo_title},
+				bo_content = #{bo.bo_content},
+				bo_bc_num = #{bo.bo_bc_num}
+			where bo_num = #{bo.bo_num}
+	
+	</update>
 </mapper>
