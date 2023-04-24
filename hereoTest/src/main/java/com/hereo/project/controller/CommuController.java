@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hereo.project.pagination.CommuCriteria;
+import com.hereo.project.pagination.PageMaker;
 import com.hereo.project.service.CommuService;
 import com.hereo.project.service.MembersService;
 import com.hereo.project.utils.MessageUtils;
@@ -32,14 +34,18 @@ public class CommuController {
 	MembersService membersService;
 	
 	@GetMapping(value = {"/community/free", "/community"})
-	public String home02(Model model) {
+	public String home02(Model model, CommuCriteria cri) {
 		
 		ArrayList<BoardTypeVO> bt_list = boardService.getBoardType();
 		BoardTypeVO bt=bt_list.get(0);
 		int bt_num = bt.getBt_num();
-		ArrayList<BoardVO> free_list= boardService.getBoard(bt_num);
+		ArrayList<BoardVO> free_list= boardService.getBoard(bt_num, cri);
 		
-		
+		int totalCount=boardService.getBoardTotalCount(cri, bt_num);
+		PageMaker pm = new PageMaker(totalCount,5,cri);
+
+			
+		model.addAttribute("pm",pm);
 		model.addAttribute("bt_num",bt_num);
 		model.addAttribute("free_board", free_list);
 		
@@ -47,39 +53,59 @@ public class CommuController {
 	}	
 	
 	@GetMapping(value = "/community/eventAcid")
-	public String eventAcid(Model model) {
+	public String eventAcid(Model model, CommuCriteria cri) {
 		ArrayList<BoardTypeVO> bt_list = boardService.getBoardType();
 		BoardTypeVO bt=bt_list.get(1);
 		int bt_num = bt.getBt_num();
 		
-		ArrayList<BoardVO> acid_list= boardService.getBoard(bt_num);
+		ArrayList<BoardVO> acid_list= boardService.getBoard(bt_num, cri);
+		
+		int totalCount=boardService.getBoardTotalCount(cri, bt_num);
+		PageMaker pm = new PageMaker(totalCount,5,cri);
+
+			
+		model.addAttribute("pm",pm);
 		model.addAttribute("bt_num",bt_num);
 		model.addAttribute("acid_board", acid_list);
 		return "/community/eventAcid-board";
 	}	
 	
 	@GetMapping(value = "/community/findHero")
-	public String findHero(Model model) {
+	public String findHero(Model model, CommuCriteria cri) {
 		ArrayList<BoardTypeVO> bt_list = boardService.getBoardType();
 		BoardTypeVO bt=bt_list.get(2);
 		int bt_num = bt.getBt_num();
+	
+		ArrayList<BoardVO> hero_list= boardService.getBoard(bt_num, cri);
 		
-		ArrayList<BoardVO> hero_list= boardService.getBoard(bt_num);
+		int totalCount=boardService.getBoardTotalCount(cri, bt_num);
+		PageMaker pm = new PageMaker(totalCount,5,cri);
+
+			
+		model.addAttribute("pm",pm);
 		model.addAttribute("bt_num",bt_num);
 		model.addAttribute("hero_board",hero_list);
 		return "/community/findHero-board";
 	}
 	
 	@GetMapping(value = "/community/market")
-	public String market(Model model, @RequestParam("region") int regionNum, 
-			@RequestParam("state") String state) {
+	public String market(Model model, CommuCriteria cri) {
 		ArrayList<BoardTypeVO> bt_list = boardService.getBoardType();
 		BoardTypeVO bt=bt_list.get(3);
 		int bt_num = bt.getBt_num();
-		
-		ArrayList<BoardVO> market_list= boardService.getBoard(bt_num);
+
+		ArrayList<BoardVO> market_list = boardService.getBoard(bt_num, cri);
+
+		int totalCount=boardService.getBoardTotalCount(cri, bt_num);
+		PageMaker pm = new PageMaker(totalCount,5,cri);
+
+			
+		model.addAttribute("pm",pm);
 		model.addAttribute("bt_num",bt_num);
+
 		model.addAttribute("market_board", market_list);
+		
+		
 		return "/community/market-board";
 	}
 

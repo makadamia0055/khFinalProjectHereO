@@ -21,13 +21,7 @@
 	<select id="selectBoardCategoryName" resultType="com.hereo.project.vo.BoardCategoryVO">
 	select * from `board-category` where bc_bt_num=#{bt_num} and bc_auth_sort !="지역";
 	</select>
-	
-	<select id="selectBoard" resultType="com.hereo.project.vo.BoardVO">
-	select board.* ,members.me_nickname from `board` 
-		inner join members 
-		on board.bo_me_id = members.me_id
-		where bo_bt_num=#{bt_num} order by bo_num DESC;
-	</select>
+
 	
 	<select id="getBoardTypeBtNum" resultType="com.hereo.project.vo.BoardTypeVO">
 	select * from `board-type` where bt_num = #{bt_num}
@@ -61,4 +55,23 @@
 	<delete id="deleteBoard">
 		delete from `board` where bo_num=#{bo.bo_num}
 	</delete>
+	
+	<select id="getBoardList" resultType="com.hereo.project.vo.BoardVO">	
+		select board.* ,members.me_nickname from `board` 
+			inner join members 
+			on board.bo_me_id = members.me_id
+			where bo_bt_num=#{bt_num}
+			<if test="cri.searchType == 'bo_title'"> and bo_title like concat('%',#{cri.searchName},'%')</if>
+			<if test="cri.searchType == 'me_nickname'"> and me_nickname like concat('%',#{cri.searchName},'%')</if>
+			order by bo_num DESC
+			limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="getBoardTotalCount" resultType="int">
+		select count(*) from `board`
+		where bo_bt_num=#{bt_num}
+			<if test="cri.searchType == 'bo_title'"> and bo_title like concat('%',#{cri.searchName},'%')</if>
+			<if test="cri.searchType == 'me_nickname'"> and me_nickname like concat('%',#{cri.searchName},'%')</if>
+		
+	</select>
 </mapper>

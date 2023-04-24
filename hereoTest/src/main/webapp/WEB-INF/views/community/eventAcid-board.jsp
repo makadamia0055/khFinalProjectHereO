@@ -21,7 +21,7 @@
             <tbody>
               <c:forEach items="${acid_board}" var="ac" varStatus="no">
 	             <tr>
-	                <td><c:out value="${fn:length(acid_board) - no.index}" /></td>
+	                <td><c:out value="${pm.totalCount - pm.cri.pageStart - no.index}" /></td>
 	                <td class="acid__contents-title"><a href="<c:url value='/community/content/${ac.bo_num}'></c:url>">${ac.bo_title }</a></td>
 	                <td>${ac.bo_view }</td>
 	                <td>${ac.bo_register_date_str2 }</td>

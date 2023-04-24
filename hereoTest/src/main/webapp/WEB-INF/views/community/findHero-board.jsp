@@ -33,7 +33,7 @@
             <tbody>
              <c:forEach items="${hero_board}" var="hr" varStatus="no">
 	             <tr>
-	                <td><c:out value="${fn:length(hero_board) - no.index}" /></td>
+	                <td><c:out value="${pm.totalCount - pm.cri.pageStart - no.index}" /></td>
 	                <td>${hr.bo_region}</td>
 	                <td>${hr.bo_state}</td>
 	                <td class="hero__contents-title"><a href="<c:url value='/community/content/${hr.bo_num}'></c:url>">${hr.bo_title }</a></td>

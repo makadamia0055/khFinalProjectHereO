@@ -31,7 +31,7 @@
             <tbody>
              <c:forEach items="${free_board}" var="fr" varStatus="no">
 	             <tr>
-	                <td><c:out value="${fn:length(free_board) - no.index}" /></td>
+	                <td><c:out value="${pm.totalCount - pm.cri.pageStart - no.index}" /></td>
 	                <td class="free__contents-title"><a href="<c:url value='/community/content/${fr.bo_num}'></c:url>">${fr.bo_title }</a></td>
 	                <td>${fr.me_nickname }</td>
 	                <td>${fr.bo_view }</td>

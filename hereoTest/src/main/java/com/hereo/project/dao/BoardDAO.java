@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.hereo.project.pagination.CommuCriteria;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
@@ -19,7 +20,6 @@ public interface BoardDAO {
 
 	ArrayList<BoardCategoryVO> selectBoardCategoryName(@Param("bt_num")int bt_num);
 
-	ArrayList<BoardVO> selectBoard(@Param("bt_num") int bt_num);
 
 	BoardTypeVO getBoardTypeBtNum(@Param("bt_num") int bt_num);
 
@@ -32,6 +32,10 @@ public interface BoardDAO {
 	void updateBoard(@Param("bo") BoardVO board);
 
 	void deleteBoard(@Param("bo") BoardVO board);
+
+	ArrayList<BoardVO> getBoardList(@Param("cri") CommuCriteria cri, @Param("bt_num") int bt_num);
+
+	int getBoardTotalCount(@Param("cri") CommuCriteria cri, @Param("bt_num") int bt_num);
 
 
 

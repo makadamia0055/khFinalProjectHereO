@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hereo.project.dao.BoardDAO;
 import com.hereo.project.dao.MembersDAO;
+import com.hereo.project.pagination.CommuCriteria;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
@@ -45,11 +46,7 @@ public class CommuServiceImp implements CommuService {
 		return selectBoardCategory;
 	}
 
-	@Override
-	public ArrayList<BoardVO> getBoard(int bt_num) {
-		ArrayList<BoardVO> selectBoard=boardDao.selectBoard(bt_num);
-		return selectBoard;
-	}
+
 
 	@Override
 	public BoardTypeVO getBoardTypebyBtNum(int bt_num) {
@@ -91,6 +88,20 @@ public class CommuServiceImp implements CommuService {
 		boardDao.deleteBoard(board);
 		return true; 
 		
+	}
+
+	@Override
+	public ArrayList<BoardVO> getBoard(int bt_num, CommuCriteria cri) {
+		 if(cri==null)
+			 cri= new CommuCriteria();
+		 System.out.println("서비스임프"+cri);
+		return boardDao.getBoardList(cri, bt_num);
+	}
+
+	@Override
+	public int getBoardTotalCount(CommuCriteria cri, int bt_num) {
+		
+		return boardDao.getBoardTotalCount(cri, bt_num);
 	}
 }
 
