@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hereo.project.service.CommuService;
 import com.hereo.project.service.MembersService;
@@ -70,7 +71,8 @@ public class CommuController {
 	}
 	
 	@GetMapping(value = "/community/market")
-	public String market(Model model) {
+	public String market(Model model, @RequestParam("region") int regionNum, 
+			@RequestParam("state") String state) {
 		ArrayList<BoardTypeVO> bt_list = boardService.getBoardType();
 		BoardTypeVO bt=bt_list.get(3);
 		int bt_num = bt.getBt_num();

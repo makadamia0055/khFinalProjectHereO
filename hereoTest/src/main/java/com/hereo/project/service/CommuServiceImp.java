@@ -88,7 +88,7 @@ public class CommuServiceImp implements CommuService {
 		if(user==null)
 			return false;
 		
-		boardDao.deleteBoard(board, user);
+		boardDao.deleteBoard(board);
 		return true; 
 		
 	}

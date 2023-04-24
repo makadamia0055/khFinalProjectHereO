@@ -21,21 +21,21 @@
           class="market__region-select region-seoul"
           style="background-color: #c7f2a4"
         >
-          <a href="#">#서울</a>
+          <a href="<c:url value='/community/market?region=02'></c:url>">#서울</a>
         </div>
         <div
           class="market__region-select region-kungGi"
           style="background-color: #c7f2a4"
         >
-          <a href="#">#경기</a>
+          <a href="<c:url value='/community/market?region=031'></c:url>">#경기</a>
         </div>
       </div>
       <div class="market__buyAndSell">
         <div class="market__sell" style="background-color: #ffd384">
-          <a href="#">#팝니다</a>
+          <a href="<c:url value='/community/market?state=sell'></c:url>">#팝니다</a>
         </div>
         <div class="market__buy" style="background-color: #fff9b0">
-          <a href="#">#삽니다</a>
+          <a href="<c:url value='/community/market?state=buy'></c:url>">#삽니다</a>
         </div>
       </div>
       <div class="market__contents">

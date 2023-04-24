@@ -31,7 +31,7 @@ public interface BoardDAO {
 
 	void updateBoard(@Param("bo") BoardVO board);
 
-	Object deleteBoard(@Param("bo") BoardVO board, MembersVO user);
+	void deleteBoard(@Param("bo") BoardVO board);
 
 
 
