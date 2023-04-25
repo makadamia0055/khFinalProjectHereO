@@ -8,7 +8,6 @@
       <span class="accid__title">사건사고 게시판</span><br />
       <p class="accid__notice">🔥 사건사고 게시판은 익명게시판입니다.</p>
       <div class="accid__contents">
-        <form>
           <table class="table table-hover">
             <thead>
               <tr>
@@ -32,39 +31,32 @@
           <div class="writeBoard-btnBox"><a href="<c:url value='/community/writing/${bt_num}'></c:url>"><button type="button" class="writeBoard-btn">글쓰기</button></a></div>
           <div class="commu-common__pageNum">
             <ul class="pagination pagination-sm">
-              <li class="page-item prev">
-                <a class="page-link text-secondary" href="#">◀</a>
-              </li>
-              <li class="page-item active">
-                <a class="page-link text-secondary" href="#">1</a>
-              </li>
+             <c:if test="${pm.prev}">
+              	<li class="page-item">
+                	<a class="page-link text-secondary" href="<c:url value='/community/eventAcid?page=${pm.startPage-1}
+                		&search=${pm.cri.search}&type=${pm.cri.type} }'></c:url>">◀</a>
+              	</li>
+              </c:if>	
+              <c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
+              	<li class="page-item <c:if test="${pm.cri.page ==i}"> active </c:if>">
+                	<a class="page-link text-secondary" href="<c:url value='/community/eventAcid?page=${i}&search=${pm.cri.search}&type=${pm.cri.type}'></c:url>">${i}</a>
+             	</li>
+             </c:forEach>
+             <c:if test="${pm.next}">
               <li class="page-item">
-                <a class="page-link text-secondary" href="#">2</a>
+                <a class="page-link text-secondary" href="<c:url value='/community/eventAcid?page=${pm.endPage+1}
+                		&search=${pm.cri.search}&type=${pm.cri.type} }'></c:url>">▶</a>
               </li>
-              <li class="page-item">
-                <a class="page-link text-secondary" href="#">3</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link text-secondary" href="#">4</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link text-secondary" href="#">5</a>
-              </li>
-              <li class="page-item next">
-                <a class="page-link text-secondary" href="#">▶</a>
-              </li>
+             </c:if> 
             </ul>
           </div>
+         <form> 
           <div class="commu-common__search">
-            <select>
-              <option style="font-size: 14px" class="freeBoard-opt">제목</option>
+            <select name="searchType">
+              <option style="font-size: 14px" class="freeBoard-opt"value="bo_title" <c:if test="${pm.cri.searchType == 'bo_title'}">selected</c:if>>제목</option>
             </select>
-            <input type="text" class="commu-common__search-input" />
-            <input
-              type="button"
-              value="검색"
-              class="commu-common__search-btn"
-            />
+            <input type="text" class="commu-common__search-input" name="searchName" value="${pm.cri.searchName}" />
+            <a href="<c:url value='/community/eventAcid?searchType=${pm.cri.searchType}&searchName=${pm.cri.searchName } '></c:url>"><button type="submit" class="commu-common__search-btn">검색</button></a>
           </div>
         </form>
       </div>

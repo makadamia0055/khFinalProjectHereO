@@ -22,6 +22,7 @@ import com.hereo.project.utils.MessageUtils;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
+import com.hereo.project.vo.BoardVoteVO;
 import com.hereo.project.vo.MembersVO;
 
 
@@ -102,7 +103,6 @@ public class CommuController {
 			
 		model.addAttribute("pm",pm);
 		model.addAttribute("bt_num",bt_num);
-
 		model.addAttribute("market_board", market_list);
 		
 		
@@ -164,6 +164,9 @@ public class CommuController {
 		BoardVO boardDetail =boardService.getBoardDetail(bo_num);
 		int bt_num=boardDetail.getBo_bt_num();
 		BoardTypeVO bt = boardService.getBoardTypebyBtNum(bt_num);
+		BoardVoteVO bv = boardService.getBoardVote(user, bo_num);
+		System.out.println("좋아요"+bv);
+		model.addAttribute("boardVote", bv);
 		model.addAttribute("user", user);
 		model.addAttribute("bt", bt);
 		model.addAttribute("detail", boardDetail);

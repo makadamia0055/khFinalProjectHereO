@@ -31,7 +31,7 @@
 		<textarea id="content" name="bo_content"></textarea>
 		<button class="btn-writingSubmit">등록</button>
 	</form>
-      
+    <div style="display:none" id="test"></div>
 </main>
 
 <script src="https://kit.fontawesome.com/bedfa56d7f.js" crossorigin="anonymous"></script>
@@ -45,4 +45,34 @@
 		maxHeight: 500,            
 		placeholder: '내용을 입력하세요'	    
 	});
+  
+  $('form').submit(function(){
+	 let bo_region = $('[name=bo_region]').val();
+	 
+	 if(bo_region==0){
+		 alert('지역 태그를 선택하세요.');
+		 $('[name=bo_region]').focus();
+		 return false;
+	 }
+	 let bo_state = $('[name=bo_state]').val();
+	 if(bo_state==0){
+		 alert('현황 태그를 선택하세요.');
+		 $('[name=bo_state]').focus();
+		 return false;
+	 }
+	 
+	 let bo_title = $('[name=bo_title]').val();
+	 if(bo_title==0){
+		 alert('제목을 입력하세요.');
+		 return false;
+	 }
+	 let bo_content = $('#content').val();
+	 $('#test').html(bo_content);
+	 if($('#test').text().trim().length==0){
+		 alert('내용을 입력하세요.');
+		 return false;
+	 }
+	 console.log(bo_content);
+	 console.log("하이");
+  })
 </script>

@@ -15,7 +15,7 @@
           class="market__region-select region-all"
           style="background-color: #95cd41"
         >
-          <a href="<c:url value='/community/market'></c:url>"">#전체</a>
+          <a href="<c:url value='/community/market'></c:url>">#전체</a>
         </div>
         <div
           class="market__region-select region-seoul"
@@ -32,14 +32,10 @@
       </div>
       <div class="market__buyAndSell">
         <div class="market__sell" style="background-color: #ffd384">
-          <a href="<c:url value='/community/market?bo_state=팝니다'></c:url>">#팝니다</a>
-        </div>
-        <div class="market__buy" style="background-color: #fff9b0">
-          <a href="<c:url value='/community/market?bo_state=삽니다'></c:url>">#삽니다</a>
+          <a href="<c:url value='/community/market?bo_state=판매중'></c:url>">#판매중</a>
         </div>
       </div>
       <div class="market__contents">
-        <form>
           <table class="table table-hover">
             <thead>
               <tr>
@@ -77,25 +73,25 @@
               	</c:if>
               	<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
               		<li class="page-item <c:if test="${pm.cri.page ==i}"> active </c:if>">
-                		<a class="page-link text-secondary" href="<c:url value='/community/market?page=${i}&search=${pm.cri.search}&type=${pm.cri.type}'></c:url>">${i}</a>
+                		<a class="page-link text-secondary" href="<c:url value='/community/market?page=${i}&search=${pm.cri.search}&type=${pm.cri.type}&bo_region=${pm.cri.bo_region}'></c:url>">${i}</a>
              		 </li>
              	</c:forEach>
-              <li class="page-item">
-                <a class="page-link text-secondary" href="#">▶</a>
-              </li>
+              	<c:if test="${pm.next}">	
+              		<li class="page-item">
+                		<a class="page-link text-secondary" href="<c:url value='/community/market?page=${pm.endPage+1}
+                		&search=${pm.cri.search}&type=${pm.cri.type} }'></c:url>">▶</a>
+              		</li>
+              	</c:if>	
             </ul>
           </div>
+        <form>  
           <div class="commu-common__search">
-            <select>
-              <option style="font-size: 14px" name="searchType" <c:if test="${pm.cri.searchType == 'bo_title'}">seleted</c:if>>제목</option>
-              <option style="font-size: 14px"name="searchType" <c:if test="${pm.cri.searchType == 'me_nickname'}">seleted</c:if>>작성자</option>
+            <select name="searchType">
+              <option style="font-size: 14px"  value="bo_title" <c:if test="${pm.cri.searchType == 'bo_title'}">selected</c:if>>제목</option>
+              <option style="font-size: 14px" value="me_nickname" <c:if test="${pm.cri.searchType == 'me_nickname'}">selected</c:if>>작성자</option>
             </select>
-            <input type="text" class="commu-common__search-input" name="searchName"/>
-            <input
-              type="button"
-              value="검색"
-              class="commu-common__search-btn"
-            />
+            <input type="text" class="commu-common__search-input" name="searchName" value="${pm.cri.searchName}"/>
+            <a href="<c:url value='/community/market?searchType=${pm.cri.searchType}&searchName=${pm.cri.searchName } '></c:url>"><button type="submit" class="commu-common__search-btn">검색</button></a>
           </div>
         </form>
       </div>

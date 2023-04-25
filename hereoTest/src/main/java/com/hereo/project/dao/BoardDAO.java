@@ -8,6 +8,7 @@ import com.hereo.project.pagination.CommuCriteria;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
+import com.hereo.project.vo.BoardVoteVO;
 import com.hereo.project.vo.MembersVO;
 
 public interface BoardDAO {
@@ -36,6 +37,8 @@ public interface BoardDAO {
 	ArrayList<BoardVO> getBoardList(@Param("cri") CommuCriteria cri, @Param("bt_num") int bt_num);
 
 	int getBoardTotalCount(@Param("cri") CommuCriteria cri, @Param("bt_num") int bt_num);
+
+	BoardVoteVO getBoardVote(@Param("user")MembersVO user, @Param("bo_num")int bo_num);
 
 
 

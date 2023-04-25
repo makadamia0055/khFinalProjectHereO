@@ -27,9 +27,14 @@
 		<a href="<c:url value='/community/${bt.bt_namebyEnglish}'></c:url>">
 			<button class="pre-list_btn commu-btn">목록 <i class="fa-solid fa-bars"></i>
 			</button>
-		</a>	
-		<button class="like_btn commu-btn">추천 <i class="fa-regular fa-thumbs-up"></i></button>
-		<button class="dislike_btn commu-btn">비추천 <i class="fa-regular fa-thumbs-down"></i></button>
+		</a>
+		<c:if test="${boardVote==null || boardVote.bv_state !=1}">	
+			<button class="like_btn commu-btn" data-updown="1">추천 <i class="fa-regular fa-thumbs-up"></i></button>
+		</c:if>
+		<c:if test=" ${boardVote!=null && boardVote.bv_state==1 }">
+			<button class="like_btn commu-btn" data-updown="1" style="background-color:#2155CD">추천 <i class="fa-regular fa-thumbs-up"></i></button>
+		</c:if>
+		<button class="dislike_btn commu-btn"data-updown="-1">비추천 <i class="fa-regular fa-thumbs-down"></i></button>
 	</div>
 	<div class="btn-container02">
 		<c:if test="${user.me_id == detail.bo_me_id}">
@@ -45,7 +50,6 @@
 		</c:if>
 	</div>	
 </div>
-<div>댓글</div>
 </main>
 <script
       src="https://kit.fontawesome.com/bedfa56d7f.js"
