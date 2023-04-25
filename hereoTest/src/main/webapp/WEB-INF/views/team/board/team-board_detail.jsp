@@ -290,7 +290,7 @@
    function createAndAppendPagination(data){
 	   let pmStr = "";
 	   		if(data.pm.prev)
-				pmStr +='<li class="page-item prev"><a href="#" class="page-link">이전</a></li>';
+				pmStr +='<li class="page-item prev"><a href="#" class="page-link" data-page="prev">이전</a></li>';
 			
 			for(let i = data.pm.startPage; i<data.pm.endPage+1; i++){
 				pmStr +='<li class="page-item ';

@@ -37,14 +37,19 @@
               "</div>
               <li class="item-team_intro">
                 통산 경기 : <span class="team-total">
-                  
+                <c:choose>
+                  	<c:when test="${empty totalMatch|| totalMatch == -1}">오류</c:when>
+                  	<c:otherwise>${totalMatch} 경기</c:otherwise>
+               	</c:choose>
                 </span>
+              </li>
+              <li class="item-team_intro">통산 승-무-패 : 
+              	
               </li>
               <li class="item-team_intro">
                 통산 팀 승률 : 
               </li>
               
-              <li class="current-league_text">현재 참여 리그 : <a href="#" class="current-league">가리봉동 가리비 리그</a></li>
             </ul>
           </div>
           <div class="right-record">

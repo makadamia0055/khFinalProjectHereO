@@ -314,6 +314,8 @@ public class TeamController {
 	@RequestMapping(value = "/team/record", method = RequestMethod.GET)
 	public ModelAndView teamRecord(ModelAndView mv, Integer teamNum) {
 		TeamVO tmpTeam = teamService.selectTeamByTm_Num(teamNum);
+		int totalMatch = teamService.countTeamTotalMatch(teamNum);
+		mv.addObject("totalMatch", totalMatch);
 		mv.addObject("team", tmpTeam);
 		mv.setViewName("/team/team-record");
 		return mv;

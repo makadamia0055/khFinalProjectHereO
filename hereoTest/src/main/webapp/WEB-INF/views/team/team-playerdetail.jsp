@@ -25,7 +25,7 @@
               		<c:otherwise>소속팀 없음</c:otherwise>
               	</c:choose>
               </span><span class="player-team"></li>
-              <li class="list-group-item list-group-item-action">통산 출장 경기 : <span class="all_join_match">29</span>경기</li> 
+              <li class="list-group-item list-group-item-action">통산 출장 경기 : <span class="all_join_match"></span>경기</li> 
               <li class="list-group-item list-group-item-action item-throwhitarm">
                 투타 : <span class="player-throwarm">${player.pl_pitching_hand }</span><span class="player-hitarm">${player.pl_hitting_hand }</span>
               </li>

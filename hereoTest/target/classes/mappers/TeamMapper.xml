@@ -110,5 +110,10 @@
 				tm_num = #{tm.tm_num}
 				
 	</update>
+	<select id="countTeamTotalMatch" resultType="int">
+	 select distinct count(*) from `match-record` 
+	 where mr_ms_num = 
+	 (select ms_num from `match-schedule` where ms_tm_home_num = #{tm_num} or ms_tm_away_num= #{tm_num})
+	</select>
 
 </mapper>
