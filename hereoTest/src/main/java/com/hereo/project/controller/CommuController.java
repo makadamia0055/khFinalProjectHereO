@@ -1,6 +1,8 @@
 package com.hereo.project.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hereo.project.pagination.CommuCriteria;
 import com.hereo.project.pagination.PageMaker;
@@ -165,6 +168,8 @@ public class CommuController {
 		int bt_num=boardDetail.getBo_bt_num();
 		BoardTypeVO bt = boardService.getBoardTypebyBtNum(bt_num);
 		BoardVoteVO bv = boardService.getBoardVote(user, bo_num);
+		
+		
 		System.out.println("좋아요"+bv);
 		model.addAttribute("boardVote", bv);
 		model.addAttribute("user", user);
@@ -231,6 +236,20 @@ public class CommuController {
 		return "redirect:/community/" + englishName;
 		
 	}
-
+	@ResponseBody
+	@GetMapping(value="/community/content/updown/{bv_bo_num}/{bv_state}")
+	public Map<String,Object> updownBoard(@PathVariable("bv_bo_num")int bv_bo_num, 
+			HttpSession session,
+			@PathVariable("bv_state") int bv_state) {
+	
+		Map<String, Object> map = new HashMap<String, Object>();
+		MembersVO user = (MembersVO)session.getAttribute("loginUser");
+		int res = boardService.updateUpdown(bv_bo_num, bv_state, user);
+		map.put("updown", res);
+		BoardVO board=boardService.getBoardDetail(bv_bo_num);
+		map.put("board", board);
+		return map;
+		
+	}
 }
 	

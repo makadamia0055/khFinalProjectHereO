@@ -38,7 +38,15 @@ public interface BoardDAO {
 
 	int getBoardTotalCount(@Param("cri") CommuCriteria cri, @Param("bt_num") int bt_num);
 
-	BoardVoteVO getBoardVote(@Param("user")MembersVO user, @Param("bo_num")int bo_num);
+	BoardVoteVO getBoardVote(@Param("user")String user, @Param("bo_num")int bo_num);
+
+	void insertUpdown(@Param("updown") BoardVoteVO updownVo);
+
+	void updateUpdown(@Param("updown") BoardVoteVO updownVo);
+
+	void updateBoardUpDown(@Param("bv_bo_num") int bv_bo_num);
+
+
 
 
 

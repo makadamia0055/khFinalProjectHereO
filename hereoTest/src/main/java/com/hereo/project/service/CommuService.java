@@ -36,5 +36,7 @@ public interface CommuService {
 
 	BoardVoteVO getBoardVote(MembersVO user, int bo_num);
 
+	int updateUpdown(int bv_bo_num, int bv_state, MembersVO user);
+
 
 }

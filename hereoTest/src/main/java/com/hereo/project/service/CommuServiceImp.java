@@ -106,8 +106,36 @@ public class CommuServiceImp implements CommuService {
 
 	@Override
 	public BoardVoteVO getBoardVote(MembersVO user, int bo_num) {
+		if(user==null)
+			return null;
+		BoardVoteVO voteVo = boardDao.getBoardVote(user.getMe_id(), bo_num);
+		return voteVo;
+	}
+
+	@Override
+	public int updateUpdown(int bv_bo_num, int bv_state, MembersVO user) {
+		if(user==null)
+			return -100;
 		
-		return boardDao.getBoardVote(user,bo_num);
+		int res=0;
+		BoardVoteVO voteVo = boardDao.getBoardVote(user.getMe_id(), bv_bo_num);
+		
+		if(voteVo == null) {
+			BoardVoteVO updownVo = new BoardVoteVO(bv_bo_num, user.getMe_id(), bv_state);
+			boardDao.insertUpdown(updownVo);
+			res=bv_state;
+		}else if (voteVo.getBv_state()==bv_state) {
+			BoardVoteVO updownVo= new BoardVoteVO(bv_bo_num,user.getMe_id(),0);
+			boardDao.updateUpdown(updownVo);
+			res=0;
+		}else {
+			BoardVoteVO updownVo= new BoardVoteVO(bv_bo_num,user.getMe_id(),bv_state);
+			boardDao.updateUpdown(updownVo);
+			res=bv_state;
+		}
+
+		boardDao.updateBoardUpDown(bv_bo_num);
+		return res;
 	}
 }
 
