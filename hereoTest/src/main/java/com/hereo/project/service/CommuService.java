@@ -38,5 +38,9 @@ public interface CommuService {
 
 	int updateUpdown(int bv_bo_num, int bv_state, MembersVO user);
 
+	ArrayList<BoardVO> getTopFiveBoard(int bt_num);
+
+	ArrayList<BoardVO> getAllBoardForHot();
+
 
 }

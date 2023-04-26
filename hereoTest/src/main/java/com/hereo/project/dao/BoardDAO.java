@@ -46,6 +46,10 @@ public interface BoardDAO {
 
 	void updateBoardUpDown(@Param("bv_bo_num") int bv_bo_num);
 
+	ArrayList<BoardVO> getTopFiveBoard(@Param("bt_num") int bt_num);
+
+	ArrayList<BoardVO> getAllBoardForHot();
+
 
 
 

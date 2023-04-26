@@ -51,6 +51,8 @@ public interface TeamService {
 
 	boolean checkIsLeader(Integer teamNum, String bo_me_id);
 
+	ArrayList<TeamVO> getNewTeam();
+
 
 
 	

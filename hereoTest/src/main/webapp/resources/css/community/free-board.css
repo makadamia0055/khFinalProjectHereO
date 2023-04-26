@@ -12,7 +12,7 @@
 .free__hotTopic {
   margin-top: 40px;
   width: 90%;
-  height: 270px;
+  height: 240px;
   border: 1px solid none;
   border-radius: 15px;
   padding: 5px;
@@ -24,11 +24,11 @@
 }
 .free_hotTopic-contents {
   display: flex;
-  justify-content: space-evenly;
 }
 .Top5 {
-  width: 17%;
-  height: 200px;
+  width: 1000px;
+  height: 180px;
+  margin-left: 20px;
   background-color: #f5f5f5;
 }
 .free__contents {
@@ -39,5 +39,15 @@
 }
 .free__contents-title a:hover {
   text-decoration: underline;
+}
+.topFiveList {
+	display : block;
+	padding : 5px 5px;
+}
+.fire_re {
+	color : #FF1E1E;
+}
+.topFiveList:hover {
+	text-decoration: underline;
 }
 

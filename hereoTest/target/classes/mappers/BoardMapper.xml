@@ -108,4 +108,16 @@
 			) where bo_num=#{bv_bo_num}
 			
 	</update>
+	<select id="getTopFiveBoard" resultType="com.hereo.project.vo.BoardVO">
+		select * from `board`
+			where bo_register_date >= date_sub(now(), interval 1 week) and bo_bt_num=#{bt_num}
+			order by bo_view DESC
+			limit 5
+	</select>
+	<select id="getAllBoardForHot" resultType="com.hereo.project.vo.BoardVO">
+		select * from `board`
+			where bo_register_date >= date_sub(now(), interval 2 day) and bo_bt_num in (1,2,3,4)
+			order by bo_view DESC
+			limit 4
+	</select>
 </mapper>

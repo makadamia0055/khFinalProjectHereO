@@ -46,5 +46,7 @@ public interface TeamDAO {
 
 	int updateTeam(@Param("tm")TeamVO team);
 
+	ArrayList<TeamVO> getNewTeam();
+
 
 }

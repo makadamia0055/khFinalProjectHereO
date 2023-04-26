@@ -45,6 +45,7 @@ public class CommuController {
 		int bt_num = bt.getBt_num();
 		ArrayList<BoardVO> free_list= boardService.getBoard(bt_num, cri);
 		
+		ArrayList<BoardVO> topFiveList = boardService.getTopFiveBoard(bt_num);
 		int totalCount=boardService.getBoardTotalCount(cri, bt_num);
 		PageMaker pm = new PageMaker(totalCount,5,cri);
 
@@ -52,7 +53,7 @@ public class CommuController {
 		model.addAttribute("pm",pm);
 		model.addAttribute("bt_num",bt_num);
 		model.addAttribute("free_board", free_list);
-		
+		model.addAttribute("topFive", topFiveList);
 		return "/community/free-board";
 	}	
 	

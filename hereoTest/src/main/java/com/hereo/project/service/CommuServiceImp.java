@@ -137,6 +137,18 @@ public class CommuServiceImp implements CommuService {
 		boardDao.updateBoardUpDown(bv_bo_num);
 		return res;
 	}
+
+	@Override
+	public ArrayList<BoardVO> getTopFiveBoard(int bt_num) {
+		
+		return boardDao.getTopFiveBoard(bt_num);
+	}
+
+	@Override
+	public ArrayList<BoardVO> getAllBoardForHot() {
+		
+		return boardDao.getAllBoardForHot();
+	}
 }
 
 

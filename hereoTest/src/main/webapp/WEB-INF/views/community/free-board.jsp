@@ -9,11 +9,11 @@
       <div class="free__hotTopic">
         <h5 class="free__hotTopic-title">이번주 조회수 T⚾P 5</h5>
         <div class="free_hotTopic-contents">
-          <div class="Top5"><a href="#">1</a></div>
-          <div class="Top5"><a href="#">1</a></div>
-          <div class="Top5"><a href="#">1</a></div>
-          <div class="Top5"><a href="#">1</a></div>
-          <div class="Top5"><a href="#">1</a></div>
+        	<div class="Top5">
+        		<c:forEach items="${topFive}" var="t" varStatus="no">	
+        			<span class="topFiveList"><a href="<c:url value='/community/content/${t.bo_num}'></c:url>"><i class="fa-solid fa-fire fire_re"></i>  ${no.count}. ${t.bo_title}</a></span>
+        		</c:forEach>
+        	</div>	
         </div>
       </div>
       <div class="free__contents">
