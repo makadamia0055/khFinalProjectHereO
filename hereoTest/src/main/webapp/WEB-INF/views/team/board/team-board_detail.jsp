@@ -290,7 +290,7 @@
    function createAndAppendPagination(data){
 	   let pmStr = "";
 	   		if(data.pm.prev)
-				pmStr +='<li class="page-item prev"><a href="#" class="page-link">이전</a></li>';
+				pmStr +='<li class="page-item prev"><a href="#" class="page-link" data-page="prev">이전</a></li>';
 			
 			for(let i = data.pm.startPage; i<data.pm.endPage+1; i++){
 				pmStr +='<li class="page-item ';
@@ -355,7 +355,7 @@
 	   $(rplyForm).show();
 	   $(this).parent().append(rplyForm);
 	   let dataNum = $(this).data('num');
-	   $(rplyForm).attr("action", "<c:url value='/team/board_reply_update'></c:url>")
+	   $(rplyForm).attr("action", "<c:url value='/team/board_reply_insert'></c:url>")
 
 	   $('[name=br_ori_num]').attr('value', dataNum);
 	   
@@ -375,7 +375,7 @@
     	  alert('자기 자신의 글만 수정 가능합니다.');
     	  return;
       }
-      let rplyForm = $('[name=rereplyForm]');
+      let rplyForm = $('[name=replyForm]');
 	   $(rplyForm).show();
 	   $('.reply-contents').show();
 	   let contents= $(this).parents('.reply-contents');
