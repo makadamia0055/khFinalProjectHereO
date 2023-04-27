@@ -1,6 +1,8 @@
 package com.hereo.project.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,13 +14,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hereo.project.pagination.CommuCriteria;
+import com.hereo.project.pagination.PageMaker;
 import com.hereo.project.service.CommuService;
 import com.hereo.project.service.MembersService;
 import com.hereo.project.utils.MessageUtils;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
+import com.hereo.project.vo.BoardVoteVO;
 import com.hereo.project.vo.MembersVO;
 
 
@@ -31,53 +38,78 @@ public class CommuController {
 	MembersService membersService;
 	
 	@GetMapping(value = {"/community/free", "/community"})
-	public String home02(Model model) {
+	public String home02(Model model, CommuCriteria cri) {
 		
 		ArrayList<BoardTypeVO> bt_list = boardService.getBoardType();
 		BoardTypeVO bt=bt_list.get(0);
 		int bt_num = bt.getBt_num();
-		ArrayList<BoardVO> free_list= boardService.getBoard(bt_num);
+		ArrayList<BoardVO> free_list= boardService.getBoard(bt_num, cri);
 		
-		
+		ArrayList<BoardVO> topFiveList = boardService.getTopFiveBoard(bt_num);
+		int totalCount=boardService.getBoardTotalCount(cri, bt_num);
+		PageMaker pm = new PageMaker(totalCount,5,cri);
+
+			
+		model.addAttribute("pm",pm);
 		model.addAttribute("bt_num",bt_num);
 		model.addAttribute("free_board", free_list);
-		
+		model.addAttribute("topFive", topFiveList);
 		return "/community/free-board";
 	}	
 	
 	@GetMapping(value = "/community/eventAcid")
-	public String eventAcid(Model model) {
+	public String eventAcid(Model model, CommuCriteria cri) {
 		ArrayList<BoardTypeVO> bt_list = boardService.getBoardType();
 		BoardTypeVO bt=bt_list.get(1);
 		int bt_num = bt.getBt_num();
 		
-		ArrayList<BoardVO> acid_list= boardService.getBoard(bt_num);
+		ArrayList<BoardVO> acid_list= boardService.getBoard(bt_num, cri);
+		
+		int totalCount=boardService.getBoardTotalCount(cri, bt_num);
+		PageMaker pm = new PageMaker(totalCount,5,cri);
+
+			
+		model.addAttribute("pm",pm);
 		model.addAttribute("bt_num",bt_num);
 		model.addAttribute("acid_board", acid_list);
 		return "/community/eventAcid-board";
 	}	
 	
 	@GetMapping(value = "/community/findHero")
-	public String findHero(Model model) {
+	public String findHero(Model model, CommuCriteria cri) {
 		ArrayList<BoardTypeVO> bt_list = boardService.getBoardType();
 		BoardTypeVO bt=bt_list.get(2);
 		int bt_num = bt.getBt_num();
+	
+		ArrayList<BoardVO> hero_list= boardService.getBoard(bt_num, cri);
 		
-		ArrayList<BoardVO> hero_list= boardService.getBoard(bt_num);
+		int totalCount=boardService.getBoardTotalCount(cri, bt_num);
+		PageMaker pm = new PageMaker(totalCount,5,cri);
+
+			
+		model.addAttribute("pm",pm);
 		model.addAttribute("bt_num",bt_num);
 		model.addAttribute("hero_board",hero_list);
 		return "/community/findHero-board";
 	}
 	
 	@GetMapping(value = "/community/market")
-	public String market(Model model) {
+	public String market(Model model, CommuCriteria cri) {
 		ArrayList<BoardTypeVO> bt_list = boardService.getBoardType();
 		BoardTypeVO bt=bt_list.get(3);
 		int bt_num = bt.getBt_num();
-		
-		ArrayList<BoardVO> market_list= boardService.getBoard(bt_num);
+
+		ArrayList<BoardVO> market_list = boardService.getBoard(bt_num, cri);
+
+		int totalCount=boardService.getBoardTotalCount(cri, bt_num);
+		PageMaker pm = new PageMaker(totalCount,5,cri);
+
+			
+		model.addAttribute("pm",pm);
 		model.addAttribute("bt_num",bt_num);
 		model.addAttribute("market_board", market_list);
+		
+		
 		return "/community/market-board";
 	}
 
@@ -136,6 +168,11 @@ public class CommuController {
 		BoardVO boardDetail =boardService.getBoardDetail(bo_num);
 		int bt_num=boardDetail.getBo_bt_num();
 		BoardTypeVO bt = boardService.getBoardTypebyBtNum(bt_num);
+		BoardVoteVO bv = boardService.getBoardVote(user, bo_num);
+		
+		
+		System.out.println("좋아요"+bv);
+		model.addAttribute("boardVote", bv);
 		model.addAttribute("user", user);
 		model.addAttribute("bt", bt);
 		model.addAttribute("detail", boardDetail);
@@ -200,6 +237,20 @@ public class CommuController {
 		return "redirect:/community/" + englishName;
 		
 	}
-
+	@ResponseBody
+	@GetMapping(value="/community/content/updown/{bv_bo_num}/{bv_state}")
+	public Map<String,Object> updownBoard(@PathVariable("bv_bo_num")int bv_bo_num, 
+			HttpSession session,
+			@PathVariable("bv_state") int bv_state) {
+	
+		Map<String, Object> map = new HashMap<String, Object>();
+		MembersVO user = (MembersVO)session.getAttribute("loginUser");
+		int res = boardService.updateUpdown(bv_bo_num, bv_state, user);
+		map.put("updown", res);
+		BoardVO board=boardService.getBoardDetail(bv_bo_num);
+		map.put("board", board);
+		return map;
+		
+	}
 }
 	

@@ -48,6 +48,12 @@ public class TeamServiceImp implements TeamService{
 	public int countTeams(String state, Criteria cri) {
 		return teamDao.countAllTeams(state, cri);
 	}
+	//메인 페이지 new팀 불러오기
+	@Override
+	public ArrayList<TeamVO> getNewTeam() {
+		
+		return teamDao.getNewTeam();
+	}
 
 
 	@Override
@@ -218,7 +224,6 @@ public class TeamServiceImp implements TeamService{
 			return -1;
 		return teamDao.countTeamTotalMatch(teamNum);
 	}
-
 	
 	
 }

@@ -43,7 +43,7 @@
           <div class="main__contents-commu">
             <div class="commu-mainTitle">
               야구계
-              <a href="community/commu-market.html"
+              <a href="<c:url value='/community/market'></c:url>"
                 ><span style="color: #fd841f">" Carrot Market "</span></a
               >
             </div>
@@ -54,21 +54,21 @@
     </main>
     <section class="team-section menu-section">
       <h2>New Team</h2>
+      	<p class="team-intro">히어로에 최근 등록된 팀들을 소개합니다.  <i class="fa-solid fa-face-laugh smile-icon"></i></p>
       <div class="newTeam-container">
-        <div class="newTeam__list"><a href="#">준비중</a></div>
-        <div class="newTeam__list"><a href="#">준비중</a></div>
-        <div class="newTeam__list"><a href="#">준비중</a></div>
+      	<c:forEach items="${team}" var="t">
+        	<div class="newTeam__list"><a href="#">${t.tm_name}</a></div>
+        </c:forEach>	
       </div>
-      <div class="newTeam__more"><a href="#">더보기</a></div>
+      <div class="newTeam__more"><a href="<c:url value='/team/main'></c:url>">다른 팀 더보기</a></div>
     </section>
     <section class="commu-section menu-section">
       <div class="commu__issue">
         <h2>실시간 🔥이슈</h2>
         <ul class="commu__issue-contents">
-          <li><a href="#">🔥ABC 가나다 마바사</a></li>
-          <li><a href="#">🔥DEF 가나다 마바사</a></li>
-          <li><a href="#">🔥GHI 가나다라마바사</a></li>
-          <li><a href="#">🔥GHI 가나다라마바사아</a></li>
+        	<c:forEach items="${hot}" var="h">
+          		<li><a href="<c:url value='/community/content/${h.bo_num}'></c:url>">🔥 ${h.bo_title}</a></li>
+          	</c:forEach>
         </ul>
       </div>
       <div class="commu__find">

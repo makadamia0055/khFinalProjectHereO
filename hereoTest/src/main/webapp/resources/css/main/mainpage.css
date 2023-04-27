@@ -101,7 +101,15 @@ body::-webkit-scrollbar {
 
 /* 팀 섹션 - Team 적용*/
 .team-section h2 {
+  margin-top: 50px;
   color: #d2001a;
+}
+.team-intro {
+	padding-left : 80px;
+}
+.smile-icon {
+	color: #FFCA03;
+	font-size:18px;
 }
 .newTeam-container {
   width: 100vw;
@@ -110,10 +118,11 @@ body::-webkit-scrollbar {
 }
 .newTeam__list {
   width: 25%;
-  margin-top: 10px;
-  height: 350px;
+  margin-top: 40px;
+  height: 400px;
   border: 1px solid #ecedf2;
   box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%);
+  border-radius: 50%;
 }
 .newTeam__more {
   width: inherit;

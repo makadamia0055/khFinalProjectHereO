@@ -2,9 +2,11 @@ package com.hereo.project.service;
 
 import java.util.ArrayList;
 
+import com.hereo.project.pagination.CommuCriteria;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.BoardVO;
+import com.hereo.project.vo.BoardVoteVO;
 import com.hereo.project.vo.MembersVO;
 
 public interface CommuService {
@@ -17,7 +19,6 @@ public interface CommuService {
 
 	ArrayList<BoardCategoryVO> getBoardCategory02(int bt_num);
 
-	ArrayList<BoardVO> getBoard(int bt_num);
 
 	BoardTypeVO getBoardTypebyBtNum(int bt_num);
 
@@ -28,6 +29,18 @@ public interface CommuService {
 	boolean updateBoard(BoardVO board);
 
 	boolean deleteBoard(BoardVO board, MembersVO user);
+
+	ArrayList<BoardVO> getBoard(int bt_num, CommuCriteria cri);
+
+	int getBoardTotalCount(CommuCriteria cri, int bt_num);
+
+	BoardVoteVO getBoardVote(MembersVO user, int bo_num);
+
+	int updateUpdown(int bv_bo_num, int bv_state, MembersVO user);
+
+	ArrayList<BoardVO> getTopFiveBoard(int bt_num);
+
+	ArrayList<BoardVO> getAllBoardForHot();
 
 
 }
