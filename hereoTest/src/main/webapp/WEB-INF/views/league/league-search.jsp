@@ -32,12 +32,12 @@
 	      <c:forEach items="${league }" var="lg">
 	        <li class="item-league">
 	          <div class="left-box">
-	            <a href="" class="link-league">
-	              <img src='<c:url value='/resources/img/league/kbo로고.pnq'></c:url>' class="item-league-logo"></img>
+	            <a href="<c:url value='/league/main${lg.lg_num}'></c:url>" class="link-league">
+	              <img src='<c:url value='/resources/img/league/kbo로고.png'></c:url>' class="item-league-logo"></img>
 	            </a>
 	          </div>
 	          <div class="right-box">
-	            리그 이름 : <a href="" class="link-league">${lg.lg_name }</a><br>
+	            리그 이름 : <a href="<c:url value='/league/main${lg.lg_num }'></c:url>" class="link-league">${lg.lg_name }</a><br>
 	            리그 상태 : <span>${lg.lg_state }</span>
 	          </div>
 	        </li>
