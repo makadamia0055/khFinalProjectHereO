@@ -46,5 +46,5 @@ public interface TeamDAO {
 
 	int updateTeam(@Param("tm")TeamVO team);
 
-
+	int countTeamTotalMatch(Integer tm_num);
 }
