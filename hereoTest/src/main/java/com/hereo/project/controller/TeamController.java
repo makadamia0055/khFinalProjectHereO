@@ -617,7 +617,7 @@ public class TeamController {
 	public ModelAndView TeamBoardReplyUpdatePOST(ModelAndView mv, BoardReplyVO reply, HttpServletRequest req) {
 		String url = req.getHeader("referer");
 		
-		int br_num = reply.getBr_ori_num();
+		int br_num = reply.getBr_num();
 		reply.setBr_num(br_num);
 		
 		boolean res = teamBoardService.updateReply(reply);
@@ -713,7 +713,6 @@ public class TeamController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		int replyCnt = teamBoardService.countReply(boNum);
-		
 		ArrayList<BoardReplyVO> list = teamBoardService.selectReplyByBoNumAndCri(cri, boNum);
 		PageMaker pm = new PageMaker(replyCnt, 10, cri);
 		

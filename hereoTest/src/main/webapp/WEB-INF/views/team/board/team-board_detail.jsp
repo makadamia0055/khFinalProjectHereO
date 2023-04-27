@@ -95,6 +95,7 @@
 								<input type="text" name="teamNum" value="${team.tm_num }" hidden readonly>
 								<input type="text" name="bo_num" value="${board.bo_num }" hidden readonly>
 								<input type="text" name="bo_me_id" value="${loginUser.me_id }" hidden readonly>
+								
 								<a type="button" class="btn-delete">삭제</a>
 							</form>
 						</c:if>
@@ -113,7 +114,10 @@
 						<div class="input-group mt-3">
 							<input type="text" name="br_me_id" hidden readonly value="${loginUser.me_id}">
 							<input type="text" name="br_bo_num" hidden readonly value="${board.bo_num}">
-							<input type="text" name="br_ori_num" hidden readonly value="0"> 
+							<input type="text" name="br_ori_num" hidden readonly value="0">
+							<input type="text" name="br_toward_num" value="" hidden readonly>
+							<input type="text" name="br_groupLayer" value="" hidden readonly>
+								 
 							<textarea name="br_contents" class="form-control" maxlength="300" placeholder="댓글을 입력해주세요."></textarea>
 							<div class="input-group-append">
     							<button class="input-group-text btn btn-secendary">댓글 입력</button>
@@ -220,12 +224,8 @@
    }
    /* 댓글 불러오기 ajax */
    function requestReply(){
-	   let replyObj={
-			   bo_num : ${board.bo_num},
-			   cri : cri
-	   };
-	   ajax("POST", replyObj, "<c:url value='/team/ajax/getReply?boNum="+"${board.bo_num}"+"'></c:url>", function(data){
-		   let replyStr=  createReply(data);
+	   ajax("POST", cri, "<c:url value='/team/ajax/getReply?boNum="+"${board.bo_num}"+"'></c:url>", function(data){
+		   let replyStr =  createReply(data);
 		   appendReply(replyStr);
 	   })
    }
@@ -258,10 +258,10 @@
 			+'<span class="nickname">'+nickAndRank.userMember.me_nickname+'</span>'
 		+'</span>'
 		+'<span class="box-date">'+replyDate+'</span>'
-	+'</div><div class="list-group-item list-group-item-action reply-contents" data-num="'+rp.br_num +'" data-ori_num="'+rp.br_ori_num +'">'
+	+'</div><div class="list-group-item list-group-item-action reply-contents" data-num="'+rp.br_num +'" data-ori_num="'+rp.br_ori_num +'" data-groupord="'+rp.br_groupOrd+'" data-grouplayer="'+rp.br_groupLayer+'">'
 	   /* 대댓 @닉네임 넣어주는 곳 */
 		if(rp.br_ori_num!=rp.br_num){
-		   let oriMeId= getOriMeId(rp.br_ori_num);
+		   let oriMeId= getOriMeId(rp.br_toward_num);
 		   rereObj ={
 				   me_id: oriMeId,
 		    		teamNum: ${team.tm_num}	   
@@ -298,7 +298,7 @@
 				if(i == data.pm.cri.page){
 					pmStr += ' active';
 				}
-				pmStr += '"><a href="#" class="page-link">'
+				pmStr += '"><a href="#" class="page-link page-index" data-index="'+ i +'">'
 				+ i +'</a></li>'
 				
 			}
@@ -308,6 +308,15 @@
 			$('.container-pagination .pagination li').remove();
 			$('.container-pagination .pagination').append(pmStr);
 			
+			$('.page-item .page-link').on('click', function(e){
+				e.preventDefault();
+				if($(this).hasClass('page-index')){
+					cri.page = $(this).data('index');
+					$('.box-reply').children().remove();
+					requestReply();
+					return;
+				}
+			})
    }
    /* 생성된 댓글 문자열을 넣어주는 함수 */
    function appendReply(str){
@@ -355,9 +364,14 @@
 	   $(rplyForm).show();
 	   $(this).parent().append(rplyForm);
 	   let dataNum = $(this).data('ori_num');
+	   let towardNum = $(this).data('num');
+	   let dataGroupOrd = $(this).data('groupord');
+	   let dataLayer = $(this).data('grouplayer');
 	   $(rplyForm).attr("action", "<c:url value='/team/board_reply_insert'></c:url>")
 
 	   $('[name=br_ori_num]').attr('value', dataNum);
+	   $('[name=br_toward_num]').attr('value', towardNum);
+	   $('[name=br_groupLayer]').attr('value', dataLayer+1);
 	   
 	   
    })
@@ -381,10 +395,12 @@
 	   let contents= $(this).parents('.reply-contents');
 	   $(contents).hide();
 	   $(contents).prev().after(rplyForm);
+	   $('.replyForm .input-group [name=br_num]').remove();
+	   $('.replyForm .input-group').append('<input type="text" name="br_num" hidden readonly value="'+dataNum+'">');
 	   let repText = $(contents).find('.reply-text').text();
 	   $(rplyForm).find('[name=br_contents]').text(repText)
 	   /* 수정은 ori_num 값을 건드릴 필요는 없음 근데 ori_num에 원 댓글 번호가 자동으로 들어가니
-	   그걸 ori_num 대용으로 사용함*/
+	   그걸 ori_num 대용으로 사용함 => 댓글 구현 형식을 바꾸면서 수정 방식도 바꿈*/
 	   $(rplyForm).attr("action", "<c:url value='/team/board_reply_update'></c:url>")
 	  	
  

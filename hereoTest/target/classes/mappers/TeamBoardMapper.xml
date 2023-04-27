@@ -91,15 +91,17 @@
 			where bo_num =#{bo_num}
 	</delete>
 	<insert id="insertReply">
-		insert into `board-reply`(br_num, br_ori_num, br_bo_num, br_me_id, br_contents, br_register_date)
+		insert into `board-reply`(br_num, br_ori_num, br_groupOrd, br_groupLayer, br_toward_num, br_bo_num, br_me_id, br_contents, br_register_date)
 		select ifnull(max(br_num), 0)+1,
 		<if test="br.br_ori_num == 0">
-			ifnull(max(br_num), 0)+1,
+			ifnull(max(br_num), 0)+1, 0, 0,
 		</if>
 		<if test="br.br_ori_num != 0">
-			#{br.br_ori_num},
+			#{br.br_ori_num}, ifnull((select max(br_groupOrd)+1 from `board-reply` where br_groupLayer = ${br.br_groupLayer}), 0),
+			
+			 #{br.br_groupLayer},
 		</if>
-			#{br.br_bo_num}, #{br.br_me_id}, #{br.br_contents}, now()
+			#{br.br_toward_num}, #{br.br_bo_num}, #{br.br_me_id}, #{br.br_contents}, now()
 			from `board-reply`
 	</insert>
 	<select id="countReply" resultType="int">
@@ -109,7 +111,7 @@
 	<select id="selectReplyByBoNumAndCri" resultType="com.hereo.project.vo.BoardReplyVO">
 		select * from `board-reply`
 			where br_bo_num = #{bo_num}
-			order by br_ori_num, br_num asc
+			order by br_ori_num, br_groupLayer, br_groupOrd
 			limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	<select id="selectMeIdByBrOriNum" resultType="String">
@@ -161,4 +163,15 @@
 			where bf_num = #{bf_num}
 			
 	</delete>
+	<select id="beforeDeleteReplyChecker" resultType="int">
+		select count(*) from `board-reply` where br_toward_num = #{br_num}
+	</select>
+	<update id="updateToDeletedReply">
+		update `board-reply`
+			set br_contents = '삭제된 댓글 입니다.',
+				br_state = 'deleted'
+			
+			where br_num = #{br_num}
+	</update>
+	
 </mapper>

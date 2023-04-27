@@ -71,6 +71,10 @@ public interface TeamBoardDAO {
 
 	void deleteBoardFilesByBfNum(Integer bf_num);
 
+	void updateToDeletedReply(Integer br_num);
+
+	int beforeDeleteReplyChecker(Integer br_num);
+
 	
 
 }

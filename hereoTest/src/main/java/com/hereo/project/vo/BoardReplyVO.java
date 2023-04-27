@@ -20,6 +20,9 @@ public class BoardReplyVO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date br_update_date;
 	private int br_ori_num;
+	private int br_groupOrd;
+	private int br_groupLayer;
+	private int br_toward_num;
 	
 	public String getBr_register_date_str() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

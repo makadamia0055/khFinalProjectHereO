@@ -227,6 +227,10 @@ public class TeamBoardServiceImp implements TeamBoardService {
 	public boolean deleteReply(Integer br_num) {
 		if(br_num == null)
 			return false;
+		if(teamBoardDao.beforeDeleteReplyChecker(br_num)!=0) {
+			teamBoardDao.updateToDeletedReply(br_num);
+			return true;
+		}
 		return teamBoardDao.deleteReply(br_num)!=0;
 	}
 	@Override
