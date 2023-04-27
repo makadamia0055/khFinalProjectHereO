@@ -1,41 +1,88 @@
 package com.hereo.project.controller;
 
+
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hereo.project.dao.RegionDAO;
+import com.hereo.project.pagination.Criteria;
+import com.hereo.project.pagination.PageMaker;
+import com.hereo.project.service.LeagueService;
+import com.hereo.project.service.MembersService;
+import com.hereo.project.service.RecordService;
+import com.hereo.project.vo.LeagueVO;
+import com.hereo.project.vo.MembersVO;
+import com.hereo.project.vo.PlayerrecordHitterVO;
+import com.hereo.project.vo.RegionVO;
+import com.hereo.project.vo.TeamPlayerVO;
+import com.hereo.project.vo.TeamVO;
 
 
 
 @Controller
 public class LeagueController {
+
+	@Autowired
+	LeagueService leagueService;
+	@Autowired
+	RecordService recordService;
+	@Autowired
+	MembersService memberService;
+	@Autowired
+	RegionDAO regionDao;
+	
+	@RequestMapping(value = "/league/leagueSearch", method = RequestMethod.GET)
+	public ModelAndView leagueSearch(ModelAndView mv , Criteria cri) {
+		int totalCount = leagueService.countLeague("활동중", cri);
+		if(cri==null) {
+			cri = new Criteria();
+		}
+		cri.setPerPageNum(8);
+		PageMaker pm = new PageMaker(totalCount, 8, cri);	
+		
+		ArrayList<LeagueVO> leagueList = leagueService.selectLeaguesByCriAndState( "활동중", pm.getCri());
+		
+		RegionVO[] regionArr = regionDao.selectAllRegion();
+		
+		mv.addObject("league", leagueList);
+		mv.addObject("region", regionArr);
+		mv.addObject("pm", pm);
+		mv.setViewName("/league/league-search");
+		return mv;
+	}
 	
 	@RequestMapping(value = "/league/main", method = RequestMethod.GET)
 	public ModelAndView leagueMain(ModelAndView mv) {
+		
 		mv.setViewName("/league/league-main");
 		return mv;
 	}
-	@RequestMapping(value = "/league/recodeHit", method = RequestMethod.GET)
-	public ModelAndView leagueRecodeHit(ModelAndView mv) {
-		mv.setViewName("/league/league-recode-hit");
+	@RequestMapping(value = "/league/recordHit", method = RequestMethod.GET)
+	public ModelAndView leagueRecordHit(ModelAndView mv) {
+		ArrayList<PlayerrecordHitterVO> hList = recordService.getSelectAllHitRecord();
+
+		mv.addObject("hList", hList);
+		mv.setViewName("/league/league-record-hit");
 		return mv;
 	}
-	@RequestMapping(value = "/league/recodePit", method = RequestMethod.GET)
-	public ModelAndView leagueRecodePit(ModelAndView mv) {
-		mv.setViewName("/league/league-recode-pit");
+	@RequestMapping(value = "/league/recordPit", method = RequestMethod.GET)
+	public ModelAndView leagueRecordPit(ModelAndView mv) {
+		mv.setViewName("/league/league-record-pit");
 		return mv;
 	}
-	@RequestMapping(value = "/league/recodeTeam", method = RequestMethod.GET)
-	public ModelAndView leagueRecodeTeam(ModelAndView mv) {
-		mv.setViewName("/league/league-recode-team");
+	@RequestMapping(value = "/league/recordTeam", method = RequestMethod.GET)
+	public ModelAndView leagueRecordTeam(ModelAndView mv) {
+		mv.setViewName("/league/league-record-team");
 		return mv;
 	}
 	@RequestMapping(value = "/league/schedule", method = RequestMethod.GET)
 	public ModelAndView leagueSchedule(ModelAndView mv) {
+		
 		mv.setViewName("/league/league-schedule");
 		return mv;
 	}
@@ -54,8 +101,6 @@ public class LeagueController {
 		mv.setViewName("/league/league-schedule-managerment");
 		return mv;
 	}
-	
-	
 	
 	
 }

@@ -218,7 +218,12 @@ public class TeamServiceImp implements TeamService{
 		
 	}
 
-
+	@Override
+	public int countTeamTotalMatch(Integer teamNum) {
+		if(teamNum==null||teamNum==0)
+			return -1;
+		return teamDao.countTeamTotalMatch(teamNum);
+	}
 	
 	
 }

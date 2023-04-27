@@ -110,11 +110,18 @@
 				tm_num = #{tm.tm_num}
 				
 	</update>
+
 	
 	<select id="getNewTeam" resultType="com.hereo.project.vo.TeamVO">
 		select * from `team`
 			order by tm_num DESC
 			limit 3
+	</select>
+
+	<select id="countTeamTotalMatch" resultType="int">
+	 select distinct count(*) from `match-record` 
+	 where mr_ms_num = 
+	 (select ms_num from `match-schedule` where ms_tm_home_num = #{tm_num} or ms_tm_away_num= #{tm_num})
 	</select>
 
 </mapper>

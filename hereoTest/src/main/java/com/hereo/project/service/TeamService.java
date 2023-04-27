@@ -53,6 +53,8 @@ public interface TeamService {
 
 	ArrayList<TeamVO> getNewTeam();
 
+	int countTeamTotalMatch(Integer teamNum);
+
 
 
 	

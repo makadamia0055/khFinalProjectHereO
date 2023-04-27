@@ -10,10 +10,10 @@
 	<div class="top-box">
 		<ul class="nav nav-tabs">
 			<li class="nav-item">
-				<a class="nav-link hit active" href="<c:url value='/league/recodeHit'></c:url>">타자</a>
+				<a class="nav-link hit active" href="<c:url value='/league/recordHit'></c:url>">타자</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link pit" href="<c:url value='/league/recodePit'></c:url>">투수</a>
+				<a class="nav-link pit" href="<c:url value='/league/recordPit'></c:url>">투수</a>
 			</li>
 
 		</ul>
@@ -125,117 +125,33 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items="${hList }" var="pl">	
 					<tr>
 						<td>1</td>
-						<td>이정후(22)</td>
-						<td>두산공작기계야구단</td>
+						<td>${pl.ph_tp_num}</td>
+						<td>몬스터즈</td>
 						<td>0.364</td>
-						<td>10</td>
-						<td>25</td>
-						<td>22</td>
-						<td>8</td>
 						<td>1</td>
-						<td>0</td>
-						<td>2</td>
-						<td>7</td>
-						<td>0</td>
-						<td>1</td>
-						<td>0</td>
-						<td>3</td>
-						<td>0</td>
-						<td>1</td>
+						<td>${pl.ph_bats}</td>
+						<td>${pl.ph_hits }</td>
+						<td>${pl.ph_single_hits }</td>
+						<td>${pl.ph_twobase_hits }</td>
+						<td>${pl.ph_threebase_hits}</td>
+						<td>${pl.ph_homeruns }</td>
 						<td>0</td>
 						<td>0</td>
+						<td>${pl.ph_steals }</td>
+						<td>${pl.ph_fail_steals }</td>
+						<td>${pl.ph_fourballs }</td>
+						<td>${pl.ph_hitbypitches }</td>
+						<td>${pl.ph_strike_outs }</td>
+						<td>${pl.ph_doubleplays }</td>
+						<td>${pl.ph_errors }</td>
 					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
-			<div class="bottom-box pit hidden">
-		<table class="table">
-			<thead>
-				<tr>
-					<th style="width: 4%;">순위</th>
-					<th style="width: 7%;">선수명</th>
-					<th style="width: 12%;">팀명</th>
-					<th style="width: 8%;">
-						<a >평균자책점</a>
-					</th>
-					<th style="width: 4%;">
-						<a >경기</a>
-					</th>
-					<th style="width: 4%;">
-						<a >승리</a>
-					</th>
-					<th style="width: 4%;">
-						<a >패배</a>
-					</th>
-					<th style="width: 5%;">
-						<a >세이브</a>
-					</th>
-					<th style="width: 4%;">
-						<a >홀드</a>
-					</th>
-					<th style="width: 4%;">
-						<a >승률</a>
-					</th>
-					<th style="width: 5%;">
-						<a >타자수</a>
-					</th>
-					<th style="width: 5%;">
-						<a >이닝</a>
-					</th>
-					<th style="width: 4%;">
-						<a >안타</a>
-					</th>
-					<th style="width: 4%;">
-						<a >홈런</a>
-					</th>
-					<th style="width: 4%;">
-						<a >볼넷</a>
-					</th>
-					<th style="width: 4%;">
-						<a >사구</a>
-					</th>
-					<th style="width: 4%;">
-						<a >삼진</a>
-					</th>
-					<th style="width: 4%;">
-						<a >실점</a>
-					</th>
-					<th style="width: 5%;">
-						<a >자책점</a>
-					</th>
-					<th style="width: 5%;">
-						<a >투구수</a>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>1</td>
-					<td>이병헌</td>
-					<td>두산공작기계야구단</td>
-					<td>3.38</td>
-					<td>8</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>3</td>
-					<td>-</td>
-					<td>22</td>
-					<td>5 1/3</td>
-					<td>1</td>
-					<td>1</td>
-					<td>4</td>
-					<td>1</td>
-					<td>4</td>
-					<td>2</td>
-					<td>2</td>
-					<td>0</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
 	</div>
 	
 	

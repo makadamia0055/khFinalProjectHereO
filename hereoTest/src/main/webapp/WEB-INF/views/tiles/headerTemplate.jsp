@@ -41,12 +41,11 @@
               </ul>
             </li>
             <li class="menu-container__box top-menu__league-hover">
-              <a href="<c:url value='/league/main'></c:url>"><span>리그</span></a>
+              <a href="<c:url value='/league/leagueSearch'></c:url>"><span>리그</span></a>
               <ul class="submenu-containerBox1 league-submenu__01">
                 <li>
-                  <a href="../recodeGame/insertScore.html" target="_top"
-                    >리그 기록</a
-                  >
+                  <a href="<c:url value='/league/leagueSearch'></c:url>" target="_top"
+                    >리그찾기</a>
                 </li>
               </ul>
             </li>
@@ -95,6 +94,7 @@
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
     ></script>
+
 	<script>
 	$('.login_popup').click(function(e){
 
@@ -106,3 +106,4 @@
 
 	})
 	</script>
+

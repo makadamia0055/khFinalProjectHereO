@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hereo.project.dao.LeagueDAO">
+		<select id="countAllleague" resultType="int">
+		select count(lg_num)
+			from league
+			where lg_state like #{state}
+			<if test="cri.type != 0">
+  				and lg_re_num= #{cri.type}  				
+  			</if>
+	</select>
+	
+	<select id="selectLeaguesByCriAndState" resultType="com.hereo.project.vo.LeagueVO">
+		select * from league
+			where 
+			(lg_name like concat('%',#{cri.search} ,'%'))
+			<if test="cri.type != 0">
+  				and lg_re_num= #{cri.type}  				
+  			</if>
+  			order by lg_num desc
+			limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+
+</mapper>
