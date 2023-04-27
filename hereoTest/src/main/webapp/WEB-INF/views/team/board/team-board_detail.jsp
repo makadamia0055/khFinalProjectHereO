@@ -258,7 +258,7 @@
 			+'<span class="nickname">'+nickAndRank.userMember.me_nickname+'</span>'
 		+'</span>'
 		+'<span class="box-date">'+replyDate+'</span>'
-	+'</div><div class="list-group-item list-group-item-action reply-contents" data-num="'+rp.br_num +'">'
+	+'</div><div class="list-group-item list-group-item-action reply-contents" data-num="'+rp.br_num +'" data-ori_num="'+rp.br_ori_num +'">'
 	   /* 대댓 @닉네임 넣어주는 곳 */
 		if(rp.br_ori_num!=rp.br_num){
 		   let oriMeId= getOriMeId(rp.br_ori_num);
@@ -354,7 +354,7 @@
 	   let rplyForm = $('[name=rereplyForm]');
 	   $(rplyForm).show();
 	   $(this).parent().append(rplyForm);
-	   let dataNum = $(this).data('num');
+	   let dataNum = $(this).data('ori_num');
 	   $(rplyForm).attr("action", "<c:url value='/team/board_reply_insert'></c:url>")
 
 	   $('[name=br_ori_num]').attr('value', dataNum);
