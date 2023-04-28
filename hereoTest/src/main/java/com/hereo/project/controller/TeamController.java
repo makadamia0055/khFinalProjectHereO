@@ -602,6 +602,7 @@ public class TeamController {
 		
 		String url = req.getHeader("referer");
 		boolean res = teamBoardService.insertReply(reply);
+		System.out.println(reply);
 		if(res) {
 			mv.addObject("msg", "답글이 등록되었습니다.");
 			

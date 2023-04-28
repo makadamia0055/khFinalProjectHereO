@@ -23,6 +23,7 @@ public class BoardReplyVO {
 	private int br_groupOrd;
 	private int br_groupLayer;
 	private int br_toward_num;
+	private String br_state;
 	
 	public String getBr_register_date_str() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

@@ -200,7 +200,11 @@ public class TeamBoardServiceImp implements TeamBoardService {
 				reply.getBr_contents()==null||reply.getBr_contents().trim().length()==0)
 			return false;
 		
-		return teamBoardDao.insertReply(reply)!=0;
+		boolean res =teamBoardDao.insertReply(reply)!=0;
+		reply.setBr_groupOrd(reply.getBr_groupOrd()+1);
+		updateReplyPlusOne(reply);	
+				
+		return res;
 	}
 
 	@Override
@@ -227,10 +231,11 @@ public class TeamBoardServiceImp implements TeamBoardService {
 	public boolean deleteReply(Integer br_num) {
 		if(br_num == null)
 			return false;
-		if(teamBoardDao.beforeDeleteReplyChecker(br_num)!=0) {
-			teamBoardDao.updateToDeletedReply(br_num);
-			return true;
-		}
+//		프론트 단에서 해결하기로 결정
+//		if(teamBoardDao.beforeDeleteReplyChecker(br_num)!=0) {
+//			teamBoardDao.updateToDeletedReply(br_num);
+//			return true;
+//		}
 		return teamBoardDao.deleteReply(br_num)!=0;
 	}
 	@Override
@@ -321,5 +326,9 @@ public class TeamBoardServiceImp implements TeamBoardService {
 		UploadFileUtils.removeFile(uploadPath, file.getBf_filename());
 
 		teamBoardDao.deleteBoardFilesByBfNum(s);
+	}
+	public void updateReplyPlusOne(BoardReplyVO reply) {
+		
+		teamBoardDao.updateReplyPlusOne(reply);
 	}
 }

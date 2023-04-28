@@ -115,6 +115,7 @@
 							<input type="text" name="br_me_id" hidden readonly value="${loginUser.me_id}">
 							<input type="text" name="br_bo_num" hidden readonly value="${board.bo_num}">
 							<input type="text" name="br_ori_num" hidden readonly value="0">
+							<input type="text" name="br_groupOrd" value="" hidden readonly>
 							<input type="text" name="br_toward_num" value="" hidden readonly>
 							<input type="text" name="br_groupLayer" value="" hidden readonly>
 								 
@@ -236,6 +237,10 @@
 	   
 	   let replyStr = "";
 	   for(let rp of data.replyList){
+		   if(rp.br_state=="delete"&&!checkRefReply(data.replyList, rp.br_num)){
+			   console.log(1);
+			   continue;
+		   }
 		   wObj ={
 				   me_id: rp.br_me_id,
 		    		teamNum: ${team.tm_num}	   
@@ -258,7 +263,7 @@
 			+'<span class="nickname">'+nickAndRank.userMember.me_nickname+'</span>'
 		+'</span>'
 		+'<span class="box-date">'+replyDate+'</span>'
-	+'</div><div class="list-group-item list-group-item-action reply-contents" data-num="'+rp.br_num +'" data-ori_num="'+rp.br_ori_num +'" data-groupord="'+rp.br_groupOrd+'" data-grouplayer="'+rp.br_groupLayer+'">'
+	+'</div><div class="list-group-item list-group-item-action reply-contents" data-num="'+rp.br_num +'" data-ori_num="'+rp.br_ori_num +'" data-groupOrd="'+rp.br_groupOrd+'" data-grouplayer="'+rp.br_groupLayer+'">'
 	   /* 대댓 @닉네임 넣어주는 곳 */
 		if(rp.br_ori_num!=rp.br_num){
 		   let oriMeId= getOriMeId(rp.br_toward_num);
@@ -270,21 +275,39 @@
 		replyStr += '<span class="badge badge-pill badge-success">@' +reNickAndRank.userMember.me_nickname + '</span> '
 	   }
 	/* 댓글 내용 */
-	 replyStr += '<span class="reply-text">'+rp.br_contents +'</span>';
-	 
-	/* 댓글 버튼 넣어주는 곳 */
+	/* 댓글 상태가 n인 것만 출력되도록 */
+	if(rp.br_state=="n"){
+		replyStr += '<span class="reply-text">'+rp.br_contents +'</span>';
+		
+		/* 댓글 버튼 넣어주는 곳 */
+
 		if(rp.br_me_id == '${loginUser.me_id}'||viewAuth){
 			
-		replyStr += '<br><div class="d-flex flex-row-reverse" >'
-		+'<button class="btn btn-outline-secondary btn-sm btn-more btn-reply-delete" data-toggle="tooltip" title="댓글 삭제"><i class="fa-solid fa-trash" style="color: #5a5a63;"></i></button>'
-		+'<button class="btn btn-outline-secondary btn-sm btn-more btn-reply-edit ml-2" data-toggle="tooltip" title="댓글 수정"><i class="fa-solid fa-gear" style="color: #5a5a63;"></i></button>'
-		+'</div>'
+			replyStr += '<br><div class="d-flex flex-row-reverse" >'
+			+'<button class="btn btn-outline-secondary btn-sm btn-more btn-reply-delete" data-toggle="tooltip" title="댓글 삭제"><i class="fa-solid fa-trash" style="color: #5a5a63;"></i></button>'
+			+'<button class="btn btn-outline-secondary btn-sm btn-more btn-reply-edit ml-2" data-toggle="tooltip" title="댓글 수정"><i class="fa-solid fa-gear" style="color: #5a5a63;"></i></button>'
+			+'</div>'
+			}
+		}else if(rp.br_state=="deleted"&&checkRefReply(data.replyList, rp.br_num)){
+		   replyStr += '<span class="reply-text delete-reply">삭제된 댓글 입니다.</span>';
 		}
 		replyStr += '</div></li>'
-	   }
-	   
+   }
+	 
 	   createAndAppendPagination(data);
 	   return replyStr;
+   }
+   /* 댓글의 레퍼런스(자신을 참조하는 대댓이 있는지)가 있는지 살피는 메소드 */
+   function checkRefReply(data, num){
+	   let res = false;
+	   for(let i of data){
+		   if(i.br_forward_num == num && i.br_state != "deleted"){
+			   res= true;
+			   return res;   
+		   }
+			
+	   }
+	   return res;
    }
    /* 댓글 페이지네이션 넣어주는 메소드 */
    function createAndAppendPagination(data){
@@ -360,16 +383,21 @@
 		   alert('로그인 한 회원만 댓글을 달 수 있습니다.');
 		   return;
 	   }
+	   if($(this).find('.reply-text').hasClass('delete-reply')){
+		   
+		   return;
+	   }
 	   let rplyForm = $('[name=rereplyForm]');
 	   $(rplyForm).show();
 	   $(this).parent().append(rplyForm);
 	   let dataNum = $(this).data('ori_num');
 	   let towardNum = $(this).data('num');
-	   let dataGroupOrd = $(this).data('groupord');
+	   let dataGroupOrd = $(this).data('groupord'); 
 	   let dataLayer = $(this).data('grouplayer');
 	   $(rplyForm).attr("action", "<c:url value='/team/board_reply_insert'></c:url>")
 
-	   $('[name=br_ori_num]').attr('value', dataNum);
+   	   $('[name=br_ori_num]').attr('value', dataNum);
+	   $('[name=br_groupOrd]').attr('value', dataGroupOrd);
 	   $('[name=br_toward_num]').attr('value', towardNum);
 	   $('[name=br_groupLayer]').attr('value', dataLayer+1);
 	   
