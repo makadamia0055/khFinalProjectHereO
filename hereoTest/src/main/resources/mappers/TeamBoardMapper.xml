@@ -90,18 +90,21 @@
 		delete from `board`
 			where bo_num =#{bo_num}
 	</delete>
-	<insert id="insertReply">
-		insert into `board-reply`(br_num, br_ori_num, br_groupOrd, br_groupLayer, br_toward_num, br_bo_num, br_me_id, br_contents, br_register_date)
-		select ifnull(max(br_num), 0)+1,
-		<if test="br.br_toward_num == 0">
-			ifnull(max(br_num), 0)+1, 0, 0,
-		</if>
-		<if test="br.br_toward_num != 0">
-			#{br.br_ori_num}, ifnull((select br_groupOrd from `board-reply` where br_ori_num=#{br.br_ori_num} and br_groupOrd > #{br.br_groupOrd} and #{br.br_groupLayer} >= br_groupLayer order by br_groupOrd limit 1), #{br.br_groupOrd})+1, #{br.br_groupLayer},
-		</if>
-			#{br.br_toward_num}, #{br.br_bo_num}, #{br.br_me_id}, #{br.br_contents}, now()
-			from `board-reply`
+	<insert id="insertReply" useGeneratedKeys="true" keyProperty="br.br_num">
+	  <!-- insert 쿼리 -->
+	  INSERT INTO `board-reply`(br_ori_num, br_groupOrd, br_groupLayer, br_toward_num, br_bo_num, br_me_id, br_contents, br_register_date)
+	  SELECT 
+	    <if test="br.br_toward_num == 0">
+	      0, 1, 0,
+	    </if>
+	    <if test="br.br_toward_num != 0">
+	      #{br.br_ori_num}, IFNULL((SELECT br_groupOrd FROM `board-reply` WHERE br_ori_num=#{br.br_ori_num} AND br_groupOrd > #{br.br_groupOrd} AND #{br.br_groupLayer} >= br_groupLayer ORDER BY br_groupOrd LIMIT 1), ifnull(MAX(br_groupOrd),0))+1, #{br.br_groupLayer},
+	    </if>
+	    #{br.br_toward_num}, #{br.br_bo_num}, #{br.br_me_id}, #{br.br_contents}, NOW()
+	    FROM `board-reply`
 	</insert>
+
+
 	<select id="countReply" resultType="int">
 		select count(*) from `board-reply`
 			where br_bo_num = #{bo_num}
@@ -174,7 +177,15 @@
 	<update id="updateReplyPlusOne">
 		update `board-reply`
 			set br_groupOrd =  br_groupOrd + 1
-       		where br_ori_num = #{br.br_ori_num} and br_groupOrd > #{br.br_groupOrd};
+       		where br_ori_num = #{br.br_ori_num} and br_groupOrd >= #{br.br_groupOrd} and br_num !=#{br.br_num};
+	</update>
+	<select id="selectReplyByBoNum" resultType="com.hereo.project.vo.BoardReplyVO">
+		select * from `board-reply` where br_num = #{br_num}
+	</select>
+	<update id="updateReplyOriNum">
+		update `board-reply`
+			set br_ori_num = #{br.br_num}
+			where br_num = #{br.br_num} 
 	</update>
 	
 </mapper>

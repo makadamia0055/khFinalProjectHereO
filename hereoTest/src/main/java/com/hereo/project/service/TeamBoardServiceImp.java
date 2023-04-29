@@ -199,10 +199,12 @@ public class TeamBoardServiceImp implements TeamBoardService {
 		if(reply==null||reply.getBr_me_id()==null||reply.getBr_me_id().trim().length()==0||
 				reply.getBr_contents()==null||reply.getBr_contents().trim().length()==0)
 			return false;
-		
 		boolean res =teamBoardDao.insertReply(reply)!=0;
-		reply.setBr_groupOrd(reply.getBr_groupOrd()+1);
-		updateReplyPlusOne(reply);	
+		if(reply.getBr_toward_num()==0) {
+			teamBoardDao.updateReplyOriNum(reply);
+		}
+		
+		updateReplyPlusOne(reply.getBr_num());	
 				
 		return res;
 	}
@@ -327,8 +329,8 @@ public class TeamBoardServiceImp implements TeamBoardService {
 
 		teamBoardDao.deleteBoardFilesByBfNum(s);
 	}
-	public void updateReplyPlusOne(BoardReplyVO reply) {
-		
+	public void updateReplyPlusOne(Integer br_num) {
+		BoardReplyVO reply = teamBoardDao.selectReplyByBoNum(br_num);
 		teamBoardDao.updateReplyPlusOne(reply);
 	}
 }

@@ -77,6 +77,10 @@ public interface TeamBoardDAO {
 
 	void updateReplyPlusOne(@Param("br")BoardReplyVO reply);
 
+	BoardReplyVO selectReplyByBoNum(@Param("br_num")Integer br_num);
+
+	void updateReplyOriNum(@Param("br")BoardReplyVO reply);
+
 	
 
 }
