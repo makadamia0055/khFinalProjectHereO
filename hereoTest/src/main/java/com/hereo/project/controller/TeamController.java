@@ -602,7 +602,6 @@ public class TeamController {
 	public ModelAndView TeamBoardReplyPOST(ModelAndView mv, BoardReplyVO reply, HttpServletRequest req) {
 		
 		String url = req.getHeader("referer");
-		System.out.println(reply );
 		boolean res = teamBoardService.insertReply(reply);
 		if(res) {
 			mv.addObject("msg", "댓글이 등록되었습니다.");

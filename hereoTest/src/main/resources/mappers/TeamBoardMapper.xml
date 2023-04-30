@@ -92,17 +92,20 @@
 	</delete>
 	<insert id="insertReply" useGeneratedKeys="true" keyProperty="br.br_num">
 	 INSERT INTO `board-reply`(br_ori_num, br_groupOrd, br_groupLayer, br_toward_num, br_bo_num, br_me_id, br_contents, br_register_date, br_state)
-	  value(
+	  select
 	    <if test="br.br_toward_num == 0">
 	      0, 1, 0,
 	    </if>
 	    <if test="br.br_toward_num != 0">
-	      #{br.br_ori_num}, IFNULL((SELECT br_groupOrd FROM `board-reply` WHERE br_ori_num=#{br.br_ori_num} AND br_groupOrd > #{br.br_groupOrd} AND #{br.br_groupLayer} >= br_groupLayer ORDER BY br_groupOrd LIMIT 1), ifnull((select MAX(br_groupOrd) from `board-reply` where br_ori_num = #{br.br_ori_num}),0)+1), #{br.br_groupLayer},
+	      #{br.br_ori_num}, 
+	      IFNULL((select gO from 
+	      	(SELECT br_groupOrd as gO FROM `board-reply` WHERE br_ori_num=#{br.br_ori_num} AND br_groupOrd > #{br.br_groupOrd} AND #{br.br_groupLayer} >= br_groupLayer ORDER BY br_groupOrd LIMIT 1) as tmpT), 
+	      	IFNULL(max(br_groupOrd),0)+1), 
+	      #{br.br_groupLayer},
 	    </if>
-	    #{br.br_toward_num}, #{br.br_bo_num}, #{br.br_me_id}, #{br.br_contents}, NOW(), 'n')
+	    #{br.br_toward_num}, #{br.br_bo_num}, #{br.br_me_id}, #{br.br_contents}, NOW(), 'n'
+	    from `board-reply` where br_ori_num = #{br.br_ori_num}
 	</insert>
-
-
 	<select id="countReply" resultType="int">
 		select count(*) from `board-reply`
 			where br_bo_num = #{bo_num}
@@ -137,7 +140,6 @@
 			set bf_bo_num = #{bo_num}
 			where bf_num = #{bf_num}
 			
-	
 	</update>
 	<delete id="deleteSummerNoteImg">
 		delete from `board-file`
@@ -168,15 +170,39 @@
 	<update id="updateToDeletedReply">
 		update `board-reply`
 			set br_state = 'deleted'
-				
-			
 			where br_num = #{br_num}
 	</update>
 	<update id="updateReplyPlusOne">
-		update `board-reply`
-			set br_groupOrd =  br_groupOrd + 1
-       		where br_ori_num = #{br.br_ori_num} and br_groupOrd >= #{br.br_groupOrd} and br_num !=#{br.br_num};
+		 update `board-reply`
+		      set br_groupOrd = br_groupOrd + 1
+		     	 where br_ori_num = #{br.br_ori_num}
+		     		 and br_groupOrd > #{br.br_groupOrd}
+		     		 and br_num != #{br.br_num}
+		    	 	 and br_groupLayer != #{br.br_groupLayer};
+		 
 	</update>
+	<update id="updateReplyPlusOneForDup">
+		 <choose>
+		 	<when test="res">
+		 		update `board-reply`
+		     	 	set br_groupOrd = br_groupOrd + 1
+		    	  	where br_num = #{br.br_num};
+		 	</when>
+		 	<otherwise>
+		 		update `board-reply`
+		 			set br_groupOrd = br_groupOrd + 1
+		 			where br_num !=#{br.br_num} and br_groupOrd=#{br.br_groupOrd}
+		 	</otherwise>
+		 </choose>
+		 
+	</update>
+	<select id="checkDupOrd" resultType="int">
+		select count(*) from `board-reply`
+			where br_ori_num = #{br.br_ori_num}
+				and br_groupOrd = #{br.br_groupOrd}
+				and br_groupLayer = #{br.br_groupLayer}
+	</select>
+	
 	<select id="selectReplyByBoNum" resultType="com.hereo.project.vo.BoardReplyVO">
 		select * from `board-reply` where br_num = #{br_num}
 	</select>

@@ -199,9 +199,10 @@ public class TeamBoardServiceImp implements TeamBoardService {
 		if(reply==null||reply.getBr_me_id()==null||reply.getBr_me_id().trim().length()==0||
 				reply.getBr_contents()==null||reply.getBr_contents().trim().length()==0)
 			return false;
+		boolean res;
 		
-		boolean res = teamBoardDao.insertReply(reply)!=0;
-		System.out.println(res);
+		res= teamBoardDao.insertReply(reply)!=0;	
+		
 		
 		if(reply.getBr_toward_num()==0&&res) {
 			teamBoardDao.updateReplyOriNum(reply);
@@ -335,5 +336,9 @@ public class TeamBoardServiceImp implements TeamBoardService {
 	public void updateReplyPlusOne(Integer br_num) {
 		BoardReplyVO reply = teamBoardDao.selectReplyByBoNum(br_num);
 		teamBoardDao.updateReplyPlusOne(reply);
+		boolean res = teamBoardDao.checkDupOrd(reply)>1;
+		teamBoardDao.updateReplyPlusOneForDup(reply, res);
+		
+		
 	}
 }

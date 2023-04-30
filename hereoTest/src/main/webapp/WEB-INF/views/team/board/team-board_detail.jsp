@@ -103,7 +103,7 @@
 					<form name="replyForm" class="replyForm" action="<c:url value='/team/board_reply_insert'></c:url>" method="post">
 						<div class="input-group mt-3">
 							<input type="text" name="br_me_id" hidden readonly value="${loginUser.me_id}">
-							<input type="text" name="br_bo_num" hidden value="${board.bo_num }"> 
+							<input type="text" name="br_bo_num" hidden value="${board.bo_num}"> 
 							<textarea name="br_contents" class="form-control" maxlength="300" placeholder="댓글을 입력해주세요."></textarea>
 							<div class="input-group-append">
     							<button class="input-group-text btn btn-secendary">댓글 입력</button>
@@ -114,7 +114,7 @@
 						<div class="input-group mt-3">
 							<input type="text" name="br_me_id" hidden readonly value="${loginUser.me_id}">
 							<input type="text" name="br_bo_num" hidden readonly value="${board.bo_num}">
-							<input type="text" name="br_ori_num" hidden readonly value="0">
+							<input type="text" name="br_ori_num" value="" hidden readonly >
 							<input type="text" name="br_groupOrd" value="" hidden readonly>
 							<input type="text" name="br_toward_num" value="" hidden readonly>
 							<input type="text" name="br_groupLayer" value="" hidden readonly>
