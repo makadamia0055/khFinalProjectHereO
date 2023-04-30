@@ -199,12 +199,15 @@ public class TeamBoardServiceImp implements TeamBoardService {
 		if(reply==null||reply.getBr_me_id()==null||reply.getBr_me_id().trim().length()==0||
 				reply.getBr_contents()==null||reply.getBr_contents().trim().length()==0)
 			return false;
-		boolean res =teamBoardDao.insertReply(reply)!=0;
-		if(reply.getBr_toward_num()==0) {
+		
+		boolean res = teamBoardDao.insertReply(reply)!=0;
+		System.out.println(res);
+		
+		if(reply.getBr_toward_num()==0&&res) {
 			teamBoardDao.updateReplyOriNum(reply);
 		}
-		
-		updateReplyPlusOne(reply.getBr_num());	
+		if(res)
+			updateReplyPlusOne(reply.getBr_num());	
 				
 		return res;
 	}

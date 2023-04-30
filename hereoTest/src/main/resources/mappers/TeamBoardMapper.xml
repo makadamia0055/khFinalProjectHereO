@@ -91,17 +91,15 @@
 			where bo_num =#{bo_num}
 	</delete>
 	<insert id="insertReply" useGeneratedKeys="true" keyProperty="br.br_num">
-	  <!-- insert 쿼리 -->
-	  INSERT INTO `board-reply`(br_ori_num, br_groupOrd, br_groupLayer, br_toward_num, br_bo_num, br_me_id, br_contents, br_register_date)
-	  SELECT 
+	 INSERT INTO `board-reply`(br_ori_num, br_groupOrd, br_groupLayer, br_toward_num, br_bo_num, br_me_id, br_contents, br_register_date, br_state)
+	  value(
 	    <if test="br.br_toward_num == 0">
 	      0, 1, 0,
 	    </if>
 	    <if test="br.br_toward_num != 0">
-	      #{br.br_ori_num}, IFNULL((SELECT br_groupOrd FROM `board-reply` WHERE br_ori_num=#{br.br_ori_num} AND br_groupOrd > #{br.br_groupOrd} AND #{br.br_groupLayer} >= br_groupLayer ORDER BY br_groupOrd LIMIT 1), ifnull(MAX(br_groupOrd),0))+1, #{br.br_groupLayer},
+	      #{br.br_ori_num}, IFNULL((SELECT br_groupOrd FROM `board-reply` WHERE br_ori_num=#{br.br_ori_num} AND br_groupOrd > #{br.br_groupOrd} AND #{br.br_groupLayer} >= br_groupLayer ORDER BY br_groupOrd LIMIT 1), ifnull((select MAX(br_groupOrd) from `board-reply` where br_ori_num = #{br.br_ori_num}),0)+1), #{br.br_groupLayer},
 	    </if>
-	    #{br.br_toward_num}, #{br.br_bo_num}, #{br.br_me_id}, #{br.br_contents}, NOW()
-	    FROM `board-reply`
+	    #{br.br_toward_num}, #{br.br_bo_num}, #{br.br_me_id}, #{br.br_contents}, NOW(), 'n')
 	</insert>
 
 
