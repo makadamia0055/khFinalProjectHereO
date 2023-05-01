@@ -100,6 +100,7 @@
 							</form>
 						</c:if>
 					</div>
+					<!-- 그냥 댓글 -->
 					<form name="replyForm" class="replyForm" action="<c:url value='/team/board_reply_insert'></c:url>" method="post">
 						<div class="input-group mt-3">
 							<input type="text" name="br_me_id" hidden readonly value="${loginUser.me_id}">
@@ -110,6 +111,7 @@
   							</div>
 						</div>
 					</form>
+					<!-- 대댓 -->
 					<form name="rereplyForm" style="display:none;" class="ml-3 replyForm" action="<c:url value='/team/board_reply_insert'></c:url>" method="post">
 						<div class="input-group mt-3">
 							<input type="text" name="br_me_id" hidden readonly value="${loginUser.me_id}">
@@ -241,12 +243,14 @@
 			   console.log(1);
 			   continue;
 		   }
+		   /* 댓글 닉네임, 권한 */
 		   wObj ={
 				   me_id: rp.br_me_id,
 		    		teamNum: ${team.tm_num}	   
 		   }
 		   let nickAndRank = getPlayerNameAndRank(wObj);
 		   let auth = '손님';
+		   /*  */
 		   if(nickAndRank.userTP!=null)
 			   auth = nickAndRank.userTP.tp_auth;
 		   let replyDate = rp.br_register_date_str2;

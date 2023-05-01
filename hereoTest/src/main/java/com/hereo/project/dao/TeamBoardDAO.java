@@ -49,6 +49,7 @@ public interface TeamBoardDAO {
 
 	int insertReply(@Param("br")BoardReplyVO reply);
 	
+	int insertRereply(@Param("br")BoardReplyVO reply);
 
 
 	int countReply(int bo_num);

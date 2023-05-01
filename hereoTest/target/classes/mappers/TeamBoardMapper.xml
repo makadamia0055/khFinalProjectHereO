@@ -92,17 +92,23 @@
 	</delete>
 	<insert id="insertReply" useGeneratedKeys="true" keyProperty="br.br_num">
 	 INSERT INTO `board-reply`(br_ori_num, br_groupOrd, br_groupLayer, br_toward_num, br_bo_num, br_me_id, br_contents, br_register_date, br_state)
-	  select
-	    <if test="br.br_toward_num == 0">
+	  value(
+	    
 	      0, 1, 0,
-	    </if>
-	    <if test="br.br_toward_num != 0">
+	    
+	    #{br.br_toward_num}, #{br.br_bo_num}, #{br.br_me_id}, #{br.br_contents}, NOW(), 'n')
+	    
+	</insert>
+	<insert id="insertRereply" useGeneratedKeys="true" keyProperty="br.br_num">
+	 INSERT INTO `board-reply`(br_ori_num, br_groupOrd, br_groupLayer, br_toward_num, br_bo_num, br_me_id, br_contents, br_register_date, br_state)
+	  select
+	    
 	      #{br.br_ori_num}, 
 	      IFNULL((select gO from 
 	      	(SELECT br_groupOrd as gO FROM `board-reply` WHERE br_ori_num=#{br.br_ori_num} AND br_groupOrd > #{br.br_groupOrd} AND #{br.br_groupLayer} >= br_groupLayer ORDER BY br_groupOrd LIMIT 1) as tmpT), 
 	      	IFNULL(max(br_groupOrd),0)+1), 
 	      #{br.br_groupLayer},
-	    </if>
+	   
 	    #{br.br_toward_num}, #{br.br_bo_num}, #{br.br_me_id}, #{br.br_contents}, NOW(), 'n'
 	    from `board-reply` where br_ori_num = #{br.br_ori_num}
 	</insert>
@@ -176,14 +182,14 @@
 		 update `board-reply`
 		      set br_groupOrd = br_groupOrd + 1
 		     	 where br_ori_num = #{br.br_ori_num}
-		     		 and br_groupOrd > #{br.br_groupOrd}
+		     		 and br_groupOrd >= #{br.br_groupOrd}
 		     		 and br_num != #{br.br_num}
 		    	 	 and br_groupLayer != #{br.br_groupLayer};
 		 
 	</update>
 	<update id="updateReplyPlusOneForDup">
 		 <choose>
-		 	<when test="res">
+		 	<when test="res eq true">
 		 		update `board-reply`
 		     	 	set br_groupOrd = br_groupOrd + 1
 		    	  	where br_num = #{br.br_num};
