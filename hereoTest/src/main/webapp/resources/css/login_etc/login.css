@@ -29,8 +29,10 @@
 .id-remember {
     margin-left: 5%;
     font-size: 13px;
-    cursor: pointer;
     color: #888888;
+}
+.pointer:hover {
+	cursor: pointer;
 }
 .id-remember span {
     padding: 0 3px;
@@ -45,6 +47,9 @@
     border-style: none;
     font-weight: 600;
     margin-bottom: 15px;
+}
+.login-btn:hover {
+	cursor: pointer;
 }
 .search-idPw {
     padding-left: 20%;
