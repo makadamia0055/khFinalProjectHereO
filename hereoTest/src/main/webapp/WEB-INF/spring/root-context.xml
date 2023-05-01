@@ -16,7 +16,7 @@
 	      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
 	    <property name="url"
-	              value="jdbc:mysql://localhost:3306/herodb?useSSL=false&amp;serverTimezone=Asia/Seoul">
+	              value="jdbc:mysql://localhost:3307/herodb?useSSL=false&amp;serverTimezone=Asia/Seoul">
 	    </property>
 	    <property name="username" value="root"></property>
 	    <property name="password" value="root"></property>

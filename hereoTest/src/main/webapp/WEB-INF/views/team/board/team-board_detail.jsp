@@ -95,25 +95,32 @@
 								<input type="text" name="teamNum" value="${team.tm_num }" hidden readonly>
 								<input type="text" name="bo_num" value="${board.bo_num }" hidden readonly>
 								<input type="text" name="bo_me_id" value="${loginUser.me_id }" hidden readonly>
+								
 								<a type="button" class="btn-delete">삭제</a>
 							</form>
 						</c:if>
 					</div>
+					<!-- 그냥 댓글 -->
 					<form name="replyForm" class="replyForm" action="<c:url value='/team/board_reply_insert'></c:url>" method="post">
 						<div class="input-group mt-3">
 							<input type="text" name="br_me_id" hidden readonly value="${loginUser.me_id}">
-							<input type="text" name="br_bo_num" hidden value="${board.bo_num }"> 
+							<input type="text" name="br_bo_num" hidden value="${board.bo_num}"> 
 							<textarea name="br_contents" class="form-control" maxlength="300" placeholder="댓글을 입력해주세요."></textarea>
 							<div class="input-group-append">
     							<button class="input-group-text btn btn-secendary">댓글 입력</button>
   							</div>
 						</div>
 					</form>
+					<!-- 대댓 -->
 					<form name="rereplyForm" style="display:none;" class="ml-3 replyForm" action="<c:url value='/team/board_reply_insert'></c:url>" method="post">
 						<div class="input-group mt-3">
 							<input type="text" name="br_me_id" hidden readonly value="${loginUser.me_id}">
 							<input type="text" name="br_bo_num" hidden readonly value="${board.bo_num}">
-							<input type="text" name="br_ori_num" hidden readonly value="0"> 
+							<input type="text" name="br_ori_num" value="" hidden readonly >
+							<input type="text" name="br_groupOrd" value="" hidden readonly>
+							<input type="text" name="br_toward_num" value="" hidden readonly>
+							<input type="text" name="br_groupLayer" value="" hidden readonly>
+								 
 							<textarea name="br_contents" class="form-control" maxlength="300" placeholder="댓글을 입력해주세요."></textarea>
 							<div class="input-group-append">
     							<button class="input-group-text btn btn-secendary">댓글 입력</button>
@@ -220,12 +227,8 @@
    }
    /* 댓글 불러오기 ajax */
    function requestReply(){
-	   let replyObj={
-			   bo_num : ${board.bo_num},
-			   cri : cri
-	   };
-	   ajax("POST", replyObj, "<c:url value='/team/ajax/getReply?boNum="+"${board.bo_num}"+"'></c:url>", function(data){
-		   let replyStr=  createReply(data);
+	   ajax("POST", cri, "<c:url value='/team/ajax/getReply?boNum="+"${board.bo_num}"+"'></c:url>", function(data){
+		   let replyStr =  createReply(data);
 		   appendReply(replyStr);
 	   })
    }
@@ -234,14 +237,21 @@
 	   if(data.replyList == null)
 		   return;
 	   
+	   
 	   let replyStr = "";
 	   for(let rp of data.replyList){
+		   if(rp.br_state=="deleted"&&!checkRefReply(data.replyList, rp)){
+			   continue;
+		   }
+		   console.log(checkRefReply(data.replyList, rp))
+		   /* 댓글 닉네임, 권한 */
 		   wObj ={
 				   me_id: rp.br_me_id,
 		    		teamNum: ${team.tm_num}	   
 		   }
 		   let nickAndRank = getPlayerNameAndRank(wObj);
 		   let auth = '손님';
+		   /*  */
 		   if(nickAndRank.userTP!=null)
 			   auth = nickAndRank.userTP.tp_auth;
 		   let replyDate = rp.br_register_date_str2;
@@ -251,17 +261,17 @@
 		   /* 대댓 마진 레프트 넣어주는 곳 */
 		   if(rp.br_ori_num!=rp.br_num)
 			   replyStr += ' ml-3 ';
-		   
+		  
 		   replyStr+= '"><div class="list-group-item d-flex justify-content-between list-group-item-secondary align-items-center reply-title">'
 			+'<span class="box-nick">'
-			+'<span class="badge badge-primary badge-pill">'+auth +'</span>' 
-			+'<span class="nickname">'+nickAndRank.userMember.me_nickname+'</span>'
+			+'<span class="badge badge-primary badge-pill">'+ auth +'</span>' 
+			+'<span class="nickname">'+ nickAndRank.userMember.me_nickname +'</span>'
 		+'</span>'
 		+'<span class="box-date">'+replyDate+'</span>'
-	+'</div><div class="list-group-item list-group-item-action reply-contents" data-num="'+rp.br_num +'">'
+	+'</div><div class="list-group-item list-group-item-action reply-contents" data-num="'+rp.br_num +'" data-ori_num="'+rp.br_ori_num +'" data-groupOrd="'+rp.br_groupOrd+'" data-grouplayer="'+rp.br_groupLayer+'">'
 	   /* 대댓 @닉네임 넣어주는 곳 */
-		if(rp.br_ori_num!=rp.br_num){
-		   let oriMeId= getOriMeId(rp.br_ori_num);
+		if(rp.br_toward_num!=0){
+		   let oriMeId= getOriMeId(rp.br_toward_num);
 		   rereObj ={
 				   me_id: oriMeId,
 		    		teamNum: ${team.tm_num}	   
@@ -270,22 +280,64 @@
 		replyStr += '<span class="badge badge-pill badge-success">@' +reNickAndRank.userMember.me_nickname + '</span> '
 	   }
 	/* 댓글 내용 */
-	 replyStr += '<span class="reply-text">'+rp.br_contents +'</span>';
-	 
-	/* 댓글 버튼 넣어주는 곳 */
+	/* 댓글 상태가 n인 것만 출력되도록 */
+	if(rp.br_state=="n"){
+		replyStr += '<span class="reply-text">'+rp.br_contents +'</span>';
+		
+		/* 댓글 버튼 넣어주는 곳 */
+
 		if(rp.br_me_id == '${loginUser.me_id}'||viewAuth){
 			
-		replyStr += '<br><div class="d-flex flex-row-reverse" >'
-		+'<button class="btn btn-outline-secondary btn-sm btn-more btn-reply-delete" data-toggle="tooltip" title="댓글 삭제"><i class="fa-solid fa-trash" style="color: #5a5a63;"></i></button>'
-		+'<button class="btn btn-outline-secondary btn-sm btn-more btn-reply-edit ml-2" data-toggle="tooltip" title="댓글 수정"><i class="fa-solid fa-gear" style="color: #5a5a63;"></i></button>'
-		+'</div>'
+			replyStr += '<br><div class="d-flex flex-row-reverse" >'
+			+'<button class="btn btn-outline-secondary btn-sm btn-more btn-reply-delete" data-toggle="tooltip" title="댓글 삭제"><i class="fa-solid fa-trash" style="color: #5a5a63;"></i></button>'
+			+'<button class="btn btn-outline-secondary btn-sm btn-more btn-reply-edit ml-2" data-toggle="tooltip" title="댓글 수정"><i class="fa-solid fa-gear" style="color: #5a5a63;"></i></button>'
+			+'</div>'
+			}
+		}else if(rp.br_state=="deleted"&&checkRefReply(data.replyList, rp)){
+		   replyStr += '<span class="reply-text delete-reply">삭제된 댓글 입니다.</span>';
 		}
 		replyStr += '</div></li>'
-	   }
-	   
+   }
+	 
 	   createAndAppendPagination(data);
 	   return replyStr;
    }
+   
+   
+   
+   /* 댓글의 레퍼런스(자신을 참조하는 대댓이 있는지)가 있는지 살피는 메소드 */
+   function checkRefReply(data, reply){
+	   let res = false;
+	   /* 삭제되지 않은 댓글 참조 확인 */
+	   for(let i= data.length -1;i>=0; i--){
+		   console.log(data[i]);
+		   if(data[i].br_ori_num!=reply.br_ori_num){
+			   continue;
+			}
+		   if(data[i].br_groupOrd<=reply.br_groupOrd){
+			   continue;
+		   }
+		   if(reply.br_state!="deleted"){
+			   continue;
+		   }
+		   if(data[i].br_toward_num == reply.br_num){
+			   console.log(i);
+
+			   if(data[i].br_state != "deleted"){
+				   	res= true;
+				   return res;   
+			   }else{
+				   if(checkRefReply(data.slice(0, i), data[i])){
+					   res = true;
+					   return res;
+				   }
+			   }
+		   }
+		}
+	   
+	   return res;
+   }
+   
    /* 댓글 페이지네이션 넣어주는 메소드 */
    function createAndAppendPagination(data){
 	   let pmStr = "";
@@ -298,7 +350,7 @@
 				if(i == data.pm.cri.page){
 					pmStr += ' active';
 				}
-				pmStr += '"><a href="#" class="page-link">'
+				pmStr += '"><a href="#" class="page-link page-index" data-index="'+ i +'">'
 				+ i +'</a></li>'
 				
 			}
@@ -308,6 +360,15 @@
 			$('.container-pagination .pagination li').remove();
 			$('.container-pagination .pagination').append(pmStr);
 			
+			$('.page-item .page-link').on('click', function(e){
+				e.preventDefault();
+				if($(this).hasClass('page-index')){
+					cri.page = $(this).data('index');
+					$('.box-reply').children().remove();
+					requestReply();
+					return;
+				}
+			})
    }
    /* 생성된 댓글 문자열을 넣어주는 함수 */
    function appendReply(str){
@@ -351,13 +412,23 @@
 		   alert('로그인 한 회원만 댓글을 달 수 있습니다.');
 		   return;
 	   }
+	   if($(this).find('.reply-text').hasClass('delete-reply')){
+		   
+		   return;
+	   }
 	   let rplyForm = $('[name=rereplyForm]');
 	   $(rplyForm).show();
 	   $(this).parent().append(rplyForm);
-	   let dataNum = $(this).data('num');
+	   let dataNum = $(this).data('ori_num');
+	   let towardNum = $(this).data('num');
+	   let dataGroupOrd = $(this).data('groupord'); 
+	   let dataLayer = $(this).data('grouplayer');
 	   $(rplyForm).attr("action", "<c:url value='/team/board_reply_insert'></c:url>")
 
-	   $('[name=br_ori_num]').attr('value', dataNum);
+   	   $('[name=br_ori_num]').attr('value', dataNum);
+	   $('[name=br_groupOrd]').attr('value', dataGroupOrd);
+	   $('[name=br_toward_num]').attr('value', towardNum);
+	   $('[name=br_groupLayer]').attr('value', dataLayer+1);
 	   
 	   
    })
@@ -381,10 +452,12 @@
 	   let contents= $(this).parents('.reply-contents');
 	   $(contents).hide();
 	   $(contents).prev().after(rplyForm);
+	   $('.replyForm .input-group [name=br_num]').remove();
+	   $('.replyForm .input-group').append('<input type="text" name="br_num" hidden readonly value="'+dataNum+'">');
 	   let repText = $(contents).find('.reply-text').text();
 	   $(rplyForm).find('[name=br_contents]').text(repText)
 	   /* 수정은 ori_num 값을 건드릴 필요는 없음 근데 ori_num에 원 댓글 번호가 자동으로 들어가니
-	   그걸 ori_num 대용으로 사용함*/
+	   그걸 ori_num 대용으로 사용함 => 댓글 구현 형식을 바꾸면서 수정 방식도 바꿈*/
 	   $(rplyForm).attr("action", "<c:url value='/team/board_reply_update'></c:url>")
 	  	
  
