@@ -93,10 +93,9 @@
 	<insert id="insertReply" useGeneratedKeys="true" keyProperty="br.br_num">
 	 INSERT INTO `board-reply`(br_ori_num, br_groupOrd, br_groupLayer, br_toward_num, br_bo_num, br_me_id, br_contents, br_register_date, br_state)
 	  value(
-	    
-	      0, 1, 0,
-	    
-	    #{br.br_toward_num}, #{br.br_bo_num}, #{br.br_me_id}, #{br.br_contents}, NOW(), 'n')
+	    0, 1, 0,
+	    #{br.br_toward_num}, #{br.br_bo_num}, #{br.br_me_id}, 
+	    #{br.br_contents}, NOW(), 'n')
 	    
 	</insert>
 	<insert id="insertRereply" useGeneratedKeys="true" keyProperty="br.br_num">

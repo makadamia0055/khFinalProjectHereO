@@ -237,12 +237,13 @@
 	   if(data.replyList == null)
 		   return;
 	   
+	   
 	   let replyStr = "";
 	   for(let rp of data.replyList){
-		   if(rp.br_state=="delete"&&!checkRefReply(data.replyList, rp.br_num)){
-			   console.log(1);
+		   if(rp.br_state=="deleted"&&!checkRefReply(data.replyList, rp)){
 			   continue;
 		   }
+		   console.log(checkRefReply(data.replyList, rp))
 		   /* 댓글 닉네임, 권한 */
 		   wObj ={
 				   me_id: rp.br_me_id,
@@ -260,16 +261,16 @@
 		   /* 대댓 마진 레프트 넣어주는 곳 */
 		   if(rp.br_ori_num!=rp.br_num)
 			   replyStr += ' ml-3 ';
-		   
+		  
 		   replyStr+= '"><div class="list-group-item d-flex justify-content-between list-group-item-secondary align-items-center reply-title">'
 			+'<span class="box-nick">'
-			+'<span class="badge badge-primary badge-pill">'+auth +'</span>' 
-			+'<span class="nickname">'+nickAndRank.userMember.me_nickname+'</span>'
+			+'<span class="badge badge-primary badge-pill">'+ auth +'</span>' 
+			+'<span class="nickname">'+ nickAndRank.userMember.me_nickname +'</span>'
 		+'</span>'
 		+'<span class="box-date">'+replyDate+'</span>'
 	+'</div><div class="list-group-item list-group-item-action reply-contents" data-num="'+rp.br_num +'" data-ori_num="'+rp.br_ori_num +'" data-groupOrd="'+rp.br_groupOrd+'" data-grouplayer="'+rp.br_groupLayer+'">'
 	   /* 대댓 @닉네임 넣어주는 곳 */
-		if(rp.br_ori_num!=rp.br_num){
+		if(rp.br_toward_num!=0){
 		   let oriMeId= getOriMeId(rp.br_toward_num);
 		   rereObj ={
 				   me_id: oriMeId,
@@ -292,7 +293,7 @@
 			+'<button class="btn btn-outline-secondary btn-sm btn-more btn-reply-edit ml-2" data-toggle="tooltip" title="댓글 수정"><i class="fa-solid fa-gear" style="color: #5a5a63;"></i></button>'
 			+'</div>'
 			}
-		}else if(rp.br_state=="deleted"&&checkRefReply(data.replyList, rp.br_num)){
+		}else if(rp.br_state=="deleted"&&checkRefReply(data.replyList, rp)){
 		   replyStr += '<span class="reply-text delete-reply">삭제된 댓글 입니다.</span>';
 		}
 		replyStr += '</div></li>'
@@ -301,18 +302,42 @@
 	   createAndAppendPagination(data);
 	   return replyStr;
    }
+   
+   
+   
    /* 댓글의 레퍼런스(자신을 참조하는 대댓이 있는지)가 있는지 살피는 메소드 */
-   function checkRefReply(data, num){
+   function checkRefReply(data, reply){
 	   let res = false;
-	   for(let i of data){
-		   if(i.br_forward_num == num && i.br_state != "deleted"){
-			   res= true;
-			   return res;   
+	   /* 삭제되지 않은 댓글 참조 확인 */
+	   for(let i= data.length -1;i>=0; i--){
+		   console.log(data[i]);
+		   if(data[i].br_ori_num!=reply.br_ori_num){
+			   continue;
+			}
+		   if(data[i].br_groupOrd<=reply.br_groupOrd){
+			   continue;
 		   }
-			
-	   }
+		   if(reply.br_state!="deleted"){
+			   continue;
+		   }
+		   if(data[i].br_toward_num == reply.br_num){
+			   console.log(i);
+
+			   if(data[i].br_state != "deleted"){
+				   	res= true;
+				   return res;   
+			   }else{
+				   if(checkRefReply(data.slice(0, i), data[i])){
+					   res = true;
+					   return res;
+				   }
+			   }
+		   }
+		}
+	   
 	   return res;
    }
+   
    /* 댓글 페이지네이션 넣어주는 메소드 */
    function createAndAppendPagination(data){
 	   let pmStr = "";
