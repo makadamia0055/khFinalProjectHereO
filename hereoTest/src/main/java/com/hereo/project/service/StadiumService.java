@@ -8,6 +8,7 @@ import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.RegionDetailVO;
 import com.hereo.project.vo.StadiumImageVO;
+import com.hereo.project.vo.StadiumTimetableVO;
 import com.hereo.project.vo.StadiumVO;
 
 public interface StadiumService {
@@ -23,6 +24,8 @@ public interface StadiumService {
 	void insertStadium(StadiumVO stadium, MembersVO user, MultipartFile[] files);
 
 	RegionDetailVO getRegionDetail(int rd_num);
+
+	ArrayList<StadiumTimetableVO> getStadiumTimetableList(MembersVO user);
 
 	
 

@@ -25,6 +25,7 @@ import com.hereo.project.vo.RegionDetailVO;
 import com.hereo.project.vo.RegionSubVO;
 import com.hereo.project.vo.RegionVO;
 import com.hereo.project.vo.StadiumImageVO;
+import com.hereo.project.vo.StadiumTimetableVO;
 import com.hereo.project.vo.StadiumVO;
 
 
@@ -46,6 +47,23 @@ import com.hereo.project.vo.StadiumVO;
 		mv.addObject("list",list);
 		mv.addObject("pm", pm);
 		mv.setViewName("/reservation/reservation-stadium_list");
+	
+		return mv;
+	}
+	@RequestMapping(value = "/reservation/stadium/info", method=RequestMethod.GET)
+	public ModelAndView stadiumInfo(ModelAndView mv) {
+		
+		mv.setViewName("/reservation/reservation-stadium_info");
+	
+		return mv;
+	}
+	@RequestMapping(value = "/reservation/stadium/timetable", method=RequestMethod.GET)
+	public ModelAndView stadiumTimetable(ModelAndView mv,HttpSession session) {
+		MembersVO user = (MembersVO)session.getAttribute("user");
+		ArrayList<StadiumTimetableVO> stList = stadiumService.getStadiumTimetableList(user);
+		mv.addObject("stList", stList);
+		mv.setViewName("/reservation/reservation-stadium_timetable");
+	
 		return mv;
 	}
 	//	구장 등록 정보
