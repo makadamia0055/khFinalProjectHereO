@@ -101,7 +101,7 @@
                             <p><strong>경기</strong></p>
                         </td>
                         <td rowspan="3" id="table-stadium">
-                            <a href="<c:url value='/reservation/stadium-info'></c:url>">
+                            <a href="<c:url value='/reservation/stadium/info'></c:url>">
                                 <img src="강상.jpg" alt="" class="img">
                                 <br>
                                 <strong style="color: black; font-size: 15px;">구장명 : </strong><span>강상제3구장</span>
@@ -172,10 +172,15 @@ $( function() {
       prevText: "이전달",
       dayNamesMin : ['일','월','화','수','목','금','토'],
       monthNamesShort:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-      dateFormat : "yy년mm월dd일",
+      dateFormat : "yy/mm/dd",
       minDate: "dtNow", // 오늘 날짜 이전 데이터 클릭 방지
       showButtonPanel:true,
       currentText : "오늘 날짜",
+      onSelect: function(dateText) {
+          var dateText = $(this).val();
+          var url = "<c:url value='/reservation/main'></c:url>" + dateText.replace(/\//g, "-");
+          window.location.href = url;
+      }
     });
 } );
 $('.link-region').on('click', function() {

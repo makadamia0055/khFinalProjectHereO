@@ -10,5 +10,5 @@ public class RegionDetailVO {
 	private String rd_zipcode;
 	private String rd_address;
 	private String rd_detail_address;
-	private int rd_re_num;
+	private int rd_rs_num;
 }
