@@ -3,8 +3,11 @@ package com.hereo.project.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +18,9 @@ import com.hereo.project.pagination.PageMaker;
 import com.hereo.project.service.LeagueService;
 import com.hereo.project.service.MembersService;
 import com.hereo.project.service.RecordService;
+import com.hereo.project.vo.LeagueAttributeVO;
+import com.hereo.project.vo.LeagueParticipationteamVO;
+import com.hereo.project.vo.LeagueScheduleVO;
 import com.hereo.project.vo.LeagueVO;
 import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerrecordHitterVO;
@@ -56,9 +62,15 @@ public class LeagueController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/league/main", method = RequestMethod.GET)
-	public ModelAndView leagueMain(ModelAndView mv) {
-		
+	@RequestMapping(value = "/league/main{lg_num}", method = RequestMethod.GET)
+	public ModelAndView leagueMain(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
+		ArrayList<LeagueVO> league = leagueService.selectLeagueByLgNum(lg_num);
+		ArrayList<LeagueAttributeVO> leagueAtt = leagueService.selectLeagueAttByLgNum(lg_num);
+		ArrayList<LeagueScheduleVO> leagueSche = leagueService.selectLeagueSchedule(lg_num);
+
+		mv.addObject("leagueSche", leagueSche);
+		mv.addObject("leagueAtt",leagueAtt);
+		mv.addObject("league", league);
 		mv.setViewName("/league/league-main");
 		return mv;
 	}

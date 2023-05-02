@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -603,10 +604,10 @@ public class TeamController {
 		String url = req.getHeader("referer");
 		boolean res = teamBoardService.insertReply(reply);
 		if(res) {
-			mv.addObject("msg", "답글이 등록되었습니다.");
+			mv.addObject("msg", "댓글이 등록되었습니다.");
 			
 		}else {
-			mv.addObject("msg", "답글이 등록에 실패하였습니다.");
+			mv.addObject("msg", "댓글 등록에 실패하였습니다.");
 		}
 		mv.addObject("url", url);
 		mv.setViewName("/common/message");
@@ -617,15 +618,15 @@ public class TeamController {
 	public ModelAndView TeamBoardReplyUpdatePOST(ModelAndView mv, BoardReplyVO reply, HttpServletRequest req) {
 		String url = req.getHeader("referer");
 		
-		int br_num = reply.getBr_ori_num();
+		int br_num = reply.getBr_num();
 		reply.setBr_num(br_num);
 		
 		boolean res = teamBoardService.updateReply(reply);
 		if(res) {
-			mv.addObject("msg", "답글이 수정되었습니다.");
+			mv.addObject("msg", "댓글이 수정되었습니다.");
 			
 		}else {
-			mv.addObject("msg", "답글 수정에 실패하였습니다.");
+			mv.addObject("msg", "댓글 수정에 실패하였습니다.");
 		}
 		mv.addObject("url", url);
 		mv.setViewName("/common/message");
@@ -713,7 +714,6 @@ public class TeamController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		int replyCnt = teamBoardService.countReply(boNum);
-		
 		ArrayList<BoardReplyVO> list = teamBoardService.selectReplyByBoNumAndCri(cri, boNum);
 		PageMaker pm = new PageMaker(replyCnt, 10, cri);
 		

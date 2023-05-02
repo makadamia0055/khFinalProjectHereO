@@ -48,6 +48,9 @@ public interface TeamBoardDAO {
 	int deleteTeamBoardByAuth(int bo_num);
 
 	int insertReply(@Param("br")BoardReplyVO reply);
+	
+	int insertRereply(@Param("br")BoardReplyVO reply);
+
 
 	int countReply(int bo_num);
 
@@ -70,6 +73,20 @@ public interface TeamBoardDAO {
 	int updateBoardFromTeamBoard(@Param("bo")BoardVO board);
 
 	void deleteBoardFilesByBfNum(Integer bf_num);
+
+	int updateToDeletedReply(Integer br_num);
+
+	int beforeDeleteReplyChecker(Integer br_num);
+
+	void updateReplyPlusOne(@Param("br")BoardReplyVO reply);
+
+	BoardReplyVO selectReplyByBoNum(@Param("br_num")Integer br_num);
+
+	void updateReplyOriNum(@Param("br")BoardReplyVO reply);
+	
+	int checkDupOrd(@Param("br")BoardReplyVO reply);
+	
+	int updateReplyPlusOneForDup(@Param("br")BoardReplyVO reply, @Param("res") boolean res);
 
 	
 
