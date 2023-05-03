@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hereo.project.dao.RegionDAO">
+	<select id="selectAllRegion" resultType="com.hereo.project.vo.RegionVO">
+		select * from region
+	</select>
+	<select id="selectRegion" resultType="com.hereo.project.vo.RegionVO">
+        select *
+        from region
+    </select>
+	<insert id="insertRegion" useGeneratedKeys="true" keyProperty="region.re_num">
+	  insert into region (re_sido) 
+	  values (#{region.re_sido})
+	</insert>
+	<select id="getRegionByNum" resultType="com.hereo.project.vo.RegionVO">
+        select * from region where re_num = #{rs_re_num}
+    </select>
+</mapper>

@@ -1,0 +1,29 @@
+@charset "UTF-8";
+ 
+ sidebar{
+ position: fixed;
+  z-index: 10;
+  top: 120px;
+  width: calc(18%);
+  height: 100vh;
+  float: left;
+  /* background-color: rgb(26, 22, 22); */
+  background-color: #FFC54D;
+  /* box-shadow: 3px 0 0 0 rgba(0, 0, 0, 0.7); */
+}
+
+.list-side {
+  position: relative;
+  background-color: transparent;
+}
+.list-side .item-side .link-side {
+  text-align: left;
+  padding-left: 10px; 
+}
+.sublist-side .subitem-side {
+  margin-left: 10px;
+}
+.sublist-side .subitem-side .sublink-side {
+  padding: 10px;
+  text-align: left;
+}
