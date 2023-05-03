@@ -12,12 +12,14 @@ import com.hereo.project.vo.TeamVO;
 public interface PlayerService {
 
 	ArrayList<PlayerVO> selectPlayerByTm_Num(Integer teamNum);
+
+	ArrayList<PlayerVO> selectPlayerByTm_Num(Integer teamNum, Criteria cri);
 	
 	ArrayList<Position_HopeVO> selectPositionHopeByPlayer(PlayerVO player);
 	
 	PlayerVO selectPlayerByPl_Num(Integer player);
 
-
+	
 
 	boolean insertPlayerToTeam(TeamVO team, PlayerVO player, int auth);
 
@@ -35,7 +37,9 @@ public interface PlayerService {
 
 	public boolean hasNoTeam(int pl_num);
 
-	TeamPlayerVO selectTeamPlayerByPlNumAndTmNum(int pl_num, Integer tm_num); 
+	TeamPlayerVO selectTeamPlayerByPlNumAndTmNum(int pl_num, Integer tm_num);
+
+	ArrayList<TeamPlayerVO> selectTPByTmNum(int tm_num); 
 
 
 }

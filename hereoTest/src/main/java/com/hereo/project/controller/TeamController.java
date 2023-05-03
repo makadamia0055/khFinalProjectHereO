@@ -321,6 +321,26 @@ public class TeamController {
 		mv.setViewName("/team/team-record");
 		return mv;
 	}
+//	팀 라인업 짜기 페이지
+	@RequestMapping(value = "/team/lineup", method = RequestMethod.GET)
+	public ModelAndView teamLineup(ModelAndView mv, Integer teamNum, Integer bookNum) {
+//		임시 팀번호 및 예약번호 세팅
+		teamNum = 1;
+		bookNum = 1;
+		TeamVO team = teamService.selectTeamByTm_Num(teamNum);
+//		새로운 메서드 필요한 듯 용병이나 팀원 불러오는 메서드
+		ArrayList<TeamPlayerVO> tPlayerList = playerService.selectTPByTmNum(team.getTm_num());
+		
+//		기존의 플레이어도 보내주기로 함. 나중에 ajax로 읽어오나 미리 보내주나
+		ArrayList<PlayerVO> playerList = playerService.selectPlayerByTm_Num(team.getTm_num());
+		
+		mv.addObject("team", team);
+		mv.addObject("tPlayerList", tPlayerList);
+		mv.addObject("playerList", playerList);
+		mv.setViewName("/team/team-lineup");
+		return mv;
+	}
+	
 //	팀 가입 관리 페이지(팀의 가입 관리)
 	@RequestMapping(value = "/team/wtjPage", method = RequestMethod.GET)
 	public ModelAndView teamWTJPage(ModelAndView mv,Criteria cri, HttpSession session) {

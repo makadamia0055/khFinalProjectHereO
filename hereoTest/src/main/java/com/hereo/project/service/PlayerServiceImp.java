@@ -9,7 +9,6 @@ import com.hereo.project.dao.PlayerDAO;
 import com.hereo.project.dao.PositionDAO;
 import com.hereo.project.dao.TeamPlayerDAO;
 import com.hereo.project.pagination.Criteria;
-import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.Position_HopeVO;
 import com.hereo.project.vo.TeamPlayerVO;
@@ -26,6 +25,30 @@ public class PlayerServiceImp implements PlayerService{
 	
 	@Override
 	public ArrayList<PlayerVO> selectPlayerByTm_Num(Integer teamNum) {
+		if(teamNum==null||teamNum<0)
+			return null;
+		ArrayList<TeamPlayerVO> teamPlayerList = teamPlayerDao.selectPlayerListByTeam(teamNum);
+		if(teamPlayerList==null||teamPlayerList.size()==0)
+			return null;
+		ArrayList<PlayerVO> playerList = new ArrayList<PlayerVO>();
+		for(TeamPlayerVO tmp : teamPlayerList) {
+			PlayerVO tmpPlayer = playerDao.selectPlayerByTP(tmp);
+			if(tmpPlayer==null)
+				continue;
+			if(tmpPlayer.getTeamList()!=null)
+				tmpPlayer.setTeamList(teamPlayerList);
+			ArrayList<Position_HopeVO> tmpPositionList = selectPositionHopeByPlayer(tmpPlayer);
+			tmpPlayer.setPositionList(tmpPositionList);
+			playerList.add(tmpPlayer);
+			
+		}
+		
+		
+		return playerList;
+	}
+//	아직 미구현
+	@Override
+	public ArrayList<PlayerVO> selectPlayerByTm_Num(Integer teamNum, Criteria cri) {
 		if(teamNum==null||teamNum<0)
 			return null;
 		ArrayList<TeamPlayerVO> teamPlayerList = teamPlayerDao.selectPlayerListByTeam(teamNum);
@@ -143,5 +166,11 @@ public class PlayerServiceImp implements PlayerService{
 		if(pl_num == 0||tm_num==null||tm_num==0)
 			return null;
 		return teamPlayerDao.selectTeamPlayerByPlNumAndTmNum(pl_num, tm_num);
+	}
+	@Override
+	public ArrayList<TeamPlayerVO> selectTPByTmNum(int tm_num) {
+		if(tm_num == 0)
+			return null;
+		return teamPlayerDao.selectPlayerListByTeam(tm_num);
 	}
 }
