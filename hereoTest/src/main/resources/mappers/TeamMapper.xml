@@ -18,6 +18,9 @@
 			limit #{cri.pageStart}, #{cri.perPageNum}
 			
 	</select>
+	<select id="getAllTeamList" resultType="com.hereo.project.vo.TeamVO" >
+		select * from `team`
+	</select>
 	<select id="selectAllTeamsByCri" resultType="com.hereo.project.vo.TeamVO">
 		select * from team
 		where

@@ -34,7 +34,13 @@ public class TeamServiceImp implements TeamService{
 	public ArrayList<TeamVO> selectAllTeamsByCri(Criteria cri) {
 		return teamDao.selectAllTeamsByCri(cri);
 	}
-
+	
+	@Override
+	public ArrayList<TeamVO> getAllTeamList() {
+		
+		return teamDao.getAllTeamList();
+	}
+	
 	
 	@Override
 	public TeamVO selectTeamByTm_Num(Integer teamNum) {
@@ -224,6 +230,8 @@ public class TeamServiceImp implements TeamService{
 			return -1;
 		return teamDao.countTeamTotalMatch(teamNum);
 	}
-	
+
+
+
 	
 }

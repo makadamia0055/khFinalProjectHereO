@@ -55,6 +55,9 @@ public interface TeamService {
 
 	int countTeamTotalMatch(Integer teamNum);
 
+	ArrayList<TeamVO> getAllTeamList();
+
+
 
 
 	

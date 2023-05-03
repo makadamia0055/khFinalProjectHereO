@@ -47,7 +47,7 @@
 	               <td>09시 00분 부터</td>
 	               <td>2시간30분</td>
 	               <td><span class="price">${sd.st_rent_cost }</span></td>   
-	               <td class="status"><a href="<c:url value='/reservation/payment?stadium=${sd.st_num}'></c:url>"><span class="league">리그</span></a>
+	               <td class="status"><a href="<c:url value='/reservation/payment_info?st_num=${sd.st_num}'></c:url>"><span class="league">리그</span></a>
 	               	</td>
 	               <td><strong></strong></td>
             </tr>       

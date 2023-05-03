@@ -50,4 +50,6 @@ public interface TeamDAO {
 
 	int countTeamTotalMatch(Integer tm_num);
 
+	ArrayList<TeamVO> getAllTeamList();
+
 }

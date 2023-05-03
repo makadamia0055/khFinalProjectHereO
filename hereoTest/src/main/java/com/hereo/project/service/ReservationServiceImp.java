@@ -14,6 +14,8 @@ public class ReservationServiceImp implements ReservationService{
 
 	@Autowired
 	StadiumDAO stadiumDao;
+	
+
 	@Override
 	public ArrayList<StadiumVO> getStadiumTimetable(int st_num) {
 		
@@ -26,6 +28,7 @@ public class ReservationServiceImp implements ReservationService{
 		
 		return stadiumDao.getStadiumTimetableForPay(st_num);
 	}
+
 	
 	
 	

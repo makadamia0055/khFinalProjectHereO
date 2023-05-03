@@ -8,7 +8,8 @@
 			<h1>예약하기</h1>
 		</header>
 		<div class="content">
-			<section class="reserve_info" style="margin: 0;">
+			<form method="post">
+				<section class="reserve_info" style="margin: 0;">
 					<ul class="list-content">
 						<h2>예약 정보</h2>
 						<li class="item-content">
@@ -24,17 +25,17 @@
 						<li class="item-content">
 							<span>예약 시간</span>
 							<br>
-							<input type="text"placeholder="예약 시간" disabled>
+							<input type="text" name="" value=""placeholder="예약 시간" disabled>
 						</li>
 						<li class="item-content">
 							<span>예약자명</span>
 							<br>
-							<input type="text"placeholder="예약자 성명" disabled>
+							<input type="text" name="rv_me_id" value="${user.me_id}" placeholder="${user.me_name}" disabled>
 						</li>
 						<li class="item-content">
 							<span>예약자 휴대폰 번호</span>
 							<br>
-							<input type="text"placeholder="예약자 휴대폰 번호" disabled>
+							<input type="text"placeholder="${user.me_tel}" disabled>
 						</li>
 						
 					</ul>
@@ -46,8 +47,8 @@
 							<div class="">
 								<select name="referee" id="" >
 										<option>심판 유무 선택</option>
-										<option>있음</option>
-										<option>없음</option>
+										<option name="rv_isReferee" value=1>있음</option>
+										<option name="rv_isReferee" value=0>없음</option>
 								</select>
 								<br>
 								<span class="referee__text" hidden>유무 선택에 따라 총 결제금액이 변동됩니다.</span>
@@ -59,8 +60,8 @@
 							<div class="">
 								<select name="clerk" id="">
 										<option>기록원 유무 선택</option>
-										<option>있음</option>
-										<option>없음</option>
+										<option name="rv_isRecoder" value=1>있음</option>
+										<option name="rv_isRecoder" value=0>없음</option>
 								</select>
 								<br>
 								<span class="clerk__text">유무 선택에 따라 총 결제금액이 변동됩니다.</span>
@@ -73,8 +74,8 @@
 									<div class="match_box">
 										<select name="match" id="" onchange="categoryChange(this)">
 												<option value>경기 유형 선택</option>	
-												<option value="match01">친선</option>
-												<option value="match02">연습</option>
+												<option name="rv_game_type" value="친선">친선</option>
+												<option name="rv_game_type" value="연습">연습</option>
 										</select>
 										<br>
 										<span class="league__text" hidden>연습경기는 경기기록에 반영되지 않습니다.</span>
@@ -89,45 +90,27 @@
 							</div>
 						</li>	
 					</ul>
-			</section>
-			<section class="pay-select">
-					<h4 style="color: black;">결제 수단 선택</h4>
-					<select id="payment-select" class="select-type" >
-						<option data-minprice="0" value="" >
-							결제 수단
-						</option>
-						<option data-minprice="0" value="KAKAO" >
-							카카오뱅크
-						</option>
-						<option data-minprice="0" value="CARD" >
-							신용/체크카드
-						</option>
-						<option data-minprice="0" value="PHONE" >
-							휴대폰결제
-						</option>
-					</select>
-			</section>
-			<section class="pay-price">
-				<p>
-					<strong style="font-size: 20px;">
-						<b>총 결제 금액</b>
-					</strong>
-				</p>
-				<input type="text" placeholder="150,000원">
-			</section>
-			
-			<section class="agree">
-				<p class="all_check">
-					<label>
-						<input type="checkbox" name="checkAll" class="check" onclick="checkAll()">
-						<span>전체 동의</span>
-					</label>
-				</p>
-				<div class="personal-info info1">
-					<label>
-						<input type="checkbox" name="checkOne" class="check">
-						<a href="#" data-toggle="modal" data-target="#agree1">취소/환불규정(필수)</a>
-									<div class="modal" id="agree1">
+				</section>
+				<section class="pay-price">
+					<p>
+						<strong style="font-size: 20px;">
+							<b>총 결제 금액</b>
+						</strong>
+					</p>
+					<input type="text" placeholder="150,000원">
+				</section>		
+				<section class="agree">
+					<p class="all_check">
+						<label>
+							<input type="checkbox" name="checkAll" class="check" onclick="checkAll()">
+							<span>전체 동의</span>
+						</label>
+					</p>
+					<div class="personal-info info1">
+						<label>
+							<input type="checkbox" name="checkOne" class="check">
+							<a href="#" data-toggle="modal" data-target="#agree1">취소/환불규정(필수)</a>
+										<div class="modal" id="agree1">
 										<div class="modal-dialog modal-dialog-centered">
 											<div class="modal-content">	
 												<div class="modal-header">
@@ -307,8 +290,9 @@
 				</div>
 			</section>
 			<div class="booking-btn">
-				<button class="btn-reservation">예약하기</button>
+				<a href="<c:url value='/reservation/payment?stadium=${st.st_num}'></c:url>"><button class="btn-reservation">예약하기</button></a>
 			</div>
+		</form>	
 		</div>			
 	</div>
 	<script src="../reservation/matchselect.js"></script>
