@@ -8,10 +8,11 @@
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
-		<java-version>1.6</java-version>
+		<java-version>1.8</java-version>
 		<org.springframework-version>5.1.8.RELEASE</org.springframework-version>
-		<org.aspectj-version>1.6.10</org.aspectj-version>
-		<org.slf4j-version>1.6.6</org.slf4j-version>
+		<org.aspectj-version>1.9.2</org.aspectj-version>
+		<org.slf4j-version>1.7.25</org.slf4j-version>
+		<spring.security.version>5.1.5.RELEASE</spring.security.version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -196,25 +197,29 @@
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-core</artifactId>
 		    <version>2.9.4</version>
-		</dependency> 
-		<!--스프링시큐리티 web 라이브러리-->
-		<dependency>
-		    <groupId>org.springframework.security</groupId>
-		    <artifactId>spring-security-web</artifactId>
-		    <version>4.1.0.RELEASE</version>
-		</dependency>
-		  <!--스프링시큐리티 core 라이브러리-->
-		<dependency>
-		    <groupId>org.springframework.security</groupId>
-		    <artifactId>spring-security-core</artifactId>
-		    <version>4.1.0.RELEASE</version>
-		</dependency>
-		  <!--스프링시큐리티 config 라이브러리-->
-		<dependency>
-		    <groupId>org.springframework.security</groupId>
-		    <artifactId>spring-security-config</artifactId>
-		    <version>4.1.0.RELEASE</version>
-		</dependency> 
+		</dependency>  
+		 <!-- Spring Security -->
+	    <dependency>
+	        <groupId>org.springframework.security</groupId>
+	        <artifactId>spring-security-core</artifactId>
+	        <version>${spring.security.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.springframework.security</groupId>
+	        <artifactId>spring-security-web</artifactId>
+	        <version>${spring.security.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.springframework.security</groupId>
+	        <artifactId>spring-security-config</artifactId>
+	        <version>${spring.security.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.springframework.security</groupId>
+	        <artifactId>spring-security-taglibs</artifactId>
+	        <version>${spring.security.version}</version>
+	    </dependency>
+	    <!--  -->
 	</dependencies>
     <build>
         <plugins>
@@ -237,8 +242,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
