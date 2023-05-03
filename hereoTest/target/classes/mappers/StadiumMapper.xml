@@ -31,7 +31,9 @@
 	<select id="selectFileList" resultType="com.hereo.project.vo.StadiumImageVO">
 		select * from `stadium-image` where si_sd_num = #{sd_num}
 	</select>
-	
+	<select id="selectStadiumTimetableList" resultType="com.hereo.project.vo.StadiumTimetableVO">
+		select * from `stadium-timetable`
+	</select>
 	<!-- 스타디움 등록 -->
 	<insert id="insertStadium">
 	    <![CDATA[
