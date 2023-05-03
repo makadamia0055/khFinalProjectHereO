@@ -74,51 +74,94 @@ border:0;}
                 <div class="cell header-item">대관비용</div>
                 <div class="cell header-item">비고</div>
             </div>
-            <form action="<c:url value='/reservation/stadium/timetable/insert'></c:url>" method="post">	
+            
+            <form action="<c:url value='/stadium/timetable/insert'></c:url>" method="post">	
 	            <div class="body form-group">
 	                <div class="cell form-control time-num">1게임</div>
 	                <div class="cell">
-	                    <select id="s_time_time_start" onchange="s_time_select(this)" class="form-control">
-	                        <option value="">시작시간</option>
-	                        <script>
-	                            for (i = 12; i < 48; i++) {
-	                                var hour = '';
-	                                var min = ':00';
-	                            
-	                                if ((Math.ceil(i / 2)) < 13) {
-	                                    hour = (Math.floor(i / 2));
-	                                } else {
-	                                    hour = (Math.floor(i / 2));
-	                                }
-	                                if (i % 2 != 0) {
-	                                    min = ':30';
-	                                }
-	                                document.write('<option value=' + hour + min + '>' + hour + min + '</option>');
-	                            }
-	                        </script>
-	                    </select>
-	                </div>
+                        <select id="start-time" onchange="s_time_select(this)" class="form-control">
+                            <option value="">시작시간</option>
+                            <option value="06:00">06시00분</option>
+                            <option value="06:30">06시30분</option>
+                            <option value="07:00">07시00분</option>
+                            <option value="07:30">07시30분</option>
+                            <option value="08:00">08시00분</option>
+                            <option value="08:30">08시30분</option>
+                            <option value="09:00">09시00분</option>
+                            <option value="09:30">09시30분</option>
+                            <option value="10:00">10시00분</option>
+                            <option value="10:30">10시30분</option>
+                            <option value="11:00">11시00분</option>
+                            <option value="11:30">11시30분</option>
+                            <option value="12:00">12시00분</option>
+                            <option value="12:30">12시30분</option>
+                            <option value="13:00">13시00분</option>
+                            <option value="13:30">13시30분</option>
+                            <option value="14:00">14시00분</option>
+                            <option value="14:30">14시30분</option>
+                            <option value="15:00">15시00분</option>
+                            <option value="15:30">15시30분</option>
+                            <option value="16:00">16시00분</option>
+                            <option value="16:30">16시30분</option>
+                            <option value="17:00">17시00분</option>
+                            <option value="17:30">17시30분</option>
+                            <option value="18:00">18시00분</option>
+                            <option value="18:30">18시30분</option>
+                            <option value="19:00">19시00분</option>
+                            <option value="19:30">19시30분</option>
+                            <option value="20:00">20시00분</option>
+                            <option value="20:30">20시30분</option>
+                            <option value="21:00">21시00분</option>
+                            <option value="21:30">21시30분</option>
+                            <option value="22:00">22시00분</option>
+                            <option value="22:30">22시30분</option>
+                            <option value="23:00">23시00분</option>
+                            <option value="23:30">23시30분</option>
+                            <option value="24:00">24시00분</option>
+                        </select>
+                    </div>
 	                <div class="cell">
-	                    <select id="s_time_time_end" onchange="s_time_select(this)" class="form-control">
-	                        <option value="">종료시간</option>
-	                        <script>
-	                            for (i = 12; i < 48; i++) {
-	                                var hour = '';
-	                                var min = ':00';
-	                            
-	                                if ((Math.ceil(i / 2)) < 13) {
-	                                    hour = (Math.floor(i / 2));
-	                                } else {
-	                                    hour = (Math.floor(i / 2));
-	                                }
-	                                if (i % 2 != 0) {
-	                                    min = ':30';
-	                                }
-	                                document.write('<option value=' + hour + min + '>' + hour + min + '</option>');
-	                            }
-	                        </script>
-	                    </select>
-	                </div>
+                        <select id="end-time" onchange="s_time_select(this)" class="form-control">
+                            <option value="">종료시간</option>
+                            <option value="06:00">06시00분</option>
+                            <option value="06:30">06시30분</option>
+                            <option value="07:00">07시00분</option>
+                            <option value="07:30">07시30분</option>
+                            <option value="08:00">08시00분</option>
+                            <option value="08:30">08시30분</option>
+                            <option value="09:00">09시00분</option>
+                            <option value="09:30">09시30분</option>
+                            <option value="10:00">10시00분</option>
+                            <option value="10:30">10시30분</option>
+                            <option value="11:00">11시00분</option>
+                            <option value="11:30">11시30분</option>
+                            <option value="12:00">12시00분</option>
+                            <option value="12:30">12시30분</option>
+                            <option value="13:00">13시00분</option>
+                            <option value="13:30">13시30분</option>
+                            <option value="14:00">14시00분</option>
+                            <option value="14:30">14시30분</option>
+                            <option value="15:00">15시00분</option>
+                            <option value="15:30">15시30분</option>
+                            <option value="16:00">16시00분</option>
+                            <option value="16:30">16시30분</option>
+                            <option value="17:00">17시00분</option>
+                            <option value="17:30">17시30분</option>
+                            <option value="18:00">18시00분</option>
+                            <option value="18:30">18시30분</option>
+                            <option value="19:00">19시00분</option>
+                            <option value="19:30">19시30분</option>
+                            <option value="20:00">20시00분</option>
+                            <option value="20:30">20시30분</option>
+                            <option value="21:00">21시00분</option>
+                            <option value="21:30">21시30분</option>
+                            <option value="22:00">22시00분</option>
+                            <option value="22:30">22시30분</option>
+                            <option value="23:00">23시00분</option>
+                            <option value="23:30">23시30분</option>
+                            <option value="24:00">24시00분</option>
+                        </select>
+                    </div>
 	                <div class="cell">                   
 	                        <input name="s_hour" id="s_hour" disabled>
 	                </div>
@@ -166,36 +209,24 @@ border:0;}
     </div>
 
     <script type="text/javascript">
-    function s_time_select(select) {
-        //select 옵션
-        var selectedOption = $(select).find('option:selected');
-        $('#s_hour').val(selectedOption.val());
-        }
-                    $(document).ready(function() {
-    	//select dropdown 메뉴
-    	var startTimeDropdown = $('#s_time_time_start');
-    	var endTimeDropdown = $('#s_time_time_end');
-    		//dropdown change 함수
-    	$(startTimeDropdown).add(endTimeDropdown).on('change', function() {
-    		var startTime = $(startTimeDropdown).val();
-    		var endTime = $(endTimeDropdown).val();
-
-    		if (startTime && endTime) {
-    		var startTimeMinutes = convertTimeToMinutes(startTime);
-    		var endTimeMinutes = convertTimeToMinutes(endTime);
-    		var differenceInMinutes = endTimeMinutes - startTimeMinutes;
-    		var differenceHours = Math.floor(differenceInMinutes / 60);
-    		var differenceMinutes = differenceInMinutes % 60;
-    		$('#s_hour').val(differenceHours + '시간' + differenceMinutes+'분');
-    		}
-    	});
-    	function convertTimeToMinutes(timeString) {
-    		var parts = timeString.split(':');
-    		var hours = parseInt(parts[0], 10);
-    		var minutes = parseInt(parts[1], 10);
-    		return hours * 60 + minutes;
+	    function s_time_select(elem) {
+	    	  var start_time = document.getElementById("start-time").value;
+	    	  var end_time = document.getElementById("end-time").value;
+		    	  if (start_time && end_time) {
+		    	    var start_hour = parseInt(start_time.split(':')[0]);
+		    	    var start_minute = parseInt(start_time.split(':')[1]);
+		    	    var end_hour = parseInt(end_time.split(':')[0]);
+		    	    var end_minute = parseInt(end_time.split(':')[1]);
+		    	    var diff_hour = end_hour - start_hour;
+		    	    var diff_minute = end_minute - start_minute;
+		    	    if (diff_minute < 0) {
+		    	      diff_hour--;
+		    	      diff_minute += 60;
+		    	    }
+		    	    var s_hour = Math.floor(diff_hour) + "시간 " + diff_minute + "분";
+		    	    document.getElementById('s_hour').value = s_hour;
+		    	  }
     	}
-    	});
     </script>
     
 </body>

@@ -27,9 +27,20 @@
 		<a href="<c:url value='/community/${bt.bt_namebyEnglish}'></c:url>">
 			<button class="pre-list_btn commu-btn">목록 <i class="fa-solid fa-bars"></i>
 			</button>
-		</a>	
-		<button class="like_btn commu-btn">추천 <i class="fa-regular fa-thumbs-up"></i></button>
-		<button class="dislike_btn commu-btn">비추천 <i class="fa-regular fa-thumbs-down"></i></button>
+		</a>
+		<c:if test="${boardVote==null || boardVote.bv_state !=1}">	
+			<button class="like_btn commu-btn" data-updown="1">추천(<span class="count">${detail.bo_up}</span>)<i class="fa-regular fa-thumbs-up"></i></button>
+		</c:if>
+		<c:if test="${boardVote!=null && boardVote.bv_state==1 }">
+			<button class="like_btn commu-btn" data-updown="1" style="background-color:#2155CD">추천(<span class="count">${detail.bo_up}</span>)<i class="fa-regular fa-thumbs-up"></i></button>
+		</c:if>
+		<c:if test="${boardVote ==null || boardVote.bv_state !=-1}">
+			<button class="dislike_btn commu-btn"data-updown="-1">비추천(<span class="count">${detail.bo_down}</span>) <i class="fa-regular fa-thumbs-down"></i></button>
+		</c:if>
+		<c:if test="${boardVote !=null && boardVote.bv_state ==-1}">
+			<button class="dislike_btn commu-btn"data-updown="-1" style="background-color:#FF0032">비추천(<span class="count">${detail.bo_down}</span>)<i class="fa-regular fa-thumbs-down"></i></button>
+		</c:if>
+		
 	</div>
 	<div class="btn-container02">
 		<c:if test="${user.me_id == detail.bo_me_id}">
@@ -45,9 +56,50 @@
 		</c:if>
 	</div>	
 </div>
-<div>댓글</div>
 </main>
 <script
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
  ></script>
+ <script>
+ $('.commu-btn').click(function(){
+	 if('${user.me_id}'==''){
+		 alert("로그인 기능이 필요합니다.");
+		 return;
+		 }
+	 let bv_state=$(this).data('updown');
+	 let bo_num='${detail.bo_num}';
+	 let url = '<c:url value="/community/content/updown/"></c:url>'+bo_num+'/'+bv_state;
+	 
+	 $.ajax({
+		asyn:true,
+		type:'get',
+		url:url,
+		dataType:"json",
+		success : function(data){
+				console.log(data);
+			$('.like_btn>.count').text(data.board.bo_up);
+			$('.dislike_btn>.count').text(data.board.bo_down);
+			
+			$('.like_btn').css('background-color','');
+			$('.dislike_btn').css('background-color','');
+			
+			if(data.updown==1) {
+				alert("추천!");
+				$('.like_btn').css('background-color','#2155CD');
+			}else if(data.updown == -1){
+				alert("비추천!");
+				$('.dislike_btn').css('background-color','#FF0032');
+				
+			}else {
+				if(bv_state ==1)
+					alert("추천 취소!")
+					else
+						alert("비추천 취소!")
+				  }
+			}
+			
+	 });
+ });
+ 
+ </script>

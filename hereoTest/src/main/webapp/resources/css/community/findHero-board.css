@@ -35,3 +35,6 @@
 .hero__contents-title a:hover {
   text-decoration: underline;
 }
+.hero__state{
+	  margin-top: 25px;
+}

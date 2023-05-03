@@ -13,6 +13,7 @@ import com.hereo.project.utils.UploadFileUtils;
 import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.RegionDetailVO;
 import com.hereo.project.vo.StadiumImageVO;
+import com.hereo.project.vo.StadiumTimetableVO;
 import com.hereo.project.vo.StadiumVO;
 
 @Service
@@ -97,6 +98,13 @@ public class StadiumServiceImp implements StadiumService{
 		public RegionDetailVO getRegionDetail(int rd_num) {
 			
 			return stadiumDao.selectRegionDetail(rd_num);
+		}
+
+		@Override
+		public ArrayList<StadiumTimetableVO> getStadiumTimetableList(MembersVO user) {
+			if(user == null)
+			return null;
+			return stadiumDao.selectStadiumTimetableList(user);
 		}
 	
 

@@ -1,5 +1,7 @@
 package com.hereo.project.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hereo.project.service.CommuService;
 import com.hereo.project.service.MembersService;
+import com.hereo.project.service.TeamService;
+import com.hereo.project.vo.BoardVO;
 import com.hereo.project.vo.MembersVO;
+import com.hereo.project.vo.TeamVO;
 
 
 @Controller
@@ -22,8 +28,19 @@ public class HomeController {
 	@Autowired
 	MembersService membersService;
 	
+	@Autowired
+	CommuService commuService;
+	
+	@Autowired
+	TeamService teamService;
+	
 	@GetMapping(value = "/")
-	public String home() {
+	public String home(Model model) {
+		ArrayList<BoardVO> hotList = commuService.getAllBoardForHot();
+		ArrayList<TeamVO> newTeam = teamService.getNewTeam();
+		
+		model.addAttribute("hot", hotList);
+		model.addAttribute("team", newTeam);
 		return "/home";
 	}
 	//회원가입 기능
