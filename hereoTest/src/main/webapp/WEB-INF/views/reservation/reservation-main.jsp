@@ -21,54 +21,11 @@
                     <li class="item-region">
                         <a href="#" class="link-region btn btn-dark" role="button" data-local="전체">전체</a>
                     </li>
+                    <c:forEach items="${regionList}" var="rl">
                     <li class="item-region">
-                        <a href="#" class="link-region btn btn-light" role="button" data-local="서울">서울</a>
+                        <a href="#" class="link-region btn btn-light" role="button" data-local="${rl.re_num}">${rl.re_sido}</a>
                     </li>
-                    <li class="item-region">
-                        <a href="#" class="link-region btn btn-light" role="button" data-local="경기">경기</a>
-                    </li>
-                    <li class="item-region">
-                        <a href="#" class="link-region btn btn-light" role="button" data-local="부산">부산</a>
-                    </li>
-                    <li class="item-region">
-                        <a href="#" class="link-region btn btn-light" role="button" data-local="대구">대구</a>
-                    </li>
-                    <li class="item-region">
-                        <a href="#" class="link-region btn btn-light" role="button" data-local="인천">인천</a>
-                    </li>
-                    <li class="item-region">
-                        <a href="#" class="link-region btn btn-light" role="button" data-local="대전">대전</a>
-                    </li>
-                    <li class="item-region">
-                        <a href="#" class="link-region btn btn-light" role="button" data-local="광주">광주</a>
-                    </li>
-                    <li class="item-region">
-                        <a href="#" class="link-region btn btn-light" role="button" data-local="울산">울산</a>
-                    </li>
-                    <li class="item-region">
-                        <a href="#" class="link-region btn btn-light" role="button" data-local="강원">강원</a>
-                    </li>
-                    <li class="item-region">
-                        <a href="#" class="link-region btn btn-light" role="button" data-local="충남">충남</a>
-                    </li>
-                    <li class="item-region">
-                        <a href="#" class="link-region btn btn-light" role="button" data-local="충북">충북</a>
-                    </li>
-                    <li class="item-region">
-                        <a href="#" class="link-region btn btn-light" role="button" data-local="전남">전남</a>
-                    </li>
-                    <li class="item-region">
-                        <a href="#" class="link-region btn btn-light" role="button" data-local="전북">전북</a>
-                    </li>
-                    <li class="item-region">
-                        <a href="#" class="link-region btn btn-light" role="button" data-local="경남">경남</a>
-                    </li>
-                    <li class="item-region">
-                        <a href="#" class="link-region btn btn-light" role="button" data-local="경북">경북</a>
-                    </li>
-                    <li class="item-region">
-                        <a href="#" class="link-region btn btn-light" role="button" data-local="제주">제주</a>
-                    </li>
+                    </c:forEach>
                 </ul>
             </div>
             <div class="search_box">
