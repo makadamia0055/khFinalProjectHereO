@@ -135,7 +135,7 @@ $( function() {
       currentText : "오늘 날짜",
       onSelect: function(dateText) {
           var dateText = $(this).val();
-          var url = "<c:url value='/reservation/main'></c:url>" + dateText.replace(/\//g, "-");
+          var url = "<c:url value='/reservation/main?'></c:url>" + dateText.replace(/\//g, "-");
           window.location.href = url;
       }
     });

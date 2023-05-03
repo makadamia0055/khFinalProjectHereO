@@ -17,4 +17,7 @@ hereoTest/.classpath
 
 hereoTest/.settings/org.eclipse.wst.common.component
 
+hereoTest/.settings/org.eclipse.jdt.core.prefs
+
+hereoTest/.settings/org.eclipse.wst.common.project.facet.core.xml
 *.properties

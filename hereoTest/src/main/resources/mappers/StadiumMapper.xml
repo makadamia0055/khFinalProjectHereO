@@ -55,7 +55,15 @@
 			join region_sub on rd_rs_num = rs_num
 				where rd_num = #{rd_num}
 	</select>
-
+	<!-- 스타디움 스케쥴 가져오기 -->
+	<select id="selectStadiumTimetable" resultType="com.hereo.project.vo.StadiumTimetableVO">
+		select * from `stadium-timetable` where st_sd_num=#{st_num}
+	</select>
+	<!--  결제를 위한 스타디움 타임 스케쥴 가져오기 -->
+	<select id="getStadiumTimetableForPay" resultType="com.hereo.project.vo.StadiumTimetableVO">
+		select * from `stadium-timetable`
+			where st_num=#{st_num}  
+	</select>
 
 
 </mapper>
