@@ -17,6 +17,9 @@
 	<select id="selectStadiumByRv_Num" resultType="com.hereo.project.vo.StadiumVO">
 		select * from stadium 
 			where sd_num = (select st_sd_num from `stadium-timetable` where st_num = (select ss_st_num from `stadium-schedule` where ss_rv_num = #{rv_num}));
-	
+	</select>
+	<select id="selectMatchScheduleByMsNum" resultType="com.hereo.project.vo.MatchScheduleVO">
+		select * from `match-schedule`
+			where ms_num = #{ms_num}
 	</select>
 </mapper>

@@ -154,7 +154,11 @@
 									<c:forEach items="${tPlayerList}" var="tp">
 										<c:choose>
 											<c:when test="${tp.tp_auth > 1}">
-												<option value="${tp.tp_num}" data-baknum="${tp.tp_backnum }"></option>
+												<option value="${tp.tp_num}" data-baknum="${tp.tp_backnum }">
+													<c:forEach items="${playerList}" var="pl">
+														<c:if test="${pl.pl_num eq tp.tp_pl_num}">${tp.tp_backnum}.${pl.me_nickname}</c:if>
+													</c:forEach>
+												</option>
 											</c:when>
 										</c:choose>
 										
@@ -191,8 +195,13 @@
 								<c:forEach items="${tPlayerList}" var="tp">
 										<c:choose>
 											<c:when test="${tp.tp_auth > 1}">
-												<option value="${tp.tp_num}" data-baknum="${tp.tp_backnum }"></option>
+												<option value="${tp.tp_num}" data-baknum="${tp.tp_backnum}">
+													<c:forEach items="${playerList}" var="pl">
+														<c:if test="${pl.pl_num eq tp.tp_pl_num}">${tp.tp_backnum}.${pl.me_nickname}</c:if>
+													</c:forEach>
+												</option>
 											</c:when>
+											
 										</c:choose>
 										
 								</c:forEach>
@@ -217,7 +226,7 @@
 				</div>
 				<div class="bench">
 					<div class="title-bench">벤치 <button class="btn btn-sm btn-dark btn-bench-append">추가</button>
-					<div class="d-flex content-bench"></div>	
+					<div class="d-flex flex-wrap content-bench"></div>	
 					</div>
 					
 
@@ -228,7 +237,8 @@
 			</div>
 			<div class="right-panel">
 				<div class="container-line_up text-center">
-					<span class="">선발 라인업 <button class="btn btn-success btn-sm btn-scan">새로고침</button></span>
+					<span class="">선발 라인업 </span>
+					<button class="btn btn-success btn-sm btn-scan" hidden>새로고침</button>
 					<table class="table" id="lineupTable">
 						<thead>
 							<tr>
@@ -312,9 +322,9 @@
 	
 				</div>
 	
-				 <button type="button" class="btn btn-pill btn-primary">중간 저장</button>
-				 <button type="button" class="btn btn-pill btn-primary">초기화</button>
-				 <button type="button" class="btn btn-pill btn-primary">제출</button><br>
+				 <button type="button" class="btn btn-pill btn-primary btn-save">저장</button>
+				 <!-- <button type="button" class="btn btn-pill btn-primary">초기화</button>
+				 <button type="button" class="btn btn-pill btn-primary">제출</button><br> -->
 	
 			</div>
 
@@ -328,6 +338,16 @@
 
 	
 	<script>
+	let playerCnt = ${fn:length(tPlayerList)}
+	if(playerCnt<9){
+		if(!confirm("팀의 플레이어가 9명보다 작습니다. 계속 라인업을 작성합니까?")){
+			alert('이전 페이지로 이동합니다.')
+			location.href(history.back());
+		}
+	}
+	
+	
+	
 	let $playerBox = $('.box-player');
 	let $tableTd = $('.table-position');
 	let $contentBox = $('.content-position')
@@ -339,7 +359,7 @@
 
  	let _ml_ms_num = 1 ;//'${ms_num}';
 	let positionMap = new Map();
-	positionMap.set(1, "투수"); 
+	positionMap.set(1,"투수"); 
 	positionMap.set(2,"포수"); 
 	positionMap.set(3,"1루수"); 
 	positionMap.set(4,"2루수"); 
@@ -358,7 +378,6 @@
 		let dataPo =  positionMap.get(dataNum);
 		$(this).text(dataPo);
 	})
-	
 	
 
 	let LineUp = {
@@ -398,12 +417,16 @@
 			}
 		},
 		scanBench(){
-			benchLine = [];
+			this.benchLine = [];
 			for(let tmp of $bench){
 				let ml_tp_num = $(tmp).find('.select-position option:selected').val();
-
+				console.log(ml_tp_num);
+				if(ml_tp_num == 0 || ml_tp_num == undefined)
+					continue;
 				let tmpObj = new LUObj(ml_tp_num);
 				tmpObj.ml_type = '벤치';
+				tmpObj.ml_po_num = 11;
+				tmpObj.ml_battingorder= 0;
 				this.benchLine.push(tmpObj);
 			}
 		},
@@ -432,7 +455,7 @@
 					}
 				});
 				let tmpPlayerBox = $playerBox.filter(function(){
-					if($(this).data('plnum')==tmp.ml_tp_num)
+					if($(this).data('tpnum')==tmp.ml_tp_num)
 						return this;
 				});
 				let playerN = tmpPlayerBox.find('.name-player').text();
@@ -446,7 +469,7 @@
 			let benchCol =  $('#lineupTable').find('.benchMem');
 			for(let tmp of this.benchLine){
 				let tmpPlayerBox = $playerBox.filter(function(){
-					if($(this).data('plnum')==tmp.ml_tp_num)
+					if($(this).data('tpnum')==tmp.ml_tp_num)
 					return this;
 				});
 				let playerB = tmpPlayerBox.find('.bakNum-player').text();
@@ -483,16 +506,23 @@
 	let benchSeat = 0;
 	
 	$('.btn-bench-append').on('click', function(e){
-		let playerSelector = '<select class="select-position" name="" id="positionBench'+benchSeat+'">'
-		+'<option class="defaultN" value="0">-선수-</option>'					
-		+'<option value="1">1번 누구</option>'
-		+'</select>';
+		let $selectPlayerOpt = $('.select-position:first').clone(true)
+		$selectPlayerOpt.removeAttr("selected")
+		console.log($selectPlayerOpt)
+		
+		let playerSelector = '<select class="select-position p-2" name="" id="positionBench'+benchSeat+'">'
+		$selectPlayerOpt.each(function(){
+			playerSelector += $(this).html();
+		})
+		playerSelector +='</select>';
 		++benchSeat;
 		e.preventDefault();
 		$($bench).append(playerSelector);
 
 		$('.select-position').on('change', function(e){
-		checkDuplicatePO(this);
+			checkDuplicatePO(this);
+			$('.btn-scan').click();
+
 		})
 	})
 checkbox_DH_toggler(true);
@@ -534,9 +564,12 @@ $('.checkbox-DH').click(function(e){
 	
 $('.select-hitorder').on('change', function(e){
 	checkDuplicateHO(this);
+	$('.btn-scan').click();
+	
 })
 $('.select-position').on('change', function(e){
 	checkDuplicatePO(this);
+	$('.btn-scan').click();
 })
 
 function checkDuplicateHO(data){
@@ -565,9 +598,43 @@ $('.btn-scan').click(function(e){
 		LineUp.scanBench();
 		clearBoard();
 		LineUp.print();
-		console.log(LineUp.line)
 	})
 
+$('.btn-save').click(function(e){
+		let lineObj = LineUp.line;
+		let benchObj = LineUp.benchLine;
+
+		ajaxAsync("POST", lineObj.concat(benchObj), '<c:url value="/ajax/lineup_save?teamNum=${team.tm_num}&ms_num=${ms_num}"></c:url>', function(data){
+			console.log(data.res)
+		})
+		
+})
+	function ajaxAsync(method, obj, url, successFunc, errorFunc){
+	$.ajax({
+		async:true,
+		type: method,
+		data: JSON.stringify(obj),
+		url: url, 
+		dataType: "json",
+		contentType:"application/json; charset=UTF-8",
+		success: successFunc,
+		error: errorFunc
+		
+	});
+}
+function ajax(method, obj, url, successFunc, errorFunc){
+	$.ajax({
+		async:false,
+		type: method,
+		data: JSON.stringify(obj),
+		url: url, 
+		dataType: "json",
+		contentType:"application/json; charset=UTF-8",
+		success: successFunc,
+		error: errorFunc
+		
+	});
+}
 	
 	
 </script>

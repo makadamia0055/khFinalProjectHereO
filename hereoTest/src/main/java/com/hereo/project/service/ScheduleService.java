@@ -8,4 +8,6 @@ public interface ScheduleService {
 	public ArrayList<MatchScheduleVO> selectTeamScheduleByTeamAfterToday(Integer teamNum);
 
 	public MatchScheduleVO selectNextTeamSchedule(Integer teamNum);
+	
+	public MatchScheduleVO selectMatchScheduleByMsNum(Integer ms_num);
 }
