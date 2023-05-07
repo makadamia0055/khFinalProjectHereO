@@ -603,9 +603,16 @@ $('.btn-scan').click(function(e){
 $('.btn-save').click(function(e){
 		let lineObj = LineUp.line;
 		let benchObj = LineUp.benchLine;
-
+		if(Object.keys(lineObj).length<9){
+			if(!confirm("라인업이 완벽하게 등록되지 않았습니다. 그래도 저장합니까?"))
+				return;
+		}
 		ajaxAsync("POST", lineObj.concat(benchObj), '<c:url value="/ajax/lineup_save?teamNum=${team.tm_num}&ms_num=${ms_num}"></c:url>', function(data){
-			console.log(data.res)
+			if(data.res==1){
+				alert('라인업이 저장되었습니다.')
+			}else{
+				alert('라인업 저장에 실패했습니다.')
+			}
 		})
 		
 })

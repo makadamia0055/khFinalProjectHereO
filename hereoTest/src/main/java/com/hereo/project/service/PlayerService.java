@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.MembersVO;
+import com.hereo.project.vo.PlayerRecordHitterVO;
+import com.hereo.project.vo.PlayerRecordPitcherVO;
+import com.hereo.project.vo.PlayerRecordYearHitterVO;
+import com.hereo.project.vo.PlayerRecordYearPitcherVO;
 import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.Position_HopeVO;
 import com.hereo.project.vo.TeamPlayerVO;
@@ -39,7 +43,15 @@ public interface PlayerService {
 
 	TeamPlayerVO selectTeamPlayerByPlNumAndTmNum(int pl_num, Integer tm_num);
 
-	ArrayList<TeamPlayerVO> selectTPByTmNum(int tm_num); 
+	ArrayList<TeamPlayerVO> selectTPByTmNum(int tm_num);
+
+	ArrayList<PlayerRecordHitterVO> selectPlayerRecordHitter(int pl_num);
+
+	ArrayList<PlayerRecordPitcherVO> selectPlayerRecordPitcher(int pl_num);
+
+	ArrayList<PlayerRecordYearHitterVO> selectPlayerRecordYearHitter(int pl_num);
+
+	ArrayList<PlayerRecordYearPitcherVO> selectPlayerRecordYearPitcher(int pl_num); 
 
 
 }

@@ -9,6 +9,10 @@ import com.hereo.project.dao.PlayerDAO;
 import com.hereo.project.dao.PositionDAO;
 import com.hereo.project.dao.TeamPlayerDAO;
 import com.hereo.project.pagination.Criteria;
+import com.hereo.project.vo.PlayerRecordHitterVO;
+import com.hereo.project.vo.PlayerRecordPitcherVO;
+import com.hereo.project.vo.PlayerRecordYearHitterVO;
+import com.hereo.project.vo.PlayerRecordYearPitcherVO;
 import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.Position_HopeVO;
 import com.hereo.project.vo.TeamPlayerVO;
@@ -172,5 +176,21 @@ public class PlayerServiceImp implements PlayerService{
 		if(tm_num == 0)
 			return null;
 		return teamPlayerDao.selectPlayerListByTeam(tm_num);
+	}
+	@Override
+	public ArrayList<PlayerRecordHitterVO> selectPlayerRecordHitter(int pl_num) {
+		return teamPlayerDao.selectPlayerRecordHitter(pl_num);
+	}
+	@Override
+	public ArrayList<PlayerRecordPitcherVO> selectPlayerRecordPitcher(int pl_num) {
+		return teamPlayerDao.selectPlayerRecordPitcher(pl_num);
+	}
+	@Override
+	public ArrayList<PlayerRecordYearHitterVO> selectPlayerRecordYearHitter(int pl_num) {
+		return teamPlayerDao.selectPlayerRecoreYearHitter(pl_num);
+	}
+	@Override
+	public ArrayList<PlayerRecordYearPitcherVO> selectPlayerRecordYearPitcher(int pl_num) {
+		return teamPlayerDao.selectPlayerRecordYearPitcher(pl_num);
 	}
 }

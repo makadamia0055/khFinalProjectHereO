@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hereo.project.dao.RecordDAO">
-	<select id="selectAllHitRecord" resultType="com.hereo.project.vo.PlayerrecordHitterVO">
+	<select id="selectAllHitRecord" resultType="com.hereo.project.vo.PlayerRecordHitterVO">
 		select * from `playerrecord-hitter`
 
 	</select>

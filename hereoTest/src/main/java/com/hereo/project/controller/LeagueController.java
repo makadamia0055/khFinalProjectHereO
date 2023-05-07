@@ -23,7 +23,7 @@ import com.hereo.project.vo.LeagueParticipationteamVO;
 import com.hereo.project.vo.LeagueScheduleVO;
 import com.hereo.project.vo.LeagueVO;
 import com.hereo.project.vo.MembersVO;
-import com.hereo.project.vo.PlayerrecordHitterVO;
+import com.hereo.project.vo.PlayerRecordHitterVO;
 import com.hereo.project.vo.RegionVO;
 import com.hereo.project.vo.TeamPlayerVO;
 import com.hereo.project.vo.TeamVO;
@@ -76,7 +76,7 @@ public class LeagueController {
 	}
 	@RequestMapping(value = "/league/recordHit", method = RequestMethod.GET)
 	public ModelAndView leagueRecordHit(ModelAndView mv) {
-		ArrayList<PlayerrecordHitterVO> hList = recordService.getSelectAllHitRecord();
+		ArrayList<PlayerRecordHitterVO> hList = recordService.getSelectAllHitRecord();
 
 		mv.addObject("hList", hList);
 		mv.setViewName("/league/league-record-hit");

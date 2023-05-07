@@ -36,6 +36,10 @@ import com.hereo.project.vo.BoardVoteVO;
 import com.hereo.project.vo.MatchLineUpVO;
 import com.hereo.project.vo.MatchScheduleVO;
 import com.hereo.project.vo.MembersVO;
+import com.hereo.project.vo.PlayerRecordHitterVO;
+import com.hereo.project.vo.PlayerRecordPitcherVO;
+import com.hereo.project.vo.PlayerRecordYearHitterVO;
+import com.hereo.project.vo.PlayerRecordYearPitcherVO;
 import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.RegionVO;
 import com.hereo.project.vo.TeamApprovalListVO;
@@ -219,6 +223,14 @@ public class TeamController {
 			TeamVO team = teamList.get(0);
 			mv.addObject("team", team);
 		}
+		ArrayList<PlayerRecordHitterVO> pHList = playerService.selectPlayerRecordHitter(tmpPlayer.getPl_num());
+		ArrayList<PlayerRecordPitcherVO> pPList = playerService.selectPlayerRecordPitcher(tmpPlayer.getPl_num());
+		ArrayList<PlayerRecordYearHitterVO> yHList = playerService.selectPlayerRecordYearHitter(tmpPlayer.getPl_num());
+		ArrayList<PlayerRecordYearPitcherVO> yPList = playerService.selectPlayerRecordYearPitcher(tmpPlayer.getPl_num());
+		mv.addObject("pHList", pHList);
+		mv.addObject("pPList", pPList);
+		mv.addObject("yHList", yHList);
+		mv.addObject("yPList", yPList);
 		mv.addObject("player", tmpPlayer);
 		mv.setViewName("/team/team-playerdetail");
 		return mv;
@@ -390,7 +402,6 @@ public class TeamController {
 		if(existLineUpList!=null&&existLineUpList.size()>0) {
 			lineUpService.deleteLineUpByTmNumAndMsNum(teamNum, ms_num);
 		}
-		System.out.println(lineupList);
 
 		int res = lineUpService.insertMatchLineUp(lineupList);
 		map.put("res", res);
@@ -417,7 +428,7 @@ public class TeamController {
 		int teamNum = team.getTm_num();
 //		권한 체크 필요
 		
-		if(teamService.checkIsLeader(teamNum, user.getMe_id())) {
+		if(!teamService.checkIsLeader(teamNum, user.getMe_id())) {
 			mv.addObject("msg", "팀 관리자만 이용할 수 있는 메뉴입니다.");
 			mv.addObject("url", "/team/main");
 			mv.setViewName("/common/message");
