@@ -117,7 +117,7 @@
 			order by tm_num DESC
 			limit 3
 	</select>
-
+	
 	<select id="countTeamTotalMatch" resultType="int">
 	 select distinct count(*) from `match-record` 
 	 where mr_ms_num = 
