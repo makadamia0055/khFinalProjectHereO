@@ -53,4 +53,11 @@ public class ScheduleServiceImp implements ScheduleService {
 			return null;
 		return scheduleDao.selectMatchScheduleByMsNum(ms_num);
 	}
+
+	@Override
+	public ArrayList<MatchScheduleVO> selectMatchScheduleByTmNum(Integer teamNum) {
+		if(teamNum==null||teamNum<1)
+			return null;
+		return scheduleDao.selectMatchScheduleByTmNum(teamNum);
+	}
 }

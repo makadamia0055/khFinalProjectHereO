@@ -25,6 +25,7 @@ import com.hereo.project.service.AuthService;
 import com.hereo.project.service.LineUpService;
 import com.hereo.project.service.MembersService;
 import com.hereo.project.service.PlayerService;
+import com.hereo.project.service.RecordService;
 import com.hereo.project.service.ScheduleService;
 import com.hereo.project.service.TeamBoardService;
 import com.hereo.project.service.TeamService;
@@ -34,6 +35,7 @@ import com.hereo.project.vo.BoardReplyVO;
 import com.hereo.project.vo.BoardVO;
 import com.hereo.project.vo.BoardVoteVO;
 import com.hereo.project.vo.MatchLineUpVO;
+import com.hereo.project.vo.MatchRecordVO;
 import com.hereo.project.vo.MatchScheduleVO;
 import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerRecordHitterVO;
@@ -61,6 +63,8 @@ public class TeamController {
 	AuthService authService;
 	@Autowired
 	LineUpService lineUpService;
+	@Autowired
+	RecordService recordService;
 	
 	@Autowired
 	PlayerService playerService;
@@ -330,12 +334,24 @@ public class TeamController {
 	@RequestMapping(value = "/team/record", method = RequestMethod.GET)
 	public ModelAndView teamRecord(ModelAndView mv, Integer teamNum) {
 		TeamVO tmpTeam = teamService.selectTeamByTm_Num(teamNum);
-		int totalMatch = teamService.countTeamTotalMatch(teamNum);
+		HashMap<String, Object> totalMatch = teamService.countTeamTotalMatch(teamNum);
+		ArrayList<MatchScheduleVO> msList = scheduleService.selectMatchScheduleByTmNum(teamNum);
+		mv.addObject("msList", msList);
 		mv.addObject("totalMatch", totalMatch);
 		mv.addObject("team", tmpTeam);
 		mv.setViewName("/team/team-record");
 		return mv;
 	}
+//	팀 기록 페이지 해당 경기의 정보를 ajax로 가져오는 메서드
+	@ResponseBody
+	@RequestMapping(value="/team/ajax/record", method=RequestMethod.POST)
+	public Map<String, Object>teamRecordAjax(@RequestBody MatchRecordVO matchRecord, Integer tm_num) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		matchRecord = recordService.selectMatchRecordByMrNum(matchRecord.getMr_num());
+		map.put("matchRecord", matchRecord);
+		return map;
+	}
+	
 //	팀 라인업 짜기 페이지
 	@RequestMapping(value = "/team/lineup", method = RequestMethod.GET)
 	public ModelAndView teamLineup(ModelAndView mv, Integer teamNum, Integer ms_num, HttpSession session) {

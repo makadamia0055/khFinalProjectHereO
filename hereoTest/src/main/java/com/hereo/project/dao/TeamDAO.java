@@ -50,4 +50,6 @@ public interface TeamDAO {
 
 	int countTeamTotalMatch(Integer tm_num);
 
+	int countTeamTotalMatchByState(@Param("tm_num")Integer teamNum, @Param("state")String string);
+
 }

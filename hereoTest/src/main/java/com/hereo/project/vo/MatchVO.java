@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class MatchVO {
 	private MatchRecordVO matchRecord;
 	private MatchScheduleVO matchSchedule;
+	private int endInning;
 	
 }

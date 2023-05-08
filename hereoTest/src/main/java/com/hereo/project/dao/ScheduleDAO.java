@@ -15,4 +15,6 @@ public interface ScheduleDAO {
 
 	MatchScheduleVO selectMatchScheduleByMsNum(Integer ms_num);
 
+	ArrayList<MatchScheduleVO> selectMatchScheduleByTmNum(Integer teamNum);
+
 }

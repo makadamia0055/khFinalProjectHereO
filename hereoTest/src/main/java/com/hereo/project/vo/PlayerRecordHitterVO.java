@@ -33,7 +33,7 @@ public class PlayerRecordHitterVO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date ms_datetime;
 	
-	public String getMs_datatime_str() {
+	public String getMs_datetime_str() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		return format.format(ms_datetime);
 	}
