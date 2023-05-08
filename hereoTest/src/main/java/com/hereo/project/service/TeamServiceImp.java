@@ -1,6 +1,7 @@
 package com.hereo.project.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -219,10 +220,15 @@ public class TeamServiceImp implements TeamService{
 	}
 
 	@Override
-	public int countTeamTotalMatch(Integer teamNum) {
+	public HashMap<String, Object> countTeamTotalMatch(Integer teamNum) {
+		HashMap<String, Object> map = new HashMap<String, Object>(); 
 		if(teamNum==null||teamNum==0)
-			return -1;
-		return teamDao.countTeamTotalMatch(teamNum);
+			return null;
+		map.put("total", teamDao.countTeamTotalMatch(teamNum));
+		map.put("win", teamDao.countTeamTotalMatchByState(teamNum, "win"));
+		map.put("lose", teamDao.countTeamTotalMatchByState(teamNum, "lose"));
+		map.put("draw", teamDao.countTeamTotalMatchByState(teamNum, "draw"));
+		return map;
 	}
 	
 	

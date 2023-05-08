@@ -119,9 +119,27 @@
 	</select>
 	
 	<select id="countTeamTotalMatch" resultType="int">
-	 select distinct count(*) from `match-record` 
-	 where mr_ms_num = 
-	 (select ms_num from `match-schedule` where ms_tm_home_num = #{tm_num} or ms_tm_away_num= #{tm_num})
+	 select distinct count(*) as total from `match-record` 
+	 join `match-schedule` on  `match-record`.mr_ms_num =`match-schedule`.ms_num 
+	 where (ms_tm_home_num!= ms_tm_away_num) and (ms_tm_home_num = #{tm_num} or ms_tm_away_num= #{tm_num})
+	 
 	</select>
+	<select id="countTeamTotalMatchByState" resultType="int">
+	 select distinct count(*) as total from `match-record` 
+	 join `match-schedule` on  `match-record`.mr_ms_num =`match-schedule`.ms_num
+	 <choose>
+		 <when test='state == "win"'>
+			 where (ms_tm_home_num!= ms_tm_away_num) and ((ms_tm_home_num = #{tm_num} and mr_point_home>mr_point_away) or (ms_tm_away_num= #{tm_num} and mr_point_away> mr_point_home))
+		 </when>
+		 <when test='state == "lose"'>
+		 	 where (ms_tm_home_num!= ms_tm_away_num) and ((ms_tm_home_num = #{tm_num} and mr_point_away>mr_point_home) or (ms_tm_away_num= #{tm_num} and mr_point_home> mr_point_away))
+		 </when>
+		 <otherwise>
+		 	 where (ms_tm_home_num!= ms_tm_away_num) and ((ms_tm_home_num = #{tm_num} and mr_point_away=mr_point_home) or (ms_tm_away_num= #{tm_num} and mr_point_home= mr_point_away))
+		 	
+		 </otherwise> 
+	 </choose>
+	</select>
+
 
 </mapper>

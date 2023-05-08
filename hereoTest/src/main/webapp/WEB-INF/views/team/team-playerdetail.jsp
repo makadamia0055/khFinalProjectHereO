@@ -46,56 +46,9 @@
           
         </div>
         
-        <!-- <div class="block-tile title-recently_Match_score">
-          최근 경기 성적
-        
-        </div>
-        <div class="hitter_memu">
-          <ul class="hitter_date_stat">
-            <li class="match_date">2023-02-23</li>
-            <li class="enter_time">3타수</li>
-            <li class="hit_time">2안타</li>
-            <li class="home_run"></li>
-            <li class="hit_rate"></li>
-
-          </ul>
-        </div>
-        <div class="pitcher_memu">
-
-        </div>
-        
-          
        
-        <div class="container-latest_score">
-          <div class="box-latest_score">
-            <ul class="latest-stat-hit">
-              <li class="item-last10gamehit">
-                10경기 타율 : <span class="last10gamehit">0.302</span>
-              </li>
-              <li class="item-last10hit">
-                10타석 타율 : <span class="last10hit">0.404</span>
-              </li>
-              <li class="item-hitpoint">
-                10경기 타점 : <span class="last10hitpoint">3</span>점
-              </li>
-            </ul>
-            <ul class="latest-stat-throw">
-              <!-- 주요 구종 -->
-              <!-- <li class="item-last10gamepitch">
-                10경기 자책점 : <span class="last10gamepitch">2.302</span>
-              </li>
-              <li class="item-last10hitted">
-                10타석 피안타율 : <span class="last10hitted">0.404</span>
-              </li>
-              <li class="item-hitpoint">
-                10경기 실점 : <span class="last10losepoint">6</span>점
-              </li>
-            </ul>
-           
-          </div> 
-        </div> -->
         <div class="block-tile title-recently_Match_score">
-          최근 10경기 성적
+          일자별 경기 성적
           <div class="box-btn box-latest">
             <a href="#" role="button" class="btn btn-primary hitter">타자</a>
             <a href="#" role="button" class="btn btn-success btn-pithcer" style="display:none;">투수</a>
@@ -128,27 +81,30 @@
                 </tr>
               </thead>
               <tbody>
-
+              	<c:if test="${empty pHList}">
+					<tr><td colspan="17">타자 기록이 없습니다</td></tr>
+				</c:if>	
+				<c:forEach items="${pHList}" var="ph">
                 <tr>
-                  <td class="match_date">2023-02-12</th>
+                  <td class="match_date">${ph.ms_datatime_str}</th>
                   <td class="match_oppo"><a class="badge badge-danger">돌핀즈</span></td>
-                  <td class="match_AVG">0.320</td>
-                  <td class="match_PA">3</td>
-                  <td class="match_AB">2</td>
-                  <td class="match_R">1</td>
-                  <td class="match_H">1</td>
-                  <td class="match_2B">1</td>
-                  <td class="match_3B">0</td>
-                  <td class="match_HR">0</td>
-                  <td class="match_RBI">1</td>
-                  <td class="match_SB">1</td>
-                  <td class="match_CS">0</td>
-                  <td class="match_BB">3</td>
-                  <td class="match_HBP">0</td>
-                  <td class="match_SO">1</td>
-                  <td class="match_GDP">0</td>
+                  <td class="match_AVG"></td>
+                  <td class="match_PA">${ph.ph_bats}</td>
+                  <td class="match_AB">${ph.ph_hits}</td>
+                  <td class="match_R"></td>
+                  <td class="match_H">${ph.ph_single_hits}</td>
+                  <td class="match_2B">${ph.ph_twobase_hits}</td>
+                  <td class="match_3B">${ph.ph_threebase_hits}</td>
+                  <td class="match_HR">${ph.ph_homeruns}</td>
+                  <td class="match_RBI"></td>
+                  <td class="match_SB">${ph.ph_steals}</td>
+                  <td class="match_CS">${ph.ph_fail_steals}</td>
+                  <td class="match_BB">${ph.ph_fourballs}</td>
+                  <td class="match_HBP">${ph.ph_hitbypitches}</td>
+                  <td class="match_SO">${ph.ph_strike_outs}</td>
+                  <td class="match_GDP">${ph.ph_doubleplays}</td>
                 </tr>
-                
+                </c:forEach>
               </tbody>
             </table>
           </div>
@@ -165,36 +121,39 @@
                   <th class="match_AB">타자수</th>
                   <th class="match_R">이닝</th>
                   <th class="match_H">피안타</th>
-                  <th class="match_2B">홈런</th>
-                  <th class="match_3B">볼넷</th>
-                  <th class="match_HR">사구</th>
+                  <th class="match_HR">홈런</th>
+                  <th class="match_4b">볼넷</th>
+                  <th class="match_hbp">사구</th>
                   <th class="match_RBI">삼진</th>
                   <th class="match_SB">실점</th>
                   <th class="match_CS">자책점</th>
-                  <th class="match_BB">피안타율</th>
+                  <th class="match_BB">투구수</th>
                   
                 </tr>
               </thead>
               <tbody>
-
-                
+				<c:if test="${empty pPList}">
+					<tr><td colspan="14">투수 기록이 없습니다</td></tr>
+				</c:if>	
+                <c:forEach items="${pPList}" var="pp">
                 <tr>
-                  <td class="match_date">2023-02-12</th>
+                  <td class="match_date">${pp.ms_datetime}</th>
                   <td class="match_oppo"><a class="badge badge-danger">돌핀즈</span></td>
                   <td class="match_AVG">0.320</td>
-                  <td class="match_PA">3</td>
-                  <td class="match_AB">2</td>
-                  <td class="match_R">1</td>
-                  <td class="match_H">1</td>
-                  <td class="match_2B">1</td>
-                  <td class="match_3B">0</td>
-                  <td class="match_HR">0</td>
-                  <td class="match_RBI">1</td>
-                  <td class="match_SB">1</td>
-                  <td class="match_CS">0</td>
-                  <td class="match_BB">3</td>
+                  <td class="match_PA">${pp.pp_earnedruns/pp.pp_innings}</td>
+                  <td class="match_AB">${pp.pp_hitters}</td>
+                  <td class="match_R">${pp.pp_innings}</td>
+                  <td class="match_H">${pp.pp_hits }</td>
+                  <td class="match_HR">${pp.pp_homeruns}</td>
+                  <td class="match_4b">${pp.pp_fourballs}</td>
+                  <td class="match_hbp">${pp.pp_hitbypitches}</td>
+                  <td class="match_RBI">${pp.pp_strikeouts}</td>
+                  <td class="match_SB">${pp.pp_losepoints}</td>
+                  <td class="match_CS">${pp.pp_earnedruns }</td>
+                  <td class="match_BB">${pp.pp_pitches}</td>
                   
                 </tr>
+                </c:forEach>
               </tbody>
             </table>
           </div>
@@ -206,7 +165,7 @@
         </div> -->
         <!-- 베스트 플레이 영상 -->
         <div class="block-tile title-Match_recode">
-         전체 경기 기록 열람
+			년도별 경기 성적	
          <div class="box-btn">
           <a href="#" role="button" class="btn btn-primary hitter">타자</a>
           <a href="#" role="button" class="btn btn-success btn-pithcer" style="display:none;">투수</a>
@@ -243,24 +202,30 @@
                 <tbody>
     
                   
+                   <c:if test="${empty yHList}">
+					<tr><td colspan="17">타자 기록이 없습니다</td></tr>
+				</c:if>	
+				<c:forEach items="${yHList}" var="yh">
                   <tr>
-                    <td class="match_date">2023-02-12</th>
-                    <td class="match_oppo"><a class="badge badge-danger">돌핀즈</span></td>
-                    <td class="match_AVG">0.320</td>
-                    <td class="match_PA">3</td>
-                    <td class="match_AB">2</td>
-                    <td class="match_R">1</td>
-                    <td class="match_H">1</td>
-                    <td class="match_2B">1</td>
-                    <td class="match_3B">0</td>
-                    <td class="match_HR">0</td>
-                    <td class="match_RBI">1</td>
-                    <td class="match_SB">1</td>
-                    <td class="match_CS">0</td>
-                    <td class="match_BB">3</td>
-                    <td class="match_HBP">0</td>
-                    <td class="match_SO">1</td>
-                    <td class="match_GDP">0</td>
+                  <td class="match_date">년도</th>
+                  
+                  <td class="match_AVG">${yh.yh_year}</td>
+                  <td class="match_PA">${yh.yh_bats}</td>
+                  <td class="match_AB">${yh.yh_hits}</td>
+                  <td class="match_R"></td>
+                  <td class="match_H">${yh.yh_single_hits}</td>
+                  <td class="match_2B">${yh.yh_twobase_hits}</td>
+                  <td class="match_3B">${yh.yh_threebase_hits}</td>
+                  <td class="match_HR">${yh.yh_homeruns}</td>
+                  <td class="match_RBI"></td>
+                  <td class="match_SB">${yh.yh_steals}</td>
+                  <td class="match_CS">${yh.yh_fail_steals}</td>
+                  <td class="match_BB">${yh.yh_fourballs}</td>
+                  <td class="match_HBP">${yh.yh_hitbypitches}</td>
+                  <td class="match_SO">${yh.yh_strike_outs}</td>
+                  <td class="match_GDP">${yh.yh_doubleplays}</td>
+                </tr>
+                </c:forEach>
                   </tr>
                 </tbody>
               </table>
@@ -292,23 +257,27 @@
                 <tbody>
   
                   
-                  <tr>
-                    <td class="match_date">2023-02-12</th>
-                    <td class="match_oppo"><a class="badge badge-danger">돌핀즈</span></td>
-                    <td class="match_AVG">0.320</td>
-                    <td class="match_PA">3</td>
-                    <td class="match_AB">2</td>
-                    <td class="match_R">1</td>
-                    <td class="match_H">1</td>
-                    <td class="match_2B">1</td>
-                    <td class="match_3B">0</td>
-                    <td class="match_HR">0</td>
-                    <td class="match_RBI">1</td>
-                    <td class="match_SB">1</td>
-                    <td class="match_CS">0</td>
-                    <td class="match_BB">3</td>
-                    
-                  </tr>
+                 <c:if test="${empty yPList}">
+					<tr><td colspan="14">투수 기록이 없습니다</td></tr>
+				</c:if>	
+                <c:forEach items="${yPList}" var="yp">
+                <tr>
+                  <td class="match_date">${yp.yp_year}</th>
+                  <td class="match_AVG">0.320</td>
+                  <td class="match_PA">${yp.yp_earnedruns/pp.pp_innings}</td>
+                  <td class="match_AB">${yp.yp_hitters}</td>
+                  <td class="match_R">${yp.yp_innings}</td>
+                  <td class="match_H">${yp.yp_hits }</td>
+                  <td class="match_HR">${yp.yp_homeruns}</td>
+                  <td class="match_4b">${yp.yp_fourballs}</td>
+                  <td class="match_hbp">${yp.yp_hitbypitches}</td>
+                  <td class="match_RBI">${yp.yp_strikeouts}</td>
+                  <td class="match_SB">${yp.yp_losepoints}</td>
+                  <td class="match_CS">${yp.yp_earnedruns }</td>
+                  <td class="match_BB">${yp.yp_pitches}</td>
+                  
+                </tr>
+                </c:forEach>
                 </tbody>
               </table>
             </div>
