@@ -7,9 +7,11 @@ import com.hereo.project.vo.StadiumVO;
 
 public interface ReservationService {
 
-	ArrayList<StadiumVO> getStadiumTimetable(int st_num);
+	ArrayList<StadiumVO> getStadiumTimetable(int stadium);
 
 	StadiumTimetableVO getStadiumTimetableForPay(int st_num);
+
+	ArrayList<StadiumVO> getStadiumList(Integer region);
 
 
 

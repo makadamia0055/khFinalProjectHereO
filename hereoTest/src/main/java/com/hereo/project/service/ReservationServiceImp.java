@@ -17,16 +17,22 @@ public class ReservationServiceImp implements ReservationService{
 	
 
 	@Override
-	public ArrayList<StadiumVO> getStadiumTimetable(int st_num) {
+	public ArrayList<StadiumVO> getStadiumTimetable(int stadium) {
 		
 
 
-		return stadiumDao.selectStadiumTimetable(st_num);
+		return stadiumDao.selectStadiumTimetable(stadium);
 	}
 	@Override
 	public StadiumTimetableVO getStadiumTimetableForPay(int st_num) {
 		
 		return stadiumDao.getStadiumTimetableForPay(st_num);
+	}
+	@Override
+	public ArrayList<StadiumVO> getStadiumList(Integer region) {
+		
+
+		return stadiumDao.selectStadiumList(region);
 	}
 
 	

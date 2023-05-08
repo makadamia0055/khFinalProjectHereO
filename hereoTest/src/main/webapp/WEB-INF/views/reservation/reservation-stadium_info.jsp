@@ -14,6 +14,7 @@
          <button id="go-back" class="btn-prev btn btn-dark">이전 페이지</button>
          <button class="btn btn-success btn-update">수정</button>
       </div>
+      <h2>[예약 날짜 : ${game_date}]</h2>
       <div class="info-img">
          <img src="강상.jpg" alt="" class="img img1" style="width: 1000px; height: 500px;">
          <img src="강상3.jpg" alt="" class="img img2" style="width: 1000px; height:500px; display: none;">
@@ -43,11 +44,11 @@
          <tbody>
            <c:forEach items="${sd}" var="sd">
             <tr>
-	               <th>1게임</th>
+	               <th>${sd.st_game_num }게임</th>
 	               <td>09시 00분 부터</td>
 	               <td>2시간30분</td>
 	               <td><span class="price">${sd.st_rent_cost }</span></td>   
-	               <td class="status"><a href="<c:url value='/reservation/payment_info?st_num=${sd.st_num}'></c:url>"><span class="league">리그</span></a>
+	               <td class="status"><a href="<c:url value='/reservation/payment_info?st_num=${sd.st_num}&date=${game_date}'></c:url>"><span class="league">리그</span></a>
 	               	</td>
 	               <td><strong></strong></td>
             </tr>       

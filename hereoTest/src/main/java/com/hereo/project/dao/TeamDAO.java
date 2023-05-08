@@ -52,4 +52,6 @@ public interface TeamDAO {
 
 	ArrayList<TeamVO> getAllTeamList();
 
+	Integer searchUserTeam(@Param("me_id")String me_id);
+
 }

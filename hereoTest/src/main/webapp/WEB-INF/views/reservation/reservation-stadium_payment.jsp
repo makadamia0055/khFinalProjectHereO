@@ -5,12 +5,19 @@
 
 <input type="hidden" name="cost" value="${st.st_rent_cost}">
 <input type="hidden" name="user_id" value="${user.me_id}">
+<input type="hidden" name="user_mail" value="${user.me_mail}">
+<input type="hidden" name="user_tel" value="${user.me_tel}">
+<input type="hidden" name="user_id" value="${user.me_id}">
+<input type="hidden" name="user_id" value="${user.me_id}">
+<input type="hidden" name="user_id" value="${user.me_id}">
 
 
 <script>
 
 const cost = document.querySelector('input[name="cost"]').value;
 const user_id = document.querySelector('input[name="user_id"]').value;
+const user_mail = document.querySelector('input[name="user_mail"]').value;
+const user_tel = document.querySelector('input[name="user_tel"]').value;
 BootPay.request({
 	price: cost, 
 	application_id: "6450af6d755e27001b375f47",
@@ -31,9 +38,9 @@ BootPay.request({
 	],
 	user_info: {
 		username: user_id,
-		email: '사용자 이메일',
+		email: user_mail,
 		addr: '사용자 주소',
-		phone: '010-1234-4567'
+		phone: user_tel
 	},
 	order_id: '고유order_id_1234', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
 	params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},

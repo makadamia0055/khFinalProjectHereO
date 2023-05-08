@@ -15,4 +15,5 @@ public class StadiumScheduleVO {
 	private Date ss_game_date;
 	private int ss_st_num;
 	private int ss_rv_num;
+	private String ss_state;
 }

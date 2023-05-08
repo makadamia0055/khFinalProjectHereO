@@ -231,6 +231,12 @@ public class TeamServiceImp implements TeamService{
 		return teamDao.countTeamTotalMatch(teamNum);
 	}
 
+	@Override
+	public Integer searchUserTeam(String me_id) {
+		Integer userTeamNum = teamDao.searchUserTeam(me_id);
+		return userTeamNum;
+	}
+
 
 
 	

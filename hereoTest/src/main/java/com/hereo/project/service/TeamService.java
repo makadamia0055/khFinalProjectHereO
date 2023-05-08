@@ -57,6 +57,8 @@ public interface TeamService {
 
 	ArrayList<TeamVO> getAllTeamList();
 
+	Integer searchUserTeam(String me_id);
+
 
 
 

@@ -126,5 +126,12 @@
 	 where mr_ms_num = 
 	 (select ms_num from `match-schedule` where ms_tm_home_num = #{tm_num} or ms_tm_away_num= #{tm_num})
 	</select>
+	
+	<select id="searchUserTeam" resultType="Integer">
+	select tp_tm_num from `team-player`
+		join player on tp_pl_num=pl_num
+		join members on pl_me_id = me_id
+		where me_id=#{me_id}
+	</select>
 
 </mapper>

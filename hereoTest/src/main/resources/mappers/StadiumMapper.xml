@@ -14,6 +14,13 @@
   			order by sd_num desc
   			limit #{cri.pageStart}, #{cri.perPageNum}
   	</select>
+  	<select id ="selectStadiumList" resultType="com.hereo.project.vo.StadiumVO">
+  		select * from `stadium`
+  			join `region_detail` on sd_rd_num = rd_num
+  			join `region_sub` on rd_rs_num = rs_num
+  			where
+  				rs_re_num = #{r}
+  	</select>
   	<select id="selectStadiumTotalCount" resultType="int">
   		select count(*) from stadium
   			where
@@ -57,7 +64,7 @@
 	</select>
 	<!-- 스타디움 스케쥴 가져오기 -->
 	<select id="selectStadiumTimetable" resultType="com.hereo.project.vo.StadiumTimetableVO">
-		select * from `stadium-timetable` where st_sd_num=#{st_num}
+		select * from `stadium-timetable` where st_sd_num=#{st}
 	</select>
 	<!--  결제를 위한 스타디움 타임 스케쥴 가져오기 -->
 	<select id="getStadiumTimetableForPay" resultType="com.hereo.project.vo.StadiumTimetableVO">
