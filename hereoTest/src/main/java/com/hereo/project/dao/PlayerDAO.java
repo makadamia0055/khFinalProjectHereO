@@ -7,7 +7,7 @@ import com.hereo.project.vo.TeamPlayerVO;
 
 public interface PlayerDAO {
 
-	PlayerVO selectPlayerByTP(@Param("tp")TeamPlayerVO tmp);
+	PlayerVO selectPlayerByTpPlNum(@Param("tp_pl_num")Integer tmp);
 
 	PlayerVO selectPlayerByNum(@Param("pl_num")Integer player);
 

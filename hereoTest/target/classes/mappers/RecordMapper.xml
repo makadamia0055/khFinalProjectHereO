@@ -56,5 +56,28 @@
 			where mb_mi_num =#{mi_num}
 			order by mb_inning_order asc
 	</select>
+	<select id="selectMatchPartInHome" resultType="com.hereo.project.vo.MatchParticipateVO">
+		SELECT * FROM `match-partcipate`
+			join `match-record` on mp_mr_num = mr_num
+		    join `match-schedule` on mr_ms_num = ms_num
+		    join `team-player` on mp_tp_num = tp_num
+		    where tp_tm_num = ms_tm_home_num and mp_mr_num = #{mr_num}
+	</select>
+	<select id="selectMatchPartInAway" resultType="com.hereo.project.vo.MatchParticipateVO">
+		SELECT * FROM `match-partcipate`
+			join `match-record` on mp_mr_num = mr_num
+		    join `match-schedule` on mr_ms_num = ms_num
+		    join `team-player` on mp_tp_num = tp_num
+		    where tp_tm_num = ms_tm_away_num and mp_mr_num = #{mr_num}
+	</select>
+	<select id="selectPlayerRecordHitterByTpNumAndMrNum" resultType="com.hereo.project.vo.PlayerRecordHitterVO">
+		select * from `playerrecord-hitter`
+			where ph_tp_num = #{tp_num} and ph_mr_num = #{mr_num}
+	</select>
+	<select id="selectPlayerRecordPitcherByTpNumAndMrNum" resultType="com.hereo.project.vo.PlayerRecordPitcherVO">
+		select * from `playerrecord-pitcher`
+			where pp_tp_num = #{tp_num} and pp_mr_num = #{mr_num}
+	</select>
+	
 	
 </mapper>

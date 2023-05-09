@@ -59,7 +59,7 @@
                 통산 팀 승률 : <c:set var="rate" value="${totalMatch.win}/${totalMatch.total}"/>
                 <c:choose>
                   	<c:when test="${empty totalMatch.total|| totalMatch.total == -1}">오류</c:when>
-                  	<c:when test="${totalMatch.total == 0}">0%</c:when>
+                  	<c:when test="${totalMatch.total == 0||totalMatch.win==0}">0%</c:when>
                   	<c:otherwise>${rate*100}%</c:otherwise>
                	</c:choose>
               </li>
@@ -126,23 +126,37 @@
             <div class="box-score">
               <div class="team-box our-team">
                 <div class="img-box">
-<!--                   <img class="team-logo rounded-circle" src="" alt="단또즈">
- -->                  <button class="badge badge-pill badge-success">홈팀</button>
+                   <img class="team-logo home-team rounded-circle" src="<c:choose>
+										<c:when test="${empty team.tm_team_img}">
+											<c:url value='/files/defaultlogo.png'></c:url>
+										</c:when>
+										<c:otherwise>
+											<c:url value='/files${team.tm_team_img}'></c:url>
+										</c:otherwise>
+									</c:choose>" alt="단또즈">
+                  <button class="badge badge-pill badge-success">홈팀</button>
                 </div>
-                <span class="team-name">단또즈</span>
+                <span class="team-name home-team">단또즈</span>
               </div>
               VS
               <div class="team-box our-team">
-                <span class="team-name">돌핀즈</span>
+                <span class="team-name away-team">돌핀즈</span>
                 <div class="img-box">
-<!--                   <img class="team-logo rounded-circle" src="./돌고래.png" alt="단또즈">
- -->                  <button class="badge badge-pill badge-danger">원정</button>
+                  <img class="team-logo away-team rounded-circle" src="<c:choose>
+										<c:when test="${empty team.tm_team_img}">
+											<c:url value='/files/defaultlogo.png'></c:url>
+										</c:when>
+										<c:otherwise>
+											<c:url value='/files${team.tm_team_img}'></c:url>
+										</c:otherwise>
+									</c:choose>" alt="단또즈">
+                  <button class="badge badge-pill badge-danger">원정</button>
                 </div>
               </div>
               <div class="score_num">
                 <span class="home_score">5</span>
                 :
-                <span class="opponent_score">2</span>
+                <span class="away_score">2</span>
               </div>
             </div>
 
@@ -369,6 +383,8 @@
                 <thead>
                   <tr>
                     <th class="name-player">선수</th>
+                    <th>선발/교체</th>
+                   	<th>타순</th>
                     <th>1회</th>
                     <th>2회</th>
                     <th>3회</th>
@@ -377,16 +393,18 @@
                     <th>6회</th>
                     <th>타수</th>
                     <th>안타</th>
-                    <th>타점</th>
-                    <th>득점</th>
+                    <th>홈런</th>
+                    <th>볼넷</th>
                     <th>도루</th>
                     <th>타율</th>
 
                   </tr>
                 </thead>
-                <tbody>
-                  <tr class="trscore_hometeam">
+                <tbody class="container-trstat_home hitter">
+                  <tr class="trstat_hometeam">
                     <td class="ht_name-player">강백호</td>
+                    <td class="ht_partType">선발</td>
+                    <td class="ht_hitorder">1</td>
                     <td class="ht_inning_1">4구, 도루</td>
                     <td class="ht_inning_2"></td>
                     <td class="ht_inning_3">좌플</td>
@@ -400,8 +418,9 @@
                     <td class="ht_run">1</td>
                     <td class="ht_hitrate">0.500</td>
                   </tr>
-                  <tr class="trscore_hometeam">
+                  <tr class="trstat_hometeam">
                     <td class="name-player">강백호</td>
+                    <td class="ht_hitorder">2</td>
                     <td class="inning_1">4구, 도루</td>
                     <td class="inning_2"></td>
                     <td class="inning_3">좌플</td>
@@ -444,7 +463,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="trscore_hometeam">
+                  <tr class="trstat_hometeam">
                     <td class="name-player">강백호</td>
                     <td class="pt_result">-</td>
                     <td class="pt_inning">2 ⅔</td>
@@ -464,7 +483,7 @@
                     <td class="pt_pitching_time">53</td>
                     <td class="pt_rate">5.26</td>
                   </tr>
-                  <tr class="trscore_hometeam">
+                  <tr class="trstat_hometeam">
                     <td class="name-player">강백호</td>
                     <td class="pt_result">-</td>
                     <td class="pt_inning">2 ⅔</td>
@@ -565,6 +584,11 @@
       //     }
       //   }
       // });
+      
+    let homePitcherArr = [];
+  	let homeHitterArr = [];
+  	let awayPitcherArr = [];
+  	let awayHitterArr = [];
       $('.btn-group_position a').click(function(e){
         e.preventDefault();
         $('.box-detail_score .table-stat').hide();
@@ -602,6 +626,8 @@
       ajax("POST", mrObj, '<c:url value="/team/ajax/record?tm_num=${team.tm_num}"></c:url>', function(data){
     	  console.log(data);
     	  scoreBoardMaker(data);
+    	  nameBoardMaker(data);
+    	  partInMaker(data);
       })
       function scoreBoardMaker(data){
     	  /* 이닝 변수 선언 */
@@ -617,7 +643,7 @@
           let homeTeam = data.matchRecord.matchSchedule.homeTeam;
           let tdStr = '<td class="name-home_team">'+homeTeam.tm_name+'</td>'
           for(let i = 0; i<inningCnt; i++){
-    		  tdStr+= '<td class="score-Home" data-inning="'+(i+1)+'"></td>'
+    		  tdStr+= '<td class="score-Home" data-inning="'+(i+1)+'">0</td>'
     	  }
           
           tdStr += '<td class="total_home"></td>'
@@ -626,21 +652,177 @@
           let awayTeam = data.matchRecord.matchSchedule.awayTeam;
           tdStr = '<td class="name-away_team">'+awayTeam.tm_name+'</td>'
           for(let i = 0; i<inningCnt; i++){
-    		  tdStr+= '<td class="score-away" data-inning="'+(i+1)+'"></td>'
+    		  tdStr+= '<td class="score-away" data-inning="'+(i+1)+'">0</td>'
     	  }
           
           tdStr += '<td class="total_away"></td>'
           $('.trscore_opponent').html(tdStr);
           /* 팀 점수 넣어주기 */
-          let innings = data.matchRecord.iningList;
-          for(let tmp in innings){
-        	  
+          let innings = data.matchRecord.inningList;
+          /* 총점 선언 */
+          let homeSum = 0;
+          let awaySum = 0;
+          /* 이닝 별 점수 넣기 */
+          for(let tmp of innings){
+        	  let inningNum = tmp.mi_inning;
+        	  if(tmp.mi_isFirstLast){
+         		  $('.score-Home').filter(function(){
+        			  if($(this).data('inning')==inningNum)
+        				  return this;
+        		  }).text(tmp.mi_point);
+         		  homeSum+=tmp.mi_point;
+        	  }else{
+        		  $('.score-away').filter(function(){
+        			  if($(this).data('inning')==inningNum)
+        				  return this;
+        		  }).text(tmp.mi_point);
+        		  awaySum+=tmp.mi_point;
+        	  }
           }
+          /* 총점 넣어주기 */
+          $('.total_home').text(homeSum);
+          $('.total_away').text(awaySum);
           
       }
+      function nameBoardMaker(data){
+    	  /* 팀 선언 */
+    	  let homeTeam = data.matchRecord.matchSchedule.homeTeam;
+    	  let awayTeam = data.matchRecord.matchSchedule.awayTeam;
+    	  /* 점수 선언 */
+    	  let homeScore = data.matchRecord.mr_point_home;
+    	  let awayScore = data.matchRecord.mr_point_away;
+    	  /* 팀 이름 넣어주기 */
+    	  $('.team-box .team-name.home-team').text(homeTeam.tm_name);
+    	  $('.team-box .team-name.away-team').text(awayTeam.tm_name);
+    	  /* 팀 점수 넣어주기 */
+    	  $('.score_num .home_score').text(homeScore);
+    	  $('.score_num .away_score').text(awayScore);
+    	  /* 팀 로고 넣어주기 */
+    	  let str = "<c:url value='/files/defaultlogo.png'></c:url>";
+    	  if(homeTeam.tm_team_img != null&& homeTeam.tm_team_img.trim().length!=0){
+    		str ="<c:url value='/files"+homeTeam.tm_team_img+"'></c:url>";
+    	  }
+		  $('.team-logo.home-team').attr("src", str)
+		  str = "<c:url value='/files/defaultlogo.png'></c:url>";
+		  if(awayTeam.tm_team_img != null&& awayTeam.tm_team_img.trim().length!=0){
+			str ="<c:url value='/files"+awayTeam.tm_team_img+"'></c:url>"; 
+    	  }   
+    	  
+		  $('.team-logo.away-team').attr("src", str)
+
+      }
+    
+    function partInMaker(data){
+    	let homeList = data.homePartInList;
+    	let awayList = data.awayPartInList;
+    	homePitcherArr = [];
+    	homeHitterArr = [];
+    	awayPitcherArr = [];
+    	awayHitterArr = [];
+    	for(let tmp of homeList){
+    		if(tmp.mp_po_num==1){
+    			homePitcherArr.push(tmp);
+    		}else{
+    			homeHitterArr.push(tmp);
+    		}
+    		
+    	}
+    	for(let tmp of awayList){
+    		if(tmp.mp_po_num==1){
+    			awayPitcherArr.push(tmp);
+    		}else{
+    			awayHitterArr.push(tmp);
+    		}
+    		
+    	}
+    	
+    	hitterPlateMaker(homeHitterArr);
+    	pitcherPlateMaker(homePitcherArr);
+
+    }
+    function hitterPlateMaker(arr1){
+    	$('.container-trstat_home').html('');
+    	for(let i = 0 ; i<arr1.length ; i++){
+    		
+	    	let str = '<tr class="trstat_hometeam" data-num="'+(i+1)+'">'
+	        +'<td class="ht_name-player"></td>'
+	        +'<td class="ht_partType"></td>'
+	        +'<td class="ht_hitorder"></td>'
+	        +'<td class="ht_inning_1"></td>'
+	        +'<td class="ht_inning_2"></td>'
+	        +'<td class="ht_inning_3"></td>'
+	        +'<td class="ht_inning_4"></td>'
+	        +'<td class="ht_inning_5"></td>'
+	        +'<td class="ht_inning_6"></td>'
+	        +'<td class="ht_hit_time"></td>'
+	        +'<td class="ht_hit"></td>'
+	        +'<td class="ht_homerun"></td>'
+	        +'<td class="ht_fourball"></td>'
+	        +'<td class="ht_run"></td>'
+	        +'<td class="ht_hitrate"></td>'
+	      +'</tr>'
+	    	$('.container-trstat_home').html(str);
+    	}
+    	setHitter(arr1);
+    }
+    function setHitter(arr){
+    	/* 정렬 */
+    	arr.sort((a,b)=>{
+    		if(a.mp_order != b.mp_order)
+    			return (a.mp_order-b.mp_order)
+    		if(a.mp_inning != b.mp_inning)
+    			return (a.mp_inning - b.mp_inning)
+    		return (a.mp_num-b.mp_num)
+    	})
+	   	let container = $('.container-trstat_home .trstat_hometeam');	
+    	for(let tmp of container){
+    		/* hitter table가져와서 순서대로 세팅한 뒤 ajax로 배터 데이터 가져와서 세팅하는게 나을듯? */
+    		let index = container.index(tmp);
+    		let tmpArr = arr.at(index);
+    		let uObj = {
+    			tp_num : tmpArr.mp_tp_num,
+    			mr_num : tmpArr.mp_mr_num
+    		} 
+    		ajaxParam("POST", uObj, '<c:url value="/team/ajax/playerRecord"></c:url>', function(data){
+    			console.log(data);
+    			$(tmp).find('.ht_name-player').text(data.player.me_nickname);
+    			let prh = data.pRHitter
+    			if(data.pRHitter !=null){
+	    			$(tmp).find('.ht_hit_time').text(prh.ph_hits);
+	    			$(tmp).find('.ht_hit').text(prh.ph_single_hits + prh.ph_twobase_hits + prh.ph_threebase_hits );
+	    			$(tmp).find('.ht_homerun').text(prh.ph_homeruns);
+	    			$(tmp).find('.ht_fourball').text(prh.ph_fourballs);
+	    			$(tmp).find('.ht_run').text(prh.ph_steals);
+	    			$(tmp).find('.ht_hitrate').text((prh.ph_hits/prh.ph_bats * 100)+ "%");
+    			}else{
+    				$(tmp).find('.ht_hit_time').addClass('text-center').attr('colspan', '6').text("기록 없음");
+    				$(tmp).find('.ht_hit').remove()
+	    			$(tmp).find('.ht_homerun').remove()
+	    			$(tmp).find('.ht_fourball').remove()
+	    			$(tmp).find('.ht_run').remove()
+	    			$(tmp).find('.ht_hitrate').remove()
+    			}
+    		} );
+    				
+    	}
+    }
+    function pitcherPlateMaker(arr1, arr2){
+    	
+    }
       
-      
-      
+    function ajaxParam(method, obj, url, successFunc, errorFunc){
+    	$.ajax({
+    		async:false,
+    		type: method,
+    		data: obj,
+    		url: url, 
+    		dataType: "json",
+    		
+    		success: successFunc,
+    		error: errorFunc
+    		
+    	});
+    }  
 	function ajax(method, obj, url, successFunc, errorFunc){
 		$.ajax({
 			async:false,

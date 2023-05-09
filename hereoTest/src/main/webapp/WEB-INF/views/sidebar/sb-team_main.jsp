@@ -26,42 +26,46 @@
 			<!-- 라인업 페이지 일 경우 사이드바 -->
 			<div>${team.tm_name}팀 라인업</div>
 			<div>0월0일 vs xx팀</div>
-			
 			<div class="text-center"><h3>선수 리스트</h3></div>
 			<hr>
-			<c:forEach items="${playerList}" var="pl">
-			
 			<div class="d-flex flex-wrap">
-				<a href="#" class="box-player" draggable="true" data-tpnum='<c:forEach items="${tPlayerList}" var="tp"><c:if test="${pl.pl_num == tp.tp_pl_num}">${tp.tp_num}</c:if></c:forEach>'>
-					<img src="
-					<c:choose>
-						<c:when test="${empty pl.pl_player_img}">
-							<c:url value='/files/defaultlogo.png'></c:url>
-						</c:when>
-						<c:otherwise>
-							<c:url value='/files${pl.pl_player_img}'></c:url>
-						</c:otherwise>
-					</c:choose>
-					" draggable="false" class="icon-player " alt="">
-					<br>
-					<div class="box-name">
-						<span class="bakNum-player">
-							<c:forEach items="${tPlayerList}" var="tp">
-								<c:if test="${pl.pl_num == tp.tp_pl_num}">${tp.tp_backnum}</c:if>
-							</c:forEach>
-						</span>.
-						<span class="name-player">${pl.me_nickname }</span>
-					</div>
-					<div class="box-position_hope">
-						<c:forEach items="${pl.positionList}" var="po">
-							<span class="badge badge-pill badge-danger" data-position="${po.ph_po_num}">${po.ph_po_ko_name}</span>
-						</c:forEach>
-					</div>
-				</a>
+			<c:forEach items="${playerList}" var="pl">
+				<c:forEach items="${tPlayerList}" var="tp">
+					<c:if test="${pl.pl_num == tp.tp_pl_num && tp.tp_auth > 1 }">
+						<a href="#" class="box-player" draggable="true" data-tpnum='<c:forEach items="${tPlayerList}" var="tp"><c:if test="${pl.pl_num == tp.tp_pl_num}">${tp.tp_num}</c:if></c:forEach>'>
+							<img src="
+							<c:choose>
+								<c:when test="${empty pl.pl_player_img}">
+									<c:url value='/files/defaultlogo.png'></c:url>
+								</c:when>
+								<c:otherwise>
+									<c:url value='/files${pl.pl_player_img}'></c:url>
+								</c:otherwise>
+							</c:choose>
+							" draggable="false" class="icon-player " alt="">
+							<br>
+							<div class="box-name">
+								<span class="bakNum-player">
+									<c:forEach items="${tPlayerList}" var="tp">
+										<c:if test="${pl.pl_num == tp.tp_pl_num}">${tp.tp_backnum}</c:if>
+									</c:forEach>
+								</span>.
+								<span class="name-player">${pl.me_nickname }</span>
+							</div>
+							<div class="box-position_hope">
+								<c:forEach items="${pl.positionList}" var="po">
+									<span class="badge badge-pill badge-danger" data-position="${po.ph_po_num}">${po.ph_po_ko_name}</span>
+								</c:forEach>
+							</div>
+						</a>
+						
+					
+					</c:if>
+				</c:forEach>
 				
+			</c:forEach>
 			</div>
 			<hr>
-			</c:forEach>
 			
 			
 			

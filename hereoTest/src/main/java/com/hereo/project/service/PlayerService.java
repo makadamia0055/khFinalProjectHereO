@@ -24,7 +24,6 @@ public interface PlayerService {
 	PlayerVO selectPlayerByPl_Num(Integer player);
 
 	
-
 	boolean insertPlayerToTeam(TeamVO team, PlayerVO player, int auth);
 
 	PlayerVO selectPlayerByMeId(String me_id);
@@ -51,7 +50,12 @@ public interface PlayerService {
 
 	ArrayList<PlayerRecordYearHitterVO> selectPlayerRecordYearHitter(int pl_num);
 
-	ArrayList<PlayerRecordYearPitcherVO> selectPlayerRecordYearPitcher(int pl_num); 
+	ArrayList<PlayerRecordYearPitcherVO> selectPlayerRecordYearPitcher(int pl_num);
+
+	PlayerVO selectPlayerByTpNum(Integer tp_num);
+	
+	TeamPlayerVO selectTeamPlayerByTpNum(Integer tp_num);
+
 
 
 }

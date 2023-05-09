@@ -36,7 +36,7 @@ public class PlayerServiceImp implements PlayerService{
 			return null;
 		ArrayList<PlayerVO> playerList = new ArrayList<PlayerVO>();
 		for(TeamPlayerVO tmp : teamPlayerList) {
-			PlayerVO tmpPlayer = playerDao.selectPlayerByTP(tmp);
+			PlayerVO tmpPlayer = playerDao.selectPlayerByTpPlNum(tmp.getTp_pl_num());
 			if(tmpPlayer==null)
 				continue;
 			if(tmpPlayer.getTeamList()!=null)
@@ -60,7 +60,7 @@ public class PlayerServiceImp implements PlayerService{
 			return null;
 		ArrayList<PlayerVO> playerList = new ArrayList<PlayerVO>();
 		for(TeamPlayerVO tmp : teamPlayerList) {
-			PlayerVO tmpPlayer = playerDao.selectPlayerByTP(tmp);
+			PlayerVO tmpPlayer = playerDao.selectPlayerByTpPlNum(tmp.getTp_pl_num());
 			if(tmpPlayer==null)
 				continue;
 			if(tmpPlayer.getTeamList()!=null)
@@ -83,7 +83,7 @@ public class PlayerServiceImp implements PlayerService{
 			return null;
 		ArrayList<PlayerVO> playerList = new ArrayList<PlayerVO>();
 		for(TeamPlayerVO tmp : teamPlayerList) {
-			PlayerVO tmpPlayer = playerDao.selectPlayerByTP(tmp);
+			PlayerVO tmpPlayer = playerDao.selectPlayerByTpPlNum(tmp.getTp_pl_num());
 			if(tmpPlayer==null)
 				continue;
 			if(tmpPlayer.getTeamList()!=null)
@@ -193,4 +193,18 @@ public class PlayerServiceImp implements PlayerService{
 	public ArrayList<PlayerRecordYearPitcherVO> selectPlayerRecordYearPitcher(int pl_num) {
 		return teamPlayerDao.selectPlayerRecordYearPitcher(pl_num);
 	}
+	@Override
+	public PlayerVO selectPlayerByTpNum(Integer tp_num) {
+		if(tp_num==null)
+			return null;
+		TeamPlayerVO tp = teamPlayerDao.selectTeamPlayerByTpNum(tp_num);
+		return playerDao.selectPlayerByTpPlNum(tp.getTp_pl_num());
+	}
+	@Override
+	public TeamPlayerVO selectTeamPlayerByTpNum(Integer tp_num) {
+		if(tp_num==null)
+			return null;
+		return teamPlayerDao.selectTeamPlayerByTpNum(tp_num);
+	}
+
 }
