@@ -761,7 +761,7 @@
 	        +'<td class="ht_run"></td>'
 	        +'<td class="ht_hitrate"></td>'
 	      +'</tr>'
-	    	$('.container-trstat_home').html(str);
+	    	$('.container-trstat_home').append(str);
     	}
     	setHitter(arr1);
     }
@@ -802,7 +802,9 @@
 	    			$(tmp).find('.ht_run').remove()
 	    			$(tmp).find('.ht_hitrate').remove()
     			}
-    		} );
+    		});
+    		$(tmp).find('.ht_partType').text(tmpArr.mp_type);
+    		$(tmp).find('.ht_hitorder').text(tmpArr.mp_order);
     				
     	}
     }
