@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hereo.project.dao.LeagueDAO;
 import com.hereo.project.dao.RecordDAO;
+import com.hereo.project.vo.BatterBoxEventVO;
 import com.hereo.project.vo.MatchParticipateVO;
 import com.hereo.project.vo.MatchRecordVO;
 import com.hereo.project.vo.MembersVO;
@@ -56,6 +57,11 @@ public class RecordServiceImp implements RecordService {
 		return recordDao.selectPlayerRecordPitcherByTpNumAndMrNum(tp_num, mr_num);
 
 		
+	}
+
+	@Override
+	public ArrayList<BatterBoxEventVO> getAllBatterBoxEventList() {
+		return recordDao.getAllBatterBoxEventList();
 	}
 
 }

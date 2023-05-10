@@ -78,6 +78,9 @@
 		select * from `playerrecord-pitcher`
 			where pp_tp_num = #{tp_num} and pp_mr_num = #{mr_num}
 	</select>
+	<select id="getAllBatterBoxEventList" resultType="com.hereo.project.vo.BatterBoxEventVO">
+		select * from `batterboxevent-type` order by be_num asc
+	</select>
 	
 	
 </mapper>

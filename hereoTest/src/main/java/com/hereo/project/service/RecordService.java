@@ -2,6 +2,7 @@ package com.hereo.project.service;
 
 import java.util.ArrayList;
 
+import com.hereo.project.vo.BatterBoxEventVO;
 import com.hereo.project.vo.LeagueAttributeVO;
 import com.hereo.project.vo.MatchParticipateVO;
 import com.hereo.project.vo.MatchRecordVO;
@@ -25,5 +26,7 @@ public interface RecordService {
 	PlayerRecordHitterVO selectPlayerRecordHitterByTpNumAndMrNum(Integer tp_num, Integer mr_num);
 
 	PlayerRecordHitterVO selectPlayerRecordPitcherByTpNumAndMrNum(Integer tp_num, Integer mr_num);
+
+	ArrayList<BatterBoxEventVO> getAllBatterBoxEventList();
 
 }

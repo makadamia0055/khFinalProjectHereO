@@ -29,6 +29,7 @@ import com.hereo.project.service.RecordService;
 import com.hereo.project.service.ScheduleService;
 import com.hereo.project.service.TeamBoardService;
 import com.hereo.project.service.TeamService;
+import com.hereo.project.vo.BatterBoxEventVO;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardFileVO;
 import com.hereo.project.vo.BoardReplyVO;
@@ -889,6 +890,7 @@ public class TeamController {
 		map.put("player", player);
 		return map;
 	}
+	
 //	tp_num과 mr_num을 보내면 해당 게임 정보를 찾아와주는 메소드(위에꺼에서 더 보충)
 	@ResponseBody
 	@RequestMapping(value="/team/ajax/playerRecord", method=RequestMethod.POST)
@@ -902,6 +904,15 @@ public class TeamController {
 		map.put("pRPitcher", pRPitcher);
 		map.put("tp", tp);
 		map.put("player", player);
+		return map;
+	}
+//	batterBoxEvent type 보내기
+	@ResponseBody
+	@RequestMapping(value="/team/ajax/batterBoxEvent", method=RequestMethod.POST)
+	public Map<String, Object>getBatterBoxEvent() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		ArrayList<BatterBoxEventVO> batterBoxEventList = recordService.getAllBatterBoxEventList();
+		map.put("batterBoxEventList", batterBoxEventList);
 		return map;
 	}
 	

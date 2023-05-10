@@ -380,7 +380,7 @@
 							</div>
               
               <table class="table table-bordered table-sm table-hitter table-stat">
-                <thead>
+                <thead class="thead-hitter">
                   <tr>
                     <th class="name-player">선수</th>
                     <th>선발/교체</th>
@@ -400,7 +400,7 @@
 
                   </tr>
                 </thead>
-                <tbody class="container-trstat_home hitter">
+                <tbody class="container-trstat_hitter home">
                   <tr class="trstat_hometeam">
                     <td class="ht_name-player">강백호</td>
                     <td class="ht_partType">선발</td>
@@ -445,11 +445,8 @@
                     <th>결과</th>
                     <th>이닝</th>
                     <th>타자</th>
-                    <th>타수</th>
                     <th>피안타</th>
                     <th>피홈런</th>
-                    <th>희타</th>
-                    <th>희비</th>
                     <th>볼넷</th>
                     <th>사구</th>
                     <th>삼진</th>
@@ -462,7 +459,7 @@
 
                   </tr>
                 </thead>
-                <tbody>
+                <tbody class="container-trstat_pitcher home">
                   <tr class="trstat_hometeam">
                     <td class="name-player">강백호</td>
                     <td class="pt_result">-</td>
@@ -589,46 +586,84 @@
   	let homeHitterArr = [];
   	let awayPitcherArr = [];
   	let awayHitterArr = [];
+  	let isHomeAway = true // true = home
+  	let endOfInning = 0;
+  	
+  	/* 베터 박스 이벤트 받아오기 */
+  	let batterBoxEvent = {
+  			beList : [], 
+  			get(num){
+  				for(let tmp of this.beList){
+  					if(tmp.be_num == num)
+  						return tmp.be_sub_type;
+  				}
+  			}
+  	}
+	$.ajax({
+			async:false,
+			type: "POST",
+			url: "<c:url value='/team/ajax/batterBoxEvent'></c:url>", 
+			dataType: "json",
+			success: function(data){
+				for(let tmp of data.batterBoxEventList){
+					batterBoxEvent.beList.push(tmp);
+				}
+			} 
+	});
       $('.btn-group_position a').click(function(e){
-        e.preventDefault();
-        $('.box-detail_score .table-stat').hide();
-       if($(this).hasClass('item-whole')){
-        $('.box-detail_score table').show();
-       }else if($(this).hasClass('item-pitcher')){
-        $('.box-detail_score .table-pitcher').show();
-       }else{
-        $('.box-detail_score .table-hitter').show();
-
-       }
+	        e.preventDefault();
+	        $('.box-detail_score .table-stat').hide();
+	       if($(this).hasClass('item-whole')){
+	        $('.box-detail_score table').show();
+	       }else if($(this).hasClass('item-pitcher')){
+	        $('.box-detail_score .table-pitcher').show();
+	       }else{
+	        $('.box-detail_score .table-hitter').show();
+	
+	       }
 
       })
+      /* 홈 어웨이 버튼  */
       $('.btn-group_homeaway a').click(function(e){
         e.preventDefault();
         $('.big_container-lineup .container-lineup').hide();
         if($(this).hasClass('item-home')){
          $('.big_container-lineup .container-lineup.home-team').show();
+          isHomeAway= true;
 
         }else{
           $('.big_container-lineup .container-lineup.opponent-team').show();
+          isHomeAway = false;
 
         }
       })
+      
       $('.right-record a').click(function(){
-        let team = $(this).data('team');
+        let ms = $(this).data('ms');
         $('.box-datepicker #last_match_date option').removeProp('selected');
         $('.box-datepicker #last_match_date option').filter(function(){
-          return $(this).data('team')==team;
+          return $(this).data('ms')==ms;
         }).prop('selected', true)
       })
-      let mrObj = {
-    	  mr_num : 1
+      
+      $('#last_match_date').change(setFullRecordData);
+      setFullRecordData();
+      function setFullRecordData(){
+
+          let tmpMrNum = $('#last_match_date option:selected').data('ms')
+          let mrObj = {
+        	  mr_num : tmpMrNum
+          }
+          ajax("POST", mrObj, '<c:url value="/team/ajax/record?tm_num=${team.tm_num}"></c:url>', function(data){
+        	  console.log(data);
+        	  endOfInning = data.matchRecord.endInning;
+        	  scoreBoardMaker(data);
+        	  nameBoardMaker(data);
+        	  partInMaker(data);
+        	  
+          })
       }
-      ajax("POST", mrObj, '<c:url value="/team/ajax/record?tm_num=${team.tm_num}"></c:url>', function(data){
-    	  console.log(data);
-    	  scoreBoardMaker(data);
-    	  nameBoardMaker(data);
-    	  partInMaker(data);
-      })
+      
       function scoreBoardMaker(data){
     	  /* 이닝 변수 선언 */
     	  let inningCnt = data.matchRecord.endInning;
@@ -735,36 +770,58 @@
     		}
     		
     	}
-    	
-    	hitterPlateMaker(homeHitterArr);
-    	pitcherPlateMaker(homePitcherArr);
+    	if(isHomeAway){
+	    	hitterPlateMaker(homeHitterArr);
+	    	pitcherPlateMaker(homePitcherArr);
+    	}else{
+	    	hitterPlateMaker(awayHitterArr);
+	    	pitcherPlateMaker(awayPitcherArr);
+
+    	}
 
     }
     function hitterPlateMaker(arr1){
-    	$('.container-trstat_home').html('');
+    	$('.thead-hitter').html('');
+    	let thStr = '<tr><th class="name-player">선수</th>'
+        +'<th>선발/교체</th>'
+       	+'<th>타순</th>'
+        for(let j = 0 ; j<endOfInning; j++){
+        	thStr+= '<th>'+(j+1)+'회</th>'
+        	
+        }
+        thStr+='<th>타수</th>'
+        +'<th>안타</th>'
+        +'<th>홈런</th>'
+        +'<th>볼넷</th>'
+        +'<th>도루</th>'
+        +'<th>타율</th></tr>'
+        $('.thead-hitter').html(thStr);
+    	
+    	$('.container-trstat_hitter').html('');
     	for(let i = 0 ; i<arr1.length ; i++){
     		
-	    	let str = '<tr class="trstat_hometeam" data-num="'+(i+1)+'">'
+	    	let str = '<tr class="trstat_hometeam" data-num="'+(i+1)+'" data-mpNum="0">'
 	        +'<td class="ht_name-player"></td>'
 	        +'<td class="ht_partType"></td>'
 	        +'<td class="ht_hitorder"></td>'
-	        +'<td class="ht_inning_1"></td>'
-	        +'<td class="ht_inning_2"></td>'
-	        +'<td class="ht_inning_3"></td>'
-	        +'<td class="ht_inning_4"></td>'
-	        +'<td class="ht_inning_5"></td>'
-	        +'<td class="ht_inning_6"></td>'
-	        +'<td class="ht_hit_time"></td>'
+	        
+	        for(let j = 0 ; j<endOfInning; j++){
+	        	str+= '<td class="ht_inning_'+(j+1)+' ht_inning" data-inning="'+(j+1)+'"></td>'
+	        	
+	        }
+	        str+='<td class="ht_hit_time"></td>'
 	        +'<td class="ht_hit"></td>'
 	        +'<td class="ht_homerun"></td>'
 	        +'<td class="ht_fourball"></td>'
 	        +'<td class="ht_run"></td>'
 	        +'<td class="ht_hitrate"></td>'
 	      +'</tr>'
-	    	$('.container-trstat_home').append(str);
+	    	$('.container-trstat_hitter').append(str);
     	}
     	setHitter(arr1);
+    	hitterInningEventMaker();
     }
+    /* 만들어진 칸에 히터 스탯 넣어주는 메소드 */
     function setHitter(arr){
     	/* 정렬 */
     	arr.sort((a,b)=>{
@@ -774,7 +831,7 @@
     			return (a.mp_inning - b.mp_inning)
     		return (a.mp_num-b.mp_num)
     	})
-	   	let container = $('.container-trstat_home .trstat_hometeam');	
+	   	let container = $('.container-trstat_hitter .trstat_hometeam');	
     	for(let tmp of container){
     		/* hitter table가져와서 순서대로 세팅한 뒤 ajax로 배터 데이터 가져와서 세팅하는게 나을듯? */
     		let index = container.index(tmp);
@@ -784,7 +841,6 @@
     			mr_num : tmpArr.mp_mr_num
     		} 
     		ajaxParam("POST", uObj, '<c:url value="/team/ajax/playerRecord"></c:url>', function(data){
-    			console.log(data);
     			$(tmp).find('.ht_name-player').text(data.player.me_nickname);
     			let prh = data.pRHitter
     			if(data.pRHitter !=null){
@@ -805,11 +861,127 @@
     		});
     		$(tmp).find('.ht_partType').text(tmpArr.mp_type);
     		$(tmp).find('.ht_hitorder').text(tmpArr.mp_order);
-    				
+    		$(tmp).attr('data-mpNum', tmpArr.mp_num);
+ 			
     	}
     }
-    function pitcherPlateMaker(arr1, arr2){
-    	
+    /* 타자 이닝 이벤트 넣어주기 */
+	function hitterInningEventMaker(){
+		let tmpMrNum = $('#last_match_date option:selected').data('ms')
+	      let mrObj = {
+	    	  mr_num : tmpMrNum
+	      }
+	      ajax("POST", mrObj, '<c:url value="/team/ajax/record?tm_num=${team.tm_num}"></c:url>', function(data){
+	    	  let tmpInningList = data.matchRecord.inningList
+	    	  for(let tmp of tmpInningList){
+	    		  if(tmp.mi_isFirstLast!=isHomeAway)
+	    			  continue;
+	    		  for(let tmptmp of tmp.batterBoxList){
+	    			  let hitterNum = tmptmp.mb_mp_hitter_num;
+	    			  let inningNum = tmp.mi_inning;
+	    			  let beStr = batterBoxEvent.get(tmptmp.mb_be_num);
+	    			  let hitterTr = $('.trstat_hometeam').filter(function(){
+	    				  if($(this).data('mpnum')==hitterNum)
+	    					  return this;
+	    			  });
+	    			  console.log(hitterTr);
+	    			  hitterTr.find('.ht_inning').filter(function(){
+	    				  if($(this).data('inning')==inningNum)
+	    					  return this;
+	    			  }).text(beStr);
+	    		  }
+	    			  
+	    	  }
+	    	  
+	      })
+    } 
+    
+    /* 투수칸 맹글기 */
+    function pitcherPlateMaker(arr){
+    	$('.container-trstat_pitcher').html('');
+		for(let i = 0 ; i<arr.length ; i++){
+    		
+	    let str = '<tr class="trstat_hometeam" data-num="'+(i+1)+'" data-mpNum="0">'
+	       +'<td class="pt_name-player"></td>'
+	       +'<td class="pt_result"></td>'
+	        +'<td class="pt_innings"></td>'
+	        +'<td class="pt_hitters"></td>'
+	        +'<td class="pt_hits"></td>'
+	        +'<td class="pt_homeruns"></td>'
+	        +'<td class="pt_fourballs"></td>'
+	        +'<td class="pt_hitbypitches"></td>'
+	        +'<td class="pt_strikeouts"></td>'
+	        +'<td class="pt_wildpitchs"></td>'
+	        +'<td class="pt_balk"></td>'
+	        +'<td class="pt_losepoints"></td>'
+	        +'<td class="pt_earnedruns"></td>'
+	        +'<td class="pt_pitches"></td>'
+	        +'<td class="pt_rate"></td>'
+	        +'</tr>'
+	    	$('.container-trstat_pitcher').append(str);
+
+		}
+		setPitcher(arr);
+    }
+    function setPitcher(arr){
+    	/* 정렬 */
+    	arr.sort((a,b)=>{
+    		if(a.mp_order != b.mp_order)
+    			return (a.mp_order-b.mp_order)
+    		if(a.mp_inning != b.mp_inning)
+    			return (a.mp_inning - b.mp_inning)
+    		return (a.mp_num-b.mp_num)
+    	})
+	   	let container = $('.container-trstat_pitcher .trstat_hometeam');	
+    	for(let tmp of container){
+    		/* hitter table가져와서 순서대로 세팅한 뒤 ajax로 배터 데이터 가져와서 세팅하는게 나을듯? */
+    		let index = container.index(tmp);
+    		let tmpArr = arr.at(index);
+    		let uObj = {
+    			tp_num : tmpArr.mp_tp_num,
+    			mr_num : tmpArr.mp_mr_num
+    		} 
+    		ajaxParam("POST", uObj, '<c:url value="/team/ajax/playerRecord"></c:url>', function(data){
+    			$(tmp).find('.pt_name-player').text(data.player.me_nickname);
+    			let prp = data.pRpitcher
+    			if(data.pRPitcher !=null){
+    				
+	    			$(tmp).find('.pt_innings').text(prp.pp_innings);
+	    			$(tmp).find('.pt_hitters').text(prp.pp_hitters);
+	    			$(tmp).find('.pt_hits').text(prp.pp_hits);
+	    			$(tmp).find('.pt_homeruns').text(prp.pp_homeruns);
+	    			$(tmp).find('.pt_fourballs').text(prp.pp_fourballs);
+	    			$(tmp).find('.pt_hitbypitches').text(prp.pp_hitbypitches);
+	    			$(tmp).find('.pt_strikeouts').text(prp.pp_strikeouts);
+	    			$(tmp).find('.pt_wildpitchs').text(prp.pp_wildpitchs);
+	    			$(tmp).find('.pt_balk').text(prp.pp_balk);
+	    			$(tmp).find('.pt_losepoints').text(prp.pp_losepoints);
+	    			$(tmp).find('.pt_earnedruns').text(prp.pp_earnedruns);
+	    			$(tmp).find('.pt_pitches').text(prp.pp_pitches);
+	    			$(tmp).find('.pt_rate').text(prp.pp_earnedruns/prp.pp_innings);
+
+
+    			}else{
+    				
+    				$(tmp).find('.pt_innings').addClass('text-center').attr('colspan', '13').text("기록 없음");
+    				$(tmp).find('.pt_hitters').remove();
+	    			$(tmp).find('.pt_hits').remove();
+	    			$(tmp).find('.pt_homeruns').remove();
+	    			$(tmp).find('.pt_fourballs').remove();
+	    			$(tmp).find('.pt_hitbypitches').remove();
+	    			$(tmp).find('.pt_strikeouts').remove();
+	    			$(tmp).find('.pt_wildpitchs').remove();
+	    			$(tmp).find('.pt_balk').remove();
+	    			$(tmp).find('.pt_losepoints').remove();
+	    			$(tmp).find('.pt_earnedruns').remove();
+	    			$(tmp).find('.pt_pitches').remove();
+	    			$(tmp).find('.pt_rate').remove();
+
+    			}
+    		});
+    		$(tmp).attr('data-mpNum', tmpArr.mp_num);
+    				
+    	}
     }
       
     function ajaxParam(method, obj, url, successFunc, errorFunc){
