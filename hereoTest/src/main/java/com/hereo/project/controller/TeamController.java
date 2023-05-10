@@ -347,14 +347,17 @@ public class TeamController {
 //	팀 기록 페이지 해당 경기의 정보를 ajax로 가져오는 메서드
 	@ResponseBody
 	@RequestMapping(value="/team/ajax/record", method=RequestMethod.POST)
-	public Map<String, Object>teamRecordAjax(@RequestBody MatchRecordVO matchRecord, Integer tm_num) {
+	public Map<String, Object>teamRecordAjax(@RequestBody MatchScheduleVO matchSchedule, Integer tm_num) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		matchRecord = recordService.selectMatchRecordByMrNum(matchRecord.getMr_num());
-		ArrayList<MatchParticipateVO> homeTeamPartInList = recordService.selectMatchPartInHome(matchRecord.getMr_num());
-		ArrayList<MatchParticipateVO> awayTeamPartInList = recordService.selectMatchPartInAway(matchRecord.getMr_num());
-		map.put("homePartInList", homeTeamPartInList);
-		map.put("awayPartInList", awayTeamPartInList);
-		map.put("matchRecord", matchRecord);
+		MatchRecordVO matchRecord = recordService.selectMatchRecordByMsNum(matchSchedule.getMs_num());
+		if(matchRecord !=null) {
+			ArrayList<MatchParticipateVO> homeTeamPartInList = recordService.selectMatchPartInHome(matchRecord.getMr_num());
+			ArrayList<MatchParticipateVO> awayTeamPartInList = recordService.selectMatchPartInAway(matchRecord.getMr_num());
+			map.put("homePartInList", homeTeamPartInList);
+			map.put("awayPartInList", awayTeamPartInList);
+			map.put("matchRecord", matchRecord);
+				
+		}
 		return map;
 	}
 	
@@ -913,6 +916,18 @@ public class TeamController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		ArrayList<BatterBoxEventVO> batterBoxEventList = recordService.getAllBatterBoxEventList();
 		map.put("batterBoxEventList", batterBoxEventList);
+		return map;
+	}
+	
+//	lineUp보내기
+	@ResponseBody
+	@RequestMapping(value="/team/ajax/sendLineUp", method=RequestMethod.POST)
+	public Map<String, Object>sendLineUp(@RequestParam("ms_num")Integer ms_num) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		ArrayList<MatchLineUpVO> homeLineUp = lineUpService.selectLineUpOfMatchHome(ms_num);
+		ArrayList<MatchLineUpVO> awayLineUp = lineUpService.selectLineUpOfMatchAway(ms_num);
+		map.put("homeLineUp", homeLineUp);
+		map.put("awayLineUp", awayLineUp);
 		return map;
 	}
 	

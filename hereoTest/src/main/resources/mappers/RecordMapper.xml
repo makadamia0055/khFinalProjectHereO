@@ -81,6 +81,10 @@
 	<select id="getAllBatterBoxEventList" resultType="com.hereo.project.vo.BatterBoxEventVO">
 		select * from `batterboxevent-type` order by be_num asc
 	</select>
+	<select id="selectMatchRecordByMsNum" resultMap="MatchRecord">
+		select * from `match-record`
+			where mr_ms_num = #{ms_num}
+	</select>
 	
 	
 </mapper>

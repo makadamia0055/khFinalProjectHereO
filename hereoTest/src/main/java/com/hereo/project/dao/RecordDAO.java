@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.hereo.project.vo.BatterBoxEventVO;
 import com.hereo.project.vo.MatchParticipateVO;
 import com.hereo.project.vo.MatchRecordVO;
+import com.hereo.project.vo.MatchScheduleVO;
 import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.PlayerRecordHitterVO;
@@ -28,5 +29,8 @@ public interface RecordDAO {
 	PlayerRecordHitterVO selectPlayerRecordPitcherByTpNumAndMrNum(@Param("tp_num")Integer tp_num, @Param("mr_num")Integer mr_num);
 
 	ArrayList<BatterBoxEventVO> getAllBatterBoxEventList();
+
+	MatchRecordVO selectMatchRecordByMsNum(int ms_num);
+
 
 }

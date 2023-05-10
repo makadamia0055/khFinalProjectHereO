@@ -158,6 +158,7 @@
                 :
                 <span class="away_score">2</span>
               </div>
+              <div class="no-data" style="display:none">데이터가 없습니다.</div>
             </div>
 
             <div class="big_container-lineup">
@@ -232,7 +233,7 @@
                   
                 </ul>
                 
-                <a href="./team-whole_player.html" role="button" class="btn btn-primary col-lg-12">전체 선수 보기</a>
+                <a href="#" role="button" class="btn btn-primary col-lg-12" id="#wholePlayerHome">전체 선수 보기</a>
                 <a href="#lineup1" role="button" class="btn btn-secondary col-lg-12" data-toggle="collapse">접기/펼치기</a>
 
               </div>
@@ -307,7 +308,7 @@
                   
                 </ul>
                 
-                <a href="./team-whole_player.html" role="button" class="btn btn-primary col-lg-12">전체 선수 보기</a>
+                <a href="#" role="button" class="btn btn-primary col-lg-12" id="#wholePlayerAway">전체 선수 보기</a>
                 <a href="#lineup1" role="button" class="btn btn-secondary col-lg-12" data-toggle="collapse">접기/펼치기</a>
 
               </div>
@@ -350,6 +351,7 @@
                 </tr>
                 
               </table>
+              <div class="no-data" style="display: none">데이터가 없습니다.</div>
             </div>
            
           </div>
@@ -442,7 +444,7 @@
                 <thead>
                   <tr>
                     <th class="name-player">투수</th>
-                    <th>결과</th>
+                 <!--    <th>결과</th> -->
                     <th>이닝</th>
                     <th>타자</th>
                     <th>피안타</th>
@@ -530,27 +532,9 @@
       
       
 
-        <!-- <div class="container-team-current-league">
-          <h2 class="title-team-current-league">현재 참여 중 리그</h2>
-          <ul class="list-team-current-league">
-            <li class="item-team-current-league">
-              <a href="#" class="link-team-current-league">
-                쌍용배 아마 최강야구 8강 진출
-              </a>
-            </li>
-          </ul>
-        </div> -->
-
-        <!-- <div class="container-team-winlose-graph">
-          <span class="title-winlosegraph">창단 이후 승률</span>
-          <div class="item-winlosegraph">
-            <canvas id="team-winlosegraph"></canvas>
-          </div>
-
-        </div> -->
+       
         
       </div>
-      <!-- 이후 스프링으로 빼서 따로 페이지 만들기 -->
       
     </section>
 
@@ -561,32 +545,14 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      // const ctx = document.getElementById('team-winlosegraph');
     
-      // new Chart(ctx, {
-      //   type: 'bar',
-      //   data: {
-      //     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      //     datasets: [{
-      //       label: '# of Votes',
-      //       data: [12, 19, 3, 5, 2, 3],
-      //       borderWidth: 1
-      //     }]
-      //   },
-      //   options: {
-      //     scales: {
-      //       y: {
-      //         beginAtZero: true
-      //       }
-      //     }
-      //   }
-      // });
-      
     let homePitcherArr = [];
   	let homeHitterArr = [];
   	let awayPitcherArr = [];
   	let awayHitterArr = [];
   	let isHomeAway = true // true = home
+  	let homeTeamNum;
+  	let awayTeamNum;
   	let endOfInning = 0;
   	
   	/* 베터 박스 이벤트 받아오기 */
@@ -630,10 +596,14 @@
         if($(this).hasClass('item-home')){
          $('.big_container-lineup .container-lineup.home-team').show();
           isHomeAway= true;
+          setFullRecordData();
+
 
         }else{
           $('.big_container-lineup .container-lineup.opponent-team').show();
           isHomeAway = false;
+          setFullRecordData();
+
 
         }
       })
@@ -646,33 +616,72 @@
         }).prop('selected', true)
       })
       
-      $('#last_match_date').change(setFullRecordData);
+      $('#last_match_date').on('change', setFullRecordData());
       setFullRecordData();
       function setFullRecordData(){
 
-          let tmpMrNum = $('#last_match_date option:selected').data('ms')
-          let mrObj = {
-        	  mr_num : tmpMrNum
+          let tmpMsNum = $('#last_match_date option:selected').data('ms')
+          let msObj = {
+        	  ms_num : tmpMsNum
           }
-          ajax("POST", mrObj, '<c:url value="/team/ajax/record?tm_num=${team.tm_num}"></c:url>', function(data){
-        	  console.log(data);
+          ajax("POST", msObj, '<c:url value="/team/ajax/record?tm_num=${team.tm_num}"></c:url>', function(data){
+        	  
+        	  if(data.matchRecord!=null){
         	  endOfInning = data.matchRecord.endInning;
+        	  homeTeamNum = data.matchRecord.matchSchedule.homeTeam.tm_num;
+        	  awayTeamNum = data.matchRecord.matchSchedule.awayTeam.tm_num;
+        	  }
         	  scoreBoardMaker(data);
         	  nameBoardMaker(data);
         	  partInMaker(data);
+        	  lineUpMaker(data);
         	  
           })
       }
-      
+      function lineUpMaker(data){
+    	  let str1 = '<c:url value="/team/wholeplayer?teamNum='+homeTeamNum+'"></c:url>'
+    	  $('#wholePlayerHome').attr('href', str1);
+    	  let str2 = '<c:url value="/team/wholeplayer?teamNum='+awayTeamNum+'"></c:url>'
+    	  $('#wholePlayerAway').attr('href', str2);
+    	  let liObj = {
+            	  ms_num : data.matchRecord.mr_ms_num
+              }
+              ajaxParam("POST", liObj, '<c:url value="/team/ajax/sendLineUp"></c:url>', function(data){
+			      let homeLine = data.homeLineUp;
+			      let awayLine = data.awayLineUp;
+			      
+			      homeLine.sort((a,b)=>{
+			    		return (a.ml_battingorder - b.ml_battingorder)
+			    	})
+			      awayLine.sort((a,b)=>{
+			    		return (a.ml_battingorder - b.ml_battingorder)
+			    	})
+            	  /* 여기 하고 있음 */
+              })
+      }
+      /* 스코어 보드 만들기 */
       function scoreBoardMaker(data){
     	  /* 이닝 변수 선언 */
-    	  let inningCnt = data.matchRecord.endInning;
-    	  /* 이닝 th 만들기 */
-    	  let thStr = '<th class="name-team">팀</th>'
-    	  for(let i = 0; i<inningCnt; i++){
-    		  thStr+= '<th>'+(i+1)+'회</th>'
+    	  let inningCnt = 0;
+    	  if(data.matchRecord==null){
+    		  $('.box-detail_score').children().hide()
+    		  $('.box-detail_score .no-data').show();
+    		  return;
+    	  }else{
+    		  $('.box-detail_score').children().show()
+    		  $('.box-detail_score .no-data').hide();
     	  }
-          thStr += '<th>Total</th>';
+    	  inningCnt = data.matchRecord.endInning;
+    	  let thStr;
+    	  
+   		  /* 이닝 th 만들기 */
+       	  thStr = '<th class="name-team">팀</th>'
+       	  for(let i = 0; i<inningCnt; i++){
+       		  thStr+= '<th>'+(i+1)+'회</th>'
+       	  }
+             thStr += '<th>Total</th>';
+    	  
+    	  
           $('.th_row').html(thStr);
           /* 시작팀 뼈대 만들기 */
           let homeTeam = data.matchRecord.matchSchedule.homeTeam;
@@ -720,6 +729,15 @@
           
       }
       function nameBoardMaker(data){
+    	  if(data.matchRecord == null){
+    		  $('.box-score').children().hide();
+    		  $('.box-score .no-data').show();
+    		  return;
+    		  
+    	  }else{
+    		  $('.box-score').children().show();
+    		  $('.box-score .no-data').hide();
+    	  }
     	  /* 팀 선언 */
     	  let homeTeam = data.matchRecord.matchSchedule.homeTeam;
     	  let awayTeam = data.matchRecord.matchSchedule.awayTeam;
@@ -754,6 +772,9 @@
     	homeHitterArr = [];
     	awayPitcherArr = [];
     	awayHitterArr = [];
+    	if(homeList == null)
+    		return;
+    	
     	for(let tmp of homeList){
     		if(tmp.mp_po_num==1){
     			homePitcherArr.push(tmp);
@@ -762,6 +783,8 @@
     		}
     		
     	}
+    	if(awayList == null)
+    		return;
     	for(let tmp of awayList){
     		if(tmp.mp_po_num==1){
     			awayPitcherArr.push(tmp);
@@ -782,6 +805,9 @@
     }
     function hitterPlateMaker(arr1){
     	$('.thead-hitter').html('');
+    	if(arr1==null)
+    		return;
+    
     	let thStr = '<tr><th class="name-player">선수</th>'
         +'<th>선발/교체</th>'
        	+'<th>타순</th>'
@@ -831,6 +857,8 @@
     			return (a.mp_inning - b.mp_inning)
     		return (a.mp_num-b.mp_num)
     	})
+    	if(arr == null)
+    		return;
 	   	let container = $('.container-trstat_hitter .trstat_hometeam');	
     	for(let tmp of container){
     		/* hitter table가져와서 순서대로 세팅한 뒤 ajax로 배터 데이터 가져와서 세팅하는게 나을듯? */
@@ -867,11 +895,13 @@
     }
     /* 타자 이닝 이벤트 넣어주기 */
 	function hitterInningEventMaker(){
-		let tmpMrNum = $('#last_match_date option:selected').data('ms')
-	      let mrObj = {
-	    	  mr_num : tmpMrNum
+		let tmpMsNum = $('#last_match_date option:selected').data('ms')
+	      let msObj = {
+	    	  ms_num : tmpMsNum
 	      }
-	      ajax("POST", mrObj, '<c:url value="/team/ajax/record?tm_num=${team.tm_num}"></c:url>', function(data){
+	      ajax("POST", msObj, '<c:url value="/team/ajax/record?tm_num=${team.tm_num}"></c:url>', function(data){
+	    	  if(data.matchRecord==null)
+	    		  return;
 	    	  let tmpInningList = data.matchRecord.inningList
 	    	  for(let tmp of tmpInningList){
 	    		  if(tmp.mi_isFirstLast!=isHomeAway)
@@ -884,7 +914,7 @@
 	    				  if($(this).data('mpnum')==hitterNum)
 	    					  return this;
 	    			  });
-	    			  console.log(hitterTr);
+	    			  
 	    			  hitterTr.find('.ht_inning').filter(function(){
 	    				  if($(this).data('inning')==inningNum)
 	    					  return this;
@@ -899,12 +929,14 @@
     /* 투수칸 맹글기 */
     function pitcherPlateMaker(arr){
     	$('.container-trstat_pitcher').html('');
+    	if(arr==null)
+    		return;
 		for(let i = 0 ; i<arr.length ; i++){
     		
 	    let str = '<tr class="trstat_hometeam" data-num="'+(i+1)+'" data-mpNum="0">'
 	       +'<td class="pt_name-player"></td>'
-	       +'<td class="pt_result"></td>'
-	        +'<td class="pt_innings"></td>'
+/* 	       +'<td class="pt_result"></td>'
+ */	        +'<td class="pt_innings"></td>'
 	        +'<td class="pt_hitters"></td>'
 	        +'<td class="pt_hits"></td>'
 	        +'<td class="pt_homeruns"></td>'
@@ -932,6 +964,8 @@
     			return (a.mp_inning - b.mp_inning)
     		return (a.mp_num-b.mp_num)
     	})
+    	if(arr==null)
+    		return;
 	   	let container = $('.container-trstat_pitcher .trstat_hometeam');	
     	for(let tmp of container){
     		/* hitter table가져와서 순서대로 세팅한 뒤 ajax로 배터 데이터 가져와서 세팅하는게 나을듯? */

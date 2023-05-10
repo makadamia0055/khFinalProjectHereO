@@ -52,5 +52,19 @@ public class LineUpServiceImp implements LineUpService {
 			return;
 		lineUpDao.deleteLineUpByTmNumAndMsNum(teamNum, ms_num);
 	}
+
+	@Override
+	public ArrayList<MatchLineUpVO> selectLineUpOfMatchHome(Integer ms_num) {
+		if(ms_num==null)
+			return null;
+		return lineUpDao.selectLineUpOfMatchHome(ms_num);
+	}
+
+	@Override
+	public ArrayList<MatchLineUpVO> selectLineUpOfMatchAway(Integer ms_num) {
+		if(ms_num==null)
+			return null;
+		return lineUpDao.selectLineUpOfMatchAway(ms_num);
+	}
 	
 }

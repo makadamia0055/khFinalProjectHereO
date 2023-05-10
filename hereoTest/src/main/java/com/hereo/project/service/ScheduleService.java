@@ -12,4 +12,5 @@ public interface ScheduleService {
 	public MatchScheduleVO selectMatchScheduleByMsNum(Integer ms_num);
 
 	public ArrayList<MatchScheduleVO> selectMatchScheduleByTmNum(Integer teamNum);
+
 }
