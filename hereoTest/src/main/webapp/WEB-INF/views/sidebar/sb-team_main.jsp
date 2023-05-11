@@ -212,6 +212,18 @@
 		        >
       		</li>
       </c:if>
+      <c:if test="${!empty loginUser}">
+      		 <li class="item-side">
+		        <a
+		          href="<c:url value='/team/updatePl'></c:url>"
+		          role="button"
+		          class="link-side btn btn-outline-light col-lg-12"
+		          >
+		          	<i class="fa-solid fa-baseball"></i> 플레이어 정보 수정
+					
+		        </a>
+		      </li>
+      </c:if>
     </ul>
 		</c:otherwise>
 	</c:choose>

@@ -2,6 +2,8 @@ package com.hereo.project.service;
 
 import java.util.ArrayList;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerRecordHitterVO;
@@ -55,6 +57,9 @@ public interface PlayerService {
 	PlayerVO selectPlayerByTpNum(Integer tp_num);
 	
 	TeamPlayerVO selectTeamPlayerByTpNum(Integer tp_num);
+
+	boolean updatePlayer(PlayerVO player, MultipartFile imgFile);
+
 
 
 

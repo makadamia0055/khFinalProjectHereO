@@ -13,5 +13,7 @@ public interface PlayerDAO {
 
 	PlayerVO selectPlayerByMeId(String me_id);
 
+	int updatePlayer(@Param("pl")PlayerVO player);
+
 
 }

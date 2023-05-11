@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hereo.project.dao.PlayerDAO;
 import com.hereo.project.dao.PositionDAO;
 import com.hereo.project.dao.TeamPlayerDAO;
 import com.hereo.project.pagination.Criteria;
+import com.hereo.project.utils.UploadFileUtils;
 import com.hereo.project.vo.PlayerRecordHitterVO;
 import com.hereo.project.vo.PlayerRecordPitcherVO;
 import com.hereo.project.vo.PlayerRecordYearHitterVO;
@@ -26,6 +28,9 @@ public class PlayerServiceImp implements PlayerService{
 	TeamPlayerDAO teamPlayerDao;
 	@Autowired
 	PositionDAO positionDao;
+	
+	String uploadPath = "D:\\uploadfiles";
+
 	
 	@Override
 	public ArrayList<PlayerVO> selectPlayerByTm_Num(Integer teamNum) {
@@ -206,5 +211,24 @@ public class PlayerServiceImp implements PlayerService{
 			return null;
 		return teamPlayerDao.selectTeamPlayerByTpNum(tp_num);
 	}
+	@Override
+	public boolean updatePlayer(PlayerVO player, MultipartFile imgFile) {
+		if(player==null)
+			return false;
+		
+		String tmpImgPath = "";
+		if(imgFile!=null&&imgFile.getOriginalFilename().length()!=0) {
+			try {
+				 tmpImgPath = UploadFileUtils.uploadFile(uploadPath, imgFile.getOriginalFilename(), imgFile.getBytes());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		player.setPl_player_img(tmpImgPath);
+		
+		return playerDao.updatePlayer(player)!=0;
+	}
+	
 
 }

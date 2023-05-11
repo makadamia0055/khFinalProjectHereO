@@ -18,8 +18,16 @@
 			where pl_me_id like #{me_id}
 	
 	</select>
-
-
-
+	<update id="updatePlayer">
+		update player
+			set pl_hitting_hand = #{pl.pl_hitting_hand},
+				pl_pitching_hand = #{pl.pl_pitching_hand},
+				pl_ispro = #{pl.pl_ispro},
+				pl_introduce = #{pl.pl_introduce}, 
+				pl_player_img = #{pl.pl_player_img}
+				
+			where pl_num = #{pl.pl_num}
+	
+	</update>
 
 </mapper>

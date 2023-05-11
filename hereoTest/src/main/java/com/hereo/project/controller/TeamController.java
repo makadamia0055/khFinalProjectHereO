@@ -323,7 +323,35 @@ public class TeamController {
 		return mv;
 	}
 	
+//	팀 정보 수정 페이지
+	@RequestMapping(value = "/team/updatePl", method = RequestMethod.GET)
+	public ModelAndView updatePl(ModelAndView mv, HttpSession session) {
+		
+		
+		mv.setViewName("/team/team-updatePl");
+		return mv;
+	}
 	
+//	팀 정보 수정 페이지POST
+
+	@RequestMapping(value = "/team/updatePl", method = RequestMethod.POST)
+	public ModelAndView updatePlPOST(ModelAndView mv, HttpSession session, PlayerVO player, MultipartFile imgFile, String hopePositionStr) {
+		System.out.println(hopePositionStr);
+		boolean res = playerService.updatePlayer(player, imgFile);
+		if(!res) {
+			mv.addObject("msg", "플레이어 정보가 변경되지 않았습니다.");
+			mv.addObject("url", "/team/updatePl");
+			
+		}else {
+			mv.addObject("msg", "플레이어 정보가 변경 되었습니다.");
+			mv.addObject("url", "/team/main");
+			session.removeAttribute("userPlayer");
+
+		}
+
+		mv.setViewName("/common/message");
+		return mv;
+	}
 	
 //	팀 가입 페이지 -get
 	@RequestMapping(value = "/team/join", method = RequestMethod.GET)

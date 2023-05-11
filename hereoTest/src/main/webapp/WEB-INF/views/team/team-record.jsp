@@ -233,13 +233,13 @@
                   
                 </ul>
                 
-                <a href="#" role="button" class="btn btn-primary col-lg-12" id="#wholePlayerHome">전체 선수 보기</a>
+                <a href="#" role="button" class="btn btn-primary col-lg-12" id="wholePlayerHome">전체 선수 보기</a>
                 <a href="#lineup1" role="button" class="btn btn-secondary col-lg-12" data-toggle="collapse">접기/펼치기</a>
 
               </div>
               <div class="container-lineup opponent-team">
                 <div class="titletext-lineup">선발 Line-up</div>
-                <ul class="list-lineup collapse" id="lineup1">
+                <ul class="list-lineup collapse" id="lineup2">
                   <li class="item-lineup">
                     <span class="num-lineup btn btn-info">1</span>
                     <a href="#" class="link-lineup">강백호</a>
@@ -308,7 +308,7 @@
                   
                 </ul>
                 
-                <a href="#" role="button" class="btn btn-primary col-lg-12" id="#wholePlayerAway">전체 선수 보기</a>
+                <a href="#" role="button" class="btn btn-primary col-lg-12" id="wholePlayerAway">전체 선수 보기</a>
                 <a href="#lineup1" role="button" class="btn btn-secondary col-lg-12" data-toggle="collapse">접기/펼치기</a>
 
               </div>
@@ -555,6 +555,20 @@
   	let awayTeamNum;
   	let endOfInning = 0;
   	
+  	/* 포지션 */
+  	let positionMap = new Map();
+	positionMap.set(1,"투수"); 
+	positionMap.set(2,"포수"); 
+	positionMap.set(3,"1루수"); 
+	positionMap.set(4,"2루수"); 
+	positionMap.set(5,"3루수"); 
+	positionMap.set(6,"유격수"); 
+	positionMap.set(7,"우익수"); 
+	positionMap.set(8,"중견수"); 
+	positionMap.set(9,"좌익수"); 
+	positionMap.set(10,"지명타자"); 
+  	
+  	
   	/* 베터 박스 이벤트 받아오기 */
   	let batterBoxEvent = {
   			beList : [], 
@@ -594,19 +608,26 @@
         e.preventDefault();
         $('.big_container-lineup .container-lineup').hide();
         if($(this).hasClass('item-home')){
-         $('.big_container-lineup .container-lineup.home-team').show();
-          isHomeAway= true;
-          setFullRecordData();
-
+       
+			home();
 
         }else{
-          $('.big_container-lineup .container-lineup.opponent-team').show();
-          isHomeAway = false;
-          setFullRecordData();
-
+        
+         	away();
 
         }
       })
+      function home(){
+    	  $('.big_container-lineup .container-lineup.home-team').show();
+          isHomeAway= true;
+          setFullRecordData();
+      }
+      function away(){
+    	  $('.big_container-lineup .container-lineup.opponent-team').show();
+          isHomeAway = false;
+          setFullRecordData();
+
+      }
       
       $('.right-record a').click(function(){
         let ms = $(this).data('ms');
@@ -631,6 +652,17 @@
         	  homeTeamNum = data.matchRecord.matchSchedule.homeTeam.tm_num;
         	  awayTeamNum = data.matchRecord.matchSchedule.awayTeam.tm_num;
         	  }
+        	  /* 초기 시작 해당 팀에 맞춰주는 메소드 */
+        	  if(data.matchRecord.matchSchedule.homeTeam.tm_num == ${team.tm_num}){
+        		  isHomeAway = true;
+            	  $('.big_container-lineup .container-lineup.home-team').show();
+
+        	  }else{
+        		  isHomeAway = false;
+            	  $('.big_container-lineup .container-lineup.opponent-team').show();
+
+        	  }
+        	  console.log(data);
         	  scoreBoardMaker(data);
         	  nameBoardMaker(data);
         	  partInMaker(data);
@@ -639,9 +671,10 @@
           })
       }
       function lineUpMaker(data){
-    	  let str1 = '<c:url value="/team/wholeplayer?teamNum='+homeTeamNum+'"></c:url>'
+    	  /* 전체 선수 보기 주소 설정하는 부분 */
+    	  let str1 = '<c:url value="/team/wholeplayer?teamNum='+homeTeamNum+'"></c:url>';
     	  $('#wholePlayerHome').attr('href', str1);
-    	  let str2 = '<c:url value="/team/wholeplayer?teamNum='+awayTeamNum+'"></c:url>'
+    	  let str2 = '<c:url value="/team/wholeplayer?teamNum='+awayTeamNum+'"></c:url>';
     	  $('#wholePlayerAway').attr('href', str2);
     	  let liObj = {
             	  ms_num : data.matchRecord.mr_ms_num
@@ -656,7 +689,64 @@
 			      awayLine.sort((a,b)=>{
 			    		return (a.ml_battingorder - b.ml_battingorder)
 			    	})
-            	  /* 여기 하고 있음 */
+			    
+			    	/* 라인업 만들어주기 */
+			    	$('#lineup1').html('');
+			    	let i = 1;
+			      
+			    	for(let tmp of homeLine){
+			    		let plName = '';
+			    		let liObj = {
+			    				tp_num : tmp.ml_tp_num
+			    		}
+			    		ajaxParam("POST", liObj, '<c:url value="/team/ajax/playerNameByTpNum"></c:url>', function(data){
+			    			plName = data.player.me_nickname;
+			    		})
+						
+			    		let liStr = '<li class="item-lineup">'
+	                    +'<span class="num-lineup btn btn-info">'+ (i++) +'</span>'
+	                    +'<a href="#" class="link-lineup">'+ plName+'</a>'
+	                    +'<span class="position-lineup">'+positionMap.get(tmp.ml_po_num) +'</span>'
+	                    +'</li>'
+	                    $('#lineup1').append(liStr);
+			    	}
+			    	if(homeLine.length==0){
+			    		let liStr = '<li class="item-lineup">'
+		                    +'<span class="num-lineup btn btn-info">Info</span>'
+		                    +'<a href="#" class="link-lineup">라인업 정보가 없습니다.</a>'
+		                    
+		                    +'</li>'
+		                    $('#lineup1').append(liStr);
+		             		       
+			    	}
+			    	$('#lineup2').html('')
+			    	i = 1;
+			    	
+			    	for(let tmp of awayLine){
+			    		let plName = '';
+			    		let liObj = {
+			    				tp_num : tmp.ml_tp_num
+			    		}
+			    		ajaxParam("POST", liObj, '<c:url value="/team/ajax/playerNameByTpNum"></c:url>', function(data){
+			    			plName = data.player.me_nickname;
+			    		})
+						
+			    		let liStr = '<li class="item-lineup">'
+	                    +'<span class="num-lineup btn btn-info">'+ (i++) +'</span>'
+	                    +'<a href="#" class="link-lineup">'+ plName+'</a>'
+	                    +'<span class="position-lineup">'+positionMap.get(tmp.ml_po_num) +'</span>'
+	                    +'</li>'
+	                    $('#lineup2').append(liStr);
+			    	}
+			    	if(awayLine.length==0){
+			    		let liStr = '<li class="item-lineup">'
+		                    +'<span class="num-lineup btn btn-info">Info</span>'
+		                    +'<a href="#" class="link-lineup">라인업 정보가 없습니다.</a>'
+		                    
+		                    +'</li>'
+		                    $('#lineup2').append(liStr);
+			    	}
+			    	
               })
       }
       /* 스코어 보드 만들기 */
