@@ -10,5 +10,8 @@ import com.hereo.project.vo.Position_HopeVO;
 public interface PositionDAO {
 
 	ArrayList<Position_HopeVO> selectPlayerPosition_H(@Param("player")PlayerVO player);
+	
+	void insertPoistionHope(@Param("pl_num")int pl_num, @Param("i")Integer i);
+
 
 }

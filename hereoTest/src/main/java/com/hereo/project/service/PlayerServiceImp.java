@@ -1,6 +1,7 @@
 package com.hereo.project.service;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -212,7 +213,7 @@ public class PlayerServiceImp implements PlayerService{
 		return teamPlayerDao.selectTeamPlayerByTpNum(tp_num);
 	}
 	@Override
-	public boolean updatePlayer(PlayerVO player, MultipartFile imgFile) {
+	public boolean updatePlayer(PlayerVO player, MultipartFile imgFile, String tokenStr) {
 		if(player==null)
 			return false;
 		
@@ -224,8 +225,19 @@ public class PlayerServiceImp implements PlayerService{
 				e.printStackTrace();
 			}
 		}
-		
 		player.setPl_player_img(tmpImgPath);
+		
+		ArrayList<Integer> poHList = new ArrayList<Integer>();
+		if(tokenStr.trim().length()!=0) {
+			StringTokenizer st = new StringTokenizer(tokenStr);
+			while(st.hasMoreTokens()) {
+				Integer num = Integer.parseInt(st.nextToken());
+				poHList.add(num);
+			}
+		}
+		for(Integer i : poHList) {
+			positionDao.insertPoistionHope(player.getPl_num(), i);
+		}
 		
 		return playerDao.updatePlayer(player)!=0;
 	}

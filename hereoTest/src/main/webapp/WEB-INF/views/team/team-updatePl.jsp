@@ -63,27 +63,43 @@
 						<input type="text" name="hopePositionStr" hidden>
 						<div class="form-check-inline">
 						  <label class="form-check-label">
-						    <input type="checkbox" class="form-check-input hopePosition" name="hopePosition" value="1">투수
+						    <input type="checkbox" class="form-check-input hopePosition" name="hopePosition" value="1" 
+						    	<c:forEach items="${pHList}" var="pl">
+						    		<c:if test="${pl.ph_po_num == 1}"> checked</c:if>
+						    	</c:forEach>
+						    >투수
 						  </label>
 						</div>
 						<div class="form-check-inline">
 						  <label class="form-check-label">
-						    <input type="checkbox" class="form-check-input hopePosition" name="hopePosition" value="2">포수
+						    <input type="checkbox" class="form-check-input hopePosition" name="hopePosition" value="2"
+						    <c:forEach items="${pHList}" var="pl">
+						    		<c:if test="${pl.ph_po_num == 2}"> checked</c:if>
+						    	</c:forEach>>포수
 						  </label>
 						</div>
 						<div class="form-check-inline">
 						  <label class="form-check-label">
-						    <input type="checkbox" class="form-check-input hopePosition" name="hopePosition" value="12">내야수
+						    <input type="checkbox" class="form-check-input hopePosition" name="hopePosition" value="12"
+						    <c:forEach items="${pHList}" var="pl">
+						    		<c:if test="${pl.ph_po_num == 12}"> checked</c:if>
+						    	</c:forEach>>내야수
 						  </label>
 						</div>
 						<div class="form-check-inline">
 						  <label class="form-check-label">
-						    <input type="checkbox" class="form-check-input hopePosition" name="hopePosition" value="13">외야수
+						    <input type="checkbox" class="form-check-input hopePosition" name="hopePosition" value="13"
+						    <c:forEach items="${pHList}" var="pl">
+						    		<c:if test="${pl.ph_po_num == 13}"> checked</c:if>
+						    	</c:forEach>>외야수
 						  </label>
 						</div>
 						<div class="form-check-inline">
 						  <label class="form-check-label">
-						    <input type="checkbox" class="form-check-input hopePosition" name="hopePosition" value="14">지명타자
+						    <input type="checkbox" class="form-check-input hopePosition" name="hopePosition" value="10"
+						    <c:forEach items="${pHList}" var="pl">
+						    		<c:if test="${pl.ph_po_num == 10}"> checked</c:if>
+						    	</c:forEach>>지명타자
 						  </label>
 						</div>
 					</div>

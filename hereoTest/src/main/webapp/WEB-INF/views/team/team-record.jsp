@@ -567,6 +567,9 @@
 	positionMap.set(8,"중견수"); 
 	positionMap.set(9,"좌익수"); 
 	positionMap.set(10,"지명타자"); 
+	positionMap.set(11,"벤치");
+	positionMap.set(12,"내야수");
+	positionMap.set(13,"외야수");
   	
   	
   	/* 베터 박스 이벤트 받아오기 */

@@ -58,7 +58,7 @@ public interface PlayerService {
 	
 	TeamPlayerVO selectTeamPlayerByTpNum(Integer tp_num);
 
-	boolean updatePlayer(PlayerVO player, MultipartFile imgFile);
+	boolean updatePlayer(PlayerVO player, MultipartFile imgFile, String hopePositionStr);
 
 
 

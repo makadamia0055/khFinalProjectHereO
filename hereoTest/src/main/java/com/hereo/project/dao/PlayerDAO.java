@@ -16,4 +16,5 @@ public interface PlayerDAO {
 	int updatePlayer(@Param("pl")PlayerVO player);
 
 
+
 }

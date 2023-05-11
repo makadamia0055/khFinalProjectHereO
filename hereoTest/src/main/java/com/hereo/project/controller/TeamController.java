@@ -45,6 +45,7 @@ import com.hereo.project.vo.PlayerRecordPitcherVO;
 import com.hereo.project.vo.PlayerRecordYearHitterVO;
 import com.hereo.project.vo.PlayerRecordYearPitcherVO;
 import com.hereo.project.vo.PlayerVO;
+import com.hereo.project.vo.Position_HopeVO;
 import com.hereo.project.vo.RegionVO;
 import com.hereo.project.vo.TeamApprovalListVO;
 import com.hereo.project.vo.TeamPlayerVO;
@@ -326,8 +327,8 @@ public class TeamController {
 //	팀 정보 수정 페이지
 	@RequestMapping(value = "/team/updatePl", method = RequestMethod.GET)
 	public ModelAndView updatePl(ModelAndView mv, HttpSession session) {
-		
-		
+		ArrayList<Position_HopeVO> pHList= playerService.selectPositionHopeByPlayer((PlayerVO)session.getAttribute("userPlayer"));
+		mv.addObject("pHList", pHList);
 		mv.setViewName("/team/team-updatePl");
 		return mv;
 	}
@@ -336,8 +337,7 @@ public class TeamController {
 
 	@RequestMapping(value = "/team/updatePl", method = RequestMethod.POST)
 	public ModelAndView updatePlPOST(ModelAndView mv, HttpSession session, PlayerVO player, MultipartFile imgFile, String hopePositionStr) {
-		System.out.println(hopePositionStr);
-		boolean res = playerService.updatePlayer(player, imgFile);
+		boolean res = playerService.updatePlayer(player, imgFile, hopePositionStr);
 		if(!res) {
 			mv.addObject("msg", "플레이어 정보가 변경되지 않았습니다.");
 			mv.addObject("url", "/team/updatePl");
