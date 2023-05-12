@@ -13,7 +13,7 @@ public class PlayerVO {
 	private String pl_hitting_hand;
 	private String pl_pitching_hand;
 	private String pl_ispro;
-	private String pl_introduct;
+	private String pl_introduce;
 	private String pl_player_img;
 	private ArrayList<TeamPlayerVO> teamList;
 	private ArrayList<Position_HopeVO> positionList;

@@ -151,7 +151,7 @@
      	  				</c:otherwise>
        	  			</c:choose>
        	  			<script>
-       	  				let schedule = $('.oppoteam').get();
+       	  				var schedule = $('.oppoteam').get();
        	  				for(i of schedule){
        	  					if(i.dataset.team==0)
        	  						continue;

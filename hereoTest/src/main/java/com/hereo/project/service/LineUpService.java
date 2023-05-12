@@ -14,4 +14,8 @@ public interface LineUpService {
 
 	void deleteLineUpByTmNumAndMsNum(Integer teamNum, Integer ms_num);
 
+	ArrayList<MatchLineUpVO> selectLineUpOfMatchHome(Integer ms_num);
+
+	ArrayList<MatchLineUpVO> selectLineUpOfMatchAway(Integer ms_num);
+
 }

@@ -2,6 +2,8 @@ package com.hereo.project.service;
 
 import java.util.ArrayList;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerRecordHitterVO;
@@ -24,7 +26,6 @@ public interface PlayerService {
 	PlayerVO selectPlayerByPl_Num(Integer player);
 
 	
-
 	boolean insertPlayerToTeam(TeamVO team, PlayerVO player, int auth);
 
 	PlayerVO selectPlayerByMeId(String me_id);
@@ -51,7 +52,15 @@ public interface PlayerService {
 
 	ArrayList<PlayerRecordYearHitterVO> selectPlayerRecordYearHitter(int pl_num);
 
-	ArrayList<PlayerRecordYearPitcherVO> selectPlayerRecordYearPitcher(int pl_num); 
+	ArrayList<PlayerRecordYearPitcherVO> selectPlayerRecordYearPitcher(int pl_num);
+
+	PlayerVO selectPlayerByTpNum(Integer tp_num);
+	
+	TeamPlayerVO selectTeamPlayerByTpNum(Integer tp_num);
+
+	boolean updatePlayer(PlayerVO player, MultipartFile imgFile, String hopePositionStr);
+
+
 
 
 }

@@ -305,7 +305,7 @@
 	})
 $(function(){
 	
-	$('dialog form').validate({
+	$('#innerForm').validate({
         rules: {
         	tp_backnum:{
         		required : true,
