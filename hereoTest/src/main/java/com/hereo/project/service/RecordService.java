@@ -17,4 +17,5 @@ public interface RecordService {
 
 	MatchRecordVO selectMatchRecordByMrNum(int mr_num);
 
+	ArrayList<PlayerRecordHitterVO> getSelectLeagueHitRecord(int lg_num);
 }

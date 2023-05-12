@@ -32,17 +32,21 @@
 	      <c:forEach items="${league }" var="lg">
 	        <li class="item-league">
 	          <div class="left-box">
-	            <a href="<c:url value='/league/main${lg.lg_num}'></c:url>" class="link-league">
+	            <a href="<c:url value='/league/main/${lg.lg_num}'></c:url>" class="link-league">
 	              <img src='<c:url value='/resources/img/league/kbo로고.png'></c:url>' class="item-league-logo"></img>
 	            </a>
 	          </div>
 	          <div class="right-box">
-	            리그 이름 : <a href="<c:url value='/league/main${lg.lg_num }'></c:url>" class="link-league">${lg.lg_name }</a><br>
+	            리그 이름 : <a href="<c:url value='/league/main/${lg.lg_num }'></c:url>" class="link-league">${lg.lg_name }</a><br>
 	            리그 상태 : <span>${lg.lg_state }</span>
 	          </div>
 	        </li>
 	      </c:forEach>
       </ul>
+      <div class="btn btn-insert-league btn-success" >
+      	<a href="<c:url value='/league/leagueInsert'></c:url>">리그생성신청하기</a>
+      </div>
+      
       <div class="container-pagenation">
 			<ul class="pagination justify-content-center">
 				<c:if test="${pm.prev}">

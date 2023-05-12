@@ -19,11 +19,18 @@ public interface LeagueService {
 
 	ArrayList<LeagueVO> selectLeaguesByCriAndState(String state, Criteria cri);
 
-	ArrayList<LeagueVO> selectLeagueByLgNum(int lg_num);
+	LeagueVO selectLeagueByLgNum(int lg_num);
 
 	ArrayList<LeagueAttributeVO> selectLeagueAttByLgNum(int lg_num);
 
 	ArrayList<LeagueScheduleVO> selectLeagueSchedule(int lg_num);
+
+	ArrayList<LeagueParticipationteamVO> getSelectLeagueParti(int lg_num);
+
+	Boolean insertLeague(MembersVO user, LeagueVO league);
+
+	boolean checkLeagueName(String lg_name);
+
 
 
 }

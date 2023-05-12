@@ -22,32 +22,30 @@
 				</div>
 				<div class="form-group">
 					<label for="league-name"></label>
-					<select class="form-control" id="league-name">
-						<option>kh중앙리그</option>
-						<option>kh숏리그</option>
-						<option>kh평일리그</option>
-						<option>kh주말리그</option>
+					<select class="form-control" name="league-name">
+						<c:forEach items="${leagueAtt}" var="la">	
+							<option value="${la.la_name }">${la.la_name }</option>
+						</c:forEach>
 					</select>
 				</div>
 				<div class="form-group">
 					<label for="league-type"></label>
-					<select class="form-control" id="league-type">
-						<option>중앙3부리그</option>
-						<option>숏4부리그</option>
-						<option>평일3부리그</option>
-						<option>주말4부리그</option>
+					<select class="form-control" name="league-name">
+						<c:forEach items="${leagueAtt}" var="la">
+							<option value="${la.la_match_type }">${la.la_match_type }</option>
+						</c:forEach>
 					</select>
+						
 				</div>
 				<div class="form-group">	
 					<label for="league-team"></label>
 					<select class="form-control" id="league-team">
-						<option selected>없음</option>
-						<option>kia타이거즈</option>
-						<option>kt위즈</option>
-						<option>두산 베어스</option>
-						<option>ssg랜더스</option>
-						<option>롯데 자이언트</option>
-						<option>lg트윈스</option>
+						<c:forEach items="${leagueParti }" var="lp">
+							<c:if test="${lp.lp_approval == 2 }">
+								<option value="0">없음</option>
+								<option value="${lp.lp_team.tm_name }">${lp.lp_team.tm_name}</option>
+							</c:if>
+						</c:forEach>
 					</select>
 				</div>
 				<button type="button" class="btn btn-outline-secondary">검색</button>
@@ -69,49 +67,33 @@
 				</tr>
 			</thead>
 			<tbody>
+			<c:forEach items="${leagueSche}" var="ls" varStatus="la">
 				<tr>
-					<td>03.23 (목)</td>
-					<td>20:00</td>
+					<td>${ls.ls_match_date_str2 }</td>
+					<td>${ls.ls_match_date_str3 }</td>
 					<td>1</td>
-					<td>평일리그/평일야간리그</td>
-					<td>소망야구장</td>
+					<td>${ls.ls_leagueAtt.la_name }/${ls.ls_leagueAtt.la_match_type }</td>
+					<td>KH야구장</td>
 					<td>
 						<div class="team-wrap team-left">
-								<span class="team"><a href="">빈티지(야간)</a></span>
-							<span class="score">5</span>
+								<span class="team"><a href="">${ls.ls_team_a.tm_name }</a></span>
+							<span class="score">${ls.ls_point_a }</span>
 						</div>
 						<span class="versus">VS</span>
 						<div class="team-wrap team-right">
-							<span class="score">4</span>
-							<span class="team"><a href="">펠컨스</a></span>
+							<span class="score">${ls.ls_point_b }</span>
+							<span class="team"><a href="">${ls.ls_team_b.tm_name }</a></span>
 						</div>
 					</td>
-					<td>경기후</td>
+					<td>${ls.ls_match_state }</td>
 					<td>
-						<button type="button" class="btn btn-secondary">경기기록</button>
-					</td>
-				</tr>
-				<tr>
-					<td>03.23 (목)</td>
-					<td>20:00</td>
-					<td>1</td>
-					<td>평일리그/평일야간리그</td>
-					<td>소망야구장</td>
-					<td>
-						<div class="team-wrap team-left">
-								<span class="team"><a href="">빈티지(야간)</a></span>
-							<span class="score"></span>
-						</div>
-						<span class="versus">VS</span>
-						<div class="team-wrap team-right">
-							<span class="score"></span>
-							<span class="team"><a href="">펠컨스</a></span>
-						</div>
-					<td>경기전</td>
-					<td>
-						<button type="button" class="btn btn-secondary">경기기록</button>
+						<c:if test="${ls.ls_match_state == '경기후' }">
+							<button type="button" class="btn btn-secondary">경기기록</button>
+						</c:if>
 					</td>
 				</tr>
+			</c:forEach>
+				
 			</tbody>
 		</table>
 	</div>

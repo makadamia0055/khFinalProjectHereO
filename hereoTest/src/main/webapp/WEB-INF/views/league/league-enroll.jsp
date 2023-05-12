@@ -7,6 +7,8 @@
 <script  type="text/javascript" src="<c:url value='/resources/js/common/bootstrap.bundle.min.js'></c:url>"></script>
 <script  type="text/javascript" src="<c:url value='/resources/js/common/jquery.js'></c:url>"></script>
 
+
+
 <div class="container-box">
 <div class="middle-box mt-2">
 		<div class="filter-box">
