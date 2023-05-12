@@ -13,4 +13,5 @@ public class MatchParticipateVO {
 	private String mp_type;
 	private int mp_po_num;
 	private int mp_inning;
+	private int mp_mr_num;
 }

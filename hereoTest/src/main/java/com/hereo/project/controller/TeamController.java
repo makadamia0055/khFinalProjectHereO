@@ -29,12 +29,14 @@ import com.hereo.project.service.RecordService;
 import com.hereo.project.service.ScheduleService;
 import com.hereo.project.service.TeamBoardService;
 import com.hereo.project.service.TeamService;
+import com.hereo.project.vo.BatterBoxEventVO;
 import com.hereo.project.vo.BoardCategoryVO;
 import com.hereo.project.vo.BoardFileVO;
 import com.hereo.project.vo.BoardReplyVO;
 import com.hereo.project.vo.BoardVO;
 import com.hereo.project.vo.BoardVoteVO;
 import com.hereo.project.vo.MatchLineUpVO;
+import com.hereo.project.vo.MatchParticipateVO;
 import com.hereo.project.vo.MatchRecordVO;
 import com.hereo.project.vo.MatchScheduleVO;
 import com.hereo.project.vo.MembersVO;
@@ -43,6 +45,7 @@ import com.hereo.project.vo.PlayerRecordPitcherVO;
 import com.hereo.project.vo.PlayerRecordYearHitterVO;
 import com.hereo.project.vo.PlayerRecordYearPitcherVO;
 import com.hereo.project.vo.PlayerVO;
+import com.hereo.project.vo.Position_HopeVO;
 import com.hereo.project.vo.RegionVO;
 import com.hereo.project.vo.TeamApprovalListVO;
 import com.hereo.project.vo.TeamPlayerVO;
@@ -321,7 +324,34 @@ public class TeamController {
 		return mv;
 	}
 	
+//	팀 정보 수정 페이지
+	@RequestMapping(value = "/team/updatePl", method = RequestMethod.GET)
+	public ModelAndView updatePl(ModelAndView mv, HttpSession session) {
+		ArrayList<Position_HopeVO> pHList= playerService.selectPositionHopeByPlayer((PlayerVO)session.getAttribute("userPlayer"));
+		mv.addObject("pHList", pHList);
+		mv.setViewName("/team/team-updatePl");
+		return mv;
+	}
 	
+//	팀 정보 수정 페이지POST
+
+	@RequestMapping(value = "/team/updatePl", method = RequestMethod.POST)
+	public ModelAndView updatePlPOST(ModelAndView mv, HttpSession session, PlayerVO player, MultipartFile imgFile, String hopePositionStr) {
+		boolean res = playerService.updatePlayer(player, imgFile, hopePositionStr);
+		if(!res) {
+			mv.addObject("msg", "플레이어 정보가 변경되지 않았습니다.");
+			mv.addObject("url", "/team/updatePl");
+			
+		}else {
+			mv.addObject("msg", "플레이어 정보가 변경 되었습니다.");
+			mv.addObject("url", "/team/main");
+			session.removeAttribute("userPlayer");
+
+		}
+
+		mv.setViewName("/common/message");
+		return mv;
+	}
 	
 //	팀 가입 페이지 -get
 	@RequestMapping(value = "/team/join", method = RequestMethod.GET)
@@ -345,10 +375,17 @@ public class TeamController {
 //	팀 기록 페이지 해당 경기의 정보를 ajax로 가져오는 메서드
 	@ResponseBody
 	@RequestMapping(value="/team/ajax/record", method=RequestMethod.POST)
-	public Map<String, Object>teamRecordAjax(@RequestBody MatchRecordVO matchRecord, Integer tm_num) {
+	public Map<String, Object>teamRecordAjax(@RequestBody MatchScheduleVO matchSchedule, Integer tm_num) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		matchRecord = recordService.selectMatchRecordByMrNum(matchRecord.getMr_num());
-		map.put("matchRecord", matchRecord);
+		MatchRecordVO matchRecord = recordService.selectMatchRecordByMsNum(matchSchedule.getMs_num());
+		if(matchRecord !=null) {
+			ArrayList<MatchParticipateVO> homeTeamPartInList = recordService.selectMatchPartInHome(matchRecord.getMr_num());
+			ArrayList<MatchParticipateVO> awayTeamPartInList = recordService.selectMatchPartInAway(matchRecord.getMr_num());
+			map.put("homePartInList", homeTeamPartInList);
+			map.put("awayPartInList", awayTeamPartInList);
+			map.put("matchRecord", matchRecord);
+				
+		}
 		return map;
 	}
 	
@@ -792,6 +829,7 @@ public class TeamController {
 	
 
 // 공용 ajax 맵핑 코드
+//	팀넘버 가져오기
 	@ResponseBody
 	@RequestMapping(value="/team/ajax/teamNum", method=RequestMethod.POST)
 	public Map<String, Object>getTeamByNumAjax(@RequestBody TeamVO team) {
@@ -801,6 +839,7 @@ public class TeamController {
 		map.put("team", tmp);
 		return map;
 	}
+//	팀의 다음 경기 
 	@ResponseBody
 	@RequestMapping(value="/team/ajax/nextMatch", method=RequestMethod.POST)
 	public Map<String, Object>getNextMatchByNumAjax(@RequestBody TeamVO team) {
@@ -812,6 +851,7 @@ public class TeamController {
 		}
 		return map;
 	}
+//	좋아요싫어요수
 	@ResponseBody
 	@RequestMapping(value="/team/ajax/boardVote", method=RequestMethod.POST)
 	public Map<String, Object>setBoardVote(@RequestBody BoardVoteVO vote) {
@@ -824,6 +864,7 @@ public class TeamController {
 		map.put("voteRes", res);
 		return map;
 	}
+//	유저 좋아요 싫어요 정보
 	@ResponseBody
 	@RequestMapping(value="/team/ajax/getUserVote", method=RequestMethod.POST)
 	public Map<String, Object>getUserBoardVote(@RequestBody BoardVoteVO vote) {
@@ -832,6 +873,7 @@ public class TeamController {
 		map.put("vote", userVote);
 		return map;
 	}
+//	리플 가져오기
 	@ResponseBody
 	@RequestMapping(value="/team/ajax/getReply", method=RequestMethod.POST)
 	public Map<String, Object>getBoardReply(@RequestBody Criteria cri, Integer boNum) {
@@ -845,6 +887,7 @@ public class TeamController {
 		map.put("pm", pm);
 		return map;
 	}
+//	리플 지우기
 	@ResponseBody
 	@RequestMapping(value="/team/ajax/deleteReply", method=RequestMethod.POST)
 	public Map<String, Object>deleteBoardReply(@RequestParam("br_num") Integer br_num) {
@@ -854,6 +897,7 @@ public class TeamController {
 		
 		return map;
 	}
+//	me_id로 플레이어 이름과 계급 가져오기
 	@ResponseBody
 	@RequestMapping(value="/team/ajax/playerNameAndRank", method=RequestMethod.POST)
 	public Map<String, Object>getPlayerNameAndRank(@RequestParam("me_id")String me_id, @RequestParam("teamNum")Integer teamNum) {
@@ -868,6 +912,53 @@ public class TeamController {
 		map.put("userTP", tp);		
 		return map;
 	}
+//	tp_num로 플레이어 이름가져오기
+	@ResponseBody
+	@RequestMapping(value="/team/ajax/playerNameByTpNum", method=RequestMethod.POST)
+	public Map<String, Object>getPlayerNameByTpNum(@RequestParam("tp_num")Integer tp_num) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		PlayerVO player = playerService.selectPlayerByTpNum(tp_num);
+		map.put("player", player);
+		return map;
+	}
+	
+//	tp_num과 mr_num을 보내면 해당 게임 정보를 찾아와주는 메소드(위에꺼에서 더 보충)
+	@ResponseBody
+	@RequestMapping(value="/team/ajax/playerRecord", method=RequestMethod.POST)
+	public Map<String, Object>getPlayerRecord(@RequestParam("tp_num")Integer tp_num, @RequestParam("mr_num")Integer mr_num) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		PlayerVO player = playerService.selectPlayerByTpNum(tp_num);
+		TeamPlayerVO tp = playerService.selectTeamPlayerByTpNum(tp_num);
+		PlayerRecordHitterVO pRHitter = recordService.selectPlayerRecordHitterByTpNumAndMrNum(tp_num, mr_num);
+		PlayerRecordHitterVO pRPitcher = recordService.selectPlayerRecordPitcherByTpNumAndMrNum(tp_num, mr_num);
+		map.put("pRHitter", pRHitter);
+		map.put("pRPitcher", pRPitcher);
+		map.put("tp", tp);
+		map.put("player", player);
+		return map;
+	}
+//	batterBoxEvent type 보내기
+	@ResponseBody
+	@RequestMapping(value="/team/ajax/batterBoxEvent", method=RequestMethod.POST)
+	public Map<String, Object>getBatterBoxEvent() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		ArrayList<BatterBoxEventVO> batterBoxEventList = recordService.getAllBatterBoxEventList();
+		map.put("batterBoxEventList", batterBoxEventList);
+		return map;
+	}
+	
+//	lineUp보내기
+	@ResponseBody
+	@RequestMapping(value="/team/ajax/sendLineUp", method=RequestMethod.POST)
+	public Map<String, Object>sendLineUp(@RequestParam("ms_num")Integer ms_num) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		ArrayList<MatchLineUpVO> homeLineUp = lineUpService.selectLineUpOfMatchHome(ms_num);
+		ArrayList<MatchLineUpVO> awayLineUp = lineUpService.selectLineUpOfMatchAway(ms_num);
+		map.put("homeLineUp", homeLineUp);
+		map.put("awayLineUp", awayLineUp);
+		return map;
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/team/ajax/getAuth", method=RequestMethod.POST)
 	public Map<String, Object>getAuth(@RequestParam("me_id")String me_id, @RequestParam("tm_num")Integer teamNum) {

@@ -16,4 +16,8 @@ public interface LineUpDAO {
 
 	int insertMatchLineUp(@Param("ml")MatchLineUpVO tmp);
 
+	ArrayList<MatchLineUpVO> selectLineUpOfMatchHome(Integer ms_num);
+
+	ArrayList<MatchLineUpVO> selectLineUpOfMatchAway(Integer ms_num);
+
 }

@@ -47,4 +47,6 @@ public interface TeamPlayerDAO {
 
 	ArrayList<PlayerRecordYearPitcherVO> selectPlayerRecordYearPitcher(int pl_num);
 
+	TeamPlayerVO selectTeamPlayerByTpNum(Integer tp_num);
+
 }

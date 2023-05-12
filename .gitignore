@@ -21,3 +21,11 @@ hereoTest/.settings/org.eclipse.jdt.core.prefs
 
 hereoTest/.settings/org.eclipse.wst.common.project.facet.core.xml
 *.properties
+
+hereoTest/.settings/org.eclipse.m2e.core.prefs
+
+hereoTest/.settings/org.eclipse.wst.validation.prefs
+
+hereoTest/.settings/org.springframework.ide.eclipse.beans.core.prefs
+
+hereoTest/.settings/org.springframework.ide.eclipse.core.prefs

@@ -338,7 +338,11 @@
 
 	
 	<script>
-	let playerCnt = ${fn:length(tPlayerList)}
+	
+	
+	
+	let playerCnt = $('.box-player').length;
+	console.log(playerCnt)
 	if(playerCnt<9){
 		if(!confirm("팀의 플레이어가 9명보다 작습니다. 계속 라인업을 작성합니까?")){
 			alert('이전 페이지로 이동합니다.')
@@ -368,8 +372,10 @@
 	positionMap.set(7,"우익수"); 
 	positionMap.set(8,"중견수"); 
 	positionMap.set(9,"좌익수"); 
-	positionMap.set(10,"지명타자"); 
- 
+	positionMap.set(10,"지명타자");
+	positionMap.set(11,"벤치");
+	positionMap.set(12,"내야수");
+	positionMap.set(13,"외야수");
 	
 	$('.table-position .name-position').each(function(){
 		let dataNum = $(this).data('position');
@@ -526,6 +532,7 @@
 		})
 	})
 checkbox_DH_toggler(true);
+	/* 지명타자 칸 관련 */
 function checkbox_DH_toggler(bool){
 	if(bool){
 		// 지명타자 칸 얼리기
