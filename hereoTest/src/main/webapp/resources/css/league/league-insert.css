@@ -20,6 +20,7 @@ label{
 }
 
 .form-group .league-name{
+	display: inlineblock; position: relative;
     width: 400px; float: left;
 }
 

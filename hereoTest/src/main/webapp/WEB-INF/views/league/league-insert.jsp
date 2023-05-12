@@ -22,16 +22,18 @@ label.error{color:red;}
               </div>
             </div>
         <div class="form-group">
-          <label class="control-label" for="leagueName">리그이름</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control league-name" id="le_name" placeholder="리그이름을 입력하세요." name="le_name">
-            <button class="btn btn-dark btn-duplicateCheck" type="button">리그이름 중복 체크</button>
-            <label for="leagueName" class="error" id="leagueName-error"></label> 
-          </div>
+	        <div class="team-selector">
+				<label for="team_name">리그이름</label><br>
+				<input type="text" class="form-control league-name col-lg-6" name="le_name" id="le_name" placeholder="리그이름 5~20자" required>
+				<br>
+				<label for="leagueName" id="leagueName-error" class="error"></label>
+			</div>
+				<button class="btn btn-dark btn-duplicateCheck" type="button">리그이름 중복 체크</button>
         </div>
         <div class="form-group">
           <label class="control-label" for="leagueLocal">리그지역</label>
           <select class="form-control league-local" name="le_re_num" id="league-local" style="width: 100px; margin-left: 10px">
+          	<option value="0">선택</option>
             <option value="1">서울</option>
             <option value="2">경기</option>
             <option value="3">인천</option>
