@@ -120,7 +120,8 @@ padding: 10px;
 
 .box-middle .btn{
 	width: 28px; height: 16px; text-align: center;
-	font-size: 12px; border: none; border-radius: 5px; color: #fff;
+	padding : 0;
+	font-size: 8px; border: none; border-radius: 5px; color: #fff;
 }
 .box-middle .recode-guide .btn-out{
 	background-color: hsla(0, 98%, 52%, 0.949);
@@ -163,6 +164,14 @@ background: #aa1ed4;
 .box-middle .box-recode-player .tbl .player-recode-btn{
 	width: 20px; height: 20px; position: relative;
 	top: 1px; text-align: center;
+}
+/* 박스 */
+td.inning.selected{
+	background-color: rgba(20, 255, 255, .7);
+}
+
+td.inning.disable{
+	color : red;
 }
 
 
