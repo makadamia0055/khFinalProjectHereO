@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.main-container{
+	width: 1200px; position: relative;
+	margin-left: 500px; top: 200px;
+}
+.top-box{
+	margin-top: 15px;
+}
+.top-box .navbar{
+	width: 128px;
+}
+
+.middle-box .form-group{
+	display: inline-block;
+}
+.middle-box .filter-box .btn{
+	position: relative; bottom: 3px;
+}
+
+
+.bottom-box{
+	width: 1200px;
+}
+
+
+.table{
+	width: 100%;  border-collapse: collapse;
+  text-align: center;
+}
+.table thead th{
+	font-size: 12px; padding: 12px;
+	border-top: 1px solid black; border-bottom: 1px solid black;
+}
+
+.table tbody td{
+	font-size: 12px;
+}

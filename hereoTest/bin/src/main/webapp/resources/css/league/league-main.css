@@ -1,0 +1,191 @@
+@charset "UTF-8";
+ul{ margin: 0; padding:0;}
+
+.container-main{
+	min-width: 1000px;
+	width: 1000px;
+	margin: 0 auto;
+	position: relative;
+	height: 1000px; margin-left: 500px;
+}
+.container-main .box-main-top{
+	position: relative;
+	top: 200px;
+	width: 100%; height: 500px;
+	font-size: 12px; color: #666;
+}
+.box-main-top .main-top-game .section{
+	float: left;
+	height: 354px;
+	width: 485px;
+	position: relative; background-color: #242424;
+}
+
+/* 리그 선택  */
+.box-main-top .main-top-game .section.league{
+	width: 270px; background-color: #3b3b3b;
+}
+.main-top-game .league .select-box{
+	background-color: #202020; padding: 7px 5px; height: 50px;
+}
+.main-top-game .league .select-box select{
+	width: 100px; text-align: center; border-radius: 5px; 
+	height: 30px; margin-top: 3px;
+}
+.main-top-game .league .select-box .btn{
+	margin-left: 4px;
+}
+
+/* 참가팀 */
+.main-top-game .league .attend-team{
+	height: 304px;
+}
+.main-top-game .league .attend-team h2{
+	margin-left: 25px; margin-top: 7px; text-align: center;
+	font-weight: normal; height: 21px; width: 205px;
+	line-height: 21px; font-size: 15px; color: aquamarine;
+}
+.main-top-game .league .attend-team ul{
+	width: 200px; margin-left: 30px; zoom: 1;
+	margin-top: 10px; height: 216px;
+}
+.main-top-game .league .attend-team ul li{
+	float: left; width: 36px; height: 36px;
+	position: relative; margin: 6px 7px;
+}
+.main-top-game .league .attend-team img{
+	width: 36px; height: 36px; border-radius: 30px;
+}
+.league .attend-team .btn{
+	width: 270px; height: 50px; background-color: #0489B1; color: #fff;
+}
+
+/* 메인 중앙 */
+.main-top-game .section .section-tab{
+	height: 50px; border-bottom: 1px solid;
+}
+.section .section-tab .tab{
+	text-align: center; height: 50px; line-height: 50px;
+	font-size: 15px; color: antiquewhite;
+}
+.section .section-tab .tab.selected{
+	color: #e27432;
+}
+.section .section-tab .tab span{
+	cursor: pointer;
+}
+.section .section-tab .tab-left{
+	float: left; width: 50%; border-right: 0.5px solid antiquewhite;
+}
+.main-top-game .section .article{
+	overflow: auto; height: 304px;
+}
+
+.main-top-game .section .article ul{
+	width: 445px; margin-left: 15px; color: #444;
+}
+.main-top-game .section .article.result{
+	display: none;
+}
+.main-top-game .section .article .list-game li{
+	height: 50px; width: 450px;
+	padding: 8px 0; zoom: 1; line-height: 30px;
+	border-bottom: 1px solid; font-size: 12px;
+}
+ul.list-game li dt, ul.list-game li dd{
+	float: left;
+}
+ul.list-game li dt{
+	width: 110px; margin-left: 5px; font-size: 12px;
+}
+ul.list-game li dd .emblem{
+	float: right; margin-left: 2px;
+}
+ul.list-game li dd{
+	width: 154px; text-align: right; cursor: default;
+	white-space: nowrap; overflow: hidden; position: relative;
+}
+ul.list-game li dd a{
+	color: #666; text-decoration: none;
+}
+ul.list-game li dt+dd{
+	text-align: left; margin-left: 3px;
+}
+ul.list-game li dt+dd .emblem{
+	float: left; margin-right: 5px;
+}
+ul.list-game li dt+dd .team{
+	float: left; text-align: left;
+}
+ul.list-game li dd.versus{
+	width: 15px; text-align: center;
+}
+ul.list-game li .versus+dd, .versus+dd .team{
+	float: right; margin-right: 5px;
+}
+ul.list-game li dd .team{
+	display: block; text-align: right;
+	font-size: 15px; overflow: hidden;
+}
+ul.list-game li dd .score{
+	cursor: default;
+}
+ul.list-game li dt+dd .score{
+	float: right; margin-right: 5px; 
+}
+ul.list-game li .versus+dd .score{
+	float: left; 
+}
+
+
+
+
+/* 메인 오른쪽 팀순위 */
+.box-main-top .main-top-game .section.team{
+	width: 245px; 
+	background-color: #3b3b3b;
+}
+.section.team .ranking-title{
+	height: 50px;
+	text-align: center; line-height: 50px;
+	font-size: 15px; color: antiquewhite;
+	border-bottom: 1px solid;
+}
+.section.team .ranking-contents{
+	position: relative; height: 275px; overflow: hidden;
+}
+.section.team .rank-table{
+	border-collapse: collapse;
+	margin-top: 15px;
+	margin-left: 20px;
+	width: 195px;
+}
+.section.team .rank-table thead th{
+	font-size: 11px; letter-spacing: -1px; background: #555; 
+	line-height: 19px; height: 19px; font-weight: normal; color: #aaa;
+	display: table-cell;
+}
+.section.team .rank-table th, .section.team .rank-table td{
+	text-align: center;
+}
+
+.section.team .rank-table tbody th{
+	color: #e27432; 
+}
+.section.team .rank-table tbody th, .section.team .rank-table tbody td{
+	border-bottom: 1px solid; text-align: center; border-bottom-color: #555555;
+}
+.section.team .rank-table tbody td{
+	font-size: 12px; height: 25px; color: #aaa;
+}
+.section.team .rank-table tbody a{
+	color: #444;
+	text-decoration: none;
+}
+.section.team .rank-table tbody .team{
+	display: block; overflow: hidden; white-space: nowrap;
+	float: left; color: #aaaaaa;
+}
+.section.team .rank-table tbody .red{
+	color: #d14c03;
+}

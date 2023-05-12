@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hereo.project.dao.BoardDAO">
+	<select id="selectBoardType" resultType="com.hereo.project.vo.BoardTypeVO">
+	<![CDATA[		
+	
+	select * from `board-type` where bt_w_auth<=#{auth}
+	]]>
+		
+	</select>
+	<select id="selectAllBoardType" resultType="com.hereo.project.vo.BoardTypeVO">
+	
+	select * from `board-type`
+	</select>
+	<select id="selectBoardCategoryRegion" resultType="com.hereo.project.vo.BoardCategoryVO">
+	select * from `board-category` where bc_bt_num=#{bt_num} and bc_auth_sort="지역";
+	</select>
+	
+	<select id="selectBoardCategoryName" resultType="com.hereo.project.vo.BoardCategoryVO">
+	select * from `board-category` where bc_bt_num=#{bt_num} and bc_auth_sort !="지역";
+	</select>
+
+	
+	<select id="getBoardTypeBtNum" resultType="com.hereo.project.vo.BoardTypeVO">
+	select * from `board-type` where bt_num = #{bt_num}
+	</select>
+	
+	<insert id="enrollBoard">
+	insert into board(bo_title, bo_content, bo_me_id,bo_region,bo_state,bo_bt_num)
+		values(#{bo.bo_title},#{bo.bo_content},#{bo.bo_me_id},#{bo.bo_region},#{bo.bo_state},#{bo.bo_bt_num})
+	</insert>
+	
+	<select id="selectBoardDetail" resultType="com.hereo.project.vo.BoardVO">
+	select board.*, members.me_nickname from `board` inner join members
+	on board.bo_me_id = members.me_id
+	 where bo_num=#{bo_num}
+	</select>
+
+	<update id="updateBoardViews">
+		update `board` set bo_view = bo_view+1
+		where bo_num=#{bo_num}
+	</update>
+	
+	<update id="updateBoard">
+		update `board` set 
+			bo_title = #{bo.bo_title},
+			bo_content= #{bo.bo_content},
+			bo_region = #{bo.bo_region},
+			bo_state = #{bo.bo_state}
+		where bo_num = #{bo.bo_num}
+	</update>
+	
+	<delete id="deleteBoard">
+		delete from `board` where bo_num=#{bo.bo_num}
+	</delete>
+	
+	<select id="getBoardList" resultType="com.hereo.project.vo.BoardVO">	
+		select board.* ,members.me_nickname from `board` 
+			inner join members 
+			on board.bo_me_id = members.me_id
+			where bo_bt_num=#{bt_num}
+			<if test="cri.searchType == 'bo_title'"> and bo_title like concat('%',#{cri.searchName},'%')</if>
+			<if test="cri.searchType == 'me_nickname'"> and me_nickname like concat('%',#{cri.searchName},'%')</if>
+			<if test="cri.bo_region == '서울'"> and bo_region = #{cri.bo_region} </if>
+			<if test="cri.bo_region == '경기'"> and bo_region = #{cri.bo_region}</if>
+			<if test="cri.bo_state == '판매중'"> and bo_state = #{cri.bo_state}</if>
+			<if test="cri.bo_state == '모집중'"> and bo_state = #{cri.bo_state}</if>
+			order by bo_num DESC
+			limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="getBoardTotalCount" resultType="int">
+		select count(*) from `board`
+			inner join members 
+			on board.bo_me_id = members.me_id
+		where bo_bt_num=#{bt_num}
+			<if test="cri.searchType == 'bo_title'"> and bo_title like concat('%',#{cri.searchName},'%')</if>
+			<if test="cri.searchType == 'me_nickname'"> and me_nickname like concat('%',#{cri.searchName},'%')</if>
+		    <if test="cri.bo_region == '서울'"> and bo_region = #{cri.bo_region} </if>
+			<if test="cri.bo_region == '경기'"> and bo_region = #{cri.bo_region}</if>
+			<if test="cri.bo_state == '판매중'"> and bo_state = #{cri.bo_state}</if>
+			<if test="cri.bo_state == '모집중'"> and bo_state = #{cri.bo_state}</if>
+	</select>
+	
+	<select id="getBoardVote" resultType="com.hereo.project.vo.BoardVoteVO">
+		select * from `board-vote`
+			where bv_bo_num=#{bo_num} and bv_me_id=#{user}
+	</select>
+	<insert id="insertUpdown">
+		insert into
+			`board-vote`(bv_me_id, bv_state, bv_bo_num)
+			values(#{updown.bv_me_id},#{updown.bv_state},#{updown.bv_bo_num})
+	</insert>
+	<update id="updateUpdown">
+	 	update `board-vote`
+	 		set bv_state=#{updown.bv_state}
+	 		where bv_me_id=#{updown.bv_me_id} and bv_bo_num=#{updown.bv_bo_num}
+	</update>
+	<update id="updateBoardUpDown">
+		update `board`
+			set bo_up = (
+				select count(*) from `board-vote` where bv_bo_num=#{bv_bo_num} and bv_state=1
+				),
+				bo_down = (
+				select count(*) from `board-vote` where bv_bo_num=#{bv_bo_num} and bv_state = -1
+			) where bo_num=#{bv_bo_num}
+			
+	</update>
+	<select id="getTopFiveBoard" resultType="com.hereo.project.vo.BoardVO">
+		select * from `board`
+			where bo_register_date >= date_sub(now(), interval 1 week) and bo_bt_num=#{bt_num}
+			order by bo_view DESC
+			limit 5
+	</select>
+	<select id="getAllBoardForHot" resultType="com.hereo.project.vo.BoardVO">
+		select * from `board`
+			where bo_register_date >= date_sub(now(), interval 2 day) and bo_bt_num in (1,2,3,4)
+			order by bo_view DESC
+			limit 4
+	</select>
+</mapper>

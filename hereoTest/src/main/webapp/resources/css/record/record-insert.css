@@ -1,0 +1,172 @@
+@charset "UTF-8";
+.main-container{
+background-color: #183153; width: 1200px; margin:0 auto;
+padding-bottom: 20px; 
+}
+
+/* 기록등록 메인 타이틀 */
+.main-container .box-top{
+padding: 10px;
+}
+.box-top .top-title{
+	height: 50px; color: aliceblue;  text-align: center;
+	font-size: 20px; margin-top: 20px;
+}
+
+/* 스코어보드 테이블 */
+.box-score{
+	height: 120px; margin-left: 180px;
+}
+.box-score .tbl{
+	width: 100%; border-top: 1px solid #929292; text-align: center;
+	vertical-align: middle; border-collapse: collapse; background-color: #929292;
+}
+.box-score .tbl thead th{
+	padding: 5px 0; font-weight: 550;
+}
+.box-score .tbl th{
+	background: 0 0; border-bottom: 1px solid #dcdcdc; width: 50px;
+	font-family: ngb; font-size: 18px; color: #121212;
+}
+.box-score .tbl td{
+	padding: 10px 0; background: 0 0; border-bottom: 1px solid #dcdcdc;
+	font-family: ngb; font-size: 15px; text-align: center;
+}
+
+.box-score [class^=score-]{
+	float: left;
+}
+.box-score .data1{
+	width: 215px; border-right: 1px solid #dcdcdc;
+}
+.box-score .data2{
+	width: 460px; border-right: 1px solid #dcdcdc;
+}
+.box-score .data3{
+	width: 160px;
+}
+
+
+
+.top-box-exceptiongame{
+	width: 900px; margin-left: 110px;
+}
+.exception-box{
+	display: inline-block; line-height: 30px; margin-top: 10px;
+	margin-left: 130px;
+}
+.top-box-exceptiongame .left-box{
+	color: gray; font-style: oblique; font-size: 12px;
+	width: 900px;
+}
+
+.btn-exceptiongame{
+	width: 20px; background-color: gray; color: gray;
+}
+.exception-box .btn-save{
+	width: 100px; height: 37px; position: relative; left: 150px;
+}
+
+/* 미들 박스 */
+.box-middle{
+	border-radius: 10px; border: 1px solid #000;
+	margin: 50px 50px; width: 1100px; background-color: #fff;
+	padding-bottom: 40px;
+}
+.box-middle .middle-top{
+	height: 50px; text-align: center; line-height: 50px;
+	 color: #505050;  background-color: #c5c5c5; border-radius: 10px 10px 0 0;
+	 
+}
+.box-middle .middle-top span{
+	cursor: pointer; 
+}
+
+.box-middle .middle-top .home-team[aria-selected=true]{
+	background-color: white; border-radius: 8px 0 0 0; padding-right: 1.7px;
+	font-weight: 800; color: #121212; border-right: 1px solid gray;
+}
+.box-middle .middle-top .away-team[aria-selected=true]{
+	background-color: white; border-radius: 0 8px 0 0; padding-left: 1.5px;
+	font-weight: 800; color: #121212; border-left: 1px solid gray;
+}
+
+.box-middle .middle-top[aria-selected=true]{
+	background-color: white; border-radius: 0 8px 0 0;
+	font-weight: 800; color: #121212;
+}
+
+
+
+
+.middle-top .home-team{
+	width: 49.9%; float:left;
+}
+.middle-top .away-team{
+	width: 49.8%; float:right;
+}
+.recode-guide{
+	font-size: 12px; font-style:normal; color: rgb(179, 174, 174);
+}
+.box-middle table{
+	background-color: #ececec; border-collapse: collapse; font-size: 12px;
+}
+.box-middle table th, .box-middle table td{
+	text-align: left; padding: 3px;
+}
+.box-middle table thead{
+	border-bottom: 1px solid #cccccc;
+}
+
+.box-middle .btn{
+	width: 28px; height: 16px; text-align: center;
+	font-size: 12px; border: none; border-radius: 5px; color: #fff;
+}
+.box-middle .recode-guide .btn-out{
+	background-color: hsla(0, 98%, 52%, 0.949);
+}
+.box-middle .recode-guide .btn-hit{
+	background: #04b430;
+}
+.box-middle .recode-guide .btn-run{
+background: #aa1ed4;
+}
+.box-middle .recode-guide .btn-sacrifice{
+	background: #dee60d;
+}
+.box-middle .recode-guide .btn-hrun{
+	background: #08298A;
+}
+.box-middle .recode-guide .btn-eror{
+	background: #81DAF5;
+}
+
+.box-middle .box-recode-player{
+	margin-top: 10px;
+}
+.box-middle .box-recode-player .tbl{
+	background-color: #fff; font-size: 11px; border-top: 1px solid #929292;
+}
+.box-middle .box-recode-player .tbl .btn-delete{
+	width: 15px; height: 15px;
+}
+
+
+.box-middle .box-recode-player .tbl thead th{
+	 text-align: center; border-left: 1px solid #505050;
+	 height: 25px;
+}
+.box-middle .box-recode-player .tbl tbody td{
+	text-align: center; height: 25px; border: 0.5px solid #929292;
+}
+
+.box-middle .box-recode-player .tbl .player-recode-btn{
+	width: 20px; height: 20px; position: relative;
+	top: 1px; text-align: center;
+}
+
+
+
+/* 기록 내용 */
+
+

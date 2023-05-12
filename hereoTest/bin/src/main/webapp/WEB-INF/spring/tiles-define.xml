@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+ 
+<tiles-definitions>
+  <!-- main layout -->
+  <definition name="layout-tiles" template="/WEB-INF/views/tiles/tiles-layout.jsp">
+    <put-attribute name="header" value="/WEB-INF/views/tiles/headerTemplate.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/views/tiles/footerTemplate.jsp" />
+  </definition>
+  
+  <definition name="noSideBarlayout-tiles" template="/WEB-INF/views/tiles/tiles-layout2.jsp">
+    <put-attribute name="header" value="/WEB-INF/views/tiles/headerTemplate.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/views/tiles/footerTemplate.jsp" />
+  </definition>
+  
+  <definition name="/home" extends="noSideBarlayout-tiles">
+    <put-attribute name="body" value="/WEB-INF/views/home.jsp" />
+  </definition>
+  	
+  <definition name="/team/*" extends="layout-tiles">
+    <put-attribute name="body" value="/WEB-INF/views/team/{1}.jsp" />
+    <put-attribute name="left" value="/WEB-INF/views/sidebar/sb-team_main.jsp" />
+  </definition>
+  <definition name="/team/*/*" extends="/team/*">
+    <put-attribute name="body" value="/WEB-INF/views/team/{1}/{2}.jsp" />
+  </definition>		
+
+  
+  <definition name="/community/*" extends="layout-tiles">
+    <put-attribute name="body" value="/WEB-INF/views/community/{1}.jsp" />
+    <put-attribute name="left" value="/WEB-INF/views/sidebar/sb-community.jsp" />
+  </definition>	
+
+  <definition name="/reservation/*" extends="layout-tiles">
+    <put-attribute name="body" value="/WEB-INF/views/reservation/{1}.jsp" />
+    <put-attribute name="left" value="/WEB-INF/views/sidebar/sb-reservation_main.jsp" />
+  </definition>
+  <definition name="/reservation/*/*" extends="/reservation/*">
+    <put-attribute name="body" value="/WEB-INF/views/reservation/{1}/{2}.jsp" />
+  </definition>		
+  
+  <definition name="/league/*" extends="layout-tiles">
+    <put-attribute name="body" value="/WEB-INF/views/league/{1}.jsp" />
+    <put-attribute name="left" value="/WEB-INF/views/sidebar/sb-league-main.jsp" />
+  </definition>
+  
+
+ 
+</tiles-definitions>
