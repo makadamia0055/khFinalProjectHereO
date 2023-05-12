@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hereo.project.dao.StadiumDAO">
+	<select id="selectBoardList" resultType="com.hereo.project.vo.StadiumVO">
+  		select * 
+  			from stadium
+  			join region_detail on sd_rd_num = rd_num
+  			join members on sd_me_id = me_id
+  			where 
+  				(sd_name like concat('%',#{cri.search} ,'%')
+  				or sd_intro like concat('%',#{cri.search} ,'%'))
+  			order by sd_num desc
+  			limit #{cri.pageStart}, #{cri.perPageNum}
+  	</select>
+  	<select id="selectStadiumTotalCount" resultType="int">
+  		select count(*) from stadium
+  			where
+  				(sd_name like concat('%',#{cri.search} ,'%')
+  				or sd_intro like concat('%',#{cri.search} ,'%'))
+  	</select>
+  	<select id="selectStadium" resultType="com.hereo.project.vo.StadiumVO">
+  		select * from stadium
+	  		join region_detail on sd_rd_num = rd_num
+	  		join members on sd_me_id = me_id
+	  			where sd_num = #{sd_num}
+	 			order by sd_num desc
+  	</select>
+	
+	<select id="selectFileList" resultType="com.hereo.project.vo.StadiumImageVO">
+		select * from `stadium-image` where si_sd_num = #{sd_num}
+	</select>
+	<select id="selectStadiumTimetableList" resultType="com.hereo.project.vo.StadiumTimetableVO">
+		select * from `stadium-timetable`
+	</select>
+	<!-- 스타디움 등록 -->
+	<insert id="insertStadium">
+	    <![CDATA[
+	        INSERT INTO stadium(sd_rd_num, sd_name, sd_register_date, sd_contact, sd_me_id, sd_price, sd_intro)
+	        VALUES (#{stadium.sd_rd_num}, #{stadium.sd_name}, NOW(), #{stadium.sd_contact},
+          #{stadium.sd_me_id}, #{stadium.sd_price}, #{stadium.sd_intro})
+	    ]]>
+	</insert>
+	
+	<!-- 스타디움 이미지 등록 -->
+	<insert id="insertStadiumImage">
+	    <![CDATA[
+	        INSERT INTO stadium_image(sd_num, si_filename)
+	        VALUES (#{sd_num}, #{si_filename})
+	    ]]>
+	</insert>
+	<select id="selectRegionDetail" resultType="int">
+		select * from region_detail
+			join region_sub on rd_rs_num = rs_num
+				where rd_num = #{rd_num}
+	</select>
+
+
+
+</mapper>
+
+

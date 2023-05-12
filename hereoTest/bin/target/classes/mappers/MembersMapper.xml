@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hereo.project.dao.MembersDAO">
+	<select id="getAllMember" resultType="com.hereo.project.vo.MembersVO">
+		select * from members
+	</select>
+	<insert id="insertUser" >
+		insert into members(me_id, me_pw, me_name, me_gender, me_nickname, me_tel,
+		me_mail)
+  		values(#{user.me_id},#{user.me_pw},#{user.me_name},#{user.me_gender},#{user.me_nickname},#{user.me_tel},
+  		#{user.me_mail})
+	</insert>
+
+	<select id="selectMembersByMeId" resultType="com.hereo.project.vo.MembersVO">
+		select * from members
+			where me_id like #{pl_me_id}
+	</select>
+	
+	<select id="selectUserId" resultType="com.hereo.project.vo.MembersVO">
+		select * from members
+			where me_id like #{me_id}
+	</select>
+	<update id="updateSession">
+		update members set 
+			me_session_id=#{user.me_session_id},
+			me_session_limit=#{user.me_session_limit}
+		where me_id = #{user.me_id}
+	</update>
+	<select id="selectLoginSession" resultType="com.hereo.project.vo.MembersVO">
+		select * from members
+			where me_session_id = #{me_session_id} and me_session_limit > now()
+	</select>
+</mapper>
