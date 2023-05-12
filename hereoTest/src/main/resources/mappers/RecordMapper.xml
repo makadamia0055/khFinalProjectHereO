@@ -87,4 +87,52 @@
 	</select>
 	
 	
+	<resultMap type="com.hereo.project.vo.PlayerRecordHitterVO" id="PlayerRecordHitter">
+		<id property="" column=""></id>
+		<result property="ph_num" column="ph_num"/>
+		<result property="ph_tp_num" column="ph_tp_num"/>
+		<result property="ph_mr_num" column="ph_mr_num"/>
+		<result property="ph_single_hits" column="ph_single_hits"/>
+		<result property="ph_twobase_hits" column="ph_twobase_hits"/>
+		<result property="ph_threebase_hits" column="ph_threebase_hits"/>
+		<result property="ph_homeruns" column="ph_homeruns"/>
+		<result property="ph_errors" column="ph_errors"/>
+		<result property="ph_steals" column="ph_steals"/>
+		<result property="ph_fail_steals" column="ph_fail_steals"/>
+		<result property="ph_fourballs" column="ph_fourballs"/>
+		<result property="ph_strike_outs" column="ph_strike_outs"/>
+		<result property="ph_hits" column="ph_hits"/>
+		<result property="ph_bats" column="ph_bats"/>
+		<result property="ph_doubleplays" column="ph_doubleplays"/>
+		<result property="ph_hitbypitches" column="ph_hitbypitches"/>
+		<collection property="ph_team" ofType="com.hereo.project.vo.TeamVO" column="ph_tp_num" select="selectTeam"></collection>
+		<collection property="ph_members" ofType="com.hereo.project.vo.MembersVO" column="ph_tp_num" select="selectMembers"></collection>
+		<collection property="ph_tPlayer" ofType="com.hereo.project.vo.TeamPlayerVO" column="ph_tp_num" select="selectBackNum"></collection>
+	</resultMap>
+	<select id="selectMatchNum" resultType="com.hereo.project.vo.MatchRecordVO">
+		select * from `match-record`
+			where mr_num = #{lm_mr_num}
+	</select>
+	<select id="selectTeam" resultType="com.hereo.project.vo.TeamVO">
+		select * from team
+			join `team-player` on tm_num = tp_tm_num
+			join `playerrecord-hitter` on tp_num = ph_tp_num
+			where ph_tp_num = #{ph_tp_num}
+	</select>
+	<select id="selectMembers" resultType="com.hereo.project.vo.MembersVO">
+		select * from members
+			join player on me_id = pl_me_id
+			join `team-player` on pl_num = tp_pl_num
+			join `playerrecord-hitter` on tp_num = ph_tp_num
+			where ph_tp_num = #{ph_tp_num}
+	</select>
+	<select id="selectBackNum" resultType="com.hereo.project.vo.TeamPlayerVO">
+		select * from `team-player`
+			join `playerrecord-hitter` on tp_num = ph_tp_num
+			where ph_tp_num = #{ph_tp_num}
+	</select>
+	<select id="selectLeagueHitRecord" resultMap="PlayerRecordHitter">
+		select * from `playerrecord-hitter`
+			where ph_mr_num = #{mr_num}
+	</select>
 </mapper>

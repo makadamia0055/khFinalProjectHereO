@@ -29,14 +29,27 @@
 						<button type="button" class="btn btn-secondary btn-sm mb-1">조회</button>
 					</div>
 					<div class="attend-team">
-						<h2>9개팀</h2>
+						<c:set var = "count" value = "0" />
+						<c:forEach items="${leagueParti }" var="lp" varStatus="status">
+							<c:if test="${lp.lp_approval == 2 }">
+								<c:set var="count" value="${count + 1 }"></c:set>
+							</c:if>
+						</c:forEach>
+								<h2><c:out value="${count}팀"/></h2>
+								
+						
 						<ul>
-							<li>
-								<a href="">
-									<span><img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>"></span>
-								</a>
-							</li>
+							<c:forEach items="${leagueParti }" var="lp">
+								<c:if test="${lp.lp_approval == 2 }">
+									<li>
+										<a href="">
+											<span><img src="<c:url value='/resources/img/league/kt로고.jpg'></c:url>"></span>
+										</a>
+									</li>
+								</c:if>
+							</c:forEach>
 						</ul>
+						
 						<button type="button" class="btn" >리그신청하기</button>
 					</div>
 				</div>
@@ -131,30 +144,22 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<th>1</th>
-									<td>
-										<a href="">
-											<span class="team">kt위즈</span>
-										</a>
-									</td>
-									<td>2</td>
-									<td>
-										<span class="red">1.000</span>
-									</td>
-								</tr>
-								<tr>
-									<th>1</th>
-									<td>
-										<a href="">
-											<span class="team">kt위즈</span>
-										</a>
-									</td>
-									<td>2</td>
-									<td>
-										<span class="red">0.500</span>
-									</td>
-								</tr>
+								<c:forEach items="${leagueParti }" var="lp">
+								
+										<tr>
+											<th>등수</th>
+											<td>
+												<a href="">
+													<span class="team">팀이름</span>
+												</a>
+											</td>
+											<td class="gameCount">경기수</td>
+											<td>
+												<span class="red">승률</span>
+											</td>
+										</tr>
+								
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -162,6 +167,7 @@
 			
 		</div>
 	</div>
+	
 	</div>
 <script>
 $('.tab-left').click(function(){
@@ -176,5 +182,16 @@ $('.tab-right').click(function(){
 	$('.article.schedule').hide();
 	$('.article.result').show();
 });
+
+
+//팀랭킹 - ajax 이용
+
+//팀 경기수 
+
+//팀 경기승률 계산
+
+//경기승률 랭킹
+
+
 </script>
 
