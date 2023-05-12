@@ -41,43 +41,17 @@
             </tr>
          </thead>
          <tbody>
+           <c:forEach items="${sd}" var="sd">
             <tr>
-               <th>1게임</th>
-               <td>09시 00분 부터</td>
-               <td>2시간30분</td>
-               <td><span class="price">150,000 원</span></td>   
-               <td class="status"><span class="league">리그</span></td>
-               <td><strong></strong></td>
-            </tr>
-            <tr>
-               <th>2게임</th>
-               <td>12시 00분 부터</td>
-               <td>2시간30분</td>
-               <td><span class="price">150,000 원</span></td>
-               <td class="status"><span class="confirm">확정</span></td><td><strong></strong></td>               
-            </tr>
-            <tr>
-               <th>3게임</th>
-               <td>15시 00분 부터</td>
-               <td>2시간30분</td>
-               <td><span class="price">150,000 원</span></td>
-               <td class="status"><span class="reserve">예약</span></td><td><strong>예약가능</strong></td>
-            </tr>
-            <tr>
-               <th>4게임</th>
-               <td>18시 00분 부터</td>
-               <td>2시간30분</td>
-               <td><span class="price">150,000 원</span></td>
-               <td class="status"><span class="league">리그</span></td><td><strong></strong></td>               
-            </tr>
-            <tr style="display:none">
-               <th>5게임</th>
-               <td>21시 00분 부터</td>
-               <td>2시간30분</td>
-               <td><span class="price">230,000 원</span></td>
-               <td class="status"><span class="reserve">예약</span></td><td><strong>예약가능</strong></td>
-            </tr>            
-            
+	               <th>1게임</th>
+	               <td>09시 00분 부터</td>
+	               <td>2시간30분</td>
+	               <td><span class="price">${sd.st_rent_cost }</span></td>   
+	               <td class="status"><a href="<c:url value='/reservation/payment?stadium=${sd.st_num}'></c:url>"><span class="league">리그</span></a>
+	               	</td>
+	               <td><strong></strong></td>
+            </tr>       
+           </c:forEach> 
          </tbody>
          <!-- <form name="cancelpzForm" id="cancelpzForm" action="/booking/stadium/reserve" method="post"></form>
             <input type="hidden" name="mode" value="cancelpz">
@@ -89,6 +63,8 @@
             <table cellpadding="0" cellspacing="0" class="content-table">
                <tbody>
                   <tr>
+                  
+                  	<input type="hidden" name="stadium-num" value="">
                      <td class="title" style="width: 30%;">
                         <b>구장명</b>
                      </td>

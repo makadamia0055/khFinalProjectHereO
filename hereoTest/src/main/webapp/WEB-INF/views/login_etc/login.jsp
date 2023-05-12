@@ -24,8 +24,9 @@
       <input class="login-input" type="text" placeholder="아이디" name="me_id"/><br />
       <input class="login-input" type="password" placeholder="비밀번호" name="me_pw"/><br />
       <div class="id-remember">
-        <input type="checkbox" name="autoLogin" value="true">
-        <label for="auto" class="auto">자동로그인</label>
+        <label for="auto" class="pointer">
+        	<span><input type="checkbox" id="auto" name="autoLogin" value="true"> 자동로그인</span>
+        </label>
       </div>
       <input class="login-btn" type="submit" value="로그인"/>
     </form>

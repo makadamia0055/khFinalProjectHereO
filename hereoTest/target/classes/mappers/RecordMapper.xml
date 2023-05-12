@@ -3,9 +3,58 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hereo.project.dao.RecordDAO">
-	<select id="selectAllHitRecord" resultType="com.hereo.project.vo.PlayerrecordHitterVO">
+	<select id="selectAllHitRecord" resultType="com.hereo.project.vo.PlayerRecordHitterVO">
 		select * from `playerrecord-hitter`
 
 	</select>
-
+		<resultMap type="com.hereo.project.vo.MatchRecordVO" id="MatchRecord">
+			<result column="mr_num" property="mr_num"/>
+			<result column="mr_ms_num" property="mr_ms_num"/>
+			<result column="mr_point_home" property="mr_point_home"/>
+			<result column="mr_point_away" property="mr_point_away"/>
+			<result column="mr_startteam" property="mr_startteam"/>
+			<collection column="mr_num"
+							property="inningList"
+							javaType="java.util.List"
+							ofType="com.hereo.project.vo.MatchInningVO"
+							select="selectMatchInningByMiNum">
+			</collection>
+			<collection column="mr_ms_num"
+						property="matchSchedule"
+						ofType="com.hereo.project.vo.MatchScheduleVO"
+						select="com.hereo.project.dao.ScheduleDAO.selectMatchScheduleByMsNum">
+			</collection>
+			
+		</resultMap>
+	
+	<resultMap type="com.hereo.project.vo.MatchInningVO" id="MatchInning">
+		<result column="mi_num" property="mi_num"/>
+		<result column="mi_inning" property="mi_inning"/>
+		<result column="mi_isFirstLast" property="mi_isFirstLast"/>
+		<result column="mi_point" property="mi_point"/>
+		<result column="mi_mr_num" property="mi_mr_num"/>
+		<collection column="mi_num"
+						property="batterBoxList"
+						javaType="java.util.List"
+						ofType="com.hereo.project.vo.MatchBatterBoxEventVO"
+						select="selectMatchBatterBoxEventByMbNum">
+		</collection>
+		
+	</resultMap>
+	
+	<select id="selectMatchRecordByMrNum" resultMap="MatchRecord">
+		select * from `match-record`
+			where mr_num = #{mr_num}
+	</select>
+	<select id="selectMatchInningByMiNum" resultMap="MatchInning">
+		select * from `match-inning`
+			where mi_mr_num =#{mr_num}
+			order by mi_inning asc, mi_isfirstlast desc
+	</select>
+	<select id="selectMatchBatterBoxEventByMbNum" resultType="com.hereo.project.vo.MatchBatterBoxEventVO">
+		select * from `match-batterboxevent`
+			where mb_mi_num =#{mi_num}
+			order by mb_inning_order asc
+	</select>
+	
 </mapper>

@@ -31,5 +31,9 @@ public interface StadiumDAO {
 
 	ArrayList<StadiumTimetableVO> selectStadiumTimetableList(@Param("user")MembersVO user);
 
+	ArrayList<StadiumVO> selectStadiumTimetable(@Param("st_num") int st_num);
+
+	StadiumTimetableVO getStadiumTimetableForPay(@Param("st_num") int st_num);
+
 
 }

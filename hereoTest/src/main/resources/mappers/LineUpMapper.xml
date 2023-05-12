@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hereo.project.dao.LineUpDAO">
+	<select id="selectLineUpByMsNum" resultType="com.hereo.project.vo.MatchLineUpVO">
+		select * from `match-lineup`
+			join `team-player` on ml_tp_num = tp_num
+			where ml_ms_num = #{ms_num}
+	</select>
+	<select id="selectLineUpByTmNumAndMsNum" resultType="com.hereo.project.vo.MatchLineUpVO">
+		select * from `match-lineup`
+			join `team-player` on ml_tp_num = tp_num
+			where ml_ms_num = #{ms_num} and tp_tm_num = #{teamNum}
+	</select>
+	<delete id="deleteLineUpByTmNumAndMsNum">
+		delete `match-lineup`.* from `match-lineup`
+			inner join `team-player` on ml_tp_num = tp_num
+			where ml_ms_num = #{ms_num} and tp_tm_num = #{teamNum}
+	</delete>
+	<insert id="insertMatchLineUp">
+		insert into `match-lineup`(ml_ms_num, ml_battingorder, ml_type, ml_tp_num, ml_po_num)
+		value(#{ml.ml_ms_num}, #{ml.ml_battingorder}, #{ml.ml_type}, #{ml.ml_tp_num}, #{ml.ml_po_num})
+	</insert>
+</mapper>

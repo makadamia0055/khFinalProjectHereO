@@ -57,7 +57,17 @@
       	<p class="team-intro">히어로에 최근 등록된 팀들을 소개합니다.  <i class="fa-solid fa-face-laugh smile-icon"></i></p>
       <div class="newTeam-container">
       	<c:forEach items="${team}" var="t">
-        	<div class="newTeam__list"><a href="#">${t.tm_name}</a></div>
+        	<div class="newTeam__list"><a href="#"style="background-image: url(
+									<c:choose>
+										<c:when test="${empty t.tm_team_img}">
+											<c:url value='/files/defaultlogo.png'></c:url>
+										</c:when>
+										<c:otherwise>
+											<c:url value='/files${t.tm_team_img}'></c:url>
+										</c:otherwise>
+									</c:choose>	);" ></a>
+			</div>
+        	<div class="newTeam__name">${t.tm_name}</div>
         </c:forEach>	
       </div>
       <div class="newTeam__more"><a href="<c:url value='/team/main'></c:url>">다른 팀 더보기</a></div>
@@ -74,7 +84,9 @@
       <div class="commu__find">
         <h2>📣 이번 달에 경기할 팀 찾아요</h2>
         <ul class="commu__find-contents">
-          <li><img src="<c:url value='/resources/img/team/강아지.png'></c:url>" class="commu__find-img" /></li>
+          <li>
+          	<img src="<c:url value='/resources/img/team/강아지.png'></c:url>" class="commu__find-img" /></div>
+          </li>
           <li><img src="<c:url value='/resources/img/team/돼지.png'></c:url>" class="commu__find-img" /></li>
           <li><img src="<c:url value='/resources/img/team/고양이 로고.png'></c:url>" class="commu__find-img" /></li>
           <li><img src="<c:url value='/resources/img/team/돼지.png'></c:url>" class="commu__find-img" /></li>

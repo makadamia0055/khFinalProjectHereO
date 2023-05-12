@@ -117,6 +117,7 @@
 		       	  	<th class="text-center">매치 타입</th>
 		       	  	<th class="text-center">상대팀</th>
 		       	  	<th class="text-center">경기 일자</th>
+		       	  	<th class="text-center">경기 라인업</th>
 	       	  	</tr>
        	  	</thead>
        	  	<tbody>
@@ -128,7 +129,7 @@
        	  	</c:if>
        	  	<c:forEach items="${scList}" var="sc" varStatus="status">
        	  		<tr>
-       	  			<td>
+       	  			<td class="text-center">
        	  			<c:choose>
        	  				<c:when test="${sc.ms_match_sort =='리그' }"><span class="badge badge-warning">${sc.ms_match_sort}</span></c:when>
        	  				<c:otherwise><span class="badge badge-light">${sc.ms_match_sort}</span></c:otherwise>
@@ -143,7 +144,8 @@
        	  					<span class="badge badge-primary" data-team="0" data-index="${status.index }">연습</span></td><td>
        	  				</c:when>
      	  				<c:otherwise>
-     	  					<span class="badge badge-warning">원정</span></td><td>
+     	  					<span class="badge badge-warning">원정</span></td>
+     	  					<td class="text-center">
      	  					VS <a class="oppoteam" href="<c:url value='/team/sep?teamNum=${sc.ms_tm_home_num }'></c:url>" data-team="${sc.ms_tm_home_num }" data-index="${status.index }"></a>
      	  					
      	  				</c:otherwise>
@@ -168,6 +170,11 @@
        	  			<td>
        	  				<span class="date"><fmt:formatDate type="both" pattern = "yyyy년 MM월 dd일 HH시 mm분" value="${sc.ms_datetime }"></fmt:formatDate></span>
        	  			<a class="btn btn-light" href="#">일정 상세보기</a>
+      	  			</td>
+      	  			<td class="text-center">
+      	  				<c:if test="${sc.ms_match_sort != '연습'}">
+      	  					<a class="btn btn-warning" data-matchNum="${sc.ms_num}" href="<c:url value='/team/lineup?teamNum=${team.tm_num}&ms_num=${sc.ms_num}'></c:url>">라인업 제출</a>
+      	  				</c:if>
       	  			</td>
        	  			
        	  		</tr>
@@ -206,27 +213,6 @@
       src="https://kit.fontawesome.com/bedfa56d7f.js"
       crossorigin="anonymous"
     ></script>
-   <!--  <script>
-      const ctx = document.getElementById('graph_vsOppoPitcher');
-    
-      new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['1번', '2번', '3번', '4번', '5번', '6번', '7번', '8번', '9번'],
-          datasets: [{
-            label: '상대 선발 - 상대 타율',
-            data: [0.320, 0.190, 0.306, 0.505, 0.23, 0.312 , 0.250, 0, 0.610],
-            borderWidth: 0.2
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
-        }
-      });
-    </script> -->
+   
     
     

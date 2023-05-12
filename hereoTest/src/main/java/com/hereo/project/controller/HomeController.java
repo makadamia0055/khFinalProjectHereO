@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,7 @@ public class HomeController {
 	
 	@Autowired
 	TeamService teamService;
+	
 	
 	@GetMapping(value = "/")
 	public String home(Model model) {
@@ -69,12 +71,11 @@ public class HomeController {
 	public String loginPost(Model model, MembersVO user) {
 		MembersVO loginUser = membersService.login(user);
 		model.addAttribute("loginUser",loginUser);
-		System.out.println(loginUser);
 		if(loginUser==null) {
 			return "redirect:/login";
 		} else {
 			loginUser.setAutoLogin(user.isAutoLogin());
-			System.out.println("체크용"+loginUser);
+			//System.out.println("체크용"+loginUser);
 			return "redirect:/login";
 		}		
 	}

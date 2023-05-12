@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.hereo.project.dao.LeagueDAO;
 import com.hereo.project.dao.RecordDAO;
+import com.hereo.project.vo.MatchRecordVO;
 import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerVO;
-import com.hereo.project.vo.PlayerrecordHitterVO;
+import com.hereo.project.vo.PlayerRecordHitterVO;
 import com.hereo.project.vo.TeamPlayerVO;
 import com.hereo.project.vo.TeamVO;
 
@@ -20,9 +21,14 @@ public class RecordServiceImp implements RecordService {
 	RecordDAO recordDao;
 
 	@Override
-	public ArrayList<PlayerrecordHitterVO> getSelectAllHitRecord() {
+	public ArrayList<PlayerRecordHitterVO> getSelectAllHitRecord() {
 
 		return recordDao.selectAllHitRecord();
+	}
+
+	@Override
+	public MatchRecordVO selectMatchRecordByMrNum(int mr_num) {
+		return recordDao.selectMatchRecordByMrNum(mr_num);
 	}
 
 }

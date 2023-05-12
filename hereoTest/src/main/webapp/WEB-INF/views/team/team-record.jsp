@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
 <link rel="stylesheet" href="/hereoTest/resources/css/team/team_common.css" />
 <link rel="stylesheet" href="/hereoTest/resources/css/team/team.css" />
 
@@ -38,16 +41,27 @@
               <li class="item-team_intro">
                 통산 경기 : <span class="team-total">
                 <c:choose>
-                  	<c:when test="${empty totalMatch|| totalMatch == -1}">오류</c:when>
-                  	<c:otherwise>${totalMatch} 경기</c:otherwise>
+                  	<c:when test="${empty totalMatch.total|| totalMatch.total == -1}">오류</c:when>
+                  	<c:when test="${totalMatch.total == 0}">없음</c:when>
+                  	<c:otherwise>${totalMatch.total} 경기</c:otherwise>
                	</c:choose>
                 </span>
               </li>
               <li class="item-team_intro">통산 승-무-패 : 
+              <c:choose>
+                  	<c:when test="${empty totalMatch.total|| totalMatch.total == -1}">오류</c:when>
+                  	<c:when test="${totalMatch.total == 0}">없음</c:when>
+                  	<c:otherwise>${totalMatch.win}-${totalMatch.draw}-${totalMatch.lose} 경기</c:otherwise>
+               	</c:choose>
               	
               </li>
               <li class="item-team_intro">
-                통산 팀 승률 : 
+                통산 팀 승률 : <c:set var="rate" value="${totalMatch.win}/${totalMatch.total}"/>
+                <c:choose>
+                  	<c:when test="${empty totalMatch.total|| totalMatch.total == -1}">오류</c:when>
+                  	<c:when test="${totalMatch.total == 0}">0%</c:when>
+                  	<c:otherwise>${rate*100}%</c:otherwise>
+               	</c:choose>
               </li>
               
             </ul>
@@ -56,22 +70,24 @@
           
             <div class="container-matchup">
               <ul class="list-matchup">
-                <div class="titletext-matchup">최근 5 경기 결과</div>
-                <li class="item-matchup">
-                  <span class="num-lineup btn btn-info">1</span>
-                  VS <a href="#" class="link-matchup" data-team="mammoth">맘모스</a>
-                  <span class="result-matchup win">승</span>
-                </li>
-                <li class="item-matchup">
-                  <span class="num-lineup btn btn-info">2</span>
-                  VS <a href="#" class="link-matchup" data-team="dolphins">돌핀즈</a>
-                  <span class="result-matchup lose">패</span>
-                </li>
-                <li class="item-matchup">
-                  <span class="num-lineup btn btn-info">3</span>
-                  VS <a href="#" class="link-matchup" data-team="Dangdangs">댕댕스</a>
-                  <span class="result-matchup draw">무</span>
-                </li>
+                <div class="titletext-matchup">최근 5 경기 스케줄</div>
+                <c:forEach items="${msList}" var="ms" varStatus="i">
+	                <c:if test="${fn:length(msList) - i.count <5}">
+	                	<li class="item-matchup">
+		                  <span class="num-lineup btn btn-info">${fn:length(msList) - i.count +1}</span>
+		                  VS <a href="#" class="link-matchup" data-ms="${ms.ms_num}">
+			                <c:choose>
+			                	<c:when test="${ms.ms_tm_home_num == ms.ms_tm_away_num}">연습경기</c:when>
+			                	<c:when test="${ms.ms_tm_home_num != ms.ms_tm_away_num and ms.ms_tm_home_num == team.tm_num}">VS ${ms.awayTeam.tm_name}</c:when>
+			                	<c:when test="${ms.ms_tm_home_num != ms.ms_tm_away_num and ms.ms_tm_away_num == team.tm_num}">VS ${ms.homeTeam.tm_name}</c:when>
+			                </c:choose> 
+		                  </a>
+		                  <span class="result-matchup"></span>
+		                </li>
+	                
+	                </c:if>
+	                
+                </c:forEach>
               </ul>
             </div>
           </div> 
@@ -95,16 +111,23 @@
             <div class="box-datepicker form-group">
               <label for="last_match_date">경기 날짜 선택 </label>
               <select class="form-control" id="last_match_date">
-                <option data-team="mammoth">23-01-23 VS 맘모스</option>
-                <option data-team="dolphins" selected>23-02-03 VS 돌핀즈</option>
-                <option data-team="Dangdangs">23-02-13 VS 댕댕스</option>
+              	<c:forEach items="${msList}" var="ms">
+                	<option data-ms="${ms.ms_num}">${ms.ms_datetime_str} 
+                	<c:choose>
+                		<c:when test="${ms.ms_tm_home_num == ms.ms_tm_away_num}">연습경기</c:when>
+                		<c:when test="${ms.ms_tm_home_num != ms.ms_tm_away_num and ms.ms_tm_home_num == team.tm_num}">VS ${ms.awayTeam.tm_name}</c:when>
+                		<c:when test="${ms.ms_tm_home_num != ms.ms_tm_away_num and ms.ms_tm_away_num == team.tm_num}">VS ${ms.homeTeam.tm_name}</c:when>
+                	</c:choose> 
+                	</option>
+                
+                </c:forEach>
               </select>
             </div>
             <div class="box-score">
               <div class="team-box our-team">
                 <div class="img-box">
-                  <img class="team-logo rounded-circle" src="./고양이 로고.png" alt="단또즈">
-                  <button class="badge badge-pill badge-success">홈팀</button>
+<!--                   <img class="team-logo rounded-circle" src="" alt="단또즈">
+ -->                  <button class="badge badge-pill badge-success">홈팀</button>
                 </div>
                 <span class="team-name">단또즈</span>
               </div>
@@ -112,8 +135,8 @@
               <div class="team-box our-team">
                 <span class="team-name">돌핀즈</span>
                 <div class="img-box">
-                  <img class="team-logo rounded-circle" src="./돌고래.png" alt="단또즈">
-                  <button class="badge badge-pill badge-danger">원정</button>
+<!--                   <img class="team-logo rounded-circle" src="./돌고래.png" alt="단또즈">
+ -->                  <button class="badge badge-pill badge-danger">원정</button>
                 </div>
               </div>
               <div class="score_num">
@@ -281,7 +304,7 @@
           <div class="subcontainer-secondLine">
             <div class="box-detail_score">
               <table class="table-detail_score table">
-                <tr>
+                <tr class="th_row">
                   <th class="name-team">팀</th>
                   <th>1회</th>
                   <th>2회</th>
@@ -573,5 +596,62 @@
           return $(this).data('team')==team;
         }).prop('selected', true)
       })
-
+      let mrObj = {
+    	  mr_num : 1
+      }
+      ajax("POST", mrObj, '<c:url value="/team/ajax/record?tm_num=${team.tm_num}"></c:url>', function(data){
+    	  console.log(data);
+    	  scoreBoardMaker(data);
+      })
+      function scoreBoardMaker(data){
+    	  /* 이닝 변수 선언 */
+    	  let inningCnt = data.matchRecord.endInning;
+    	  /* 이닝 th 만들기 */
+    	  let thStr = '<th class="name-team">팀</th>'
+    	  for(let i = 0; i<inningCnt; i++){
+    		  thStr+= '<th>'+(i+1)+'회</th>'
+    	  }
+          thStr += '<th>Total</th>';
+          $('.th_row').html(thStr);
+          /* 시작팀 뼈대 만들기 */
+          let homeTeam = data.matchRecord.matchSchedule.homeTeam;
+          let tdStr = '<td class="name-home_team">'+homeTeam.tm_name+'</td>'
+          for(let i = 0; i<inningCnt; i++){
+    		  tdStr+= '<td class="score-Home" data-inning="'+(i+1)+'"></td>'
+    	  }
+          
+          tdStr += '<td class="total_home"></td>'
+          $('.trscore_hometeam').html(tdStr);
+          /* 원정팀 뼈대 만들기 */
+          let awayTeam = data.matchRecord.matchSchedule.awayTeam;
+          tdStr = '<td class="name-away_team">'+awayTeam.tm_name+'</td>'
+          for(let i = 0; i<inningCnt; i++){
+    		  tdStr+= '<td class="score-away" data-inning="'+(i+1)+'"></td>'
+    	  }
+          
+          tdStr += '<td class="total_away"></td>'
+          $('.trscore_opponent').html(tdStr);
+          /* 팀 점수 넣어주기 */
+          let innings = data.matchRecord.iningList;
+          for(let tmp in innings){
+        	  
+          }
+          
+      }
+      
+      
+      
+	function ajax(method, obj, url, successFunc, errorFunc){
+		$.ajax({
+			async:false,
+			type: method,
+			data: JSON.stringify(obj),
+			url: url, 
+			dataType: "json",
+			contentType:"application/json; charset=UTF-8",
+			success: successFunc,
+			error: errorFunc
+			
+		});
+	}
     </script>

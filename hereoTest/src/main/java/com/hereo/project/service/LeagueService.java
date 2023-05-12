@@ -7,7 +7,7 @@ import com.hereo.project.vo.LeagueParticipationteamVO;
 import com.hereo.project.vo.LeagueScheduleVO;
 import com.hereo.project.vo.LeagueVO;
 import com.hereo.project.vo.MembersVO;
-import com.hereo.project.vo.PlayerrecordHitterVO;
+import com.hereo.project.vo.PlayerRecordHitterVO;
 import com.hereo.project.vo.TeamPlayerVO;
 import com.hereo.project.vo.TeamVO;
 import com.hereo.project.pagination.Criteria;
