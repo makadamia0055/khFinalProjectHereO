@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import com.hereo.project.vo.BatterBoxEventVO;
+import com.hereo.project.vo.MatchInningVO;
 import com.hereo.project.vo.MatchParticipateVO;
 import com.hereo.project.vo.MatchRecordVO;
 import com.hereo.project.vo.MatchScheduleVO;
@@ -31,6 +32,18 @@ public interface RecordDAO {
 	ArrayList<BatterBoxEventVO> getAllBatterBoxEventList();
 
 	MatchRecordVO selectMatchRecordByMsNum(int ms_num);
+
+	int insertMatchRecord(@Param("mr")MatchRecordVO matchRecord);
+
+	int updateMatchRecord(@Param("mr")MatchRecordVO matchRecord);
+
+	ArrayList<MatchInningVO> selectMatchInningByMrNum(int mr_num);
+
+	void deleteMatchInning(int mr_num);
+
+	int insertMatchInning(@Param("mi")MatchInningVO tmpInning);
+
+	
 
 
 }

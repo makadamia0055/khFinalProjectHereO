@@ -30,7 +30,7 @@
 	<resultMap type="com.hereo.project.vo.MatchInningVO" id="MatchInning">
 		<result column="mi_num" property="mi_num"/>
 		<result column="mi_inning" property="mi_inning"/>
-		<result column="mi_isFirstLast" property="mi_isFirstLast"/>
+		<result column="mi_isfirstlast" property="mi_isfirstlast"/>
 		<result column="mi_point" property="mi_point"/>
 		<result column="mi_mr_num" property="mi_mr_num"/>
 		<collection column="mi_num"
@@ -85,6 +85,30 @@
 		select * from `match-record`
 			where mr_ms_num = #{ms_num}
 	</select>
+	<insert id="insertMatchRecord" useGeneratedKeys="true" keyProperty="mr.mr_num">
+		insert into `match-record`(mr_ms_num, mr_point_home, mr_point_away, mr_startteam)
+		value(${mr.mr_ms_num}, ${mr.mr_point_home}, ${mr.mr_point_away}, ${mr.mr_startteam})
+	</insert>
+	<update id="updateMatchRecord">
+		update `match-record`
+			set mr_ms_num = ${mr.mr_ms_num},
+				mr_point_home =  ${mr.mr_point_home},
+				mr_point_away = ${mr.mr_point_away},
+				mr_startteam =  ${mr.mr_startteam}
+			where mr_num = ${mr.mr_num}
+	</update>
+	<select id="selectMatchInningByMrNum" resultMap="MatchInning">
+		select * from `match-inning`
+			where mi_mr_num = #{mr_num}
+	</select>
+	<delete id="deleteMatchInning">
+		delete from `match-inning`
+			where mi_mr_num = #{mr_num}
+	</delete>
+	<insert id="insertMatchInning"  useGeneratedKeys="true" keyProperty="mi.mi_num">
+		insert into `match-inning`(mi_inning, mi_isfirstlast, mi_point, mi_mr_num) 
+		value(#{mi.mi_inning}, #{mi.mi_isfirstlast}, #{mi.mi_point}, #{mi.mi_mr_num})
+	</insert>
 	
 	
 </mapper>

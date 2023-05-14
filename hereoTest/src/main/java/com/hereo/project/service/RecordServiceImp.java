@@ -1,22 +1,20 @@
 package com.hereo.project.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hereo.project.dao.LeagueDAO;
 import com.hereo.project.dao.RecordDAO;
 import com.hereo.project.vo.BatterBoxEventVO;
-import com.hereo.project.vo.MatchLineUpVO;
+import com.hereo.project.vo.MatchInningVO;
 import com.hereo.project.vo.MatchParticipateVO;
 import com.hereo.project.vo.MatchRecordVO;
-import com.hereo.project.vo.MatchScheduleVO;
-import com.hereo.project.vo.MembersVO;
-import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.PlayerRecordHitterVO;
-import com.hereo.project.vo.TeamPlayerVO;
-import com.hereo.project.vo.TeamVO;
 
 
 @Service
@@ -69,6 +67,56 @@ public class RecordServiceImp implements RecordService {
 	@Override
 	public MatchRecordVO selectMatchRecordByMsNum(int ms_num) {
 		return recordDao.selectMatchRecordByMsNum(ms_num);
+	}
+
+	@Override
+	public boolean insertOrUpdateMatchRecord(MatchRecordVO matchRecord) {
+		if(matchRecord==null||matchRecord.getMr_ms_num()<1)
+			return false;
+		MatchRecordVO ori = selectMatchRecordByMsNum(matchRecord.getMr_ms_num());
+		if(ori== null) {
+			return recordDao.insertMatchRecord(matchRecord) !=0;
+		}else {
+			matchRecord.setMr_num(ori.getMr_num());
+			return recordDao.updateMatchRecord(matchRecord) !=0;
+		}
+	}
+
+	@Override
+	public boolean insertOrUpdateMatchInning(String matchInningList) {
+		if(matchInningList==null)
+			return false;
+//		json 변환 과정
+		ObjectMapper objectMapper = new ObjectMapper();
+		List<MatchInningVO> mIList;
+		try {
+			mIList = Arrays.asList(objectMapper.readValue(matchInningList, MatchInningVO[].class));
+			System.out.println(mIList);
+			// 이후 메소드 처리
+			int mr_num;
+			if(mIList.get(0)==null) {
+				return false;
+			}
+			mr_num = mIList.get(0).getMi_mr_num();
+			ArrayList<MatchInningVO> exstList = recordDao.selectMatchInningByMrNum(mr_num);
+			if(exstList!=null&&exstList.size()!=0) {
+				recordDao.deleteMatchInning(mr_num);
+				
+			}
+			for(MatchInningVO tmpInning : mIList) {
+				if(recordDao.insertMatchInning(tmpInning)!=0)
+					return false;
+			}
+			System.out.println(mIList);
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		
+		
+		
 	}
 
 	
