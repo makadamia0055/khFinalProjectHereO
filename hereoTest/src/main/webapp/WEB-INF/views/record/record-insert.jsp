@@ -612,7 +612,7 @@
 					<tbody>
 						<tr class="player-record-box ex" hidden>
 							<td>
-								<select>
+								<select class="hitOrder">
 									<option value="0">-타순-</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -623,6 +623,7 @@
 									<option value="7">7</option>
 									<option value="8">8</option>
 									<option value="9">9</option>
+									<option value="10">투수</option>
 									
 								</select>
 							
@@ -646,7 +647,7 @@
 								</select>
 							</td>
 							<td>
-								<select>
+								<select class="position">
 									<option value="0">-포지션-</option>
 									<option value="1">투수</option>
 									<option value="2">포수</option>
@@ -662,9 +663,9 @@
 							
 							</td>
 							<td>
-								<select>
-									<option>선발</option>
-									<option>교체</option>
+								<select class="isSelection">
+									<option value="1">선발</option>
+									<option value="2">교체</option>
 								</select>
 							</td>
 							<td class="inning" data-inning="1"></td>
@@ -705,7 +706,7 @@
 						</tr>
 						<tr class="player-record-box">
 							<td>
-								<select>
+								<select class="hitOrder">
 									<option value="0">-타순-</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -716,6 +717,7 @@
 									<option value="7">7</option>
 									<option value="8">8</option>
 									<option value="9">9</option>
+									<option value="10">투수</option>
 									
 								</select>
 							
@@ -739,7 +741,7 @@
 								</select>
 							</td>
 							<td>
-								<select>
+								<select class="position">
 									<option value="0">-포지션-</option>
 									<option value="1">투수</option>
 									<option value="2">포수</option>
@@ -755,9 +757,9 @@
 							
 							</td>
 							<td>
-								<select>
-									<option>선발</option>
-									<option>교체</option>
+								<select class="isSelection">
+									<option value="1">선발</option>
+									<option value="2">교체</option>
 								</select>
 							</td>
 							<td class="inning" data-inning="1"></td>
@@ -831,7 +833,7 @@
 					<tbody>
 						<tr class="player-record-box">
 							<td>
-								<select>
+								<select class="hitOrder">
 									<option value="0">-타순-</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -842,6 +844,7 @@
 									<option value="7">7</option>
 									<option value="8">8</option>
 									<option value="9">9</option>
+									<option value="10">투수</option>
 									
 								</select>
 							
@@ -849,11 +852,11 @@
 							<td>
 								<select class="select-player">
 									<option class="defaultN" value="0">-선수-</option>
-									<c:forEach items="${hTPlayerList}" var="tp">
+									<c:forEach items="${aTPlayerList}" var="tp">
 										<c:choose>
 											<c:when test="${tp.tp_auth > 1}">
 												<option value="${tp.tp_num}" data-baknum="${tp.tp_backnum}">
-													<c:forEach items="${hPlayerList}" var="pl">
+													<c:forEach items="${aPlayerList}" var="pl">
 														<c:if test="${pl.pl_num eq tp.tp_pl_num}">${pl.me_nickname}(${tp.tp_backnum})</c:if>
 													</c:forEach>
 												</option>
@@ -865,7 +868,7 @@
 								</select>
 							</td>
 							<td>
-								<select>
+								<select class="position">
 									<option value="0">-포지션-</option>
 									<option value="1">투수</option>
 									<option value="2">포수</option>
@@ -881,9 +884,9 @@
 							
 							</td>
 							<td>
-								<select>
-									<option>선발</option>
-									<option>교체</option>
+								<select class="isSelection">
+									<option value="1">선발</option>
+									<option value="2">교체</option>
 								</select>
 							</td>
 							<td class="inning" data-inning="1"></td>
@@ -937,6 +940,8 @@
 	let homeAway = true;
 	let selectedBox;
  	let ms_num = 1;
+	let startTeam ;
+	
 	
 	$('td.inning').on('click', playerClick);
 	
@@ -1104,7 +1109,6 @@
 	}
 	$('.btn-save').click(ajaxPostMatchRecord)
 	
-	let startTeam ;
 	/* 경기 기본 Record 정보 넘기는 메소드 */
 	function ajaxPostMatchRecord(){
 	
@@ -1115,7 +1119,15 @@
 	}else{
 		alert('시작팀을 선택해 주십시오.')
 		return ;
-	}	
+	}
+	if(!infoChecker()){
+		alert('입력되지 않은 정보가 있습니다.');
+		return ;
+	}
+	if(typeof pitcherLiner(true) == 'number' ||typeof pitcherLiner(false)=='number'){
+		alert('투수 정보에 오류가 있습니다.');
+		return;
+	}
 		let matchRecordObj = {
 				mr_ms_num : ms_num, 
 				mr_point_home : $('.inning-Score.a-team.total .score-input.total').val(),
@@ -1138,30 +1150,172 @@
 	/* matchInning 저장 메소드*/
 	function ajaxPostMatchInning(data){
 		let matchRecord = data.matchRecord;
-		console.log(matchRecord);
 		let homeTeam = $('.inning-Score.a-team').not('.total').filter(function(){
 			if(!$(this).find('input').attr('disable'))
 				return this;
 		});
-		let homeTeamArr = [];
+		/* 홈팀 보내기 */
+		let totalTeamArr = [];
 		for(let tmp of homeTeam){
 			let tmpObj = {
 				mi_inning : $(tmp).data('inning'),
-				mi_isFirstLast : startTeam,
+				mi_isfirstlast : startTeam,
 				mi_point : Number($(tmp).find('.score-input').val()),
 				mi_mr_num : matchRecord.mr_num
 			}
-			homeTeamArr.push(tmpObj);
+			totalTeamArr.push(tmpObj);
 			
 		}
-		let homeTeamArrStringifyObj = {
-				"homeTeamList" : JSON.stringify(homeTeamArr)
-		}
-		ajaxParam("POST", homeTeamArrStringifyObj, '<c:url value="/record/matchInningPost"></c:url>', function(data){
+		/* 어웨이팀 처리 */
+		let awayTeam = $('.inning-Score.b-team').not('.total').filter(function(){
+			if(!$(this).find('input').attr('disable'))
+				return this;
+		});
+		for(let tmp of awayTeam){
+			let tmpObj = {
+				mi_inning : $(tmp).data('inning'),
+				mi_isfirstlast : !startTeam,
+				mi_point : Number($(tmp).find('.score-input').val()),
+				mi_mr_num : matchRecord.mr_num
+			}
+			totalTeamArr.push(tmpObj);
 			
+		}
+		let totalTeamArrStringifyObj = {
+				"totalTeamList" : JSON.stringify(totalTeamArr)
+		}
+		ajaxParam("POST", totalTeamArrStringifyObj, '<c:url value="/record/matchInningPost"></c:url>', function(data){
+			ajaxPostBatterBoxEvent(data);
 		})
 		
 	}
+	/* batterBoxEvent 이벤트 send 메소드 */
+	function ajaxPostBatterBoxEvent(data){
+		let rstMIList = data.matchInningList;
+		let homeTeamBBEvent = $('.box-recode-player.home_team .player-record-box').not('.ex').find('td.inning').filter(function(){
+			if($(this).data('inning') <= inningEnd)
+				return this;
+		})
+		let totalBBEvent = [];
+		for(let tmp of homeTeamBBEvent){
+			let tmpBtn = $(tmp).find('button');
+			for(let tmptmp of tmpBtn){
+				console.log($(tmptmp).text());
+				
+			}
+		}
+	}
+	/* 선수 열 값 중 선택하지 않은 값이 있는가 체크 */
+	function infoChecker(){
+		let allPlayerRow = $('.player-record-box').not('.ex');
+		for(let tmp of allPlayerRow){
+			if($(tmp).find('.hitOrder option:selected').val()==0)
+				return false;
+			if($(tmp).find('.select-player option:selected').val()==0)
+				return false;
+			if($(tmp).find('.position option:selected').val()==0)
+				return false;
+		}
+		return true;
+	}
+	function pitcherLiner(wh){
+		let tmpStr = wh?'home_team':'away_team';
+		let oppoPitcher = $('.player-record-box').not('.ex').filter(function(){
+			if($(this).find('.position').find('option:selected').val()==1&& $(this).parents('.box-recode-player').hasClass(""+tmpStr))
+				return this;
+		})
+		if(oppoPitcher==null||oppoPitcher.length==0)
+			return -1;
+		let pitcherLineObj = {};
+		for(let i = 0; i<=inningEnd; i++){
+			pitcherLineObj['inning'+i]=[];
+		}
+		for(let tmp of oppoPitcher){
+			if($(tmp).find('.select-player option:selected').val()==0)
+				return -1;
+			/* 선발투수를 0번째 이닝에 넣어줌. */
+			if($(tmp).find('.isSelection option:selected').val()==1){
+				pitcherLineObj.inning0.push({
+					type: '선발',
+					playerNum : $(tmp).find('.select-player option:selected').val()
+				})
+						
+			}
+			/* 교체 버튼이 존재할 때 교체 버튼의 종류를 따져 이닝 배열에 선수번호 넣어줌 */
+			if($(tmp).find('button.btn-exchange').length!=0){
+				let excInning = $(tmp).find('button.btn-exchange').parent().data('inning');
+				let excType = $(tmp).find('button.btn-exchange').text()==91?"교체In":"교체Out";
+				pitcherLineObj['inning'+excInning].push({
+					type : excType,
+					playerNum : $(tmp).find('.select-player option:selected').val()
+					});
+				}
+				
+			}
+		/* 선발 투수 중복인지 따지는 부분 */
+		if(isSelectionDup(pitcherLineObj))
+			return -2;
+		/* 리턴 해주는 부분 */
+		fillPitcherList(pitcherLineObj);
+		return pitcherLineObj;
+				
+	}
+	/* 투수 리스트 빈 부분 채우기 메소드
+		선발을 쫙 세팅, 교체 in을 해당 시점부터 쫙 세팅, 교체 out으로 해당시점부터 쫙 뺌
+	*/	
+	function fillPitcherList(pitcherLineObj){
+		
+		/* 일단 선발 세팅 */
+		let selectionPNum = pitcherLineObj.inning0[0].playerNum;
+		for(let i = 1; i<=inningEnd ; i++){
+			pitcherLineObj['inning'+i].push({
+				type: "연투",
+				playerNum : selectionPNum
+			})
+		}
+		/* 교체 in 세팅 */
+		for(let i = 1; i<=inningEnd; i++){
+			let inningArr = pitcherLineObj['inning'+i];
+			let changeInArr = inningArr.filter(a=>{
+				return a.type=="교체In";
+			})
+			for(let tmp of changeInArr){
+				let tmpNum = tmp.playerNum;
+				for(let j = i+1; j<=inningEnd; j++){
+					pitcherLineObj['inning'+j].push({
+						type: "연투",
+						playerNum : tmpNum
+					})
+				}
+			}
+		}
+		for(let i = 1; i<=inningEnd; i++){
+			let inningArr = pitcherLineObj['inning'+i];
+			let changeOutArr = inningArr.filter(a=>{
+				return a.type=="교체Out";
+			})
+			for(let tmp of changeOutArr){
+				let tmpNum = tmp.playerNum;
+				for(let j = i; j<=inningEnd; j++){
+					pitcherLineObj['inning' + j] = pitcherLineObj['inning' + j].filter(obj => {
+				        return obj.type!="연투"||obj.playerNum != tmpNum; 
+				      });
+				}
+			}
+			
+		}
+		return pitcherLineObj;
+	}
+		
+	
+			
+	/* 선발투수 중복 체크 */
+	function isSelectionDup(data){
+		if(data.inning0.length!=1)
+			return true;
+		return false;
+	}
+	
 	
 	/* 레거시 코드 */
 	$('.box-recode-player.away_team').hide();

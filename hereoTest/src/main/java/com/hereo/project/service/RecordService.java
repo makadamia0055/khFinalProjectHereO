@@ -6,6 +6,7 @@ import org.apache.tomcat.util.json.ParseException;
 
 import com.hereo.project.vo.BatterBoxEventVO;
 import com.hereo.project.vo.LeagueAttributeVO;
+import com.hereo.project.vo.MatchInningVO;
 import com.hereo.project.vo.MatchLineUpVO;
 import com.hereo.project.vo.MatchParticipateVO;
 import com.hereo.project.vo.MatchRecordVO;
@@ -37,7 +38,7 @@ public interface RecordService {
 
 	boolean insertOrUpdateMatchRecord(MatchRecordVO matchRecord);
 
-	boolean insertOrUpdateMatchInning(String matchInningList) ;
+	ArrayList<MatchInningVO> insertOrUpdateMatchInning(String matchInningList) ;
 
 	
 

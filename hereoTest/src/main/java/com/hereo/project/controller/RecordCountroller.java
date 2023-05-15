@@ -70,11 +70,10 @@ public class RecordCountroller {
 	
 	@ResponseBody
 	@RequestMapping(value="/record/matchInningPost", method=RequestMethod.POST)
-	public Map<String, Object>getMatchInningPost(@RequestParam(value="homeTeamList") String matchInningList) {
+	public Map<String, Object>getMatchInningPost(@RequestParam(value="totalTeamList") String matchInningList) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		boolean res = recordService.insertOrUpdateMatchInning(matchInningList);
-		
-		
+		ArrayList<MatchInningVO> inningList= recordService.insertOrUpdateMatchInning(matchInningList);
+		map.put("matchInningList", inningList);
 		return map;
 	}
 	

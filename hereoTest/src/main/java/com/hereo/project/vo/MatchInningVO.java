@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class MatchInningVO implements Comparable<MatchInningVO>{
 	private int mi_num;
 	private int mi_inning;
-	private boolean isfirstlast;
+	private boolean mi_isfirstlast;
 	private int mi_point;
 	private int mi_mr_num;
 	
@@ -19,8 +19,8 @@ public class MatchInningVO implements Comparable<MatchInningVO>{
 	@Override
 	public int compareTo(MatchInningVO o) {
 		if(this.mi_inning==o.mi_inning) {
-			if(this.isfirstlast!=o.isfirstlast) {
-				if(this.isfirstlast) {
+			if(this.mi_isfirstlast!=o.mi_isfirstlast) {
+				if(this.mi_isfirstlast) {
 					return -1;
 				}else {
 					return 1;

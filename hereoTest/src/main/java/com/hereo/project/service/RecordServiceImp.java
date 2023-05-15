@@ -83,19 +83,18 @@ public class RecordServiceImp implements RecordService {
 	}
 
 	@Override
-	public boolean insertOrUpdateMatchInning(String matchInningList) {
+	public ArrayList<MatchInningVO> insertOrUpdateMatchInning(String matchInningList) {
 		if(matchInningList==null)
-			return false;
+			return null;
 //		json 변환 과정
 		ObjectMapper objectMapper = new ObjectMapper();
-		List<MatchInningVO> mIList;
+		ArrayList<MatchInningVO> mIList;
 		try {
-			mIList = Arrays.asList(objectMapper.readValue(matchInningList, MatchInningVO[].class));
-			System.out.println(mIList);
+			mIList = new ArrayList<MatchInningVO>(Arrays.asList(objectMapper.readValue(matchInningList, MatchInningVO[].class)));
 			// 이후 메소드 처리
 			int mr_num;
 			if(mIList.get(0)==null) {
-				return false;
+				return null;
 			}
 			mr_num = mIList.get(0).getMi_mr_num();
 			ArrayList<MatchInningVO> exstList = recordDao.selectMatchInningByMrNum(mr_num);
@@ -104,14 +103,12 @@ public class RecordServiceImp implements RecordService {
 				
 			}
 			for(MatchInningVO tmpInning : mIList) {
-				if(recordDao.insertMatchInning(tmpInning)!=0)
-					return false;
+				recordDao.insertMatchInning(tmpInning);
 			}
-			System.out.println(mIList);
-			return true;
+			return mIList;
 		} catch (IOException e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 		
 		
