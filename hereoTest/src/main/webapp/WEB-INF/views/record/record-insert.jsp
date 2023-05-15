@@ -1218,6 +1218,7 @@
 		}
 		return true;
 	}
+	/* 투수 정보 채우는 메소드 (wh는 홈팀, 어웨이팀 가리는 bool형 인자) */
 	function pitcherLiner(wh){
 		let tmpStr = wh?'home_team':'away_team';
 		let oppoPitcher = $('.player-record-box').not('.ex').filter(function(){
