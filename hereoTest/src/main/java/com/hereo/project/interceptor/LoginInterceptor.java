@@ -22,7 +22,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mv) throws Exception{
-		
+		System.out.println("loginInterceptpr");
 		ModelMap modelMap = mv.getModelMap();
 		MembersVO loginUser = (MembersVO)modelMap.get("loginUser");
 		

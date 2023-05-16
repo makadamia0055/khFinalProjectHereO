@@ -1,9 +1,9 @@
 package com.hereo.project.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -11,11 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hereo.project.dao.RegionDAO;
@@ -23,15 +24,15 @@ import com.hereo.project.service.PlayerService;
 import com.hereo.project.service.ReservationService;
 import com.hereo.project.service.TeamService;
 import com.hereo.project.utils.MessageUtils;
-import com.hereo.project.vo.BoardCategoryVO;
-import com.hereo.project.vo.BoardTypeVO;
 import com.hereo.project.vo.MembersVO;
-import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.RegionVO;
+import com.hereo.project.vo.ReservationVO;
 import com.hereo.project.vo.StadiumScheduleVO;
 import com.hereo.project.vo.StadiumTimetableVO;
 import com.hereo.project.vo.StadiumVO;
 import com.hereo.project.vo.TeamVO;
+
+import kr.co.bootpay.Bootpay;
 
 
 @Controller
@@ -92,7 +93,6 @@ public class ReservationController {
 		if(userTeam==null) {
 			MessageUtils.alertAndGoPage(response, "팀 소속 선수만 예약을 할 수 있습니다.", "/hereoTest", "/reservation/main");
 		}
-		System.out.println("팀"+teamList);
 		model.addAttribute("date", date);
 		model.addAttribute("teamList", teamList);
 		model.addAttribute("st", st);
@@ -100,15 +100,85 @@ public class ReservationController {
 		return "/reservation/reservation-stadium";
 	}
 	//임시로 만들어 놓은 결제창 메서드
+	@ResponseBody
 	@PostMapping(value= {"/reservation/payment_info"})
-	public String reservePayment(HttpSession session, int st_num, Model model) {
+	public Map<String,Object> reservePayment(HttpSession session, int st_num, Model model, String date,
+			HttpServletResponse response, ReservationVO reservation) {
+		
 		MembersVO user=(MembersVO)session.getAttribute("loginUser");
-		StadiumScheduleVO checkSch = reservationService.checkStadiumSchedule(st_num);
-		StadiumTimetableVO st=reservationService.getStadiumTimetableForPay(st_num);
-		model.addAttribute("st", st);
-		model.addAttribute("user", user);
-		return "/reservation/main";
+		String msg="";
+		String url="";
+		String state="결제완료";
+		ArrayList<StadiumScheduleVO> checkSch = reservationService.checkStadiumSchedule(st_num, date,state);
+		System.out.println("체크"+checkSch);
+		if(checkSch.isEmpty()) {
+			reservationService.insertReservation(reservation, date, st_num);
+		}else {
+			msg="이미 예약이 완료된 게임입니다.";
+			url="/reservation/main";
+		}
+		ReservationVO re = reservationService.selectReservation(reservation.getRv_num());
+		HashMap<String,Object> map=new HashMap<String,Object >();
+		map.put("reserve",re);
+		map.put("user", user);
+		map.put("msg", msg);
+		map.put("url",url);
+		return map;
 	}
+	//임시로 만들어 놓은 예약확인 
+	@GetMapping(value={"/reservation/check"})
+	public String reservationCheck(HttpSession session) {
+		MembersVO user=(MembersVO)session.getAttribute("loginUser");
+		
+		return "/reservation/reservation-check";
+	}
+	@ResponseBody
+	@PostMapping(value= {"/reservation/bootPay"})
+	public String bootPay(@RequestParam String receipt_id, @RequestParam int rv_num) {
 
+		Bootpay bootpay = new Bootpay("6450af6d755e27001b375f4a", "vt/NZXiLbNOBadm8p2ONHo1ZO+DOfUbpMUC9rDoluQk=");
+		try {
+		   HashMap<String, Object> token = bootpay.getAccessToken();
+		   if(token.get("error_code") != null) { //success
+		       return "fail : Is Error";
+		   }
+
+		   String receiptId = receipt_id; 
+		   HashMap res = bootpay.getReceipt(receiptId);
+		  System.out.println("응답"+res);
+		   if(res.get("error_code") == null) { //success
+		        System.out.println("confirm success: " + res);
+		        reservationService.updateSchedule(receipt_id);
+		   } 
+		   Integer order_id = (Integer)res.get("order_id");
+		   if(order_id == null) {
+			   return "fail : Null order_id ";
+		   }
+		   //결제상태 변경해줌
+		   reservationService.updateState(receipt_id,rv_num);
+		} catch (Exception e) {
+		   e.printStackTrace();
+		}
+		return null;
+	}
+	//결제 중 취소 버튼을 누를경우에 db에 있는 reservation과 scheudule을 삭제하는 메서드
+	@PostMapping(value= {"/reservation/cancelBootPay"})
+	public String bootPay(@RequestBody ReservationVO reserve) {
+		System.out.println(reserve);
+		reservationService.deleteReservation(reserve.getRv_num());		
+		return null;
+	}
+	//결제 완료 전 혹시 같은 스케쥴의 결제 완료가 다시 된 게 있는지 체크하는 메서드 (재고확인메서드)
+	@PostMapping(value= {"/reservation/checkBootPay"})
+	public boolean checkBootPay(@RequestBody ReservationVO reserve, @RequestParam boolean enable) {
+		System.out.println("체크부트페이"+reserve);
+		boolean isInventory = reservationService.checkInventory(reserve.getRv_num());
+		
+		if(isInventory==false) {
+			enable = true;
+		}else enable=false;
+		
+		return enable;
+	}
 }
 	

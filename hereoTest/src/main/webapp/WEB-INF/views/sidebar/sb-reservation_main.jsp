@@ -49,7 +49,7 @@
          </div>
       </li>
       <li class="item-side">
-         <a href="#" target="_parent" class="link-side btn btn-light col-md">예약 확인</a>
+         <a href="<c:url value='/reservation/check'></c:url>" target="_parent" class="link-side btn btn-light col-md">예약 확인</a>
       </li>
       <li class="item-side">
          <a href="<c:url value='/reservation/stadium/list'></c:url>" target="_parent"  class="link-side btn btn-light col-md">구장 등록</a>
