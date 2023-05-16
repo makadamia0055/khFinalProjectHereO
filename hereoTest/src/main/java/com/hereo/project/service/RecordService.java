@@ -40,6 +40,10 @@ public interface RecordService {
 
 	ArrayList<MatchInningVO> insertOrUpdateMatchInning(String matchInningList) ;
 
+	boolean insertOrUpdateMatchBBE(String matchBBEStr, Integer mr_num);
+
+	boolean insertOrUpdateMatchParticipate(String matchParticipate, Integer mr_num);
+
 	
 
 }

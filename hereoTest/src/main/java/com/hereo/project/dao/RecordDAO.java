@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import com.hereo.project.vo.BatterBoxEventVO;
+import com.hereo.project.vo.MatchBatterBoxEventVO;
 import com.hereo.project.vo.MatchInningVO;
 import com.hereo.project.vo.MatchParticipateVO;
 import com.hereo.project.vo.MatchRecordVO;
@@ -42,6 +43,12 @@ public interface RecordDAO {
 	void deleteMatchInning(int mr_num);
 
 	int insertMatchInning(@Param("mi")MatchInningVO tmpInning);
+
+	void insertMatchBBE(@Param("mb")MatchBatterBoxEventVO tmpBBE, @Param("mr_num")Integer mr_num);
+
+	void insertMatchParticipate(@Param("mp")MatchParticipateVO tmpPart);
+
+	void deleteMatchParticipate(Integer mr_num);
 
 	
 

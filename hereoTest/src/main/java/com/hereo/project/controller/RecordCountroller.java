@@ -77,4 +77,21 @@ public class RecordCountroller {
 		return map;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/record/matchBBEPost", method=RequestMethod.POST)
+	public Map<String, Object>getMatchBBEPost(@RequestParam(value="totalBBE") String matchBBEStr, @RequestParam(value="mr_num") Integer mr_num) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		boolean res = recordService.insertOrUpdateMatchBBE(matchBBEStr, mr_num);
+		map.put("res", res);
+		return map;
+	}
+	@ResponseBody
+	@RequestMapping(value="/record/matchParticipate", method=RequestMethod.POST)
+	public Map<String, Object>getMatchParticipate(@RequestParam(value="teamPart") String matchParticipate, @RequestParam(value="mr_num") Integer mr_num) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		boolean res = recordService.insertOrUpdateMatchParticipate(matchParticipate, mr_num);
+		map.put("res", res);
+		return map;
+	}
+	
 }

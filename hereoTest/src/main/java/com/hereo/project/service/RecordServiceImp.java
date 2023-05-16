@@ -3,7 +3,6 @@ package com.hereo.project.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.hereo.project.dao.RecordDAO;
 import com.hereo.project.vo.BatterBoxEventVO;
+import com.hereo.project.vo.MatchBatterBoxEventVO;
 import com.hereo.project.vo.MatchInningVO;
 import com.hereo.project.vo.MatchParticipateVO;
 import com.hereo.project.vo.MatchRecordVO;
@@ -111,9 +111,50 @@ public class RecordServiceImp implements RecordService {
 			return null;
 		}
 		
+	}
+
+	@Override
+	public boolean insertOrUpdateMatchBBE(String matchBBEStr, Integer mr_num) {
+		if(matchBBEStr==null||mr_num==null)
+			return false;
+//		json 변환 과정
+		ObjectMapper objectMapper = new ObjectMapper();
+		ArrayList<MatchBatterBoxEventVO> bBEList;
+		try {
+			bBEList = new ArrayList<MatchBatterBoxEventVO>(Arrays.asList(objectMapper.readValue(matchBBEStr, MatchBatterBoxEventVO[].class)));
+			// 이후 메소드 처리
+			for(MatchBatterBoxEventVO tmpBBE : bBEList) {
+				System.out.println(tmpBBE);
+				recordDao.insertMatchBBE(tmpBBE, mr_num);
+			}
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
 		
-		
-		
+	}
+
+	@Override
+	public boolean insertOrUpdateMatchParticipate(String matchParticipate, Integer mr_num) {
+		if(matchParticipate==null)
+			return false;
+//		json 변환 과정
+		ObjectMapper objectMapper = new ObjectMapper();
+		ArrayList<MatchParticipateVO> partList;
+		try {
+			partList = new ArrayList<MatchParticipateVO>(Arrays.asList(objectMapper.readValue(matchParticipate, MatchParticipateVO[].class)));
+			// 이후 메소드 처리
+			recordDao.deleteMatchParticipate(mr_num);
+				
+			for(MatchParticipateVO tmpPart : partList) {
+				recordDao.insertMatchParticipate(tmpPart);
+			}
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	

@@ -941,7 +941,7 @@
 	let selectedBox;
  	let ms_num = 1;
 	let startTeam ;
-	
+	let mr_num;
 	
 	$('td.inning').on('click', playerClick);
 	
@@ -1139,6 +1139,7 @@
 		ajax("POST", matchRecordObj, '<c:url value="/record/matchRecordPost"></c:url>', function(data){
 			if(data.res){
 				console.log("matchRecord 데이터 저장");
+				mr_num = data.matchRecord.mr_num;
 				ajaxPostMatchInning(data);
 			}else{
 				console.log("matchRecord 데이터 저장 실패");
@@ -1185,6 +1186,8 @@
 				"totalTeamList" : JSON.stringify(totalTeamArr)
 		}
 		ajaxParam("POST", totalTeamArrStringifyObj, '<c:url value="/record/matchInningPost"></c:url>', function(data){
+			/* 여기서 match-participate */
+			sendMatchPartcipate();
 			ajaxPostBatterBoxEvent(data);
 		})
 		
@@ -1192,19 +1195,210 @@
 	/* batterBoxEvent 이벤트 send 메소드 */
 	function ajaxPostBatterBoxEvent(data){
 		let rstMIList = data.matchInningList;
+		/*  */
 		let homeTeamBBEvent = $('.box-recode-player.home_team .player-record-box').not('.ex').find('td.inning').filter(function(){
 			if($(this).data('inning') <= inningEnd)
 				return this;
 		})
+		let awayTeamBBEvent = $('.box-recode-player.away_team .player-record-box').not('.ex').find('td.inning').filter(function(){
+			if($(this).data('inning') <= inningEnd)
+				return this;
+		})
 		let totalBBEvent = [];
-		for(let tmp of homeTeamBBEvent){
+		let teamA;
+		let teamB;
+		if(startTeam){
+			firstTeam = homeTeamBBEvent;
+			secondTeam = awayTeamBBEvent;
+		}else{
+			firstTeam = awayTeamBBEvent;
+			secondTeam = homeTeamBBEvent;
+		}
+		for(let tmp of firstTeam){
 			let tmpBtn = $(tmp).find('button');
+			/* 현재 이닝 */
+			let inning = $(tmp).data('inning');
+			/* 타순 */
+			let hitOrd = $(tmp).parent().find('.hitOrder option:selected').val();
+			let currentHitter = $(tmp).parent().find('.select-player option:selected').val();
+
+			let pitcherLine = pitcherLiner(!startTeam);
+			/* 현재 이닝의 투수(중 첫번째) */
+			let currentPitcher = selectPitcher(pitcherLine, inning);
+			/* 해당 tmp에 들어있는 btn 마다 */
 			for(let tmptmp of tmpBtn){
-				console.log($(tmptmp).text());
+				/* 버튼의 값 */
+				let btnType = $(tmptmp).text();
+				let tmpBBEObj = {
+						mb_mi_num : inningNumSelector(data, startTeam, inning),
+						hitOrder: hitOrd,
+						be_type : btnType,
+						mb_mp_hitter_num : currentHitter,
+						mb_mp_pitcher_num: currentPitcher
+				}
+				console.log(tmpBBEObj)
+
 				
+				totalBBEvent.push(tmpBBEObj);
+			
 			}
 		}
+		for(let tmp of secondTeam){
+			let tmpBtn = $(tmp).find('button');
+			/* 현재 이닝 */
+			let inning = $(tmp).data('inning');
+			/* 타순 */
+			let hitOrd = $(tmp).parent().find('.hitOrder option:selected').val();
+			let currentHitter = $(tmp).parent().find('.select-player option:selected').val();
+
+			let pitcherLine = pitcherLiner(startTeam);
+			/* 현재 이닝의 투수(중 첫번째) */
+			let currentPitcher = selectPitcher(pitcherLine, inning);
+			/* 해당 tmp에 들어있는 btn 마다 */
+			for(let tmptmp of tmpBtn){
+				/* 버튼의 값 */
+				let btnType = $(tmptmp).text();
+				let tmpBBEObj = {
+						mb_mi_num : inningNumSelector(data, !startTeam, inning),
+						hitOrder: hitOrd,
+						be_type : btnType,
+						mb_mp_hitter_num : currentHitter,
+						mb_mp_pitcher_num: currentPitcher
+				}
+				console.log(tmpBBEObj)
+				totalBBEvent.push(tmpBBEObj);
+			
+			}
+		}
+		totalBBEvent.sort(function(a, b){
+			
+			if(a.mb_mi_num != b.mb_mi_num)
+				return a.mb_mi_num - b.mb_mi_num;
+			
+			if(a.hitOrder!=b.hitOrder)
+				return a.hitOrder - b.hitOrder;
+		})
+		if(totalBBEvent.length==0){
+			alert('등록된 이벤트가 없습니다.')			
+			return;
+		}
+		totalBBEvent[0].mb_inning_order = 0;
+		for(let i = 1; i<totalBBEvent.length; i++){
+			if(totalBBEvent[i-1].mb_mi_num == totalBBEvent[i].mb_mi_num){
+				totalBBEvent[i].mb_inning_order = totalBBEvent[i-1].mb_inning_order +1; 
+			}else{
+				totalBBEvent[i].mb_inning_order = 0;
+			}
+		}
+	
+		let totalBBEStringifyObj = {
+				"totalBBE" : JSON.stringify(totalBBEvent),
+				"mr_num" : mr_num
+		}
+		/* ajax로 BBE보내는 메소드 */
+		ajaxParam("POST", totalBBEStringifyObj, '<c:url value="/record/matchBBEPost"></c:url>', function(data){
+			console.log(data);
+			
+		})
+		
 	}
+	/* match-partcipate를 입력하는 메소드 추가, 처음에 생각치 못한 메소드라 구현순서 밀려서 꼬인 부분 있음. */
+	function sendMatchPartcipate(){
+		let totalTeamPartSelection = $('.box-recode-player .player-record-box').not('.ex').filter(function(){
+			if($(this).find('.isSelection option:selected').val() ==1)
+				return this;
+		})
+		let totalTeamPart = [];
+		/* 인원수 체크는 다른 곳에서 해주기(그 빈 값 체크하는 곳에서 하는게 좋을듯) */
+		for(let tmp of totalTeamPartSelection){
+			let tmpObj = {
+					mp_tp_num:$(tmp).find('.select-player option:selected').val(),
+					mp_order:$(tmp).find('.hitOrder option:selected').val(),
+					mp_type:'선발',
+					mp_po_num: $(tmp).find('.position option:selected').val(),
+					mp_inning: 0, 
+					mp_mr_num: mr_num
+			}
+			totalTeamPart.push(tmpObj);
+		}
+		let totalTeamPartExchangeIn = $('.box-recode-player .player-record-box').not('.ex').filter(function(){
+			if($(this).find('.isSelection option:selected').val() ==2)
+				return this;
+		})
+		for(let tmp of totalTeamPartExchangeIn){
+			/* 일단 교체 out도 기록한다는 기존의  */
+			let excInning = $(tmp).find('button.btn-exchange').filter(function(){
+				if($(this).text()==91)
+					return this;
+			}).parent().data('inning'); 
+			let excType ="교체In";
+			if(excInning == undefined){
+				continue;
+			}
+			/* 이닝 *3 하는 기믹 일단 포기 */
+			let tmpObj = {
+					mp_tp_num:$(tmp).find('.select-player option:selected').val(),
+					mp_order:$(tmp).find('.hitOrder option:selected').val(),
+					mp_type: excType,
+					mp_po_num: $(tmp).find('.position option:selected').val(),
+					mp_inning: excInning, 
+					mp_mr_num: mr_num
+			}
+			totalTeamPart.push(tmpObj);
+			
+		}
+		let totalTeamPartExchangeOut = $('.box-recode-player .player-record-box').not('.ex');
+		for(let tmp of totalTeamPartExchangeOut){
+			/* 일단 교체 out도 기록한다는 기존의  */
+			
+			let excInning = $(tmp).find('button.btn-exchange').filter(function(){
+				if($(this).text()==92)
+					return this;
+			}).parent().data('inning'); 
+			let excType ="교체Out";
+			if(excInning == undefined){
+				continue;
+			}
+			/* 이닝 *3 하는 기믹 일단 포기 */
+			let tmpObj = {
+					mp_tp_num:$(tmp).find('.select-player option:selected').val(),
+					mp_order:$(tmp).find('.hitOrder option:selected').val(),
+					mp_type: excType,
+					mp_po_num: $(tmp).find('.position option:selected').val(),
+					mp_inning: excInning, 
+					mp_mr_num: mr_num
+			}
+			totalTeamPart.push(tmpObj);
+		}
+		let teamPartStringifyObj = {
+				"teamPart" : JSON.stringify(totalTeamPart),
+				"mr_num" : mr_num
+		}
+		ajaxParamAsync("POST", teamPartStringifyObj, '<c:url value="/record/matchParticipate"></c:url>', function(data){
+			console.log(data);
+			
+		})
+		
+	}
+	
+	/* 이닝 데이터에서 start팀 값과 inning값 받아서 이닝 num리턴하는 함수 */
+	function inningNumSelector(data, isFirstLast, inning){
+		let matchInningList = data.matchInningList;
+		let inningObj = matchInningList.filter(e=> {
+			return e.mi_isfirstlast == isFirstLast && e.mi_inning == inning;
+		})
+		return inningObj[0].mi_num;
+	}
+	/* 현재 이닝 피쳐 선택해주는 메소드 */
+	function selectPitcher(pitcherLine, inning){
+		let inningArr = pitcherLine["inning"+inning];
+		let inningPitchers = inningArr.filter(e=>{
+			return e.type == '연투'||e.type == '교체In';
+		})
+		return inningPitchers[0].playerNum;
+	}
+	
+	
 	/* 선수 열 값 중 선택하지 않은 값이 있는가 체크 */
 	function infoChecker(){
 		let allPlayerRow = $('.player-record-box').not('.ex');
@@ -1383,7 +1577,19 @@
 
 })
 /* 레거시 코드 끝 */	
-
+function ajaxParamAsync(method, obj, url, successFunc, errorFunc){
+    	$.ajax({
+    		async:true,
+    		type: method,
+    		data: obj,
+    		url: url, 
+    		dataType: "json",
+    		
+    		success: successFunc,
+    		error: errorFunc
+    		
+    	});
+    }  
 function ajaxParam(method, obj, url, successFunc, errorFunc){
     	$.ajax({
     		async:false,
