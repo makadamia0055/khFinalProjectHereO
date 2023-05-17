@@ -7,8 +7,7 @@
 <script  type="text/javascript" src="<c:url value='/resources/js/common/jquery.js'></c:url>"></script>
 <script  type="text/javascript" src="<c:url value='/resources/js/common/bootstrap.min.js'></c:url>"></script>
 <script  type="text/javascript" src="<c:url value='/resources/js/common/popper.min.js'></c:url>"></script>
-<%-- <script  type="text/javascript" src="<c:url value='/resources/js/record/record-insert.js'></c:url>"></script>
- --%><div class="main-container">
+<div class="main-container">
 		<div class="box-top">
 			<div class="top-title">
 				<span>2022년 02월 27일(월요일) 11:00 / KH야구장 / 1경기</span>
@@ -85,18 +84,18 @@
 			<div class="top-box-exceptiongame">
 				<div class="exception-box">
 					<div class="left-box">
-						<form action="">
-							<!-- <input type="radio" name="exception-game" class="btn-exceptiongame">콜드승
+						<!-- <form action="">
+							<input type="radio" name="exception-game" class="btn-exceptiongame">콜드승
 							<input type="radio" name="exception-game" class="btn-exceptiongame">몰수승(승리팀선택)
 							<input type="radio" name="exception-game" class="btn-exceptiongame">양팀몰수패
 							<input type="radio" name="exception-game" class="btn-exceptiongame">추첨승(승리팀선택)
-							<input type="radio" name="exception-game" class="btn-exceptiongame">기권승(승리팀선택) -->
-							<button class="btn-save">저장</button>
-						</form>
+							<input type="radio" name="exception-game" class="btn-exceptiongame">기권승(승리팀선택)
+						</form> -->
 					</div>
 				</div>
 			</div>
 		</div>
+
 		<div class="box-middle">
 			<div class="middle-top">
 				<div class="home-team" aria-selected="true"><span>홈 : ${ms.homeTeam.tm_name}</span></div>
@@ -578,6 +577,8 @@
 				</table>
 				<hr>
 			</div>
+			<button class="btn btn-success btn-save">저장</button>
+			
 			<div class="btn-box">
 				<button class="btn btn-primary btn-playerAdd homePlayer">선수 추가</button>
 			</div>
@@ -599,13 +600,13 @@
 							<th style="width: 65px;">7</th>
 							<th style="width: 65px;">8</th>
 							<th style="width: 65px;">9</th>
-							<th style="width: 25px;">타석</th>
-							<th style="width: 25px;">타수</th>
+							<th style="width: 25px;">투구수</th>
+							<!-- <th style="width: 25px;">타수</th>
 							<th style="width: 25px;">안타</th>
 							<th style="width: 25px;">타점</th>
 							<th style="width: 25px;">득점</th>
 							<th style="width: 25px;">도루</th>
-							<th style="width: 20px;"></th>
+							 --><th style="width: 20px;"></th>
 						</tr>
 					</thead>
 					
@@ -680,7 +681,7 @@
 							<td>
 								<input type="text" class="player-input" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
 							</td>
-							<td>
+							<!-- <td>
 								<input type="text" class="player-input" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
 
 							</td>
@@ -699,7 +700,7 @@
 							<td>
 								<input type="text" class="player-input" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
 								
-							</td>
+							</td> -->
 							<td>
 								<button class="player-recode-btn btn-delete">X</button>
 							</td>
@@ -774,7 +775,7 @@
 							<td>
 								<input type="text" class="player-input" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
 							</td>
-							<td>
+							<!-- <td>
 								<input type="text" class="player-input" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
 
 							</td>
@@ -793,7 +794,7 @@
 							<td>
 								<input type="text" class="player-input" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
 								
-							</td>
+							</td> -->
 							<td>
 								<button class="player-recode-btn btn-delete">X</button>
 							</td>
@@ -901,7 +902,7 @@
 							<td>
 								<input type="text" class="player-input" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
 							</td>
-							<td>
+							<!-- <td>
 								<input type="text" class="player-input" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
 
 							</td>
@@ -920,7 +921,7 @@
 							<td>
 								<input type="text" class="player-input" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
 								
-							</td>
+							</td> -->
 							<td>
 								<button class="player-recode-btn btn-delete">X</button>
 							</td>
@@ -1188,6 +1189,7 @@
 		ajaxParam("POST", totalTeamArrStringifyObj, '<c:url value="/record/matchInningPost"></c:url>', function(data){
 			/* 여기서 match-participate */
 			sendMatchPartcipate();
+			clearCurrentMrNumPlayerRecord();
 			ajaxPostBatterBoxEvent(data);
 		})
 		
@@ -1302,6 +1304,18 @@
 		})
 		
 	}
+	/* 현재 mr_num의 개인 기록이 있다면 clear 시키는 메소드 */
+	function clearCurrentMrNumPlayerRecord(){
+		let clearObj ={
+				mr_num : mr_num
+		}
+		ajaxParamAsync("POST", clearObj, '<c:url value="/record/clearCurrentPlayerRecord"></c:url>', function(data){
+			console.log(data);
+		})
+		
+	}
+	
+	
 	/* match-partcipate를 입력하는 메소드 추가, 처음에 생각치 못한 메소드라 구현순서 밀려서 꼬인 부분 있음. */
 	function sendMatchPartcipate(){
 		let totalTeamPartSelection = $('.box-recode-player .player-record-box').not('.ex').filter(function(){

@@ -157,6 +157,13 @@ public class RecordServiceImp implements RecordService {
 		}
 	}
 
+	@Override
+	public void clearCurrentPlayerRecordByMrNum(int mr_num) {
+		recordDao.clearCurrentHitterRecordByMrNum(mr_num);
+		recordDao.clearCurrentPitcherRecordByMrNum(mr_num);
+		
+	}
+
 	
 	
 

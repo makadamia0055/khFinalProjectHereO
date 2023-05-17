@@ -109,15 +109,15 @@
 		insert into `match-inning`(mi_inning, mi_isfirstlast, mi_point, mi_mr_num) 
 		value(#{mi.mi_inning}, #{mi.mi_isfirstlast}, #{mi.mi_point}, #{mi.mi_mr_num})
 	</insert>
-	<insert id="insertMatchBBE">
 	
-		insert into `match-batterboxevent`(mb_inning_order, mb_be_num, mb_mi_num, mb_mp_hitter_num, mb_mp_pitcher_num)
-		values(#{mb.mb_inning_order}, 
-		(select be_num from `batterboxevent-type` where be_type like #{mb.be_type}), 
-		#{mb.mb_mi_num}, 
-		(select mp_num from `match-participate` where mp_mr_num = #{mr_num} and mp_tp_num = #{mb.mb_mp_hitter_num} order by mp_inning limit 1), 
-		(select mp_num from `match-participate` where mp_mr_num = #{mr_num} and mp_tp_num = #{mb.mb_mp_pitcher_num} order by mp_inning limit 1))
-	</insert> 
+	<select id="insertMatchBBE" statementType="CALLABLE">
+		<![CDATA[
+		{call BBEinsertProcedure(
+			#{mb.mb_inning_order}, #{mb.be_type}, #{mr_num}, #{mb.mb_mi_num}, #{mb.mb_mp_hitter_num}, #{mb.mb_mp_pitcher_num}
+		)}
+		]]>
+		
+	</select>
 	<insert id="insertMatchParticipate">
 		insert into `match-participate`(mp_tp_num, mp_order, mp_type, mp_po_num, mp_inning, mp_mr_num)
 		value(#{mp.mp_tp_num}, #{mp.mp_order}, #{mp.mp_type}, #{mp.mp_po_num}, #{mp.mp_inning}, #{mp.mp_mr_num})
@@ -126,6 +126,16 @@
 		delete from `match-participate` 
 			where mp_mr_num = #{mr_num}
 	</delete>
+	<delete id="clearCurrentHitterRecordByMrNum">
+		delete from `playerrecord-hitter`
+			where ph_mr_num = #{mr_num};
+	
+	</delete>
+	<delete id="clearCurrentPitcherRecordByMrNum">
+		delete from `playerrecord-pitcher`
+			where pp_mr_num = #{mr_num}
+	</delete>
+		
 	
 	
 </mapper>

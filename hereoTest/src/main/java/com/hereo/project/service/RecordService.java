@@ -44,6 +44,8 @@ public interface RecordService {
 
 	boolean insertOrUpdateMatchParticipate(String matchParticipate, Integer mr_num);
 
+	void clearCurrentPlayerRecordByMrNum(int mr_num);
+
 	
 
 }

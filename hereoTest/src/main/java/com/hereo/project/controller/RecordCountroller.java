@@ -76,7 +76,14 @@ public class RecordCountroller {
 		map.put("matchInningList", inningList);
 		return map;
 	}
-	
+	@ResponseBody
+	@RequestMapping(value="/record/clearCurrentPlayerRecord", method=RequestMethod.POST)
+	public Map<String, Object>clearCurrentPlayerRecord(@RequestParam(value="mr_num") int mr_num) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		recordService.clearCurrentPlayerRecordByMrNum(mr_num);
+		
+		return map;
+	}
 	@ResponseBody
 	@RequestMapping(value="/record/matchBBEPost", method=RequestMethod.POST)
 	public Map<String, Object>getMatchBBEPost(@RequestParam(value="totalBBE") String matchBBEStr, @RequestParam(value="mr_num") Integer mr_num) {

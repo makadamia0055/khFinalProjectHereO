@@ -50,7 +50,9 @@ public interface RecordDAO {
 
 	void deleteMatchParticipate(Integer mr_num);
 
+	void clearCurrentHitterRecordByMrNum(int mr_num);
 	
+	void clearCurrentPitcherRecordByMrNum(int mr_num);
 
 
 }

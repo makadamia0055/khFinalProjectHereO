@@ -190,7 +190,9 @@ td.inning.disable{
 	padding:0;
 	width: 30px;
 }
-
+.btn-save{
+	float:right;
+}
 
 /* 기록 내용 */
 
