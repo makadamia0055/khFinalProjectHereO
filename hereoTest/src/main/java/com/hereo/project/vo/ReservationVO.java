@@ -19,6 +19,7 @@ public class ReservationVO {
 	private String rv_game_type;
 	private int rv_home_num;
 	private int rv_away_num;
+	private StadiumScheduleVO ss;
 
 	public String getSd_register_date_str() {
 		SimpleDateFormat format = 

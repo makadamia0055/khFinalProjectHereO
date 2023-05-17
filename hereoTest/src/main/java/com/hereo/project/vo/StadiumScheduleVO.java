@@ -17,6 +17,7 @@ public class StadiumScheduleVO {
 	private int ss_st_num;
 	private int ss_rv_num;
 	private String ss_state;
+	private StadiumTimetableVO st;
 	
 	public String getSs_game_date() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

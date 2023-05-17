@@ -85,4 +85,13 @@ public class ReservationServiceImp implements ReservationService{
 		String state="결제완료";
 		stadiumDao.updateState(receipt_id, state, rv_num);
 	}
+
+	@Override
+	public ArrayList<StadiumScheduleVO> getReservationList(String me_id) {
+		
+		String state = "결제완료";
+		ArrayList<StadiumScheduleVO> list = stadiumDao.getReservationList(me_id,state);
+		
+		return list;
+	}
 }

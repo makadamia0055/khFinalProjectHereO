@@ -127,8 +127,8 @@ public class ReservationController {
 	}
 	//임시로 만들어 놓은 예약확인 
 	@GetMapping(value={"/reservation/check"})
-	public String reservationCheck(HttpSession session) {
-		MembersVO user=(MembersVO)session.getAttribute("loginUser");
+	public String reservationCheck(Model model, HttpSession session) {
+		ArrayList<StadiumScheduleVO> reserveList=reservationService.getReservationList(((MembersVO)session.getAttribute("loginUser")).getMe_id());
 		
 		return "/reservation/reservation-check";
 	}
@@ -149,17 +149,17 @@ public class ReservationController {
 		   if(res.get("error_code") == null) { //success
 		        System.out.println("confirm success: " + res);
 		        reservationService.updateSchedule(receipt_id);
+		        reservationService.updateState(receipt_id,rv_num);
 		   } 
 		   Integer order_id = (Integer)res.get("order_id");
 		   if(order_id == null) {
 			   return "fail : Null order_id ";
 		   }
-		   //결제상태 변경해줌
-		   reservationService.updateState(receipt_id,rv_num);
+		  
 		} catch (Exception e) {
 		   e.printStackTrace();
 		}
-		return null;
+		return "/reservation/main";
 	}
 	//결제 중 취소 버튼을 누를경우에 db에 있는 reservation과 scheudule을 삭제하는 메서드
 	@PostMapping(value= {"/reservation/cancelBootPay"})

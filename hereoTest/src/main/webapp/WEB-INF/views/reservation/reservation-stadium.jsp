@@ -396,7 +396,8 @@
 								  receipt_id : data.receipt_id
 							  },
 							  success: function(response) {
-							    console.log(response);
+								  alert("결제가 완료되었습니다.")
+								  window.location.href='<%= request.getContextPath() %>'+ response;
 							  },
 							  error: function(xhr, status, error) {
 

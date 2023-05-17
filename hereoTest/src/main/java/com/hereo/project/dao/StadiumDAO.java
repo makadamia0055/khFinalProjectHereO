@@ -56,6 +56,8 @@ public interface StadiumDAO {
 
 	void updateState(@Param("receipt_id") String receipt_id, @Param("state") String state, @Param("rv_num") int rv_num);
 
+	ArrayList<StadiumScheduleVO> getReservationList(@Param("me_id") String me_id, @Param("state") String state);
+
 
 
 

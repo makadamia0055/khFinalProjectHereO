@@ -29,6 +29,8 @@ public interface ReservationService {
 
 	void updateState(String receipt_id, int rv_num);
 
+	ArrayList<StadiumScheduleVO> getReservationList(String me_id);
+
 
 
 
