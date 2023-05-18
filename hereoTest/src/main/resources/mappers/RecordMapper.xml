@@ -30,7 +30,7 @@
 	<resultMap type="com.hereo.project.vo.MatchInningVO" id="MatchInning">
 		<result column="mi_num" property="mi_num"/>
 		<result column="mi_inning" property="mi_inning"/>
-		<result column="mi_isFirstLast" property="mi_isFirstLast"/>
+		<result column="mi_isfirstlast" property="mi_isfirstlast"/>
 		<result column="mi_point" property="mi_point"/>
 		<result column="mi_mr_num" property="mi_mr_num"/>
 		<collection column="mi_num"
@@ -84,6 +84,81 @@
 	<select id="selectMatchRecordByMsNum" resultMap="MatchRecord">
 		select * from `match-record`
 			where mr_ms_num = #{ms_num}
+	</select>
+	<insert id="insertMatchRecord" useGeneratedKeys="true" keyProperty="mr.mr_num">
+		insert into `match-record`(mr_ms_num, mr_point_home, mr_point_away, mr_startteam)
+		value(${mr.mr_ms_num}, ${mr.mr_point_home}, ${mr.mr_point_away}, ${mr.mr_startteam})
+	</insert>
+	<update id="updateMatchRecord">
+		update `match-record`
+			set mr_ms_num = ${mr.mr_ms_num},
+				mr_point_home =  ${mr.mr_point_home},
+				mr_point_away = ${mr.mr_point_away},
+				mr_startteam =  ${mr.mr_startteam}
+			where mr_num = ${mr.mr_num}
+	</update>
+	<select id="selectMatchInningByMrNum" resultMap="MatchInning">
+		select * from `match-inning`
+			where mi_mr_num = #{mr_num}
+	</select>
+	<delete id="deleteMatchInning">
+		delete from `match-inning`
+			where mi_mr_num = #{mr_num}
+	</delete>
+	<insert id="insertMatchInning"  useGeneratedKeys="true" keyProperty="mi.mi_num">
+		insert into `match-inning`(mi_inning, mi_isfirstlast, mi_point, mi_mr_num) 
+		value(#{mi.mi_inning}, #{mi.mi_isfirstlast}, #{mi.mi_point}, #{mi.mi_mr_num})
+	</insert>
+	
+	<select id="insertMatchBBE" statementType="CALLABLE">
+		<![CDATA[
+		{call BBEinsertProcedure(
+			#{mb.mb_inning_order}, #{mb.be_type}, #{mr_num}, #{mb.mb_mi_num}, #{mb.mb_mp_hitter_num}, #{mb.mb_mp_pitcher_num}
+		)}
+		]]>
+		
+	</select>
+	<insert id="insertMatchParticipate">
+		insert into `match-participate`(mp_tp_num, mp_order, mp_type, mp_po_num, mp_inning, mp_mr_num)
+		value(#{mp.mp_tp_num}, #{mp.mp_order}, #{mp.mp_type}, #{mp.mp_po_num}, #{mp.mp_inning}, #{mp.mp_mr_num})
+	</insert>
+	<delete id="deleteMatchParticipate">
+		delete from `match-participate` 
+			where mp_mr_num = #{mr_num}
+	</delete>
+	<delete id="clearCurrentHitterRecordByMrNum">
+		delete from `playerrecord-hitter`
+			where ph_mr_num = #{mr_num};
+	
+	</delete>
+	<delete id="clearCurrentPitcherRecordByMrNum">
+		delete from `playerrecord-pitcher`
+			where pp_mr_num = #{mr_num}
+	</delete>
+	<select id="updateYearRecordPitcher" statementType="CALLABLE">
+		<![CDATA[
+		{call BBEinsertProcedure(
+			#{mr_num}, #{pp.pp_tp_num}
+		)}
+		]]>
+		
+	</select>
+	<select id="PlayerRecordHitterVO" statementType="CALLABLE">
+		<![CDATA[
+		{call BBEinsertProcedure(
+			#{mr_num}, #{ph.ph_tp_num}
+		)}
+		]]>
+		
+	</select>
+	<select id="selectPlayerRecordHitterByMr_num" resultType="com.hereo.project.vo.PlayerRecordHitterVO">
+		select * from `playerrecord-hitter`
+			where ph_mr_num = #{mr_num}
+	</select>
+	
+	<select id="selectPlayerRecordPitcherByMr_num" resultType="com.hereo.project.vo.PlayerRecordPitcherVO">
+		select * from `playerrecord-pitcher`
+				where pp_mr_num = #{mr_num}
 	</select>
 	
 	

@@ -86,6 +86,117 @@ public class RecordServiceImp implements RecordService {
 	}
 
 	
+	@Override
+
+	public boolean insertOrUpdateMatchRecord(MatchRecordVO matchRecord) {
+		if(matchRecord==null||matchRecord.getMr_ms_num()<1)
+			return false;
+		MatchRecordVO ori = selectMatchRecordByMsNum(matchRecord.getMr_ms_num());
+		if(ori== null) {
+			return recordDao.insertMatchRecord(matchRecord) !=0;
+		}else {
+			matchRecord.setMr_num(ori.getMr_num());
+			return recordDao.updateMatchRecord(matchRecord) !=0;
+		}
+	}
+
+	@Override
+	public ArrayList<MatchInningVO> insertOrUpdateMatchInning(String matchInningList) {
+		if(matchInningList==null)
+			return null;
+//		json 변환 과정
+		ObjectMapper objectMapper = new ObjectMapper();
+		ArrayList<MatchInningVO> mIList;
+		try {
+			mIList = new ArrayList<MatchInningVO>(Arrays.asList(objectMapper.readValue(matchInningList, MatchInningVO[].class)));
+			// 이후 메소드 처리
+			int mr_num;
+			if(mIList.get(0)==null) {
+				return null;
+			}
+			mr_num = mIList.get(0).getMi_mr_num();
+			ArrayList<MatchInningVO> exstList = recordDao.selectMatchInningByMrNum(mr_num);
+			if(exstList!=null&&exstList.size()!=0) {
+				recordDao.deleteMatchInning(mr_num);
+				
+			}
+			for(MatchInningVO tmpInning : mIList) {
+				recordDao.insertMatchInning(tmpInning);
+			}
+			return mIList;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+
+	@Override
+	public boolean insertOrUpdateMatchBBE(String matchBBEStr, Integer mr_num) {
+		if(matchBBEStr==null||mr_num==null)
+			return false;
+//		json 변환 과정
+		ObjectMapper objectMapper = new ObjectMapper();
+		ArrayList<MatchBatterBoxEventVO> bBEList;
+		try {
+			bBEList = new ArrayList<MatchBatterBoxEventVO>(Arrays.asList(objectMapper.readValue(matchBBEStr, MatchBatterBoxEventVO[].class)));
+			// 이후 메소드 처리
+			for(MatchBatterBoxEventVO tmpBBE : bBEList) {
+				System.out.println(tmpBBE);
+				recordDao.insertMatchBBE(tmpBBE, mr_num);
+			}
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+
+	@Override
+	public boolean insertOrUpdateMatchParticipate(String matchParticipate, Integer mr_num) {
+		if(matchParticipate==null)
+			return false;
+//		json 변환 과정
+		ObjectMapper objectMapper = new ObjectMapper();
+		ArrayList<MatchParticipateVO> partList;
+		try {
+			partList = new ArrayList<MatchParticipateVO>(Arrays.asList(objectMapper.readValue(matchParticipate, MatchParticipateVO[].class)));
+			// 이후 메소드 처리
+			recordDao.deleteMatchParticipate(mr_num);
+				
+			for(MatchParticipateVO tmpPart : partList) {
+				recordDao.insertMatchParticipate(tmpPart);
+			}
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public void clearCurrentPlayerRecordByMrNum(int mr_num) {
+		recordDao.clearCurrentHitterRecordByMrNum(mr_num);
+		recordDao.clearCurrentPitcherRecordByMrNum(mr_num);
+		
+	}
+
+	@Override
+	public boolean updateYearRecord(Integer mr_num) {
+		ArrayList<PlayerRecordPitcherVO> pitcherList= recordDao.selectPlayerRecordHitterByMr_num(mr_num);
+		ArrayList<PlayerRecordHitterVO> hitterList = recordDao.selectPlayerRecordPitcherByMr_num(mr_num);
+		
+		for(PlayerRecordPitcherVO tmp : pitcherList) {
+			recordDao.updateYearRecordPitcher(mr_num, tmp);
+		}
+		for(PlayerRecordHitterVO tmp : hitterList) {
+			recordDao.updateYearRecordHitter(mr_num, tmp);
+		}
+		
+		return false;
+  }
+	
 	
 
 }
