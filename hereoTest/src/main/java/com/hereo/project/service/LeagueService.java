@@ -27,9 +27,18 @@ public interface LeagueService {
 
 	ArrayList<LeagueParticipationteamVO> getSelectLeagueParti(int lg_num);
 
-	Boolean insertLeague(MembersVO user, LeagueVO league);
+	Boolean insertLeague(LeagueVO league);
 
 	boolean checkLeagueName(String lg_name);
+
+	int countLeaguePlayer(Criteria cri);
+
+	boolean insertLeagueType(LeagueAttributeVO la, int lg_num);
+
+	boolean updateLeagueType(LeagueAttributeVO la, int lg_num);
+
+	boolean deleteLeagueType(Integer la_num);
+
 
 
 

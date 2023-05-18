@@ -159,18 +159,18 @@
 		</div>
 	</div>
 	<ul class="pagination justify-content-center">
-	<li class="page-item <c:if test="${!pm.prev}"> disabled</c:if>">
-		<a href="<c:url value='/board/list?page=${pm.startPage-1}&search=${pm.cri.search}&type=${pm.cri.type}'></c:url>" class="page-link">이전</a>
-	</li>
-	<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
-		<li class="page-item <c:if test="${i == pm.cri.page }"> active</c:if>">
-			<a href="<c:url value='/board/list?page=${i}&search=${pm.cri.search}&type=${pm.cri.type}'></c:url>" class="page-link">${i}</a>
+		<li class="page-item <c:if test="${!pm.prev}"> disabled</c:if>">
+			<a href="<c:url value='/league/recordHit/${lg_num }?page=${pm.startPage-1}&search=${pm.cri.search}&type=${pm.cri.type}'></c:url>" class="page-link">이전</a>
 		</li>
-	</c:forEach>
-	<li class="page-item <c:if test="${!pm.next}"> disabled</c:if>">
-		<a href="<c:url value='/board/list?page=${pm.endPage+1}&search=${pm.cri.search}&type=${pm.cri.type}'></c:url>" class="page-link">다음</a>
-	</li>
-</ul>
+		<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
+			<li class="page-item <c:if test="${i == pm.cri.page }"> active</c:if>">
+				<a href="<c:url value='/league/recordHit/{lg_num}?page=${i}&search=${pm.cri.search}&type=${pm.cri.type}'></c:url>" class="page-link">${i}</a>
+			</li>
+		</c:forEach>
+		<li class="page-item <c:if test="${!pm.next}"> disabled</c:if>">
+			<a href="<c:url value='/league/recordHit/${lg_num }?page=${pm.endPage+1}&search=${pm.cri.search}&type=${pm.cri.type}'></c:url>" class="page-link">다음</a>
+		</li>
+	</ul>
 	
 <script>
 

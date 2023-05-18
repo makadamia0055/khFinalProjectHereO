@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hereo.project.dao.LeagueDAO;
 import com.hereo.project.dao.MembersDAO;
+import com.hereo.project.dao.RecordDAO;
 import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.LeagueAttributeVO;
 import com.hereo.project.vo.LeagueParticipationteamVO;
@@ -20,6 +21,8 @@ import com.hereo.project.vo.TeamVO;
 public class LeagueServiceImp implements LeagueService {
 	@Autowired
 	LeagueDAO leagueDao;
+	@Autowired
+	RecordDAO recordDao;
 	@Autowired
 	MembersDAO membersDao;
 
@@ -56,19 +59,19 @@ public class LeagueServiceImp implements LeagueService {
 		return leagueDao.selectLeagueParti(lg_num);
 	}
 	@Override
-	public Boolean insertLeague(MembersVO user, LeagueVO league) {
+	public Boolean insertLeague(LeagueVO league) {
 		//리그 등록 서비스
-		if(user == null) //로그인체크
-			return false;
+
 		if(!checkLeague(league)) // 필요한 리그정보 없을시 실패
 			return false;
+		
 		leagueDao.insertLeague(league);
 		
 		return true;
 	}
 	private boolean checkLeague(LeagueVO league) {
 		//리그정보체크
-		if(league == null || league.getLg_name() == null || league.getLg_re_num() == 0)
+		if(league == null || league.getLg_name() == null)
 			return false;
 		return true;
 	}
@@ -81,5 +84,41 @@ public class LeagueServiceImp implements LeagueService {
 			return true;
 		return false;
 	}
+	@Override
+	public int countLeaguePlayer(Criteria cri) {
+		cri = cri == null ? new Criteria() : cri;
+		return recordDao.countLeaguePlayer(cri);
+	}
+	
+	//리그타입 등록
+	@Override
+	public boolean insertLeagueType(LeagueAttributeVO la, int lg_num) {
+		if(lg_num == 0)
+			return false;
+		if(la.getLa_name() == null && la.getLa_match_type() == null)
+			return false;
+		la.setLa_lg_num(lg_num);
+		LeagueAttributeVO dbLa = leagueDao.selectLeagueAttByType(la.getLa_match_type());
+		if( dbLa != null && la.getLa_num() != dbLa.getLa_num()) 
+			return false;
+		return leagueDao.insertLeagueType(la) != 0;
+	}
+	//리그타입 수정
+	@Override
+	public boolean updateLeagueType(LeagueAttributeVO la, int lg_num) {
+		if(lg_num == 0)
+			return false;
+		if(la.getLa_num() < 1 && la.getLa_name() == null && la.getLa_match_type() == null)
+			return false;
+		return leagueDao.updateLeagueType(la) != 0;
+	}
+	@Override
+	public boolean deleteLeagueType(Integer la_num) {
+		if(la_num == null || la_num <= 1)
+			return false;
+		return leagueDao.deleteLeagueType(la_num);
+	}
+	
+
 
 }

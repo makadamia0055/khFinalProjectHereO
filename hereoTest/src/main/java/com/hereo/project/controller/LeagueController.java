@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import com.hereo.project.pagination.PageMaker;
 import com.hereo.project.service.LeagueService;
 import com.hereo.project.service.MembersService;
 import com.hereo.project.service.RecordService;
+import com.hereo.project.utils.MessageUtils;
 import com.hereo.project.vo.LeagueAttributeVO;
 import com.hereo.project.vo.LeagueParticipationteamVO;
 import com.hereo.project.vo.LeagueScheduleVO;
@@ -46,18 +48,20 @@ public class LeagueController {
 	RegionDAO regionDao;
 	
 	@RequestMapping(value = "/league/leagueSearch", method = RequestMethod.GET) 
-	public ModelAndView leagueSearch(ModelAndView mv , Criteria cri) {
+	public ModelAndView leagueSearch(ModelAndView mv , Criteria cri, HttpSession session) {
+		MembersVO user = (MembersVO)session.getAttribute("user");
 		int totalCount = leagueService.countLeague("활동중", cri);
 		if(cri==null) {
 			cri = new Criteria();
 		}
-		cri.setPerPageNum(8);
-		PageMaker pm = new PageMaker(totalCount, 8, cri);	
+		cri.setPerPageNum(6);
+		PageMaker pm = new PageMaker(totalCount, 6, cri);	
 		
 		ArrayList<LeagueVO> leagueList = leagueService.selectLeaguesByCriAndState( "활동중", pm.getCri());
 		
 		RegionVO[] regionArr = regionDao.selectAllRegion();
 		
+		mv.addObject("user",user);
 		mv.addObject("league", leagueList);
 		mv.addObject("region", regionArr);
 		mv.addObject("pm", pm);
@@ -82,11 +86,18 @@ public class LeagueController {
 	@RequestMapping(value = "/league/recordHit/{lg_num}", method = RequestMethod.GET)
 	public ModelAndView leagueRecordHit(ModelAndView mv, @PathVariable("lg_num")int lg_num
 			, Criteria cri) {	
+		int totalCount = leagueService.countLeaguePlayer(cri);
+		if(cri==null) {
+			cri = new Criteria();
+		}
+		cri.setPerPageNum(10);
+		PageMaker pm = new PageMaker(totalCount, 10, cri);
 		//리그 기록실 타자기록페이지
-		ArrayList<PlayerRecordHitterVO> hList = recordService.getSelectLeagueHitRecord(lg_num);
+		ArrayList<PlayerRecordHitterVO> hList = recordService.getSelectLeagueHitRecord(lg_num, cri);
 
 		mv.addObject("lg_num", lg_num);
 		mv.addObject("hList", hList);
+		mv.addObject("pm", pm);
 		mv.setViewName("/league/league-record-hit");
 		return mv;
 	}
@@ -117,42 +128,85 @@ public class LeagueController {
 		mv.setViewName("/league/league-schedule");
 		return mv;
 	}
-	@RequestMapping(value = "/league/enroll", method = RequestMethod.GET)
-	public ModelAndView leagueEnroll(ModelAndView mv) {
+	@RequestMapping(value = "/league/enroll/{lg_num}", method = RequestMethod.GET)
+	public ModelAndView leagueEnroll(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
+		ArrayList<LeagueAttributeVO> laList = leagueService.selectLeagueAttByLgNum(lg_num);
+		ArrayList<LeagueParticipationteamVO> lpList = leagueService.getSelectLeagueParti(lg_num);
+		
+		mv.addObject("lpList", lpList);
+		mv.addObject("laList", laList);
+		mv.addObject("lg_num", lg_num);
 		mv.setViewName("/league/league-enroll");
 		return mv;
 	}
-	@RequestMapping(value = "/league/partimanagerment", method = RequestMethod.GET)
-	public ModelAndView leaguePartiManagerment(ModelAndView mv) {
-		mv.setViewName("/league/league-parti-managerment");
+	@RequestMapping(value = "/league/insertType/{lg_num}", method = RequestMethod.GET)
+	public ModelAndView leagueInsertType(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
+		ArrayList<LeagueAttributeVO> laList = leagueService.selectLeagueAttByLgNum(lg_num);
+		
+		mv.addObject("laList", laList);
+		mv.addObject("lg_num", lg_num);
+		mv.setViewName("/league/league-insertType");
 		return mv;
 	}
-	@RequestMapping(value = "/league/schedulemanagerment", method = RequestMethod.GET)
-	public ModelAndView leagueScheduleManagerment(ModelAndView mv) {
+	@RequestMapping(value = "/league/insertType/insert/{lg_num}", method = RequestMethod.POST)
+	public ModelAndView leagueInsertTypePost(ModelAndView mv, @PathVariable("lg_num")int lg_num,
+			LeagueAttributeVO la) {
+		boolean isInsert = leagueService.insertLeagueType(la, lg_num);
+
+		mv.addObject("lg_num", lg_num);
+		mv.addObject("redirect:/league/insertType/{lg_num}");
+		return mv;
+	}
+	@RequestMapping(value = "/league/insertType/{lg_num}/update", method = RequestMethod.POST)
+	public ModelAndView leagueUpdateTypePost(ModelAndView mv, @PathVariable("lg_num")int lg_num,
+			LeagueAttributeVO la) {
+		boolean isUpdate = leagueService.updateLeagueType(la, lg_num);
+		
+		mv.addObject("lg_num", lg_num);
+		mv.setViewName("redirect:/league/insertType/{lg_num}");
+		return mv;
+	}
+	@RequestMapping(value = "/league/insertType/{lg_num}/delete", method = RequestMethod.GET)
+	public ModelAndView leagueDeleteType(ModelAndView mv,@PathVariable("lg_num")int lg_num,
+			Integer la_num) {
+		boolean isDelete = leagueService.deleteLeagueType( la_num);
+		
+
+		mv.setViewName("redirect:/league/insertType/{lg_num}");
+		return mv;
+	}
+	@RequestMapping(value = "/league/partimanagerment/{lg_num}", method = RequestMethod.GET)
+	public ModelAndView leaguePartiManagerment(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
+		mv.setViewName("/league/league-parti-managerment");
+		mv.addObject("lg_num", lg_num);
+		return mv;
+	}
+	@RequestMapping(value = "/league/schedulemanagerment/{lg_num}", method = RequestMethod.GET)
+	public ModelAndView leagueScheduleManagerment(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
 		mv.setViewName("/league/league-schedule-managerment");
+		mv.addObject("lg_num", lg_num);
 		return mv;
 	}
 	
 	@RequestMapping(value = "/league/leagueInsert", method = RequestMethod.GET)
 	public ModelAndView leagueInsert(ModelAndView mv, HttpSession session) {
-		MembersVO user = (MembersVO)session.getAttribute("user");
-		if(user == null)
-			mv.setViewName("/league/leagueSearch");
+
 		mv.setViewName("/league/league-insert");
 		return mv;
 	}
 	
 	@RequestMapping(value = "/league/leagueInsert", method = RequestMethod.POST)
-	public ModelAndView leagueInsertPOST(ModelAndView mv, LeagueVO league ,HttpSession session) {
-		MembersVO user = (MembersVO)session.getAttribute("user");
-		leagueService.insertLeague(user, league);
+	public ModelAndView leagueInsertPOST(ModelAndView mv, LeagueVO league) {
+		
+		leagueService.insertLeague(league);
+		
 		mv.setViewName("redirect:/league/leagueSearch");
 		return mv;
 	}
 	
 	
 	@ResponseBody
-	@RequestMapping(value = "/check/leName", method = RequestMethod.POST)
+	@RequestMapping(value = "/check/lgName", method = RequestMethod.POST)
 	public Map<String, Object> checkId(@RequestBody LeagueVO league) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		boolean res = leagueService.checkLeagueName(league.getLg_name());

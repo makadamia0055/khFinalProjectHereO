@@ -210,4 +210,11 @@
 		select * from `playerrecord-hitter`
 			where ph_mr_num = #{mr_num}
 	</select>
+  	<select id="countLeaguePlayer" resultType="int">
+  		select count(ph_num) from `playerrecord-hitter`
+  		where 
+  		<if test="cri.type != 0">
+  			ph_tp_num = #{cri.type}
+  		</if>
+  </select>
 </mapper>
