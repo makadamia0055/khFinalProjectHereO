@@ -3,18 +3,16 @@ package com.hereo.project.service;
 import java.util.ArrayList;
 
 
+import com.hereo.project.pagination.Criteria;
+
+
+
 import com.hereo.project.vo.BatterBoxEventVO;
-import com.hereo.project.vo.LeagueAttributeVO;
 import com.hereo.project.vo.MatchInningVO;
-import com.hereo.project.vo.MatchLineUpVO;
 import com.hereo.project.vo.MatchParticipateVO;
 import com.hereo.project.vo.MatchRecordVO;
-import com.hereo.project.vo.MatchScheduleVO;
-import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerRecordHitterVO;
-import com.hereo.project.vo.TeamPlayerVO;
-import com.hereo.project.vo.TeamVO;
-import com.hereo.project.pagination.Criteria;
+import com.hereo.project.vo.PlayerRecordPitcherVO;
 
 
 public interface RecordService {
@@ -29,7 +27,7 @@ public interface RecordService {
 
 	PlayerRecordHitterVO selectPlayerRecordHitterByTpNumAndMrNum(Integer tp_num, Integer mr_num);
 
-	PlayerRecordHitterVO selectPlayerRecordPitcherByTpNumAndMrNum(Integer tp_num, Integer mr_num);
+	PlayerRecordPitcherVO selectPlayerRecordPitcherByTpNumAndMrNum(Integer tp_num, Integer mr_num);
 
 	ArrayList<BatterBoxEventVO> getAllBatterBoxEventList();
 
@@ -49,6 +47,9 @@ public interface RecordService {
 	boolean updateYearRecord(Integer mr_num);
 
 	ArrayList<PlayerRecordHitterVO> getSelectLeagueHitRecord(int lg_num, Criteria cri);
+
+=======
+
 
 
 	
