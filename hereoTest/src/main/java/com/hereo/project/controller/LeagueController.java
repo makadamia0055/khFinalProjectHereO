@@ -128,6 +128,8 @@ public class LeagueController {
 		mv.setViewName("/league/league-schedule");
 		return mv;
 	}
+	
+	//리그 참가 신청(팀)
 	@RequestMapping(value = "/league/enroll/{lg_num}", method = RequestMethod.GET)
 	public ModelAndView leagueEnroll(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
 		ArrayList<LeagueAttributeVO> laList = leagueService.selectLeagueAttByLgNum(lg_num);
@@ -139,6 +141,8 @@ public class LeagueController {
 		mv.setViewName("/league/league-enroll");
 		return mv;
 	}
+	
+	//리그타입 (등록,수정,삭제) 
 	@RequestMapping(value = "/league/insertType/{lg_num}", method = RequestMethod.GET)
 	public ModelAndView leagueInsertType(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
 		ArrayList<LeagueAttributeVO> laList = leagueService.selectLeagueAttByLgNum(lg_num);
@@ -148,19 +152,19 @@ public class LeagueController {
 		mv.setViewName("/league/league-insertType");
 		return mv;
 	}
-	@RequestMapping(value = "/league/insertType/insert/{lg_num}", method = RequestMethod.POST)
+	@RequestMapping(value = "/league/insertType/{lg_num}/insert", method = RequestMethod.POST)
 	public ModelAndView leagueInsertTypePost(ModelAndView mv, @PathVariable("lg_num")int lg_num,
 			LeagueAttributeVO la) {
 		boolean isInsert = leagueService.insertLeagueType(la, lg_num);
 
 		mv.addObject("lg_num", lg_num);
-		mv.addObject("redirect:/league/insertType/{lg_num}");
+		mv.setViewName("redirect:/league/insertType/{lg_num}");
 		return mv;
 	}
 	@RequestMapping(value = "/league/insertType/{lg_num}/update", method = RequestMethod.POST)
 	public ModelAndView leagueUpdateTypePost(ModelAndView mv, @PathVariable("lg_num")int lg_num,
 			LeagueAttributeVO la) {
-		boolean isUpdate = leagueService.updateLeagueType(la, lg_num);
+		boolean isUpdate = leagueService.updateLeagueType(la);
 		
 		mv.addObject("lg_num", lg_num);
 		mv.setViewName("redirect:/league/insertType/{lg_num}");
@@ -175,12 +179,40 @@ public class LeagueController {
 		mv.setViewName("redirect:/league/insertType/{lg_num}");
 		return mv;
 	}
-	@RequestMapping(value = "/league/partimanagerment/{lg_num}", method = RequestMethod.GET)
-	public ModelAndView leaguePartiManagerment(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
-		mv.setViewName("/league/league-parti-managerment");
+	
+	//리그 참가 신청 승인(리그)
+	@RequestMapping(value = "/league/partimanagerment/list/{lg_num}")
+	public ModelAndView leaguePartiManagermentList(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
+		ArrayList<LeagueAttributeVO> laList = leagueService.selectLeagueAttByLgNum(lg_num);
+		
+		
+		mv.addObject("laList", laList);
+		mv.setViewName("/league/league-parti-managerment-list");
 		mv.addObject("lg_num", lg_num);
 		return mv;
 	}
+	
+	@RequestMapping(value = "/league/partimanagerment/{lg_num}/detail/{la_num}", method = RequestMethod.GET)
+	public ModelAndView leaguePartiManagerment(ModelAndView mv, @PathVariable("lg_num")int lg_num,
+			@PathVariable("la_num")int la_num) {
+		ArrayList<LeagueParticipationteamVO> lpList = leagueService.getSelectLeagueParti(la_num);
+		
+		mv.addObject("lpList",lpList);
+		mv.setViewName("/league/league-parti-managerment-detail");
+		mv.addObject("lg_num", lg_num);
+		return mv;
+	}
+	@RequestMapping(value = "/league/partimanagerment/{lg_num}/detail/{la_num}/save", method = RequestMethod.POST)
+	public ModelAndView leaguePartiManagermentSavePOST(ModelAndView mv, @PathVariable("lg_num")int lg_num,
+			@PathVariable("la_num")int la_num, LeagueParticipationteamVO lp) {
+		boolean isSave = leagueService.updateLeaguePartiTeamSave(lp);
+		
+		mv.setViewName("/league/league-parti-managerment-detail");
+		mv.addObject("lg_num", lg_num);
+		return mv;
+	}
+
+	
 	@RequestMapping(value = "/league/schedulemanagerment/{lg_num}", method = RequestMethod.GET)
 	public ModelAndView leagueScheduleManagerment(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
 		mv.setViewName("/league/league-schedule-managerment");

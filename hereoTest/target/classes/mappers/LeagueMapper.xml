@@ -134,4 +134,12 @@
 	<delete id="deleteLeagueType">
 		delete from `league_attribute` where la_num = #{la_num}
 	</delete>
+	
+	<!-- league participation -->
+	<update id="updateLeaguePartiTeamSave">
+		update `league-participationteam` set
+		lp_approval = #{lp.lp_approval}
+			where lp_num = #{lp.lp_num}
+	</update>
+
 </mapper>

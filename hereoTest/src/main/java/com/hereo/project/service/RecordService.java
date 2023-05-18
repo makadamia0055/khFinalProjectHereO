@@ -2,7 +2,11 @@ package com.hereo.project.service;
 
 import java.util.ArrayList;
 
+
 import com.hereo.project.pagination.Criteria;
+
+
+
 import com.hereo.project.vo.BatterBoxEventVO;
 import com.hereo.project.vo.MatchInningVO;
 import com.hereo.project.vo.MatchParticipateVO;
@@ -43,6 +47,10 @@ public interface RecordService {
 	boolean updateYearRecord(Integer mr_num);
 
 	ArrayList<PlayerRecordHitterVO> getSelectLeagueHitRecord(int lg_num, Criteria cri);
+
+=======
+
+
 
 	
 

@@ -35,9 +35,12 @@ public interface LeagueService {
 
 	boolean insertLeagueType(LeagueAttributeVO la, int lg_num);
 
-	boolean updateLeagueType(LeagueAttributeVO la, int lg_num);
+	boolean updateLeagueType(LeagueAttributeVO la);
 
 	boolean deleteLeagueType(Integer la_num);
+
+	boolean updateLeaguePartiTeamSave(LeagueParticipationteamVO lp);
+
 
 
 
