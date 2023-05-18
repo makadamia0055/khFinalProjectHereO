@@ -100,5 +100,13 @@ public class RecordCountroller {
 		map.put("res", res);
 		return map;
 	}
+	@ResponseBody
+	@RequestMapping(value="/record/updateYearRecord", method=RequestMethod.POST)
+	public Map<String, Object>updateYearRecord(@RequestParam(value="mr_num") Integer mr_num) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		boolean res = recordService.updateYearRecord(mr_num);
+		map.put("res", res);
+		return map;
+	}
 	
 }

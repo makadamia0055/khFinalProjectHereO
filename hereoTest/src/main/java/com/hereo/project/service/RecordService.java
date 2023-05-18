@@ -46,6 +46,8 @@ public interface RecordService {
 
 	void clearCurrentPlayerRecordByMrNum(int mr_num);
 
+	boolean updateYearRecord(Integer mr_num);
+
 	
 
 }

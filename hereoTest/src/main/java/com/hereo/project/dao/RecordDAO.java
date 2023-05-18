@@ -13,6 +13,7 @@ import com.hereo.project.vo.MatchScheduleVO;
 import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.PlayerRecordHitterVO;
+import com.hereo.project.vo.PlayerRecordPitcherVO;
 import com.hereo.project.vo.TeamPlayerVO;
 import com.hereo.project.vo.TeamVO;
 
@@ -53,6 +54,15 @@ public interface RecordDAO {
 	void clearCurrentHitterRecordByMrNum(int mr_num);
 	
 	void clearCurrentPitcherRecordByMrNum(int mr_num);
+
+	void updateYearRecordPitcher(@Param("mr_num")Integer mr_num, @Param("pp")PlayerRecordPitcherVO tmp);
+	
+	void updateYearRecordHitter(@Param("mr_num")Integer mr_num, @Param("ph")PlayerRecordHitterVO tmp);
+
+
+	ArrayList<PlayerRecordPitcherVO> selectPlayerRecordHitterByMr_num(Integer mr_num);
+
+	ArrayList<PlayerRecordHitterVO> selectPlayerRecordPitcherByMr_num(Integer mr_num);
 
 
 }

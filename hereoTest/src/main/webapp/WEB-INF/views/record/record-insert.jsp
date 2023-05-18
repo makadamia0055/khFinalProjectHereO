@@ -1300,10 +1300,23 @@
 		/* ajax로 BBE보내는 메소드 */
 		ajaxParam("POST", totalBBEStringifyObj, '<c:url value="/record/matchBBEPost"></c:url>', function(data){
 			console.log(data);
+			updateYearRecord()
 			
 		})
 		
 	}
+	function updateYearRecord(){
+		let yObj = {
+				mr_num : mr_num
+		}
+		ajaxParam("POST", yObj, '<c:url value="/record/updateYearRecord"></c:url>', function(data){
+			console.log(data);
+			
+		})
+	}
+	
+	
+	
 	/* 현재 mr_num의 개인 기록이 있다면 clear 시키는 메소드 */
 	function clearCurrentMrNumPlayerRecord(){
 		let clearObj ={

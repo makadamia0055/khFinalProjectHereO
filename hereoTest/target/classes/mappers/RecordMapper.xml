@@ -135,7 +135,31 @@
 		delete from `playerrecord-pitcher`
 			where pp_mr_num = #{mr_num}
 	</delete>
+	<select id="updateYearRecordPitcher" statementType="CALLABLE">
+		<![CDATA[
+		{call BBEinsertProcedure(
+			#{mr_num}, #{pp.pp_tp_num}
+		)}
+		]]>
 		
+	</select>
+	<select id="PlayerRecordHitterVO" statementType="CALLABLE">
+		<![CDATA[
+		{call BBEinsertProcedure(
+			#{mr_num}, #{ph.ph_tp_num}
+		)}
+		]]>
+		
+	</select>
+	<select id="selectPlayerRecordHitterByMr_num" resultType="com.hereo.project.vo.PlayerRecordHitterVO">
+		select * from `playerrecord-hitter`
+			where ph_mr_num = #{mr_num}
+	</select>
+	
+	<select id="selectPlayerRecordPitcherByMr_num" resultType="com.hereo.project.vo.PlayerRecordPitcherVO">
+		select * from `playerrecord-pitcher`
+				where pp_mr_num = #{mr_num}
+	</select>
 	
 	
 </mapper>

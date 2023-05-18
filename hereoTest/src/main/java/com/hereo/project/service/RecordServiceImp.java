@@ -15,6 +15,7 @@ import com.hereo.project.vo.MatchInningVO;
 import com.hereo.project.vo.MatchParticipateVO;
 import com.hereo.project.vo.MatchRecordVO;
 import com.hereo.project.vo.PlayerRecordHitterVO;
+import com.hereo.project.vo.PlayerRecordPitcherVO;
 
 
 @Service
@@ -162,6 +163,21 @@ public class RecordServiceImp implements RecordService {
 		recordDao.clearCurrentHitterRecordByMrNum(mr_num);
 		recordDao.clearCurrentPitcherRecordByMrNum(mr_num);
 		
+	}
+
+	@Override
+	public boolean updateYearRecord(Integer mr_num) {
+		ArrayList<PlayerRecordPitcherVO> pitcherList= recordDao.selectPlayerRecordHitterByMr_num(mr_num);
+		ArrayList<PlayerRecordHitterVO> hitterList = recordDao.selectPlayerRecordPitcherByMr_num(mr_num);
+		
+		for(PlayerRecordPitcherVO tmp : pitcherList) {
+			recordDao.updateYearRecordPitcher(mr_num, tmp);
+		}
+		for(PlayerRecordHitterVO tmp : hitterList) {
+			recordDao.updateYearRecordHitter(mr_num, tmp);
+		}
+		
+		return false;
 	}
 
 	
