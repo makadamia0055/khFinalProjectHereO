@@ -1,7 +1,10 @@
 package com.hereo.project.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,8 @@ import com.hereo.project.dao.RecordDAO;
 import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.BatterBoxEventVO;
 import com.hereo.project.vo.LeagueMatchListVO;
+import com.hereo.project.vo.MatchBatterBoxEventVO;
+import com.hereo.project.vo.MatchInningVO;
 import com.hereo.project.vo.MatchLineUpVO;
 import com.hereo.project.vo.MatchParticipateVO;
 import com.hereo.project.vo.MatchRecordVO;
@@ -17,6 +22,7 @@ import com.hereo.project.vo.MatchScheduleVO;
 import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.PlayerRecordHitterVO;
+import com.hereo.project.vo.PlayerRecordPitcherVO;
 import com.hereo.project.vo.TeamPlayerVO;
 import com.hereo.project.vo.TeamVO;
 
@@ -74,9 +80,9 @@ public class RecordServiceImp implements RecordService {
 	public MatchRecordVO selectMatchRecordByMsNum(int ms_num) {
 		return recordDao.selectMatchRecordByMsNum(ms_num);
 	}
-
+	
 	@Override
-	public ArrayList<PlayerRecordHitterVO> getSelectLeagueHitRecord(int lg_num,Criteria cri) {
+	public ArrayList<PlayerRecordHitterVO> getSelectLeagueHitRecord(int lg_num, Criteria cri) {
 		cri = cri == null ? new Criteria() : cri;
 		LeagueMatchListVO lm = leagueDao.selectLeagueMatchLgNum(1);
 		MatchRecordVO mr = recordDao.selectMatchNum(lm.getLm_mr_num());

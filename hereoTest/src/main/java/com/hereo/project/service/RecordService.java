@@ -2,7 +2,6 @@ package com.hereo.project.service;
 
 import java.util.ArrayList;
 
-import org.apache.tomcat.util.json.ParseException;
 
 import com.hereo.project.vo.BatterBoxEventVO;
 import com.hereo.project.vo.LeagueAttributeVO;
@@ -49,7 +48,7 @@ public interface RecordService {
 
 	boolean updateYearRecord(Integer mr_num);
 
-	ArrayList<PlayerRecordHitterVO> getSelectLeagueHitRecord(int lg_num);
+	ArrayList<PlayerRecordHitterVO> getSelectLeagueHitRecord(int lg_num, Criteria cri);
 
 
 	

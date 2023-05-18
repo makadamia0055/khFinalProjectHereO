@@ -51,6 +51,12 @@ public interface LeagueDAO {
 
 	boolean deleteLeagueType(@Param("la_num")Integer la_num);
 
+	boolean updateLeaguePartiTeamSave(@Param("lp")LeagueParticipationteamVO lp);
+
+
+
+
+
 
 
 

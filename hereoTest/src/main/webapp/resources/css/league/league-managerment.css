@@ -22,8 +22,11 @@ select {
 .filter-box .btn{
 	position: relative; bottom: 3px;
 }
-.btn-complete{
-	position: relative; bottom: 3px; left: 750px;
+.middle-box .btn-complete{
+	position: relative; left: 1045px;
+}
+.middle-box .btn-save{
+	position: relative; left: 1040px;
 }
 
 .hidden{
@@ -55,7 +58,7 @@ select {
 	text-align: center;
   color: #444;
   background-color: #fff;
-	width: 30px; height: 25px;
+	width: 40px; height: 25px;
 
   border: 1px solid #aaa;
 	border-radius: 5px;
@@ -93,4 +96,7 @@ select {
 }
 .middle-box.schedule .talbe tbody td .versus{
 	width: 12px; display: inline-block;
+}
+.bottom-box .btn{
+	margin-bottom: 5px;
 }
