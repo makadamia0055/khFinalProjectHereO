@@ -114,11 +114,18 @@ public class LeagueServiceImp implements LeagueService {
 	}
 	@Override
 	public boolean deleteLeagueType(Integer la_num) {
-		if(la_num == null || la_num <= 1)
+		if(la_num == null || la_num < 1)
 			return false;
 		return leagueDao.deleteLeagueType(la_num);
 	}
-	
+	@Override
+	public boolean updateLeaguePartiTeamSave(LeagueParticipationteamVO lp) {
+		if(lp == null && lp.getLp_num() < 1)
+			return false;
+		System.out.println(lp);
+		return leagueDao.updateLeaguePartiTeamSave(lp);
+	}
+
 
 
 }

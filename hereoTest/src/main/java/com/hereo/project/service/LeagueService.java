@@ -39,6 +39,9 @@ public interface LeagueService {
 
 	boolean deleteLeagueType(Integer la_num);
 
+	boolean updateLeaguePartiTeamSave(LeagueParticipationteamVO lp);
+
+
 
 
 

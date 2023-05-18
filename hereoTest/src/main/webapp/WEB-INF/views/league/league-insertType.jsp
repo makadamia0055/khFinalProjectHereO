@@ -14,10 +14,10 @@
 				<a class="nav-link schedule" href="<c:url value='/league/schedulemanagerment/${lg_num}'></c:url>">리그일정관리</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link register" href="<c:url value='/league/partimanagerment/${lg_num}'></c:url>">리그참가관리</a>
+				<a class="nav-link register" href="<c:url value='/league/partimanagerment/list/${lg_num}'></c:url>">리그참가관리</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link create active" href="<c:url value='/league/insertType/${lg_num}'></c:url>">리그생성</a>
+				<a class="nav-link create active" href="<c:url value='/league/insertType/${lg_num}'></c:url>">리그타입관리</a>
 			</li>
 		</ul>
 	</div>
