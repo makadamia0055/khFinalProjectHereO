@@ -86,7 +86,7 @@
 				</c:if>	
 				<c:forEach items="${pHList}" var="ph">
                 <tr>
-                  <td class="match_date">${ph.ms_datatime_str}</th>
+                  <td class="match_date">${ph.ms_datetime_str}</th>
                   <td class="match_oppo"><a class="badge badge-danger">돌핀즈</span></td>
                   <td class="match_AVG"></td>
                   <td class="match_PA">${ph.ph_bats}</td>
@@ -117,7 +117,7 @@
                   <th class="match_date">일자</th>
                   <th class="match_oppo">상대</th>
                   <th class="match_AVG">결과</th>
-                  <th class="match_PA">평균자책점</th>
+                  <!-- <th class="match_PA">평균자책점</th> -->
                   <th class="match_AB">타자수</th>
                   <th class="match_R">이닝</th>
                   <th class="match_H">피안타</th>
@@ -126,7 +126,7 @@
                   <th class="match_hbp">사구</th>
                   <th class="match_RBI">삼진</th>
                   <th class="match_SB">실점</th>
-                  <th class="match_CS">자책점</th>
+                  <!-- <th class="match_CS">자책점</th> -->
                   <th class="match_BB">투구수</th>
                   
                 </tr>
@@ -137,19 +137,19 @@
 				</c:if>	
                 <c:forEach items="${pPList}" var="pp">
                 <tr>
-                  <td class="match_date">${pp.ms_datetime}</th>
-                  <td class="match_oppo"><a class="badge badge-danger">돌핀즈</span></td>
-                  <td class="match_AVG">0.320</td>
-                  <td class="match_PA">${pp.pp_earnedruns/pp.pp_innings}</td>
+                  <td class="match_date">${pp.ms_datetime_str}</th>
+                  <td class="match_oppo"><a class="badge badge-danger"></span></td>
+                  <td class="match_AVG"></td>
+                  <!-- <td class="match_PA"></td> -->
                   <td class="match_AB">${pp.pp_hitters}</td>
                   <td class="match_R">${pp.pp_innings}</td>
                   <td class="match_H">${pp.pp_hits }</td>
-                  <td class="match_HR">${pp.pp_homeruns}</td>
-                  <td class="match_4b">${pp.pp_fourballs}</td>
-                  <td class="match_hbp">${pp.pp_hitbypitches}</td>
-                  <td class="match_RBI">${pp.pp_strikeouts}</td>
-                  <td class="match_SB">${pp.pp_losepoints}</td>
-                  <td class="match_CS">${pp.pp_earnedruns }</td>
+                  <td class="match_HR">${pp.pp_homeRuns}</td>
+                  <td class="match_4b">${pp.pp_fourBalls}</td>
+                  <td class="match_hbp">${pp.pp_hitByPitches}</td>
+                  <td class="match_RBI">${pp.pp_strikeOuts}</td>
+                  <td class="match_SB">${pp.pp_losePoints}</td>
+                  <!-- <td class="match_CS"></td> -->
                   <td class="match_BB">${pp.pp_pitches}</td>
                   
                 </tr>
@@ -179,8 +179,8 @@
               <table class="table table-bordered">
                 <thead class="thead thead-dark">
                   <tr>
-                    <th class="match_date">일자</th>
-                    <th class="match_oppo">상대</th>
+                    <th class="match_date">년도</th>
+                    
                     <th class="match_AVG">타율</th>
                     <th class="match_PA">타석</th>
                     <th class="match_AB">타수</th>
@@ -207,9 +207,9 @@
 				</c:if>	
 				<c:forEach items="${yHList}" var="yh">
                   <tr>
-                  <td class="match_date">년도</th>
+                  <td class="match_date">${yh.yh_year}</th>
                   
-                  <td class="match_AVG">${yh.yh_year}</td>
+                  
                   <td class="match_PA">${yh.yh_bats}</td>
                   <td class="match_AB">${yh.yh_hits}</td>
                   <td class="match_R"></td>
@@ -237,10 +237,10 @@
               <table class="table table-bordered">
                 <thead class="thead thead-dark">
                   <tr>
-                    <th class="match_date">일자</th>
+                    <th class="match_date">년도</th>
                     <th class="match_oppo">상대</th>
                     <th class="match_AVG">결과</th>
-                    <th class="match_PA">평균자책점</th>
+                    <!-- <th class="match_PA">평균자책점</th> -->
                     <th class="match_AB">타자수</th>
                     <th class="match_R">이닝</th>
                     <th class="match_H">피안타</th>
@@ -249,7 +249,7 @@
                     <th class="match_HR">사구</th>
                     <th class="match_RBI">삼진</th>
                     <th class="match_SB">실점</th>
-                    <th class="match_CS">자책점</th>
+                    <!-- <th class="match_CS">자책점</th> -->
                     <th class="match_BB">피안타율</th>
                     
                   </tr>
@@ -264,7 +264,7 @@
                 <tr>
                   <td class="match_date">${yp.yp_year}</th>
                   <td class="match_AVG">0.320</td>
-                  <td class="match_PA">${yp.yp_earnedruns/pp.pp_innings}</td>
+                  <%-- <td class="match_PA">${yp.yp_earnedruns/pp.pp_innings}</td> --%>
                   <td class="match_AB">${yp.yp_hitters}</td>
                   <td class="match_R">${yp.yp_innings}</td>
                   <td class="match_H">${yp.yp_hits }</td>
@@ -273,7 +273,7 @@
                   <td class="match_hbp">${yp.yp_hitbypitches}</td>
                   <td class="match_RBI">${yp.yp_strikeouts}</td>
                   <td class="match_SB">${yp.yp_losepoints}</td>
-                  <td class="match_CS">${yp.yp_earnedruns }</td>
+                  <%-- <td class="match_CS">${yp.yp_earnedruns }</td> --%>
                   <td class="match_BB">${yp.yp_pitches}</td>
                   
                 </tr>
@@ -298,7 +298,7 @@
 </html>
 
 <script>
-  const ctx = document.getElementById('PlayerStatChart');
+ /*  const ctx = document.getElementById('PlayerStatChart');
 
   new Chart(ctx, {
     type: 'radar',
@@ -333,7 +333,7 @@
         }
       }
     }
-  });
+  }); */
 
 </script>
 <script>

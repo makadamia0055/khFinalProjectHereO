@@ -1,24 +1,24 @@
 package com.hereo.project.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hereo.project.dao.LeagueDAO;
 import com.hereo.project.dao.RecordDAO;
 import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.BatterBoxEventVO;
 import com.hereo.project.vo.LeagueMatchListVO;
-import com.hereo.project.vo.MatchLineUpVO;
+import com.hereo.project.vo.MatchBatterBoxEventVO;
+import com.hereo.project.vo.MatchInningVO;
 import com.hereo.project.vo.MatchParticipateVO;
 import com.hereo.project.vo.MatchRecordVO;
-import com.hereo.project.vo.MatchScheduleVO;
-import com.hereo.project.vo.MembersVO;
-import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.PlayerRecordHitterVO;
-import com.hereo.project.vo.TeamPlayerVO;
-import com.hereo.project.vo.TeamVO;
+import com.hereo.project.vo.PlayerRecordPitcherVO;
 
 
 @Service
@@ -57,7 +57,7 @@ public class RecordServiceImp implements RecordService {
 	}
 
 	@Override
-	public PlayerRecordHitterVO selectPlayerRecordPitcherByTpNumAndMrNum(Integer tp_num, Integer mr_num) {
+	public PlayerRecordPitcherVO selectPlayerRecordPitcherByTpNumAndMrNum(Integer tp_num, Integer mr_num) {
 		if(tp_num==null||mr_num==null||tp_num<1||mr_num<1)
 			return null;
 		return recordDao.selectPlayerRecordPitcherByTpNumAndMrNum(tp_num, mr_num);
@@ -196,6 +196,9 @@ public class RecordServiceImp implements RecordService {
 		
 		return false;
   }
+
+	
+
 	
 	
 

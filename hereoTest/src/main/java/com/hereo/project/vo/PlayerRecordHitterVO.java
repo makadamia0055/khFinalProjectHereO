@@ -41,7 +41,11 @@ public class PlayerRecordHitterVO {
 	private Date ms_datetime;
 	
 	public String getMs_datetime_str(){
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		return format.format(ms_datetime);
+		if(this.ms_datetime!=null) {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			return format.format(ms_datetime);
+		}else {
+			return null;
+		}
 	}
 }
