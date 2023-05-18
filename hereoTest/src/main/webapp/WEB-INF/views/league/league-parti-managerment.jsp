@@ -13,13 +13,13 @@
 	<div class="top-box mt-2">
 		<ul class="nav nav-tabs">
 			<li class="nav-item">
-				<a class="nav-link schedule" href="<c:url value='/league/schedulemanagerment'></c:url>">리그일정관리</a>
+				<a class="nav-link schedule" href="<c:url value='/league/schedulemanagerment/${lg_num}'></c:url>">리그일정관리</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link register active" href="">리그참가관리</a>
+				<a class="nav-link register active" href="<c:url value='/league/partimanagerment/${lg_num}'></c:url>">리그참가관리</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link create" href="">리그생성</a>
+				<a class="nav-link create" href="<c:url value='/league/insertType/${lg_num}'></c:url>">리그생성</a>
 			</li>
 		</ul>
 	</div>

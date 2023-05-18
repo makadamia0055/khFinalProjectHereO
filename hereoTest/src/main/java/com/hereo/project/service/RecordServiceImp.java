@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hereo.project.dao.LeagueDAO;
 import com.hereo.project.dao.RecordDAO;
+import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.BatterBoxEventVO;
 import com.hereo.project.vo.LeagueMatchListVO;
 import com.hereo.project.vo.MatchLineUpVO;
@@ -75,11 +76,12 @@ public class RecordServiceImp implements RecordService {
 	}
 
 	@Override
-	public ArrayList<PlayerRecordHitterVO> getSelectLeagueHitRecord(int lg_num) {
+	public ArrayList<PlayerRecordHitterVO> getSelectLeagueHitRecord(int lg_num,Criteria cri) {
+		cri = cri == null ? new Criteria() : cri;
 		LeagueMatchListVO lm = leagueDao.selectLeagueMatchLgNum(1);
 		MatchRecordVO mr = recordDao.selectMatchNum(lm.getLm_mr_num());
 		
-		return recordDao.selectLeagueHitRecord(mr.getMr_num());
+		return recordDao.selectLeagueHitRecord(mr.getMr_num(),cri);
 
 	}
 

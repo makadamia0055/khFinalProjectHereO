@@ -33,7 +33,7 @@ public interface RecordService {
 
 	MatchRecordVO selectMatchRecordByMsNum(int ms_num);
 
-	ArrayList<PlayerRecordHitterVO> getSelectLeagueHitRecord(int lg_num);
+	ArrayList<PlayerRecordHitterVO> getSelectLeagueHitRecord(int lg_num, Criteria cri);
 
 	
 
