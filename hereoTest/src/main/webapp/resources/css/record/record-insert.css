@@ -19,13 +19,13 @@ padding: 10px;
 }
 .box-score .tbl{
 	width: 100%; border-top: 1px solid #929292; text-align: center;
-	vertical-align: middle; border-collapse: collapse; background-color: #929292;
+	vertical-align: middle; border-collapse: collapse; background-color: #f7f7f7;
 }
 .box-score .tbl thead th{
 	padding: 5px 0; font-weight: 550;
 }
 .box-score .tbl th{
-	background: 0 0; border-bottom: 1px solid #dcdcdc; width: 50px;
+	background: 0 0; border-bottom: 1px solid #dcdcdc; 
 	font-family: ngb; font-size: 18px; color: #121212;
 }
 .box-score .tbl td{
@@ -33,22 +33,18 @@ padding: 10px;
 	font-family: ngb; font-size: 15px; text-align: center;
 }
 
-.box-score [class^=score-]{
-	float: left;
+.box-score .inning-score.total{
+	border-left: 1px solid #dcdcdc;
+	text-align: center;
 }
+
 .box-score .data1{
-	width: 215px; border-right: 1px solid #dcdcdc;
-}
-.box-score .data2{
-	width: 460px; border-right: 1px solid #dcdcdc;
-}
-.box-score .data3{
-	width: 160px;
+	width: 80%; border-right: 1px solid #dcdcdc;
 }
 
 
 
-.top-box-exceptiongame{
+/* .top-box-exceptiongame{
 	width: 900px; margin-left: 110px;
 }
 .exception-box{
@@ -65,7 +61,7 @@ padding: 10px;
 }
 .exception-box .btn-save{
 	width: 100px; height: 37px; position: relative; left: 150px;
-}
+} */
 
 /* 미들 박스 */
 .box-middle{
@@ -118,28 +114,40 @@ padding: 10px;
 	border-bottom: 1px solid #cccccc;
 }
 
-.box-middle .btn{
+.box-middle .btn-panel{
 	width: 28px; height: 16px; text-align: center;
-	font-size: 12px; border: none; border-radius: 5px; color: #fff;
+	padding : 0; 
+	font-size: 8px; border: none; border-radius: 5px; color: #fff;
 }
-.box-middle .recode-guide .btn-out{
+.box-middle .recode-guide .btn-out,
+.player-record-box .btn-out{
 	background-color: hsla(0, 98%, 52%, 0.949);
 }
-.box-middle .recode-guide .btn-hit{
+.box-middle .recode-guide .btn-hit, 
+.player-record-box .btn-hit{
 	background: #04b430;
 }
-.box-middle .recode-guide .btn-run{
+.box-middle .recode-guide .btn-run,
+.player-record-box .btn-run{
 background: #aa1ed4;
 }
-.box-middle .recode-guide .btn-sacrifice{
+.box-middle .recode-guide .btn-sacrifice,
+.player-record-box .btn-sacrifice{
 	background: #dee60d;
 }
-.box-middle .recode-guide .btn-hrun{
+.box-middle .recode-guide .btn-hrun,
+.player-record-box .btn-hrun{
 	background: #08298A;
 }
-.box-middle .recode-guide .btn-eror{
+.box-middle .recode-guide .btn-eror,
+.player-record-box .btn-eror{
 	background: #81DAF5;
 }
+.box-middle .recode-guide .btn-exchange,
+.player-record-box .btn-exchange{
+	background: #000;
+}
+
 
 .box-middle .box-recode-player{
 	margin-top: 10px;
@@ -164,8 +172,27 @@ background: #aa1ed4;
 	width: 20px; height: 20px; position: relative;
 	top: 1px; text-align: center;
 }
+/* 박스 */
+td.inning.selected{
+	background-color: rgba(20, 255, 255, .7);
+}
 
+td.inning.disable{
+	
+	background-color: grey;
+}
 
+.box-recode-player .player-input{
+	padding:0; width:20px;
+}
+
+.tbl .inning-Score input{
+	padding:0;
+	width: 30px;
+}
+.btn-save{
+	float:right;
+}
 
 /* 기록 내용 */
 
