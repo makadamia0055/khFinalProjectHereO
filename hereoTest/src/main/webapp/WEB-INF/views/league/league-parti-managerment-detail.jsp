@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="<c:url value='/resources/css/common/bootstrap.min.css'></c:url>" rel="stylesheet">
 <link href="<c:url value='/resources/css/common/style.css'></c:url>" rel="stylesheet">
-<link href="<c:url value='/resources/css/league/league-managerment.css?version=2304062020'></c:url>" rel="stylesheet">
+<link href="<c:url value='/resources/css/league/league-managerment.css?version=2305182115'></c:url>" rel="stylesheet">
 <script  type="text/javascript" src="<c:url value='/resources/js/common/bootstrap.bundle.min.js'></c:url>"></script>
 <script  type="text/javascript" src="<c:url value='/resources/js/common/jquery.js'></c:url>"></script>
 <script  type="text/javascript" src="<c:url value='/resources/js/common/popper.min.js'></c:url>"></script>
@@ -16,7 +16,7 @@
 				<a class="nav-link schedule" href="<c:url value='/league/schedulemanagerment/${lg_num}'></c:url>">리그일정관리</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link register active" href="<c:url value='/league/partimanagerment/${lg_num}'></c:url>">리그참가관리</a>
+				<a class="nav-link register active" href="<c:url value='/league/partimanagerment/list/${lg_num}'></c:url>">리그참가관리</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link create" href="<c:url value='/league/insertType/${lg_num}'></c:url>">리그타입관리</a>

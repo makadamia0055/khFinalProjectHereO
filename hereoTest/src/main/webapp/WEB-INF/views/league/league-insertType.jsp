@@ -58,7 +58,7 @@
 		</tbody>
 		<tfoot>
 		<tr>
-			<form action="<c:url value='/league/insertType/insert/${lg_num }'></c:url>" method="post">
+			<form action="<c:url value='/league/insertType/${lg_num }/insert'></c:url>" method="post">
 				<th></th>
 				<th>
 					<div class="form-group">

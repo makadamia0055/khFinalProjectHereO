@@ -93,21 +93,16 @@ public class LeagueServiceImp implements LeagueService {
 	//리그타입 등록
 	@Override
 	public boolean insertLeagueType(LeagueAttributeVO la, int lg_num) {
-		if(lg_num == 0)
-			return false;
 		if(la.getLa_name() == null && la.getLa_match_type() == null)
 			return false;
 		la.setLa_lg_num(lg_num);
-		LeagueAttributeVO dbLa = leagueDao.selectLeagueAttByType(la.getLa_match_type());
-		if( dbLa != null && la.getLa_num() != dbLa.getLa_num()) 
-			return false;
+
 		return leagueDao.insertLeagueType(la) != 0;
 	}
 	//리그타입 수정
 	@Override
-	public boolean updateLeagueType(LeagueAttributeVO la, int lg_num) {
-		if(lg_num == 0)
-			return false;
+	public boolean updateLeagueType(LeagueAttributeVO la) {
+
 		if(la.getLa_num() < 1 && la.getLa_name() == null && la.getLa_match_type() == null)
 			return false;
 		return leagueDao.updateLeagueType(la) != 0;
@@ -118,6 +113,8 @@ public class LeagueServiceImp implements LeagueService {
 			return false;
 		return leagueDao.deleteLeagueType(la_num);
 	}
+	
+	//리그 참가 승인
 	@Override
 	public boolean updateLeaguePartiTeamSave(LeagueParticipationteamVO lp) {
 		if(lp == null && lp.getLp_num() < 1)

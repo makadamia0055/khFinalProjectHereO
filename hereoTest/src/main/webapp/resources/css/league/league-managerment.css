@@ -97,6 +97,6 @@ select {
 .middle-box.schedule .talbe tbody td .versus{
 	width: 12px; display: inline-block;
 }
-.middle-box .btn-complete{
-	
+.bottom-box .btn{
+	margin-bottom: 5px;
 }
