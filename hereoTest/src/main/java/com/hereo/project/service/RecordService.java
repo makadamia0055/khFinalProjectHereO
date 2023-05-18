@@ -36,6 +36,7 @@ public interface RecordService {
 
 	MatchRecordVO selectMatchRecordByMsNum(int ms_num);
 
+
 	boolean insertOrUpdateMatchRecord(MatchRecordVO matchRecord);
 
 	ArrayList<MatchInningVO> insertOrUpdateMatchInning(String matchInningList) ;
@@ -47,6 +48,9 @@ public interface RecordService {
 	void clearCurrentPlayerRecordByMrNum(int mr_num);
 
 	boolean updateYearRecord(Integer mr_num);
+
+	ArrayList<PlayerRecordHitterVO> getSelectLeagueHitRecord(int lg_num);
+
 
 	
 

@@ -29,7 +29,13 @@ public class PlayerRecordHitterVO {
 	private int ph_bats;
 	private int ph_doubleplays;
 	private int ph_hitbypitches;
+
 	private int ph_onbases;
+
+	private TeamVO ph_team;
+	private MembersVO ph_members;
+	private TeamPlayerVO ph_tPlayer;
+
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date ms_datetime;
