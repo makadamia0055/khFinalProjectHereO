@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.BatterBoxEventVO;
 import com.hereo.project.vo.MatchBatterBoxEventVO;
 import com.hereo.project.vo.MatchInningVO;
@@ -23,7 +24,7 @@ public interface RecordDAO {
 	
 	MatchRecordVO selectMatchRecordByMrNum(int mr_num);
 	
-	ArrayList<PlayerRecordHitterVO> selectLeagueHitRecord(@Param("mr_num")int mr_num);
+	ArrayList<PlayerRecordHitterVO> selectLeagueHitRecord(@Param("mr_num")int mr_num, @Param("cri")Criteria cri);
 
 	MatchRecordVO selectMatchNum(@Param("lm_mr_num")int lm_mr_num);
 
@@ -38,6 +39,8 @@ public interface RecordDAO {
 	ArrayList<BatterBoxEventVO> getAllBatterBoxEventList();
 
 	MatchRecordVO selectMatchRecordByMsNum(int ms_num);
+	
+	int countLeaguePlayer(@Param("cri")Criteria cri);
 
 	int insertMatchRecord(@Param("mr")MatchRecordVO matchRecord);
 

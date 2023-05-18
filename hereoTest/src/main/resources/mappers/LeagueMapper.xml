@@ -26,7 +26,17 @@
 		<collection property="lp_team" ofType="com.hereo.project.vo.TeamVO" column="lp_tm_num" select="selectTeamName"></collection>
 		<collection property="lp_leagueSchedule" ofType="com.hereo.project.vo.LeagueScheduleVO" column="lp_num" select="selectLeagueSchedule"></collection>
 	</resultMap>
-
+	<resultMap type="com.hereo.project.vo.LeagueAttributeVO" id="leagueAttribute">
+		<id property="" column=""></id>
+		<result property="la_num" column="la_num"/>
+		<result property="la_name" column="la_name"/>
+		<result property="la_match_type" column="la_match_type"/>
+		<result property="la_start_date" column="la_start_date"/>
+		<result property="la_whole_period" column="la_whole_period"/>
+		<result property="la_team_state" column="la_team_state"/>
+		<result property="la_lg_num" column="la_lg_num"/>
+		<collection property="la_lp_team" ofType="com.hereo.project.vo.LeagueParticipationteamVO" column="la_num" select="selectLeagueParticipationTeam"></collection>
+	</resultMap>
 	<select id="countAllleague" resultType="int">
 		select count(lg_num)
 			from league
@@ -35,7 +45,11 @@
   				and lg_re_num= #{cri.type}  				
   			</if>
 	</select>
-
+	<select id="selectLeagueParticipationTeam" resultMap="leagueAttribute">
+		select * from `league-attribute`
+			join `league-participationteam` on la_num = lp_le_num
+			where lp_num = #{lp_num}
+	</select>
 	<select id="selectLeaguesByCriAndState" resultType="com.hereo.project.vo.LeagueVO">
 		select * from league
 			where 
@@ -85,9 +99,10 @@
 	</select>
 	
 	<!-- league insert  -->
-	<insert id="insertLeague">
-		insert into league(lg_num, lg_name, lg_introduce, lg_start_day, lg_state, lg_approval, lg_logo, lg_re_num, lg_me_id)
-		value ( #{lg.lg_num},#{lg.lg_name},#{lg.lg_introduce},#{lg.lg_start_day},#{lg.lg_state},#{lg.lg_approval},#{lg.lg_logo},#{lg.lg_re_num},#{lg.lg_me_id})
+	<insert id="insertLeague" useGeneratedKeys="true" keyProperty="lg.lg_num">
+		insert into league(lg_num, lg_name, lg_me_id, lg_state, lg_approval)
+		select ifnull(max(lg_num),0)+1, #{lg.lg_name}, #{lg.lg_me_id},'활동중', '2'
+			from league
 	</insert>
 	<select id="selectLeague" resultType="com.hereo.project.vo.LeagueVO">
 		select * from league
@@ -95,6 +110,28 @@
 	</select>
 	<select id="checkLeagueName" resultType="com.hereo.project.vo.LeagueVO">
 		select * from league
-			where le_name = #{le_name}
+			where lg_name = #{lg_name}
 	</select>
+	
+	<!-- league type -->
+	<insert id="insertLeagueType">
+		insert into `league_attribute`(la_num, la_name, la_match_type, la_start_date, la_lg_num)
+		select ifnull(max(la_num),0)+1, #{la.la_name}, #{la.la_match_type}, now(), #{la.la_lg_num}
+			from `league_attribute`
+	</insert>
+	<select id="selectLeagueAttByType" resultType="com.hereo.project.vo.LeagueAttributeVO">
+		select * from `league_attribute`
+		where la_match_type = #{la_match_type}
+	</select>
+	<update id="updateLeagueType">
+		update `league_attribute` set
+			la_name = #{la.la_name},
+			la_match_type = #{la.la_match_type},
+			la_team_state = #{la.la_team_state}
+			where 
+				la_num = #{la.la_num}
+	</update>
+	<delete id="deleteLeagueType">
+		delete from `league_attribute` where la_num = #{la_num}
+	</delete>
 </mapper>

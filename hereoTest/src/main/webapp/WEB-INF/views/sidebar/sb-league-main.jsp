@@ -46,12 +46,12 @@
 							</a>
 						</li>
 						<li class="subitem-side">
-							<a class="sublink-side btn btn-outline-danger col-sm-8" href="<c:url value='/league/enroll'></c:url>">
+							<a class="sublink-side btn btn-outline-danger col-sm-8" href="<c:url value='/league/enroll/${lg_num }'></c:url>">
 								<span class="menu-title">리그경기신청</span>
 							</a>
 						</li>
 						<li class="subitem-side">
-							<a class="sublink-side btn btn-outline-danger col-sm-8" href="<c:url value='/league/schedulemanagerment'></c:url>">
+							<a class="sublink-side btn btn-outline-danger col-sm-8" href="<c:url value='/league/schedulemanagerment/${lg_num }'></c:url>">
 								<span class="menu-title">리그관리</span>
 							</a>
 						</li>
