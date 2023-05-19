@@ -17,9 +17,9 @@
             
           </div>
           <div class="rightbox-profile">
-            <ul class="list-group player-profile1">
+            <ul class="list-group list-group-flush player-profile1">
               <h3 class="player-name">${player.me_nickname }</h3>
-              <li class="list-group-item list-group-item-action">소속팀 : 
+              <li class="list-group-item list-group-item-action ">소속팀 : 
               	<c:choose>
               		<c:when test="${not empty team}">${team.tm_name}</c:when>
               		<c:otherwise>소속팀 없음</c:otherwise>

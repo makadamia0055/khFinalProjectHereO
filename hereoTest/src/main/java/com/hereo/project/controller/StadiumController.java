@@ -175,6 +175,13 @@ import com.hereo.project.vo.StadiumVO;
 	@RequestMapping(value = "/reservation/stadium/insert", method = RequestMethod.GET)
 	public ModelAndView StadiumInsert(ModelAndView mv, HttpSession session) {
 		MembersVO user = (MembersVO)session.getAttribute("loginUser");
+		if(user==null) {
+			mv.addObject("msg", "로그인된 유저만 구장을 등록할 수 있습니다.");
+			mv.addObject("url", "/reservation/main");
+			mv.setViewName("/common/message");
+			return mv;
+		}
+		
 		mv.setViewName("/reservation/reservation-stadium_insert");
 		return mv;
 	}
