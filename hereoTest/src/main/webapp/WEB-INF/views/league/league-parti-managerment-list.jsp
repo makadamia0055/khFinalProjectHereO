@@ -70,7 +70,10 @@
 									<button type="button" class="btn btn-outline-warning btn-up">수정</button>
 								</a>
 							</c:if>
-							<button type="button" class="btn btn-outline-info btn-finish">모집완료</button>
+							<a href="<c:url value='/league/partimanagerment/${lg_num}/detail/${la.la_num}/update'></c:url>">
+								<button type="button" class="btn btn-outline-info btn-finish">모집완료</button>
+							</a>
+							
 
 						</td>
 					</tr>

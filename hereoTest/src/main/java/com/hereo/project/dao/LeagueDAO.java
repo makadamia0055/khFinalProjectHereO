@@ -53,6 +53,14 @@ public interface LeagueDAO {
 
 	boolean updateLeaguePartiTeamSave(@Param("lp")LeagueParticipationteamVO lp);
 
+	LeagueParticipationteamVO selectleagueApproval(@Param("lp_num")int lp_num);
+
+	void updateleagueApproval(@Param("lp")LeagueParticipationteamVO lpVo);
+
+	LeagueParticipationteamVO selectLeaguePartiByLpNum(@Param("lp_num")int lp_num);
+
+	int updateLeaguePartiTeam(@Param("la")LeagueAttributeVO la, @Param("la_num")int la_num);
+
 
 
 
