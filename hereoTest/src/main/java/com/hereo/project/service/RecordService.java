@@ -48,9 +48,6 @@ public interface RecordService {
 
 	ArrayList<PlayerRecordHitterVO> getSelectLeagueHitRecord(int lg_num, Criteria cri);
 
-=======
-
-
 
 	
 
