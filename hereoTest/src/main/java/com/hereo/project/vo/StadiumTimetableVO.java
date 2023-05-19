@@ -12,5 +12,7 @@ public class StadiumTimetableVO {
 	private int st_use_time;
 	private int st_rent_cost;
 	private int st_daytype;
+	private int st_game_num;
+	private StadiumVO s;
 	
 }

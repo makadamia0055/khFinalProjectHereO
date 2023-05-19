@@ -43,21 +43,25 @@
 	</beans:bean>
 	
 
-	<context:component-scan base-package="com.hereo.project.**" />
+	<context:component-scan base-package="com.hereo.project.*" />
 	
 	<!-- 인터셉터 설정 -->
 		<beans:bean id="loginInterceptor" class="com.hereo.project.interceptor.LoginInterceptor">
 		</beans:bean>
 		<beans:bean id="guestInterceptor" class="com.hereo.project.interceptor.GuestInterceptor">
 		</beans:bean>
-		<beans:bean id="AutoLoginInterceptor" class="com.hereo.project.interceptor.AutoLoginInterceptor">
+		<beans:bean id="autoLoginInterceptor" class="com.hereo.project.interceptor.AutoLoginInterceptor">
 		</beans:bean>
-		<beans:bean id="InfoInsertInterceptor" class="com.hereo.project.interceptor.InfoInsertInterceptor">
+		<beans:bean id="infoInsertInterceptor" class="com.hereo.project.interceptor.InfoInsertInterceptor">
 		</beans:bean>
-		<beans:bean id="InfoDeleteInterceptor" class="com.hereo.project.interceptor.InfoDeleteInterceptor">
+		<beans:bean id="infoDeleteInterceptor" class="com.hereo.project.interceptor.InfoDeleteInterceptor">
 		</beans:bean>
 		
 	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:ref bean="autoLoginInterceptor"/>
+		</interceptor>
 		<interceptor>
 			<mapping path="/login"/>
 			<beans:ref bean="loginInterceptor"/>
@@ -68,15 +72,11 @@
 		</interceptor>
 		<interceptor>
 			<mapping path="/**"/>
-			<beans:ref bean="AutoLoginInterceptor"/>
+			<beans:ref bean="infoInsertInterceptor"/>
 		</interceptor>
 		<interceptor>
 			<mapping path="/**"/>
-			<beans:ref bean="InfoInsertInterceptor"/>
-		</interceptor>
-		<interceptor>
-			<mapping path="/**"/>
-			<beans:ref bean="InfoDeleteInterceptor"/>
+			<beans:ref bean="infoDeleteInterceptor"/>
 		</interceptor>
 		
 	</interceptors>	
