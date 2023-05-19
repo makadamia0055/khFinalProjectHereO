@@ -56,6 +56,11 @@ public interface TeamService {
 
 	HashMap<String, Object> countTeamTotalMatch(Integer teamNum);
 
+	ArrayList<TeamVO> getAllTeamList();
+
+	Integer searchUserTeam(String me_id);
+
+
 
 
 	

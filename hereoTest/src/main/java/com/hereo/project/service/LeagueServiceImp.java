@@ -116,13 +116,33 @@ public class LeagueServiceImp implements LeagueService {
 	
 	//리그 참가 승인
 	@Override
-	public boolean updateLeaguePartiTeamSave(LeagueParticipationteamVO lp) {
-		if(lp == null && lp.getLp_num() < 1)
-			return false;
-		System.out.println(lp);
-		return leagueDao.updateLeaguePartiTeamSave(lp);
+	public int leagueApproval(int lp_num, int lp_approval) {
+		if(lp_num < 1)
+			return -100;
+		int res = 0;
+		LeagueParticipationteamVO dbLp = leagueDao.selectleagueApproval(lp_num);
+		
+		if(dbLp.getLp_approval() == lp_approval) {
+			LeagueParticipationteamVO lpVo = new LeagueParticipationteamVO(lp_num, lp_approval);
+			leagueDao.updateleagueApproval(lpVo);
+			res = 0;
+		}else {
+			LeagueParticipationteamVO lpVo = new LeagueParticipationteamVO(lp_num, lp_approval);
+			leagueDao.updateleagueApproval(lpVo);
+			res = lp_approval;
+		}
+		return res;
 	}
-
+	@Override
+	public LeagueParticipationteamVO getLeagueParti(int lp_num) {
+		return leagueDao.selectLeaguePartiByLpNum(lp_num);
+	}
+	@Override
+	public boolean updateLeaguePartiTeam(LeagueAttributeVO la, int la_num) {
+		if(la == null)
+			return false;
+		return leagueDao.updateLeaguePartiTeam(la, la_num) != 0 ;
+	}
 
 
 }

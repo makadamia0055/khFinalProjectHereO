@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.6.min.js" type="application/javascript"></script>
+	<script src="<c:url value='/resources/js/common/popper.min.js'></c:url>"></script>
+	<script src="<c:url value='/resources/js/common/bootstrap.bundle.min.js'></c:url>"></script>    
 <link rel="stylesheet" href="<c:url value='/resources/css/reservation/reservation-stadium.css'></c:url>" />
 <body>
 	<div class="booking">	
@@ -8,33 +11,35 @@
 			<h1>예약하기</h1>
 		</header>
 		<div class="content">
-			<section class="reserve_info" style="margin: 0;">
+			<form method="post" id="form">
+				<section class="reserve_info" style="margin: 0;">
 					<ul class="list-content">
 						<h2>예약 정보</h2>
 						<li class="item-content">
 							<span>예약 구장</span>
 							<br>
-							<input type="text" placeholder="구장이름(출력) 수정X" disabled>
+							<input type="text" placeholder="구장이름(출력) 수정X" readonly>
 						</li>
 						<li class="item-content">
 							<span>예약 날짜</span>
 							<br>
-							<input type="text"placeholder="예약 날짜" disabled>
+							<input type="text" name ="ss_game_date" value= "${date}" placeholder="${date}" readonly>
 						</li>
 						<li class="item-content">
 							<span>예약 시간</span>
 							<br>
-							<input type="text"placeholder="예약 시간" disabled>
+							<input type="text" name="st_start_time" value="${st.st_start_time}"placeholder="${st.st_start_time}시" readonly>
 						</li>
 						<li class="item-content">
 							<span>예약자명</span>
 							<br>
-							<input type="text"placeholder="예약자 성명" disabled>
+							<input type="text" placeholder="${user.me_name}" readonly>
+							<input type="hidden" name="rv_me_id" value="${loginUser.me_id}">
 						</li>
 						<li class="item-content">
 							<span>예약자 휴대폰 번호</span>
 							<br>
-							<input type="text"placeholder="예약자 휴대폰 번호" disabled>
+							<input type="text"placeholder="${user.me_tel}" readonly>
 						</li>
 						
 					</ul>
@@ -44,10 +49,10 @@
 						<li class="item-content">
 							<span>심판 유무</span>
 							<div class="">
-								<select name="referee" id="" >
+								<select name="rv_isReferee" id="" >
 										<option>심판 유무 선택</option>
-										<option>있음</option>
-										<option>없음</option>
+										<option value=1>있음</option>
+										<option value=0>없음</option>
 								</select>
 								<br>
 								<span class="referee__text" hidden>유무 선택에 따라 총 결제금액이 변동됩니다.</span>
@@ -57,10 +62,10 @@
 						<li class="item-content">
 							<span>기록원 유무</span>
 							<div class="">
-								<select name="clerk" id="">
+								<select name="rv_isRecoder" id="">
 										<option>기록원 유무 선택</option>
-										<option>있음</option>
-										<option>없음</option>
+										<option value=1>있음</option>
+										<option value=0>없음</option>
 								</select>
 								<br>
 								<span class="clerk__text">유무 선택에 따라 총 결제금액이 변동됩니다.</span>
@@ -71,10 +76,10 @@
 							<div class="match_boxes">
 								<span>경기 유형 선택</span>								
 									<div class="match_box">
-										<select name="match" id="" onchange="categoryChange(this)">
+										<select name="rv_game_type">
 												<option value>경기 유형 선택</option>	
-												<option value="match01">친선</option>
-												<option value="match02">연습</option>
+												<option value="친선">친선</option>
+												<option value="연습">연습</option>
 										</select>
 										<br>
 										<span class="league__text" hidden>연습경기는 경기기록에 반영되지 않습니다.</span>
@@ -89,45 +94,28 @@
 							</div>
 						</li>	
 					</ul>
-			</section>
-			<section class="pay-select">
-					<h4 style="color: black;">결제 수단 선택</h4>
-					<select id="payment-select" class="select-type" >
-						<option data-minprice="0" value="" >
-							결제 수단
-						</option>
-						<option data-minprice="0" value="KAKAO" >
-							카카오뱅크
-						</option>
-						<option data-minprice="0" value="CARD" >
-							신용/체크카드
-						</option>
-						<option data-minprice="0" value="PHONE" >
-							휴대폰결제
-						</option>
-					</select>
-			</section>
-			<section class="pay-price">
-				<p>
-					<strong style="font-size: 20px;">
-						<b>총 결제 금액</b>
-					</strong>
-				</p>
-				<input type="text" placeholder="150,000원">
-			</section>
-			
-			<section class="agree">
-				<p class="all_check">
-					<label>
-						<input type="checkbox" name="checkAll" class="check" onclick="checkAll()">
-						<span>전체 동의</span>
-					</label>
-				</p>
-				<div class="personal-info info1">
-					<label>
-						<input type="checkbox" name="checkOne" class="check">
-						<a href="#" data-toggle="modal" data-target="#agree1">취소/환불규정(필수)</a>
-									<div class="modal" id="agree1">
+				</section>
+				<section class="pay-price">
+					<p>
+						<strong style="font-size: 20px;">
+							<b>총 결제 금액</b>
+						</strong>
+					</p>
+					<input type="text" placeholder="${st.st_rent_cost}원" readonly>
+					<input type="hidden" name="rv_total_price" value="${st.st_rent_cost}">
+				</section>		
+				<section class="agree">
+					<p class="all_check">
+						<label>
+							<input type="checkbox" name="checkAll" class="check" >
+							<span>전체 동의</span>
+						</label>
+					</p>
+					<div class="personal-info info1">
+						<label>
+							<input type="checkbox" name="checkOne" class="check">
+							<a href="#" data-toggle="modal" data-target="#agree1">취소/환불규정(필수)</a>
+										<div class="modal" id="agree1">
 										<div class="modal-dialog modal-dialog-centered">
 											<div class="modal-content">	
 												<div class="modal-header">
@@ -307,22 +295,128 @@
 				</div>
 			</section>
 			<div class="booking-btn">
-				<button class="btn-reservation">예약하기</button>
+				<button class="btn-reservation" type="button">예약하기</button>
 			</div>
+			<input type="hidden" name="st_num" value="${st.st_num}"/>
+		</form>	
 		</div>			
 	</div>
 	<script src="../reservation/matchselect.js"></script>
 	<script>
+	let receipt_id = null;
 		// 전체 동의 체크 
 		$(document).ready(function() {
 			$('input[name="checkAll"]').click(function() {
 				$('input[name="checkOne"]').prop('checked', $(this).prop('checked'));
 				});
 		});
-		$(document).read(function(){
+		$(document).ready(function(){
 			$('select[name="referee"]').click(function(){
 				$('.clerk__text').show();
 			})
 		})
+		//ajax로 폼태그 보내기
+		
+
+		$('.btn-reservation').on("click",function(){
+			var reservationForm = $("#form").serialize();
+			var st_num = $('input[name=st_num]').val();
+			var date=$('input[name=ss_game_date]').val();
+
+			$.ajax({
+			
+				asyn:true,
+				type:'post',
+				url:'<c:url value="/reservation/payment_info"></c:url>' + '?st_num=' + st_num +'&date='+date,
+				dataType:"json",
+				data:reservationForm,
+				success : function(data){
+
+					var reserve = data.reserve;
+					var user=data.user;
+					var msg=data.msg;
+					var url=data.url;
+
+					if (msg.trim()!=='' && url.trim()!==''){
+						alert(msg);
+						 window.location.href='<%= request.getContextPath() %>'+url;
+					}
+					BootPay.request({
+						
+						price: reserve.rv_total_price, 
+						application_id: "6450af6d755e27001b375f47",
+						name: '구장 예약', 
+						pg: 'kcp',
+						method: 'card', 
+						show_agree_window: 0, 
+						user_info: {
+							username: user.me_id,
+							email: user.me_mail,
+							addr: 'x',
+							phone: user.me_tel
+						},
+						order_id: reserve.rv_num
+					}).error(function (data) {
+						//결제 진행시 에러가 발생하면 수행됩니다.
+						console.log(data);
+					}).cancel((data)=>cancelBootPay(data, reserve)
+						).confirm(function (data) {
+						var enable = true; // 재고 수량 관리 로직 혹은 다른 처리
+							$.ajax({
+								  asyn:false,
+								  url: '<c:url value="/reservation/checkBootPay"></c:url>',  
+								  method: "POST", 
+								  data: JSON.stringify({
+							            reserve: reserve,
+							            enable: enable
+							        }),
+								  contentType:"application/json; charset=UTF-8",
+								  success: function(data){
+									  enable=data
+								  }
+							});
+
+						if (enable) {
+							BootPay.transactionConfirm(data); // 조건이 맞으면 승인 처리를 한다.
+						} else {
+							BootPay.removePaymentWindow(); // 조건이 맞지 않으면 결제 창을 닫고 결제를 승인하지 않는다.
+						}
+					}).close(function (data) {
+					    // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
+					    console.log(data);
+					}).done(function (data) {
+						//결제가 정상적으로 완료되면 수행됩니다
+						//비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
+						$.ajax({
+							  asyn:true,
+							  url: '<c:url value="/reservation/bootPay"></c:url>',  // 서버 URL
+							  method: "POST",          // 요청 방식 (GET, POST 등)
+							  data: {
+								  rv_num : data.order_id,
+								  receipt_id : data.receipt_id
+							  },
+							  success: function(response) {
+								  alert("결제가 완료되었습니다.")
+								  window.location.href='<%= request.getContextPath() %>'+ response;
+							  },
+							  error: function(xhr, status, error) {
+
+							    console.log("AJAX 요청 실패: " + error);
+							  }
+							});
+				
+					});
+			 }})
+		 })
+
+			function cancelBootPay(data,reserve) {					
+				$.ajax({
+					  asyn:true,
+					  url: '<c:url value="/reservation/cancelBootPay"></c:url>',  
+					  method: "POST", 
+					  data: JSON.stringify(reserve),
+					  contentType:"application/json; charset=UTF-8"
+				});
+			}
 	</script>
 </body>

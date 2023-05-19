@@ -49,7 +49,9 @@ public interface RecordService {
 
 	ArrayList<PlayerRecordHitterVO> getSelectLeagueHitRecord(int lg_num, Criteria cri);
 
+
 	TeamVO getOppoTeamName(Integer mr_num, Integer tm_num);
+
 
 
 
