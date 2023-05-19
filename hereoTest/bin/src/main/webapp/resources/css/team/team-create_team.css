@@ -1,0 +1,25 @@
+.teamcreate-main{
+	position: relative;
+	
+	border-radius: 20%;
+	padding: 0 auto;
+	vertical-align: auto;
+	color: black;
+}
+.teamcreate-main .title-teamcreate{
+	position: absolute;
+	top: -50px;
+	font-weight: 700;
+}
+.container-create-input{
+	position: relative;
+	display: inline-block;
+	width: 26em; height : 40em;
+	margin: calc(5em) calc(7em);
+	box-sizing: content-box;
+}
+
+.container-create-input label{
+	margin-top : 10px
+	
+}

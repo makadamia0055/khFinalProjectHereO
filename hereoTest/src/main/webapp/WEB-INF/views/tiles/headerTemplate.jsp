@@ -46,6 +46,10 @@
                 <li>
                   <a href="<c:url value='/league/leagueSearch'></c:url>" target="_top"
                     >리그찾기</a>
+                    
+                </li>
+                <li>
+                  <a href="<c:url value='/record/insert'></c:url>">기록등록</a>
                 </li>
               </ul>
             </li>

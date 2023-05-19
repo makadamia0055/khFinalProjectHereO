@@ -50,8 +50,12 @@ public interface TeamDAO {
 
 	int countTeamTotalMatch(Integer tm_num);
 
+
 	ArrayList<TeamVO> getAllTeamList();
 
 	Integer searchUserTeam(@Param("me_id")String me_id);
+
+	int countTeamTotalMatchByState(@Param("tm_num")Integer teamNum, @Param("state")String string);
+
 
 }

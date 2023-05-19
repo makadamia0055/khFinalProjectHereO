@@ -3,9 +3,218 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hereo.project.dao.RecordDAO">
-	<select id="selectAllHitRecord" resultType="com.hereo.project.vo.PlayerrecordHitterVO">
+	<select id="selectAllHitRecord" resultType="com.hereo.project.vo.PlayerRecordHitterVO">
 		select * from `playerrecord-hitter`
 
 	</select>
-
+		<resultMap type="com.hereo.project.vo.MatchRecordVO" id="MatchRecord">
+			<result column="mr_num" property="mr_num"/>
+			<result column="mr_ms_num" property="mr_ms_num"/>
+			<result column="mr_point_home" property="mr_point_home"/>
+			<result column="mr_point_away" property="mr_point_away"/>
+			<result column="mr_startteam" property="mr_startteam"/>
+			<collection column="mr_num"
+							property="inningList"
+							javaType="java.util.List"
+							ofType="com.hereo.project.vo.MatchInningVO"
+							select="selectMatchInningByMiNum">
+			</collection>
+			<collection column="mr_ms_num"
+						property="matchSchedule"
+						ofType="com.hereo.project.vo.MatchScheduleVO"
+						select="com.hereo.project.dao.ScheduleDAO.selectMatchScheduleByMsNum">
+			</collection>
+			
+		</resultMap>
+	
+	<resultMap type="com.hereo.project.vo.MatchInningVO" id="MatchInning">
+		<result column="mi_num" property="mi_num"/>
+		<result column="mi_inning" property="mi_inning"/>
+		<result column="mi_isfirstlast" property="mi_isfirstlast"/>
+		<result column="mi_point" property="mi_point"/>
+		<result column="mi_mr_num" property="mi_mr_num"/>
+		<collection column="mi_num"
+						property="batterBoxList"
+						javaType="java.util.List"
+						ofType="com.hereo.project.vo.MatchBatterBoxEventVO"
+						select="selectMatchBatterBoxEventByMbNum">
+		</collection>
+		
+	</resultMap>
+	
+	<select id="selectMatchRecordByMrNum" resultMap="MatchRecord">
+		select * from `match-record`
+			where mr_num = #{mr_num}
+	</select>
+	<select id="selectMatchInningByMiNum" resultMap="MatchInning">
+		select * from `match-inning`
+			where mi_mr_num =#{mr_num}
+			order by mi_inning asc, mi_isfirstlast desc
+	</select>
+	<select id="selectMatchBatterBoxEventByMbNum" resultType="com.hereo.project.vo.MatchBatterBoxEventVO">
+		select * from `match-batterboxevent`
+			where mb_mi_num =#{mi_num}
+			order by mb_inning_order asc
+	</select>
+	<select id="selectMatchPartInHome" resultType="com.hereo.project.vo.MatchParticipateVO">
+		SELECT * FROM `match-participate`
+			join `match-record` on mp_mr_num = mr_num
+		    join `match-schedule` on mr_ms_num = ms_num
+		    join `team-player` on mp_tp_num = tp_num
+		    where tp_tm_num = ms_tm_home_num and mp_mr_num = #{mr_num}
+	</select>
+	<select id="selectMatchPartInAway" resultType="com.hereo.project.vo.MatchParticipateVO">
+		SELECT * FROM `match-participate`
+			join `match-record` on mp_mr_num = mr_num
+		    join `match-schedule` on mr_ms_num = ms_num
+		    join `team-player` on mp_tp_num = tp_num
+		    where tp_tm_num = ms_tm_away_num and mp_mr_num = #{mr_num}
+	</select>
+	<select id="selectPlayerRecordHitterByTpNumAndMrNum" resultType="com.hereo.project.vo.PlayerRecordHitterVO">
+		select * from `playerrecord-hitter`
+			where ph_tp_num = #{tp_num} and ph_mr_num = #{mr_num}
+	</select>
+	<select id="selectPlayerRecordPitcherByTpNumAndMrNum" resultType="com.hereo.project.vo.PlayerRecordPitcherVO">
+		select * from `playerrecord-pitcher`
+			where pp_tp_num = #{tp_num} and pp_mr_num = #{mr_num}
+	</select>
+	<select id="getAllBatterBoxEventList" resultType="com.hereo.project.vo.BatterBoxEventVO">
+		select * from `batterboxevent-type` order by be_num asc
+	</select>
+	<select id="selectMatchRecordByMsNum" resultMap="MatchRecord">
+		select * from `match-record`
+			where mr_ms_num = #{ms_num}
+	</select>
+	<insert id="insertMatchRecord" useGeneratedKeys="true" keyProperty="mr.mr_num">
+		insert into `match-record`(mr_ms_num, mr_point_home, mr_point_away, mr_startteam)
+		value(${mr.mr_ms_num}, ${mr.mr_point_home}, ${mr.mr_point_away}, ${mr.mr_startteam})
+	</insert>
+	<update id="updateMatchRecord">
+		update `match-record`
+			set mr_ms_num = ${mr.mr_ms_num},
+				mr_point_home =  ${mr.mr_point_home},
+				mr_point_away = ${mr.mr_point_away},
+				mr_startteam =  ${mr.mr_startteam}
+			where mr_num = ${mr.mr_num}
+	</update>
+	<select id="selectMatchInningByMrNum" resultMap="MatchInning">
+		select * from `match-inning`
+			where mi_mr_num = #{mr_num}
+	</select>
+	<delete id="deleteMatchInning">
+		delete from `match-inning`
+			where mi_mr_num = #{mr_num}
+	</delete>
+	<insert id="insertMatchInning"  useGeneratedKeys="true" keyProperty="mi.mi_num">
+		insert into `match-inning`(mi_inning, mi_isfirstlast, mi_point, mi_mr_num) 
+		value(#{mi.mi_inning}, #{mi.mi_isfirstlast}, #{mi.mi_point}, #{mi.mi_mr_num})
+	</insert>
+	
+	<select id="insertMatchBBE" statementType="CALLABLE">
+		<![CDATA[
+		{call BBEinsertProcedure(
+			#{mb.mb_inning_order}, #{mb.be_type}, #{mr_num}, #{mb.mb_mi_num}, #{mb.mb_mp_hitter_num}, #{mb.mb_mp_pitcher_num}
+		)}
+		]]>
+		
+	</select>
+	<insert id="insertMatchParticipate">
+		insert into `match-participate`(mp_tp_num, mp_order, mp_type, mp_po_num, mp_inning, mp_mr_num)
+		value(#{mp.mp_tp_num}, #{mp.mp_order}, #{mp.mp_type}, #{mp.mp_po_num}, #{mp.mp_inning}, #{mp.mp_mr_num})
+	</insert>
+	<delete id="deleteMatchParticipate">
+		delete from `match-participate` 
+			where mp_mr_num = #{mr_num}
+	</delete>
+	<delete id="clearCurrentHitterRecordByMrNum">
+		delete from `playerrecord-hitter`
+			where ph_mr_num = #{mr_num};
+	
+	</delete>
+	<delete id="clearCurrentPitcherRecordByMrNum">
+		delete from `playerrecord-pitcher`
+			where pp_mr_num = #{mr_num}
+	</delete>
+	<select id="updateYearRecordPitcher" statementType="CALLABLE">
+		<![CDATA[
+		{call BBEinsertProcedure(
+			#{mr_num}, #{pp.pp_tp_num}
+		)}
+		]]>
+		
+	</select>
+	<select id="PlayerRecordHitterVO" statementType="CALLABLE">
+		<![CDATA[
+		{call BBEinsertProcedure(
+			#{mr_num}, #{ph.ph_tp_num}
+		)}
+		]]>
+		
+	</select>
+	<select id="selectPlayerRecordHitterByMr_num" resultType="com.hereo.project.vo.PlayerRecordHitterVO">
+		select * from `playerrecord-hitter`
+			where ph_mr_num = #{mr_num}
+	</select>
+	
+	<select id="selectPlayerRecordPitcherByMr_num" resultType="com.hereo.project.vo.PlayerRecordPitcherVO">
+		select * from `playerrecord-pitcher`
+				where pp_mr_num = #{mr_num}
+	</select>
+	
+	
+	<resultMap type="com.hereo.project.vo.PlayerRecordHitterVO" id="PlayerRecordHitter">
+		<id property="" column=""></id>
+		<result property="ph_num" column="ph_num"/>
+		<result property="ph_tp_num" column="ph_tp_num"/>
+		<result property="ph_mr_num" column="ph_mr_num"/>
+		<result property="ph_single_hits" column="ph_single_hits"/>
+		<result property="ph_twobase_hits" column="ph_twobase_hits"/>
+		<result property="ph_threebase_hits" column="ph_threebase_hits"/>
+		<result property="ph_homeruns" column="ph_homeruns"/>
+		<result property="ph_errors" column="ph_errors"/>
+		<result property="ph_steals" column="ph_steals"/>
+		<result property="ph_fail_steals" column="ph_fail_steals"/>
+		<result property="ph_fourballs" column="ph_fourballs"/>
+		<result property="ph_strike_outs" column="ph_strike_outs"/>
+		<result property="ph_hits" column="ph_hits"/>
+		<result property="ph_bats" column="ph_bats"/>
+		<result property="ph_doubleplays" column="ph_doubleplays"/>
+		<result property="ph_hitbypitches" column="ph_hitbypitches"/>
+		<collection property="ph_team" ofType="com.hereo.project.vo.TeamVO" column="ph_tp_num" select="selectTeam"></collection>
+		<collection property="ph_members" ofType="com.hereo.project.vo.MembersVO" column="ph_tp_num" select="selectMembers"></collection>
+		<collection property="ph_tPlayer" ofType="com.hereo.project.vo.TeamPlayerVO" column="ph_tp_num" select="selectBackNum"></collection>
+	</resultMap>
+	<select id="selectMatchNum" resultType="com.hereo.project.vo.MatchRecordVO">
+		select * from `match-record`
+			where mr_num = #{lm_mr_num}
+	</select>
+	<select id="selectTeam" resultType="com.hereo.project.vo.TeamVO">
+		select * from team
+			join `team-player` on tm_num = tp_tm_num
+			join `playerrecord-hitter` on tp_num = ph_tp_num
+			where ph_tp_num = #{ph_tp_num}
+	</select>
+	<select id="selectMembers" resultType="com.hereo.project.vo.MembersVO">
+		select * from members
+			join player on me_id = pl_me_id
+			join `team-player` on pl_num = tp_pl_num
+			join `playerrecord-hitter` on tp_num = ph_tp_num
+			where ph_tp_num = #{ph_tp_num}
+	</select>
+	<select id="selectBackNum" resultType="com.hereo.project.vo.TeamPlayerVO">
+		select * from `team-player`
+			join `playerrecord-hitter` on tp_num = ph_tp_num
+			where ph_tp_num = #{ph_tp_num}
+	</select>
+	<select id="selectLeagueHitRecord" resultMap="PlayerRecordHitter">
+		select * from `playerrecord-hitter`
+			where ph_mr_num = #{mr_num}
+	</select>
+  	<select id="countLeaguePlayer" resultType="int">
+  		select count(ph_num) from `playerrecord-hitter`
+  		where 
+  		<if test="cri.type != 0">
+  			ph_tp_num = #{cri.type}
+  		</if>
+  </select>
 </mapper>

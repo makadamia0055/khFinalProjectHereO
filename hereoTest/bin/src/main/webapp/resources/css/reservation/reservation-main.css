@@ -1,0 +1,146 @@
+@charset "UTF-8";
+*{ margin: 0; padding: 0;}
+.reservations{
+position: absolute;  left: 20%;  margin-left: 30px;
+box-sizing: border-box; 
+border-radius: 10px;  margin-top: 150px;
+}
+
+table{
+border-collapse: collapse;
+font-size: 15px;
+}
+
+th{
+   padding: 10px;
+}
+td{
+   padding: 10px;
+text-align: center;
+}
+#table-title{
+border-bottom: 3px solid black;
+text-align: center; 
+}
+#table-name{
+   font-size: 15px;
+}
+#table-region strong,#table-region span,
+#table-content strong,#table-content span{
+font-size: 15px; color: black; padding: 0;
+}
+#table-stadium{
+height: 100%; 
+}
+#table-stadium span{
+	color: black;
+}
+#table-stadium:hover span,#table-stadium:hover strong {
+text-decoration: underline; 
+}  
+#table-stadium strong{padding: 0;}
+img{
+width: 100%; height: 100%;
+} 
+.list{
+margin-top: 20px;  border-radius: 15px;
+padding: 20px; 
+position: relative;
+}
+.stadium-list{
+border-top: 3px solid black;
+}
+.topbox{
+padding: 20px;  background-color:#fff;
+}
+.search_boxes .item-region + .item-region {
+margin-left: 4px; font-size: 13px;
+}
+.list-region{
+display: flex; justify-content: center; 
+}
+.btn-group{
+   display: flex; width: 100%; box-sizing: border-box; 
+}
+.btn-group .btn{
+   font-size: 15px;  
+}
+.reservations .search_boxes{
+display: flex; flex-wrap: wrap; align-items: center; flex-direction: column;
+}
+.reservations .search_box{
+display: flex; justify-content: center;
+}
+.region_select{
+   box-sizing: border-box; width: 100%; text-align: center; margin: 10px 0;
+}
+.region_select .form-control{
+   width: calc(31%); border:1px solid #33333377; padding: 0 10px;
+}
+[name=region],[name=gugun]{
+    width: 300px; height: 30px;
+}
+.reservations .btn-secondary{
+width: 70px;  color: #fff; border-radius: 10px;
+font-weight: bold; background-color: #73777B;
+font-size: 15px; margin-left: 3px; padding: 0;
+} 
+.game-group{
+display: table;
+width: 100%;
+border-collapse: collapse;
+border-spacing: 0;
+}
+.game-title {
+display: table-cell;
+font-weight: bold;
+padding: 10px;
+}
+
+.game-info {
+display: table-row-group;
+}
+.game-info > div {
+display: table-cell;
+vertical-align: middle;
+}
+.status {
+font-weight: bold; padding: 8px;
+}
+.status span{
+   display: block; margin: 0 auto; width: 50px; height: 20px;
+   font-weight: bold; box-shadow: 10px 2px 15px 1px rgba(0,0,0,0.35);
+   background-color: #3333331f; 
+   border-radius: 15px; font-size: 15px; text-align: center; 
+}
+.status:nth-child(n+6):nth-child(-n+10){
+   display: none;
+}
+
+.status span.league,.status span.confirm{
+   border-radius: 15px; color: black;
+   text-shadow: 0 0 1px rgb(0 0 0 / 60%);
+}
+.status span.reserve{
+   border-radius: 15px;
+   background-color: rgba(0, 102, 255, 0.5); color: #fff;
+   text-shadow: 0 0 1px rgb(0 0 0 /60%); cursor: pointer; 
+}
+
+.pagination {
+   display: flex;
+   justify-content: center;
+}
+.page-link,
+.prev-link,
+.next-link {
+margin: 0 5px;
+padding: 5px 10px;
+border: 1px solid #ddd;
+background-color: #ddd;
+cursor: pointer;
+font-weight: bold;
+}
+.active {
+   background-color: #ddd;
+}
