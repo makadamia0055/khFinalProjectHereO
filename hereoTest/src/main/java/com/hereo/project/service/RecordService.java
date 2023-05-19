@@ -13,6 +13,7 @@ import com.hereo.project.vo.MatchParticipateVO;
 import com.hereo.project.vo.MatchRecordVO;
 import com.hereo.project.vo.PlayerRecordHitterVO;
 import com.hereo.project.vo.PlayerRecordPitcherVO;
+import com.hereo.project.vo.TeamVO;
 
 
 public interface RecordService {
@@ -47,6 +48,13 @@ public interface RecordService {
 	boolean updateYearRecord(Integer mr_num);
 
 	ArrayList<PlayerRecordHitterVO> getSelectLeagueHitRecord(int lg_num, Criteria cri);
+
+
+	TeamVO getOppoTeamName(Integer mr_num, Integer tm_num);
+
+
+
+
 
 
 	

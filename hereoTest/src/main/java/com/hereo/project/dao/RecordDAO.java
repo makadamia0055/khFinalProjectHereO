@@ -67,9 +67,10 @@ public interface RecordDAO {
 	void updateYearRecordHitter(@Param("mr_num")Integer mr_num, @Param("ph")PlayerRecordHitterVO tmp);
 
 
-	ArrayList<PlayerRecordPitcherVO> selectPlayerRecordHitterByMr_num(Integer mr_num);
+	ArrayList<PlayerRecordPitcherVO> selectPlayerRecordPitcherByMr_num(Integer mr_num);
 
-	ArrayList<PlayerRecordHitterVO> selectPlayerRecordPitcherByMr_num(Integer mr_num);
+	ArrayList<PlayerRecordHitterVO> selectPlayerRecordHitterByMr_num(Integer mr_num);
+
 
 
 }

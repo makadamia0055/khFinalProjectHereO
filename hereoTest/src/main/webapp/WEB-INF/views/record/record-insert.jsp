@@ -726,12 +726,12 @@
 							<td>
 								<select class="select-player">
 									<option class="defaultN" value="0">-선수-</option>
-									<c:forEach items="${hTPlayerList}" var="tp">
+									<c:forEach items="${hTPlayerList}" var="tp" varStatus="ind">
 										<c:choose>
 											<c:when test="${tp.tp_auth > 1}">
 												<option value="${tp.tp_num}" data-baknum="${tp.tp_backnum}">
 													<c:forEach items="${hPlayerList}" var="pl">
-														<c:if test="${pl.pl_num eq tp.tp_pl_num}">${pl.me_nickname}(${tp.tp_backnum})</c:if>
+														<c:if test="${pl.pl_num eq tp.tp_pl_num}">${ind.count}.${pl.me_nickname}(${tp.tp_backnum})</c:if>
 													</c:forEach>
 												</option>
 											</c:when>
@@ -744,15 +744,15 @@
 							<td>
 								<select class="position">
 									<option value="0">-포지션-</option>
-									<option value="1">투수</option>
-									<option value="2">포수</option>
-									<option value="3">1루수</option>
-									<option value="4">2루수</option>
-									<option value="5">3루수</option>
-									<option value="6">유격수</option>
-									<option value="7">우익수</option>
-									<option value="8">중견수</option>
-									<option value="9">좌익수</option>
+									<option value="1">1.투수</option>
+									<option value="2">2.포수</option>
+									<option value="3">3.1루수</option>
+									<option value="4">4.2루수</option>
+									<option value="5">5.3루수</option>
+									<option value="6">6.유격수</option>
+									<option value="7">7.우익수</option>
+									<option value="8">8.중견수</option>
+									<option value="9">9.좌익수</option>
 									<option value="10">지명타자</option>
 								</select>
 							
@@ -853,12 +853,12 @@
 							<td>
 								<select class="select-player">
 									<option class="defaultN" value="0">-선수-</option>
-									<c:forEach items="${aTPlayerList}" var="tp">
+									<c:forEach items="${aTPlayerList}" var="tp" varStatus="ind">
 										<c:choose>
 											<c:when test="${tp.tp_auth > 1}">
 												<option value="${tp.tp_num}" data-baknum="${tp.tp_backnum}">
 													<c:forEach items="${aPlayerList}" var="pl">
-														<c:if test="${pl.pl_num eq tp.tp_pl_num}">${pl.me_nickname}(${tp.tp_backnum})</c:if>
+														<c:if test="${pl.pl_num eq tp.tp_pl_num}">${ind.count}.${pl.me_nickname}(${tp.tp_backnum})</c:if>
 													</c:forEach>
 												</option>
 											</c:when>
@@ -871,15 +871,15 @@
 							<td>
 								<select class="position">
 									<option value="0">-포지션-</option>
-									<option value="1">투수</option>
-									<option value="2">포수</option>
-									<option value="3">1루수</option>
-									<option value="4">2루수</option>
-									<option value="5">3루수</option>
-									<option value="6">유격수</option>
-									<option value="7">우익수</option>
-									<option value="8">중견수</option>
-									<option value="9">좌익수</option>
+									<option value="1">1.투수</option>
+									<option value="2">2.포수</option>
+									<option value="3">3.1루수</option>
+									<option value="4">4.2루수</option>
+									<option value="5">5.3루수</option>
+									<option value="6">6.유격수</option>
+									<option value="7">7.우익수</option>
+									<option value="8">8.중견수</option>
+									<option value="9">9.좌익수</option>
 									<option value="10">지명타자</option>
 								</select>
 							
