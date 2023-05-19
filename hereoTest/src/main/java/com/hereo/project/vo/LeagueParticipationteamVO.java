@@ -17,4 +17,5 @@ public class LeagueParticipationteamVO {
 		this.lp_num = lp_num;
 		this.lp_approval = lp_approval;
 	}
+
 }

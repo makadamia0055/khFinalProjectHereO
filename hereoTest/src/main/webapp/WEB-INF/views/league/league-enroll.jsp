@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="<c:url value='/resources/css/common/bootstrap.min.css'></c:url>" rel="stylesheet">
 <link href="<c:url value='/resources/css/common/style.css'></c:url>" rel="stylesheet">
-<link href="<c:url value='/resources/css/league/league-schedule.css'></c:url>" rel="stylesheet">
+<link href="<c:url value='/resources/css/league/league-enroll.css'></c:url>" rel="stylesheet">
 <script  type="text/javascript" src="<c:url value='/resources/js/common/bootstrap.bundle.min.js'></c:url>"></script>
 <script  type="text/javascript" src="<c:url value='/resources/js/common/jquery.js'></c:url>"></script>
 
@@ -39,7 +39,7 @@
 				<tbody>
 					<c:forEach items="${laList }" var="la" varStatus="vs">
 						<tr>
-							<td>${vs.index+1 }</td>
+							<td>${vs.index+1 }<input type="hidden" value="${la.la_num }" name="la_num"></td>
 							<td>${la.la_start_date_str }</td>
 							<td>${la.la_name }</td>
 							<td>${la.la_match_type }</td>
@@ -47,7 +47,7 @@
 								
 							</td>
 							<td>
-								<c:if test="${la.la_team_state == '완료' }">
+								<c:if test="${la.la_team_state == '모집완료' }">
 									<button type="button" class="btn btn-danger">모집완료</button>
 								</c:if>
 								<c:if test="${la.la_team_state == '모집중' }">
@@ -55,12 +55,12 @@
 								</c:if>
 							</td>
 							<td>
-								<c:if test="${la.la_team_state == '완료' }">
+								<c:if test="${la.la_team_state == '모집완료' }">
 									<button type="button" class="btn btn-outline-danger">신청불가</button>
 								</c:if>
 								<c:if test="${la.la_team_state == '모집중' }">
-									<button type="button" class="btn btn-outline-success">신청</button>
-									<button type="button" class="btn btn-outline-danger">취소</button>
+									<button type="button" class="btn btn-outline-success btn-application">신청</button>
+									<button type="button" class="btn btn-outline-danger btn-cancell">취소</button>
 								</c:if>
 								
 							</td>
@@ -70,6 +70,36 @@
 				</tbody>
 			</table>
 		</div>
-
 	</div>
 </div>
+
+<script>
+	$('.btn-application').click(function(){
+		if('${user.me_id}' == ''){
+			alert('로그인한 회원만 신청 할 수 있습니다.');
+			return;
+		}
+		//리스트에 있는 값이여서 값을 찾아와야함
+		let la_num = $(this).parents('tr').find('[name=la_num]').val();
+		let url = '<c:url value="/league/team/appli/"></c:url>'+la_num;
+		
+		$.ajax({
+	        async:true,
+	        type:'get',
+	        url: url,
+	        dataType:"json",//서버에서 보낸 데이터의 타입. Map받으로 받을거기 때문에 json
+	        success : function(data){
+	        	console.log(data)
+	        	if(data.state == 1){
+	        		alert('~~팀의 참가승인을 거절하였습니다.');
+	        	}else if(data.state == 2){
+	        		alert('~~팀의 참가승인을 승인하였습니다.');
+	        	}
+	        }
+	    });
+	});
+	
+	$('.btn-cancell').click(function(){
+
+	});
+</script>

@@ -131,10 +131,15 @@ public class LeagueController {
 	
 	//리그 참가 신청(팀)
 	@RequestMapping(value = "/league/enroll/{lg_num}", method = RequestMethod.GET)
-	public ModelAndView leagueEnroll(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
+	public ModelAndView leagueEnroll(ModelAndView mv, @PathVariable("lg_num")int lg_num,
+			HttpSession session) {
 		ArrayList<LeagueAttributeVO> laList = leagueService.selectLeagueAttByLgNum(lg_num);
 		ArrayList<LeagueParticipationteamVO> lpList = leagueService.getSelectLeagueParti(lg_num);
+		MembersVO user = (MembersVO)session.getAttribute("user");
 		
+		
+		
+		mv.addObject("user", user);
 		mv.addObject("lpList", lpList);
 		mv.addObject("laList", laList);
 		mv.addObject("lg_num", lg_num);
@@ -264,6 +269,19 @@ public class LeagueController {
 		map.put("state", res);
 		LeagueParticipationteamVO lp = leagueService.getLeagueParti(lp_num);
 		map.put("lp_num", lp);
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/league/team/appli/{la_num}", method = RequestMethod.GET)
+	public Map<String, Object> leagueApplication(@RequestBody LeagueAttributeVO leagueAtt,
+			@PathVariable("la_num")int la_num, HttpSession session) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		MembersVO user = (MembersVO)session.getAttribute("user");
+		
+		int res = leagueService.insertLeagueAttByTeam(la_num, user);
+		
+		
 		return map;
 	}
 	

@@ -82,7 +82,6 @@ $('.select-approval').change(function(){
         url: url,
         dataType:"json",//서버에서 보낸 데이터의 타입. Map받으로 받을거기 때문에 json
         success : function(data){
-        	console.log(data)
         	if(data.state == 1){
         		alert('~~팀의 참가승인을 거절하였습니다.');
         	}else if(data.state == 2){

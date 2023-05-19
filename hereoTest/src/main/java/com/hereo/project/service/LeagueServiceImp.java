@@ -14,6 +14,8 @@ import com.hereo.project.vo.LeagueParticipationteamVO;
 import com.hereo.project.vo.LeagueScheduleVO;
 import com.hereo.project.vo.LeagueVO;
 import com.hereo.project.vo.MembersVO;
+import com.hereo.project.vo.PlayerVO;
+import com.hereo.project.vo.TeamPlayerVO;
 import com.hereo.project.vo.TeamVO;
 
 
@@ -142,6 +144,23 @@ public class LeagueServiceImp implements LeagueService {
 		if(la == null)
 			return false;
 		return leagueDao.updateLeaguePartiTeam(la, la_num) != 0 ;
+	}
+	
+	//리그 참가신청 (팀)
+	@Override
+	public int insertLeagueAttByTeam(int la_num, MembersVO user) {
+		if(user == null)
+			return -100;
+		int res = 0;
+		PlayerVO player = leagueDao.selectPlayerByUser(user.getMe_id());
+		TeamPlayerVO tPlayer = leagueDao.selectTplayerByPlNum(player.getPl_num());
+		if(tPlayer.getTp_tm_num() < 1)
+			res = 0;
+		TeamVO team = leagueDao.selectTeamByTpNum(tPlayer.getTp_tm_num());
+		
+		leagueDao.selectLeaguePartiTeamByLeagueAtt(team.getTm_num(), la_num);
+		
+		return res;
 	}
 
 
