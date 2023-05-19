@@ -137,15 +137,23 @@
 	</delete>
 	<select id="updateYearRecordPitcher" statementType="CALLABLE">
 		<![CDATA[
-		{call BBEinsertProcedure(
+		{call updatePlayerrecordPitcherYearByMr_num(
 			#{mr_num}, #{pp.pp_tp_num}
+		)}
+		]]>
+		
+	</select>
+	<select id="updateYearRecordHitter" statementType="CALLABLE">
+		<![CDATA[
+		{call updatePlayerrecordHitterYearByMr_num(
+			#{mr_num}, #{ph.ph_tp_num}
 		)}
 		]]>
 		
 	</select>
 	<select id="PlayerRecordHitterVO" statementType="CALLABLE">
 		<![CDATA[
-		{call BBEinsertProcedure(
+		{call updatePlayerrecordHitterYearByMr_num(
 			#{mr_num}, #{ph.ph_tp_num}
 		)}
 		]]>
@@ -216,5 +224,7 @@
   		<if test="cri.type != 0">
   			ph_tp_num = #{cri.type}
   		</if>
-  </select>
+  	</select>
+  	
+  
 </mapper>
