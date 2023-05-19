@@ -133,14 +133,14 @@
 										<c:otherwise>
 											<c:url value='/files${team.tm_team_img}'></c:url>
 										</c:otherwise>
-									</c:choose>" alt="단또즈">
+									</c:choose>" alt="팀이름">
                   <button class="badge badge-pill badge-success">홈팀</button>
                 </div>
-                <span class="team-name home-team">단또즈</span>
+                <span class="team-name home-team">${team.tm_name}</span>
               </div>
               VS
               <div class="team-box our-team">
-                <span class="team-name away-team">돌핀즈</span>
+                <span class="team-name away-team">팀이름</span>
                 <div class="img-box">
                   <img class="team-logo away-team rounded-circle" src="<c:choose>
 										<c:when test="${empty team.tm_team_img}">
@@ -149,14 +149,14 @@
 										<c:otherwise>
 											<c:url value='/files${team.tm_team_img}'></c:url>
 										</c:otherwise>
-									</c:choose>" alt="단또즈">
+									</c:choose>" alt="팀이름">
                   <button class="badge badge-pill badge-danger">원정</button>
                 </div>
               </div>
               <div class="score_num">
-                <span class="home_score">5</span>
+                <span class="home_score">0</span>
                 :
-                <span class="away_score">2</span>
+                <span class="away_score">0</span>
               </div>
               <div class="no-data" style="display:none">데이터가 없습니다.</div>
             </div>
@@ -173,7 +173,7 @@
                     <!-- <span class="attendance badge badge-success">용병</span> -->
   
                   </li>
-                  <li class="item-lineup">
+                 <!--  <li class="item-lineup">
                     <span class="num-lineup btn btn-info">1</span>
                     <a href="#" class="link-lineup">강백호</a>
                     <span class="position-lineup">유격수</span>
@@ -184,7 +184,7 @@
                     <a href="#" class="link-lineup">강백호</a>
                     <span class="position-lineup">유격수</span>
                     <span class="attendance badge badge-warning">용병</span>
-                    <!-- <span class="attendance badge badge-success">용병</span> -->
+                    <span class="attendance badge badge-success">용병</span>
   
                   </li>
                   <li class="item-lineup">
@@ -198,7 +198,7 @@
                     <a href="#" class="link-lineup">강백호</a>
                     <span class="position-lineup">유격수</span>
                     <span class="attendance badge badge-warning">용병</span>
-                    <!-- <span class="attendance badge badge-success">용병</span> -->
+                    <span class="attendance badge badge-success">용병</span>
   
                   </li>
                   <li class="item-lineup">
@@ -212,7 +212,7 @@
                     <a href="#" class="link-lineup">강백호</a>
                     <span class="position-lineup">유격수</span>
                     <span class="attendance badge badge-warning">용병</span>
-                    <!-- <span class="attendance badge badge-success">용병</span> -->
+                    <span class="attendance badge badge-success">용병</span>
   
                   </li>
                   <li class="item-lineup">
@@ -226,9 +226,9 @@
                     <a href="#" class="link-lineup">강백호</a>
                     <span class="position-lineup">유격수</span>
                     <span class="attendance badge badge-warning">용병</span>
-                    <!-- <span class="attendance badge badge-success">용병</span> -->
+                    <span class="attendance badge badge-success">용병</span>
   
-                  </li>
+                  </li> -->
                   
                   
                 </ul>
@@ -248,7 +248,7 @@
                     <!-- <span class="attendance badge badge-success">용병</span> -->
   
                   </li>
-                  <li class="item-lineup">
+                  <!-- <li class="item-lineup">
                     <span class="num-lineup btn btn-info">1</span>
                     <a href="#" class="link-lineup">강백호</a>
                     <span class="position-lineup">유격수</span>
@@ -259,7 +259,7 @@
                     <a href="#" class="link-lineup">강백호</a>
                     <span class="position-lineup">유격수</span>
                     <span class="attendance badge badge-warning">용병</span>
-                    <!-- <span class="attendance badge badge-success">용병</span> -->
+                    <span class="attendance badge badge-success">용병</span>
   
                   </li>
                   <li class="item-lineup">
@@ -273,7 +273,7 @@
                     <a href="#" class="link-lineup">강백호</a>
                     <span class="position-lineup">유격수</span>
                     <span class="attendance badge badge-warning">용병</span>
-                    <!-- <span class="attendance badge badge-success">용병</span> -->
+                    <span class="attendance badge badge-success">용병</span>
   
                   </li>
                   <li class="item-lineup">
@@ -287,7 +287,7 @@
                     <a href="#" class="link-lineup">강백호</a>
                     <span class="position-lineup">유격수</span>
                     <span class="attendance badge badge-warning">용병</span>
-                    <!-- <span class="attendance badge badge-success">용병</span> -->
+                    <span class="attendance badge badge-success">용병</span>
   
                   </li>
                   <li class="item-lineup">
@@ -301,9 +301,9 @@
                     <a href="#" class="link-lineup">강백호</a>
                     <span class="position-lineup">유격수</span>
                     <span class="attendance badge badge-warning">용병</span>
-                    <!-- <span class="attendance badge badge-success">용병</span> -->
+                    <span class="attendance badge badge-success">용병</span>
   
-                  </li>
+                  </li> -->
                   
                   
                 </ul>
@@ -330,24 +330,24 @@
                   <th>Total</th>
                 </tr>
                 <tr class="trscore_hometeam">
-                  <td class="name-home_team">단또즈</td>
-                  <td class="inning_1">1</td>
-                  <td class="inning_2">0</td>
-                  <td class="inning_3">1</td>
-                  <td class="inning_4">0</td>
-                  <td class="inning_5">0</td>
-                  <td class="inning_6">3</td>
-                  <td class="total_home">5</td>
-                </tr>
-                <tr class="trscore_opponent">
-                  <td class="name-home_team">돌핀즈</td>
+                  <td class="name-home_team">Home팀</td>
                   <td class="inning_1">0</td>
                   <td class="inning_2">0</td>
                   <td class="inning_3">0</td>
-                  <td class="inning_4">2</td>
+                  <td class="inning_4">0</td>
                   <td class="inning_5">0</td>
                   <td class="inning_6">0</td>
-                  <td class="total_home">2</td>
+                  <td class="total_home">0</td>
+                </tr>
+                <tr class="trscore_opponent">
+                  <td class="name-home_team">Away팀</td>
+                  <td class="inning_1">0</td>
+                  <td class="inning_2">0</td>
+                  <td class="inning_3">0</td>
+                  <td class="inning_4">0</td>
+                  <td class="inning_5">0</td>
+                  <td class="inning_6">0</td>
+                  <td class="total_home">0</td>
                 </tr>
                 
               </table>
@@ -404,38 +404,23 @@
                 </thead>
                 <tbody class="container-trstat_hitter home">
                   <tr class="trstat_hometeam">
-                    <td class="ht_name-player">강백호</td>
-                    <td class="ht_partType">선발</td>
-                    <td class="ht_hitorder">1</td>
-                    <td class="ht_inning_1">4구, 도루</td>
+                    <td class="ht_name-player"></td>
+                    <td class="ht_partType"></td>
+                    <td class="ht_hitorder"></td>
+                    <td class="ht_inning_1"></td>
                     <td class="ht_inning_2"></td>
-                    <td class="ht_inning_3">좌플</td>
-                    <td class="ht_inning_4">좌안</td>
+                    <td class="ht_inning_3"></td>
+                    <td class="ht_inning_4"></td>
                     <td class="ht_inning_5"></td>
                     <td class="ht_inning_6"></td>
-                    <td class="ht_hit_time">2</td>
-                    <td class="ht_hit">1</td>
-                    <td class="ht_hit_point">2</td>
-                    <td class="ht_point">1</td>
-                    <td class="ht_run">1</td>
-                    <td class="ht_hitrate">0.500</td>
+                    <td class="ht_hit_time"></td>
+                    <td class="ht_hit"></td>
+                    <td class="ht_hit_point"></td>
+                    <td class="ht_point"></td>
+                    <td class="ht_run"></td>
+                    <td class="ht_hitrate"></td>
                   </tr>
-                  <tr class="trstat_hometeam">
-                    <td class="name-player">강백호</td>
-                    <td class="ht_hitorder">2</td>
-                    <td class="inning_1">4구, 도루</td>
-                    <td class="inning_2"></td>
-                    <td class="inning_3">좌플</td>
-                    <td class="inning_4">좌안</td>
-                    <td class="inning_5"></td>
-                    <td class="inning_6"></td>
-                    <td class="hit_time">2</td>
-                    <td class="hit">1</td>
-                    <td class="hit_point">2</td>
-                    <td class="point">1</td>
-                    <td class="run">1</td>
-                    <td class="hitrate">0.500</td>
-                  </tr>
+                  
                   
                 </tbody>
                 
@@ -463,45 +448,26 @@
                 </thead>
                 <tbody class="container-trstat_pitcher home">
                   <tr class="trstat_hometeam">
-                    <td class="name-player">강백호</td>
-                    <td class="pt_result">-</td>
-                    <td class="pt_inning">2 ⅔</td>
-                    <td class="pt_vshitter_num">13</td>
-                    <td class="pt_vshitter_time">8</td>
-                    <td class="pt_hit">1</td>
-                    <td class="pt_homerun">0</td>
-                    <td class="pt_sacrifice_bunt">0</td>
-                    <td class="pt_sacrifice_fly">0</td>
-                    <td class="pt_fourball">2</td>
-                    <td class="pt_deadball">3</td>
-                    <td class="pt_k">4</td>
-                    <td class="pt_failball">0</td>
-                    <td class="pt_balk">1</td>
-                    <td class="pt_lose_point">2</td>
-                    <td class="pt_self_lose_point">2</td>
-                    <td class="pt_pitching_time">53</td>
-                    <td class="pt_rate">5.26</td>
+                    <td class="name-player"></td>
+                    <td class="pt_result"></td>
+                    <td class="pt_inning"></td>
+                    <td class="pt_vshitter_num"></td>
+                    <td class="pt_vshitter_time"></td>
+                    <td class="pt_hit"></td>
+                    <td class="pt_homerun"></td>
+                    <td class="pt_sacrifice_bunt"></td>
+                    <td class="pt_sacrifice_fly"></td>
+                    <td class="pt_fourball"></td>
+                    <td class="pt_deadball"></td>
+                    <td class="pt_k"></td>
+                    <td class="pt_failball"></td>
+                    <td class="pt_balk"></td>
+                    <td class="pt_lose_point"></td>
+                    <td class="pt_self_lose_point"></td>
+                    <td class="pt_pitching_time"></td>
+                    <td class="pt_rate"></td>
                   </tr>
-                  <tr class="trstat_hometeam">
-                    <td class="name-player">강백호</td>
-                    <td class="pt_result">-</td>
-                    <td class="pt_inning">2 ⅔</td>
-                    <td class="pt_vshitter_num">13</td>
-                    <td class="pt_vshitter_time">8</td>
-                    <td class="pt_hit">1</td>
-                    <td class="pt_homerun">0</td>
-                    <td class="pt_sacrifice_bunt">0</td>
-                    <td class="pt_sacrifice_fly">0</td>
-                    <td class="pt_fourball">2</td>
-                    <td class="pt_deadball">3</td>
-                    <td class="pt_k">4</td>
-                    <td class="pt_failball">0</td>
-                    <td class="pt_balk">1</td>
-                    <td class="pt_lose_point">2</td>
-                    <td class="pt_self_lose_point">2</td>
-                    <td class="pt_pitching_time">53</td>
-                    <td class="pt_rate">5.26</td>
-                  </tr>
+                  
                   
                   
                 </tbody>
@@ -1071,7 +1037,8 @@
     		ajaxParam("POST", uObj, '<c:url value="/team/ajax/playerRecord"></c:url>', function(data){
     			$(tmp).find('.pt_name-player').text(data.player.me_nickname);
     			let prp = data.pRpitcher
-    			if(data.pRPitcher !=null){
+    			console.log(prp);
+    			if(prp !=undefined){
     				
 	    			$(tmp).find('.pt_innings').text(prp.pp_innings);
 	    			$(tmp).find('.pt_hitters').text(prp.pp_hitters);

@@ -930,7 +930,7 @@ public class TeamController {
 		PlayerVO player = playerService.selectPlayerByTpNum(tp_num);
 		TeamPlayerVO tp = playerService.selectTeamPlayerByTpNum(tp_num);
 		PlayerRecordHitterVO pRHitter = recordService.selectPlayerRecordHitterByTpNumAndMrNum(tp_num, mr_num);
-		PlayerRecordHitterVO pRPitcher = recordService.selectPlayerRecordPitcherByTpNumAndMrNum(tp_num, mr_num);
+		PlayerRecordPitcherVO pRPitcher = recordService.selectPlayerRecordPitcherByTpNumAndMrNum(tp_num, mr_num);
 		map.put("pRHitter", pRHitter);
 		map.put("pRPitcher", pRPitcher);
 		map.put("tp", tp);

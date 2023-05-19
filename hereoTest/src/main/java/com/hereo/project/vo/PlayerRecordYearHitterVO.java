@@ -1,5 +1,10 @@
 package com.hereo.project.vo;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor	
 public class PlayerRecordYearHitterVO {
 	private int yh_num;
 	private int yh_tp_num;
