@@ -322,7 +322,7 @@
 			var reservationForm = $("#form").serialize();
 			var st_num = $('input[name=st_num]').val();
 			var date=$('input[name=ss_game_date]').val();
-			console.log(reservationForm);
+
 			$.ajax({
 			
 				asyn:true,

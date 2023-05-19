@@ -89,9 +89,21 @@ public class ReservationServiceImp implements ReservationService{
 	@Override
 	public ArrayList<StadiumScheduleVO> getReservationList(String me_id) {
 		
-		String state = "결제완료";
+		String state = "예약대기";
 		ArrayList<StadiumScheduleVO> list = stadiumDao.getReservationList(me_id,state);
 		
 		return list;
+	}
+
+	@Override
+	public double getTotalPrice(String receipt_id) {		
+		return stadiumDao.getTotalPrice(receipt_id);
+	}
+
+	@Override
+	public void updateState(String receipt_id) {
+		String state ="결제취소";
+		stadiumDao.cancelState(receipt_id, state);
+		
 	}
 }

@@ -107,10 +107,10 @@
 		set ss_state=#{state}, ss_receipt_id=#{receipt_id}
 		where ss_rv_num=#{rv_num}
 	</update>
-	<select id="getReservationList" resultType="com.hereo.project.vo.StadiumScheduleVO">
+	<select id="getReservationList" resultMap="stadiumTimeConnect">
 		select * from `stadium-schedule` join `reservation` 
 		on `stadium-schedule`.ss_rv_num = `reservation`.rv_num
-		where rv_me_id=#{me_id} and ss_state=#{state}
+		where rv_me_id=#{me_id} and ss_state!=#{state}
 	</select>
 	<resultMap type="com.hereo.project.vo.ReservationVO" id="reserve">
 		<id property="rv_num" column="rv_num" />
@@ -123,9 +123,50 @@
 		<result property="rv_game_type" column="rv_game_type"/>
 		<result property="rv_home_num" column="rv_home_num"/>
 		<result property="rv_away_num" column="rv_away_num"/>
-		<collection property="ss" ofType="kr.kh.spring.vo.B" column="a_target_num" select="selectBListByA"></collection>
+		<collection property="ss" ofType="com.hereo.project.vo.StadiumScheduleVO" column="rv_num" select="selectSS"></collection>
 	</resultMap>
-
+	<select id="selectSS" resultMap="stadiumTimeConnect" parameterType="java.util.Map">
+		select * from `stadium-schedule`
+		where ss_rv_num=#{rv_num}
+	</select>
+		<resultMap type="com.hereo.project.vo.StadiumScheduleVO" id="stadiumTimeConnect">
+		<id property="ss_num" column="ss_num" />
+		<result property="ss_game_date" column="ss_game_date"/>
+		<result property="ss_st_num" column="ss_st_num"/>
+		<result property="ss_rv_num" column="ss_rv_num"/>
+		<result property="ss_state" column="ss_state"/>
+		<result property="ss_receipt_id" column="ss_receipt_id"/>
+		<collection property="st" ofType="com.hereo.project.vo.StadiumTimetableVO" column="ss_st_num" select="selectST"></collection>
+	</resultMap>
+	<select id="selectST" resultMap="stadiumConnect" parameterType="java.util.Map">
+		select * from `stadium-timetable`
+		where st_num=#{ss_st_num}
+	</select>
+	<resultMap type="com.hereo.project.vo.StadiumTimetableVO" id="stadiumConnect">
+		<id property="st_num" column="st_num" />
+		<result property="st_sd_num" column="st_sd_num"/>
+		<result property="st_start_time" column="st_start_time"/>
+		<result property="st_use_time" column="st_use_time"/>
+		<result property="st_rent_cost" column="st_rent_cost"/>
+		<result property="st_daytype" column="st_daytype"/>
+		<result property="st_game_num" column="st_game_num"/>
+		<collection property="s" ofType="com.hereo.project.vo.StadiumVO" column="st_sd_num" select="selectS"></collection>
+	</resultMap>
+	<select id="selectS" resultType="com.hereo.project.vo.StadiumVO">
+		select * from `stadium`
+		where sd_num=#{st_sd_num}
+	</select>
+	
+	<select id="getTotalPrice" resultType="double">
+		select rv_total_price from `reservation` join `stadium-schedule` 
+		on ss_rv_num = rv_num 
+		where ss_receipt_id=#{receipt_id}
+	</select>
+	<update id="cancelState" parameterType="String">
+		update `stadium-schedule`
+		set ss_state =#{state}
+		where ss_receipt_id =#{receipt_id}
+	</update>
 </mapper>
 
 

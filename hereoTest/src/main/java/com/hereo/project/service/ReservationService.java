@@ -31,6 +31,10 @@ public interface ReservationService {
 
 	ArrayList<StadiumScheduleVO> getReservationList(String me_id);
 
+	double getTotalPrice(String receipt_id);
+
+	void updateState(String receipt_id);
+
 
 
 

@@ -58,6 +58,12 @@ public interface StadiumDAO {
 
 	ArrayList<StadiumScheduleVO> getReservationList(@Param("me_id") String me_id, @Param("state") String state);
 
+	double getTotalPrice(@Param("receipt_id") String receipt_id);
+
+	void cancelState(@Param("receipt_id") String receipt_id, @Param("state") String state);
+
+
+
 
 
 

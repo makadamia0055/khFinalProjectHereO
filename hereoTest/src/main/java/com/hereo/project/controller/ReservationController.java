@@ -33,6 +33,7 @@ import com.hereo.project.vo.StadiumVO;
 import com.hereo.project.vo.TeamVO;
 
 import kr.co.bootpay.Bootpay;
+import kr.co.bootpay.model.request.Cancel;
 
 
 @Controller
@@ -129,7 +130,9 @@ public class ReservationController {
 	@GetMapping(value={"/reservation/check"})
 	public String reservationCheck(Model model, HttpSession session) {
 		ArrayList<StadiumScheduleVO> reserveList=reservationService.getReservationList(((MembersVO)session.getAttribute("loginUser")).getMe_id());
+		System.out.println("리저브리스트"+reserveList);
 		
+		model.addAttribute("reserveList", reserveList);
 		return "/reservation/reservation-check";
 	}
 	@ResponseBody
@@ -180,5 +183,36 @@ public class ReservationController {
 		
 		return enable;
 	}
+	//결제취소 메서드
+	@ResponseBody
+	@PostMapping(value= {"/reservation/cancel"})
+	public String cancelReservation(String receipt_id) {
+		System.out.println(receipt_id);
+		try {
+		    Bootpay bootpay = new Bootpay("6450af6d755e27001b375f4a", "vt/NZXiLbNOBadm8p2ONHo1ZO+DOfUbpMUC9rDoluQk=");
+		    HashMap token = bootpay.getAccessToken();
+		    if(token.get("error_code") != null) { //failed
+		        return null;
+		    }
+		    
+		double rv_total_price=reservationService.getTotalPrice(receipt_id);
+		    Cancel cancel = new Cancel();
+		    cancel.receiptId = receipt_id;
+		    cancel.cancelUsername = "관리자";
+		    cancel.cancelMessage = "테스트 결제";
+		    cancel.cancelPrice= rv_total_price;
+
+		    HashMap res = bootpay.receiptCancel(cancel);
+		    if(res.get("error_code") == null) { //success
+		        System.out.println("receiptCancel success: " + res);
+		        reservationService.updateState(receipt_id);
+
+		    } else {
+		        System.out.println("receiptCancel false: " + res);
+		    }
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+		return "success";
+	}
 }
-	

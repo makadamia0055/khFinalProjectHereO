@@ -1,5 +1,6 @@
 package com.hereo.project.vo;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -17,10 +18,14 @@ public class StadiumScheduleVO {
 	private int ss_st_num;
 	private int ss_rv_num;
 	private String ss_state;
+	private String ss_receipt_id;
 	private StadiumTimetableVO st;
 	
 	public String getSs_game_date() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		return format.format(ss_game_date);
+	}
+	public Date getSs_game_date_toDate() {
+		return ss_game_date;
 	}
 }
