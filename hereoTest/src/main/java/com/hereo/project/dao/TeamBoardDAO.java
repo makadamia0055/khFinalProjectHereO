@@ -88,6 +88,8 @@ public interface TeamBoardDAO {
 	
 	int updateReplyPlusOneForDup(@Param("br")BoardReplyVO reply, @Param("res") boolean res);
 
+	void deleteBoardFilesByBoNum(int bo_num);
+
 	
 
 }

@@ -42,19 +42,18 @@
 		select * from `stadium-timetable`
 	</select>
 	<!-- 스타디움 등록 -->
-	<insert id="insertStadium">
-	    <![CDATA[
-	        INSERT INTO stadium(sd_rd_num, sd_name, sd_register_date, sd_contact, sd_me_id, sd_price, sd_intro)
-	        VALUES (#{stadium.sd_rd_num}, #{stadium.sd_name}, NOW(), #{stadium.sd_contact},
-          #{stadium.sd_me_id}, #{stadium.sd_price}, #{stadium.sd_intro})
-	    ]]>
+	<insert id="insertStadium" useGeneratedKeys="true" keyProperty="stadium.sd_num">
+	  INSERT INTO stadium(sd_rd_num, sd_name, sd_register_date, sd_contact, sd_me_id, sd_price, sd_intro)
+      VALUES (#{stadium.sd_rd_num}, #{stadium.sd_name}, NOW(), #{stadium.sd_contact},
+      #{stadium.sd_me_id}, #{stadium.sd_price}, #{stadium.sd_intro})
+	  
 	</insert>
 	
 	<!-- 스타디움 이미지 등록 -->
 	<insert id="insertStadiumImage">
 	    <![CDATA[
-	        INSERT INTO stadium_image(sd_num, si_filename)
-	        VALUES (#{sd_num}, #{si_filename})
+	        INSERT INTO `stadium-image`(sd_num, si_filename)
+	        VALUES (#{file.si_sd_num}, #{file.si_filename})
 	    ]]>
 	</insert>
 	<select id="selectRegionDetail" resultType="int">
