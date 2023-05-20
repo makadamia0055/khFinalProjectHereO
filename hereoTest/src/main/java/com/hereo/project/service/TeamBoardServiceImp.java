@@ -177,8 +177,9 @@ public class TeamBoardServiceImp implements TeamBoardService {
 		if(bo_me_id ==null)
 			return false;
 		ArrayList<BoardFileVO> files = selectTeamBoardFiles(bo_num);
-		if(teamBoardDao.deleteTeamBoardByNumAndId(bo_num, bo_me_id)==0)
-			return false;
+		teamBoardDao.deleteBoardFilesByBoNum(bo_num);
+		teamBoardDao.deleteTeamBoardByNumAndId(bo_num, bo_me_id);
+			
 		for(BoardFileVO file : files) {
 			UploadFileUtils.removeFile(uploadPath, file.getBf_filename());
 			

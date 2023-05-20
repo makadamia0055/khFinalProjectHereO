@@ -91,19 +91,21 @@
 			</div>
 			<div class="form-group">
 				<label for="stadium-address">구장 주소</label>
-				<input type="hidden" id="sample6_postcode" name="rd-zipcode" placeholder="우편번호">
+				<input type="hidden" id="sample6_postcode" name="rd_zipcode" placeholder="우편번호">
 				<input type="button" onclick="sample6_execDaumPostcode()" name="btn-post" value="우편번호 찾기">
-				<input type="hidden" id="sido" name="rd-address" placeholder="시">
-				<input type="text" id="sample6_address" name="rd-address" placeholder="주소"><br>
+				<input type="hidden" id="sido" name="re_sido" placeholder="시">
+				<input type="hidden" id="sigungo" name="rs_gu" placeholder="시군구">
+				<input type="text" id="sample6_address" name="rd_address" placeholder="주소"><br>
 				<span id="guide" style="color:#999;display:none"></span>
-				<input type="text" id="sample6_detailAddress" name="rd_detail-address" placeholder="상세주소"><br>
+				<input type="text" id="sample6_detailAddress" name="rd_detail_address" placeholder="상세주소"><br>
 				<input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
 			</div>
 			<div class="form-group">
 				<label for="stadium-phone">구장 연락처</label>
-				<input type="tel" name="sd_contact1" maxlength="3"> -
-				<input type="tel" name="sd_contact2" maxlength="4"> -
-				<input type="tel" name="sd_contact3" maxlength="4">
+				<input type="text" name="sd_contact1" maxlength="3" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >-
+				<input type="text" name="sd_contact2" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >-
+				<input type="text" name="sd_contact3" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
+				
 			</div>
 			<div class="form-group">
 				<label for="stadium-description" >시설 사용 규칙</label>
@@ -233,7 +235,7 @@ function readURL(input){
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_postcode").value = data.zonecode;
                 document.getElementById("sample6_address").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("sample6_detailAddress").focus();
@@ -247,7 +249,14 @@ function readURL(input){
 			oncomplete: function(data) {
 				// 시/군/구 정보를 sido input에 넣어줍니다.
 				document.getElementById("sido").value = data.sido;
-
+				
+				//시군구 정보 넣어주기
+				let data_sigungo = data.sigungu;
+				if(data_sigungo == null){
+					data_sigungo = data.bname;
+				}
+				$('#sigungo').val(data_sigungo)
+                document.getElementById("sample6_postcode").value = data.zonecode;
 				// 도로명주소 정보를 roadAddress input에 넣어줍니다.
 				document.getElementById("sample6_address").value = data.roadAddress;
 

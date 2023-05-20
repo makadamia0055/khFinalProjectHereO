@@ -216,5 +216,9 @@
 			set br_ori_num = #{br.br_num}
 			where br_num = #{br.br_num} 
 	</update>
-	
+	<delete id="deleteBoardFilesByBoNum">
+		delete from `board-file`
+			where bf_bo_num = #{bo_num}
+			
+	</delete>
 </mapper>

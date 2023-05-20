@@ -36,11 +36,10 @@ public class StadiumServiceImp implements StadiumService{
 	        String fileName = "";
 	        try {
 	            fileName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
-	            System.out.println(fileName);
 
 	            StadiumImageVO stadiumImageVo = new StadiumImageVO();
-	            stadiumImageVo.setSi_sd_num(si_sd_num); // si_sd_num 설정
 	            stadiumImageVo.setSi_filename(fileName);
+	            stadiumImageVo.setSi_sd_num(si_sd_num); // si_sd_num 설정
 	            fileList.add(stadiumImageVo); // fileList에 추가
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -94,6 +93,7 @@ public class StadiumServiceImp implements StadiumService{
 		    	 fileList = uploadFiles(files, stadium.getSd_num());
 		    	 
 		    	 for (StadiumImageVO file : fileList) {
+		    		 	System.out.println(file);
 				        file.setSi_sd_num(stadium.getSd_num());
 				        stadiumDao.insertStadiumImage(file);
 				    }

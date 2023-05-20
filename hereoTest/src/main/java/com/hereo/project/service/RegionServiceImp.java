@@ -71,6 +71,37 @@ public class RegionServiceImp implements RegionService {
 	public List<RegionSubVO> getRegionSubList(int re_num) {
 		return regionSubDao.getRegionSubList(re_num);
 	}
+	@Override
+	public RegionSubVO checkRegionSub(RegionVO region, RegionSubVO regionSub) {
+		if(region==null||regionSub == null)
+			return null;
+		RegionVO selectedRegion = regionDao.selectRegionBySido(region.getRe_sido());
+		if(selectedRegion==null) {
+			regionDao.insertRegion(region);
+			selectedRegion = regionDao.selectRegionBySido(region.getRe_sido());
+		}
+		RegionSubVO selectedRegionSub = regionSubDao.selectRegionSubByRsGu(regionSub.getRs_gu(), selectedRegion.getRe_num());
+		if(selectedRegionSub==null) {
+			regionSub.setRs_re_num(selectedRegion.getRe_num());
+			regionSubDao.insertRegionSub(regionSub);
+			selectedRegionSub = regionSubDao.selectRegionSubByRsGu(regionSub.getRs_gu(), selectedRegion.getRe_num());
+		}
+		return selectedRegionSub;
+	}
+	@Override
+	public RegionDetailVO checkRegionDetail(RegionDetailVO regionDetail) {
+		if(regionDetail==null)		
+			return null;
+		
+		RegionDetailVO selectedRegionDetail = regionDetailDao.selectRegionDetailByPostOrAddress(regionDetail);
+		if(selectedRegionDetail == null) {
+			regionDetailDao.insertRegionDetail(regionDetail);
+			selectedRegionDetail = regionDetailDao.selectRegionDetailByPostOrAddress(regionDetail);
+		}
+		return selectedRegionDetail;
+			
+		 
+	}
 
 	
 
