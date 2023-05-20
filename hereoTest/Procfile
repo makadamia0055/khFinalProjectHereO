@@ -1,2 +1,2 @@
-eb: java $JAVA_OPTS -jar target/dependency/test.jar --port $PORT target/*.war
+web: java -jar /workspace/target/test.jar
 
