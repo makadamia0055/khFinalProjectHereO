@@ -1,2 +1,2 @@
-web: java -jar /workspace/target/test.jar
+web: java -jar /hereoTest/target/test.jar
 
