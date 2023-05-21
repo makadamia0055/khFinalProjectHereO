@@ -16,7 +16,7 @@
 	      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
 	    <property name="url"
-	              value="${MYSQL_URL2}>
+	              value="${MYSQL_URL2}">
 	    </property>
 	    <property name="username" value="${DATABASE_USERNAME}"></property>
 	    <property name="password" value="${DATABASE_PASSWORD}"></property>
