@@ -169,7 +169,7 @@
        	  			</td>
        	  			<td>
        	  				<span class="date"><fmt:formatDate type="both" pattern = "yyyy년 MM월 dd일 HH시 mm분" value="${sc.ms_datetime }"></fmt:formatDate></span>
-       	  			<a class="btn btn-light" href="#">일정 상세보기</a>
+       	  			<a class="btn btn-light" href="<c:url value='/reservation/check'></c:url>">일정 상세보기</a>
       	  			</td>
       	  			<td class="text-center">
       	  				<c:if test="${sc.ms_match_sort != '연습'}">
@@ -202,8 +202,7 @@
         <div class="container-team-participate-league">
           <h2 class="title-team-league">${team.tm_slogan }</h2>
           <hr>
-          <p>팀 소개글</p>
-          <p>${team.tm_team_introduce }</p>
+          <p>${team.tm_team_introduce}</p>
         </div>
     </section>
 

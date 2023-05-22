@@ -10,8 +10,8 @@
 	</select>
 	<select id="selectNextTeamSchedule" resultType="com.hereo.project.vo.MatchScheduleVO">
 		select * from `match-schedule`
-			where ms_datetime >= now() and 
-			(ms_tm_home_num = #{teamNum} or ms_tm_away_num =#{teamNum}) 
+			where (ms_tm_home_num = #{teamNum} or ms_tm_away_num =#{teamNum}) 
+			and ms_datetime >= now() 
 			order by ms_datetime asc limit 1;
 	</select>
 	<select id="selectStadiumByRv_Num" resultType="com.hereo.project.vo.StadiumVO">

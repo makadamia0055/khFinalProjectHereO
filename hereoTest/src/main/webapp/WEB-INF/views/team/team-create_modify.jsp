@@ -108,7 +108,7 @@
 						</div>
 						<div class="form-group">
 							<label for="tm_team_introduce">팀 소개</label><br>
-							<textarea placeholder="팀 소개를 입력해주십시오.">${team.tm_team_introduce }</textarea>
+							<textarea name="tm_team_introduce" id="tm_team_introduce" placeholder="팀 소개를 입력해주십시오.">${team.tm_team_introduce}</textarea>
 							
 							
 						</div>
