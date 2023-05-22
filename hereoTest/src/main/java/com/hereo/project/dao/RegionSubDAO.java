@@ -16,5 +16,7 @@ public interface RegionSubDAO {
 
 	RegionSubVO getRegionSubByNum(@Param("rd_rs_num")int rd_rs_num);
 
+	RegionSubVO selectRegionSubByRsGu(@Param("rs_gu")String rs_gu, @Param("re_num")int re_num);
+
 
 }

@@ -202,16 +202,24 @@ public class LeagueController {
 		mv.addObject("lg_num", lg_num);
 		return mv;
 	}
-	@RequestMapping(value = "/league/partimanagerment/{lg_num}/detail/{la_num}/save", method = RequestMethod.POST)
-	public ModelAndView leaguePartiManagermentSavePOST(ModelAndView mv, @PathVariable("lg_num")int lg_num,
-			@PathVariable("la_num")int la_num, LeagueParticipationteamVO lp) {
-		boolean isSave = leagueService.updateLeaguePartiTeamSave(lp);
+	@RequestMapping(value = "/league/partimanagerment/{lg_num}/detail/{la_num}/save", method = RequestMethod.GET)
+	public ModelAndView leaguePartiManagermentSave(ModelAndView mv, @PathVariable("lg_num")int lg_num,
+			@PathVariable("la_num")int la_num) {
 		
-		mv.setViewName("/league/league-parti-managerment-detail");
+		mv.setViewName("redirect:/league/partimanagerment/list/{lg_num}");
 		mv.addObject("lg_num", lg_num);
 		return mv;
 	}
+	@RequestMapping(value = "/league/partimanagerment/{lg_num}/detail/{la_num}/update", method = RequestMethod.GET)
+	public ModelAndView leaguePartiManagermentUpdate(ModelAndView mv, @PathVariable("lg_num")int lg_num,
+			@PathVariable("la_num")int la_num, LeagueAttributeVO la) {
+		boolean isUpdate = leagueService.updateLeaguePartiTeam(la, la_num);
+		
 
+		mv.setViewName("redirect:/league/partimanagerment/list/{lg_num}");
+		mv.addObject("lg_num", lg_num);
+		return mv;
+	}
 	
 	@RequestMapping(value = "/league/schedulemanagerment/{lg_num}", method = RequestMethod.GET)
 	public ModelAndView leagueScheduleManagerment(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
@@ -243,6 +251,19 @@ public class LeagueController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		boolean res = leagueService.checkLeagueName(league.getLg_name());
 		map.put("res", res);
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/league/approval/{lp_num}/{lp_approval}", method = RequestMethod.GET)
+	public Map<String, Object> leagueApproval(@PathVariable("lp_num")int lp_num,
+			@PathVariable("lp_approval")int lp_approval) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int res = leagueService.leagueApproval(lp_num, lp_approval);
+
+		map.put("state", res);
+		LeagueParticipationteamVO lp = leagueService.getLeagueParti(lp_num);
+		map.put("lp_num", lp);
 		return map;
 	}
 	

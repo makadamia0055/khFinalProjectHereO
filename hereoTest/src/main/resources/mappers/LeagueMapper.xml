@@ -141,5 +141,21 @@
 		lp_approval = #{lp.lp_approval}
 			where lp_num = #{lp.lp_num}
 	</update>
-
+	<select id="selectleagueApproval" resultType="com.hereo.project.vo.LeagueParticipationteamVO">
+		select * from `league-participationteam`
+			where lp_num = #{lp_num}
+	</select>
+	<update id="updateleagueApproval">
+		update `league-participationteam` set
+			lp_approval = #{lp.lp_approval}
+			where lp_num = #{lp.lp_num}
+	</update>
+	<select id="selectLeaguePartiByLpNum" resultType="com.hereo.project.vo.LeagueParticipationteamVO">
+		select * from `league-participationteam` where lp_num = #{lp_num}
+	</select>
+	<update id="updateLeaguePartiTeam">
+		update `league_attribute` set
+			la_team_state = '모집완료'
+			where la_num = #{la_num}
+	</update>
 </mapper>

@@ -15,5 +15,7 @@ public interface RegionDetailDAO {
 	RegionDetailVO getRegionDetailByCode(@Param("rs_num")int rs_num, @Param("rd_zipcode")String rd_zipcode);
 
 	List<RegionDetailVO> selectRegionDetail(@Param("rd_num")int rd_num);
+
+	RegionDetailVO selectRegionDetailByPostOrAddress(@Param("rd")RegionDetailVO regionDetail);
 	
 }

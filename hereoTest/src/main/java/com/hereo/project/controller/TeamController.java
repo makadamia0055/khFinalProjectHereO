@@ -937,6 +937,17 @@ public class TeamController {
 		map.put("player", player);
 		return map;
 	}
+//	mrNum으로 경기 상대방 이름 보내기
+	@ResponseBody
+	@RequestMapping(value="/team/ajax/oppoName", method=RequestMethod.POST)
+	public Map<String, Object>getOppoName(@RequestParam("mr_num")Integer mr_num, @RequestParam("tm_num")Integer tm_num) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		TeamVO oppoTeam = recordService.getOppoTeamName(mr_num, tm_num);
+		map.put("oppoTeam", oppoTeam);
+		return map;
+	}
+	
+	
 //	batterBoxEvent type 보내기
 	@ResponseBody
 	@RequestMapping(value="/team/ajax/batterBoxEvent", method=RequestMethod.POST)

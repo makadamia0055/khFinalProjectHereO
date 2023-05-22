@@ -59,7 +59,7 @@
                         </td>
                         <td rowspan="3" id="table-stadium">
                             <a href="<c:url value='/reservation/stadium/info'></c:url>">
-                                <img src="강상.jpg" alt="" class="img">
+                                <img src="" alt="" class="img">
                                 <br>
                                 <strong style="color: black; font-size: 15px;">구장명 : </strong><span>${st.sd_name}</span>
                                 <input type="hidden" name="sd_num" value="${st.sd_num}">
@@ -82,16 +82,16 @@
                                     <div class="game-title">10게임</div>                                
                                     <br>
                                     <div class="game-info">
-                                        <div class="status"><span class="league">리그</span></div>
-                                        <div class="status"><span class="confirm">확정</span></div>
                                         <div class="status"><span class="reserve">예약</span></div>
-                                        <div class="status"><span class="league">리그</span></div>
                                         <div class="status"><span class="reserve">예약</span></div>
-                                        <div class="status"><span class="none"></span></div>
-                                        <div class="status"><span class="none"></span></div>
-                                        <div class="status"><span class="none"></span></div>
-                                        <div class="status"><span class="none"></span></div>
-                                        <div class="status"><span class="none"></span></div>                                    
+                                        <div class="status"><span class="reserve">예약</span></div>
+                                        <div class="status"><span class="reserve">예약</span></div>
+                                        <div class="status"><span class="reserve">예약</span></div>
+                                        <div class="status"><span class="reserve">예약</span></div>
+                                        <div class="status"><span class="reserve">예약</span></div>
+                                        <div class="status"><span class="reserve">예약</span></div>
+                                        <div class="status"><span class="reserve">예약</span></div>
+                                        <div class="status"><span class="reserve">예약</span></div>                                    
                                     </div>
                                 </div>
                             </div>
@@ -147,6 +147,7 @@ $( function() {
       }
     });
 } );
+ 
 $('.link-region').on('click', function() {
 	  var region = $(this).data('local');
 	  

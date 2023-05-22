@@ -21,4 +21,6 @@ public interface RegionDAO {
 
 	RegionVO[] selectAllRegion();
 
+	RegionVO selectRegionBySido(String re_sido);
+
 }

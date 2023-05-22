@@ -17,9 +17,9 @@
             
           </div>
           <div class="rightbox-profile">
-            <ul class="list-group player-profile1">
+            <ul class="list-group list-group-flush player-profile1">
               <h3 class="player-name">${player.me_nickname }</h3>
-              <li class="list-group-item list-group-item-action">소속팀 : 
+              <li class="list-group-item list-group-item-action ">소속팀 : 
               	<c:choose>
               		<c:when test="${not empty team}">${team.tm_name}</c:when>
               		<c:otherwise>소속팀 없음</c:otherwise>
@@ -61,16 +61,16 @@
               <thead class="thead thead-dark">
                 <tr>
                   <th class="match_date">일자</th>
-                  <th class="match_oppo">상대</th>
+                  <th class="match_oppoStr">상대</th>
                   <th class="match_AVG">타율</th>
                   <th class="match_PA">타석</th>
                   <th class="match_AB">타수</th>
-                  <th class="match_R">득점</th>
+                  <!-- <th class="match_R">득점</th> -->
                   <th class="match_H">안타</th>
                   <th class="match_2B">2루타</th>
                   <th class="match_3B">3루타</th>
                   <th class="match_HR">홈런</th>
-                  <th class="match_RBI">타점</th>
+                  <!-- <th class="match_RBI">타점</th> -->
                   <th class="match_SB">도루</th>
                   <th class="match_CS">도루실패</th>
                   <th class="match_BB">볼넷</th>
@@ -87,16 +87,16 @@
 				<c:forEach items="${pHList}" var="ph">
                 <tr>
                   <td class="match_date">${ph.ms_datetime_str}</th>
-                  <td class="match_oppo"><a class="badge badge-danger">돌핀즈</span></td>
-                  <td class="match_AVG"></td>
+                  <td class="match_oppo" data-mrnum="${ph.ph_mr_num}"></td>
+                  <td class="match_AVG">${ph.ph_hits / ph.ph_bats}</td>
                   <td class="match_PA">${ph.ph_bats}</td>
                   <td class="match_AB">${ph.ph_hits}</td>
-                  <td class="match_R"></td>
+                  <!-- <td class="match_R"></td> -->
                   <td class="match_H">${ph.ph_single_hits}</td>
                   <td class="match_2B">${ph.ph_twobase_hits}</td>
                   <td class="match_3B">${ph.ph_threebase_hits}</td>
                   <td class="match_HR">${ph.ph_homeruns}</td>
-                  <td class="match_RBI"></td>
+                  <!-- <td class="match_RBI"></td> -->
                   <td class="match_SB">${ph.ph_steals}</td>
                   <td class="match_CS">${ph.ph_fail_steals}</td>
                   <td class="match_BB">${ph.ph_fourballs}</td>
@@ -115,8 +115,8 @@
               <thead class="thead thead-dark">
                 <tr>
                   <th class="match_date">일자</th>
-                  <th class="match_oppo">상대</th>
-                  <th class="match_AVG">결과</th>
+                  <th class="match_oppoStr">상대</th>
+                  <!-- <th class="match_AVG">결과</th> -->
                   <!-- <th class="match_PA">평균자책점</th> -->
                   <th class="match_AB">타자수</th>
                   <th class="match_R">이닝</th>
@@ -138,8 +138,8 @@
                 <c:forEach items="${pPList}" var="pp">
                 <tr>
                   <td class="match_date">${pp.ms_datetime_str}</th>
-                  <td class="match_oppo"><a class="badge badge-danger"></span></td>
-                  <td class="match_AVG"></td>
+                  <td class="match_oppo" data-mrnum="${pp.pp_mr_num}"></td>
+                  <!-- <td class="match_AVG"></td> -->
                   <!-- <td class="match_PA"></td> -->
                   <td class="match_AB">${pp.pp_hitters}</td>
                   <td class="match_R">${pp.pp_innings}</td>
@@ -184,12 +184,12 @@
                     <th class="match_AVG">타율</th>
                     <th class="match_PA">타석</th>
                     <th class="match_AB">타수</th>
-                    <th class="match_R">득점</th>
+                    <!-- <th class="match_R">득점</th> -->
                     <th class="match_H">안타</th>
                     <th class="match_2B">2루타</th>
                     <th class="match_3B">3루타</th>
                     <th class="match_HR">홈런</th>
-                    <th class="match_RBI">타점</th>
+                    <!-- <th class="match_RBI">타점</th> -->
                     <th class="match_SB">도루</th>
                     <th class="match_CS">도루실패</th>
                     <th class="match_BB">볼넷</th>
@@ -209,15 +209,16 @@
                   <tr>
                   <td class="match_date">${yh.yh_year}</th>
                   
+                  <td class="match_AVG">${yh.yh_hits / yh.yh_bats}</th>
                   
                   <td class="match_PA">${yh.yh_bats}</td>
                   <td class="match_AB">${yh.yh_hits}</td>
-                  <td class="match_R"></td>
+                  <!-- <td class="match_R"></td> -->
                   <td class="match_H">${yh.yh_single_hits}</td>
                   <td class="match_2B">${yh.yh_twobase_hits}</td>
                   <td class="match_3B">${yh.yh_threebase_hits}</td>
                   <td class="match_HR">${yh.yh_homeruns}</td>
-                  <td class="match_RBI"></td>
+                  <!-- <td class="match_RBI"></td> -->
                   <td class="match_SB">${yh.yh_steals}</td>
                   <td class="match_CS">${yh.yh_fail_steals}</td>
                   <td class="match_BB">${yh.yh_fourballs}</td>
@@ -238,8 +239,6 @@
                 <thead class="thead thead-dark">
                   <tr>
                     <th class="match_date">년도</th>
-                    <th class="match_oppo">상대</th>
-                    <th class="match_AVG">결과</th>
                     <!-- <th class="match_PA">평균자책점</th> -->
                     <th class="match_AB">타자수</th>
                     <th class="match_R">이닝</th>
@@ -263,16 +262,16 @@
                 <c:forEach items="${yPList}" var="yp">
                 <tr>
                   <td class="match_date">${yp.yp_year}</th>
-                  <td class="match_AVG">0.320</td>
+                  <!-- <td class="match_AVG">0.320</td> -->
                   <%-- <td class="match_PA">${yp.yp_earnedruns/pp.pp_innings}</td> --%>
                   <td class="match_AB">${yp.yp_hitters}</td>
                   <td class="match_R">${yp.yp_innings}</td>
-                  <td class="match_H">${yp.yp_hits }</td>
-                  <td class="match_HR">${yp.yp_homeruns}</td>
-                  <td class="match_4b">${yp.yp_fourballs}</td>
-                  <td class="match_hbp">${yp.yp_hitbypitches}</td>
-                  <td class="match_RBI">${yp.yp_strikeouts}</td>
-                  <td class="match_SB">${yp.yp_losepoints}</td>
+                  <td class="match_H">${yp.yp_hits}</td>
+                  <td class="match_HR">${yp.yp_homeRuns}</td>
+                  <td class="match_4b">${yp.yp_fourBalls}</td>
+                  <td class="match_hbp">${yp.yp_hitByPitches}</td>
+                  <td class="match_RBI">${yp.yp_strikeOuts}</td>
+                  <td class="match_SB">${yp.yp_losePoints}</td>
                   <%-- <td class="match_CS">${yp.yp_earnedruns }</td> --%>
                   <td class="match_BB">${yp.yp_pitches}</td>
                   
@@ -298,7 +297,7 @@
 </html>
 
 <script>
- /*  const ctx = document.getElementById('PlayerStatChart');
+ const ctx = document.getElementById('PlayerStatChart');
 
   new Chart(ctx, {
     type: 'radar',
@@ -314,17 +313,7 @@
     pointBorderColor: '#fff',
     pointHoverBackgroundColor: '#fff',
     pointHoverBorderColor: 'rgb(255, 99, 132)'
-  }, {
-    label: '팀 평균',
-    data: [50, 48, 40, 45, 96, 27],
-    fill: true,
-    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-    borderColor: 'rgb(54, 162, 235)',
-    pointBackgroundColor: 'rgb(54, 162, 235)',
-    pointBorderColor: '#fff',
-    pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgb(54, 162, 235)'
-  }]
+  }, ]
     },
     options: {
       scales: {
@@ -333,7 +322,7 @@
         }
       }
     }
-  }); */
+  });
 
 </script>
 <script>
@@ -351,7 +340,41 @@
     $('.hitter_history').toggle();
     
   });
+  setOppoNamer();
+  /* 상대팀 이름 넣어주는 메소드 */
+  function setOppoNamer(){
+	  let matchOppo = $('.match_oppo');
+	  for(let tmp of matchOppo){
+		  let mrnum= $(tmp).data('mrnum');
+		  let mrObj={
+				  mr_num:mrnum,
+				  tm_num:${team.tm_num}
+		  }
+		  let oppoTmName;
+		  ajaxParam("POST", mrObj, '<c:url value="/team/ajax/oppoName"></c:url>', function(data){
+			  oppoTmName= data.oppoTeam.tm_name;
+		  })
+		  let tmpStr = '<a class="badge badge-danger">'+oppoTmName+'</a>';
+		  $(tmp).append(tmpStr);
+		  
+	  }
+	  
+  }
+  
 
+  function ajaxParam(method, obj, url, successFunc, errorFunc){
+  	$.ajax({
+  		async:false,
+  		type: method,
+  		data: obj,
+  		url: url, 
+  		dataType: "json",
+  		
+  		success: successFunc,
+  		error: errorFunc
+  		
+  	});
+  }  
  
 
 </script>

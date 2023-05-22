@@ -133,7 +133,11 @@ public class ReservationController {
 	//임시로 만들어 놓은 예약확인 
 	@GetMapping(value={"/reservation/check"})
 	public String reservationCheck(Model model, HttpSession session) {
-		ArrayList<StadiumScheduleVO> reserveList=reservationService.getReservationList(((MembersVO)session.getAttribute("loginUser")).getMe_id());
+		MembersVO user = (MembersVO)session.getAttribute("loginUser");
+		if(user==null) {
+			return "/reservation/reservation-main";
+		}
+		ArrayList<StadiumScheduleVO> reserveList=reservationService.getReservationList(user.getMe_id());
 		System.out.println("리저브리스트"+reserveList);
 		
 		model.addAttribute("reserveList", reserveList);

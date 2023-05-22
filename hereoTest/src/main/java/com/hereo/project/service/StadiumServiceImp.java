@@ -36,11 +36,10 @@ public class StadiumServiceImp implements StadiumService{
 	        String fileName = "";
 	        try {
 	            fileName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
-	            System.out.println(fileName);
 
 	            StadiumImageVO stadiumImageVo = new StadiumImageVO();
-	            stadiumImageVo.setSi_sd_num(si_sd_num); // si_sd_num 설정
 	            stadiumImageVo.setSi_filename(fileName);
+	            stadiumImageVo.setSi_sd_num(si_sd_num); // si_sd_num 설정
 	            fileList.add(stadiumImageVo); // fileList에 추가
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -81,17 +80,27 @@ public class StadiumServiceImp implements StadiumService{
 
 		@Override
 		public void insertStadium(StadiumVO stadium, MembersVO user, MultipartFile[] files) {
-		    // 파일 업로드
-		    List<StadiumImageVO> fileList = uploadFiles(files, stadium.getSd_num());
+		    
 		    //지역 정보를 가져오는 작업을 진행해야함 ..
 		    // 스타디움 등록
 		    stadium.setSd_me_id(user.getMe_id());
 		    stadiumDao.insertStadium(stadium);
 		    // 파일 정보 저장
-		    for (StadiumImageVO file : fileList) {
-		        file.setSi_sd_num(stadium.getSd_num());
-		        stadiumDao.insertStadiumImage(file);
+		    
+		 // 파일 업로드
+		    List<StadiumImageVO> fileList;
+		    if(files!=null&&files.length!=0) {
+		    	 fileList = uploadFiles(files, stadium.getSd_num());
+		    	 
+		    	 for (StadiumImageVO file : fileList) {
+		    		 	System.out.println(file);
+				        file.setSi_sd_num(stadium.getSd_num());
+				        stadiumDao.insertStadiumImage(file);
+				    }
 		    }
+		    	
+		    
+		    
 		}
 
 		@Override
