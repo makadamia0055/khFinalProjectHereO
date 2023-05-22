@@ -35,9 +35,7 @@
               <a href="<c:url value='/team/main'></c:url>"><span>팀</span></a>
               <ul class="submenu-containerBox1 team-submenu__01">
                 <li><a href="<c:url value='/team/main'></c:url>">전체 팀</a></li>
-                <li>
-                  <a href="<c:url value='/team/join'></c:url>">팀 가입신청</a>
-                </li>
+                
               </ul>
             </li>
             <li class="menu-container__box top-menu__league-hover">

@@ -69,15 +69,19 @@
 
 .submenu-containerBox1 {
   margin-top: 80px;
-  height: 200px;
+  
   width: 150px;
+  background-color: tomato;
+  border-radius : 5px;
 }
 .submenu-containerBox1 > li {
   color: black;
   font-size: 15px;
   font-weight: 600;
-  padding: 4px 0px;
+  padding: 4px 4px;
   background-color: tomato;
+  border-radius : 5px;
+  
 
 }
 

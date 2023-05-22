@@ -102,7 +102,7 @@
       </ul>
       <ul class="footer__info">
         <li>히어로 주식회사</li>
-        <li class="footer__info-git">공승배 : <a href="#">깃주소</a></li>
+        <li class="footer__info-git">공승배 : <a href="https://github.com/makadamia0055">깃허브</a></li>
         <li class="footer__info-git">권용현 : <a href="#">깃주소</a></li>
         <li class="footer__info-git">김지우 : <a href="#">깃주소</a></li>
         <li class="footer__info-git">임상신 : <a href="#">깃주소</a></li>
