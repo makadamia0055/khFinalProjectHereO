@@ -150,17 +150,18 @@ public class LeagueServiceImp implements LeagueService {
 	
 	//리그 참가신청 (팀)
 	@Override
-	public int insertLeagueAttByTeam(int la_num, MembersVO user) {
-		if(user == null)
+	public int insertLeagueAttByTeam(int la_num, String me_id) {
+		if(me_id == null)
 			return -100;
 		int res = 0;
-		PlayerVO player = leagueDao.selectPlayerByUser(user.getMe_id());
+		PlayerVO player = leagueDao.selectPlayerByUser(me_id);
 		TeamPlayerVO tPlayer = leagueDao.selectTplayerByPlNum(player.getPl_num());
+		//팀에 소속되어 있는지 확인
 		if(tPlayer.getTp_tm_num() < 1)
-			res = 0;
+			return -100;
 		TeamVO team = leagueDao.selectTeamByTpNum(tPlayer.getTp_tm_num());
 		
-		//팀 참가했는지 체크 
+		//팀이 리그신청이 되어있는지 확인 
 		LeagueParticipationteamVO dbLp = leagueDao.selectLeaguePartiTeamByLeagueAtt(team.getTm_num(), la_num);
 		
 		if(dbLp != null) {
@@ -168,10 +169,17 @@ public class LeagueServiceImp implements LeagueService {
 		}else {
 			LeagueParticipationteamVO lpVo = new LeagueParticipationteamVO(team.getTm_num(), la_num);
 			leagueDao.insertLeaguePartiByTmNum(lpVo);
+			res = 1;
 		}
 			
 		
 		return res;
+	}
+	@Override
+	public MembersVO getSelectMember(String me_id) {
+		if(me_id == null)
+			return null;
+		return leagueDao.selectMemberByMeid(me_id);
 	}
 
 

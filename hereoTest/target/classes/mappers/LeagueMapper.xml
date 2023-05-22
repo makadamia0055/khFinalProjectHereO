@@ -183,4 +183,8 @@
 		select ifnull(max(lp_num),0)+1 , #{lp.lp_tm_num}, #{lp.lp_le_num}
 			from `league-participationteam`
 	</insert>
+	<select id="selectMemberByMeid" resultType="com.hereo.project.vo.MembersVO">
+		select * from members
+			where me_id = #{me_id}
+	</select>
 </mapper>

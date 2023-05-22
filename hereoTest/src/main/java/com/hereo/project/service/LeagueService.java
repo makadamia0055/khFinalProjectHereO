@@ -45,7 +45,9 @@ public interface LeagueService {
 
 	boolean updateLeaguePartiTeam(LeagueAttributeVO la, int la_num);
 
-	int insertLeagueAttByTeam(int la_num, MembersVO user);
+	int insertLeagueAttByTeam(int la_num, String me_id);
+
+	MembersVO getSelectMember(String me_id);
 
 
 

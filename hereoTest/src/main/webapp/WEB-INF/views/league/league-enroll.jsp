@@ -75,10 +75,14 @@
 
 <script>
 	$('.btn-application').click(function(){
-		
+		if('${member.me_id}' == ''){
+			alert('로그인한 회원만 신청이 가능합니다.');
+			return;
+		}
 		//리스트에 있는 값이여서 값을 찾아와야함
 		let la_num = $(this).parents('tr').find('[name=la_num]').val();
-		let url = '<c:url value="/league/team/appli/"></c:url>'+la_num;
+		let me_id = '${member.me_id}';
+		let url = '<c:url value="/league/team/appli/"></c:url>'+la_num+'/'+me_id ;
 		
 		$.ajax({
 	        async:true,
@@ -86,12 +90,7 @@
 	        url: url,
 	        dataType:"json",//서버에서 보낸 데이터의 타입. Map받으로 받을거기 때문에 json
 	        success : function(data){
-	        	console.log(data)
-	        	if(data.state == 1){
-	        		alert('~~팀의 참가승인을 거절하였습니다.');
-	        	}else if(data.state == 2){
-	        		alert('~~팀의 참가승인을 승인하였습니다.');
-	        	}
+	        	
 	        }
 	    });
 	});

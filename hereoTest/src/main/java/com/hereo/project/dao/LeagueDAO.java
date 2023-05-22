@@ -10,6 +10,7 @@ import com.hereo.project.vo.LeagueMatchListVO;
 import com.hereo.project.vo.LeagueParticipationteamVO;
 import com.hereo.project.vo.LeagueScheduleVO;
 import com.hereo.project.vo.LeagueVO;
+import com.hereo.project.vo.MembersVO;
 import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.TeamPlayerVO;
 import com.hereo.project.vo.TeamVO;
@@ -71,6 +72,8 @@ public interface LeagueDAO {
 	LeagueParticipationteamVO selectLeaguePartiTeamByLeagueAtt(@Param("tm_num")int tm_num, @Param("la_num")int la_num);
 
 	void insertLeaguePartiByTmNum(@Param("lp")LeagueParticipationteamVO lpVo);
+
+	MembersVO selectMemberByMeid(@Param("me_id")String me_id);
 
 
 

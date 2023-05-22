@@ -135,11 +135,16 @@ public class LeagueController {
 			HttpSession session) {
 		ArrayList<LeagueAttributeVO> laList = leagueService.selectLeagueAttByLgNum(lg_num);
 		ArrayList<LeagueParticipationteamVO> lpList = leagueService.getSelectLeagueParti(lg_num);
-		MembersVO user = (MembersVO)session.getAttribute("user");
-		
-		
-		
-		mv.addObject("user", user);
+		MembersVO user = (MembersVO)session.getAttribute("loginUser");
+		if(user == null) {
+			mv.addObject("msg", "로그인된 사용자만 사용가능");
+			mv.addObject("url", "redirect:/league/main/{lg_num}");
+			mv.setViewName("/common/message");
+			return mv;
+		}
+		MembersVO member = leagueService.getSelectMember(user.getMe_id());
+		System.out.println(user.getMe_id());
+		mv.addObject("member", member);
 		mv.addObject("lpList", lpList);
 		mv.addObject("laList", laList);
 		mv.addObject("lg_num", lg_num);
@@ -273,13 +278,13 @@ public class LeagueController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/league/team/appli/{la_num}", method = RequestMethod.GET)
+	@RequestMapping(value = "/league/team/appli/{la_num}/{me_id}", method = RequestMethod.GET)
 	public Map<String, Object> leagueApplication(@RequestBody LeagueAttributeVO leagueAtt,
-			@PathVariable("la_num")int la_num, HttpSession session) {
+			@PathVariable("la_num")int la_num,
+			@PathVariable("me_id")String me_id) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		MembersVO user = (MembersVO)session.getAttribute("user");
 		
-		int res = leagueService.insertLeagueAttByTeam(la_num, user);
+		int res = leagueService.insertLeagueAttByTeam(la_num,me_id);
 		
 		map.put("res", res);
 		return map;

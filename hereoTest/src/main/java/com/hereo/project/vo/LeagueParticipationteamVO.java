@@ -14,7 +14,7 @@ public class LeagueParticipationteamVO {
 	private LeagueScheduleVO lp_leagueSchedule;
 	
 	public LeagueParticipationteamVO(int lp_tm_num, int lp_le_num) {
-		this.lp_num = lp_tm_num;
+		this.lp_tm_num = lp_tm_num;
 		this.lp_le_num = lp_le_num;
 	}
 	
