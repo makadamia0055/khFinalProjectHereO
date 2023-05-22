@@ -73,7 +73,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 />
               </div>
               <div class="signup-withBtn02">
-                <button class="idCheck-btn">중복 확인</button>
+                <input type="button" class="idCheck-btn" value="중복 확인">
               </div>
             </div>
           </div>
@@ -244,6 +244,34 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         },
         "필수 항목입니다."
       );
+     
+      $('.idCheck-btn').click(function(){
+		var me_id=$('input[name=me_id]').val();
+		
+			if(me_id.trim()==''){
+				alert("아이디를 입력해주세요.");
+			}
+			
+    	  $.ajax({
+			  asyn:true,
+			  url: '<c:url value="/sign/idcheck"></c:url>',  
+			  method: "POST", 
+			  data: {me_id: me_id},
+			  success : function(data){
+				  console.log(data);
+				  if(data=="y"){
+					  alert("사용할 수 있는 아이디입니다.");
+				  }else if(data=="n"){
+					  alert("이미 존재하는 아이디입니다.");
+				  }else if(data=="null"){
+					  
+				  }
+			  },
+			  error: function(data){
+				  console.log("에러");
+			  }
+		});
+      })
     </script>
   </body>
 </html>

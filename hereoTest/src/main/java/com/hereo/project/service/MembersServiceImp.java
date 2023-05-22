@@ -62,6 +62,12 @@ public class MembersServiceImp implements MembersService{
 		
 	}
 
+	@Override
+	public MembersVO idCheck(String me_id) {
+		
+		return membersDao.checkId(me_id);
+	}
+
 
 	
 

@@ -18,4 +18,6 @@ public interface MembersDAO {
 
 	MembersVO selectLoginSession(@Param("me_session_id") String me_session_id);
 
+	MembersVO checkId(@Param("me_id") String me_id);
+
 }

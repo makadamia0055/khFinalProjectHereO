@@ -12,8 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hereo.project.service.CommuService;
@@ -89,6 +92,23 @@ public class HomeController {
 		membersService.updateAutoLoginSession(loginUser);
 		return "redirect:/";
 	}
-	
+	@ResponseBody
+	@PostMapping(value ="/sign/idcheck")
+	public String idCheck(@RequestParam("me_id") String me_id) {
+		System.out.println(me_id);
+		String data="";
+		if(me_id==null || me_id.length()==0) {
+			data="null";					
+		}else {
+			MembersVO id = membersService.idCheck(me_id);
+			if(id==null || id.getMe_id()==null) {
+				data="y";
+			}else { 
+				data="n";
+			}
+		}
+		System.out.println(data);
+		return data;
+	}
 }
 	

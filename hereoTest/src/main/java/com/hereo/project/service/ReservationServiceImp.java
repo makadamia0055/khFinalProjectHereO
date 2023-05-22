@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hereo.project.dao.StadiumDAO;
+import com.hereo.project.pagination.CommuCriteria;
+import com.hereo.project.pagination.Criteria;
 import com.hereo.project.vo.ReservationVO;
 import com.hereo.project.vo.StadiumScheduleVO;
 import com.hereo.project.vo.StadiumTimetableVO;
@@ -33,12 +35,17 @@ public class ReservationServiceImp implements ReservationService{
 	}
 	
 	@Override
-	public ArrayList<StadiumVO> getStadiumList(Integer region) {
-		
-
-		return stadiumDao.selectStadiumList(region);
+	public ArrayList<StadiumVO> getStadiumList02(Integer region, Criteria cri) {
+		if(cri==null) 
+			 cri= new Criteria();
+		return stadiumDao.selectStadiumList02(region, cri);
 	}
-	
+	@Override
+	public ArrayList<StadiumVO> getStadiumList01(Criteria cri) {
+		if(cri==null) 
+			 cri= new Criteria();	
+		return stadiumDao.selectStadiumList01(cri);
+	}
 	//스타디움 스케쥴에 예약된 항목이 있는지 우선 체크하는 메서드
 	@Override
 	public ArrayList<StadiumScheduleVO> checkStadiumSchedule(int st_num, String date, String state) {
@@ -106,4 +113,12 @@ public class ReservationServiceImp implements ReservationService{
 		stadiumDao.cancelState(receipt_id, state);
 		
 	}
+
+	@Override
+	public void insertMatchSchedule(int rv_num) {
+		ReservationVO list = stadiumDao.getReservation(rv_num);
+		System.out.println("리스트으으"+list);
+		stadiumDao.insertMatchSchedule(list.getRv_game_type(), list.getRv_home_num(), list.getRv_away_num(), list.getSs().getSs_game_date(), list.getRv_num());
+	}
+
 }
