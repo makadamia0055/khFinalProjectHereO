@@ -43,30 +43,37 @@ public class LeagueServiceImp implements LeagueService {
 		return leagueDao.selectLeagueByLgNum(lg_num);
 	}
 	@Override
-	public ArrayList<LeagueAttributeVO> selectLeagueAttByLgNum(int lg_num) {
+	public ArrayList<LeagueAttributeVO> selectLeagueAttListByLgNum(int lg_num) {
 		if(lg_num == 0)
 			return null;
-		return leagueDao.selectLeagueAttByLgNum(lg_num);
+		return leagueDao.selectLeagueAttListByLgNum(lg_num);
 	}
 	@Override
-	public ArrayList<LeagueScheduleVO> selectLeagueSchedule(int lg_num) {
+	public ArrayList<LeagueScheduleVO> selectLeagueScheduleList(int lg_num) {
 		if(lg_num == 0)
 			return null;
-		return leagueDao.selectLeagueSchedule(lg_num);
+		LeagueAttributeVO la = leagueDao.selectLeagueAttByLgNum(lg_num);
+		if(la == null)
+			return null;
+		return leagueDao.selectLeagueScheduleList(la.getLa_num());
 	}
 	@Override
-	public ArrayList<LeagueParticipationteamVO> getSelectLeagueParti(int lg_num) {
+	public ArrayList<LeagueParticipationteamVO> getSelectLeaguePartiList(int lg_num) {
 		if(lg_num == 0)
 			return null;
-		return leagueDao.selectLeagueParti(lg_num);
+		LeagueAttributeVO la = leagueDao.selectLeagueAttByLgNum(lg_num);
+		if(la == null)
+			return null;
+		return leagueDao.selectLeaguePartiList(la.getLa_num());
 	}
 	@Override
-	public Boolean insertLeague(LeagueVO league) {
+	public Boolean insertLeague(LeagueVO league, MembersVO user) {
 		//리그 등록 서비스
-
+		if(user == null)
+			return false;
 		if(!checkLeague(league)) // 필요한 리그정보 없을시 실패
 			return false;
-		
+		league.setLg_me_id(user.getMe_id());
 		leagueDao.insertLeague(league);
 		
 		return true;
@@ -165,11 +172,11 @@ public class LeagueServiceImp implements LeagueService {
 		LeagueParticipationteamVO dbLp = leagueDao.selectLeaguePartiTeamByLeagueAtt(team.getTm_num(), la_num);
 		
 		if(dbLp != null) {
-			res = 0;
+			res = 3;
 		}else {
 			LeagueParticipationteamVO lpVo = new LeagueParticipationteamVO(team.getTm_num(), la_num);
 			leagueDao.insertLeaguePartiByTmNum(lpVo);
-			res = 1;
+			res = 2;
 		}
 			
 		
@@ -181,6 +188,7 @@ public class LeagueServiceImp implements LeagueService {
 			return null;
 		return leagueDao.selectMemberByMeid(me_id);
 	}
+
 
 
 }

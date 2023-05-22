@@ -81,8 +81,7 @@
 		}
 		//리스트에 있는 값이여서 값을 찾아와야함
 		let la_num = $(this).parents('tr').find('[name=la_num]').val();
-		let me_id = '${member.me_id}';
-		let url = '<c:url value="/league/team/appli/"></c:url>'+la_num+'/'+me_id ;
+		let url = '<c:url value="/league/team/appli/"></c:url>'+la_num;
 		
 		$.ajax({
 	        async:true,
@@ -90,7 +89,11 @@
 	        url: url,
 	        dataType:"json",//서버에서 보낸 데이터의 타입. Map받으로 받을거기 때문에 json
 	        success : function(data){
-	        	
+	        	if(data.res == 3){
+	        		alert('이미 참가신청이 되어있습니다.');
+	        	}else if(data.res == 2){
+	        		alert('참가신청을 했습니다.');
+	        	}
 	        }
 	    });
 	});
