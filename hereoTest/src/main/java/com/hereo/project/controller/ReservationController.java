@@ -19,9 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hereo.project.dao.RegionDAO;
 import com.hereo.project.pagination.Criteria;
-import com.hereo.project.pagination.PageMaker;
 import com.hereo.project.service.PlayerService;
 import com.hereo.project.service.ReservationService;
+import com.hereo.project.service.StadiumService;
 import com.hereo.project.service.TeamService;
 import com.hereo.project.utils.MessageUtils;
 import com.hereo.project.vo.MembersVO;
@@ -42,6 +42,8 @@ public class ReservationController {
 	ReservationService reservationService;
 	@Autowired
 	TeamService teamService;
+	@Autowired
+	StadiumService stadiumService;
 	
 	@Autowired
 	PlayerService playerService;
@@ -76,12 +78,21 @@ public class ReservationController {
 	}
 	//임시로 만들어 놓은 스타디움 인포 메서드
 	@GetMapping(value={"/reservation/stadium-info"})
-	public String reserveInfo(Model model, int stadium, String game_date) {
-
-		ArrayList<StadiumVO> sd= reservationService.getStadiumTimetable(stadium);
-		model.addAttribute("sd",sd);
-		model.addAttribute("game_date",game_date);
-		return "/reservation/reservation-stadium_info";
+	public ModelAndView reserveInfo(ModelAndView mv, int stadium, String game_date) {
+		if(stadium==0) {
+			mv.addObject("msg", "구장 정보가 없습니다.");
+			mv.addObject("url", "/reservation/main");
+			mv.setViewName("/common/message");
+			return mv;
+		}
+		
+		StadiumVO sd = stadiumService.selectStadiumByStnum(stadium);
+		ArrayList<StadiumTimetableVO> stList= reservationService.getStadiumTimetable(stadium);
+		mv.addObject("sd", sd);
+		mv.addObject("sdTimeTable", stList);
+		mv.addObject("game_date", game_date);
+		mv.setViewName("/reservation/reservation-stadium_info");
+		return mv;
 	}
 	//임시로 만들어 놓은 결제 정보창
 	@GetMapping(value= {"/reservation/payment_info"})

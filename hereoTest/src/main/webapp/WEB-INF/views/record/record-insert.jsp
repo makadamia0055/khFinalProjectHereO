@@ -1188,9 +1188,10 @@
 		}
 		ajaxParam("POST", totalTeamArrStringifyObj, '<c:url value="/record/matchInningPost"></c:url>', function(data){
 			/* 여기서 match-participate */
-			sendMatchPartcipate();
+			sendMatchPartcipate(data);
+			
+			
 			clearCurrentMrNumPlayerRecord();
-			ajaxPostBatterBoxEvent(data);
 		})
 		
 	}
@@ -1330,7 +1331,7 @@
 	
 	
 	/* match-partcipate를 입력하는 메소드 추가, 처음에 생각치 못한 메소드라 구현순서 밀려서 꼬인 부분 있음. */
-	function sendMatchPartcipate(){
+	function sendMatchPartcipate(data){
 		let totalTeamPartSelection = $('.box-recode-player .player-record-box').not('.ex').filter(function(){
 			if($(this).find('.isSelection option:selected').val() ==1)
 				return this;
@@ -1401,10 +1402,12 @@
 				"teamPart" : JSON.stringify(totalTeamPart),
 				"mr_num" : mr_num
 		}
-		ajaxParamAsync("POST", teamPartStringifyObj, '<c:url value="/record/matchParticipate"></c:url>', function(data){
-			console.log(data);
+		ajaxParamAsync("POST", teamPartStringifyObj, '<c:url value="/record/matchParticipate"></c:url>', function(data1){
+			console.log(data1);
 			
 		})
+		ajaxPostBatterBoxEvent(data);
+
 		
 	}
 	
