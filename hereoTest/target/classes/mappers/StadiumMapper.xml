@@ -3,6 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hereo.project.dao.StadiumDAO">
+	<resultMap type="com.hereo.project.vo.StadiumVO" id="stadiumVO">
+			<result column="sd_num" property="sd_num"/>
+			<result column="sd_rd_num" property="sd_rd_num"/>
+			<result column="sd_name" property="sd_name"/>
+			<result column="sd_register_date" property="sd_register_date"/>
+			<result column="sd_confirm" property="sd_confirm"/>
+			<result column="sd_contact" property="sd_contact"/>
+			<result column="sd_me_id" property="sd_me_id"/>
+			<result column="sd_price" property="sd_price"/>
+			<result column="sd_intro" property="sd_intro"/>
+			<collection column="sd_num"
+							property="imgList"
+							javaType="java.util.ArrayList"
+							ofType="com.hereo.project.vo.StadiumImageVO"
+							select="selectFileList">
+			</collection>
+	</resultMap>
 	<select id="selectBoardList" resultType="com.hereo.project.vo.StadiumVO">
   		select * 
   			from stadium

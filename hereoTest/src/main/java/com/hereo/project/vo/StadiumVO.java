@@ -1,6 +1,7 @@
 package com.hereo.project.vo;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import lombok.Data;
@@ -18,6 +19,8 @@ public class StadiumVO {
 	private String sd_me_id;
 	private int sd_price;
 	private String sd_intro;
+	
+	private ArrayList<StadiumImageVO> imgList;
 	
 	public StadiumVO(String sd_name, String sd_contact, String sd_intro) {
 		this.sd_name = sd_name;
