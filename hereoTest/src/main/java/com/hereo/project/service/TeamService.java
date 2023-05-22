@@ -1,6 +1,7 @@
 package com.hereo.project.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -53,7 +54,7 @@ public interface TeamService {
 
 	ArrayList<TeamVO> getNewTeam();
 
-	int countTeamTotalMatch(Integer teamNum);
+	HashMap<String, Object> countTeamTotalMatch(Integer teamNum);
 
 	ArrayList<TeamVO> getAllTeamList();
 

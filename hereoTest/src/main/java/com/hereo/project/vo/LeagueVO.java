@@ -17,6 +17,7 @@ public class LeagueVO {
 	private int lg_approval;
 	private String lg_logo;
 	private int lg_re_num;
+	private String lg_me_id;
 
 	public String getLg_start_date_str() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy");

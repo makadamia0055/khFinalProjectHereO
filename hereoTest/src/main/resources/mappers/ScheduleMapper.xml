@@ -17,6 +17,44 @@
 	<select id="selectStadiumByRv_Num" resultType="com.hereo.project.vo.StadiumVO">
 		select * from stadium 
 			where sd_num = (select st_sd_num from `stadium-timetable` where st_num = (select ss_st_num from `stadium-schedule` where ss_rv_num = #{rv_num}));
-	
 	</select>
+	
+	<resultMap type="com.hereo.project.vo.MatchScheduleVO" id="MatchSchedule">
+		<result column="ms_num" property="ms_num"/>
+		<result column="ms_datetime" property="ms_datetime"/>
+		<result column="ms_match_sort" property="ms_match_sort"/>
+		<result column="ms_tm_home_num" property="ms_tm_home_num"/>
+		<result column="ms_tm_away_num" property="ms_tm_away_num"/>
+		<result column="ms_rv_num" property="ms_rv_num"/>
+		<result column="ms_rv_num" property="ms_rv_num"/>
+		<collection column="ms_num"
+						property="homeTeam"
+						ofType="com.hereo.project.vo.TeamVO"
+						select="selectHomeTeamFromMatchSchedule">
+		</collection>
+		<collection column="ms_num"
+						property="awayTeam"
+						ofType="com.hereo.project.vo.TeamVO"
+						select="selectAwayTeamFromMatchSchedule">
+		</collection>
+	</resultMap>
+	<select id="selectMatchScheduleByMsNum" resultMap="MatchSchedule">
+		select * from `match-schedule`
+			where ms_num = #{ms_num}
+	</select>
+	<select id="selectMatchScheduleByTmNum" resultMap="MatchSchedule">
+		select * from `match-schedule`
+		where ms_tm_home_num = #{teamNum} or ms_tm_away_num =#{teamNum}
+	</select>
+	<select id="selectHomeTeamFromMatchSchedule" resultType="com.hereo.project.vo.TeamVO">
+		select * from `team` 
+		join `match-schedule` on `team`.tm_num = `match-schedule`.ms_tm_home_num
+		where ms_num = #{ms_num}
+	</select>
+	<select id="selectAwayTeamFromMatchSchedule" resultType="com.hereo.project.vo.TeamVO">
+		select * from `team` 
+		join `match-schedule` on `team`.tm_num = `match-schedule`.ms_tm_away_num
+		where ms_num = #{ms_num}
+	</select>
+	
 </mapper>

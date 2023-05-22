@@ -7,7 +7,7 @@ import com.hereo.project.vo.LeagueParticipationteamVO;
 import com.hereo.project.vo.LeagueScheduleVO;
 import com.hereo.project.vo.LeagueVO;
 import com.hereo.project.vo.MembersVO;
-import com.hereo.project.vo.PlayerrecordHitterVO;
+import com.hereo.project.vo.PlayerRecordHitterVO;
 import com.hereo.project.vo.TeamPlayerVO;
 import com.hereo.project.vo.TeamVO;
 import com.hereo.project.pagination.Criteria;
@@ -19,11 +19,30 @@ public interface LeagueService {
 
 	ArrayList<LeagueVO> selectLeaguesByCriAndState(String state, Criteria cri);
 
-	ArrayList<LeagueVO> selectLeagueByLgNum(int lg_num);
+	LeagueVO selectLeagueByLgNum(int lg_num);
 
 	ArrayList<LeagueAttributeVO> selectLeagueAttByLgNum(int lg_num);
 
 	ArrayList<LeagueScheduleVO> selectLeagueSchedule(int lg_num);
+
+	ArrayList<LeagueParticipationteamVO> getSelectLeagueParti(int lg_num);
+
+	Boolean insertLeague(LeagueVO league);
+
+	boolean checkLeagueName(String lg_name);
+
+	int countLeaguePlayer(Criteria cri);
+
+	boolean insertLeagueType(LeagueAttributeVO la, int lg_num);
+
+	boolean updateLeagueType(LeagueAttributeVO la);
+
+	boolean deleteLeagueType(Integer la_num);
+
+	boolean updateLeaguePartiTeamSave(LeagueParticipationteamVO lp);
+
+
+
 
 
 }

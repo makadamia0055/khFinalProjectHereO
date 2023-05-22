@@ -1,5 +1,6 @@
 package com.hereo.project.vo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,4 +22,12 @@ public class MatchScheduleVO {
 	private String ms_me_id;
 //	구장 넣어두기
 	private StadiumVO ms_stadium;
+	
+	private TeamVO homeTeam;
+	private TeamVO awayTeam;
+	
+	public String getMs_datetime_str() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		return format.format(ms_datetime);
+	}
 }

@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import com.hereo.project.pagination.Criteria;
+import com.hereo.project.vo.PlayerRecordHitterVO;
+import com.hereo.project.vo.PlayerRecordPitcherVO;
+import com.hereo.project.vo.PlayerRecordYearHitterVO;
+import com.hereo.project.vo.PlayerRecordYearPitcherVO;
 import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.TeamPlayerVO;
 import com.hereo.project.vo.TeamVO;
@@ -34,5 +38,15 @@ public interface TeamPlayerDAO {
 	ArrayList<TeamVO> selectTeamByPlNumAndAuth(@Param("pl_num")int pl_num, @Param("auth")int auth);
 
 	TeamPlayerVO selectTeamPlayerByPlNumAndTmNum(@Param("pl_num")int pl_num, @Param("tm_num")Integer tm_num);
+
+	ArrayList<PlayerRecordHitterVO> selectPlayerRecordHitter(int pl_num);
+
+	ArrayList<PlayerRecordPitcherVO> selectPlayerRecordPitcher(int pl_num);
+
+	ArrayList<PlayerRecordYearHitterVO> selectPlayerRecoreYearHitter(int pl_num);
+
+	ArrayList<PlayerRecordYearPitcherVO> selectPlayerRecordYearPitcher(int pl_num);
+
+	TeamPlayerVO selectTeamPlayerByTpNum(Integer tp_num);
 
 }
