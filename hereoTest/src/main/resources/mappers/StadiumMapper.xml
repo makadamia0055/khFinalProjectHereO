@@ -20,7 +20,7 @@
 							select="selectFileList">
 			</collection>
 	</resultMap>
-	<select id="selectBoardList" resultType="com.hereo.project.vo.StadiumVO">
+	<select id="selectBoardList" resultMap="stadiumVO">
   		select * 
   			from stadium
   			join region_detail on sd_rd_num = rd_num
