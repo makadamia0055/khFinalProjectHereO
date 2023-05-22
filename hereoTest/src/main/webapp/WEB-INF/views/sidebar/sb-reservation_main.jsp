@@ -48,24 +48,28 @@
             </ul>
          </div>
       </li>
-      <li class="item-side">
-         <a href="<c:url value='/reservation/check'></c:url>" target="_parent" class="link-side btn btn-light col-md">예약 확인</a>
-      </li>
+      <c:if test="${loginUser!=null}">
+	      <li class="item-side">
+	         <a href="<c:url value='/reservation/check'></c:url>" target="_parent" class="link-side btn btn-light col-md">예약 확인</a>
+	      </li>
+	  </c:if>    
       <li class="item-side">
          <a href="<c:url value='/reservation/stadium/list'></c:url>" target="_parent"  class="link-side btn btn-light col-md">구장 등록</a>
       </li>
-      <li class="item-side reservationAdmin">
-         <a href="#demo2" class="link-side btn btn-light col-md" data-toggle="collapse">관리자 메뉴</a>
-         <div id="demo2" class="collapse">
-            <ul class="sublist-side">
-               <li class="subitem-side">
-                  <a href="<c:url value='/reservation/stadium/list'></c:url>" target="_parent"  class="sublink-side btn btn-secondary col-sm-3">구장 관리</a>
-               </li>
-               <li class="subitem-side">
-                  <a href="#" target="_parent"  class="sublink-side btn btn-secondary col-sm-3">기록 관리</a>
-               </li>                       
-            </ul>
-         </div>
-      </li>
+      <c:if test="${loginUser!=null && loginUser.me_siteauth>=9 }">
+	      <li class="item-side reservationAdmin">
+	         <a href="#demo2" class="link-side btn btn-light col-md" data-toggle="collapse">관리자 메뉴</a>
+	         <div id="demo2" class="collapse">
+	            <ul class="sublist-side">
+	               <li class="subitem-side">
+	                  <a href="<c:url value='/reservation/stadium/list'></c:url>" target="_parent"  class="sublink-side btn btn-secondary col-sm-3">구장 관리</a>
+	               </li>
+	               <li class="subitem-side">
+	                  <a href="#" target="_parent"  class="sublink-side btn btn-secondary col-sm-3">기록 관리</a>
+	               </li>                       
+	            </ul>
+	         </div>
+	      </li>
+	 </c:if>     
    </ul> 
  </sidebar>
