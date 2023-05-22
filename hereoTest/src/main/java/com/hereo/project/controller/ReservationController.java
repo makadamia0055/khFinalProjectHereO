@@ -13,13 +13,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hereo.project.dao.RegionDAO;
+import com.hereo.project.pagination.Criteria;
+import com.hereo.project.pagination.PageMaker;
 import com.hereo.project.service.PlayerService;
 import com.hereo.project.service.ReservationService;
 import com.hereo.project.service.TeamService;
@@ -48,20 +48,24 @@ public class ReservationController {
 	@Autowired
 	RegionDAO regionDao;
 	//예약 메인 페이지
-	@RequestMapping(value = "/reservation/main", method = RequestMethod.GET)
-	public ModelAndView reservationMainPage(ModelAndView mv, String game_date, Integer region) {
+	@GetMapping(value = {"/reservation/main","/reservation"})
+	public ModelAndView reservationMainPage(ModelAndView mv, String game_date, Integer region, Criteria cri) {
 		
-		//지역번호에 맞는 스타디움 가져오기
-		ArrayList<StadiumVO> stadiumList = reservationService.getStadiumList(region);
-		RegionVO[]regionList = regionDao.selectAllRegion();
-		
+		ArrayList<StadiumVO> stadiumList = new ArrayList<StadiumVO>();
+		RegionVO regi = null;
 		//지역 출력용
 		if(region==null) {
-			region = 1;
-			} 
-		RegionVO regi = regionDao.getRegionByNum(region);
+			if(cri==null) 
+				cri = new Criteria();
+			stadiumList = reservationService.getStadiumList01(cri);
+		}else {
+			stadiumList = reservationService.getStadiumList02(region, cri);
+			regi = regionDao.getRegionByNum(region);
+		}
 		
-		//날짜에 맞는 게임일정을 가져오는 거 아직 미구현
+		RegionVO[]regionList = regionDao.selectAllRegion();
+
+
 		mv.addObject("regi", regi);
 		mv.addObject("game_date", game_date);
 		mv.addObject("stadiumList", stadiumList);
@@ -157,6 +161,7 @@ public class ReservationController {
 		        System.out.println("confirm success: " + res);
 		        reservationService.updateSchedule(receipt_id);
 		        reservationService.updateState(receipt_id,rv_num);
+		        reservationService.insertMatchSchedule(rv_num);
 		   } 
 		   Integer order_id = (Integer)res.get("order_id");
 		   if(order_id == null) {

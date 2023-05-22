@@ -48,14 +48,18 @@
             </ul>
          </div>
       </li>
-      <li class="item-side">
-         <a href="<c:url value='/reservation/check'></c:url>" target="_parent" class="link-side btn btn-light col-md">예약 확인</a>
-      </li>
+      <c:if test="${loginUser!=null}">
+	      <li class="item-side">
+	         <a href="<c:url value='/reservation/check'></c:url>" target="_parent" class="link-side btn btn-light col-md">예약 확인</a>
+	      </li>
+	  </c:if>    
       <li class="item-side">
          <a href="<c:url value='/reservation/stadium/list'></c:url>" target="_parent"  class="link-side btn btn-light col-md">구장 등록</a>
       </li>
-      <c:if test="${not empty loginUser && loginUser.me_siteauth==9 }">
-      	<li class="item-side reservationAdmin">
+
+      <c:if test="${loginUser!=null && loginUser.me_siteauth>=9 }">
+	      <li class="item-side reservationAdmin">
+
 	         <a href="#demo2" class="link-side btn btn-light col-md" data-toggle="collapse">관리자 메뉴</a>
 	         <div id="demo2" class="collapse">
 	            <ul class="sublist-side">
@@ -68,6 +72,8 @@
 	            </ul>
 	         </div>
 	      </li>
-      </c:if>
+
+	 </c:if>     
+
    </ul> 
  </sidebar>

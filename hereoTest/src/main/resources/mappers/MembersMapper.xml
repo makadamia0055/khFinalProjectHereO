@@ -32,4 +32,8 @@
 		select * from members
 			where me_session_id = #{me_session_id} and me_session_limit > now()
 	</select>
+	<select id="checkId" resultType="com.hereo.project.vo.MembersVO">
+		select * from members
+		where me_id=#{me_id}
+	</select>
 </mapper>
