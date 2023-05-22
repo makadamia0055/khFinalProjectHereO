@@ -16,10 +16,10 @@
 	      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
 	    <property name="url"
-	              value="jdbc:mysql://localhost:3306/herodb?useSSL=false&amp;serverTimezone=Asia/Seoul">
+	              value="jdbc:mysql://kh4jo.iptime.org:3306/herodb?useSSL=false&amp;serverTimezone=Asia/Seoul">
 	    </property>
-	    <property name="username" value="root"></property>
-	    <property name="password" value="root"></property>
+	    <property name="username" value="kh4jo"></property>
+	    <property name="password" value="asd123123123"></property>
 	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

@@ -847,7 +847,6 @@ public class TeamController {
 		if(team.getTm_num()>0) {
 			MatchScheduleVO nextMatch= scheduleService.selectNextTeamSchedule(team.getTm_num());
 			map.put("nextMatch", nextMatch);
-			
 		}
 		return map;
 	}

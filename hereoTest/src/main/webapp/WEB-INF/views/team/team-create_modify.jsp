@@ -90,8 +90,8 @@
 							
 							<br>
 							<button type="button" class="btn btn-dark btn-img_change">현재 이미지 교체</button>
-							<input hidden type="text" name="tm_team_img" value="${team.tm_team_img }">
-							<input hidden type="file" name="imgFile" id="teamLogo" accept="image/*">
+							<input type="text" name="tm_team_img" value="${team.tm_team_img }">
+							<input type="file" name="imgFile" id="teamLogo" accept="image/*">
 							<label>
 								<input type="checkbox" name="currentLogoDelete" value="true"> 현재 이미지 삭제만 하기
 							</label>	
@@ -108,7 +108,7 @@
 						</div>
 						<div class="form-group">
 							<label for="tm_team_introduce">팀 소개</label><br>
-							<textarea placeholder="팀 소개를 입력해주십시오.">${team.tm_team_introduce }</textarea>
+							<textarea name="tm_team_introduce" id="tm_team_introduce" placeholder="팀 소개를 입력해주십시오.">${team.tm_team_introduce}</textarea>
 							
 							
 						</div>
@@ -116,7 +116,7 @@
 						
 						
 						
-						<button type="submit" class="btn btn-dark col-lg-12">팀 신청</button>
+						<button type="submit" class="btn btn-dark col-lg-12">팀 정보 변경</button>
 					
 
 

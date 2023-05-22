@@ -140,7 +140,7 @@ public class ReservationController {
 	public String reservationCheck(Model model, HttpSession session) {
 		MembersVO user = (MembersVO)session.getAttribute("loginUser");
 		if(user==null) {
-			return "/reservation/reservation-main";
+			return "redirect:/reservation/reservation-main";
 		}
 		ArrayList<StadiumScheduleVO> reserveList=reservationService.getReservationList(user.getMe_id());
 

@@ -215,7 +215,7 @@
 			
 				let time = new Date(data.nextMatch.ms_datetime);
 				
-				$('.item-schedule .date-schedule').text(time.getFullYear()+'년 '+time.getMonth()+'월 '+ time.getDate()+'일 '+ time.getHours() +'시 '+ time.getMinutes()+'분' );
+				$('.item-schedule .date-schedule').text(time.getFullYear()+'년 '+(time.getMonth()+1)+'월 '+ time.getDate()+'일 '+ time.getHours() +'시 '+ time.getMinutes()+'분' );
 				$('.item-schedule .location-schedule').text(data.nextMatch.ms_stadium.sd_name);
 				/* 예약 확인 페이지 링크 작업 필요 */
 				teamObj = {
