@@ -33,7 +33,7 @@
           <div class="main__contents-reservation">
             <div class="reservation-title">빠르고 간편하게!</div>
             <div class="reservation-mainTitle">
-              야구장 쉽게 예약하기<a href="#"
+              야구장 쉽게 예약하기<a href="<c:url value='/reservation'></c:url>"
                 ><span style="color: #e0144c" class="letter-click"
                   >CLICK!</span
                 ></a

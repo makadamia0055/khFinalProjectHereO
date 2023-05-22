@@ -18,6 +18,7 @@ public class StadiumVO {
 	private String sd_me_id;
 	private int sd_price;
 	private String sd_intro;
+	private String sd_sido;
 	
 	public StadiumVO(String sd_name, String sd_contact, String sd_intro) {
 		this.sd_name = sd_name;

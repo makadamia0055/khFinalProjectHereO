@@ -52,7 +52,7 @@
 	</select>
 	<!-- 스타디움 등록 -->
 	<insert id="insertStadium" useGeneratedKeys="true" keyProperty="stadium.sd_num">
-	  INSERT INTO stadium(sd_rd_num, sd_name, sd_register_date, sd_contact, sd_me_id, sd_price, sd_intro)
+	  INSERT INTO stadium(sd_rd_num, sd_name, sd_register_date, sd_contact, sd_me_id, sd_price, sd_intro, sd_sido)
       VALUES (#{stadium.sd_rd_num}, #{stadium.sd_name}, NOW(), #{stadium.sd_contact},
       #{stadium.sd_me_id}, #{stadium.sd_price}, #{stadium.sd_intro})
 	  
@@ -137,7 +137,7 @@
 		select * from `stadium-schedule`
 		where ss_rv_num=#{rv_num}
 	</select>
-		<resultMap type="com.hereo.project.vo.StadiumScheduleVO" id="stadiumTimeConnect">
+	<resultMap type="com.hereo.project.vo.StadiumScheduleVO" id="stadiumTimeConnect">
 		<id property="ss_num" column="ss_num" />
 		<result property="ss_game_date" column="ss_game_date"/>
 		<result property="ss_st_num" column="ss_st_num"/>
@@ -180,14 +180,13 @@
 		where rv_num=#{rv_num}
 	</select>
 	<insert id="insertMatchSchedule">
-	 
 	        INSERT INTO `match-schedule`(ms_datetime, ms_match_sort, ms_tm_home_num, ms_tm_away_num, ms_rv_num)
 	        <if test="rv_away_num==0">
 	        VALUES (#{ss_game_date},#{rv_game_type},#{rv_home_num},null,#{rv_num})
 	        </if>
-	        VALUES (#{ss_game_date},#{rv_game_type},#{rv_home_num},#{rv_away_num},#{rv_num})
-	 
+	        VALUES (#{ss_game_date},#{rv_game_type},#{rv_home_num},#{rv_away_num},#{rv_num})	 
 	</insert>
+	
 </mapper>
 
 

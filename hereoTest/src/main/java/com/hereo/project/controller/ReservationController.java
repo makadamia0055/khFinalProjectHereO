@@ -1,5 +1,6 @@
 package com.hereo.project.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hereo.project.dao.RegionDAO;
 import com.hereo.project.pagination.Criteria;
-import com.hereo.project.pagination.PageMaker;
 import com.hereo.project.service.PlayerService;
 import com.hereo.project.service.ReservationService;
 import com.hereo.project.service.TeamService;
@@ -54,7 +54,12 @@ public class ReservationController {
 		ArrayList<StadiumVO> stadiumList = new ArrayList<StadiumVO>();
 		RegionVO regi = null;
 		//지역 출력용
-		if(region==null) {
+		if(game_date==null) {
+			LocalDate now = LocalDate.now();
+			String nowStr=now.toString();
+			game_date=nowStr;
+		}
+		if(region==null || region==0) {
 			if(cri==null) 
 				cri = new Criteria();
 			stadiumList = reservationService.getStadiumList01(cri);
@@ -138,6 +143,7 @@ public class ReservationController {
 			return "/reservation/reservation-main";
 		}
 		ArrayList<StadiumScheduleVO> reserveList=reservationService.getReservationList(user.getMe_id());
+
 		System.out.println("리저브리스트"+reserveList);
 		
 		model.addAttribute("reserveList", reserveList);

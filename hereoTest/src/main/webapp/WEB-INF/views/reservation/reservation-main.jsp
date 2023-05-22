@@ -18,7 +18,7 @@
             <div class="search_boxes">
                 <ul class="list-region clear-fix">
                     <li class="item-region">
-                        <a href="#" class="link-region btn btn-dark" role="button" data-local="전체">전체</a>
+                        <a href="<c:url value='/reservation/main?game_date=${game_date}&region='></c:url>" class="link-region btn btn-dark" role="button" data-local="전체">전체</a>
                     </li>
                     <c:forEach items="${regionList}" var="rl">
                     <li class="item-region">
@@ -55,7 +55,7 @@
                 	<c:forEach items="${stadiumList}" var="st">
                     <tr class="stadium-list">
                         <td rowspan="3" id="table-region">
-                            <p><strong>${regi.re_sido}</strong></p>
+                            <p><strong>${st.sd_sido}</strong></p>
                         </td>
                         <td rowspan="3" id="table-stadium">
                             <a href="<c:url value='/reservation/stadium/info'></c:url>">
