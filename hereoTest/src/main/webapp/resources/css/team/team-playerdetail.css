@@ -14,6 +14,13 @@
 	display: inline-block;
 	flex-basis: 300px;
 }
+.rightbox-profile li{
+	padding : 3px;
+	background: transparent;
+	
+}
+
+
 
 .container-personal_detail_stat{
 	display: inline-block;

@@ -14,6 +14,22 @@
   			order by sd_num desc
   			limit #{cri.pageStart}, #{cri.perPageNum}
   	</select>
+  	<select id ="selectStadiumList02" resultType="com.hereo.project.vo.StadiumVO">
+  		select * from `stadium`
+  			join `region_detail` on sd_rd_num = rd_num
+  			join `region_sub` on rd_rs_num = rs_num
+  			where
+  				rs_re_num = #{r}
+  			limit #{cri.pageStart}, #{cri.perPageNum}	
+  	</select>
+  	<select id="selectStadiumList01" resultType="com.hereo.project.vo.StadiumVO">
+  	  	select * from `stadium`
+  			join `region_detail` on sd_rd_num = rd_num
+  			join `region_sub` on rd_rs_num = rs_num
+  			order by sd_num desc
+  			limit #{cri.pageStart}, #{cri.perPageNum}
+  			
+  	</select>
   	<select id="selectStadiumTotalCount" resultType="int">
   		select count(*) from stadium
   			where
@@ -35,19 +51,18 @@
 		select * from `stadium-timetable`
 	</select>
 	<!-- 스타디움 등록 -->
-	<insert id="insertStadium">
-	    <![CDATA[
-	        INSERT INTO stadium(sd_rd_num, sd_name, sd_register_date, sd_contact, sd_me_id, sd_price, sd_intro)
-	        VALUES (#{stadium.sd_rd_num}, #{stadium.sd_name}, NOW(), #{stadium.sd_contact},
-          #{stadium.sd_me_id}, #{stadium.sd_price}, #{stadium.sd_intro})
-	    ]]>
+	<insert id="insertStadium" useGeneratedKeys="true" keyProperty="stadium.sd_num">
+	  INSERT INTO stadium(sd_rd_num, sd_name, sd_register_date, sd_contact, sd_me_id, sd_price, sd_intro)
+      VALUES (#{stadium.sd_rd_num}, #{stadium.sd_name}, NOW(), #{stadium.sd_contact},
+      #{stadium.sd_me_id}, #{stadium.sd_price}, #{stadium.sd_intro})
+	  
 	</insert>
 	
 	<!-- 스타디움 이미지 등록 -->
 	<insert id="insertStadiumImage">
 	    <![CDATA[
-	        INSERT INTO stadium_image(sd_num, si_filename)
-	        VALUES (#{sd_num}, #{si_filename})
+	        INSERT INTO `stadium-image`(sd_num, si_filename)
+	        VALUES (#{file.si_sd_num}, #{file.si_filename})
 	    ]]>
 	</insert>
 	<select id="selectRegionDetail" resultType="int">
@@ -57,15 +72,122 @@
 	</select>
 	<!-- 스타디움 스케쥴 가져오기 -->
 	<select id="selectStadiumTimetable" resultType="com.hereo.project.vo.StadiumTimetableVO">
-		select * from `stadium-timetable` where st_sd_num=#{st_num}
+		select * from `stadium-timetable` where st_sd_num=#{st}
 	</select>
 	<!--  결제를 위한 스타디움 타임 스케쥴 가져오기 -->
 	<select id="getStadiumTimetableForPay" resultType="com.hereo.project.vo.StadiumTimetableVO">
 		select * from `stadium-timetable`
 			where st_num=#{st_num}  
 	</select>
-
-
+	<select id="checkStadiumSchedule" resultType="com.hereo.project.vo.StadiumScheduleVO">
+		select * from `stadium-schedule`
+			where ss_st_num = #{st_num} and ss_game_date = #{date} and ss_state=#{state}
+	</select>
+	<insert id="insertReservation" useGeneratedKeys="true" keyProperty="re.rv_num">
+		insert into reservation(rv_me_id, rv_payment_amount, rv_isReferee, rv_isRecoder, rv_total_price, rv_game_type, rv_home_num, rv_away_num)
+		values(#{re.rv_me_id},#{re.rv_payment_amount},#{re.rv_isReferee},#{re.rv_isRecoder},#{re.rv_total_price},#{re.rv_game_type},#{re.rv_home_num}, #{re.rv_away_num})
+	</insert>
+	<insert id="insertStadiumSchedule">
+		insert into `stadium-schedule`(ss_st_num, ss_rv_num, ss_game_date)
+		values(#{st_num},#{rv_num},#{date, jdbcType=DATE})
+	</insert>
+	<select id="selectReservation" resultType="com.hereo.project.vo.ReservationVO">
+		select * from `reservation` 
+		where rv_num=#{rv_num}
+	</select>
+	<delete id="deleteReservation" parameterType="int">
+		delete ss, re
+		from `stadium-schedule` ss
+		join `reservation` re on ss.ss_rv_num = re.rv_num
+		where ss.ss_rv_num=#{rv_num}
+		and re.rv_num=#{rv_num}
+	</delete>
+	<select id="searchStadiumSchedule" resultType="com.hereo.project.vo.StadiumScheduleVO">
+		select * from `stadium-schedule`
+		where ss_rv_num=#{rv_num}
+	</select>
+	<select id="checkCompletePayList" resultType="com.hereo.project.vo.StadiumScheduleVO">
+		select * from `stadium-schedule`
+		where ss_st_num=#{ss_st_num} and ss_game_date=#{ss_game_date} and ss_state=#{ss_state}
+	</select>
+	<update id="updateState">
+		update `stadium-schedule`
+		set ss_state=#{state}, ss_receipt_id=#{receipt_id}
+		where ss_rv_num=#{rv_num}
+	</update>
+	<select id="getReservationList" resultMap="stadiumTimeConnect">
+		select * from `stadium-schedule` join `reservation` 
+		on `stadium-schedule`.ss_rv_num = `reservation`.rv_num
+		where rv_me_id=#{me_id} and ss_state!=#{state}
+	</select>
+	<resultMap type="com.hereo.project.vo.ReservationVO" id="reserve">
+		<id property="rv_num" column="rv_num" />
+		<result property="rv_payment_amount" column="rv_payment_amount"/>
+		<result property="rv_me_id" column="rv_me_id"/>
+		<result property="rv_date" column="rv_date"/>
+		<result property="rv_isReferee" column="rv_isReferee"/>
+		<result property="rv_isRecoder" column="rv_isRecoder"/>
+		<result property="rv_total_price" column="rv_total_price"/>
+		<result property="rv_game_type" column="rv_game_type"/>
+		<result property="rv_home_num" column="rv_home_num"/>
+		<result property="rv_away_num" column="rv_away_num"/>
+		<collection property="ss" ofType="com.hereo.project.vo.StadiumScheduleVO" column="rv_num" select="selectSS"></collection>
+	</resultMap>
+	<select id="selectSS" resultMap="stadiumTimeConnect" parameterType="java.util.Map">
+		select * from `stadium-schedule`
+		where ss_rv_num=#{rv_num}
+	</select>
+		<resultMap type="com.hereo.project.vo.StadiumScheduleVO" id="stadiumTimeConnect">
+		<id property="ss_num" column="ss_num" />
+		<result property="ss_game_date" column="ss_game_date"/>
+		<result property="ss_st_num" column="ss_st_num"/>
+		<result property="ss_rv_num" column="ss_rv_num"/>
+		<result property="ss_state" column="ss_state"/>
+		<result property="ss_receipt_id" column="ss_receipt_id"/>
+		<collection property="st" ofType="com.hereo.project.vo.StadiumTimetableVO" column="ss_st_num" select="selectST"></collection>
+	</resultMap>
+	<select id="selectST" resultMap="stadiumConnect" parameterType="java.util.Map">
+		select * from `stadium-timetable`
+		where st_num=#{ss_st_num}
+	</select>
+	<resultMap type="com.hereo.project.vo.StadiumTimetableVO" id="stadiumConnect">
+		<id property="st_num" column="st_num" />
+		<result property="st_sd_num" column="st_sd_num"/>
+		<result property="st_start_time" column="st_start_time"/>
+		<result property="st_use_time" column="st_use_time"/>
+		<result property="st_rent_cost" column="st_rent_cost"/>
+		<result property="st_daytype" column="st_daytype"/>
+		<result property="st_game_num" column="st_game_num"/>
+		<collection property="s" ofType="com.hereo.project.vo.StadiumVO" column="st_sd_num" select="selectS"></collection>
+	</resultMap>
+	<select id="selectS" resultType="com.hereo.project.vo.StadiumVO">
+		select * from `stadium`
+		where sd_num=#{st_sd_num}
+	</select>
+	
+	<select id="getTotalPrice" resultType="double">
+		select rv_total_price from `reservation` join `stadium-schedule` 
+		on ss_rv_num = rv_num 
+		where ss_receipt_id=#{receipt_id}
+	</select>
+	<update id="cancelState" parameterType="String">
+		update `stadium-schedule`
+		set ss_state =#{state}
+		where ss_receipt_id =#{receipt_id}
+	</update>
+	<select id="getReservation" resultMap="reserve">
+		select * from `reservation`
+		where rv_num=#{rv_num}
+	</select>
+	<insert id="insertMatchSchedule">
+	 
+	        INSERT INTO `match-schedule`(ms_datetime, ms_match_sort, ms_tm_home_num, ms_tm_away_num, ms_rv_num)
+	        <if test="rv_away_num==0">
+	        VALUES (#{ss_game_date},#{rv_game_type},#{rv_home_num},null,#{rv_num})
+	        </if>
+	        VALUES (#{ss_game_date},#{rv_game_type},#{rv_home_num},#{rv_away_num},#{rv_num})
+	 
+	</insert>
 </mapper>
 
 

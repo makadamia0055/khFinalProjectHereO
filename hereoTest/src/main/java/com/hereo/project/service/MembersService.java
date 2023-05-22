@@ -16,6 +16,8 @@ public interface MembersService {
 
 	MembersVO getLoginSession(String me_session_id);
 
+	MembersVO idCheck(String me_id);
+
 
 
 

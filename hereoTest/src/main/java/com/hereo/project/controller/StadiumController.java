@@ -175,17 +175,32 @@ import com.hereo.project.vo.StadiumVO;
 	@RequestMapping(value = "/reservation/stadium/insert", method = RequestMethod.GET)
 	public ModelAndView StadiumInsert(ModelAndView mv, HttpSession session) {
 		MembersVO user = (MembersVO)session.getAttribute("loginUser");
+		if(user==null) {
+			mv.addObject("msg", "로그인된 유저만 구장을 등록할 수 있습니다.");
+			mv.addObject("url", "/reservation/main");
+			mv.setViewName("/common/message");
+			return mv;
+		}
+		
 		mv.setViewName("/reservation/reservation-stadium_insert");
 		return mv;
 	}
 	
 	@RequestMapping(value = "/reservation/stadium/insert", method = RequestMethod.POST)
 	public ModelAndView StadiumInsertPost(ModelAndView mv, HttpSession session,
-	        StadiumVO stadium, RegionDetailVO regionDetail,
-	        @RequestParam("file") MultipartFile[] files) {
-	    MembersVO user = (MembersVO)session.getAttribute("loginUser");
-	    stadium.setRegionDetail(regionDetail); 
-	    stadiumService.insertStadium(stadium, user, files);
+	        StadiumVO stadium, RegionVO region, RegionSubVO regionSub, RegionDetailVO regionDetail,
+	        MultipartFile[] files) {
+	    System.out.println(regionDetail);
+//		작업자 : 공승배 region과 regionSub를 체크하고 넣어주는 메소드 추가
+		RegionSubVO selectedRegionSub = regionService.checkRegionSub(region, regionSub);
+		//리전 디테일에 가져온 regionsub를 넣어주기
+		regionDetail.setRd_rs_num(selectedRegionSub.getRs_num());
+		RegionDetailVO selectedRegionDetail = regionService.checkRegionDetail(regionDetail);
+		MembersVO user = (MembersVO)session.getAttribute("loginUser");
+		
+		stadium.setSd_rd_num(selectedRegionDetail.getRd_num()); 
+		stadiumService.insertStadium(stadium, user, files);
+				
 	
 	    mv.setViewName("redirect:/reservation/stadium/list");
 	    return mv;

@@ -17,4 +17,8 @@
 	<select id="getRegionByNum" resultType="com.hereo.project.vo.RegionVO">
         select * from region where re_num = #{rs_re_num}
     </select>
+    <select id="selectRegionBySido" resultType="com.hereo.project.vo.RegionVO">
+    	select * from region where re_sido like #{re_sido}
+    </select>
+    
 </mapper>

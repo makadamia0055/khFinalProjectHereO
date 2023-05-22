@@ -9,8 +9,7 @@
 	<!-- datepicker -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-   
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>   
     <link rel="stylesheet" href="<c:url value='/resources/css/reservation/reservation-main.css'></c:url>" />
     
 <body> 
@@ -23,7 +22,7 @@
                     </li>
                     <c:forEach items="${regionList}" var="rl">
                     <li class="item-region">
-                        <a href="#" class="link-region btn btn-light" role="button" data-local="${rl.re_num}">${rl.re_sido}</a>
+                        <a href="<c:url value='/reservation/main?game_date=${game_date}&region=${rl.re_num}'></c:url>" class="link-region btn btn-light" role="button" data-local="${rl.re_num}">${rl.re_sido}</a>
                     </li>
                     </c:forEach>
                 </ul>
@@ -53,20 +52,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                	<c:forEach items="${stadiumList}" var="st">
                     <tr class="stadium-list">
                         <td rowspan="3" id="table-region">
-                            <p><strong>경기</strong></p>
+                            <p><strong>${regi.re_sido}</strong></p>
                         </td>
                         <td rowspan="3" id="table-stadium">
                             <a href="<c:url value='/reservation/stadium/info'></c:url>">
-                                <img src="강상.jpg" alt="" class="img">
+                                <img src="" alt="" class="img">
                                 <br>
-                                <strong style="color: black; font-size: 15px;">구장명 : </strong><span>강상제3구장</span>
+                                <strong style="color: black; font-size: 15px;">구장명 : </strong><span>${st.sd_name}</span>
+                                <input type="hidden" name="sd_num" value="${st.sd_num}">
                                 <br>
                                 <strong style="color: black; font-size: 15px;">구장 위치 : </strong><span>경기도 양평</span>
                             </a>
                         </td>
-                        <td rowspan="3" id="table-content">
+                        <td rowspan="3" class="table-content">
                             <div class="info-content">
                                 <div class="game-group">
                                     <div class="game-title">1게임</div>
@@ -81,16 +82,16 @@
                                     <div class="game-title">10게임</div>                                
                                     <br>
                                     <div class="game-info">
-                                        <div class="status"><span class="league">리그</span></div>
-                                        <div class="status"><span class="confirm">확정</span></div>
                                         <div class="status"><span class="reserve">예약</span></div>
-                                        <div class="status"><span class="league">리그</span></div>
                                         <div class="status"><span class="reserve">예약</span></div>
-                                        <div class="status"><span class="none"></span></div>
-                                        <div class="status"><span class="none"></span></div>
-                                        <div class="status"><span class="none"></span></div>
-                                        <div class="status"><span class="none"></span></div>
-                                        <div class="status"><span class="none"></span></div>                                    
+                                        <div class="status"><span class="reserve">예약</span></div>
+                                        <div class="status"><span class="reserve">예약</span></div>
+                                        <div class="status"><span class="reserve">예약</span></div>
+                                        <div class="status"><span class="reserve">예약</span></div>
+                                        <div class="status"><span class="reserve">예약</span></div>
+                                        <div class="status"><span class="reserve">예약</span></div>
+                                        <div class="status"><span class="reserve">예약</span></div>
+                                        <div class="status"><span class="reserve">예약</span></div>                                    
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +101,7 @@
                     <tr><td></td></tr>   
                     <!-- 구장 리스트 1개 단위 -->
                     
-                    
+                   </c:forEach> 
                 </tbody>
             </table>
         </div>
@@ -114,11 +115,15 @@
               </ul>
         </div>
     </div>  
+    <input type="hidden" name="region" value="${region}">
+    <input type="hidden" name="game_date" value="${game_date}">    
 <script src="<c:url value='/resources/js/reservation/regionbox.js'></c:url>"></script>
 <script src="https://kit.fontawesome.com/bedfa56d7f.js" crossorigin="anonymous"></script>
 <script>
   $(".reserve").click(function() {
-  window.location.href = "<c:url value='/reservation/stadium-info'></c:url>";
+	  var sd_num = $(this).parents('.table-content').prev().find('[name=sd_num]').val();
+      var game_date = $('[name=game_date]').val();
+  window.location.href = "<c:url value='/reservation/stadium-info'></c:url>" +'?game_date=' + game_date + '&stadium=' + sd_num ;
   });  
   // 데이트피커
 $( function() {
@@ -135,11 +140,14 @@ $( function() {
       currentText : "오늘 날짜",
       onSelect: function(dateText) {
           var dateText = $(this).val();
-          var url = "<c:url value='/reservation/main?'></c:url>" + dateText.replace(/\//g, "-");
+          var region = $('[name=region]').val();
+          region = region==''?0 : region;
+          var url = "<c:url value='/reservation/main?game_date='></c:url>" + dateText.replace(/\//g, "-") + '&region='+region;
           window.location.href = url;
       }
     });
 } );
+ 
 $('.link-region').on('click', function() {
 	  var region = $(this).data('local');
 	  
