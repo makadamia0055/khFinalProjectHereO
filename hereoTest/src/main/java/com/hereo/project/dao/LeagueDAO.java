@@ -68,7 +68,9 @@ public interface LeagueDAO {
 
 	TeamVO selectTeamByTpNum(@Param("tp_tm_num")int tp_tm_num);
 
-	void selectLeaguePartiTeamByLeagueAtt(@Param("tm_num")int tm_num, @Param("la_num")int la_num);
+	LeagueParticipationteamVO selectLeaguePartiTeamByLeagueAtt(@Param("tm_num")int tm_num, @Param("la_num")int la_num);
+
+	void insertLeaguePartiByTmNum(@Param("lp")LeagueParticipationteamVO lpVo);
 
 
 

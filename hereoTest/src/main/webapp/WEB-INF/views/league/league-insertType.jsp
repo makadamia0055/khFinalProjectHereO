@@ -41,7 +41,9 @@
 					<td class="form-group"><input class="form-control" type="text" value="${la.la_match_type }" name="la_match_type"></td>
 					<td class="form-group">
 						<select class="form-control" name="la_team_state">
+						<c:if test="${la.la_team_state == '모집중'}">
 							<option value="${la.la_team_state }">모집중</option>
+						</c:if>
 							<option value="${la.la_team_state }">모집완료</option>
 						</select>
 					</td>

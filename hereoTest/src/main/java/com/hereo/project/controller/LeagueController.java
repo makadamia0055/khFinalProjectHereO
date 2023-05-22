@@ -260,11 +260,11 @@ public class LeagueController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/league/approval/{lp_num}/{lp_approval}", method = RequestMethod.GET)
+	@RequestMapping(value = "/league/approval/{lp_num}/{lp_approval}/{lp_tm_num}", method = RequestMethod.GET)
 	public Map<String, Object> leagueApproval(@PathVariable("lp_num")int lp_num,
-			@PathVariable("lp_approval")int lp_approval) {
+			@PathVariable("lp_approval")int lp_approval, @PathVariable("lp_tm_num")int lp_tm_num) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		int res = leagueService.leagueApproval(lp_num, lp_approval);
+		int res = leagueService.leagueApproval(lp_num, lp_approval, lp_tm_num);
 
 		map.put("state", res);
 		LeagueParticipationteamVO lp = leagueService.getLeagueParti(lp_num);
@@ -281,7 +281,7 @@ public class LeagueController {
 		
 		int res = leagueService.insertLeagueAttByTeam(la_num, user);
 		
-		
+		map.put("res", res);
 		return map;
 	}
 	

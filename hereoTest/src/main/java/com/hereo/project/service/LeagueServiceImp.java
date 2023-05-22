@@ -118,18 +118,20 @@ public class LeagueServiceImp implements LeagueService {
 	
 	//리그 참가 승인
 	@Override
-	public int leagueApproval(int lp_num, int lp_approval) {
+	public int leagueApproval(int lp_num, int lp_approval, int lp_tm_num) {
 		if(lp_num < 1)
 			return -100;
 		int res = 0;
 		LeagueParticipationteamVO dbLp = leagueDao.selectleagueApproval(lp_num);
+		if( dbLp.getLp_tm_num() != lp_tm_num)
+			return -100;
 		
 		if(dbLp.getLp_approval() == lp_approval) {
-			LeagueParticipationteamVO lpVo = new LeagueParticipationteamVO(lp_num, lp_approval);
+			LeagueParticipationteamVO lpVo = new LeagueParticipationteamVO(lp_num, lp_approval, lp_tm_num);
 			leagueDao.updateleagueApproval(lpVo);
 			res = 0;
 		}else {
-			LeagueParticipationteamVO lpVo = new LeagueParticipationteamVO(lp_num, lp_approval);
+			LeagueParticipationteamVO lpVo = new LeagueParticipationteamVO(lp_num, lp_approval, lp_tm_num);
 			leagueDao.updateleagueApproval(lpVo);
 			res = lp_approval;
 		}
@@ -158,7 +160,16 @@ public class LeagueServiceImp implements LeagueService {
 			res = 0;
 		TeamVO team = leagueDao.selectTeamByTpNum(tPlayer.getTp_tm_num());
 		
-		leagueDao.selectLeaguePartiTeamByLeagueAtt(team.getTm_num(), la_num);
+		//팀 참가했는지 체크 
+		LeagueParticipationteamVO dbLp = leagueDao.selectLeaguePartiTeamByLeagueAtt(team.getTm_num(), la_num);
+		
+		if(dbLp != null) {
+			res = 0;
+		}else {
+			LeagueParticipationteamVO lpVo = new LeagueParticipationteamVO(team.getTm_num(), la_num);
+			leagueDao.insertLeaguePartiByTmNum(lpVo);
+		}
+			
 		
 		return res;
 	}

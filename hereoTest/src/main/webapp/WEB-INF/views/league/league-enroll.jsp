@@ -75,10 +75,7 @@
 
 <script>
 	$('.btn-application').click(function(){
-		if('${user.me_id}' == ''){
-			alert('로그인한 회원만 신청 할 수 있습니다.');
-			return;
-		}
+		
 		//리스트에 있는 값이여서 값을 찾아와야함
 		let la_num = $(this).parents('tr').find('[name=la_num]').val();
 		let url = '<c:url value="/league/team/appli/"></c:url>'+la_num;

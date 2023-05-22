@@ -39,7 +39,7 @@ public interface LeagueService {
 
 	boolean deleteLeagueType(Integer la_num);
 
-	int leagueApproval(int lp_num, int lp_approval);
+	int leagueApproval(int lp_num, int lp_approval, int lp_tm_num);
 
 	LeagueParticipationteamVO getLeagueParti(int lp_num);
 

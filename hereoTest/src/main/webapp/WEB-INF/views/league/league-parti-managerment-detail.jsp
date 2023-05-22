@@ -42,7 +42,7 @@
 							<td>${vs.index+1 }<input type="hidden" value="${lp.lp_num }" name="lp_num"></td>
 							<td>${lp.lp_team.tm_team_img }</td>
 							<td>
-								<a href="">${lp.lp_team.tm_name }</a>
+								<a href=""><input type="hidden" value="${lp.lp_team.tm_name  }" name="lp_tm_num">${lp.lp_team.tm_name }</a>
 							</td>
 							<td>15</td> <!-- 팀원수 계산 미구현 -->
 							<td>
@@ -74,7 +74,8 @@ $('.select-approval').change(function(){
 	let lp_approval = $(this).val();
 	//리스트에 있는 값이여서 값을 찾아와야함
 	let lp_num = $(this).parents('tr').find('[name=lp_num]').val();
-	let url = '<c:url value="/league/approval/"></c:url>'+lp_num+'/' + lp_approval;
+	let lp_tm_num = $(this).parents('tr').find('[name=lp_tm_num]').val();
+	let url = '<c:url value="/league/approval/"></c:url>'+lp_num+'/' + lp_approval +'/' + lp_tm_num;
 	
 	$.ajax({
         async:true,
