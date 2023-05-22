@@ -3,8 +3,6 @@
 
 hereoTest/src/main/webapp/META-INF/MANIFEST.MF
 
-hereoTest/target/
-
 hereoTest/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
 
 hereoTest/target/m2e-wtp/web-resources/META-INF/maven/com.hereo/test/pom.properties

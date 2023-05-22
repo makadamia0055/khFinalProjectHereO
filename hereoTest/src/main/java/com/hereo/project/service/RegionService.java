@@ -22,6 +22,10 @@ public interface RegionService {
 
 	List<RegionDetailVO> getRegionDetail(int rd_num);
 
+	RegionSubVO checkRegionSub(RegionVO region, RegionSubVO regionSub);
+
+	RegionDetailVO checkRegionDetail(RegionDetailVO regionDetail);
+
 
 	
 }

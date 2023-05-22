@@ -11,4 +11,8 @@
 	    insert into region_detail (rd_zipcode, rd_address, rd_detail_address,rd_rs_num) 
 		 values (#{regionDetail.rd_zipcode}, #{regionDetail.rd_address}, #{regionDetail.rd_detail_address},#{regionDetail.rd_rs_num})  
 	</insert>
+	<select id ="selectRegionDetailByPostOrAddress" resultType="com.hereo.project.vo.RegionDetailVO">
+		select distinct * from `region_detail` 
+			where rd_zipcode = #{rd.rd_zipcode} or rd_address like #{rd.rd_address}
+	</select>
 </mapper>
