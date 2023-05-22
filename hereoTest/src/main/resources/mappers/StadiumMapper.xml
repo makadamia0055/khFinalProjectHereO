@@ -53,6 +53,20 @@
   				(sd_name like concat('%',#{cri.search} ,'%')
   				or sd_intro like concat('%',#{cri.search} ,'%'))
   	</select>
+  	<select id="countReserveCheck" resultType="int">
+  		select count(*) from `reservation`
+  		where rv_me_id=#{me_id}
+  	</select>
+  	<select id="countStadiumList" resultType="int">
+  		select count(*) from `stadium`
+  	</select>
+  	<select id="countStadiumListByRegion" resultType="int">
+  		select count(*) from `stadium`
+  			join `region_detail` on sd_rd_num = rd_num
+  			join `region_sub` on rd_rs_num = rs_num
+  			join `region` on rs_re_num =re_num 			
+  		where re_num=#{region}
+  	</select>
   	<select id="selectStadium" resultType="com.hereo.project.vo.StadiumVO">
   		select * from stadium
 	  		join region_detail on sd_rd_num = rd_num
@@ -136,6 +150,7 @@
 		select * from `stadium-schedule` join `reservation` 
 		on `stadium-schedule`.ss_rv_num = `reservation`.rv_num
 		where rv_me_id=#{me_id} and ss_state!=#{state}
+		limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	<resultMap type="com.hereo.project.vo.ReservationVO" id="reserve">
 		<id property="rv_num" column="rv_num" />

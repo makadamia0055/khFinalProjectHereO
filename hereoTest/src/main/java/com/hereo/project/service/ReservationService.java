@@ -30,7 +30,7 @@ public interface ReservationService {
 
 	void updateState(String receipt_id, int rv_num);
 
-	ArrayList<StadiumScheduleVO> getReservationList(String me_id);
+	ArrayList<StadiumScheduleVO> getReservationList(String me_id, Criteria cri);
 
 	double getTotalPrice(String receipt_id);
 
@@ -39,6 +39,12 @@ public interface ReservationService {
 	ArrayList<StadiumVO> getStadiumList01(Criteria cri);
 
 	void insertMatchSchedule(int rv_num);
+
+	int countReserveCheck(String me_id);
+
+	int countStadiumList();
+
+	int countStadiumList(Integer region);
 
 
 
