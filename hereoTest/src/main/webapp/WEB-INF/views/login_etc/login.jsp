@@ -31,11 +31,11 @@
       <input class="login-btn" type="submit" value="로그인"/>
     </form>
     <ul class="search-idPw">
-      <li><a href="./find-id.html" target="_self">아이디 찾기</a></li>
+      <li><a href="#" class="searchId-btn">아이디 찾기</a></li>
       <li>|</li>
-      <li><a href="./find-pw.html">비밀번호 찾기</a></li>
+      <li><a href="#" class="searchPw-btn">비밀번호 찾기</a></li>
       <li>|</li>
-      <li><a href="../screen/signup.html" target="_blank">회원가입</a></li>
+      <li><a href="#" class="goSignUp-btn">회원가입</a></li>
     </ul>
     <script
       src="https://kit.fontawesome.com/bedfa56d7f.js"
@@ -59,6 +59,16 @@
   if (loginUserInput != null) {
 	  reloadAndClose();
   }
+  
+  $('.searchId-btn, .searchPw-btn').click(function(){
+	  alert('현재 구현중인 기능입니다.'); 
+  });
+  
+  $('.goSignUp-btn').click(function() {
+	  var url='/signup';
+	  window.close();
+	  window.opener.location.href='<%= request.getContextPath() %>'+url;
+	});
 </script>
 
   </body>

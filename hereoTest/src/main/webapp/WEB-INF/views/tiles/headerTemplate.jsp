@@ -102,9 +102,13 @@
 
 			e.preventDefault();
 			var url="<c:url value='/login'></c:url>";
-			var name="loginP";
-			var option="width=450, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no";
-			window.open(url,name,option);
+			var width = 450;
+			var height = 500;
+			var left = (window.innerWidth - width) / 2;
+			var top = (window.innerHeight - height) / 2;
+			var options = "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top + ", scrollbars=no, resizable=no, toolbar=no, menubar=no";
+			var popup = window.open(url, name, options);
+			popup.resizeTo(width, height);
 
 	})
 	</script>
