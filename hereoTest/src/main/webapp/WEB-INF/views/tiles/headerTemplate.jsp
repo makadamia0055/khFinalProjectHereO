@@ -71,17 +71,17 @@
               <span>커뮤니티</span></a>
               <ul class="submenu-containerBox1 commu-submenu__01">
                 <li>
-                  <a href="../community/commu-free.html" target="_top"
+                  <a href="<c:url value='/community/free'></c:url>"
                     >Talk 이모저모</a
                   >
                 </li>
                 <li>
-                  <a href="../community/commu-hero.html" target="_top"
+                  <a href="<c:url value='/community/findHero'></c:url>" 
                     >용병 모집</a
                   >
                 </li>
                 <li>
-                  <a href="../community/commu-market.html" target="_top"
+                  <a href="<c:url value='/community/market'></c:url>"
                     >중고거래</a
                   >
                 </li>
