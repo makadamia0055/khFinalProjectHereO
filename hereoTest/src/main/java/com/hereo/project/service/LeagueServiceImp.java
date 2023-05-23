@@ -49,10 +49,10 @@ public class LeagueServiceImp implements LeagueService {
 		return leagueDao.selectLeagueAttListByLgNum(lg_num);
 	}
 	@Override
-	public ArrayList<LeagueScheduleVO> selectLeagueScheduleList(int lg_num) {
-		if(lg_num == 0)
+	public ArrayList<LeagueScheduleVO> selectLeagueScheduleList(int la_num) {
+		if(la_num == 0)
 			return null;
-		LeagueAttributeVO la = leagueDao.selectLeagueAttByLgNum(lg_num);
+		LeagueAttributeVO la = leagueDao.selectLeagueAttByLgNum(la_num, "프로리그");
 		if(la == null)
 			return null;
 		return leagueDao.selectLeagueScheduleList(la.getLa_num());
@@ -61,7 +61,7 @@ public class LeagueServiceImp implements LeagueService {
 	public ArrayList<LeagueParticipationteamVO> getSelectLeaguePartiList(int lg_num) {
 		if(lg_num == 0)
 			return null;
-		LeagueAttributeVO la = leagueDao.selectLeagueAttByLgNum(lg_num);
+		LeagueAttributeVO la = leagueDao.selectLeagueAttByLgNum(lg_num, "프로리그");
 		if(la == null)
 			return null;
 		return leagueDao.selectLeaguePartiList(la.getLa_num());
@@ -102,11 +102,15 @@ public class LeagueServiceImp implements LeagueService {
 	//리그타입 등록
 	@Override
 	public boolean insertLeagueType(LeagueAttributeVO la, int lg_num) {
-		if(la.getLa_name() == null && la.getLa_match_type() == null)
+		if(la.getLa_name() == null || la.getLa_match_type() == null)
 			return false;
 		la.setLa_lg_num(lg_num);
-
-		return leagueDao.insertLeagueType(la) != 0;
+		
+		int isOk = leagueDao.insertLeagueType(la);
+		if(isOk == 0)
+			return false;
+		
+		return true;
 	}
 	//리그타입 수정
 	@Override
@@ -188,7 +192,6 @@ public class LeagueServiceImp implements LeagueService {
 			return null;
 		return leagueDao.selectMemberByMeid(me_id);
 	}
-
 
 
 }

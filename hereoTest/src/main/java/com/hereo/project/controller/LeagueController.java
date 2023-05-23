@@ -72,13 +72,7 @@ public class LeagueController {
 	@RequestMapping(value = "/league/main/{lg_num}", method = RequestMethod.GET)
 	public ModelAndView leagueMain(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
 		//리그 메인페이지
-		ArrayList<LeagueAttributeVO> leagueAtt = leagueService.selectLeagueAttListByLgNum(lg_num);
-		ArrayList<LeagueScheduleVO> leagueSche = leagueService.selectLeagueScheduleList(lg_num);
-		ArrayList<LeagueParticipationteamVO> leagueParti = leagueService.getSelectLeaguePartiList(lg_num);
 
-		mv.addObject("leagueParti", leagueParti);
-		mv.addObject("leagueSche", leagueSche);
-		mv.addObject("leagueAtt",leagueAtt);
 		mv.addObject("lg_num", lg_num);
 		mv.setViewName("/league/league-main");
 		return mv;
@@ -165,8 +159,18 @@ public class LeagueController {
 	@RequestMapping(value = "/league/insertType/{lg_num}/insert", method = RequestMethod.POST)
 	public ModelAndView leagueInsertTypePost(ModelAndView mv, @PathVariable("lg_num")int lg_num,
 			LeagueAttributeVO la) {
-		boolean isInsert = leagueService.insertLeagueType(la, lg_num);
 
+		boolean isInsert = leagueService.insertLeagueType(la, lg_num);
+		if(isInsert) {
+			mv.addObject("msg", "리그타입등록 성공");
+			mv.addObject("url", "/league/insertType/"+lg_num);
+			mv.setViewName("/common/message");
+			return mv;
+		}else {
+			mv.addObject("msg", "리그타입등록 실패");
+			mv.addObject("url", "/league/insertType/"+lg_num);
+			mv.setViewName("/common/message");
+		}
 		mv.addObject("lg_num", lg_num);
 		mv.setViewName("redirect:/league/insertType/{lg_num}");
 		return mv;
@@ -242,7 +246,8 @@ public class LeagueController {
 	public ModelAndView leagueInsert(ModelAndView mv, HttpSession session) {
 		MembersVO user = (MembersVO)session.getAttribute("loginUser");
 		if(user == null) {
-			mv.addObject("msg", "로그인된 사용자만 사용가능");
+			mv.addObject("msg", "로그인된 사용자만 리그가입이 가능합니다.");
+			mv.addObject("url", "/league/leagueSearch");
 			mv.setViewName("/common/message");
 			return mv;
 		}

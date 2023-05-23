@@ -71,10 +71,7 @@
 		select * from `league-schedule`
 			where ls_la_num	= #{la_num}
 	</select>
-	<select id="selectLeagueSchedule" resultType="com.hereo.project.vo.LeagueScheduleVO">
-		select * from `league-schedule`
-			where 
-	</select>
+
 	<select id="selectTeam" resultType="com.hereo.project.vo.TeamVO">
 		select * from team
 			join `league-participationteam` on tm_num = lp_tm_num
@@ -191,8 +188,12 @@
 	</select>
 	
 	<select id="selectLeagueAttByLgNum" resultType="com.hereo.project.vo.LeagueAttributeVO">
-		select * from `league_attribute
-			where la_lg_num = #{lg_num}
+		select * from `league_attribute`
+			where la_lg_num = #{lg_num} and la_match_type = #{la_match_type}
+	</select>
+	<select id="selectLeagueScheByLaNum" resultType="com.hereo.project.vo.LeagueScheduleVO">
+		select * from `league-schedule`
+			where ls_la_num = #{la_num}
 	</select>
 
 </mapper>

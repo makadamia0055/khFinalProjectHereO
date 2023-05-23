@@ -23,7 +23,7 @@ public interface LeagueService {
 
 	ArrayList<LeagueAttributeVO> selectLeagueAttListByLgNum(int lg_num);
 
-	ArrayList<LeagueScheduleVO> selectLeagueScheduleList(int lg_num);
+	ArrayList<LeagueScheduleVO> selectLeagueScheduleList(int la_num);
 
 	ArrayList<LeagueParticipationteamVO> getSelectLeaguePartiList(int lg_num);
 
@@ -48,7 +48,6 @@ public interface LeagueService {
 	int insertLeagueAttByTeam(int la_num, String me_id);
 
 	MembersVO getSelectMember(String me_id);
-
 
 
 

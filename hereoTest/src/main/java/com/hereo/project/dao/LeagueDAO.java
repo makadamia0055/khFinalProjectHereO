@@ -75,7 +75,9 @@ public interface LeagueDAO {
 
 	MembersVO selectMemberByMeid(@Param("me_id")String me_id);
 
-	LeagueAttributeVO selectLeagueAttByLgNum(@Param("lg_num")int lg_num);
+	LeagueAttributeVO selectLeagueAttByLgNum(@Param("lg_num")int lg_num,@Param("la_match_type")String la_match_type);
+
+	LeagueScheduleVO selectLeagueScheByLaNum(@Param("la_num")int la_num);
 
 
 
