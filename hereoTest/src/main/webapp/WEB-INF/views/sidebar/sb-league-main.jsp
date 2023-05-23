@@ -51,7 +51,7 @@
 							</a>
 						</li>
 						<li class="subitem-side">
-							<a class="sublink-side btn btn-outline-danger col-sm-8" href="<c:url value='/league/schedulemanagerment/${lg_num }'></c:url>">
+							<a class="sublink-side btn btn-outline-danger col-sm-8" href="<c:url value='/league/partimanagerment/list/${lg_num}'></c:url>">
 								<span class="menu-title">리그관리</span>
 							</a>
 						</li>
