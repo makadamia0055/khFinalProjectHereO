@@ -53,6 +53,20 @@
   				(sd_name like concat('%',#{cri.search} ,'%')
   				or sd_intro like concat('%',#{cri.search} ,'%'))
   	</select>
+  	<select id="countReserveCheck" resultType="int">
+  		select count(*) from `reservation`
+  		where rv_me_id=#{me_id}
+  	</select>
+  	<select id="countStadiumList" resultType="int">
+  		select count(*) from `stadium`
+  	</select>
+  	<select id="countStadiumListByRegion" resultType="int">
+  		select count(*) from `stadium`
+  			join `region_detail` on sd_rd_num = rd_num
+  			join `region_sub` on rd_rs_num = rs_num
+  			join `region` on rs_re_num =re_num 			
+  		where re_num=#{region}
+  	</select>
   	<select id="selectStadium" resultType="com.hereo.project.vo.StadiumVO">
   		select * from stadium
 	  		join region_detail on sd_rd_num = rd_num
@@ -69,7 +83,7 @@
 	</select>
 	<!-- 스타디움 등록 -->
 	<insert id="insertStadium" useGeneratedKeys="true" keyProperty="stadium.sd_num">
-	  INSERT INTO stadium(sd_rd_num, sd_name, sd_register_date, sd_contact, sd_me_id, sd_price, sd_intro)
+	  INSERT INTO stadium(sd_rd_num, sd_name, sd_register_date, sd_contact, sd_me_id, sd_price, sd_intro, sd_sido)
       VALUES (#{stadium.sd_rd_num}, #{stadium.sd_name}, NOW(), #{stadium.sd_contact},
       #{stadium.sd_me_id}, #{stadium.sd_price}, #{stadium.sd_intro})
 	  
@@ -136,6 +150,7 @@
 		select * from `stadium-schedule` join `reservation` 
 		on `stadium-schedule`.ss_rv_num = `reservation`.rv_num
 		where rv_me_id=#{me_id} and ss_state!=#{state}
+		limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	<resultMap type="com.hereo.project.vo.ReservationVO" id="reserve">
 		<id property="rv_num" column="rv_num" />
@@ -154,7 +169,7 @@
 		select * from `stadium-schedule`
 		where ss_rv_num=#{rv_num}
 	</select>
-		<resultMap type="com.hereo.project.vo.StadiumScheduleVO" id="stadiumTimeConnect">
+	<resultMap type="com.hereo.project.vo.StadiumScheduleVO" id="stadiumTimeConnect">
 		<id property="ss_num" column="ss_num" />
 		<result property="ss_game_date" column="ss_game_date"/>
 		<result property="ss_st_num" column="ss_st_num"/>
@@ -197,18 +212,20 @@
 		where rv_num=#{rv_num}
 	</select>
 	<insert id="insertMatchSchedule">
-	 
 	        INSERT INTO `match-schedule`(ms_datetime, ms_match_sort, ms_tm_home_num, ms_tm_away_num, ms_rv_num)
 	        <if test="rv_away_num==0">
 	        VALUES (#{ss_game_date},#{rv_game_type},#{rv_home_num},null,#{rv_num})
 	        </if>
-	        VALUES (#{ss_game_date},#{rv_game_type},#{rv_home_num},#{rv_away_num},#{rv_num})
-	 
+	        VALUES (#{ss_game_date},#{rv_game_type},#{rv_home_num},#{rv_away_num},#{rv_num})	 
 	</insert>
+
 	<select id="selectStadiumByStnum" resultMap="stadiumVO">
 		select * from `stadium` 
 			where sd_num = #{stadium}
 	</select>
+
+	
+
 </mapper>
 
 

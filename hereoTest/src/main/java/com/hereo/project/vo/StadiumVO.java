@@ -19,6 +19,7 @@ public class StadiumVO {
 	private String sd_me_id;
 	private int sd_price;
 	private String sd_intro;
+	private String sd_sido;
 	
 	private ArrayList<StadiumImageVO> imgList;
 	

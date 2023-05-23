@@ -91,10 +91,10 @@ public class ReservationServiceImp implements ReservationService{
 	}
 
 	@Override
-	public ArrayList<StadiumScheduleVO> getReservationList(String me_id) {
+	public ArrayList<StadiumScheduleVO> getReservationList(String me_id, Criteria cri) {
 		
 		String state = "예약대기";
-		ArrayList<StadiumScheduleVO> list = stadiumDao.getReservationList(me_id,state);
+		ArrayList<StadiumScheduleVO> list = stadiumDao.getReservationList(me_id,state, cri);
 		
 		return list;
 	}
@@ -116,6 +116,24 @@ public class ReservationServiceImp implements ReservationService{
 		ReservationVO list = stadiumDao.getReservation(rv_num);
 		System.out.println("리스트으으"+list);
 		stadiumDao.insertMatchSchedule(list.getRv_game_type(), list.getRv_home_num(), list.getRv_away_num(), list.getSs().getSs_game_date(), list.getRv_num());
+	}
+
+	@Override
+	public int countReserveCheck(String me_id) {
+		
+		return stadiumDao.countReserveCheck(me_id);
+	}
+
+	@Override
+	public int countStadiumList() {
+		
+		return stadiumDao.countStadiumList();
+	}
+
+	@Override
+	public int countStadiumList(Integer region) {
+		
+		return stadiumDao.countStadiumListByRegion(region);
 	}
 
 }
