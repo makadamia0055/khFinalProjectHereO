@@ -12,13 +12,13 @@
 	<div class="stadium-info">
       <div class="btn-box">
          <button id="go-back" class="btn-prev btn btn-dark">이전 페이지</button>
-         <button class="btn btn-success btn-update">수정</button>
       </div>
       <h2>[예약 날짜 : ${game_date}]</h2>
       <div class="info-img">
-         <img src="강상.jpg" alt="" class="img img1" style="width: 1000px; height: 500px;">
-         <img src="강상3.jpg" alt="" class="img img2" style="width: 1000px; height:500px; display: none;">
-         <img src="화도.jpg" alt="" class="img img3" style="width: 1000px; height: 500px; display: none;">
+      	<c:forEach items="${sd.imgList}" var="il">
+         <img src="<c:url value='/files${il.si_filename}'></c:url>" alt="구장이미지" class="img img1" style="width: 1000px; height: 500px;">
+      	
+      	</c:forEach>
          <button onclick="prevImage()" class="prev-button">&lt;</button>
          <button onclick="nextImage()" class="next-button">&gt;</button>     
       </div>
@@ -42,13 +42,13 @@
             </tr>
          </thead>
          <tbody>
-           <c:forEach items="${sd}" var="sd">
+           <c:forEach items="${sdTimeTable}" var="st" varStatus="ind">
             <tr>
-	               <th>${sd.st_game_num }게임</th>
-	               <td>09시 00분 부터</td>
-	               <td>2시간30분</td>
-	               <td><span class="price">${sd.st_rent_cost }</span></td>   
-	               <td class="status"><a href="<c:url value='/reservation/payment_info?st_num=${sd.st_num}&date=${game_date}'></c:url>"><span class="league">리그</span></a>
+	               <th>${ind.count}게임</th>
+	               <td>${st.st_start_time_str}</td>
+	               <td>${st.st_use_time_str} 시간</td>
+	               <td><span class="price">${st.st_rent_cost}원</span></td>   
+	               <td class="status"><a href="<c:url value='/reservation/payment_info?st_num=${st.st_num}&date=${game_date}'></c:url>"><span class="">예약 가능</span></a>
 	               	</td>
 	               <td><strong></strong></td>
             </tr>       
@@ -70,7 +70,7 @@
                         <b>구장명</b>
                      </td>
                      <td class="content">
-                        <span>화도강변구장</span>
+                        <span>${sd.sd_name}</span>
                      </td>
                   </tr>
                   <tr>
@@ -78,7 +78,7 @@
                         <b>구장 주소</b>
                      </td>
                      <td class="content">
-                        <span>경기도 남양주시 화도읍 금남리 160-15</span>
+                        <span></span>
                      </td>
                   </tr>
                   <tr>
@@ -86,8 +86,14 @@
                         <b>구장 연락처</b>
                      </td>
                      <td class="content">
-                        <span>담당자 : 홍길동 </span><br>
-                        010-1234-5678
+                        <c:choose>
+                        	<c:when test="${empty sd.sd_contact}">
+                        		비~밀♥
+                        	</c:when>
+                        	<c:otherwise>
+                        		${sd.sd_contact}
+                        	</c:otherwise>
+                        </c:choose>
                      </td>
                   </tr>                  
                   <tr>
@@ -126,7 +132,7 @@
       </div>
    </div>
    <script>
-      var currentImage = 0;
+     /*  var currentImage = 0;
       var images = $(".img");
       var numImages = images.length;
       var interval = 6000; // 이미지 전환 간격 (밀리초)
@@ -175,7 +181,7 @@
       nextImage();
       });
       // 처음에 첫 번째 이미지만 보이게 설정
-      showImage(currentImage);
+      showImage(currentImage); */
    </script>
    <script>
    document.getElementById('go-back').addEventListener('click', () => {

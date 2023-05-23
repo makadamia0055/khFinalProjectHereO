@@ -58,8 +58,18 @@
                             <p><strong>${st.sd_sido}</strong></p>
                         </td>
                         <td rowspan="3" id="table-stadium">
-                            <a href="<c:url value='/reservation/stadium/info'></c:url>">
-                                <img src="" alt="" class="img">
+                            <a href="<c:url value='/reservation/stadium/info?stadium=${st.sd_num}'></c:url>">
+                                <img src=
+                                <c:choose>
+										<c:when test="${empty st.imgList}">
+											<c:url value='/files/noimg.png'></c:url>
+										</c:when>
+										<c:otherwise>
+											"<c:url value='/files${st.imgList[0].si_filename}'></c:url>"
+										</c:otherwise>
+									</c:choose>
+                                
+                                 alt="구장 이미지1" class="img">
                                 <br>
                                 <strong style="color: black; font-size: 15px;">구장명 : </strong><span>${st.sd_name}</span>
                                 <input type="hidden" name="sd_num" value="${st.sd_num}">
