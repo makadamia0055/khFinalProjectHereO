@@ -18,10 +18,12 @@
         <li class="item-region">
           <a  href="<c:url value='/league/leagueSearch?type=0'></c:url>" role="button" data-local="all">전체</a>
         </li>
-        <c:forEach items="${region }" var="re">
-         <li class="item-region">
-           <a href="<c:url value='/league/leagueSearch?type=${re.re_num}&search=${pm.cri.search }'></c:url>" class="link-region btn" role="button" data-local="${re.re_num}">${re.re_sido}</a>
-         </li>
+        <c:forEach items="${region}" var="re">
+        	<c:if test="${!empty re.re_sido}">
+	         <li class="item-region">
+	           <a href="<c:url value='/league/leagueSearch?type=${re.re_num}&search=${pm.cri.search }'></c:url>" class="link-region btn" role="button" data-local="${re.re_num}">${re.re_sido}</a>
+	         </li>
+         	</c:if>
         </c:forEach>
       </ul>
     </div>

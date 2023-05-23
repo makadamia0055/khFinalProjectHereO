@@ -2,7 +2,6 @@ package com.hereo.project.controller;
 
 
 import java.text.SimpleDateFormat;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hereo.project.dao.RegionDAO;
 import com.hereo.project.pagination.Criteria;
+import com.hereo.project.pagination.PageMaker;
 import com.hereo.project.service.PlayerService;
 import com.hereo.project.service.ReservationService;
 import com.hereo.project.service.StadiumService;
@@ -80,6 +80,15 @@ public class ReservationController {
 			regi = regionDao.getRegionByNum(region);
 			totalCount = reservationService.countStadiumList(region);
 		}
+		if(game_date==null||game_date.trim().length()==0) {
+			SimpleDateFormat format = new SimpleDateFormat("YY-MM-dd"); 
+			Date today = new Date();
+			game_date = format.format(today);
+			
+		}
+			
+			
+		
 
 		PageMaker pm = new PageMaker(totalCount, 5, cri);
 		RegionVO[]regionList = regionDao.selectAllRegion();
@@ -108,11 +117,6 @@ public class ReservationController {
 			mv.setViewName("/common/message");
 			return mv;
 			
-			
-			/*
-			 * SimpleDateFormat format = new SimpleDateFormat("YY-MM-dd"); Date today = new
-			 * Date(); game_date = format.format(today);
-			 */
 		}
 		
 		StadiumVO sd = stadiumService.selectStadiumByStnum(stadium);
@@ -130,6 +134,7 @@ public class ReservationController {
 		MembersVO user=(MembersVO)session.getAttribute("loginUser");
 		StadiumTimetableVO st=reservationService.getStadiumTimetableForPay(st_num);
 		ArrayList<TeamVO> teamList = teamService.getAllTeamList();
+		
 		if (user==null) {
 			MessageUtils.alertAndGoPage(response, "로그인 기능이 필요한 서비스입니다.", "/hereoTest", "/reservation/main");
 		}

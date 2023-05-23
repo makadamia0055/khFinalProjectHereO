@@ -22,7 +22,7 @@
 						    <td class="cell">${r.st.s.sd_name }</td>
 						    <td class="cell">${r.ss_game_date}</td>
 							<td class="cell">${r.st.st_game_num}</td>	
-						    <td class="cell">${r.st.st_start_time}시</td>
+						    <td class="cell">${r.st.st_start_time_str}</td>
 						    <td class="cell">${r.ss_state}</td>
 						    <c:set var="currentTime" value="<%= new java.util.Date() %>"/>
  	          				<c:choose>
