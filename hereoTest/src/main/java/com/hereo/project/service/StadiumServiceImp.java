@@ -115,6 +115,13 @@ public class StadiumServiceImp implements StadiumService{
 			return null;
 			return stadiumDao.selectStadiumTimetableList(user);
 		}
+
+		@Override
+		public StadiumVO selectStadiumByStnum(int stadium) {
+			if(stadium<1)
+				return null;
+			return stadiumDao.selectStadiumByStnum(stadium);
+		}
 	
 
 		

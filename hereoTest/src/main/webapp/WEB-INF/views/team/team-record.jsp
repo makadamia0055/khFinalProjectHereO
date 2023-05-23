@@ -166,7 +166,9 @@
 					<div class="score_num">
 						<span class="home_score">0</span> : <span class="away_score">0</span>
 					</div>
-					<div class="no-data" style="display: none">데이터가 없습니다.</div>
+					<div class="no-data" style="display: none">데이터가 없습니다.
+						<a class="link-nodata btn btn-dark" href="#">경기 기록실로</a>
+					</div>
 				</div>
 
 				<div class="big_container-lineup">
@@ -547,11 +549,14 @@
           let msObj = {
         	  ms_num : tmpMsNum
           }
+          let linkStr = '<c:url value="/record/insert?ms_num='+ms_num+'"></c:url>'
+          $('.link-nodata').attr('href', linkStr);
           ajax("POST", msObj, '<c:url value="/team/ajax/record?tm_num=${team.tm_num}"></c:url>', function(data){
         	  if(data.matchRecord!=null){
-        	  endOfInning = data.matchRecord.endInning;
-        	  homeTeamNum = data.matchRecord.matchSchedule.homeTeam.tm_num;
-        	  awayTeamNum = data.matchRecord.matchSchedule.awayTeam.tm_num;
+	        	  endOfInning = data.matchRecord.endInning;
+	        	  homeTeamNum = data.matchRecord.matchSchedule.homeTeam.tm_num;
+	        	  awayTeamNum = data.matchRecord.matchSchedule.awayTeam.tm_num;
+	        	  $('.box-detail_score').show();
         	  }else{
         		  console.log('경기 기록이 없습니다.')
         		  noRecord();
@@ -587,6 +592,7 @@
     	  
     	  $('.box-score').children().hide();
 		  $('.box-score .no-data').show();
+		  $('.box-detail_score').hide();
 		  
 		  let tmpStr = '<li class="item-lineup">'
 	          +'<span class="num-lineup btn btn-info">1</span>'

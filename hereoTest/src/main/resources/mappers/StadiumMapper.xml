@@ -31,7 +31,7 @@
   			order by sd_num desc
   			limit #{cri.pageStart}, #{cri.perPageNum}
   	</select>
-  	<select id ="selectStadiumList02" resultType="com.hereo.project.vo.StadiumVO">
+  	<select id ="selectStadiumList02" resultMap="stadiumVO">
   		select * from `stadium`
   			join `region_detail` on sd_rd_num = rd_num
   			join `region_sub` on rd_rs_num = rs_num
@@ -39,7 +39,7 @@
   				rs_re_num = #{r}
   			limit #{cri.pageStart}, #{cri.perPageNum}	
   	</select>
-  	<select id="selectStadiumList01" resultType="com.hereo.project.vo.StadiumVO">
+  	<select id="selectStadiumList01" resultMap="stadiumVO">
   	  	select * from `stadium`
   			join `region_detail` on sd_rd_num = rd_num
   			join `region_sub` on rd_rs_num = rs_num
@@ -92,7 +92,7 @@
 	<!-- 스타디움 이미지 등록 -->
 	<insert id="insertStadiumImage">
 	    <![CDATA[
-	        INSERT INTO `stadium-image`(sd_num, si_filename)
+	        INSERT INTO `stadium-image`(si_sd_num, si_filename)
 	        VALUES (#{file.si_sd_num}, #{file.si_filename})
 	    ]]>
 	</insert>
@@ -103,7 +103,7 @@
 	</select>
 	<!-- 스타디움 스케쥴 가져오기 -->
 	<select id="selectStadiumTimetable" resultType="com.hereo.project.vo.StadiumTimetableVO">
-		select * from `stadium-timetable` where st_sd_num=#{st}
+		select * from `stadium-timetable` where st_sd_num=#{sd_num}
 	</select>
 	<!--  결제를 위한 스타디움 타임 스케쥴 가져오기 -->
 	<select id="getStadiumTimetableForPay" resultType="com.hereo.project.vo.StadiumTimetableVO">
@@ -218,7 +218,14 @@
 	        </if>
 	        VALUES (#{ss_game_date},#{rv_game_type},#{rv_home_num},#{rv_away_num},#{rv_num})	 
 	</insert>
+
+	<select id="selectStadiumByStnum" resultMap="stadiumVO">
+		select * from `stadium` 
+			where sd_num = #{stadium}
+	</select>
+
 	
+
 </mapper>
 
 
