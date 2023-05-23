@@ -165,8 +165,9 @@ public class LeagueController {
 	@RequestMapping(value = "/league/insertType/{lg_num}/insert", method = RequestMethod.POST)
 	public ModelAndView leagueInsertTypePost(ModelAndView mv, @PathVariable("lg_num")int lg_num,
 			LeagueAttributeVO la) {
-
 		boolean isInsert = leagueService.insertLeagueType(la, lg_num);
+
+		mv.addObject("lg_num", lg_num);
 		if(isInsert) {
 			mv.addObject("msg", "리그타입등록 성공");
 			mv.addObject("url", "/league/insertType/"+lg_num);
@@ -176,10 +177,9 @@ public class LeagueController {
 			mv.addObject("msg", "리그타입등록 실패");
 			mv.addObject("url", "/league/insertType/"+lg_num);
 			mv.setViewName("/common/message");
+			return mv;
 		}
-		mv.addObject("lg_num", lg_num);
-		mv.setViewName("redirect:/league/insertType/{lg_num}");
-		return mv;
+
 	}
 	@RequestMapping(value = "/league/insertType/{lg_num}/update", method = RequestMethod.POST)
 	public ModelAndView leagueUpdateTypePost(ModelAndView mv, @PathVariable("lg_num")int lg_num,

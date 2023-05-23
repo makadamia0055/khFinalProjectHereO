@@ -82,13 +82,13 @@ ul{ margin: 0; padding:0;}
 }
 
 .main-top-game .section .article ul{
-	width: 445px; margin-left: 15px; color: #444;
+	width: 500px; margin-left: 15px; color: #444;
 }
 .main-top-game .section .article.result{
 	display: none;
 }
 .main-top-game .section .article .list-game li{
-	height: 50px; width: 450px;
+	height: 50px; width: 480px;
 	padding: 8px 0; zoom: 1; line-height: 30px;
 	border-bottom: 1px solid; font-size: 12px;
 }
@@ -102,7 +102,7 @@ ul.list-game li dd .emblem{
 	float: right; margin-left: 2px;
 }
 ul.list-game li dd{
-	width: 154px; text-align: right; cursor: default;
+	width: 170px; text-align: right; cursor: default;
 	white-space: nowrap; overflow: hidden; position: relative;
 }
 ul.list-game li dd a{

@@ -102,7 +102,7 @@ public class LeagueServiceImp implements LeagueService {
 	//리그타입 등록
 	@Override
 	public boolean insertLeagueType(LeagueAttributeVO la, int lg_num) {
-		if(la.getLa_name() == null || la.getLa_match_type() == null)
+		if(la.getLa_name().equals("") || la.getLa_match_type().equals("") )
 			return false;
 		la.setLa_lg_num(lg_num);
 		
