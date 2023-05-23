@@ -39,7 +39,7 @@ public class HomeController {
 	TeamService teamService;
 	
 	
-	@GetMapping(value = "/")
+	@GetMapping(value = {"/","/home"})
 	public String home(Model model) {
 		ArrayList<BoardVO> hotList = commuService.getAllBoardForHot();
 		ArrayList<TeamVO> newTeam = teamService.getNewTeam();
