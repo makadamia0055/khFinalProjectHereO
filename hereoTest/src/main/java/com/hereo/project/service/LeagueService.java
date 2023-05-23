@@ -21,13 +21,13 @@ public interface LeagueService {
 
 	LeagueVO selectLeagueByLgNum(int lg_num);
 
-	ArrayList<LeagueAttributeVO> selectLeagueAttByLgNum(int lg_num);
+	ArrayList<LeagueAttributeVO> selectLeagueAttListByLgNum(int lg_num);
 
-	ArrayList<LeagueScheduleVO> selectLeagueSchedule(int lg_num);
+	ArrayList<LeagueScheduleVO> selectLeagueScheduleList(int la_num);
 
-	ArrayList<LeagueParticipationteamVO> getSelectLeagueParti(int lg_num);
+	ArrayList<LeagueParticipationteamVO> getSelectLeaguePartiList(int lg_num);
 
-	Boolean insertLeague(LeagueVO league);
+	Boolean insertLeague(LeagueVO league, MembersVO user);
 
 	boolean checkLeagueName(String lg_name);
 
@@ -39,11 +39,15 @@ public interface LeagueService {
 
 	boolean deleteLeagueType(Integer la_num);
 
-	int leagueApproval(int lp_num, int lp_approval);
+	int leagueApproval(int lp_num, int lp_approval, int lp_tm_num);
 
 	LeagueParticipationteamVO getLeagueParti(int lp_num);
 
 	boolean updateLeaguePartiTeam(LeagueAttributeVO la, int la_num);
+
+	int insertLeagueAttByTeam(int la_num, String me_id);
+
+	MembersVO getSelectMember(String me_id);
 
 
 

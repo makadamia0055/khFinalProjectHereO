@@ -42,7 +42,7 @@
 							<td>${vs.index+1 }<input type="hidden" value="${lp.lp_num }" name="lp_num"></td>
 							<td>${lp.lp_team.tm_team_img }</td>
 							<td>
-								<a href="">${lp.lp_team.tm_name }</a>
+								<a href=""><input type="hidden" value="${lp.lp_tm_num}" name="lp_tm_num">${lp.lp_team.tm_name }</a>
 							</td>
 							<td>15</td> <!-- 팀원수 계산 미구현 -->
 							<td>
@@ -74,7 +74,8 @@ $('.select-approval').change(function(){
 	let lp_approval = $(this).val();
 	//리스트에 있는 값이여서 값을 찾아와야함
 	let lp_num = $(this).parents('tr').find('[name=lp_num]').val();
-	let url = '<c:url value="/league/approval/"></c:url>'+lp_num+'/' + lp_approval;
+	let lp_tm_num = $(this).parents('tr').find('[name=lp_tm_num]').val();
+	let url = '<c:url value="/league/approval/"></c:url>'+lp_num+'/' + lp_approval +'/' + lp_tm_num;
 	
 	$.ajax({
         async:true,
@@ -82,11 +83,10 @@ $('.select-approval').change(function(){
         url: url,
         dataType:"json",//서버에서 보낸 데이터의 타입. Map받으로 받을거기 때문에 json
         success : function(data){
-        	console.log(data)
         	if(data.state == 1){
-        		alert('~~팀의 참가승인을 거절하였습니다.');
+        		alert('팀의 참가승인을 거절하였습니다.');
         	}else if(data.state == 2){
-        		alert('~~팀의 참가승인을 승인하였습니다.');
+        		alert('팀의 참가승인을 승인하였습니다.');
         	}
         }
     });

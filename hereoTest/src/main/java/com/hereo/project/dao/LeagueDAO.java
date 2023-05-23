@@ -10,6 +10,8 @@ import com.hereo.project.vo.LeagueMatchListVO;
 import com.hereo.project.vo.LeagueParticipationteamVO;
 import com.hereo.project.vo.LeagueScheduleVO;
 import com.hereo.project.vo.LeagueVO;
+import com.hereo.project.vo.MembersVO;
+import com.hereo.project.vo.PlayerVO;
 import com.hereo.project.vo.TeamPlayerVO;
 import com.hereo.project.vo.TeamVO;
 
@@ -27,13 +29,13 @@ public interface LeagueDAO {
 	
 	TeamPlayerVO selectTpNum(@Param("tm_num")int tm_num);
 
-	ArrayList<LeagueAttributeVO> selectLeagueAttByLgNum(@Param("la_lg_num")int lg_num);
+	ArrayList<LeagueAttributeVO> selectLeagueAttListByLgNum(@Param("lg_num")int lg_num);
 
-	ArrayList<LeagueScheduleVO> selectLeagueSchedule(@Param("ls_la_num")int lg_num);
+	ArrayList<LeagueScheduleVO> selectLeagueScheduleList(@Param("la_num")int la_num);
 
-	ArrayList<LeagueParticipationteamVO> selectLeagueParti(@Param("ls_la_num")int lg_num);
+	ArrayList<LeagueParticipationteamVO> selectLeaguePartiList(@Param("la_num")int la_num);
 
-	ArrayList<LeagueScheduleVO> selectLeagueTmRank(@Param("ls_la_num")Integer ls_num);
+	ArrayList<LeagueScheduleVO> selectLeagueTmRank(@Param("ls_num")Integer ls_num);
 
 	void insertLeague(@Param("lg")LeagueVO league);
 
@@ -60,6 +62,24 @@ public interface LeagueDAO {
 	LeagueParticipationteamVO selectLeaguePartiByLpNum(@Param("lp_num")int lp_num);
 
 	int updateLeaguePartiTeam(@Param("la")LeagueAttributeVO la, @Param("la_num")int la_num);
+
+	PlayerVO selectPlayerByUser(@Param("me_id")String me_id);
+
+	TeamPlayerVO selectTplayerByPlNum(@Param("pl_num")int pl_num);
+
+	TeamVO selectTeamByTpNum(@Param("tp_tm_num")int tp_tm_num);
+
+	LeagueParticipationteamVO selectLeaguePartiTeamByLeagueAtt(@Param("tm_num")int tm_num, @Param("la_num")int la_num);
+
+	void insertLeaguePartiByTmNum(@Param("lp")LeagueParticipationteamVO lpVo);
+
+	MembersVO selectMemberByMeid(@Param("me_id")String me_id);
+
+	LeagueAttributeVO selectLeagueAttByLgNum(@Param("lg_num")int lg_num,@Param("la_match_type")String la_match_type);
+
+	LeagueScheduleVO selectLeagueScheByLaNum(@Param("la_num")int la_num);
+
+
 
 
 
