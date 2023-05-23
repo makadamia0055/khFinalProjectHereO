@@ -59,11 +59,27 @@
                   <a href="<c:url value='/reservation/main'></c:url>">실시간 예약</a
                   >
                 </li>
-                <li>
-                  <a href="<c:url value='/reservation/stadium/list'></c:url>"
-                    >구장 등록</a
-                  >
-                </li>
+                <c:if test="${loginUser!=null}">
+	                <li>
+	                  <a href="<c:url value='/reservation/stadium/list'></c:url>"
+	                    >구장 등록</a
+	                  >
+	                </li>
+                </c:if>
+                <c:if test="${loginUser!=null}">
+	                <li>
+	                  <a href="<c:url value='/reservation/check'></c:url>"
+	                    >예약 확인</a
+	                  >
+	                </li>
+                </c:if>
+                <c:if test="${loginUser!=null && loginUser.me_siteauth>=9 }">
+	                <li>
+	                  <a href="<c:url value='/reservation/stadium/list'></c:url>"
+	                    >관리자 메뉴</a
+	                  >
+	                </li>
+                </c:if>                
               </ul>
             </li>
             <li class="menu-container__box top-menu__commu-hover">
