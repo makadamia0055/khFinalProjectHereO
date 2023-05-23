@@ -52,11 +52,12 @@
 	      <li class="item-side">
 	         <a href="<c:url value='/reservation/check'></c:url>" target="_parent" class="link-side btn btn-light col-md">예약 확인</a>
 	      </li>
-	  </c:if>    
-      <li class="item-side">
-         <a href="<c:url value='/reservation/stadium/list'></c:url>" target="_parent"  class="link-side btn btn-light col-md">구장 등록</a>
-      </li>
-
+	  </c:if>
+	  <c:if test="${loginUser!=null}">    
+	      <li class="item-side">
+	         <a href="<c:url value='/reservation/stadium/insert'></c:url>" target="_parent"  class="link-side btn btn-light col-md">구장 등록</a>
+	      </li>
+	  </c:if>
       <c:if test="${loginUser!=null && loginUser.me_siteauth>=9 }">
 	      <li class="item-side reservationAdmin">
 
