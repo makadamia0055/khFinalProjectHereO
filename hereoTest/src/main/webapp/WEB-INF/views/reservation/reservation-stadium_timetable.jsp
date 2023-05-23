@@ -166,7 +166,7 @@ border:0;}
 	                        <input name="s_hour" id="s_hour" disabled>
 	                </div>
 	                <div class="cell"><input type="text" id="stadium-price"></div>
-	                <div class="cell"><button class="btn btn-dark">추가</button></div> 
+	                <div class="cell"><button type="button" class="btn btn-dark btn-insert">추가</button></div> 
 	            </div>
             </form>
         </div>
@@ -227,6 +227,11 @@ border:0;}
 		    	    document.getElementById('s_hour').value = s_hour;
 		    	  }
     	}
+	    $('.btn-insert').click(function(e){
+	    	e.preventDefault();
+	    	alert('추후 구현 예정');
+	    	return;
+	    })
     </script>
     
 </body>

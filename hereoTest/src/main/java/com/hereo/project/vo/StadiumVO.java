@@ -31,7 +31,7 @@ public class StadiumVO {
 	
 	public String getSd_register_date_str() {
 		SimpleDateFormat format = 
-			new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			new SimpleDateFormat("yyyy-MM-dd");
 		return format.format(sd_register_date);
 	}
 
