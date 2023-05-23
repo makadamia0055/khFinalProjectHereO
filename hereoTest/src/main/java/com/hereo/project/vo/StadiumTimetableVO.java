@@ -19,10 +19,14 @@ public class StadiumTimetableVO {
 	private StadiumVO s;
 	
 	public String getSt_start_time_str() {
+		if(this.st_start_time==null)
+			return null;
 		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 		return format.format(st_start_time);
 	}
 	public String getSt_use_time_str() {
+		if(this.st_use_time==null)
+			return null;
 		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 		return format.format(st_use_time);
 	}

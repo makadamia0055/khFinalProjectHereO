@@ -87,9 +87,9 @@ public class HomeController {
 	public String logout(HttpServletResponse response, HttpSession session) {
 		//추후 자동로그인 기능을 위해 user남겨둠
 		MembersVO loginUser = (MembersVO)session.getAttribute("loginUser");
-		session.removeAttribute("loginUser");
 		loginUser.setMe_session_limit(null);
 		membersService.updateAutoLoginSession(loginUser);
+		session.removeAttribute("loginUser");
 		return "redirect:/";
 	}
 	@ResponseBody

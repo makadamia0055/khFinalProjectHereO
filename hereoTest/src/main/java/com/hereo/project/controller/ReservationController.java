@@ -1,6 +1,8 @@
 package com.hereo.project.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -84,6 +86,18 @@ public class ReservationController {
 			mv.addObject("url", "/reservation/main");
 			mv.setViewName("/common/message");
 			return mv;
+		}
+		if(game_date==null||game_date.trim().length()==0) {
+			mv.addObject("msg", "날짜 정보가 없습니다.");
+			mv.addObject("url", "/reservation/main");
+			mv.setViewName("/common/message");
+			return mv;
+			
+			
+			/*
+			 * SimpleDateFormat format = new SimpleDateFormat("YY-MM-dd"); Date today = new
+			 * Date(); game_date = format.format(today);
+			 */
 		}
 		
 		StadiumVO sd = stadiumService.selectStadiumByStnum(stadium);

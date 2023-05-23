@@ -42,9 +42,9 @@
                <li class="subitem-side">                          
                   <a href="<c:url value='/reservation/main'></c:url>" target="_parent"  class="sublink-side btn btn-secondary col-sm-3">예약하기</a>
                </li>
-               <li class="subitem-side">
+               <!-- <li class="subitem-side">
                   <a href="../reservation/stadium-reservation_league.html" target="_parent"  class="sublink-side btn btn-secondary col-sm-3">리그 예약하기</a>
-               </li>        
+               </li>   -->      
             </ul>
          </div>
       </li>

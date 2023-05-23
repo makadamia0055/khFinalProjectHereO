@@ -10,7 +10,7 @@
 <div class="main-container">
 		<div class="box-top">
 			<div class="top-title">
-				<span>2022년 02월 27일(월요일) 11:00 / KH야구장 / 1경기</span>
+				<span>${ms.ms_datetime_str } 경기</span>
 			</div>
 			<div class="box-score">
 				<div class="score-borad data1">
@@ -940,7 +940,7 @@
 	
 	let homeAway = true;
 	let selectedBox;
- 	let ms_num = 1;
+ 	let ms_num = ${ms.ms_num};
 	let startTeam ;
 	let mr_num;
 	
@@ -1188,10 +1188,9 @@
 		}
 		ajaxParam("POST", totalTeamArrStringifyObj, '<c:url value="/record/matchInningPost"></c:url>', function(data){
 			/* 여기서 match-participate */
-			sendMatchPartcipate(data);
-			
-			
+			sendMatchPartcipate();
 			clearCurrentMrNumPlayerRecord();
+			ajaxPostBatterBoxEvent(data);
 		})
 		
 	}
@@ -1331,7 +1330,7 @@
 	
 	
 	/* match-partcipate를 입력하는 메소드 추가, 처음에 생각치 못한 메소드라 구현순서 밀려서 꼬인 부분 있음. */
-	function sendMatchPartcipate(data){
+	function sendMatchPartcipate(){
 		let totalTeamPartSelection = $('.box-recode-player .player-record-box').not('.ex').filter(function(){
 			if($(this).find('.isSelection option:selected').val() ==1)
 				return this;
@@ -1406,7 +1405,6 @@
 			console.log(data1);
 			
 		})
-		ajaxPostBatterBoxEvent(data);
 
 		
 	}

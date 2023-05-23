@@ -230,7 +230,12 @@ public class LeagueController {
 	
 	@RequestMapping(value = "/league/leagueInsert", method = RequestMethod.GET)
 	public ModelAndView leagueInsert(ModelAndView mv, HttpSession session) {
-
+		if(session.getAttribute("loginUser")==null) {
+			mv.addObject("msg", "로그인 된 유저만 리그 생성을 신청할 수 있습니다.");
+			mv.addObject("url", "/league/leagueSearch");
+			mv.setViewName("/common/message");
+			return mv;
+		}
 		mv.setViewName("/league/league-insert");
 		return mv;
 	}
