@@ -18,7 +18,7 @@
             <div class="search_boxes">
                 <ul class="list-region clear-fix">
                     <li class="item-region">
-                        <a href="#" class="link-region btn btn-dark" role="button" data-local="전체">전체</a>
+                        <a href="<c:url value='/reservation/main?game_date=${game_date}&region='></c:url>" class="link-region btn btn-dark" role="button" data-local="전체">전체</a>
                     </li>
                     <c:forEach items="${regionList}" var="rl">
                     <li class="item-region">
@@ -55,7 +55,7 @@
                 	<c:forEach items="${stadiumList}" var="st">
                     <tr class="stadium-list">
                         <td rowspan="3" id="table-region">
-                            <p><strong>${regi.re_sido}</strong></p>
+                            <p><strong>${st.sd_sido}</strong></p>
                         </td>
                         <td rowspan="3" id="table-stadium">
                             <a href="<c:url value='/reservation/stadium/info'></c:url>">
@@ -106,13 +106,23 @@
             </table>
         </div>
         <div class="pagination">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">이전</a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">다음</a></li>
-              </ul>
+           <ul class="pagination pagination-sm">
+            	<c:if test="${pm.prev}">
+              		<li class="page-item">
+                		<a class="page-link text-secondary" href="<c:url value='/reservation/main?page=${pm.startPage-1}'></c:url>">◀</a>
+              		</li>
+              	</c:if>
+              	<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
+              		<li class="page-item <c:if test="${pm.cri.page ==i}"> active </c:if>">
+                		<a class="page-link text-secondary" href="<c:url value='/reservation/main?page=${i}'></c:url>">${i}</a>
+             		 </li>
+             	</c:forEach>
+              	<c:if test="${pm.next}">	
+              		<li class="page-item">
+                		<a class="page-link text-secondary" href="<c:url value='/reservation/main?page=${pm.endPage+1}'></c:url>">▶</a>
+              		</li>
+              	</c:if>	
+         </ul>        
         </div>
     </div>  
     <input type="hidden" name="region" value="${region}">

@@ -1,5 +1,6 @@
 package com.hereo.project.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,19 +54,31 @@ public class ReservationController {
 		
 		ArrayList<StadiumVO> stadiumList = new ArrayList<StadiumVO>();
 		RegionVO regi = null;
+		
+		int totalCount;
+
 		//지역 출력용
-		if(region==null) {
+		if(game_date==null) {
+			LocalDate now = LocalDate.now();
+			String nowStr=now.toString();
+			game_date=nowStr;
+		}
+		if(region==null || region==0) {
 			if(cri==null) 
 				cri = new Criteria();
 			stadiumList = reservationService.getStadiumList01(cri);
+			totalCount = reservationService.countStadiumList();
+
 		}else {
 			stadiumList = reservationService.getStadiumList02(region, cri);
 			regi = regionDao.getRegionByNum(region);
+			totalCount = reservationService.countStadiumList(region);
 		}
-		
+
+		PageMaker pm = new PageMaker(totalCount, 5, cri);
 		RegionVO[]regionList = regionDao.selectAllRegion();
 
-
+		mv.addObject("pm", pm);
 		mv.addObject("regi", regi);
 		mv.addObject("game_date", game_date);
 		mv.addObject("stadiumList", stadiumList);
@@ -132,14 +145,17 @@ public class ReservationController {
 	}
 	//임시로 만들어 놓은 예약확인 
 	@GetMapping(value={"/reservation/check"})
-	public String reservationCheck(Model model, HttpSession session) {
+	public String reservationCheck(Model model, HttpSession session, Criteria cri) {
 		MembersVO user = (MembersVO)session.getAttribute("loginUser");
 		if(user==null) {
 			return "redirect:/reservation/reservation-main";
 		}
-		ArrayList<StadiumScheduleVO> reserveList=reservationService.getReservationList(user.getMe_id());
+		ArrayList<StadiumScheduleVO> reserveList=reservationService.getReservationList(user.getMe_id(), cri);
+		int totalCount = reservationService.countReserveCheck(user.getMe_id());
+		PageMaker pm = new PageMaker(totalCount, 5, cri);
+
 		System.out.println("리저브리스트"+reserveList);
-		
+		model.addAttribute("pm", pm);
 		model.addAttribute("reserveList", reserveList);
 		return "/reservation/reservation-check";
 	}

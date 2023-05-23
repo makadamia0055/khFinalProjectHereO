@@ -191,6 +191,7 @@ import com.hereo.project.vo.StadiumVO;
 	        StadiumVO stadium, RegionVO region, RegionSubVO regionSub, RegionDetailVO regionDetail,
 	        MultipartFile[] files) {
 	    System.out.println(regionDetail);
+	    System.out.println(region);
 //		작업자 : 공승배 region과 regionSub를 체크하고 넣어주는 메소드 추가
 		RegionSubVO selectedRegionSub = regionService.checkRegionSub(region, regionSub);
 		//리전 디테일에 가져온 regionsub를 넣어주기

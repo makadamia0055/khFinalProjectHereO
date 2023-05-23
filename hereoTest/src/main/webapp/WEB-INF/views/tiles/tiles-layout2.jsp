@@ -5,11 +5,11 @@
 <html>
 <head>
 	<title>Home</title>
-	<link rel="stylesheet" href="/hereoTest/resources/css/common/bootstrap.min.css">
+	<link rel="stylesheet" href="<c:url value='/resources/css/common/bootstrap.min.css'></c:url>">
 	<script type="text/javascript" src="<c:url value='/resources/js/common/jquery.js'></c:url>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/js/common/popper.min.js'></c:url>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/js/common/bootstrap.bundle.min.js'></c:url>"></script>
-<link rel="stylesheet" href="/hereoTest/resources/css/common/style.css" />
+<link rel="stylesheet" href="<c:url value='/resources/css/common/style.css'></c:url>" />
 	
 </head>
 <body>

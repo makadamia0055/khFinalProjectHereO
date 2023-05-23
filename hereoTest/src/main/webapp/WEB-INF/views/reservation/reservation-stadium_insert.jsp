@@ -94,6 +94,7 @@
 				<input type="hidden" id="sample6_postcode" name="rd_zipcode" placeholder="우편번호">
 				<input type="button" onclick="sample6_execDaumPostcode()" name="btn-post" value="우편번호 찾기">
 				<input type="hidden" id="sido" name="re_sido" placeholder="시">
+				<input type="hidden" name="sd_sido">
 				<input type="hidden" id="sigungo" name="rs_gu" placeholder="시군구">
 				<input type="text" id="sample6_address" name="rd_address" placeholder="주소"><br>
 				<span id="guide" style="color:#999;display:none"></span>
@@ -249,7 +250,6 @@ function readURL(input){
 			oncomplete: function(data) {
 				// 시/군/구 정보를 sido input에 넣어줍니다.
 				document.getElementById("sido").value = data.sido;
-				
 				//시군구 정보 넣어주기
 				let data_sigungo = data.sigungu;
 				if(data_sigungo == null){
