@@ -129,7 +129,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             />
           </div>
           <div class="signup-container">
-            <label for="gender">성별 :</label><br />
+            <label>성별 : <br />
             <div class="signup-gender">
               <span class="genderType-letter">남</span>
               <input
@@ -145,6 +145,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 value="2"
               />
             </div>
+            </label>
           </div>
           <div class="signup-container">
             <label for="phone">핸드폰 번호 :</label><br />

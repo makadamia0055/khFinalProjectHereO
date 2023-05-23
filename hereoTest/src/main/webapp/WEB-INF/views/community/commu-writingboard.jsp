@@ -72,7 +72,5 @@
 		 alert('내용을 입력하세요.');
 		 return false;
 	 }
-	 console.log(bo_content);
-	 console.log("하이");
   })
 </script>

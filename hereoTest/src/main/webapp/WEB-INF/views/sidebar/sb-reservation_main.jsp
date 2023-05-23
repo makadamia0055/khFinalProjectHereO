@@ -40,11 +40,11 @@
          <div id="demo1" class="collapse">
             <ul class="sublist-side">
                <li class="subitem-side">                          
-                  <a href="<c:url value='/reservation/main'></c:url>" target="_parent"  class="sublink-side btn btn-secondary col-sm-3">예약하기</a>
+                  <a href="<c:url value='/reservation/main?region=0&game_date='></c:url>" target="_parent"  class="sublink-side btn btn-secondary col-sm-3">예약하기</a>
                </li>
-               <li class="subitem-side">
+               <!-- <li class="subitem-side">
                   <a href="../reservation/stadium-reservation_league.html" target="_parent"  class="sublink-side btn btn-secondary col-sm-3">리그 예약하기</a>
-               </li>        
+               </li>   -->      
             </ul>
          </div>
       </li>
@@ -52,11 +52,12 @@
 	      <li class="item-side">
 	         <a href="<c:url value='/reservation/check'></c:url>" target="_parent" class="link-side btn btn-light col-md">예약 확인</a>
 	      </li>
-	  </c:if>    
-      <li class="item-side">
-         <a href="<c:url value='/reservation/stadium/list'></c:url>" target="_parent"  class="link-side btn btn-light col-md">구장 등록</a>
-      </li>
-
+	  </c:if>
+	  <c:if test="${loginUser!=null}">    
+	      <li class="item-side">
+	         <a href="<c:url value='/reservation/stadium/insert'></c:url>" target="_parent"  class="link-side btn btn-light col-md">구장 등록</a>
+	      </li>
+	  </c:if>
       <c:if test="${loginUser!=null && loginUser.me_siteauth>=9 }">
 	      <li class="item-side reservationAdmin">
 

@@ -20,7 +20,7 @@
             <c:if test="${loginUser!=null}">
             	<li><a href="<c:url value='/logout'></c:url>" target="_top">로그아웃</a></li>
             </c:if>
-            <li><a href="#">고객센터</a></li>
+            <li><a href="#" class="service-btn">고객센터</a></li>
           </ul>
         </div>
         <!-- 메인 메뉴바 -->
@@ -35,9 +35,7 @@
               <a href="<c:url value='/team/main'></c:url>"><span>팀</span></a>
               <ul class="submenu-containerBox1 team-submenu__01">
                 <li><a href="<c:url value='/team/main'></c:url>">전체 팀</a></li>
-                <li>
-                  <a href="<c:url value='/team/join'></c:url>">팀 가입신청</a>
-                </li>
+                
               </ul>
             </li>
             <li class="menu-container__box top-menu__league-hover">
@@ -73,17 +71,17 @@
               <span>커뮤니티</span></a>
               <ul class="submenu-containerBox1 commu-submenu__01">
                 <li>
-                  <a href="../community/commu-free.html" target="_top"
+                  <a href="<c:url value='/community/free'></c:url>"
                     >Talk 이모저모</a
                   >
                 </li>
                 <li>
-                  <a href="../community/commu-hero.html" target="_top"
+                  <a href="<c:url value='/community/findHero'></c:url>" 
                     >용병 모집</a
                   >
                 </li>
                 <li>
-                  <a href="../community/commu-market.html" target="_top"
+                  <a href="<c:url value='/community/market'></c:url>"
                     >중고거래</a
                   >
                 </li>
@@ -104,10 +102,17 @@
 
 			e.preventDefault();
 			var url="<c:url value='/login'></c:url>";
-			var name="loginP";
-			var option="width=450, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no";
-			window.open(url,name,option);
+			var width = 450;
+			var height = 500;
+			var left = (window.innerWidth - width) / 2;
+			var top = (window.innerHeight - height) / 2;
+			var options = "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top + ", scrollbars=no, resizable=no, toolbar=no, menubar=no";
+			var popup = window.open(url, name, options);
+			popup.resizeTo(width, height);
 
+	})
+	$('.service-btn').click(function(){
+		alert("서비스 준비중입니다.");
 	})
 	</script>
 

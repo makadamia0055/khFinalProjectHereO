@@ -245,8 +245,20 @@ public class TeamController {
 //	팀 신청 페이지
 	@RequestMapping(value = "/team/create", method = RequestMethod.GET)
 	public ModelAndView teamCreate(ModelAndView mv, HttpSession session) {
-		MembersVO user = (MembersVO)session.getAttribute("user");
+		MembersVO user = (MembersVO)session.getAttribute("loginUser");
 		if(user==null) {
+			mv.addObject("msg", "로그인 해주십시오.");
+			mv.addObject("url", "/team/main");
+			mv.setViewName("/common/message");
+			return mv;
+		}
+		PlayerVO player = playerService.selectPlayerByMeId(user.getMe_id());
+		if(!playerService.hasNoTeam(player.getPl_num())) {
+//			이미 가입된 팀이 있는 경우
+			mv.addObject("msg", "가입된 팀이 있는 회원은 팀을 창설 할 수 없습니다.");
+			mv.addObject("url", "/team/main");
+			mv.setViewName("/common/message");
+			return mv;
 		}
 
 		mv.setViewName("/team/team-create");
@@ -255,14 +267,14 @@ public class TeamController {
 //	팀 신청 페이지 - POST 신청 받기
 	@RequestMapping(value = "/team/create", method = RequestMethod.POST)
 	public ModelAndView teamCreatePost(ModelAndView mv, TeamVO team, MultipartFile imgFile, HttpSession session, Integer tm_backnum) {
-		MembersVO user = (MembersVO)session.getAttribute("user");
+		MembersVO user = (MembersVO)session.getAttribute("loginUser");
 		mv.setViewName("/team/team-create");
 		if(isUserNull(user, mv)) {
 			return mv;
 		}
 		team.setTm_me_id(user.getMe_id());
 		PlayerVO player = playerService.selectPlayerByMeId(user.getMe_id());
-		if(playerService.hasNoTeam(player.getPl_num())) {
+		if(!playerService.hasNoTeam(player.getPl_num())) {
 //			이미 가입된 팀이 있는 경우
 			mv.addObject("msg", "가입된 팀이 있는 회원은 팀을 창설 할 수 없습니다.");
 			mv.addObject("url", "/team/main");
@@ -327,6 +339,7 @@ public class TeamController {
 //	팀 정보 수정 페이지
 	@RequestMapping(value = "/team/updatePl", method = RequestMethod.GET)
 	public ModelAndView updatePl(ModelAndView mv, HttpSession session) {
+		
 		ArrayList<Position_HopeVO> pHList= playerService.selectPositionHopeByPlayer((PlayerVO)session.getAttribute("userPlayer"));
 		mv.addObject("pHList", pHList);
 		mv.setViewName("/team/team-updatePl");
@@ -847,7 +860,6 @@ public class TeamController {
 		if(team.getTm_num()>0) {
 			MatchScheduleVO nextMatch= scheduleService.selectNextTeamSchedule(team.getTm_num());
 			map.put("nextMatch", nextMatch);
-			
 		}
 		return map;
 	}

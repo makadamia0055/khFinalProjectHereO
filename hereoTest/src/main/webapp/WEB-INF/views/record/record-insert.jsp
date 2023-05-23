@@ -10,7 +10,7 @@
 <div class="main-container">
 		<div class="box-top">
 			<div class="top-title">
-				<span>2022년 02월 27일(월요일) 11:00 / KH야구장 / 1경기</span>
+				<span>${ms.ms_datetime_str } 경기</span>
 			</div>
 			<div class="box-score">
 				<div class="score-borad data1">
@@ -940,7 +940,7 @@
 	
 	let homeAway = true;
 	let selectedBox;
- 	let ms_num = 1;
+ 	let ms_num = ${ms.ms_num};
 	let startTeam ;
 	let mr_num;
 	
@@ -1401,10 +1401,11 @@
 				"teamPart" : JSON.stringify(totalTeamPart),
 				"mr_num" : mr_num
 		}
-		ajaxParamAsync("POST", teamPartStringifyObj, '<c:url value="/record/matchParticipate"></c:url>', function(data){
-			console.log(data);
+		ajaxParamAsync("POST", teamPartStringifyObj, '<c:url value="/record/matchParticipate"></c:url>', function(data1){
+			console.log(data1);
 			
 		})
+
 		
 	}
 	

@@ -27,6 +27,8 @@ public interface StadiumService {
 
 	ArrayList<StadiumTimetableVO> getStadiumTimetableList(MembersVO user);
 
+	StadiumVO selectStadiumByStnum(int stadium);
+
 	
 
 	

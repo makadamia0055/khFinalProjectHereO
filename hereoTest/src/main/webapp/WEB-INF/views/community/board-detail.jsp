@@ -25,7 +25,7 @@
 	</div>
 	<div class="btn-container">
 		<a href="<c:url value='/community/${bt.bt_namebyEnglish}'></c:url>">
-			<button class="pre-list_btn commu-btn">목록 <i class="fa-solid fa-bars"></i>
+			<button class="pre-list_btn">목록 <i class="fa-solid fa-bars"></i>
 			</button>
 		</a>
 		<c:if test="${boardVote==null || boardVote.bv_state !=1}">	

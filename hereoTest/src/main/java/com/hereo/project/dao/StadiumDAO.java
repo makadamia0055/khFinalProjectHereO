@@ -34,7 +34,7 @@ public interface StadiumDAO {
 
 	ArrayList<StadiumTimetableVO> selectStadiumTimetableList(@Param("user")MembersVO user);
 
-	ArrayList<StadiumVO> selectStadiumTimetable(@Param("st") int stadium);
+	ArrayList<StadiumTimetableVO> selectStadiumTimetable(@Param("sd_num") int stadium);
 
 	StadiumTimetableVO getStadiumTimetableForPay(@Param("st_num") int st_num);
 
@@ -56,7 +56,7 @@ public interface StadiumDAO {
 
 	void updateState(@Param("receipt_id") String receipt_id, @Param("state") String state, @Param("rv_num") int rv_num);
 
-	ArrayList<StadiumScheduleVO> getReservationList(@Param("me_id") String me_id, @Param("state") String state);
+	ArrayList<StadiumScheduleVO> getReservationList(@Param("me_id") String me_id, @Param("state") String state, @Param("cri") Criteria cri);
 
 	double getTotalPrice(@Param("receipt_id") String receipt_id);
 
@@ -67,6 +67,16 @@ public interface StadiumDAO {
 	ReservationVO getReservation(@Param("rv_num") int rv_num);
 
 	void insertMatchSchedule(@Param("rv_game_type") String rv_game_type,@Param("rv_home_num") int rv_home_num,@Param("rv_away_num") int rv_away_num,@Param("ss_game_date") String ss_game_date,@Param("rv_num") int rv_num);
+
+
+	StadiumVO selectStadiumByStnum(int stadium);
+
+	int countReserveCheck(@Param("me_id") String me_id);
+
+	int countStadiumList();
+
+	int countStadiumListByRegion(@Param("region") Integer region);
+
 
 
 

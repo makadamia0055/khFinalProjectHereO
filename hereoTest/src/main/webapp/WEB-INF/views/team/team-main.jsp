@@ -26,9 +26,11 @@
 							<a href="<c:url value='/team/main?type=0'></c:url>" class="link-region btn btn-success" role="button" data-local="all">전체</a>
 						</li>
 						<c:forEach items="${region}" var="re">
-							<li class="item-region">
-								<a href="<c:url value='/team/main?type=${re.re_num}&search=${pm.cri.search }'></c:url>" class="link-region btn btn-primary" role="button" data-local="${re.re_num}">${re.re_sido}</a>
-							</li>
+							<c:if test="${!empty re.re_sido }">
+								<li class="item-region">
+									<a href="<c:url value='/team/main?type=${re.re_num}&search=${pm.cri.search }'></c:url>" class="link-region btn btn-dark" role="button" data-local="${re.re_num}">${re.re_sido}</a>
+								</li>
+							</c:if>
 						</c:forEach>
 						
 					</ul>
@@ -215,7 +217,7 @@
 			
 				let time = new Date(data.nextMatch.ms_datetime);
 				
-				$('.item-schedule .date-schedule').text(time.getFullYear()+'년 '+time.getMonth()+'월 '+ time.getDate()+'일 '+ time.getHours() +'시 '+ time.getMinutes()+'분' );
+				$('.item-schedule .date-schedule').text(time.getFullYear()+'년 '+(time.getMonth()+1)+'월 '+ time.getDate()+'일 '+ time.getHours() +'시 '+ time.getMinutes()+'분' );
 				$('.item-schedule .location-schedule').text(data.nextMatch.ms_stadium.sd_name);
 				/* 예약 확인 페이지 링크 작업 필요 */
 				teamObj = {

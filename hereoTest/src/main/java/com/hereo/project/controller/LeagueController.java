@@ -244,14 +244,12 @@ public class LeagueController {
 	
 	@RequestMapping(value = "/league/leagueInsert", method = RequestMethod.GET)
 	public ModelAndView leagueInsert(ModelAndView mv, HttpSession session) {
-		MembersVO user = (MembersVO)session.getAttribute("loginUser");
-		if(user == null) {
-			mv.addObject("msg", "로그인된 사용자만 리그가입이 가능합니다.");
+		if(session.getAttribute("loginUser")==null) {
+			mv.addObject("msg", "로그인 된 유저만 리그 생성을 신청할 수 있습니다.");
 			mv.addObject("url", "/league/leagueSearch");
 			mv.setViewName("/common/message");
 			return mv;
 		}
-			
 		mv.setViewName("/league/league-insert");
 		return mv;
 	}

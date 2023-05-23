@@ -1,5 +1,10 @@
 package com.hereo.project.controller;
 
+
+
+import java.text.SimpleDateFormat;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +27,7 @@ import com.hereo.project.pagination.Criteria;
 import com.hereo.project.pagination.PageMaker;
 import com.hereo.project.service.PlayerService;
 import com.hereo.project.service.ReservationService;
+import com.hereo.project.service.StadiumService;
 import com.hereo.project.service.TeamService;
 import com.hereo.project.utils.MessageUtils;
 import com.hereo.project.vo.MembersVO;
@@ -42,6 +48,8 @@ public class ReservationController {
 	ReservationService reservationService;
 	@Autowired
 	TeamService teamService;
+	@Autowired
+	StadiumService stadiumService;
 	
 	@Autowired
 	PlayerService playerService;
@@ -53,19 +61,40 @@ public class ReservationController {
 		
 		ArrayList<StadiumVO> stadiumList = new ArrayList<StadiumVO>();
 		RegionVO regi = null;
+		
+		int totalCount;
+
 		//지역 출력용
-		if(region==null) {
+		if(game_date==null) {
+			LocalDate now = LocalDate.now();
+			String nowStr=now.toString();
+			game_date=nowStr;
+		}
+		if(region==null || region==0) {
 			if(cri==null) 
 				cri = new Criteria();
 			stadiumList = reservationService.getStadiumList01(cri);
+			totalCount = reservationService.countStadiumList();
+
 		}else {
 			stadiumList = reservationService.getStadiumList02(region, cri);
 			regi = regionDao.getRegionByNum(region);
+			totalCount = reservationService.countStadiumList(region);
 		}
+		if(game_date==null||game_date.trim().length()==0) {
+			SimpleDateFormat format = new SimpleDateFormat("YY-MM-dd"); 
+			Date today = new Date();
+			game_date = format.format(today);
+			
+		}
+			
+			
 		
+
+		PageMaker pm = new PageMaker(totalCount, 5, cri);
 		RegionVO[]regionList = regionDao.selectAllRegion();
 
-
+		mv.addObject("pm", pm);
 		mv.addObject("regi", regi);
 		mv.addObject("game_date", game_date);
 		mv.addObject("stadiumList", stadiumList);
@@ -76,12 +105,28 @@ public class ReservationController {
 	}
 	//임시로 만들어 놓은 스타디움 인포 메서드
 	@GetMapping(value={"/reservation/stadium-info"})
-	public String reserveInfo(Model model, int stadium, String game_date) {
-
-		ArrayList<StadiumVO> sd= reservationService.getStadiumTimetable(stadium);
-		model.addAttribute("sd",sd);
-		model.addAttribute("game_date",game_date);
-		return "/reservation/reservation-stadium_info";
+	public ModelAndView reserveInfo(ModelAndView mv, int stadium, String game_date) {
+		if(stadium==0) {
+			mv.addObject("msg", "구장 정보가 없습니다.");
+			mv.addObject("url", "/reservation/main");
+			mv.setViewName("/common/message");
+			return mv;
+		}
+		if(game_date==null||game_date.trim().length()==0) {
+			mv.addObject("msg", "날짜 정보가 없습니다.");
+			mv.addObject("url", "/reservation/main");
+			mv.setViewName("/common/message");
+			return mv;
+			
+		}
+		
+		StadiumVO sd = stadiumService.selectStadiumByStnum(stadium);
+		ArrayList<StadiumTimetableVO> stList= reservationService.getStadiumTimetable(stadium);
+		mv.addObject("sd", sd);
+		mv.addObject("sdTimeTable", stList);
+		mv.addObject("game_date", game_date);
+		mv.setViewName("/reservation/reservation-stadium_info");
+		return mv;
 	}
 	//임시로 만들어 놓은 결제 정보창
 	@GetMapping(value= {"/reservation/payment_info"})
@@ -90,6 +135,7 @@ public class ReservationController {
 		MembersVO user=(MembersVO)session.getAttribute("loginUser");
 		StadiumTimetableVO st=reservationService.getStadiumTimetableForPay(st_num);
 		ArrayList<TeamVO> teamList = teamService.getAllTeamList();
+		
 		if (user==null) {
 			MessageUtils.alertAndGoPage(response, "로그인 기능이 필요한 서비스입니다.", "/hereoTest", "/reservation/main");
 		}
@@ -132,14 +178,17 @@ public class ReservationController {
 	}
 	//임시로 만들어 놓은 예약확인 
 	@GetMapping(value={"/reservation/check"})
-	public String reservationCheck(Model model, HttpSession session) {
+	public String reservationCheck(Model model, HttpSession session, Criteria cri) {
 		MembersVO user = (MembersVO)session.getAttribute("loginUser");
 		if(user==null) {
-			return "/reservation/reservation-main";
+			return "redirect:/reservation/reservation-main";
 		}
-		ArrayList<StadiumScheduleVO> reserveList=reservationService.getReservationList(user.getMe_id());
+		ArrayList<StadiumScheduleVO> reserveList=reservationService.getReservationList(user.getMe_id(), cri);
+		int totalCount = reservationService.countReserveCheck(user.getMe_id());
+		PageMaker pm = new PageMaker(totalCount, 5, cri);
+
 		System.out.println("리저브리스트"+reserveList);
-		
+		model.addAttribute("pm", pm);
 		model.addAttribute("reserveList", reserveList);
 		return "/reservation/reservation-check";
 	}
