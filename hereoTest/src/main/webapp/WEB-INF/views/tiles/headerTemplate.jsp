@@ -20,7 +20,7 @@
             <c:if test="${loginUser!=null}">
             	<li><a href="<c:url value='/logout'></c:url>" target="_top">로그아웃</a></li>
             </c:if>
-            <li><a href="#">고객센터</a></li>
+            <li><a href="#" class="service-btn">고객센터</a></li>
           </ul>
         </div>
         <!-- 메인 메뉴바 -->
@@ -71,17 +71,17 @@
               <span>커뮤니티</span></a>
               <ul class="submenu-containerBox1 commu-submenu__01">
                 <li>
-                  <a href="../community/commu-free.html" target="_top"
+                  <a href="<c:url value='/community/free'></c:url>"
                     >Talk 이모저모</a
                   >
                 </li>
                 <li>
-                  <a href="../community/commu-hero.html" target="_top"
+                  <a href="<c:url value='/community/findHero'></c:url>" 
                     >용병 모집</a
                   >
                 </li>
                 <li>
-                  <a href="../community/commu-market.html" target="_top"
+                  <a href="<c:url value='/community/market'></c:url>"
                     >중고거래</a
                   >
                 </li>
@@ -110,6 +110,9 @@
 			var popup = window.open(url, name, options);
 			popup.resizeTo(width, height);
 
+	})
+	$('.service-btn').click(function(){
+		alert("서비스 준비중입니다.");
 	})
 	</script>
 
