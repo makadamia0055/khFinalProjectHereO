@@ -21,6 +21,9 @@ label.error{color:red;}
                 <input type="file" class="league-logo" name="le_logo">
               </div>
             </div>
+            <c:if test="${!empty loginUser}">
+            	<input type="text" name="lg_me_id" hidden value="${loginUser.me_id}">
+            </c:if>
         <div class="form-group">
 	        <div class="league-selector">
 				<label for="league_name">리그이름</label><br>
