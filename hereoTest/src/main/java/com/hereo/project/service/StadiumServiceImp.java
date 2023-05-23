@@ -79,11 +79,12 @@ public class StadiumServiceImp implements StadiumService{
 		}
 
 		@Override
-		public void insertStadium(StadiumVO stadium, MembersVO user, MultipartFile[] files) {
+		public void insertStadium(StadiumVO stadium, MembersVO user, MultipartFile[] files,String sido) {
 		    
 		    //지역 정보를 가져오는 작업을 진행해야함 ..
 		    // 스타디움 등록
 		    stadium.setSd_me_id(user.getMe_id());
+		    stadium.setSd_sido(sido);
 		    stadiumDao.insertStadium(stadium);
 		    // 파일 정보 저장
 		    

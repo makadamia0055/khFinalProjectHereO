@@ -192,6 +192,7 @@ import com.hereo.project.vo.StadiumVO;
 	        MultipartFile[] files) {
 	    System.out.println(regionDetail);
 	    System.out.println(region);
+	    System.out.println(stadium);
 //		작업자 : 공승배 region과 regionSub를 체크하고 넣어주는 메소드 추가
 		RegionSubVO selectedRegionSub = regionService.checkRegionSub(region, regionSub);
 		//리전 디테일에 가져온 regionsub를 넣어주기
@@ -200,7 +201,7 @@ import com.hereo.project.vo.StadiumVO;
 		MembersVO user = (MembersVO)session.getAttribute("loginUser");
 		
 		stadium.setSd_rd_num(selectedRegionDetail.getRd_num()); 
-		stadiumService.insertStadium(stadium, user, files);
+		stadiumService.insertStadium(stadium, user, files,region.getRe_sido());
 				
 	
 	    mv.setViewName("redirect:/reservation/stadium/list");
