@@ -72,13 +72,13 @@ public class LeagueController {
 	@RequestMapping(value = "/league/main/{lg_num}", method = RequestMethod.GET)
 	public ModelAndView leagueMain(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
 		//리그 메인페이지
-		ArrayList<LeagueAttributeVO> leagueAtt = leagueService.selectLeagueAttByLgNum(lg_num);
-		ArrayList<LeagueScheduleVO> leagueSche = leagueService.selectLeagueSchedule(lg_num);
-		ArrayList<LeagueParticipationteamVO> leagueParti = leagueService.getSelectLeagueParti(lg_num);
-
-		mv.addObject("leagueParti", leagueParti);
+		ArrayList<LeagueAttributeVO> leagueAtt = leagueService.selectLeagueAttListByLgNum(lg_num);
+		ArrayList<LeagueParticipationteamVO> leagueParti = leagueService.getSelectLeaguePartiList(lg_num);
+		ArrayList<LeagueScheduleVO> leagueSche = leagueService.selectLeagueScheduleList(lg_num);
+		
 		mv.addObject("leagueSche", leagueSche);
-		mv.addObject("leagueAtt",leagueAtt);
+		mv.addObject("leagueParti", leagueParti);
+		mv.addObject("leagueAtt", leagueAtt);
 		mv.addObject("lg_num", lg_num);
 		mv.setViewName("/league/league-main");
 		return mv;
@@ -116,9 +116,9 @@ public class LeagueController {
 	}
 	@RequestMapping(value = "/league/schedule/{lg_num}", method = RequestMethod.GET)
 	public ModelAndView leagueSchedule(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
-		ArrayList<LeagueAttributeVO> leagueAtt = leagueService.selectLeagueAttByLgNum(lg_num);
-		ArrayList<LeagueParticipationteamVO> leagueParti = leagueService.getSelectLeagueParti(lg_num);
-		ArrayList<LeagueScheduleVO> leagueSche = leagueService.selectLeagueSchedule(lg_num);
+		ArrayList<LeagueAttributeVO> leagueAtt = leagueService.selectLeagueAttListByLgNum(lg_num);
+		ArrayList<LeagueParticipationteamVO> leagueParti = leagueService.getSelectLeaguePartiList(lg_num);
+		ArrayList<LeagueScheduleVO> leagueSche = leagueService.selectLeagueScheduleList(lg_num);
 
 		
 		mv.addObject("leagueSche", leagueSche);
@@ -131,10 +131,20 @@ public class LeagueController {
 	
 	//리그 참가 신청(팀)
 	@RequestMapping(value = "/league/enroll/{lg_num}", method = RequestMethod.GET)
-	public ModelAndView leagueEnroll(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
-		ArrayList<LeagueAttributeVO> laList = leagueService.selectLeagueAttByLgNum(lg_num);
-		ArrayList<LeagueParticipationteamVO> lpList = leagueService.getSelectLeagueParti(lg_num);
-		
+	public ModelAndView leagueEnroll(ModelAndView mv, @PathVariable("lg_num")int lg_num,
+			HttpSession session) {
+		ArrayList<LeagueAttributeVO> laList = leagueService.selectLeagueAttListByLgNum(lg_num);
+		ArrayList<LeagueParticipationteamVO> lpList = leagueService.getSelectLeaguePartiList(lg_num);
+		MembersVO user = (MembersVO)session.getAttribute("loginUser");
+		if(user == null) {
+			mv.addObject("msg", "로그인된 사용자만 사용가능");
+			mv.addObject("url", "/league/main/"+lg_num);
+			mv.setViewName("/common/message");
+			return mv;
+		}
+		MembersVO member = leagueService.getSelectMember(user.getMe_id());
+
+		mv.addObject("member", member);
 		mv.addObject("lpList", lpList);
 		mv.addObject("laList", laList);
 		mv.addObject("lg_num", lg_num);
@@ -145,7 +155,7 @@ public class LeagueController {
 	//리그타입 (등록,수정,삭제) 
 	@RequestMapping(value = "/league/insertType/{lg_num}", method = RequestMethod.GET)
 	public ModelAndView leagueInsertType(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
-		ArrayList<LeagueAttributeVO> laList = leagueService.selectLeagueAttByLgNum(lg_num);
+		ArrayList<LeagueAttributeVO> laList = leagueService.selectLeagueAttListByLgNum(lg_num);
 		
 		mv.addObject("laList", laList);
 		mv.addObject("lg_num", lg_num);
@@ -158,8 +168,18 @@ public class LeagueController {
 		boolean isInsert = leagueService.insertLeagueType(la, lg_num);
 
 		mv.addObject("lg_num", lg_num);
-		mv.setViewName("redirect:/league/insertType/{lg_num}");
-		return mv;
+		if(isInsert) {
+			mv.addObject("msg", "리그타입등록 성공");
+			mv.addObject("url", "/league/insertType/"+lg_num);
+			mv.setViewName("/common/message");
+			return mv;
+		}else {
+			mv.addObject("msg", "리그타입등록 실패");
+			mv.addObject("url", "/league/insertType/"+lg_num);
+			mv.setViewName("/common/message");
+			return mv;
+		}
+
 	}
 	@RequestMapping(value = "/league/insertType/{lg_num}/update", method = RequestMethod.POST)
 	public ModelAndView leagueUpdateTypePost(ModelAndView mv, @PathVariable("lg_num")int lg_num,
@@ -183,7 +203,7 @@ public class LeagueController {
 	//리그 참가 신청 승인(리그)
 	@RequestMapping(value = "/league/partimanagerment/list/{lg_num}")
 	public ModelAndView leaguePartiManagermentList(ModelAndView mv, @PathVariable("lg_num")int lg_num) {
-		ArrayList<LeagueAttributeVO> laList = leagueService.selectLeagueAttByLgNum(lg_num);
+		ArrayList<LeagueAttributeVO> laList = leagueService.selectLeagueAttListByLgNum(lg_num);
 		
 		
 		mv.addObject("laList", laList);
@@ -195,7 +215,7 @@ public class LeagueController {
 	@RequestMapping(value = "/league/partimanagerment/{lg_num}/detail/{la_num}", method = RequestMethod.GET)
 	public ModelAndView leaguePartiManagerment(ModelAndView mv, @PathVariable("lg_num")int lg_num,
 			@PathVariable("la_num")int la_num) {
-		ArrayList<LeagueParticipationteamVO> lpList = leagueService.getSelectLeagueParti(la_num);
+		ArrayList<LeagueParticipationteamVO> lpList = leagueService.getSelectLeaguePartiList(la_num);
 		
 		mv.addObject("lpList",lpList);
 		mv.setViewName("/league/league-parti-managerment-detail");
@@ -241,13 +261,15 @@ public class LeagueController {
 	}
 	
 	@RequestMapping(value = "/league/leagueInsert", method = RequestMethod.POST)
-	public ModelAndView leagueInsertPOST(ModelAndView mv, LeagueVO league) {
-		
-		leagueService.insertLeague(league);
+	public ModelAndView leagueInsertPOST(ModelAndView mv, LeagueVO league,
+			HttpSession session) {
+		MembersVO user = (MembersVO)session.getAttribute("loginUser");
+		leagueService.insertLeague(league,user);
 		
 		mv.setViewName("redirect:/league/leagueSearch");
 		return mv;
 	}
+	
 	
 	
 	@ResponseBody
@@ -260,15 +282,27 @@ public class LeagueController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/league/approval/{lp_num}/{lp_approval}", method = RequestMethod.GET)
+	@RequestMapping(value = "/league/approval/{lp_num}/{lp_approval}/{lp_tm_num}", method = RequestMethod.GET)
 	public Map<String, Object> leagueApproval(@PathVariable("lp_num")int lp_num,
-			@PathVariable("lp_approval")int lp_approval) {
+			@PathVariable("lp_approval")int lp_approval, @PathVariable("lp_tm_num")int lp_tm_num) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		int res = leagueService.leagueApproval(lp_num, lp_approval);
+		int res = leagueService.leagueApproval(lp_num, lp_approval, lp_tm_num);
 
 		map.put("state", res);
 		LeagueParticipationteamVO lp = leagueService.getLeagueParti(lp_num);
 		map.put("lp_num", lp);
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/league/team/appli/{la_num}", method = RequestMethod.GET)
+	public Map<String, Object> leagueApplication(@PathVariable("la_num")int la_num, HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		MembersVO user = (MembersVO)session.getAttribute("loginUser");
+		int res = leagueService.insertLeagueAttByTeam(la_num, user.getMe_id());
+		
+		map.put("res", res);
+		
 		return map;
 	}
 	

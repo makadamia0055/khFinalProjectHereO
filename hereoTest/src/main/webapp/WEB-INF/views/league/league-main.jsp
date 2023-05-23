@@ -26,7 +26,7 @@
 								<option value="${la.la_match_type }">${la.la_match_type }</option>
 							</c:forEach>
 						</select>
-						<button type="button" class="btn btn-secondary btn-sm mb-1">조회</button>
+						<button type="button" class="btn btn-secondary btn-sm mb-1 btn-search">조회</button>
 					</div>
 					<div class="attend-team">
 						<c:set var = "count" value = "0" />
@@ -182,6 +182,7 @@ $('.tab-right').click(function(){
 	$('.article.schedule').hide();
 	$('.article.result').show();
 });
+
 
 
 //팀랭킹 - ajax 이용

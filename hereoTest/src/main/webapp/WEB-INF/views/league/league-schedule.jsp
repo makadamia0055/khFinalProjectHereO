@@ -40,9 +40,9 @@
 				<div class="form-group">	
 					<label for="league-team"></label>
 					<select class="form-control" id="league-team">
+							<option value="0">없음</option>
 						<c:forEach items="${leagueParti }" var="lp">
 							<c:if test="${lp.lp_approval == 2 }">
-								<option value="0">없음</option>
 								<option value="${lp.lp_team.tm_name }">${lp.lp_team.tm_name}</option>
 							</c:if>
 						</c:forEach>
