@@ -113,9 +113,9 @@ font-weight: bold; padding: 8px;
    background-color: #3333331f; 
    border-radius: 15px; font-size: 15px; text-align: center; 
 }
-.status:nth-child(n+6):nth-child(-n+10){
+/* .status:nth-child(n+6):nth-child(-n+10){
    display: none;
-}
+} */
 
 .status span.league,.status span.confirm{
    border-radius: 15px; color: black;

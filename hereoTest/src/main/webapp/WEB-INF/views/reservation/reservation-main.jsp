@@ -74,8 +74,8 @@
                                 <strong style="color: black; font-size: 15px;">구장명 : </strong><span>${st.sd_name}</span>
                                 <input type="hidden" name="sd_num" value="${st.sd_num}">
                                 <br>
-                                <strong style="color: black; font-size: 15px;">구장 위치 : </strong><span>경기도 양평</span>
-                            </a>
+<!--                                 <strong style="color: black; font-size: 15px;">구장 위치 : </strong><span>경기도 양평</span>
+ -->                            </a>
                         </td>
                         <td rowspan="3" class="table-content">
                             <div class="info-content">
@@ -143,6 +143,9 @@
   $(".reserve").click(function() {
 	  var sd_num = $(this).parents('.table-content').prev().find('[name=sd_num]').val();
       var game_date = $('[name=game_date]').val();
+      if(game_date==null){
+    	  game_date = ${game_date};
+      }
   window.location.href = "<c:url value='/reservation/stadium-info'></c:url>" +'?game_date=' + game_date + '&stadium=' + sd_num ;
   });  
   // 데이트피커

@@ -87,8 +87,11 @@
 									</div>
 									<span>상대팀 선택</span>
 									<div class="match_box">
-										<select name="" id="match">
-												<option>상대팀 선택</option>
+										<select name="rv_away_num" id="match">
+												<option value="0">-상대팀 선택-</option>
+												<c:forEach items="${teamList}" var="tl">
+													<option value="${tl.tm_num}">${tl.tm_name}</option>
+												</c:forEach>
 										</select>
 									</div>
 							</div>
