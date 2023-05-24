@@ -56,8 +56,8 @@
 		</beans:bean>
 		<beans:bean id="infoDeleteInterceptor" class="com.hereo.project.interceptor.InfoDeleteInterceptor">
 		</beans:bean>
-		<beans:bean id="AdminInterceptor" class="com.hereo.project.interceptor.AdminInterceptor">
-		</beans:bean>
+		<!-- <beans:bean id="AdminInterceptor" class="com.hereo.project.interceptor.AdminInterceptor">
+		</beans:bean> -->
 		
 	<interceptors>
 		<interceptor>
@@ -80,10 +80,10 @@
 			<mapping path="/**"/>
 			<beans:ref bean="infoDeleteInterceptor"/>
 		</interceptor>
-		<interceptor>
+		<!-- <interceptor>
 			<mapping path="/reservation/stadium/list"/>
 			<beans:ref bean="AdminInterceptor"/>
-		</interceptor>
+		</interceptor> -->
 		
 	</interceptors>	
 </beans:beans>

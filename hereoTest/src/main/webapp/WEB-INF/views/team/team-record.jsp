@@ -911,8 +911,8 @@
 	    			$(tmp).find('.ht_homerun').text(prh.ph_homeruns);
 	    			$(tmp).find('.ht_fourball').text(prh.ph_fourballs);
 	    			$(tmp).find('.ht_run').text(prh.ph_steals);
-	    			$(tmp).find('.ht_hitrate').text((
-	    					(prh.ph_hits/prh.ph_bats) * 100)+ "%");
+	    			let rate = ((prh.ph_hits/prh.ph_bats) * 100);
+	    			$(tmp).find('.ht_hitrate').text(rate+ "%");
     			}else{
     				$(tmp).find('.ht_hit_time').addClass('text-center').attr('colspan', '6').text("기록 없음");
     				$(tmp).find('.ht_hit').remove()

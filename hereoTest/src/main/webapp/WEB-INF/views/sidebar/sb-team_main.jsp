@@ -25,7 +25,6 @@
 		<c:when test="${fn:contains(path, '/team/lineup')}">
 			<!-- 라인업 페이지 일 경우 사이드바 -->
 			<div>${team.tm_name}팀 라인업</div>
-			<div>0월0일 vs xx팀</div>
 			<div class="text-center"><h3>선수 리스트</h3></div>
 			<hr>
 			<div class="d-flex flex-wrap">
