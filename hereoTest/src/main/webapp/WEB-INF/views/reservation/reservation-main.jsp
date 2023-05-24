@@ -157,19 +157,20 @@ $( function() {
       prevText: "이전달",
       dayNamesMin : ['일','월','화','수','목','금','토'],
       monthNamesShort:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-      dateFormat : "yy/mm/dd",
+      dateFormat : "yy-mm-dd",
       minDate: "dtNow", // 오늘 날짜 이전 데이터 클릭 방지
       showButtonPanel:true,
       currentText : "오늘 날짜",
       onSelect: function(dateText) {
-          var dateText = $(this).val();
+    	  var dateText = $(this).val();
           var region = $('[name=region]').val();
           region = region==''?0 : region;
           var url = "<c:url value='/reservation/main?game_date='></c:url>" + dateText.replace(/\//g, "-") + '&region='+region;
-          window.location.href = url;
+          window.location.href = url;  
       }
     });
-} );
+    $('#datepicker').datepicker('setDate', '${game_date}');
+});
  
 $('.link-region').on('click', function() {
 	  var region = $(this).data('local');

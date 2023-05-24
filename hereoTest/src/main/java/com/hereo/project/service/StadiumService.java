@@ -21,7 +21,7 @@ public interface StadiumService {
 
 	ArrayList<StadiumImageVO> getFileList(int sd_num);
 
-	void insertStadium(StadiumVO stadium, MembersVO user, MultipartFile[] files);
+	void insertStadium(StadiumVO stadium, MembersVO user, MultipartFile[] files, String sido);
 
 	RegionDetailVO getRegionDetail(int rd_num);
 
