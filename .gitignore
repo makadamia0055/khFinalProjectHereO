@@ -29,3 +29,5 @@ hereoTest/.settings/org.springframework.ide.eclipse.beans.core.prefs
 hereoTest/.settings/org.springframework.ide.eclipse.core.prefs
 
 hereoTest/target/dependency/webapp-runner.jar
+
+hereoTest/target/m2e-wtp/web-resources/META-INF/maven/com.hereo/test/
