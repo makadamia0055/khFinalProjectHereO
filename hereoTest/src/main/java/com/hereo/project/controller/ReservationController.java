@@ -108,13 +108,13 @@ public class ReservationController {
 	public ModelAndView reserveInfo(ModelAndView mv, int stadium, String game_date) {
 		if(stadium==0) {
 			mv.addObject("msg", "구장 정보가 없습니다.");
-			mv.addObject("url", "/reservation/main");
+			mv.addObject("url", "/reservation");
 			mv.setViewName("/common/message");
 			return mv;
 		}
 		if(game_date==null||game_date.trim().length()==0) {
 			mv.addObject("msg", "날짜 정보가 없습니다.");
-			mv.addObject("url", "/reservation/main");
+			mv.addObject("url", "/reservation");
 			mv.setViewName("/common/message");
 			return mv;
 			
