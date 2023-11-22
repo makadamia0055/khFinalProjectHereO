@@ -6,7 +6,7 @@
 
 ---
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled.png)
+![Untitled](readmeImg/Untitled.png)
 
 <aside>
 💡 아마추어 야구인들의 편의를 증진 시키고자 구장 예약 및 경기 기록 관리, 커뮤니티 기능을 갖춘 사이트 개발하고자 하였다.
@@ -55,13 +55,13 @@
 - 그러나 상기와 같은 프로세스를 팀원 회의를 통해 정했음에도, 담당 영역에 대한 요구사항을 제대로 작성하지 않은 팀원들이 있었고, 피드백 과정도 원활하게 이루어지지 않았다.
 - 또 개발 과정에서 참고하기는 했으나, 변경된 사항을 지속적으로 반영하지 않은 부분이 있었다.
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%201.png)
+![Untitled](readmeImg/Untitled%201.png)
 
 ## 5. DB 설계
 
 ---
 
-![원본.png](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/%25EC%259B%2590%25EB%25B3%25B8.png)
+![원본.png](readmeImg/%25EC%259B%2590%25EB%25B3%25B8.png)
 
 - ERD Cloud를 통한 DB 설계 및 관리
 
@@ -133,7 +133,7 @@
 
 ---
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%202.png)
+![Untitled](readmeImg/Untitled%202.png)
 
 ## 9. 작업, 일정 및 변경 관리
 
@@ -141,13 +141,13 @@
 
 ### 9-1. 프로젝트 일정 관리
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%203.png)
+![Untitled](readmeImg/Untitled%203.png)
 
 - 노션을 통해 프로젝트 전체 일정을 관리 및 계획
 
 ### 9-2. 작업 사항 관리
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%204.png)
+![Untitled](readmeImg/Untitled%204.png)
 
 - 노션을 통해 일자별 프로젝트 작업 내역 및 수행 진척도를 관리
 - 작업을 진행 단계별로 나누어 관리할 수 있도록 함.
@@ -155,7 +155,7 @@
 
 ### 9-3. 변경 사항 관리
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%205.png)
+![Untitled](readmeImg/Untitled%205.png)
 
 - 개인별 변경 사항을 노션을 통해 관리하여, 팀원들 간에 공유할 수 있도록 관리
 - 변경사항 등록 → 도입 논의 → 변경 사항 반영 의 프로세스 구축
@@ -163,41 +163,41 @@
 
 ## 10. 기능 시연 이미지
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%206.png)
+![Untitled](readmeImg/Untitled%206.png)
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%207.png)
+![Untitled](readmeImg/Untitled%207.png)
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%208.png)
+![Untitled](readmeImg/Untitled%208.png)
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%209.png)
+![Untitled](readmeImg/Untitled%209.png)
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%2010.png)
+![Untitled](readmeImg/Untitled%2010.png)
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%2011.png)
+![Untitled](readmeImg/Untitled%2011.png)
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%2012.png)
+![Untitled](readmeImg/Untitled%2012.png)
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%2013.png)
+![Untitled](readmeImg/Untitled%2013.png)
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%2014.png)
+![Untitled](readmeImg/Untitled%2014.png)
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%2015.png)
+![Untitled](readmeImg/Untitled%2015.png)
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%2016.png)
+![Untitled](readmeImg/Untitled%2016.png)
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%2017.png)
+![Untitled](readmeImg/Untitled%2017.png)
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%2018.png)
+![Untitled](readmeImg/Untitled%2018.png)
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%2019.png)
+![Untitled](readmeImg/Untitled%2019.png)
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%2020.png)
+![Untitled](readmeImg/Untitled%2020.png)
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%2021.png)
+![Untitled](readmeImg/Untitled%2021.png)
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%2022.png)
+![Untitled](readmeImg/Untitled%2022.png)
 
-![Untitled](KH%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%20a39cc74d7acc46a081a33e314e84f1c5/Untitled%2023.png)
+![Untitled](readmeImg/Untitled%2023.png)
 
 ## 11. 프로젝트 참여 소감
 
